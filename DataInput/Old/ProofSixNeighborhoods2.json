@@ -1,0 +1,296 @@
+{
+    "population_template": {
+        "age": [
+            "adults",
+            "elders",
+            "young",
+            "children"
+        ],
+        "occupation": [
+            "idle",
+            "student",
+            "worker"
+        ],
+        "social_profile": [
+            "low",
+            "mid",
+            "high"
+        ]
+    },
+    "block_types" : ["susceptible", "infected", "removed"],
+    "repeating_global_actions" : 
+    [
+        {
+            "cycle_length" : 1,
+            "type" : "infect",
+            "values" : 
+            {
+                "beta" : 0.25,
+                "gamma" : 0.08,
+                "sigma" : 0.03,
+                "mu" : 0.0,
+                "nu" : 0.0,
+                "population_template" : {}
+            }
+        }
+    ],
+    "regions": [
+        {
+            "name": "Bom Fim",
+            "position_lat_long": [
+                998,
+                1433
+            ],
+            "neighbors": [
+                "Independência",
+                "Rio Branco",
+                "Centro"
+            ],
+            "population": [ 11593, 0, 0, 0 ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 11593
+                        },
+                    "occupation": {
+                        "worker": 11593
+                    }
+                }
+            },
+            "nodes": {
+                "home": {
+                    "1": [
+                        {
+                            "name": "adults_come_to_work",
+                            "type": "gather_population",
+                            "values": {
+                                "quantity": 20,
+                                "region": "Bom Fim",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "adults",
+                                    "occupation": "worker"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Centro",
+            "position_lat_long": [
+                825,
+                1427
+            ],
+            "neighbors": [
+                "Floresta",
+                "Independência",
+                "Bom Fim"
+            ],
+            "population": [ 39153, 1, 0, 0 ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 11593
+                    },
+                    "occupation": {
+                        "worker": 11593
+                    }
+                },
+                "infected" : {}
+            },
+                "nodes": {
+                    "home": {
+                        "7": [
+                            {
+                                "name": "adults_come_to_work",
+                                "type": "gather_population",
+                                "values": {
+                                    "quantity": 20,
+                                    "region": "Centro",
+                                    "node": "home",
+                                    "population_template": {
+                                        "age": "adults",
+                                        "occupation": "worker"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            
+        },
+        {
+            "name": "Floresta",
+            "position_lat_long": [
+                1028,
+                1265
+            ],
+            "neighbors": [
+                "Moinhos de Vento",
+                "Independência",
+                "Centro"
+            ],
+            "population": [ 11596, 0, 0, 0 ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 11593
+                    },
+                    "occupation": {
+                        "worker": 11593
+                    }
+                }
+            },
+            "nodes": {
+                "home": {
+                    "7": [
+                        {
+                            "name": "adults_come_to_work",
+                            "type": "gather_population",
+                            "values": {
+                                "quantity": 20,
+                                "region": "Floresta",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "adults",
+                                    "occupation": "worker"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Independência",
+            "position_lat_long": [
+                992,
+                1387
+            ],
+            "neighbors": [
+                "Floresta",
+                "Moinhos de Vento",
+                "Rio Branco",
+                "Bom Fim",
+                "Centro"
+            ],
+            "population": [ 8112, 0, 0, 0 ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 8112
+                    },
+                    "occupation": {
+                        "worker": 8112
+                    }
+                }
+            },
+            "nodes": {
+                "home": {
+                    "7": [
+                        {
+                            "name": "adults_come_to_work",
+                            "type": "gather_population",
+                            "values": {
+                                "quantity": 20,
+                                "region": "Independência",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "adults",
+                                    "occupation": "worker"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+            },
+        {
+            "name": "Moinhos de Vento",
+            "position_lat_long": [
+                1115,
+                1330
+            ],
+            "neighbors": [
+                "Floresta",
+                "Rio Branco",
+                "Independência"
+            ],
+            "population": [ 11937, 0, 0, 0 ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 11937
+                    },
+                    "occupation": {
+                        "worker": 11937
+                    }
+                }
+            },
+            "nodes": {
+                "home": {
+                    "7": [
+                        {
+                            "name": "adults_come_to_work",
+                            "type": "gather_population",
+                            "values": {
+                                "quantity": 20,
+                                "region": "Moinhos de Vento",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "adults",
+                                    "occupation": "worker"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Rio Branco",
+            "position_lat_long": [
+                1120,
+                1452
+            ],
+            "neighbors": [
+                "Independência",
+                "Moinhos de Vento",
+                "Bom Fim"
+            ],
+            "population": [ 17531, 0, 0, 0 ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 17531
+                    },
+                    "occupation": {
+                        
+                        "worker": 17531
+                    }
+                }
+            },
+            "nodes": {
+                "home": {
+                    "1": [
+                        {
+                            "name": "adults_come_to_work",
+                            "type": "gather_population",
+                            "values": {
+                                "quantity": 20,
+                                "region": "Rio Branco",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "adults",
+                                    "occupation": "worker"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

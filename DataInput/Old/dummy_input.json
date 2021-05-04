@@ -1,0 +1,227 @@
+[
+    {
+        "name": "Petropolis",
+        "position_lat_long": [
+            50,
+            50
+        ],
+        "nodes": {
+            "school": {
+                "7": [
+                    {
+                        "name": "gather_children_to_school",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 5,
+                            "pop_template": {
+                                "age": "child",
+                                "occupation": "student"
+                            }
+                        }
+                    }
+                ]
+            },
+            "work": {
+                "7": [
+                    {
+                        "name": "adults_come_to_work",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 20,
+                            "pop_template": {
+                                "age": "adult",
+                                "occupation": "worker"
+                            }
+                        }
+                    }
+                ]
+            },
+            "home": {
+                "18": [
+                    {
+                        "name": "everyone_goes_back_home",
+                        "type": "return_population_home",
+                        "values": {}
+                    }
+                ]
+            }
+        },
+        "neighbors": [
+            "Centro",
+            "Partenon"
+        ],
+        "population": 100,
+        "population_description": {
+            "age": {
+                "adults": 40,
+                "elders": 20,
+                "young": 15,
+                "child": 25
+            },
+            "occupation": {
+                "idle": 20,
+                "student": 40,
+                "worker": 40
+            },
+            "social_profile": {
+                "low": 40,
+                "mid": 35,
+                "high": 25
+            }
+        }
+    },
+    {
+        "name": "Partenon",
+        "position_lat_long": [
+            60,
+            70
+        ],
+        "neighbors": [
+            "Petropolis",
+            "Centro"
+        ],
+        "nodes": {
+            "school": {
+                "7": [
+                    {
+                        "name": "gather_youngs_to_school",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 5,
+                            "pop_template": {
+                                "age": "young",
+                                "occupation": "student"
+                            }
+                        }
+                    },
+                    {
+                        "name": "gather_children_to_school",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 10,
+                            "pop_template": {
+                                "age": "child",
+                                "occupation": "student"
+                            }
+                        }
+                    }
+                ]
+            },
+            "work": {
+                "7": [
+                    {
+                        "name": "adults_come_to_work",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 10,
+                            "pop_template": {
+                                "age": "adult",
+                                "occupation": "worker"
+                            }
+                        }
+                    }
+                ]
+            },
+            "home": {
+                "18": [
+                    {
+                        "name": "everyone_goes_back_home",
+                        "type": "return_population_home",
+                        "values": {}
+                    }
+                ]
+            }
+        },
+        "population": 100,
+        "population_description": {
+            "age": {
+                "adults": 40,
+                "elders": 20,
+                "young": 15,
+                "children": 25
+            },
+            "occupation": {
+                "idle": 20,
+                "student": 40,
+                "worker": 40
+            }
+        }
+    },
+    {
+        "name": "Centro",
+        "position_lat_long": [
+            30,
+            40
+        ],
+        "neighbors": [
+            "Petropolis",
+            "Partenon"
+        ],
+        "nodes": {
+            "school": {
+                "7": [
+                    {
+                        "name": "gather_youngs_to_school",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 10,
+                            "pop_template": {
+                                "age": "young",
+                                "occupation": "student"
+                            }
+                        }
+                    },
+                    {
+                        "name": "gather_children_to_school",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 10,
+                            "pop_template": {
+                                "age": "child",
+                                "occupation": "student"
+                            }
+                        }
+                    }
+                ]
+            },
+            "work": {
+                "7": [
+                    {
+                        "name": "adults_come_to_work",
+                        "type": "gather_population",
+                        "values": {
+                            "quantity": 30,
+                            "pop_template": {
+                                "age": "adult",
+                                "occupation": "worker"
+                            }
+                        }
+                    }
+                ]
+            },
+            "home": {
+                "18": [
+                    {
+                        "name": "everyone_goes_back_home",
+                        "type": "return_population_home",
+                        "values": {}
+                    }
+                ]
+            }
+        },
+        "population": 100,
+        "population_description": {
+            "age": {
+                "adults": 40,
+                "elders": 20,
+                "young": 15,
+                "children": 25
+            },
+            "occupation": {
+                "idle": 20,
+                "student": 40,
+                "worker": 40
+            }
+        }
+    }
+]

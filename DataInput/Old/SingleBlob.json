@@ -1,0 +1,97 @@
+{
+  "population_template": {
+    "age": [
+      "adults",
+      "elders",
+      "young",
+      "children"
+    ],
+    "occupation": [
+      "idle",
+      "student",
+      "worker"
+    ],
+    "social_profile": [
+      "low",
+      "mid",
+      "high"
+    ]
+  },
+  "block_types": [
+    "susceptible",
+    "infected",
+    "removed"
+  ],
+  "repeating_global_actions": [
+    {
+      "cycle_length": 24,
+      "type": "infect",
+      "values": {
+        "beta": 0.25,
+        "gamma": 0.08,
+        "sigma": 0.03,
+        "mu": 0.0,
+        "nu": 0.0,
+        "population_template": {}
+      }
+    }
+  ],
+  "regions": [
+    {
+      "name": "Centro",
+      "position_lat_long": [
+        825,
+        1427
+      ],
+      "neighbors": [
+        "Floresta",
+        "Independência",
+        "Bom Fim",
+        "Farroupilha",
+        "Cidade Baixa",
+        "Praia de Belas"
+      ],
+      "population": [
+        190439,
+        50,
+        0
+      ],
+      "population_description": [
+        {
+          "susceptible": {
+            "age": {
+              "adults": 190439,
+              "elders": 0,
+              "young": 0,
+              "children": 0
+            },
+            "occupation": {
+              "idle": 0,
+              "student": 0,
+              "worker": 190439
+            }
+          }
+        },
+        {
+          "susceptible": {
+            "age": {
+              "adults": 50,
+              "elders": 0,
+              "young": 0,
+              "children": 0
+            },
+            "occupation": {
+              "idle": 0,
+              "student": 0,
+              "worker": 50
+            }
+          }
+        }
+      ],
+      "nodes": {
+        "home": {
+        }
+      }
+    }
+  ]
+}

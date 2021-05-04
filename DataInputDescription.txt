@@ -1,0 +1,64 @@
+The data_input description is a json organized as follows:
+epsilon is an empty token
+
+
+
+data_input =: { $population_template_description ,  $block_types , $repeating_actions , $region_list }
+
+
+where
+
+$population_template_description =: "population_template": { $characteristic_description_list }
+
+$characteristic_description_list =: $characteristic_description_list , $characteristic_description | $characteristic_description
+$characteristic_description =: $characteristic_key : [ $characteristic_values_list ] 
+$characteristic_key =: $string
+
+$characteristic_values_list =: $characteristic_values_list , $characteristic_value | $characteristic_value
+$characteristic_value =: $string
+
+
+# BLOCK TYPES
+
+$block_types =: "block_types": [ $block_type_list ]
+$block_type_list =: $block_type_list, $block_type_value | $block_type_value
+$block_type_value =: $string 
+
+
+$repeating_actions =: "repeating_actions" : [ $repeating_action_list ]
+$repeating_action_list =: $repeating_action_list , $repeating_action | epsilon
+$repeating_action =: {  "cycle_length" : $int , "type" : $string, "values" : { $value_list }  }
+
+$region_list =: "regions": [$region_description_list]
+$region_description_list =: $region_description_list , $region_description | $region_description
+$region_description =: { "name": $string , "position_lat_long" : [ $int , $int ],  "nodes": { $node_description_list } , "population" : $population_size_list , $population_description_list }
+
+$node_description_list =: $node_description_list , $node_description | $node_description
+$node_description =: string : { $time_slot : [ $action_description_list ] }
+$action_description_list =: $action_description_list , $action_description | $action_description
+
+$action_description =: {  "name" : $string , "type" : $string , "values" : { $value_list }  }
+
+$value_list =: $value_list , $value | $value
+$value =: $key_value_pair | $population_template
+
+
+$population_template =: "population_template" : { $population_template_kv_pair_list }
+$population_template_kv_pair_list =: $population_template_kv_pair_list, $population_template_kv_pair | $population_template_kv_pair
+$population_template_kv_pair =: $characteristic_key : $characteristic_value
+
+$key_value_pair =: $string : $string | $string : $int
+
+$time_slot =: $string  #only numerical characters
+
+
+# same size as $block_type_list
+$population_size_list =: [ $int_list ]
+$int_list =: $int_list , $int | $int
+
+$population_description_list =: "population_description" : { $pop_description_list }
+$pop_description_list =: $block_type_value : { $pop_description_value_list }
+$pop_description_value_list =: $pop_description_value_list , pop_description_value | pop_description_value
+$pop_description_value =: $characteristic_key : { $quantity_kv_pair_list }
+$quantity_kv_pair_list =: $quantity_kv_pair_list , $quantity_kv_pair | $quantity_kv_pair
+$quantity_kv_pair =: $characteristic_value : $int

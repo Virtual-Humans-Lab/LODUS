@@ -1,0 +1,8273 @@
+{
+  "population_template": {
+    "age": [
+      "adults",
+      "elders",
+      "young",
+      "children"
+    ],
+    "occupation": [
+      "idle",
+      "student",
+      "worker"
+    ],
+    "social_profile": [
+      "low",
+      "mid",
+      "high"
+    ]
+  },
+  "block_types": [
+    "susceptible",
+    "infected",
+    "removed"
+  ],
+  "repeating_global_actions": [
+    {
+      "cycle_length": 1,
+      "type": "levy_walk",
+      "values": {
+        "population_template": {}
+      }
+    },   
+    {
+      "cycle_length": 24,
+      "type": "return_population_home",
+      "values": {
+        "population_template": {}
+      }
+    }
+  ],
+  "regions": [
+    {
+      "name": "Aberta dos Morros",
+      "image_position": [
+        1150.0,
+        3022.0
+      ],
+      "neighbors": [
+        "Campo Novo",
+        "Hípica",
+        "Espírito Santo",
+        "Guarujá",
+        "Serraria",
+        "Ponta Grossa"
+      ],
+      "population": [
+        7146,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 3573,
+            "elders": 1429,
+            "young": 1429,
+            "children": 714
+          },
+          "occupation": {
+            "idle": 2143,
+            "student": 1429,
+            "worker": 3573
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1101.5061,
+              3004.085
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1100.94067,
+              3028.01221
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1178.693,
+              3017.2002
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1119.66443,
+              3019.22656
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1095.49988,
+              3009.64258
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1094.90234,
+              3034.86279
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Agronomia",
+      "image_position": [
+        1862.0,
+        1938.0
+      ],
+      "neighbors": [
+        "Morro Santana",
+        "Jardim Carvalho",
+        "Partenon",
+        "Vila São José",
+        "Cascata",
+        "Lomba do Pinheiro"
+      ],
+      "population": [
+        2331,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1165,
+            "elders": 466,
+            "young": 466,
+            "children": 233
+          },
+          "occupation": {
+            "idle": 699,
+            "student": 466,
+            "worker": 1165
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1865.72461,
+              1961.72754
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1845.08618,
+              1893.31763
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1842.53638,
+              1917.49475
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1824.21167,
+              1933.57373
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1838.53345,
+              1963.74268
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1854.37134,
+              1995.41382
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Anchieta",
+      "image_position": [
+        1474.0,
+        865.0
+      ],
+      "neighbors": [
+        "Humaitá",
+        "São João",
+        "Santa Maria Goretti",
+        "Jardim São Pedro",
+        "Jardim Floresta",
+        "Sarandi"
+      ],
+      "population": [
+        2024,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1012,
+            "elders": 404,
+            "young": 404,
+            "children": 202
+          },
+          "occupation": {
+            "idle": 606,
+            "student": 404,
+            "worker": 1012
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1400.65479,
+              873.075134
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1523.26392,
+              840.400269
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1508.805,
+              828.9519
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1522.09692,
+              897.237366
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1501.606,
+              837.32196
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1512.5918,
+              878.0104
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Arquipélago",
+      "image_position": [
+        959.0,
+        964.0
+      ],
+      "neighbors": [
+        "Centro",
+        "Navegantes"
+      ],
+      "population": [
+        8330,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4165,
+            "elders": 1666,
+            "young": 1666,
+            "children": 833
+          },
+          "occupation": {
+            "idle": 2499,
+            "student": 1666,
+            "worker": 4165
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              981.684448,
+              914.025
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              933.246948,
+              964.181
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              942.0712,
+              901.507263
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              964.4156,
+              1011.87183
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              918.615,
+              974.2354
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              980.4768,
+              1009.96075
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Auxiliadora",
+      "image_position": [
+        1241.0,
+        1297.0
+      ],
+      "neighbors": [
+        "São João",
+        "Higienópolis",
+        "Boa Vista",
+        "MontSerrat",
+        "Moinhos de Vento",
+        "Floresta",
+        "São Geraldo"
+      ],
+      "population": [
+        9683,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4841,
+            "elders": 1936,
+            "young": 1936,
+            "children": 968
+          },
+          "occupation": {
+            "idle": 2904,
+            "student": 1936,
+            "worker": 4841
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1254.64636,
+              1344.14966
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1269.33508,
+              1304.22131
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1262.71265,
+              1269.72058
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1254.24353,
+              1234.167
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1245.25281,
+              1267.69287
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1257.85156,
+              1275.092
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Azenha",
+      "image_position": [
+        987.0,
+        1657.0
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Farroupilha",
+        "Santana",
+        "Santo Antônio",
+        "Menino Deus",
+        "Medianeira"
+      ],
+      "population": [
+        13804,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6902,
+            "elders": 2760,
+            "young": 2760,
+            "children": 1380
+          },
+          "occupation": {
+            "idle": 4140,
+            "student": 2760,
+            "worker": 6902
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              968.5139,
+              1669.47913
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1001.76581,
+              1604.18481
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              971.751465,
+              1628.06445
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1009.22028,
+              1618.78638
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1008.46942,
+              1686.68445
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              967.618958,
+              1650.97021
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1003.90149,
+              1688.13184
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1018.37091,
+              1685.55493
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Bela Vista",
+      "image_position": [
+        1261.0,
+        1455.0
+      ],
+      "neighbors": [
+        "MontSerrat",
+        "Rio Branco",
+        "Petrópolis",
+        "Boa Vista",
+        "Três Figueiras",
+        "Santa Cecília",
+        "Moinhos de Vento"
+      ],
+      "population": [
+        11787,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5893,
+            "elders": 2357,
+            "young": 2357,
+            "children": 1178
+          },
+          "occupation": {
+            "idle": 3535,
+            "student": 2357,
+            "worker": 5893
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1293.83472,
+              1503.94592
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1268.89172,
+              1427.66687
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1243.54858,
+              1452.37634
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1231.36475,
+              1489.77539
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1331.77136,
+              1465.311
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1311.20044,
+              1429.10669
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Belém Novo",
+      "image_position": [
+        1409.0,
+        3643.0
+      ],
+      "neighbors": [
+        "Ponta Grossa",
+        "Chapéu do Sol",
+        "Lageado",
+        "Boa Vista do Sul"
+      ],
+      "population": [
+        10100,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5050,
+            "elders": 2020,
+            "young": 2020,
+            "children": 1010
+          },
+          "occupation": {
+            "idle": 3030,
+            "student": 2020,
+            "worker": 5050
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1436.30688,
+              3672.86621
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1422.23279,
+              3655.65112
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1380.67407,
+              3592.9397
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1411.91724,
+              3710.6333
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1477.50281,
+              3639.541
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1341.74548,
+              3643.35425
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Belém Velho",
+      "image_position": [
+        1518.0,
+        2460.0
+      ],
+      "neighbors": [
+        "Cascata",
+        "Lomba do Pinheiro",
+        "Restinga",
+        "Vila Nova"
+      ],
+      "population": [
+        10835,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5417,
+            "elders": 2167,
+            "young": 2167,
+            "children": 1083
+          },
+          "occupation": {
+            "idle": 3250,
+            "student": 2167,
+            "worker": 5417
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1520.7959,
+              2484.306
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1487.90881,
+              2503.11865
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1535.6521,
+              2446.18726
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1524.38257,
+              2428.323
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1479.115,
+              2515.2793
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1512.6239,
+              2404.78271
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Boa Vista",
+      "image_position": [
+        1434.0,
+        1323.0
+      ],
+      "neighbors": [
+        "Higienópolis",
+        "Passo DAreia",
+        "Auxiliadora",
+        "MontSerrat",
+        "Bela Vista",
+        "Petrópolis",
+        "Três Figueiras",
+        "Chácara das Pedras",
+        "Jardim Europa"
+      ],
+      "population": [
+        10053,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5026,
+            "elders": 2010,
+            "young": 2010,
+            "children": 1005
+          },
+          "occupation": {
+            "idle": 3015,
+            "student": 2010,
+            "worker": 5026
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1440.50793,
+              1304.46606
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1441.82568,
+              1297.69849
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1431.70459,
+              1379.01782
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1435.36182,
+              1304.1803
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1485.98364,
+              1330.86133
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1469.439,
+              1333.18115
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Boa Vista do Sul",
+      "image_position": [
+        1854.0,
+        3921.0
+      ],
+      "neighbors": [
+        "Belém Novo",
+        "Lageado",
+        "São Caetano",
+        "Lami"
+      ],
+      "population": [
+        2309,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1154,
+            "elders": 461,
+            "young": 461,
+            "children": 230
+          },
+          "occupation": {
+            "idle": 691,
+            "student": 461,
+            "worker": 1154
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1879.62854,
+              3857.06982
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1896.209,
+              3929.76538
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1824.97729,
+              3927.66357
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1869.13672,
+              3853.40967
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1832.09155,
+              3917.59766
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1814.86328,
+              3944.32544
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Bom Fim",
+      "image_position": [
+        998.0,
+        1433.0
+      ],
+      "neighbors": [
+        "Independência",
+        "Rio Branco",
+        "Santa Cecília",
+        "Santana",
+        "Farroupilha",
+        "Centro",
+        "Moinhos de Vento"
+      ],
+      "population": [
+        11593,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5796,
+            "elders": 2318,
+            "young": 2318,
+            "children": 1159
+          },
+          "occupation": {
+            "idle": 3477,
+            "student": 2318,
+            "worker": 5796
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1000.16925,
+              1480.9884
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              974.1925,
+              1397.05115
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              933.1218,
+              1462.13171
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1005.40161,
+              1459.44543
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              944.5027,
+              1412.23193
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1029.21289,
+              1382.60254
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Bom Jesus",
+      "image_position": [
+        1582.0,
+        1605.0
+      ],
+      "neighbors": [
+        "Três Figueiras",
+        "Chácara das Pedras",
+        "Vila Jardim",
+        "Jardim Sabará",
+        "Jardim Carvalho",
+        "Jardim do Salso",
+        "Petrópolis"
+      ],
+      "population": [
+        28675,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 14337,
+            "elders": 5735,
+            "young": 5735,
+            "children": 2867
+          },
+          "occupation": {
+            "idle": 8602,
+            "student": 5735,
+            "worker": 14337
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1537.27478,
+              1635.16956
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1562.549,
+              1597.29126
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1629.06165,
+              1564.86768
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1545.09875,
+              1655.91382
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1607.26355,
+              1599.36621
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1619.79126,
+              1611.69434
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Camaquã",
+      "image_position": [
+        721.0,
+        2380.0
+      ],
+      "neighbors": [
+        "Cristal",
+        "Cavalhada",
+        "Tristeza",
+        "Sétimo Céu"
+      ],
+      "population": [
+        17938,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8969,
+            "elders": 3587,
+            "young": 3587,
+            "children": 1793
+          },
+          "occupation": {
+            "idle": 5380,
+            "student": 3587,
+            "worker": 8969
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              705.2957,
+              2375.04224
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              731.784058,
+              2441.82471
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              780.759155,
+              2385.61914
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              741.8203,
+              2400.03369
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              713.6545,
+              2406.58521
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              718.26825,
+              2309.13232
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Campo Novo",
+      "image_position": [
+        1161.0,
+        2771.0
+      ],
+      "neighbors": [
+        "Vila Nova",
+        "Cavalhada",
+        "Hípica",
+        "Aberta dos Morros",
+        "Espírito Santo",
+        "Ipanema"
+      ],
+      "population": [
+        8766,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4383,
+            "elders": 1753,
+            "young": 1753,
+            "children": 876
+          },
+          "occupation": {
+            "idle": 2629,
+            "student": 1753,
+            "worker": 4383
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1175.94348,
+              2784.433
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1168.06165,
+              2754.10767
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1095.15234,
+              2754.84033
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1184.961,
+              2726.21387
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1185.07886,
+              2705.258
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1089.00427,
+              2762.9043
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Cascata",
+      "image_position": [
+        1453.0,
+        2195.0
+      ],
+      "neighbors": [
+        "Coronel Aparício Borges",
+        "Vila São José",
+        "Agronomia",
+        "Lomba do Pinheiro",
+        "Belém Velho",
+        "Vila Nova",
+        "Teresópolis",
+        "Glória"
+      ],
+      "population": [
+        13013,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6506,
+            "elders": 2602,
+            "young": 2602,
+            "children": 1301
+          },
+          "occupation": {
+            "idle": 3903,
+            "student": 2602,
+            "worker": 6506
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1421.86938,
+              2196.20825
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1503.00549,
+              2192.35815
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1387.89758,
+              2167.358
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1489.54456,
+              2208.06226
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1440.25183,
+              2217.37964
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1444.02063,
+              2166.30249
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Cavalhada",
+      "image_position": [
+        840.0,
+        2403.0
+      ],
+      "neighbors": [
+        "Cristal",
+        "Nonoai",
+        "Vila Nova",
+        "Campo Novo",
+        "Ipanema",
+        "Jardim Isabel",
+        "Sétimo Céu",
+        "Camaquã"
+      ],
+      "population": [
+        29299,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 14649,
+            "elders": 5859,
+            "young": 5859,
+            "children": 2929
+          },
+          "occupation": {
+            "idle": 8788,
+            "student": 5859,
+            "worker": 14649
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              833.803,
+              2423.8772
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              821.179138,
+              2380.161
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              783.506836,
+              2426.864
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              823.4005,
+              2412.04053
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              809.1506,
+              2404.85278
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              881.7213,
+              2399.512
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              803.4807,
+              2385.77881
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Centro",
+      "image_position": [
+        825.0,
+        1427.0
+      ],
+      "neighbors": [
+        "Arquipélago",
+        "Floresta",
+        "Independência",
+        "Bom Fim",
+        "Farroupilha",
+        "Cidade Baixa",
+        "Praia de Belas"
+      ],
+      "population": [
+        39153,
+        1,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 19577,
+            "elders": 7830,
+            "young": 7830,
+            "children": 3915
+          },
+          "occupation": {
+            "idle": 11745,
+            "student": 7830,
+            "worker": 19577
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              847.011963,
+              1487.98462
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              870.8308,
+              1379.40723
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              762.592346,
+              1467.41907
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              849.9754,
+              1477.55457
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              793.60144,
+              1388.25647
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              790.6396,
+              1425.7179
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              828.069031,
+              1365.65723
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              839.0944,
+              1479.38574
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Chácara das Pedras",
+      "image_position": [
+        1554.0,
+        1467.0
+      ],
+      "neighbors": [
+        "Boa Vista",
+        "Jardim Europa",
+        "Vila Jardim",
+        "Bom Jesus",
+        "Três Figueiras"
+      ],
+      "population": [
+        6668,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 3334,
+            "elders": 1333,
+            "young": 1333,
+            "children": 666
+          },
+          "occupation": {
+            "idle": 1999,
+            "student": 1333,
+            "worker": 3334
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1532.75537,
+              1527.2168
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1561.13708,
+              1494.02686
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1547.78223,
+              1494.7384
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1586.51648,
+              1457.28564
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1533.9574,
+              1534.20886
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1618.16028,
+              1450.58728
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Chapéu do Sol",
+      "image_position": [
+        1585.0,
+        3271.0
+      ],
+      "neighbors": [
+        "Hípica",
+        "Restinga",
+        "Lageado",
+        "Belém Novo",
+        "Ponta Grossa"
+      ],
+      "population": [
+        2913,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1456,
+            "elders": 582,
+            "young": 582,
+            "children": 291
+          },
+          "occupation": {
+            "idle": 873,
+            "student": 582,
+            "worker": 1456
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1556.5531,
+              3256.33154
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1595.774,
+              3239.44971
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1627.79126,
+              3280.29468
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1572.80188,
+              3261.155
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1603.72412,
+              3289.74878
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1576.53333,
+              3213.0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Cidade Baixa",
+      "image_position": [
+        892.0,
+        1529.0
+      ],
+      "neighbors": [
+        "Centro",
+        "Farroupilha",
+        "Santana",
+        "Azenha",
+        "Menino Deus",
+        "Praia de Belas"
+      ],
+      "population": [
+        15379,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 7689,
+            "elders": 3075,
+            "young": 3075,
+            "children": 1537
+          },
+          "occupation": {
+            "idle": 4612,
+            "student": 3075,
+            "worker": 7689
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              854.7327,
+              1550.09277
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              881.6336,
+              1549.44543
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              860.0238,
+              1508.90784
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              870.220459,
+              1502.2655
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              845.256958,
+              1484.73071
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              838.1093,
+              1524.98132
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Coronel Aparício Borges",
+      "image_position": [
+        1402.0,
+        2006.0
+      ],
+      "neighbors": [
+        "Partenon",
+        "Vila João Pessoa",
+        "Vila São José",
+        "Cascata",
+        "Glória"
+      ],
+      "population": [
+        19303,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 9651,
+            "elders": 3860,
+            "young": 3860,
+            "children": 1930
+          },
+          "occupation": {
+            "idle": 5790,
+            "student": 3860,
+            "worker": 9651
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1335.15723,
+              2011.2135
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1421.5155,
+              1972.08984
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1454.74548,
+              2018.38611
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1452.6355,
+              2021.78564
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1425.3053,
+              1952.09863
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1416.88574,
+              2033.996
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Costa e Silva",
+      "image_position": [
+        2035.0,
+        1150.0
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Santa Rosa de Lima",
+        "Parque Santa Fé",
+        "Jardim Dona Leopoldina",
+        "Passo das Pedras"
+      ],
+      "population": [
+        15842,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 7921,
+            "elders": 3168,
+            "young": 3168,
+            "children": 1584
+          },
+          "occupation": {
+            "idle": 4752,
+            "student": 3168,
+            "worker": 7921
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1998.354,
+              1202.46289
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2016.21631,
+              1196.69141
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2070.57153,
+              1107.24084
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1989.98657,
+              1115.27356
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2032.6969,
+              1180.32422
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2021.24072,
+              1159.8739
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Cristal",
+      "image_position": [
+        706.0,
+        2133.0
+      ],
+      "neighbors": [
+        "Praia de Belas",
+        "Santa Tereza",
+        "Nonoai",
+        "Cavalhada",
+        "Camaquã",
+        "Tristeza",
+        "Vila Assunção"
+      ],
+      "population": [
+        31946,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 15973,
+            "elders": 6389,
+            "young": 6389,
+            "children": 3194
+          },
+          "occupation": {
+            "idle": 9583,
+            "student": 6389,
+            "worker": 15973
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              682.042664,
+              2111.813
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              765.395752,
+              2136.048
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              722.6492,
+              2104.05
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              680.743,
+              2151.52783
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              667.504,
+              2148.78247
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              690.102,
+              2135.98584
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Cristo Redentor",
+      "image_position": [
+        1615.0,
+        1160.0
+      ],
+      "neighbors": [
+        "Jardim São Pedro",
+        "Jardim Floresta",
+        "Jardim Lindóia",
+        "Vila Ipiranga",
+        "Passo DAreia"
+      ],
+      "population": [
+        16455,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8227,
+            "elders": 3291,
+            "young": 3291,
+            "children": 1645
+          },
+          "occupation": {
+            "idle": 4936,
+            "student": 3291,
+            "worker": 8227
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1681.56091,
+              1171.62158
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1640.65381,
+              1207.10193
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1541.29285,
+              1149.55945
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1652.35059,
+              1162.29736
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1600.455,
+              1202.54053
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1575.51868,
+              1221.43689
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1655.19836,
+              1140.786
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1633.786,
+              1184.46082
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Espírito Santo",
+      "image_position": [
+        956.0,
+        2910.0
+      ],
+      "neighbors": [
+        "Ipanema",
+        "Campo Novo",
+        "Aberta dos Morros",
+        "Guarujá"
+      ],
+      "population": [
+        5606,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2803,
+            "elders": 1121,
+            "young": 1121,
+            "children": 560
+          },
+          "occupation": {
+            "idle": 1681,
+            "student": 1121,
+            "worker": 2803
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              964.53186,
+              2848.114
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              993.602844,
+              2903.6228
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              998.736267,
+              2864.99219
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              956.7637,
+              2873.911
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              915.994446,
+              2862.58252
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              958.9961,
+              2924.91113
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Extrema",
+      "image_position": [
+        2705.0,
+        3684.0
+      ],
+      "neighbors": [
+        "São Caetano",
+        "Lami"
+      ],
+      "population": [
+        1981,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 990,
+            "elders": 396,
+            "young": 396,
+            "children": 198
+          },
+          "occupation": {
+            "idle": 594,
+            "student": 396,
+            "worker": 990
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2740.91382,
+              3710.77686
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2689.11963,
+              3636.95776
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2722.62549,
+              3730.80225
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2743.24976,
+              3645.50439
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2672.5293,
+              3697.10669
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2721.4502,
+              3689.11426
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Farrapos",
+      "image_position": [
+        1175.0,
+        771.0
+      ],
+      "neighbors": [
+        "Humaitá",
+        "Navegantes"
+      ],
+      "population": [
+        18986,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 9493,
+            "elders": 3797,
+            "young": 3797,
+            "children": 1898
+          },
+          "occupation": {
+            "idle": 5695,
+            "student": 3797,
+            "worker": 9493
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1191.50879,
+              837.22644
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1171.508,
+              844.875366
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1194.48413,
+              793.4438
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1139.06787,
+              771.6472
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1193.11755,
+              738.0099
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1129.30127,
+              771.5327
+            ]
+          }
+        },
+        "stadium": {
+          "characteristics": {
+            "image_position": [
+              1199.31189,
+              759.916565
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Farroupilha",
+      "image_position": [
+        969.0,
+        1486.0
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Santana",
+        "Azenha",
+        "Cidade Baixa",
+        "Centro",
+        "Rio Branco",
+        "Santa Cecília"
+      ],
+      "population": [
+        961,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 480,
+            "elders": 192,
+            "young": 192,
+            "children": 96
+          },
+          "occupation": {
+            "idle": 288,
+            "student": 192,
+            "worker": 480
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              928.9441,
+              1481.50354
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              945.710632,
+              1442.06531
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              913.0279,
+              1493.70178
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              933.1648,
+              1440.7688
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              903.269,
+              1500.76648
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              927.947937,
+              1460.91919
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              939.482849,
+              1491.7782
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Floresta",
+      "image_position": [
+        1028.0,
+        1265.0
+      ],
+      "neighbors": [
+        "São Geraldo",
+        "São João",
+        "Auxiliadora",
+        "Moinhos de Vento",
+        "Independência",
+        "Centro"
+      ],
+      "population": [
+        11596,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5798,
+            "elders": 2319,
+            "young": 2319,
+            "children": 1159
+          },
+          "occupation": {
+            "idle": 3478,
+            "student": 2319,
+            "worker": 5798
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1051.22314,
+              1244.67456
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1047.75623,
+              1269.94287
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              995.9657,
+              1237.17065
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1004.35687,
+              1232.03992
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1063.5343,
+              1284.80957
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              991.7861,
+              1320.57629
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Glória",
+      "image_position": [
+        1220.0,
+        2037.0
+      ],
+      "neighbors": [
+        "Medianeira",
+        "Partenon",
+        "Coronel Aparício Borges",
+        "Cascata",
+        "Teresópolis"
+      ],
+      "population": [
+        17067,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8533,
+            "elders": 3413,
+            "young": 3413,
+            "children": 1706
+          },
+          "occupation": {
+            "idle": 5119,
+            "student": 3413,
+            "worker": 8533
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1275.75684,
+              2048.39819
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1240.33826,
+              2063.39526
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1227.56213,
+              2063.12231
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1209.755,
+              2050.35083
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1243.18384,
+              2015.18726
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1158.8136,
+              2060.55933
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1199.78369,
+              2012.811
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Guarujá",
+      "image_position": [
+        952.0,
+        3031.0
+      ],
+      "neighbors": [
+        "Espírito Santo",
+        "Aberta dos Morros",
+        "Serraria"
+      ],
+      "population": [
+        4811,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2405,
+            "elders": 962,
+            "young": 962,
+            "children": 481
+          },
+          "occupation": {
+            "idle": 1443,
+            "student": 962,
+            "worker": 2405
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              984.948,
+              2975.80713
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              916.1051,
+              2992.619
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              897.7424,
+              2992.58862
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              909.896057,
+              3004.95923
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              946.719849,
+              3079.38379
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              977.9656,
+              3016.34644
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Higienópolis",
+      "image_position": [
+        1324.0,
+        1228.0
+      ],
+      "neighbors": [
+        "São João",
+        "Passo DAreia",
+        "Boa Vista",
+        "Auxiliadora"
+      ],
+      "population": [
+        10724,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5362,
+            "elders": 2144,
+            "young": 2144,
+            "children": 1072
+          },
+          "occupation": {
+            "idle": 3216,
+            "student": 2144,
+            "worker": 5362
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1352.97144,
+              1231.54443
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1349.6792,
+              1197.949
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1309.531,
+              1177.90356
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1379.3219,
+              1229.8656
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1295.04712,
+              1245.281
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1310.4032,
+              1191.35291
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Hípica",
+      "image_position": [
+        1409.0,
+        2990.0
+      ],
+      "neighbors": [
+        "Vila Nova",
+        "Restinga",
+        "Chapéu do Sol",
+        "Ponta Grossa",
+        "Aberta dos Morros",
+        "Campo Novo"
+      ],
+      "population": [
+        18645,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 9322,
+            "elders": 3729,
+            "young": 3729,
+            "children": 1864
+          },
+          "occupation": {
+            "idle": 5593,
+            "student": 3729,
+            "worker": 9322
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1375.47107,
+              3015.333
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1374.08484,
+              2983.94824
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1407.961,
+              2962.29639
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1450.647,
+              3013.31982
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1434.27722,
+              3016.20776
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1395.11658,
+              3032.48779
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Humaitá",
+      "image_position": [
+        1287.0,
+        820.0
+      ],
+      "neighbors": [
+        "Farrapos",
+        "Navegantes",
+        "Anchieta",
+        "São João"
+      ],
+      "population": [
+        11502,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5751,
+            "elders": 2300,
+            "young": 2300,
+            "children": 1150
+          },
+          "occupation": {
+            "idle": 3450,
+            "student": 2300,
+            "worker": 5751
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1281.33765,
+              837.640442
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1324.77515,
+              805.849548
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1346.93762,
+              856.020142
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1270.79346,
+              770.9625
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1294.71387,
+              864.5747
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1288.578,
+              849.7138
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Independência",
+      "image_position": [
+        992.0,
+        1387.0
+      ],
+      "neighbors": [
+        "Floresta",
+        "Moinhos de Vento",
+        "Rio Branco",
+        "Bom Fim",
+        "Centro"
+      ],
+      "population": [
+        8112,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4056,
+            "elders": 1622,
+            "young": 1622,
+            "children": 811
+          },
+          "occupation": {
+            "idle": 2433,
+            "student": 1622,
+            "worker": 4056
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1012.76691,
+              1390.6
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              964.17,
+              1426.32935
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1005.13019,
+              1444.95886
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              951.2009,
+              1434.2677
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1048.04749,
+              1390.205
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              949.2804,
+              1410.316
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              951.972534,
+              1397.54163
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              960.6548,
+              1348.1897
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Ipanema",
+      "image_position": [
+        898.0,
+        2748.0
+      ],
+      "neighbors": [
+        "Pedra Redonda",
+        "Jardim Isabel",
+        "Cavalhada",
+        "Campo Novo",
+        "Espírito Santo",
+        "Vila Nova"
+      ],
+      "population": [
+        13728,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6864,
+            "elders": 2745,
+            "young": 2745,
+            "children": 1372
+          },
+          "occupation": {
+            "idle": 4117,
+            "student": 2745,
+            "worker": 6864
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              833.2432,
+              2736.06787
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              863.856567,
+              2745.05469
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              920.181335,
+              2748.61719
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              948.3275,
+              2769.59375
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              875.1105,
+              2805.08667
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              879.632751,
+              2738.68677
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Botânico",
+      "image_position": [
+        1355.0,
+        1693.0
+      ],
+      "neighbors": [
+        "Petrópolis",
+        "Jardim do Salso",
+        "Partenon"
+      ],
+      "population": [
+        12521,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6260,
+            "elders": 2504,
+            "young": 2504,
+            "children": 1252
+          },
+          "occupation": {
+            "idle": 3756,
+            "student": 2504,
+            "worker": 6260
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1404.98047,
+              1707.78516
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1313.58948,
+              1721.55408
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1319.51221,
+              1723.07959
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1390.50586,
+              1737.51184
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1375.05139,
+              1635.84009
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1422.66211,
+              1667.99121
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1325.96326,
+              1747.6593
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1374.9812,
+              1645.53186
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Carvalho",
+      "image_position": [
+        1739.0,
+        1693.0
+      ],
+      "neighbors": [
+        "Vila Jardim",
+        "Jardim Sabará",
+        "Morro Santana",
+        "Agronomia",
+        "Partenon",
+        "Jardim do Salso",
+        "Bom Jesus"
+      ],
+      "population": [
+        25386,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 12693,
+            "elders": 5077,
+            "young": 5077,
+            "children": 2538
+          },
+          "occupation": {
+            "idle": 7615,
+            "student": 5077,
+            "worker": 12693
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1750.17712,
+              1765.09973
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1721.95422,
+              1682.80994
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1755.01453,
+              1647.94592
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1682.1709,
+              1689.453
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1792.5907,
+              1687.77112
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1800.883,
+              1704.28345
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1754.96033,
+              1682.29187
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim do Salso",
+      "image_position": [
+        1503.0,
+        1673.0
+      ],
+      "neighbors": [
+        "Bom Jesus",
+        "Jardim Carvalho",
+        "Partenon",
+        "Jardim Botânico",
+        "Petrópolis"
+      ],
+      "population": [
+        4405,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2202,
+            "elders": 881,
+            "young": 881,
+            "children": 440
+          },
+          "occupation": {
+            "idle": 1321,
+            "student": 881,
+            "worker": 2202
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1557.90784,
+              1714.87183
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1454.778,
+              1728.06543
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1542.55054,
+              1710.716
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1495.03333,
+              1651.67615
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1459.89734,
+              1678.22864
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1520.75537,
+              1718.241
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Dona Leopoldina",
+      "image_position": [
+        2091.0,
+        1280.0
+      ],
+      "neighbors": [
+        "Costa e Silva",
+        "Parque Santa Fé",
+        "Rubem Berta",
+        "Mário Quintana",
+        "Passo das Pedras"
+      ],
+      "population": [
+        18016,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 9008,
+            "elders": 3603,
+            "young": 3603,
+            "children": 1801
+          },
+          "occupation": {
+            "idle": 5404,
+            "student": 3603,
+            "worker": 9008
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2144.89844,
+              1314.10327
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2091.54614,
+              1220.79822
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2088.60938,
+              1315.325
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2114.78174,
+              1254.34985
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2126.54517,
+              1276.49756
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2072.272,
+              1337.23743
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Europa",
+      "image_position": [
+        1596.0,
+        1335.0
+      ],
+      "neighbors": [
+        "Passo DAreia",
+        "Vila Ipiranga",
+        "Vila Jardim",
+        "Chácara das Pedras",
+        "Boa Vista"
+      ],
+      "population": [
+        2299,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1149,
+            "elders": 459,
+            "young": 459,
+            "children": 229
+          },
+          "occupation": {
+            "idle": 688,
+            "student": 459,
+            "worker": 1149
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1560.076,
+              1336.12427
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1583.96277,
+              1348.39648
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1658.04736,
+              1296.83826
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1621.10413,
+              1321.96313
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1595.66284,
+              1392.12891
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1546.81531,
+              1368.14758
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1574.14136,
+              1295.74548
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Floresta",
+      "image_position": [
+        1593.0,
+        1031.0
+      ],
+      "neighbors": [
+        "Anchieta",
+        "Sarandi",
+        "Jardim São Pedro",
+        "Jardim Lindóia",
+        "Cristo Redentor"
+      ],
+      "population": [
+        3307,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1653,
+            "elders": 661,
+            "young": 661,
+            "children": 330
+          },
+          "occupation": {
+            "idle": 991,
+            "student": 661,
+            "worker": 1653
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1541.53687,
+              1033.28809
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1608.3291,
+              1066.8042
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1622.20715,
+              1054.46252
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1590.82727,
+              1067.72144
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1654.75378,
+              1011.04333
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1621.5199,
+              1052.04663
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Isabel",
+      "image_position": [
+        758.0,
+        2625.0
+      ],
+      "neighbors": [
+        "Sétimo Céu",
+        "Cavalhada",
+        "Ipanema",
+        "Pedra Redonda"
+      ],
+      "population": [
+        2835,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1417,
+            "elders": 567,
+            "young": 567,
+            "children": 283
+          },
+          "occupation": {
+            "idle": 850,
+            "student": 567,
+            "worker": 1417
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              727.444641,
+              2673.52075
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              818.7359,
+              2598.12427
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              761.7783,
+              2679.725
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              781.9274,
+              2668.87939
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              718.2911,
+              2683.189
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              787.730835,
+              2633.76733
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Itu",
+      "image_position": [
+        1829.0,
+        1280.0
+      ],
+      "neighbors": [
+        "São Sebastião",
+        "Sarandi",
+        "Passo das Pedras",
+        "Jardim Sabará",
+        "Vila Ipiranga",
+        "Morro Santana",
+        "Vila Jardim"
+      ],
+      "population": [
+        17853,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8926,
+            "elders": 3570,
+            "young": 3570,
+            "children": 1785
+          },
+          "occupation": {
+            "idle": 5355,
+            "student": 3570,
+            "worker": 8926
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1796.08142,
+              1302.18591
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1794.10718,
+              1291.98279
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1807.75891,
+              1241.56824
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1824.25769,
+              1214.0946
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1841.45471,
+              1235.39136
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1875.40759,
+              1266.92664
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Lindóia",
+      "image_position": [
+        1679.0,
+        1078.0
+      ],
+      "neighbors": [
+        "Sarandi",
+        "São Sebastião",
+        "Vila Ipiranga",
+        "Cristo Redentor",
+        "Jardim Floresta"
+      ],
+      "population": [
+        7417,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 3708,
+            "elders": 1483,
+            "young": 1483,
+            "children": 741
+          },
+          "occupation": {
+            "idle": 2224,
+            "student": 1483,
+            "worker": 3708
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1668.82935,
+              1035.94629
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1626.05774,
+              1085.865
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1683.70386,
+              1104.679
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1634.42419,
+              1107.16907
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1693.99939,
+              1030.2218
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1730.23169,
+              1067.29907
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1636.26367,
+              1072.70117
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim Sabará",
+      "image_position": [
+        1784.0,
+        1467.0
+      ],
+      "neighbors": [
+        "Vila Ipiranga",
+        "Jardim Itu",
+        "Passo das Pedras",
+        "Morro Santana",
+        "Jardim Carvalho",
+        "Bom Jesus",
+        "Vila Jardim"
+      ],
+      "population": [
+        13530,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6765,
+            "elders": 2706,
+            "young": 2706,
+            "children": 1353
+          },
+          "occupation": {
+            "idle": 4059,
+            "student": 2706,
+            "worker": 6765
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1793.052,
+              1404.496
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1797.81543,
+              1518.89978
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1716.04907,
+              1486.503
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1712.49915,
+              1481.87549
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1805.72559,
+              1468.74243
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1807.49622,
+              1532.81238
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Jardim São Pedro",
+      "image_position": [
+        1520.0,
+        1067.0
+      ],
+      "neighbors": [
+        "Anchieta",
+        "Jardim Floresta",
+        "Cristo Redentor",
+        "Passo DAreia",
+        "Santa Maria Goretti"
+      ],
+      "population": [
+        3967,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1983,
+            "elders": 793,
+            "young": 793,
+            "children": 396
+          },
+          "occupation": {
+            "idle": 1189,
+            "student": 793,
+            "worker": 1983
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1551.03,
+              1075.52417
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1512.00134,
+              1052.47168
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1523.20874,
+              1004.71484
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1524.45459,
+              1035.89587
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1508.264,
+              1108.176
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1560.83032,
+              1121.2041
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Lageado",
+      "image_position": [
+        1975.0,
+        3385.0
+      ],
+      "neighbors": [
+        "Restinga",
+        "Pitinga",
+        "Lomba do Pinheiro",
+        "São Caetano",
+        "Boa Vista do Sul",
+        "Belém Novo",
+        "Chapéu do Sol"
+      ],
+      "population": [
+        4481,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2240,
+            "elders": 896,
+            "young": 896,
+            "children": 448
+          },
+          "occupation": {
+            "idle": 1344,
+            "student": 896,
+            "worker": 2240
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1986.17383,
+              3346.93652
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2013.758,
+              3436.17749
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1921.08826,
+              3361.952
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1961.17957,
+              3373.09
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1984.293,
+              3362.21875
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1942.81226,
+              3396.92773
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Lami",
+      "image_position": [
+        2404.0,
+        3992.0
+      ],
+      "neighbors": [
+        "Boa Vista do Sul",
+        "São Caetano",
+        "Extrema"
+      ],
+      "population": [
+        4289,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2144,
+            "elders": 857,
+            "young": 857,
+            "children": 428
+          },
+          "occupation": {
+            "idle": 1285,
+            "student": 857,
+            "worker": 2144
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2408.684,
+              4013.10962
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2371.0686,
+              3973.843
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2392.47363,
+              3969.449
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2463.686,
+              3974.89966
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2413.956,
+              3960.02319
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2455.291,
+              3963.8374
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Lomba do Pinheiro",
+      "image_position": [
+        2037.0,
+        2352.0
+      ],
+      "neighbors": [
+        "Agronomia",
+        "Vila São José",
+        "Cascata",
+        "Belém Velho",
+        "Restinga",
+        "Pitinga",
+        "Lageado",
+        "São Caetano"
+      ],
+      "population": [
+        58106,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 29053,
+            "elders": 11621,
+            "young": 11621,
+            "children": 5810
+          },
+          "occupation": {
+            "idle": 17431,
+            "student": 11621,
+            "worker": 29053
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2058.21021,
+              2333.91431
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2017.78088,
+              2311.341
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2049.04077,
+              2361.27148
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2021.34692,
+              2368.86475
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2004.38757,
+              2403.28125
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2064.01147,
+              2390.70947
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Mário Quintana",
+      "image_position": [
+        2230.0,
+        1482.0
+      ],
+      "neighbors": [
+        "Morro Santana",
+        "Passo das Pedras",
+        "Jardim Dona Leopoldina",
+        "Rubem Berta"
+      ],
+      "population": [
+        38116,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 19058,
+            "elders": 7623,
+            "young": 7623,
+            "children": 3811
+          },
+          "occupation": {
+            "idle": 11434,
+            "student": 7623,
+            "worker": 19058
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2279.39771,
+              1457.49207
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2237.88257,
+              1453.03455
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2200.7793,
+              1494.65479
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2275.26831,
+              1423.27087
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2203.136,
+              1469.53015
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2192.081,
+              1507.07446
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Medianeira",
+      "image_position": [
+        1034.0,
+        1852.0
+      ],
+      "neighbors": [
+        "Menino Deus",
+        "Azenha",
+        "Santo Antônio",
+        "Partenon",
+        "Glória",
+        "Teresópolis",
+        "Santa Tereza"
+      ],
+      "population": [
+        11223,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5611,
+            "elders": 2244,
+            "young": 2244,
+            "children": 1122
+          },
+          "occupation": {
+            "idle": 3366,
+            "student": 2244,
+            "worker": 5611
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1082.3739,
+              1848.40771
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1006.8457,
+              1856.38452
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1009.94226,
+              1821.17468
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1067.89624,
+              1876.17273
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1061.66309,
+              1853.04138
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1022.01996,
+              1836.3103
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Menino Deus",
+      "image_position": [
+        890.0,
+        1710.0
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Azenha",
+        "Medianeira",
+        "Santa Tereza",
+        "Praia de Belas"
+      ],
+      "population": [
+        31650,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 15825,
+            "elders": 6330,
+            "young": 6330,
+            "children": 3165
+          },
+          "occupation": {
+            "idle": 9495,
+            "student": 6330,
+            "worker": 15825
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              896.717651,
+              1674.136
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              923.098938,
+              1718.55408
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              859.276245,
+              1733.00146
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              934.4241,
+              1682.53015
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              870.721863,
+              1674.3208
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              875.670837,
+              1699.1886
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              861.6619,
+              1680.73584
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Moinhos de Vento",
+      "image_position": [
+        1115.0,
+        1330.0
+      ],
+      "neighbors": [
+        "Floresta",
+        "São João",
+        "Auxiliadora",
+        "MontSerrat",
+        "Rio Branco",
+        "Independência",
+        "Bom Fim",
+        "Bela Vista",
+        "São Geraldo"
+      ],
+      "population": [
+        11937,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5968,
+            "elders": 2387,
+            "young": 2387,
+            "children": 1193
+          },
+          "occupation": {
+            "idle": 3580,
+            "student": 2387,
+            "worker": 5968
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1126.16626,
+              1403.92822
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1055.90869,
+              1367.53015
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1048.77039,
+              1325.75427
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1070.02075,
+              1296.98425
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1098.19666,
+              1272.54529
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1101.25867,
+              1315.96069
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1154.52771,
+              1330.02832
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1096.09485,
+              1326.34607
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "MontSerrat",
+      "image_position": [
+        1262.0,
+        1371.0
+      ],
+      "neighbors": [
+        "Moinhos de Vento",
+        "Auxiliadora",
+        "Boa Vista",
+        "Bela Vista",
+        "Rio Branco"
+      ],
+      "population": [
+        11236,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5618,
+            "elders": 2247,
+            "young": 2247,
+            "children": 1123
+          },
+          "occupation": {
+            "idle": 3370,
+            "student": 2247,
+            "worker": 5618
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1206.2804,
+              1401.30493
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1228.693,
+              1374.74316
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1269.6333,
+              1410.37744
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1263.64355,
+              1319.4646
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1261.02051,
+              1422.47021
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1319.63574,
+              1412.8728
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Morro Santana",
+      "image_position": [
+        1968.0,
+        1572.0
+      ],
+      "neighbors": [
+        "Passo das Pedras",
+        "Mário Quintana",
+        "Agronomia",
+        "Jardim Carvalho",
+        "Jardim Sabará",
+        "Jardim Itu"
+      ],
+      "population": [
+        19338,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 9669,
+            "elders": 3867,
+            "young": 3867,
+            "children": 1933
+          },
+          "occupation": {
+            "idle": 5800,
+            "student": 3867,
+            "worker": 9669
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2005.22754,
+              1529.31372
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1986.33191,
+              1528.28394
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2010.41077,
+              1629.88342
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1970.24988,
+              1551.617
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1967.78381,
+              1619.71716
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2027.96033,
+              1559.11084
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Navegantes",
+      "image_position": [
+        1150.0,
+        1009.0
+      ],
+      "neighbors": [
+        "Arquipélago",
+        "Farrapos",
+        "Humaitá",
+        "São João",
+        "São Geraldo"
+      ],
+      "population": [
+        4327,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2163,
+            "elders": 865,
+            "young": 865,
+            "children": 432
+          },
+          "occupation": {
+            "idle": 1297,
+            "student": 865,
+            "worker": 2163
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1183.347,
+              987.2471
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1180.50415,
+              976.6862
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1209.21411,
+              1040.761
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1179.22266,
+              1052.85864
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1179.80212,
+              994.5363
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1135.21252,
+              967.24
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1162.82715,
+              957.7385
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Nonoai",
+      "image_position": [
+        963.0,
+        2184.0
+      ],
+      "neighbors": [
+        "Santa Tereza",
+        "Teresópolis",
+        "Vila Nova",
+        "Cavalhada",
+        "Cristal"
+      ],
+      "population": [
+        25160,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 12580,
+            "elders": 5032,
+            "young": 5032,
+            "children": 2516
+          },
+          "occupation": {
+            "idle": 7548,
+            "student": 5032,
+            "worker": 12580
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              939.0104,
+              2192.79565
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              903.2082,
+              2150.02661
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              910.6454,
+              2200.09351
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              956.926941,
+              2248.94873
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1032.03943,
+              2173.7146
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              998.040833,
+              2135.882
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Parque Santa Fé",
+      "image_position": [
+        2180.0,
+        1144.0
+      ],
+      "neighbors": [
+        "Santa Rosa de Lima",
+        "Rubem Berta",
+        "Jardim Dona Leopoldina",
+        "Costa e Silva"
+      ],
+      "population": [
+        6376,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 3188,
+            "elders": 1275,
+            "young": 1275,
+            "children": 637
+          },
+          "occupation": {
+            "idle": 1912,
+            "student": 1275,
+            "worker": 3188
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2191.02344,
+              1103.02856
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2197.86743,
+              1196.76392
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2162.95483,
+              1202.11011
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2202.21973,
+              1180.95691
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2163.46387,
+              1091.72974
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2208.86841,
+              1142.75781
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Partenon",
+      "image_position": [
+        1463.0,
+        1775.0
+      ],
+      "neighbors": [
+        "Santana",
+        "Petrópolis",
+        "Jardim Botânico",
+        "Jardim do Salso",
+        "Jardim Carvalho",
+        "Agronomia",
+        "Vila São José",
+        "Vila João Pessoa",
+        "Coronel Aparício Borges",
+        "Glória",
+        "Medianeira",
+        "Santo Antônio"
+      ],
+      "population": [
+        48160,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 24080,
+            "elders": 9632,
+            "young": 9632,
+            "children": 4816
+          },
+          "occupation": {
+            "idle": 14448,
+            "student": 9632,
+            "worker": 24080
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1456.57227,
+              1803.17126
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1504.259,
+              1836.23621
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1455.69263,
+              1759.49109
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1426.60779,
+              1799.932
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1430.07983,
+              1838.32947
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1512.3645,
+              1727.47449
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Passo DAreia",
+      "image_position": [
+        1463.0,
+        1195.0
+      ],
+      "neighbors": [
+        "Santa Maria Goretti",
+        "Jardim São Pedro",
+        "Cristo Redentor",
+        "Vila Ipiranga",
+        "Jardim Europa",
+        "Boa Vista",
+        "Higienópolis",
+        "São João"
+      ],
+      "population": [
+        21968,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 10984,
+            "elders": 4393,
+            "young": 4393,
+            "children": 2196
+          },
+          "occupation": {
+            "idle": 6589,
+            "student": 4393,
+            "worker": 10984
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1406.7052,
+              1203.83765
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1457.48083,
+              1165.02551
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1457.01245,
+              1166.62939
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1505.57959,
+              1255.08923
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1411.10168,
+              1205.9209
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1483.15,
+              1264.77307
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Passo das Pedras",
+      "image_position": [
+        1956.0,
+        1305.0
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Costa e Silva",
+        "Jardim Dona Leopoldina",
+        "Mário Quintana",
+        "Morro Santana",
+        "Jardim Sabará",
+        "Jardim Itu"
+      ],
+      "population": [
+        15902,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 7951,
+            "elders": 3180,
+            "young": 3180,
+            "children": 1590
+          },
+          "occupation": {
+            "idle": 4770,
+            "student": 3180,
+            "worker": 7951
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2006.175,
+              1267.23792
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1955.8418,
+              1331.55273
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1970.00952,
+              1255.98438
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1894.40686,
+              1313.30994
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1974.46558,
+              1286.59839
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1948.96033,
+              1361.43408
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Pedra Redonda",
+      "image_position": [
+        645.0,
+        2605.0
+      ],
+      "neighbors": [
+        "Vila Conceição",
+        "Sétimo Céu",
+        "Jardim Isabel",
+        "Ipanema"
+      ],
+      "population": [
+        274,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 137,
+            "elders": 54,
+            "young": 54,
+            "children": 27
+          },
+          "occupation": {
+            "idle": 81,
+            "student": 54,
+            "worker": 137
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              661.5504,
+              2658.09351
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              680.5342,
+              2573.85132
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              692.7523,
+              2571.36987
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              613.4413,
+              2649.71362
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              578.8449,
+              2612.875
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              665.568237,
+              2625.889
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Petrópolis",
+      "image_position": [
+        1319.0,
+        1566.0
+      ],
+      "neighbors": [
+        "Rio Branco",
+        "Bela Vista",
+        "Boa Vista",
+        "Três Figueiras",
+        "Bom Jesus",
+        "Jardim do Salso",
+        "Jardim Botânico",
+        "Partenon",
+        "Santana",
+        "Santa Cecília"
+      ],
+      "population": [
+        37496,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 18748,
+            "elders": 7499,
+            "young": 7499,
+            "children": 3749
+          },
+          "occupation": {
+            "idle": 11248,
+            "student": 7499,
+            "worker": 18748
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1340.45386,
+              1606.83191
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1288.5072,
+              1503.74219
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1332.57666,
+              1532.4436
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1376.32825,
+              1525.64465
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1340.52319,
+              1549.92065
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1256.49072,
+              1569.95764
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Pitinga",
+      "image_position": [
+        2187.0,
+        2950.0
+      ],
+      "neighbors": [
+        "Lomba do Pinheiro",
+        "Restinga",
+        "Lageado",
+        "São Caetano"
+      ],
+      "population": [
+        4352,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2176,
+            "elders": 870,
+            "young": 870,
+            "children": 435
+          },
+          "occupation": {
+            "idle": 1305,
+            "student": 870,
+            "worker": 2176
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2154.975,
+              3009.70825
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2131.74,
+              2958.056
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2120.25244,
+              2924.81567
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2147.93945,
+              2916.40967
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2234.30542,
+              2975.04663
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2206.4043,
+              2984.3418
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Ponta Grossa",
+      "image_position": [
+        1117.0,
+        3352.0
+      ],
+      "neighbors": [
+        "Serraria",
+        "Aberta dos Morros",
+        "Hípica",
+        "Chapéu do Sol",
+        "Belém Novo"
+      ],
+      "population": [
+        8722,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4361,
+            "elders": 1744,
+            "young": 1744,
+            "children": 872
+          },
+          "occupation": {
+            "idle": 2616,
+            "student": 1744,
+            "worker": 4361
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1129.844,
+              3368.342
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1071.88354,
+              3386.2002
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1113.29907,
+              3291.615
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1122.64893,
+              3323.28369
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1134.554,
+              3332.919
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1119.89063,
+              3315.782
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Praia de Belas",
+      "image_position": [
+        790.0,
+        1663.0
+      ],
+      "neighbors": [
+        "Centro",
+        "Cidade Baixa",
+        "Menino Deus",
+        "Santa Tereza",
+        "Cristal"
+      ],
+      "population": [
+        2281,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1140,
+            "elders": 456,
+            "young": 456,
+            "children": 228
+          },
+          "occupation": {
+            "idle": 684,
+            "student": 456,
+            "worker": 1140
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              779.322754,
+              1723.589
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              810.224854,
+              1605.92126
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              810.165161,
+              1660.33728
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              804.0643,
+              1620.75745
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              811.0993,
+              1609.238
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              809.422241,
+              1708.2699
+            ]
+          }
+        },
+        "stadium": {
+          "characteristics": {
+            "image_position": [
+              844.156433,
+              1666.22083
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              726.4766,
+              1687.69263
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Restinga",
+      "image_position": [
+        1764.0,
+        2881.0
+      ],
+      "neighbors": [
+        "Vila Nova",
+        "Belém Velho",
+        "Lomba do Pinheiro",
+        "Pitinga",
+        "Lageado",
+        "Chapéu do Sol",
+        "Hípica"
+      ],
+      "population": [
+        53508,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 26754,
+            "elders": 10701,
+            "young": 10701,
+            "children": 5350
+          },
+          "occupation": {
+            "idle": 16051,
+            "student": 10701,
+            "worker": 26754
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1805.86707,
+              2844.481
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1797.35181,
+              2861.9458
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1815.28284,
+              2847.72559
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1742.5929,
+              2880.41553
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1815.22375,
+              2877.27661
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1813.47339,
+              2923.27539
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1794.95166,
+              2941.34863
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Rio Branco",
+      "image_position": [
+        1120.0,
+        1452.0
+      ],
+      "neighbors": [
+        "Independência",
+        "Moinhos de Vento",
+        "MontSerrat",
+        "Bela Vista",
+        "Petrópolis",
+        "Santa Cecília",
+        "Santana",
+        "Bom Fim",
+        "Farroupilha"
+      ],
+      "population": [
+        17531,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8765,
+            "elders": 3506,
+            "young": 3506,
+            "children": 1753
+          },
+          "occupation": {
+            "idle": 5259,
+            "student": 3506,
+            "worker": 8765
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1124.4989,
+              1488.6239
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1089.53674,
+              1425.20227
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1166.35657,
+              1496.58313
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1086.56128,
+              1436.02686
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1154.73328,
+              1445.73035
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1146.99487,
+              1446.85059
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1110.21948,
+              1496.95276
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Rubem Berta",
+      "image_position": [
+        2273.0,
+        1185.0
+      ],
+      "neighbors": [
+        "Santa Rosa de Lima",
+        "Parque Santa Fé",
+        "Jardim Dona Leopoldina",
+        "Mário Quintana"
+      ],
+      "population": [
+        33168,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 16584,
+            "elders": 6633,
+            "young": 6633,
+            "children": 3316
+          },
+          "occupation": {
+            "idle": 9949,
+            "student": 6633,
+            "worker": 16584
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2293.9834,
+              1248.67737
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2205.22046,
+              1201.43787
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2266.24561,
+              1214.19775
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2263.64526,
+              1169.99756
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2291.26636,
+              1195.48938
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2251.416,
+              1226.91333
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santa Cecília",
+      "image_position": [
+        1119.0,
+        1543.0
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Rio Branco",
+        "Petrópolis",
+        "Santana",
+        "Farroupilha",
+        "Bela Vista"
+      ],
+      "population": [
+        5768,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2884,
+            "elders": 1153,
+            "young": 1153,
+            "children": 576
+          },
+          "occupation": {
+            "idle": 1729,
+            "student": 1153,
+            "worker": 2884
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1103.50476,
+              1573.3501
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1081.45569,
+              1523.9613
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1150.03931,
+              1573.04968
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1114.1958,
+              1560.00781
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1180.13965,
+              1537.6803
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1122.2229,
+              1607.19
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1164.34875,
+              1596.5531
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santa Maria Goretti",
+      "image_position": [
+        1416.0,
+        1095.0
+      ],
+      "neighbors": [
+        "São João",
+        "Anchieta",
+        "Jardim São Pedro",
+        "Passo DAreia"
+      ],
+      "population": [
+        3509,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1754,
+            "elders": 701,
+            "young": 701,
+            "children": 350
+          },
+          "occupation": {
+            "idle": 1051,
+            "student": 701,
+            "worker": 1754
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1424.50208,
+              1043.35156
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1379.66016,
+              1108.89734
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1396.35022,
+              1054.11548
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1471.05518,
+              1084.55371
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1429.95923,
+              1085.34143
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1407.27844,
+              1155.20593
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santa Rosa de Lima",
+      "image_position": [
+        2240.0,
+        920.0
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Costa e Silva",
+        "Parque Santa Fé",
+        "Rubem Berta"
+      ],
+      "population": [
+        35333,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 17666,
+            "elders": 7066,
+            "young": 7066,
+            "children": 3533
+          },
+          "occupation": {
+            "idle": 10599,
+            "student": 7066,
+            "worker": 17666
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2251.20752,
+              963.7164
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2248.999,
+              982.8889
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2214.661,
+              947.5439
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2254.80518,
+              899.666565
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2257.337,
+              945.408752
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2195.736,
+              869.1685
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santa Tereza",
+      "image_position": [
+        864.0,
+        1958.0
+      ],
+      "neighbors": [
+        "Praia de Belas",
+        "Menino Deus",
+        "Medianeira",
+        "Teresópolis",
+        "Nonoai",
+        "Cristal"
+      ],
+      "population": [
+        39577,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 19788,
+            "elders": 7915,
+            "young": 7915,
+            "children": 3957
+          },
+          "occupation": {
+            "idle": 11872,
+            "student": 7915,
+            "worker": 19788
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              851.382263,
+              1944.55249
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              849.7195,
+              2024.78186
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              901.9507,
+              1972.67053
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              827.188538,
+              1970.31921
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              884.0881,
+              1991.56873
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              898.371643,
+              1903.13892
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santana",
+      "image_position": [
+        1064.0,
+        1604.0
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Santa Cecília",
+        "Partenon",
+        "Santo Antônio",
+        "Azenha",
+        "Cidade Baixa",
+        "Farroupilha",
+        "Petrópolis",
+        "Rio Branco"
+      ],
+      "population": [
+        20723,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 10361,
+            "elders": 4144,
+            "young": 4144,
+            "children": 2072
+          },
+          "occupation": {
+            "idle": 6216,
+            "student": 4144,
+            "worker": 10361
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1039.47559,
+              1565.09229
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1035.69739,
+              1554.96692
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1023.33459,
+              1621.40759
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1079.35925,
+              1645.02808
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1052.82678,
+              1639.966
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1086.00427,
+              1574.81665
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1045.97839,
+              1619.71167
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santo Antônio",
+      "image_position": [
+        1109.0,
+        1764.0
+      ],
+      "neighbors": [
+        "Santana",
+        "Partenon",
+        "Medianeira",
+        "Azenha"
+      ],
+      "population": [
+        13161,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6580,
+            "elders": 2632,
+            "young": 2632,
+            "children": 1316
+          },
+          "occupation": {
+            "idle": 3948,
+            "student": 2632,
+            "worker": 6580
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1074.76746,
+              1802.16113
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1127.91882,
+              1746.92725
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1170.422,
+              1751.54822
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1102.65515,
+              1711.221
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1164.49548,
+              1752.61877
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1087.7655,
+              1787.03992
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "São Caetano",
+      "image_position": [
+        2369.0,
+        3466.0
+      ],
+      "neighbors": [
+        "Lomba do Pinheiro",
+        "Lageado",
+        "Boa Vista do Sul",
+        "Lami",
+        "Extrema",
+        "Pitinga"
+      ],
+      "population": [
+        757,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 378,
+            "elders": 151,
+            "young": 151,
+            "children": 75
+          },
+          "occupation": {
+            "idle": 226,
+            "student": 151,
+            "worker": 378
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              2405.996,
+              3447.79565
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2349.54834,
+              3477.94531
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              2355.53076,
+              3515.708
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              2402.55151,
+              3466.965
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              2365.69849,
+              3419.50513
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              2386.56519,
+              3499.62915
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "São Geraldo",
+      "image_position": [
+        1116.0,
+        1147.0
+      ],
+      "neighbors": [
+        "Navegantes",
+        "São João",
+        "Floresta",
+        "Auxiliadora",
+        "Moinhos de Vento"
+      ],
+      "population": [
+        8681,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4340,
+            "elders": 1736,
+            "young": 1736,
+            "children": 868
+          },
+          "occupation": {
+            "idle": 2604,
+            "student": 1736,
+            "worker": 4340
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1089.86926,
+              1095.837
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1100.86157,
+              1182.012
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1132.0625,
+              1151.19165
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1124.9469,
+              1198.57
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1113.5658,
+              1164.06787
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1179.06946,
+              1141.2655
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "São João",
+      "image_position": [
+        1266.0,
+        1124.0
+      ],
+      "neighbors": [
+        "Navegantes",
+        "Humaitá",
+        "Anchieta",
+        "Santa Maria Goretti",
+        "Passo DAreia",
+        "Higienópolis",
+        "Auxiliadora",
+        "Floresta",
+        "São Geraldo",
+        "Moinhos de Vento"
+      ],
+      "population": [
+        12226,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6113,
+            "elders": 2445,
+            "young": 2445,
+            "children": 1222
+          },
+          "occupation": {
+            "idle": 3667,
+            "student": 2445,
+            "worker": 6113
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1257.46069,
+              1181.15576
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1285.46191,
+              1088.51147
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1273.9917,
+              1161.64722
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1237.70789,
+              1154.694
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1230.27344,
+              1080.259
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1239.96765,
+              1155.88477
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1282.12012,
+              1157.60608
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "São Sebastião",
+      "image_position": [
+        1761.0,
+        1073.0
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Jardim Itu",
+        "Vila Ipiranga",
+        "Jardim Lindóia"
+      ],
+      "population": [
+        7019,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 3509,
+            "elders": 1403,
+            "young": 1403,
+            "children": 701
+          },
+          "occupation": {
+            "idle": 2104,
+            "student": 1403,
+            "worker": 3509
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1727.72729,
+              1026.74341
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1761.53259,
+              1014.83057
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1799.93982,
+              1076.828
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1811.99243,
+              1059.98083
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1704.56287,
+              1100.10938
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1811.76953,
+              1023.15063
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1754.18945,
+              1024.63525
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Sarandi",
+      "image_position": [
+        1957.0,
+        904.0
+      ],
+      "neighbors": [
+        "Anchieta",
+        "Jardim Floresta",
+        "Jardim Lindóia",
+        "São Sebastião",
+        "Vila Ipiranga",
+        "Jardim Itu",
+        "Passo das Pedras",
+        "Costa e Silva",
+        "Santa Rosa de Lima"
+      ],
+      "population": [
+        59711,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 29855,
+            "elders": 11942,
+            "young": 11942,
+            "children": 5971
+          },
+          "occupation": {
+            "idle": 17913,
+            "student": 11942,
+            "worker": 29855
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1955.85669,
+              836.1289
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              2007.93384,
+              866.159363
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1953.63049,
+              863.8741
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1927.01782,
+              934.8165
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1905.75439,
+              860.1955
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1968.54968,
+              842.6322
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1942.04993,
+              897.9905
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Serraria",
+      "image_position": [
+        942.0,
+        3144.0
+      ],
+      "neighbors": [
+        "Guarujá",
+        "Aberta dos Morros",
+        "Ponta Grossa"
+      ],
+      "population": [
+        6239,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 3119,
+            "elders": 1247,
+            "young": 1247,
+            "children": 623
+          },
+          "occupation": {
+            "idle": 1870,
+            "student": 1247,
+            "worker": 3119
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              973.9956,
+              3124.02515
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              995.1835,
+              3119.95239
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              878.120361,
+              3125.07959
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              882.689636,
+              3153.218
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              950.5691,
+              3160.22559
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              947.0698,
+              3096.26978
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Sétimo Céu",
+      "image_position": [
+        697.0,
+        2541.0
+      ],
+      "neighbors": [
+        "Tristeza",
+        "Camaquã",
+        "Cavalhada",
+        "Jardim Isabel",
+        "Pedra Redonda",
+        "Vila Conceição"
+      ],
+      "population": [
+        1329,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 664,
+            "elders": 265,
+            "young": 265,
+            "children": 132
+          },
+          "occupation": {
+            "idle": 397,
+            "student": 265,
+            "worker": 664
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              705.786743,
+              2501.06885
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              658.3363,
+              2589.03735
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              660.383,
+              2498.75513
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              690.669434,
+              2607.3186
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              688.6312,
+              2514.09155
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              702.5111,
+              2587.66357
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Teresópolis",
+      "image_position": [
+        1114.0,
+        2100.0
+      ],
+      "neighbors": [
+        "Medianeira",
+        "Glória",
+        "Cascata",
+        "Vila Nova",
+        "Nonoai",
+        "Santa Tereza"
+      ],
+      "population": [
+        14707,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 7353,
+            "elders": 2941,
+            "young": 2941,
+            "children": 1470
+          },
+          "occupation": {
+            "idle": 4411,
+            "student": 2941,
+            "worker": 7353
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1177.27649,
+              2070.40454
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1186.76624,
+              2087.58154
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1076.89917,
+              2068.71167
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1141.14441,
+              2060.57153
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1124.99182,
+              2149.73853
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1051.71606,
+              2088.57251
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1148.39465,
+              2081.29541
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Três Figueiras",
+      "image_position": [
+        1447.0,
+        1441.0
+      ],
+      "neighbors": [
+        "Bela Vista",
+        "Boa Vista",
+        "Chácara das Pedras",
+        "Bom Jesus",
+        "Petrópolis"
+      ],
+      "population": [
+        4070,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2035,
+            "elders": 814,
+            "young": 814,
+            "children": 407
+          },
+          "occupation": {
+            "idle": 1221,
+            "student": 814,
+            "worker": 2035
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1484.21765,
+              1478.627
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1447.054,
+              1422.59045
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1396.58765,
+              1444.86084
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1386.31946,
+              1445.74414
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1465.63635,
+              1445.81079
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1467.67993,
+              1471.89
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1408.88464,
+              1434.47815
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Tristeza",
+      "image_position": [
+        586.0,
+        2417.0
+      ],
+      "neighbors": [
+        "Vila Assunção",
+        "Cristal",
+        "Camaquã",
+        "Sétimo Céu",
+        "Vila Conceição"
+      ],
+      "population": [
+        16692,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8346,
+            "elders": 3338,
+            "young": 3338,
+            "children": 1669
+          },
+          "occupation": {
+            "idle": 5007,
+            "student": 3338,
+            "worker": 8346
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              565.667664,
+              2439.41748
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              632.26886,
+              2366.46021
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              611.6897,
+              2402.50146
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              532.221252,
+              2421.12427
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              594.1731,
+              2399.806
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              625.8574,
+              2445.11938
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila Assunção",
+      "image_position": [
+        507.0,
+        2299.0
+      ],
+      "neighbors": [
+        "Cristal",
+        "Tristeza"
+      ],
+      "population": [
+        4418,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2209,
+            "elders": 883,
+            "young": 883,
+            "children": 441
+          },
+          "occupation": {
+            "idle": 1324,
+            "student": 883,
+            "worker": 2209
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              441.659668,
+              2268.64355
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              446.48407,
+              2273.331
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              502.905548,
+              2327.75854
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              480.6635,
+              2255.31885
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              489.6699,
+              2314.26978
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              574.6271,
+              2310.58813
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              547.669,
+              2255.31982
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila Conceição",
+      "image_position": [
+        522.0,
+        2549.0
+      ],
+      "neighbors": [
+        "Tristeza",
+        "Sétimo Céu",
+        "Pedra Redonda"
+      ],
+      "population": [
+        1349,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 674,
+            "elders": 269,
+            "young": 269,
+            "children": 134
+          },
+          "occupation": {
+            "idle": 403,
+            "student": 269,
+            "worker": 674
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              527.0374,
+              2530.997
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              480.847534,
+              2595.933
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              489.257141,
+              2583.37085
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              497.7548,
+              2537.36255
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              525.4955,
+              2609.60571
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              544.175842,
+              2582.529
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila Ipiranga",
+      "image_position": [
+        1697.0,
+        1273.0
+      ],
+      "neighbors": [
+        "Jardim Lindóia",
+        "São Sebastião",
+        "Sarandi",
+        "Jardim Itu",
+        "Jardim Sabará",
+        "Vila Jardim",
+        "Jardim Europa",
+        "Passo DAreia",
+        "Cristo Redentor"
+      ],
+      "population": [
+        18659,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 9329,
+            "elders": 3731,
+            "young": 3731,
+            "children": 1865
+          },
+          "occupation": {
+            "idle": 5596,
+            "student": 3731,
+            "worker": 9329
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1727.84485,
+              1329.61145
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1712.10754,
+              1208.70654
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1702.02039,
+              1287.24939
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1720.94006,
+              1301.2207
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1695.202,
+              1338.05591
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1692.26013,
+              1332.87354
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila Jardim",
+      "image_position": [
+        1654.0,
+        1464.0
+      ],
+      "neighbors": [
+        "Jardim Europa",
+        "Vila Ipiranga",
+        "Jardim Sabará",
+        "Jardim Carvalho",
+        "Bom Jesus",
+        "Chácara das Pedras",
+        "Jardim Itu"
+      ],
+      "population": [
+        13189,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6594,
+            "elders": 2637,
+            "young": 2637,
+            "children": 1318
+          },
+          "occupation": {
+            "idle": 3955,
+            "student": 2637,
+            "worker": 6594
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1625.61707,
+              1490.05481
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1605.09021,
+              1488.56982
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1658.15991,
+              1430.237
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1642.25916,
+              1485.24744
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1630.4978,
+              1409.3905
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1671.07861,
+              1400.44946
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila João Pessoa",
+      "image_position": [
+        1416.0,
+        1888.0
+      ],
+      "neighbors": [
+        "Partenon",
+        "Vila São José",
+        "Coronel Aparício Borges"
+      ],
+      "population": [
+        13041,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6520,
+            "elders": 2608,
+            "young": 2608,
+            "children": 1304
+          },
+          "occupation": {
+            "idle": 3912,
+            "student": 2608,
+            "worker": 6520
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1405.62549,
+              1845.65991
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1442.65186,
+              1857.9176
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1398.66711,
+              1873.62073
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1362.26331,
+              1874.3678
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1434.26965,
+              1847.81836
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1442.29236,
+              1890.16443
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila Nova",
+      "image_position": [
+        1120.0,
+        2496.0
+      ],
+      "neighbors": [
+        "Nonoai",
+        "Teresópolis",
+        "Cascata",
+        "Belém Velho",
+        "Restinga",
+        "Hípica",
+        "Campo Novo",
+        "Cavalhada",
+        "Ipanema"
+      ],
+      "population": [
+        32469,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 16234,
+            "elders": 6493,
+            "young": 6493,
+            "children": 3246
+          },
+          "occupation": {
+            "idle": 9739,
+            "student": 6493,
+            "worker": 16234
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1160.57617,
+              2516.041
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1128.62085,
+              2458.64941
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1162.3739,
+              2480.86035
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1083.02954,
+              2485.0542
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1147.33875,
+              2498.34
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1112.36462,
+              2564.17334
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1150.20532,
+              2458.2998
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Vila São José",
+      "image_position": [
+        1559.0,
+        1993.0
+      ],
+      "neighbors": [
+        "Partenon",
+        "Agronomia",
+        "Lomba do Pinheiro",
+        "Cascata",
+        "Coronel Aparício Borges",
+        "Vila João Pessoa"
+      ],
+      "population": [
+        26522,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 13261,
+            "elders": 5304,
+            "young": 5304,
+            "children": 2652
+          },
+          "occupation": {
+            "idle": 7956,
+            "student": 5304,
+            "worker": 13261
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1561.40955,
+              1965.51465
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1543.55957,
+              1968.5238
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1616.741,
+              1962.58936
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1578.69751,
+              1997.39636
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1526.681,
+              1951.15637
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1575.92615,
+              1975.70654
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

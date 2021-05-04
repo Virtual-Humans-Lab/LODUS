@@ -1,0 +1,1221 @@
+{
+  "population_template": {
+    "age": [
+      "adults",
+      "elders",
+      "young",
+      "children"
+    ],
+    "occupation": [
+      "idle",
+      "student",
+      "worker"
+    ],
+    "social_profile": [
+      "low",
+      "mid",
+      "high"
+    ]
+  },
+  "block_types": [
+    "susceptible",
+    "infected",
+    "removed"
+  ],
+  "repeating_global_actions": [
+    {
+      "cycle_length": 1,
+      "type": "levy_walk",
+      "values": {
+        "population_template": {}
+      }
+    }
+  ],
+  "regions": [
+    {
+      "name": "Azenha",
+      "image_position": [
+        987.0,
+        1657.0
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Farroupilha",
+        "Santana",
+        "Menino Deus"
+      ],
+      "population": [
+        13804,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 6902,
+            "elders": 2760,
+            "young": 2760
+          },
+          "occupation": {
+            "student": 2760,
+            "worker": 6902
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              968.5139,
+              1669.47913
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1001.76581,
+              1604.18481
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              971.751465,
+              1628.06445
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1009.22028,
+              1618.78638
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1008.46942,
+              1686.68445
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              967.618958,
+              1650.97021
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1003.90149,
+              1688.13184
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1018.37091,
+              1685.55493
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Bom Fim",
+      "image_position": [
+        998.0,
+        1433.0
+      ],
+      "neighbors": [
+        "Independência",
+        "Rio Branco",
+        "Santa Cecília",
+        "Santana",
+        "Farroupilha",
+        "Centro",
+        "Moinhos de Vento"
+      ],
+      "population": [
+        11593,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5796,
+            "elders": 2318,
+            "young": 2318
+          },
+          "occupation": {
+            "student": 2318,
+            "worker": 5796
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1000.16925,
+              1480.9884
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              974.1925,
+              1397.05115
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              933.1218,
+              1462.13171
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1005.40161,
+              1459.44543
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              944.5027,
+              1412.23193
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1029.21289,
+              1382.60254
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Centro",
+      "image_position": [
+        825.0,
+        1427.0
+      ],
+      "neighbors": [
+        "Floresta",
+        "Independência",
+        "Bom Fim",
+        "Farroupilha",
+        "Cidade Baixa",
+        "Praia de Belas"
+      ],
+      "population": [
+        39154,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 19577,
+            "elders": 7830,
+            "young": 7830
+          },
+          "occupation": {
+            "student": 7830,
+            "worker": 19577
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              847.011963,
+              1487.98462
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              870.8308,
+              1379.40723
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              762.592346,
+              1467.41907
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              849.9754,
+              1477.55457
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              793.60144,
+              1388.25647
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              790.6396,
+              1425.7179
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              828.069031,
+              1365.65723
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              839.0944,
+              1479.38574
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Cidade Baixa",
+      "image_position": [
+        892.0,
+        1529.0
+      ],
+      "neighbors": [
+        "Centro",
+        "Farroupilha",
+        "Santana",
+        "Azenha",
+        "Menino Deus",
+        "Praia de Belas"
+      ],
+      "population": [
+        15379,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 7689,
+            "elders": 3075,
+            "young": 3075
+          },
+          "occupation": {
+            "student": 3075,
+            "worker": 7689
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              854.7327,
+              1550.09277
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              881.6336,
+              1549.44543
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              860.0238,
+              1508.90784
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              870.220459,
+              1502.2655
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              845.256958,
+              1484.73071
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              838.1093,
+              1524.98132
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Farroupilha",
+      "image_position": [
+        969.0,
+        1486.0
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Santana",
+        "Azenha",
+        "Cidade Baixa",
+        "Centro",
+        "Rio Branco",
+        "Santa Cecília"
+      ],
+      "population": [
+        961,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 480,
+            "elders": 192,
+            "young": 192
+          },
+          "occupation": {
+            "student": 192,
+            "worker": 480
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              928.9441,
+              1481.50354
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              945.710632,
+              1442.06531
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              913.0279,
+              1493.70178
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              933.1648,
+              1440.7688
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              903.269,
+              1500.76648
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              927.947937,
+              1460.91919
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              939.482849,
+              1491.7782
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Floresta",
+      "image_position": [
+        1028.0,
+        1265.0
+      ],
+      "neighbors": [
+        "Moinhos de Vento",
+        "Independência",
+        "Centro"
+      ],
+      "population": [
+        11596,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5798,
+            "elders": 2319,
+            "young": 2319
+          },
+          "occupation": {
+            "student": 2319,
+            "worker": 5798
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1051.22314,
+              1244.67456
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1047.75623,
+              1269.94287
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              995.9657,
+              1237.17065
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1004.35687,
+              1232.03992
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1063.5343,
+              1284.80957
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              991.7861,
+              1320.57629
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Independência",
+      "image_position": [
+        992.0,
+        1387.0
+      ],
+      "neighbors": [
+        "Floresta",
+        "Moinhos de Vento",
+        "Rio Branco",
+        "Bom Fim",
+        "Centro"
+      ],
+      "population": [
+        8112,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 4056,
+            "elders": 1622,
+            "young": 1622
+          },
+          "occupation": {
+            "student": 1622,
+            "worker": 4056
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1012.76691,
+              1390.6
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              964.17,
+              1426.32935
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1005.13019,
+              1444.95886
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              951.2009,
+              1434.2677
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1048.04749,
+              1390.205
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              949.2804,
+              1410.316
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              951.972534,
+              1397.54163
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              960.6548,
+              1348.1897
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Menino Deus",
+      "image_position": [
+        890.0,
+        1710.0
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Azenha",
+        "Praia de Belas"
+      ],
+      "population": [
+        31650,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 15825,
+            "elders": 6330,
+            "young": 6330
+          },
+          "occupation": {
+            "student": 6330,
+            "worker": 15825
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              896.717651,
+              1674.136
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              923.098938,
+              1718.55408
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              859.276245,
+              1733.00146
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              934.4241,
+              1682.53015
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              870.721863,
+              1674.3208
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              875.670837,
+              1699.1886
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              861.6619,
+              1680.73584
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Moinhos de Vento",
+      "image_position": [
+        1115.0,
+        1330.0
+      ],
+      "neighbors": [
+        "Floresta",
+        "Rio Branco",
+        "Independência",
+        "Bom Fim"
+      ],
+      "population": [
+        11937,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 5968,
+            "elders": 2387,
+            "young": 2387
+          },
+          "occupation": {
+            "student": 2387,
+            "worker": 5968
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1126.16626,
+              1403.92822
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1055.90869,
+              1367.53015
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1048.77039,
+              1325.75427
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1070.02075,
+              1296.98425
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1098.19666,
+              1272.54529
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1101.25867,
+              1315.96069
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1154.52771,
+              1330.02832
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1096.09485,
+              1326.34607
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Praia de Belas",
+      "image_position": [
+        790.0,
+        1663.0
+      ],
+      "neighbors": [
+        "Centro",
+        "Cidade Baixa",
+        "Menino Deus"
+      ],
+      "population": [
+        2281,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 1140,
+            "elders": 456,
+            "young": 456
+          },
+          "occupation": {
+            "student": 456,
+            "worker": 1140
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              779.322754,
+              1723.589
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              810.224854,
+              1605.92126
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              810.165161,
+              1660.33728
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              804.0643,
+              1620.75745
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              811.0993,
+              1609.238
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              809.422241,
+              1708.2699
+            ]
+          }
+        },
+        "stadium": {
+          "characteristics": {
+            "image_position": [
+              844.156433,
+              1666.22083
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              726.4766,
+              1687.69263
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Rio Branco",
+      "image_position": [
+        1120.0,
+        1452.0
+      ],
+      "neighbors": [
+        "Independência",
+        "Moinhos de Vento",
+        "Santa Cecília",
+        "Santana",
+        "Bom Fim",
+        "Farroupilha"
+      ],
+      "population": [
+        17531,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 8765,
+            "elders": 3506,
+            "young": 3506
+          },
+          "occupation": {
+            "student": 3506,
+            "worker": 8765
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1124.4989,
+              1488.6239
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1089.53674,
+              1425.20227
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1166.35657,
+              1496.58313
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1086.56128,
+              1436.02686
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1154.73328,
+              1445.73035
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1146.99487,
+              1446.85059
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1110.21948,
+              1496.95276
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santa Cecília",
+      "image_position": [
+        1119.0,
+        1543.0
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Rio Branco",
+        "Santana",
+        "Farroupilha"
+      ],
+      "population": [
+        5768,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 2884,
+            "elders": 1153,
+            "young": 1153
+          },
+          "occupation": {
+            "student": 1153,
+            "worker": 2884
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1103.50476,
+              1573.3501
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1081.45569,
+              1523.9613
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1150.03931,
+              1573.04968
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1114.1958,
+              1560.00781
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1180.13965,
+              1537.6803
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1122.2229,
+              1607.19
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1164.34875,
+              1596.5531
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "Santana",
+      "image_position": [
+        1064.0,
+        1604.0
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Santa Cecília",
+        "Azenha",
+        "Cidade Baixa",
+        "Farroupilha",
+        "Rio Branco"
+      ],
+      "population": [
+        20723,
+        0,
+        0
+      ],
+      "population_description": {
+        "susceptible": {
+          "age": {
+            "adults": 10361,
+            "elders": 4144,
+            "young": 4144
+          },
+          "occupation": {
+            "student": 4144,
+            "worker": 10361
+          }
+        }
+      },
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              1039.47559,
+              1565.09229
+            ]
+          }
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              1035.69739,
+              1554.96692
+            ]
+          }
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              1023.33459,
+              1621.40759
+            ]
+          }
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1079.35925,
+              1645.02808
+            ]
+          }
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1052.82678,
+              1639.966
+            ]
+          }
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              1086.00427,
+              1574.81665
+            ]
+          }
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1045.97839,
+              1619.71167
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

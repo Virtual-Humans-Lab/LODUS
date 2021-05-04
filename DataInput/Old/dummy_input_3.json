@@ -1,0 +1,195 @@
+{
+    "population_template": {
+        "age": [
+            "adults",
+            "elders",
+            "young",
+            "children"
+        ],
+        "occupation": [
+            "idle",
+            "student",
+            "worker"
+        ],
+        "social_profile": [
+            "low",
+            "mid",
+            "high"
+        ]
+    },
+    "block_types": [
+        "healthy",
+        "infected",
+        "cured",
+        "dead"
+    ],
+    "regions": [
+        {
+            "name": "Petropolis",
+            "position_lat_long": [
+                50,
+                50
+            ],
+            "nodes": {
+                "school": {},
+                "work": {},
+                "home": {
+                    "1": [
+                        {
+                            "name": "set_desire",
+                            "type": "set_desire",
+                            "values": {
+                                "quantity": 30,
+                                "region": "Petropolis",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "children"
+                                }
+                            }
+                        }
+                    ],
+                    "2": [
+                        {
+                            "name": "propose_trade",
+                            "type": "propose_trade",
+                            "values": {
+                                "quantity": 5,
+                                "region": "Petropolis",
+                                "node": "home",
+                                "offer_quantity" : 5,
+                                "request_quantity" : 5,
+                                "request_population_template": {
+                                    "age": "children"
+                                },
+                                "offer_population_template": {
+                                    "age": "adults"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "neighbors": [
+                "Centro",
+                "Partenon"
+            ],
+            "population": [
+                100,
+                0,
+                0,
+                0
+            ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 50,
+                        "elders": 20,
+                        "young": 15,
+                        "children": 25
+                    },
+                    "occupation": {
+                        "idle": 20,
+                        "student": 40,
+                        "worker": 40
+                    },
+                    "social_profile": {
+                        "low": 40,
+                        "mid": 35,
+                        "high": 25
+                    }
+                }
+            }
+        },
+        {
+            "name": "Partenon",
+            "position_lat_long": [
+                60,
+                70
+            ],
+            "neighbors": [
+                "Petropolis",
+                "Centro"
+            ],
+            "nodes": {
+                "school": {},
+                "work": {},
+                "home": {
+                    "1": [
+                        {
+                            "name": "set_desire",
+                            "type": "set_desire",
+                            "values": {
+                                "quantity": 50,
+                                "region": "Partenon",
+                                "node": "home",
+                                "population_template": {
+                                    "age": "adults"
+                                }
+                            }
+                        }
+                    ]
+
+
+                }
+            },
+            "population": [
+                100,
+                0,
+                0,
+                0
+            ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 40,
+                        "elders": 20,
+                        "young": 15,
+                        "children": 25
+                    },
+                    "occupation": {
+                        "idle": 20,
+                        "student": 40,
+                        "worker": 40
+                    }
+                }
+            }
+        },
+        {
+            "name": "Centro",
+            "position_lat_long": [
+                30,
+                47.5
+            ],
+            "neighbors": [
+                "Petropolis",
+                "Partenon"
+            ],
+            "nodes": {
+                "school": {},
+                "work": {},
+                "home": {}
+            },
+            "population": [
+                100,
+                0,
+                0,
+                0
+            ],
+            "population_description": {
+                "healthy": {
+                    "age": {
+                        "adults": 40,
+                        "elders": 20,
+                        "young": 15,
+                        "children": 25
+                    },
+                    "occupation": {
+                        "idle": 20,
+                        "student": 40,
+                        "worker": 40
+                    }
+                }
+            }
+        }
+    ]
+}
