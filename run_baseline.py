@@ -12,7 +12,7 @@ import population
 from random_inst import FixedRandom
 
 from AgentBasedPlugin import AgentBasedPlugin
-from InfectionPlugin import InfectionPlugin
+from InfectionVaccinePlugin import InfectionVaccinePlugin
 from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
@@ -25,38 +25,35 @@ from pathlib import Path
 import time
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
-arg_parser.add_argument('-infection_mode', '--i', metavar='I', type=int, default = 0, help='The type of infection module to use. 0 is rate based, 1 is day based.')
 arg_parser.add_argument('-mobility_mode', '--m', metavar="M", type=int, default = 0, help='Mobility operation. 0 is distance based gathering. 1 is table based gathering. 2 is table and distance based pushing.')
+arg_parser.add_argument('-infection_mode', '--i', metavar='I', type=int, default = 0, help='The type of infection module to use. 0 ignores infection, otherwise infection is used.')
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
 arg_parser.add_argument('--s', metavar="S", type=int, default = None, help='Simulation Seed.')
+arg_parser.add_argument('--b', metavar="B", type=str, default = 'DataInput/beta_history/bh.csv', help='Estimated beta history file (.csv)')
+arg_parser.add_argument('--v', metavar="V", type=str, default = 'DataInput/vaccine_data.csv', help='Number of vaccinated people each day (.csv)')
 args = vars(arg_parser.parse_args())
 
 
-# FixedRandom(args['s'])
 FixedRandom()
 
 
 '''
 Data Loading stuff
 '''
-# environment_path = 'DataInput\\ProofSixNeighborhoods.json'
-# environment_path = 'DataInput\\ProofSixNeighborhoods2.json'
-environment_path = 'DataInput\\ProofSixNeighborhoods3.json'
-# environment_path = 'DataInput\\dummy_input_4.json'
 
 if 'f' in args:
     environment_path = args['f']
-
-print(f'Loading environment graph: {environment_path}')
+else:
+    raise Exception('Environment path missing. Use "python run_baseline.py -f <environment_file>.json."')
 env_graph = generate_EnvironmentGraph(environment_path)
-social_table_path = 'DataInput/PortoAlegreOutput_semicolon_avg-name_fix.csv'
+social_table_path = 'DataInput\Isolation_01_Mar_2020_To_20_Jan_2021\PortoAlegre_Isolation_01Mar2020_20Jan2021_semicolon_avg_extended.csv'
 
 
 '''
 Parameters
 '''
 #how many steps each day has
-days = 7
+days = 407
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -64,14 +61,52 @@ env_graph.routine_day_length = day_duration
 simulation_steps = days * day_duration
 
 '''
+Data Loading stuff
+'''
+# This is to load real contagion data.
+
+# Load (calibrated) beta history file
+print('Beta history will be read from file: ', args['b'])
+
+betaHistory = list()
+dayHistory = list()
+errorHistory = list()
+gammaHistory = list()
+try:
+	betaHistoryReader = open(args['b'], "r")
+	line = betaHistoryReader.readline()
+	historyLines = betaHistoryReader.readlines()
+	for line in historyLines:
+		s = line.split(";")
+		d = int(s[0])
+		b = float(s[1])
+		g = float(s[2])
+		e = float(s[3])
+		dayHistory.append(d)
+		betaHistory.append(b)
+		gammaHistory.append(g)
+		errorHistory.append(e)
+except Exception:
+	print('Beta history file not found. Will now estimated beta from start.')
+
+print(f'beta history size: {len(betaHistory)}')
+# Load real vaccine data
+print('Vaccination history will be read from file: ', args['v'])
+inputVaccineData = open(args['v'], "r")
+vaccine_data = list()
+for v in inputVaccineData:
+	vaccine_data.append(v)
+
+print("Number of days in vaccine data:", len(vaccine_data))
+
+'''
 Load Plugins Examples
 '''
 ###infection plugin
 # infection mode 0 skips infection
 if args['i'] != 0:
-    inf_plugin = InfectionPlugin(env_graph, infect_mode=args['i'] , use_infect_move_pop=False)
-    inf_plugin.day_length = day_duration
-    inf_plugin.home_density, inf_plugin.bus_density, inf_plugin.home_density, inf_plugin.bus_density  = 1, 1, 1.0, 1.0
+    inf_plugin = InfectionVaccinePlugin(env_graph, use_infect_move_pop=False, day_length = day_duration)
+    inf_plugin.home_density, inf_plugin.bus_density, inf_plugin.home_density, inf_plugin.bus_density = 1, 1, 1.0, 1.0
     env_graph.LoadPlugin(inf_plugin)
 
 
@@ -119,7 +154,8 @@ Logging
 basename = environment_path.split('\\')[-1].split('.')[0]
 
 if args['i'] != 0:
-    #Path(f'{basename}-i{str(args["i"])}-m{str(args["m"])}').mkdir(parents=True, exist_ok=True)
+    #Path(f'{basename}-i{str(args["i"])}-m{str(args["m"])}').mkdir(parents=True,
+    #exist_ok=True)
     logger = SimulationLogger(f'{basename}-i{str(args["i"])}-m{str(args["m"])}', day_duration)
 else:
     #Path(f'{basename}-m{str(args["m"])}').mkdir(parents=True, exist_ok=True)
@@ -127,18 +163,9 @@ else:
 
 logger.set_to_record('global')
 logger.set_to_record('neighbourhood')
-logger.set_to_record('neighbourhood_disserta')
-logger.set_to_record('metrics')
-logger.set_to_record('nodes')
-logger.set_to_record('positions')
 
 pop_temp = PopTemplate()
-#pop_temp.set_property('age', 'adults')
 logger.pop_template = pop_temp
-# logger.foreign_only = True
-# this option saves REALLY big files
-# logger.set_to_record('graph')
-
 
 '''
 Simulation
@@ -146,29 +173,24 @@ Simulation
 
 t = time.time()
 
-
-worker_temp = PopTemplate()
-worker_temp.set_property('occupation', 'worker') 
-worker_temp.mother_blob_id = env_graph.get_region_by_name("Centro").id
 for i in range(simulation_steps):
-    print(i, end='\r')
+    #print(i, end='\r')
+    hour = i % day_duration
+    day = int(i/day_duration)
+
+    print(f'step:{i}\thour:{hour}\tday:{day}')
+
+    # Get estimated beta and gamma for today:
+    if hour == 0:
+        inf_plugin.beta = betaHistory.pop(0)
+        inf_plugin.gamma = gammaHistory.pop(0)
 
     # Routine/Repeating Global Action Invoke example
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
-    # print(f'{sum([region.get_population_size() for region in env_graph.region_list])}\n\n') no one gets lost
-    env_graph.update_time_step(i % day_duration, i)
-
-    # Direct Action Invoke example
-    # if i == 50:
-    #     dummy_action = TimeAction('push_population', {'region':'example1', 'node':'example2', 'quantity':50})
-    #     env_graph.direct_action_invoke(dummy_action)
-    
-    # Next frame queue action example
-    # if i == 60:
-    #     dummy_action = TimeAction('push_population', {'region':'example1', 'node':'example2', 'quantity':50})
-    #     env_graph.queue_next_frame_action(dummy_action)
-
+    # print(f'{sum([region.get_population_size() for region in
+    # env_graph.region_list])}\n\n') no one gets lost
+    env_graph.update_time_step(hour, i)
 
     # records frame I data
     logger.record_frame(env_graph, i)
@@ -176,32 +198,8 @@ for i in range(simulation_steps):
 
 print(time.time() - t)
 
-# with open("distances.txt", 'w') as f:
-#     for k, v in walk.dist_dict.items():
-#         f.write(f'{k}\n')
-#         for i in v:
-#             f.write(f'{i[0]}\n')
-
-
 '''
 Logging
 # '''
-# dist = walk.get_node_distance_matrix()
-# mat = logger.complete_od_matrix(dist)
-# mat = logger.divide_od_matrix_by_scalar(mat, 1.0)
-# mat = logger.normalize_od_matrix(mat)
 
-# with open("node_distances.txt", 'w', encoding='utf-8') as mat_file:
-#     logger.write_od_matrix(mat, mat_file)
-
-# dist = walk.get_region_distance_matrix()
-# mat = logger.complete_od_matrix(dist)
-# mat = logger.divide_od_matrix_by_scalar(mat, 1.0)
-# mat = logger.normalize_od_matrix(mat)
-
-# with open("region_distances.txt", 'w', encoding='utf-8') as mat_file:
-#     logger.write_od_matrix(mat, mat_file)
-
-
-logger.compute_composite_data(env_graph, simulation_steps)
 logger.close()

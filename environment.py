@@ -464,6 +464,7 @@ class EnvironmentGraph():
         self.next_frame_queue = []
         # Queued actions priority 'first' or 'last'
         self.queued_action_priority = 'first'
+      
 
     def get_node_by_name(self, region_name, node_name):
         return self.region_dict[region_name].get_node_by_name(node_name)

@@ -104,9 +104,13 @@ class ReverseSocialIsolationPlugin(environment.TimeActionPlugin):
             data  = line.split(';')
 
             region = data[0]
-
-            for day_value in data[1:201]:
-                region_list.append(float(day_value))
+            for day_value in data[1:]:
+                try:
+                    v = float(day_value)
+                except Exception:
+                    pass
+                else:
+                    region_list.append(float(day_value))
 
             self.region_isolation_per_day[region]  = region_list
 
