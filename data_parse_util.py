@@ -59,7 +59,7 @@ def generate_EnvironmentGraph(env_input):
             #env.add_region(region_description['long_lat_position'],
             env.add_region(region_description['world_position'],
                            sum(region_description['population']), region_template, region_description['name'])
-            
+            env.region_list[-1].long_lat = region_description['long_lat_position']
             populate_EnvRegion(env.region_list[-1],
                                pop_factory,
                                region_description['population'], 

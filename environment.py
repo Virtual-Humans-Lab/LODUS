@@ -247,13 +247,14 @@ class EnvRegion():
 
     """
 
-    def __init__(self, _position = (0.0, 0.0), population = 0, _id = None):
+    def __init__(self, _position = (0.0, 0.0), _long_lat = (0.0, 0.0), population = 0, _id = None):
         """Initializes an empty EnvRegion"""
         self.name = ''
         self.id = _id
         if _id is None:
             self.id = util.IDGen("regions").get_id()
         self.position = _position
+        self.long_lat = _long_lat
         self.population = population
         self.node_list = []
         self.node_dict = {}
