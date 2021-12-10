@@ -16,10 +16,10 @@ class SimulationLogger():
 
 
         self.global_f = open('output_logs/' + base_filename + "//" + "global.csv", 'w', encoding='utf8')
-        self.global_f.write('Frame;Hour;Susceptible;Infected;Removed;dS;dI;dR;\n')
+        self.global_f.write('Frame;Hour;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;\n')
         
         self.neigh_f = open('output_logs/' + base_filename + "//" +  "neigh.csv", 'w', encoding='utf8')
-        self.neigh_f.write('Frame;Hour;Neighbourhood;Susceptible;Infected;Removed;dS;dI;dR;Total;Locals;Outsiders;\n')
+        self.neigh_f.write('Frame;Hour;Neighbourhood;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;Total;Locals;Outsiders;\n')
         
         self.diss_f = open('output_logs/' + base_filename + "//" + "diss.csv", 'w', encoding='utf8')
         self.diss_f.write('Frame;Hour;Neighbourhood;Total;Locals;Outsiders;home_total;home_locals;home_outsiders;work_total;work_locals;work_outsiders;\n')
@@ -27,15 +27,21 @@ class SimulationLogger():
         self.nodes_f = open('output_logs/' + base_filename + "//" +  "nodes.csv", 'w', encoding='utf8')
         self.nodes_f.write('Frame;Hour;Node;Total;Locals;Outsiders;\n')
 
+        self.nodes_sir_f = open('output_logs/' + base_filename + "//" +  "nodes_sir.csv", 'w', encoding='utf8')
+        self.nodes_sir_f.write('Frame;Hour;Date;NHnode;NHLat;NHLong;InnerNHnode;InnerLat;InnerLong;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;Total;Locals;Outsiders;\n')
+
+        #"Frame;Hour;Date;NHnode;NHLat;NHLong;InnerNHnode;InnerLat;InnerLong;Susceptible;Infected;Removed;dS;dI;dR;Total;Locals;Outsiders;"
+
         self.positions_f = open('output_logs/' + base_filename + "//" + "node_positions.csv", 'w', encoding='utf8')
         self.positions_f.write('Frame;ID;RegionPosition;NodeImagePosition;Quantity;\n')
 
         self.data_to_record = set() #neighbourhood, global, graph, nodes, positions, metrics and neighbourhood_disserta
 
-        self.last_frame = (0, 0, 0)
+        self.last_frame = (0, 0, 0, 0)
         self.time_cycle = time_cycle
 
         self.neigh_last_frames = {}
+        self.nodes_sir_last_frames = {}
 
         self.logs = {}
 
@@ -92,13 +98,15 @@ class SimulationLogger():
         for region_name, region in graph.region_dict.items():
             
             if region.name not in self.neigh_last_frames:
-                self.neigh_last_frames[  region.name] = (0,0,0)
+                self.neigh_last_frames[region.name] = (0,0,0,0)
 
             last_frame = self.neigh_last_frames[region.name]
 
             susceptible = 0
             infected = 0
             removed = 0
+            vaccinated = 0
+
 
             susc_tmp = PopTemplate()
             susc_tmp.add_block('susceptible')
@@ -109,35 +117,42 @@ class SimulationLogger():
             remv_tmp = PopTemplate()
             remv_tmp.add_block('removed')
 
+            vacc_tmp = PopTemplate()
+            vacc_tmp.add_block('vaccinated')
+
             for node in region.node_list:
                 susceptible += node.get_population_size(susc_tmp)
                 infected += node.get_population_size(inft_tmp)
                 removed += node.get_population_size(remv_tmp)
+                vaccinated += node.get_population_size(vacc_tmp)
 
-            totals = susceptible + infected + removed
+            totals = susceptible + infected + removed + vaccinated
             
             
             local_susceptible = 0
             local_infected = 0
             local_removed = 0
+            local_vaccinated = 0
 
-            susc_tmp.mother_blob_id =region.id
-            inft_tmp.mother_blob_id =region.id
+            susc_tmp.mother_blob_id = region.id
+            inft_tmp.mother_blob_id = region.id
             remv_tmp.mother_blob_id = region.id
+            vacc_tmp.mother_blob_id = region.id
 
             for node in region.node_list:
                 local_susceptible += node.get_population_size(susc_tmp)
                 local_infected += node.get_population_size(inft_tmp)
                 local_removed += node.get_population_size(remv_tmp)
+                local_vaccinated += node.get_population_size(vacc_tmp)
 
-            local_people =  local_susceptible + local_infected + local_removed
+            local_people =  local_susceptible + local_infected + local_removed + local_vaccinated
 
-            l_susc, l_inf, l_rem = last_frame
+            l_susc, l_inf, l_rem, l_vac = last_frame
 
-            s = f"{frame};{frame % self.time_cycle};{region.name};{susceptible};{infected};{removed};{susceptible - l_susc};{infected - l_inf};{removed - l_rem};{totals};{local_people};{totals - local_people};\n"
+            s = f"{frame};{frame % self.time_cycle};{region.name};{susceptible};{infected};{removed};{vaccinated};{susceptible - l_susc};{infected - l_inf};{removed - l_rem};{vaccinated - l_vac};{totals};{local_people};{totals - local_people};\n"
 
 
-            last_frame = susceptible, infected, removed
+            last_frame = susceptible, infected, removed, vaccinated
 
             self.neigh_last_frames[region.name] = last_frame
 
@@ -183,11 +198,9 @@ class SimulationLogger():
 
             self.nodes_f.write(s)
 
-
-    def global_frame(self, graph, frame):
-        susceptible = 0
-        infected = 0
-        removed = 0
+    def node_sir_frame(self, graph, frame):
+        
+        #susc_tmp, inft_tmp, remv_tmp, vacc_tmp = PopTemplate()
 
         susc_tmp = PopTemplate()
         susc_tmp.add_block('susceptible')
@@ -198,16 +211,93 @@ class SimulationLogger():
         remv_tmp = PopTemplate()
         remv_tmp.add_block('removed')
 
+        vacc_tmp = PopTemplate()
+        vacc_tmp.add_block('vaccinated')
+
+        
+
+
+        for node in graph.node_list:
+            #print (node.get_unique_name())
+            _node_name = str(node.get_unique_name())
+            _region = graph.get_region_by_name(node.containing_region_name)
+            #print(_region.name)
+            #print(_region.position)
+            if _node_name not in self.nodes_sir_last_frames:
+                self.nodes_sir_last_frames[_node_name] = (0,0,0,0)
+
+            _last_frame = self.nodes_sir_last_frames[_node_name]
+
+            
+            susceptible = 0
+            infected = 0
+            removed = 0
+            vaccinated = 0
+
+            tmp = copy.deepcopy(self.pop_template)
+
+            total = node.get_population_size(tmp)
+
+            tmp.mother_blob_id = graph.get_region_by_name(node.containing_region_name).id
+
+            local_people = node.get_population_size(tmp)
+
+
+            _s = node.get_population_size(susc_tmp)
+            _i = node.get_population_size(inft_tmp)
+            _r = node.get_population_size(remv_tmp)
+            _v = node.get_population_size(vacc_tmp)
+
+            #s = f"{frame};{frame % self.time_cycle};{node.get_unique_name()};{total};{local_people};{total - local_people};\n"
+            s = "{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};\n".format(
+                frame, frame % self.time_cycle, 0, 
+                node.containing_region_name, _region.long_lat[0], _region.long_lat[1],
+                node.name,node.characteristics["long_lat_position"][0],node.characteristics["long_lat_position"][1],
+                _s, _i, _r, _v,
+                _s - _last_frame[0], _i - _last_frame[1], _i - _last_frame[2], _v - _last_frame[3],
+                total, local_people, total - local_people)
+                #susceptible, infected, removed, vaccinated, susceptible - l_susc, infected - l_inf, removed - l_rem, vaccinated - l_vac)
+        
+            self.nodes_sir_f.write(s)
+
+            self.nodes_sir_last_frames[_node_name] = _s, _i, _r, _v
+
+        #"Frame;Hour;Date;
+        # NHnode;NHLat;NHLong;
+        # InnerNHnode;InnerLat;InnerLong;
+        # Susceptible;Infected;Removed;Vaccinated
+        # dS;dI;dR;dV
+        # Total;Locals;Outsiders;"
+
+    def global_frame(self, graph, frame):
+        susceptible = 0
+        infected = 0
+        removed = 0
+        vaccinated = 0
+
+        susc_tmp = PopTemplate()
+        susc_tmp.add_block('susceptible')
+
+        inft_tmp = PopTemplate()
+        inft_tmp.add_block('infected')
+
+        remv_tmp = PopTemplate()
+        remv_tmp.add_block('removed')
+
+        vacc_tmp = PopTemplate()
+        vacc_tmp.add_block('vaccinated')
+
         for node in graph.node_list:
             susceptible += node.get_population_size(susc_tmp)
             infected += node.get_population_size(inft_tmp)
             removed += node.get_population_size(remv_tmp)
+            vaccinated += node.get_population_size(vacc_tmp)
 
-        l_susc, l_inf, l_rem = self.last_frame
+        l_susc, l_inf, l_rem, l_vac = self.last_frame
 
-        s = "{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, susceptible, infected, removed, susceptible - l_susc, infected - l_inf, removed - l_rem)
+        s = "{};{};{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, susceptible, infected, removed, vaccinated, susceptible - l_susc, infected - l_inf, removed - l_rem, vaccinated - l_vac)
         
-        self.last_frame = susceptible, infected, removed
+        self.last_frame = susceptible, infected, removed, vaccinated
 
         self.global_f.write(s)
 
@@ -521,6 +611,8 @@ class SimulationLogger():
             self.record_metrics(graph, frame)
         if 'nodes' in self.data_to_record:
             self.node_frame(graph, frame)
+        if 'nodes_sir' in self.data_to_record:
+            self.node_sir_frame(graph, frame)
         if 'positions' in self.data_to_record:
             self.positions_frame(graph, frame)
         if 'neighbourhood_disserta' in self.data_to_record:

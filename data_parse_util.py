@@ -30,12 +30,18 @@ def generate_EnvironmentGraph(env_input):
             block_template.add_bucket(k, pop_buckets[k])
         block_keys = descrip['block_types']
         pop_factory = BlobFactory(block_keys, block_template)
+        #print(block_template.buckets['age'])
+        env.original_blocks = block_keys
+        env.original_block_template = block_template
 
         if 'repeating_global_actions' in descrip:
             repeating_global_actions = descrip['repeating_global_actions']
 
             for rga in repeating_global_actions:
-                env.set_repeating_action(int(rga['cycle_length']), TimeAction(rga['type'], rga['values']))
+                if 'cycle_length' in rga:
+                    env.set_repeating_action(int(rga['cycle_length']), TimeAction(rga['type'], rga['values']))
+                elif 'frames' in rga:
+                    env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
 
         for region_description in descrip['regions']:
             region_template = EnvRegionTemplate()

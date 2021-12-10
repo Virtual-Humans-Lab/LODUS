@@ -44,7 +44,7 @@ class EnvNode():
     def __init__(self):
         """"Inits EnvNode with an empty template."""
         self.name = ''
-        self.contained_blobs = []
+        self.contained_blobs:list[population.Blob] = [] 
         self.routine = None
         self.characteristics = {}
         self.id = util.IDGen('nodes').get_id()
@@ -256,7 +256,7 @@ class EnvRegion():
         self.position = _position
         self.long_lat = _long_lat
         self.population = population
-        self.node_list = []
+        self.node_list: list(EnvNode) = []
         self.node_dict = {}
         self.neighbours = [[]]
 
@@ -301,7 +301,7 @@ class EnvRegion():
 
         return action_list
 
-    def get_node_by_name(self, name):
+    def get_node_by_name(self, name) -> EnvNode:
         return self.node_dict[name]
 
     ## Not sure if its needed TODO
@@ -436,8 +436,8 @@ class EnvironmentGraph():
     """
 
     def __init__(self):
-        self.region_list = []
-        self.region_dict = {}
+        self.region_list: list[EnvRegion] = []
+        self.region_dict: dict[str,EnvRegion] = {}
         self.region_id_dict = {}
 
         self.node_list = []
@@ -459,6 +459,7 @@ class EnvironmentGraph():
         # Logging data
         self.original_population_template = None
         self.original_blocks = None
+        self.original_block_template: population.BlockTemplate = None
         self.original_repeating_actions = None
 
         # Queued actions
@@ -470,10 +471,10 @@ class EnvironmentGraph():
     def get_node_by_name(self, region_name, node_name):
         return self.region_dict[region_name].get_node_by_name(node_name)
 
-    def get_node_by_id(self, _id):
+    def get_node_by_id(self, _id) -> EnvNode:
         return self.node_id_dict[_id]
 
-    def get_region_by_name(self, name):
+    def get_region_by_name(self, name) -> EnvRegion:
         return self.region_dict[name]
 
     def get_region_by_id(self, _id):
@@ -502,12 +503,18 @@ class EnvironmentGraph():
         action_list = []
         # do repeating actions
         for rga in self.repeating_global_actions:
-            if hour % rga[0] == 0:
+            if (type(rga[0]) is int and hour % rga[0] == 0) or (type(rga[0]) is list and hour in rga[0]):
                 for region in self.region_list:
                     for node in region.node_list:
+                        if 'node_name' in rga[1].values and node.name != rga[1].values['node_name']:
+                            continue
+                        
                         action = copy.deepcopy(rga[1])
+                        if type(rga[0]) is list:
+                            action.values['frames'] = rga[0]
                         action.values['region'] = region.name
                         action.values['node'] = node.name
+                        action.values['node_id'] = node.id
                         action_list += [action]
         return action_list
 
@@ -667,8 +674,11 @@ class EnvironmentGraph():
     def set_global_action(self, action_type):
         self.global_actions.add(action_type)
 
-    def set_repeating_action(self, cycle_length, action):
+    def set_repeating_action(self, cycle_length: int, action):
         self.repeating_global_actions.append((int(cycle_length), action))
+
+    def set_repeating_action(self, frames: list[int], action):
+        self.repeating_global_actions.append((frames, action))
 
     def remove_action(self, action_type):
         self.time_action_map.pop(action_type)

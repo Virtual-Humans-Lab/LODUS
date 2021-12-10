@@ -1,4 +1,5 @@
 #encoding: utf-8
+#python .\simplest_simulator.py --f .\DataInput\NT_13_Routines.json
 import sys
 sys.path.append('./Plugins/')
 
@@ -104,7 +105,7 @@ Simulation
 
 for i in range(simulation_steps):
     print(i, end='\r')
-
+    # print(i)
     # Routine/Repeating Global Action Invoke example
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor

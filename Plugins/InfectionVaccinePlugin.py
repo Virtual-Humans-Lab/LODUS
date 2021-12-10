@@ -41,6 +41,7 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
         self.env_graph.base_actions.add('vaccinate')
         
         if use_infect_move_pop:
+            print ("HEEEERE")
             self.env_graph.remove_action('move_population')
             self.set_pair('move_population', self.move_with_infection)
 
@@ -116,7 +117,6 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
 
         destination_node.add_blobs(grabbed_population)
 
-
     def infect_moving_pop(self, blob, density, time, pop_template):
         pop_template_susc = copy.deepcopy(pop_template)
         pop_template_susc.add_block('susceptible')
@@ -163,9 +163,11 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
 
         ### DO Infected -> Removed
         removed_quantity = max(new_removed - old_removed, 0)
+        
         blob.move_profile(removed_quantity, pop_template, 'infected', 'removed')
         
     def infect(self, values, hour, time):
+        
         region = values['region']
         if isinstance(region, str):
             region = self.env_graph.get_region_by_name(region)
@@ -197,9 +199,16 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
         
         total = old_susceptible + old_infected + old_removed + old_vaccinated
 
+        beforeS = node.get_population_size(pop_template_susc)
+        beforeI = node.get_population_size(pop_template_inf)
+        beforeR = node.get_population_size(pop_template_rem)
+        beforeV = node.get_population_size(pop_template_vac)
+        beforeT = beforeS + beforeI + beforeR + beforeV
+
         # TODO fix for empty nodes
         if total == 0:
             return
+
         
         self.count = total
         self.susceptible = old_susceptible
@@ -209,7 +218,10 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
 
 
         density=1
-        self.new_infected = self.solve_infection(density)
+        abc = self.solve_infection(density)
+        if (abc > 0):
+            print("There is " + str(abc) + " newly infected")
+        #self.new_infected = self.solve_infection(density)
 
         new_susceptible = int(self.susceptible)
         new_infected = int(self.infected)
@@ -219,6 +231,12 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
         new_total = new_susceptible + new_infected + new_removed + new_vaccinated
 
         if new_total != total:
+            print (str(total) + " |n : " +str(new_total) + " | v: " + str(self.vaccinated))
+            print(f'oldT = {total}\tnewT = {new_total}')
+            print(f'oldS = {old_susceptible}\tnewS = {new_susceptible}')
+            print(f'oldI = {old_infected}\tnewI = {new_infected}')
+            print(f'oldR = {old_removed}\tnewR = {new_removed}')
+            print(f'oldV = {old_vaccinated}\tnewV = {new_vaccinated}')
             raise("Error - population size changed during infection.")
 
         ### DO Susceptible -> Infected
@@ -277,7 +295,7 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
 
                 nodes.append(node)
 
-
+        #print ("Vaccinating: " + str(values['quantity']) + " people")
         # All nodes present in nodes list
         pop_template = values['population_template']
 
@@ -292,6 +310,8 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
 
         pop_template_vac = copy.deepcopy(pop_template)
         pop_template_vac.add_block('vaccinated')
+        
+
 
         total_vaccinated_today = 0
 
@@ -299,40 +319,59 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
             # Select one random node
             node_index = FixedRandom.instance.randint(0, len(nodes)-1)
             node = nodes[node_index]
-
+            #print ("Selected Region: " + node.containing_region_name + "\t | Node: " + node.name + "\t | Population: " + str(node.get_population_size()))
             old_susceptible = node.get_population_size(pop_template_susc)
             if old_susceptible == 0:    # No more susceptibles in this node.
                 del nodes[node_index]   # Remove it from list
                 continue
-
+            
             old_infected = node.get_population_size(pop_template_inf)
             old_removed = node.get_population_size(pop_template_rem)
             old_vaccinated = node.get_population_size(pop_template_vac)
 
             total = old_susceptible + old_infected + old_removed + old_vaccinated
 
+            beforeS = node.get_population_size(pop_template_susc)
+            beforeI = node.get_population_size(pop_template_inf)
+            beforeR = node.get_population_size(pop_template_rem)
+            beforeV = node.get_population_size(pop_template_vac)
+            beforeT = beforeS + beforeI + beforeR + beforeV
+
             # TODO fix for empty nodes
             if total == 0:
+                print ("Shouldn't enter here")
                 continue
 
+            if beforeT == 0:
+                print ("Shouldn't enter here")
+                continue
+
+            #print ("Selected Region: " + node.containing_region_name + "\t | Node: " + node.name + "\t | Population: " + 
+            #    str(node.get_population_size()) + "\t | Infected: " + str(node.get_population_size(pop_template_vac)))
             self.count = total
             self.susceptible = old_susceptible
             self.infected = old_infected
             self.removed = old_removed
+            self.vaccinated = old_vaccinated
+            #self.new_vaccinated = self.solve_vaccinate_one()
 
-            self.new_vaccinated = self.solve_vaccinate_one()
+            to_be_vaccinated = self.solve_vaccinate_one()
+            #print ("There is :" + str(to_be_vaccinated) + " newly vaccinated")
+
+            self.new_vaccinated = to_be_vaccinated
+
             if self.new_vaccinated != 1:
                 input("Press key!")
 
-            if self.new_vaccinated > 0:
-                self.vaccinated += self.new_vaccinated
-
-            total_vaccinated_today = total_vaccinated_today + self.new_vaccinated
+            #if self.new_vaccinated > 0:
+            #    self.vaccinated += to_be_vaccinated
+            
+            total_vaccinated_today = total_vaccinated_today + to_be_vaccinated
 
             new_susceptible = int(self.susceptible)
             new_infected = int(self.infected)
             new_removed = int(self.removed)
-            new_vaccinated = int(self.new_vaccinated)
+            new_vaccinated = int(self.vaccinated) #+ old_vaccinated
 
             new_total = new_susceptible + new_infected + new_removed + new_vaccinated
 
@@ -364,11 +403,25 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
                 blob.move_profile(1, pop_template, 'susceptible', 'vaccinated')
                 tickets.remove(ticket)
 
+            afterS = node.get_population_size(pop_template_susc)
+            afterI = node.get_population_size(pop_template_inf)
+            afterR = node.get_population_size(pop_template_rem)
+            afterV = node.get_population_size(pop_template_vac)
+            afterT = afterS + afterI + afterR + afterV
+            # print("-----------")
+            # print(f'oldT = {beforeT}\tnewT = {afterT}')
+            # print(f'oldS = {beforeS}\tnewS = {afterS}')
+            # print(f'oldI = {beforeI}\tnewI = {afterI}')
+            # print(f'oldR = {beforeR}\tnewR = {afterR}')
+            # print(f'oldV = {beforeV}\tnewV = {afterV}')
+            # input("WTF")
+            if beforeT != afterT:
+                input("WTF")
+
 
     def infect_population(self, values, hour, time):
-
+        print("infect population")
         infect_values = {}
-
         infect_values['beta'] = values['beta']
         infect_values['gamma'] = values['gamma']
 
@@ -395,10 +448,11 @@ class InfectionVaccinePlugin(environment.TimeActionPlugin):
         dS = - self.beta * Infected * Susceptible / Count
         dI = -dS - self.gamma * Infected
         dR = self.gamma * Infected
-
+        #print("Before" + str(self.susceptible))
         self.susceptible = Susceptible + int(round(dS))
+        #print("After" + str(self.susceptible))
         self.removed = Removed + math.floor(dR)
-        self.infected = Count - self.susceptible - self.removed
+        self.infected = Count - self.susceptible - self.removed - self.vaccinated
 
         new_infected = -int(round(dS))
         return new_infected

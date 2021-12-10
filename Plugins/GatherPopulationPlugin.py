@@ -100,15 +100,16 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
      ## Complex time action. Will be broken up into smaller actions
     def converge_population(self, values, hour, time):
+        #print("CONVERGING")
         if self.DEBUG_OPERATION_OUTPUT :
             print("########## CONVERGE_POPULATION")
             print('converge Values: \n', values, '\n')
 
-        target_region = values['region']
+        target_region = values['origin_region']
         if isinstance(target_region, str):
-            target_region = self.graph.get_region_by_name(values['region'])
+            target_region = self.graph.get_region_by_name(values['origin_region'])
 
-        target_node = values['node']
+        target_node = values['origin_node']
         if isinstance(target_node, str):
             target_node = target_region.get_node_by_name(target_node)
 
@@ -124,7 +125,9 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
 
         weight_list = self.compute_weights(target_region, self.graph.region_list)
-
+        #print (available_pop)
+        #print (quantity)
+        #print (weight_list)
         ratioed_pop = util.weighted_int_distribution_with_weights(available_pop, quantity, weight_list)
 
         if self.DEBUG_OPERATION_OUTPUT :

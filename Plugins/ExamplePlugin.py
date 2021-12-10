@@ -36,6 +36,6 @@ class ExamplePlugin(environment.TimeActionPlugin):
         new_action_values['population_template'] = pop_template
 
         action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
-
+        
         return [action]
         
