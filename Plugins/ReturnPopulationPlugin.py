@@ -44,8 +44,10 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
         node = values['node']
         if isinstance(node, str):
             node = target_region.get_node_by_name(node)
-
-        pop_template = values['population_template']
+        
+        pop_template = PopTemplate()
+        if 'population_template' in values:
+            pop_template = values['population_template']
 
         sub_list = []
         

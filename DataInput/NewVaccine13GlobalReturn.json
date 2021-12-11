@@ -25,7 +25,7 @@
   ],
   "repeating_global_actions": [
     {
-      "frames": [ 9 ],
+      "frames": [ 9, 10, 11, 12, 13, 14, 15, 16 ],
       "type": "vaccinate2",
       "values": {
         "node_name": "pharmacy",
@@ -90,7 +90,18 @@
               103.99069556314498,
               -1433.4860698804259
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Azenha",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -265,7 +276,18 @@
               798.86066632997245,
               1243.3664478827268
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Bom Fim",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -407,7 +429,18 @@
               -922.80529776029289,
               1644.8078522342257
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Centro",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -581,7 +614,18 @@
               -954.49386355280876,
               4.5485692997463048
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Cidade Baixa",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -724,7 +768,18 @@
               -0.83669824246317148,
               4.2822721507400274
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Farroupilha",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -879,7 +934,18 @@
               851.47489793039858,
               1947.6198968552053
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Floresta",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -1020,7 +1086,18 @@
               893.06724255066365,
               1376.9545444329269
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Independência",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -1191,7 +1268,18 @@
               -440.67711704876274,
               -2198.3879013033584
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Menino Deus",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -1347,7 +1435,18 @@
               1792.663447085768,
               2710.332339416258
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Moinhos de Vento",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -1518,7 +1617,18 @@
               -1530.2586491676047,
               -442.8054550262168
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Praia de Belas",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -1692,7 +1802,18 @@
               1777.7626688573509,
               1105.2820178880356
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Rio Branco",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -1848,7 +1969,18 @@
               1628.9772470761091,
               52.704374385531992
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Santa Cecília",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {
@@ -2006,7 +2138,18 @@
               1058.9470753995702,
               -1432.5380807556212
             ]
-          }
+          },
+          "18": [
+            {
+              "name": "return_workers",
+              "type": "return_population_home",
+              "values": {
+                "region": "Santana",
+                "node": "home",
+                "quantity": -1
+              }
+            }
+          ]
         },
         "work": {
           "characteristics": {

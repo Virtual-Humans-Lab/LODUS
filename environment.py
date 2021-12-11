@@ -752,7 +752,6 @@ class EnvironmentGraph():
             destination_node = destination_region.get_node_by_name(destination_node)
 
         pop_template = values['population_template']
-
         quantity = values['quantity']
         if quantity == -1:
             quantity = origin_node.get_population_size(pop_template)
@@ -761,13 +760,19 @@ class EnvironmentGraph():
         available = origin_node.get_population_size(pop_template)
 
         grabbed_population = origin_node.grab_population(quantity, pop_template)
-
+        
+        
+        pt = population.PopTemplate()
+        pt.add_block('vaccinated')       
         for grab_pop in grabbed_population:
+            if grab_pop.get_population_size(pt) > 0:
+                print("hour", hour, "quant", grab_pop.get_population_size(pt)) 
+            
+            grab_pop.previous_node = origin_node.id
             if grab_pop.spawning_node is None:
                 grab_pop.spawning_node = origin_node.id
                 grab_pop.frame_origin_node = origin_node.id
-
-
+        
         destination_node.add_blobs(grabbed_population)
         
     def set_spawning_nodes(self):

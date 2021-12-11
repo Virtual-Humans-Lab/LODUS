@@ -523,6 +523,7 @@ class Blob():
         self.blocks = {}
         self.spawning_node = None
         self.frame_origin_node = None
+        self.previous_node = None
 
     def initialize_blocks(self, block_keys, block_template, populations):
         for i in range(len(block_keys)):

@@ -33,7 +33,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         
         self.DEBUG_VACC_DATA = True
         self.DEBUG_ALL_REGIONS = False
-        self.DEBUG_REGIONS = ["Azenha"]
+        self.DEBUG_REGIONS = []
         self.DEBUG_MOVE_PROFILE = False
         
         # Set the time/frame variables
@@ -49,7 +49,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         #self.set_pair('vaccinate', self.vaccinate)
         self.set_pair('vaccinate2', self.vaccinate)
         self.set_pair('vaccine_move_profile', self.vaccine_move_profile)
-        self.graph.base_actions.add('vaccine_move_profile')
+        #self.graph.base_actions.add('vaccine_move_profile')
                 
         # Get the total population of the simulation, and a dict of population per region
         self.total_population = self.graph.get_population_size()
@@ -87,6 +87,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         weight_list = [pop/self.total_population for (pop) in self.pop_per_region.values()]
         int_weights = util.distribute_ints_from_weights(self.to_vaccinate, weight_list)
         self.vac_per_region = dict([(list(self.pop_per_region.keys())[i], int_weights[i]) for i in range(len(self.pop_per_region))])
+        self.remainder_per_region = dict([(list(self.pop_per_region.keys())[i], 0.0) for i in range(len(self.pop_per_region))])
         self.prev_vac = 0
         self.remainder = 0.0
 
@@ -123,11 +124,22 @@ class VaccinePlugin(environment.TimeActionPlugin):
         
         # Calculates the number of people to be vaccinated in this node
         # based on a proportion of: region.pop/env.total_pop
-        calls_per_day = sum(values['frames'])
+        calls_per_day = len(values['frames'])
+        to_vacc_float = float(self.vac_per_region[target_region.name]/calls_per_day) + self.remainder_per_region[target_region.name]
+        self.remainder_per_region[target_region.name] = to_vacc_float % 1.0
+        
+        if self.DEBUG_ALL_REGIONS == True or target_region.name in self.DEBUG_REGIONS:
+            print(f'remainder of {target_node.name}: {self.remainder_per_region[target_region.name]}')
+        
+        to_vacc = math.floor(to_vacc_float)
+        if hour == list(values['frames'])[-1]:
+            to_vacc = round(to_vacc_float)
+        #print(to_vacc_float)
         #rg_proportion = self.pop_per_region[target_region.name]/self.total_population
         #vac_proportion = ((self.to_vaccinate*rg_proportion) + self.remainder)/calls_per_day
         #to_vacc = int(vac_proportion)
-        to_vacc = self.vac_per_region[target_region.name]
+        #to_vacc = self.vac_per_region[target_region.name]
+        #print (target_region.name, self.vac_per_region[target_region.name],self.remainder_per_region[target_region.name])
         # prev_vac track requests during the day
         # remainder is used in the next action to balance requests
         self.prev_vac += to_vacc
@@ -143,7 +155,12 @@ class VaccinePlugin(environment.TimeActionPlugin):
         new_action_values['quantity'] = to_vacc
         #new_action_values['only_locals'] = "true"
         new_action_values['different_node_name'] = "true"
-        new_action_values['population_template'] = PopTemplate()
+        
+        pop_template = PopTemplate()
+        pop_template.add_block('susceptible')
+        pop_template.add_block('infected')
+        pop_template.add_block('removed')
+        new_action_values['population_template'] = pop_template
         
         new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
         self.graph.direct_action_invoke(new_action, hour, time)
@@ -154,35 +171,56 @@ class VaccinePlugin(environment.TimeActionPlugin):
         new_action_type = 'vaccine_move_profile'
         new_action_values['node_id'] = target_node.id
         new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
-        self.graph.queue_next_frame_action(new_action)
-        #self.graph.direct_action_invoke(new_action, hour, time)
+        #self.graph.queue_next_frame_action(new_action)
+        self.graph.direct_action_invoke(new_action, hour, time)
         #sub_list.append(new_action)
         return sub_list
         
     def vaccine_move_profile(self, values, hour, time):
-        #print('---------here---------------')
-        self.graph.get_node_by_id
-
+        
         if isinstance(values['node_id'], int):
             target_node = self.graph.get_node_by_id(values['node_id'])
         else:
             print("origin_node not defined in vaccine_move_profile action.")
             return
         
-        #print(f'{target_node.id} is {self.graph.get_node_by_id(target_node.id).containing_region_name}-{self.graph.get_node_by_id(target_node.id).name}')
         pt = PopTemplate()
         pt.add_block('vaccinated')
         prev_pop = target_node.get_population_size(pt)
         
+        # pt_i = PopTemplate()
+        # pt_i.add_block('infected')
+        # target_region = self.graph.get_region_by_name(target_node.containing_region_name)
+        # print(f'{target_node.id} is {self.graph.get_node_by_id(target_node.id).containing_region_name}-{self.graph.get_node_by_id(target_node.id).name}')
+        # if target_region.get_population_size(pt_i) > 0:
+        #         print("-------",target_region.name,target_region.get_population_size(pt_i))
+        
+        sub_list = []
+        
+        
+        #print("number of blobs", len(target_node.contained_blobs), [n.blob_id for n in target_node.contained_blobs])
         for n in target_node.contained_blobs:
             size = n.get_population_size()
             n.move_profile(size, PopTemplate(),'susceptible', 'vaccinated')
-            #n.move_profile(size, PopTemplate(),'infected', 'vaccinated')
-            #n.move_profile(size, PopTemplate(),'removed', 'vaccinated')
-            #print(n.blocks.keys())
+            n.move_profile(size, PopTemplate(),'infected', 'vaccinated')
+            n.move_profile(size, PopTemplate(),'removed', 'vaccinated')
+            
+            new_action_type = 'return_to_previous'
+            new_action_values = {}
+            new_action_values['node_id'] = target_node.id
+            new_action_values['blob_id'] = n.blob_id
+            new_action_values['population_template'] = pt
+            new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+            #self.graph.direct_action_invoke(new_action,hour,time)
+            #sub_list.append(new_action)
+            #print(hour,self.graph.get_node_by_id(n.previous_node).name)
             
         if self.DEBUG_MOVE_PROFILE or target_node.containing_region_name in self.DEBUG_REGIONS:
             print(f'{(target_node.containing_region_name)[:12]:}   \t{target_node.get_population_size()}\t{prev_pop} -> {target_node.get_population_size(pt)}')
+            
+        #for x in sub_list:
+        #    self.graph.direct_action_invoke(x,hour,time)  
+        return sub_list
 
     def lalalala(self, env_graph, use_infect_move_pop = False, day_length = 24, default_beta = 0.25, default_gamma = 0.08):
 

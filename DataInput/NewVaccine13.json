@@ -26,7 +26,6 @@
   "repeating_global_actions": [
     {
       "cycle_length": 8,
-      "frames": [10,15],
       "type": "vaccinate2",
       "values": {
         "beta": 0.25,

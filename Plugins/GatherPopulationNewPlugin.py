@@ -48,10 +48,9 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         self.DEBUG_OPERATION_OUTPUT = False
         self.DEBUG_OPERATION_REGIONS = ["Azenha"]
         self.DEBUG_ALL_REQUESTS = False
-        self.DEBUG_REGIONS = ["Azenha"]
+        self.DEBUG_REGIONS = []
         
         self.set_pair('gather_population', self.converge_population)
-
         self.distance_map = {}
         self.weights_map = {}
 
@@ -137,7 +136,6 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         quantity = values['quantity']
         pop_template = values['population_template']
         
-        
         weight_list = self.compute_weights(target_region, self.graph.region_list)
         #filtering undesired nodes
         weight_list = [(n, w) for (n,w) in weight_list if (n.get_population_size(pop_template) > 0)]
@@ -145,9 +143,8 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
             weight_list = [(n, w) for (n,w) in weight_list if (n.containing_region_name == target_node.containing_region_name)]
         if 'different_node_name' in values and values['different_node_name'] == "true":
             weight_list = [(n, w) for (n,w) in weight_list if (n.name != target_node.name)]
-            
-        available_pop = [node.get_population_size(pop_template) for (node,w) in weight_list] 
         
+        available_pop = [node.get_population_size(pop_template) for (node,w) in weight_list]
         if sum(available_pop) < quantity:
             quantity = sum(available_pop)
             
@@ -159,12 +156,12 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         #node_targets = [(n, w / total_weight) for (n, w) in weight_list]
         node_targets = [(weight_list[i][0], weight_list[i][1] / total_weight,int_weights[i]) for  i in range(len(int_weights))]
         
-        
         list_count = 0
         total_quant = 0
         remainder = 0.0
         
         for node_aux, w, i in node_targets:
+            
             region = self.graph.get_region_by_name(node_aux.containing_region_name)
             isolation_factor = self.isolation_rate
             new_action_values = {}
@@ -189,7 +186,6 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
                 iso_factor = ( 1 - (self.isolation_rate + (FixedRandom.instance.random() * 0.05  - 0.025))) / (1 - self.to_total_ratio_correction) 
                 new_action_values['quantity'] = quantity * w * iso_factor
             #print(new_action_values['quantity'])
-            #print(quantity, new_action_values['quantity'])
             temp = pop_template
 
             if self.locals_only:
@@ -201,9 +197,9 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
             new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
             #print(new_action_values)
             
-            sub_list.append(new_action)
-            
-            list_count +=1 
+            #sub_list.append(new_action)
+            self.graph.direct_action_invoke(new_action, hour, time)
+            #list_count +=1 
 
         if self.DEBUG_ALL_REQUESTS or target_region.name in self.DEBUG_REGIONS:
             print(f'To {target_region.name}\tReq: {quantity} Sent: {total_quant}')

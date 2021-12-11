@@ -11,6 +11,8 @@ import population
 from random_inst import FixedRandom
 
 from GatherPopulationNewPlugin import GatherPopulationNewPlugin
+from ReturnPopulationPlugin import ReturnPopulationPlugin
+from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
 from ExamplePlugin import ExamplePlugin
@@ -38,7 +40,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 10
+days = 5
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -54,6 +56,12 @@ env_graph.LoadPlugin(plug)
 gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
 env_graph.LoadPlugin(gather_pop)
+
+return_plugin = ReturnPopulationPlugin(env_graph)
+env_graph.LoadPlugin(return_plugin)
+
+return_to_prev = ReturnToPreviousPlugin(env_graph)
+env_graph.LoadPlugin(return_to_prev)
 
 #social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 #social_distance.day_cycle = day_duration
@@ -73,7 +81,7 @@ logger.set_to_record('global')
 logger.set_to_record('neighbourhood')
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
-#logger.set_to_record('nodes')
+logger.set_to_record('nodes')
 #logger.set_to_record('positions')
 
 pop_temp = PopTemplate()
