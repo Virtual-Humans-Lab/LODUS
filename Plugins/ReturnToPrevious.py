@@ -21,6 +21,7 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
         
         node_id = values['node_id']
         blob_id = values['blob_id']
+        target_blob = None
         #print("node", node_id, "blob", blob_id)
         current_node = self.graph.get_node_by_id(node_id)
         for x in current_node.contained_blobs:
@@ -29,17 +30,21 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
         
         pop_template = values["population_template"]
         target_node = self.graph.get_node_by_id(target_blob.previous_node)
+        #print("number ob blobs:", len(target_node.contained_blobs))
+        #grabbed = current_node.grab_population(100000, PopTemplate())
+        
         grabbed = target_blob.grab_population(target_blob.get_population_size(pop_template), pop_template)
+        #print ("available pop:", target_blob.get_population_size(pop_template), "grabbed:", grabbed.get_population_size(pop_template))
         
         grabbed.previous_node = current_node.id
         if grabbed.spawning_node is None:
             grabbed.spawning_node = current_node.id
             grabbed.frame_origin_node = current_node.id
         
-        if current_node.containing_region_name == "Azenha" and current_node.name == "pharmacy":
-            print(f'wants to go from {current_node.containing_region_name}-{current_node.name} to {target_node.containing_region_name}-{target_node.name}')
-            print(f'before {target_blob.get_population_size()}') 
-            print(f'after{grabbed.get_population_size()}',target_blob.get_population_size(values["population_template"]))
+        # if current_node.containing_region_name == "Azenha" and current_node.name == "pharmacy":
+        #     print(f'wants to go from {current_node.containing_region_name}-{current_node.name} to {target_node.containing_region_name}-{target_node.name}')
+        #     print(f'before {target_blob.get_population_size()}') 
+        #     print(f'after{grabbed.get_population_size()}',target_blob.get_population_size(values["population_template"]))
         
         
         target_node.add_blob(grabbed)

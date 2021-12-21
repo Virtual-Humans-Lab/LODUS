@@ -142,7 +142,6 @@ class EnvNode():
             
             adjusted_quantity = int_adjusted_quantities[x]
             grabbed_blob = blob.grab_population(adjusted_quantity, template)
-
             new_blobs.append(grabbed_blob)
 
         blob_sizes = [blob.get_population_size() for blob in new_blobs]
@@ -152,7 +151,6 @@ class EnvNode():
                 self.contained_blobs.remove(blob)
 
         # TODO fix merging of same type blobs
-
         return new_blobs
 
     def get_unique_name(self):
@@ -766,6 +764,7 @@ class EnvironmentGraph():
         pt.add_block('vaccinated')       
         for grab_pop in grabbed_population:
             if grab_pop.get_population_size(pt) > 0:
+                #print(grab_pop)
                 print("hour", hour, "quant", grab_pop.get_population_size(pt)) 
             
             grab_pop.previous_node = origin_node.id

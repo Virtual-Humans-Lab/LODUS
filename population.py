@@ -176,9 +176,9 @@ class PropertyBlock():
 
     """
     def __init__(self, _population):
-        self.population = _population
-        self.template = None
-        self.buckets = {}
+        self.population: int = _population
+        self.template: BlockTemplate = None
+        self.buckets: dict[PropertyBucket] = {}
     
     def initialize_buckets(self, block_template):
         """Initializes buckets according to a BlockTemplate."""
@@ -548,7 +548,7 @@ class Blob():
             quantity: Population quantity to be moved.
             pop_template: The PopTemplate filter to be matched.
             origin_block: origin block key.
-            origin_block: target block key.
+            target_block: target block key.
         """
         extracted = self.blocks[origin_block].extract(quantity, pop_template)
         self.blocks[target_block].add_block(extracted)
@@ -698,8 +698,8 @@ class Blob():
 # EXAMPLES 
 if __name__ == "__main__":
 
+    FixedRandom()
     output_list = []
-
 
     dummyBlockTemplate = BlockTemplate()
     dummyBlockTemplate.add_bucket('age', ('child', 'adult', 'ancient'))
@@ -723,7 +723,6 @@ if __name__ == "__main__":
     dummyPopTemplate.set_property('risk', 'high')
 
     output_list.append(str(dummyBlob).replace('\'', '\"'))
-
     # infects 10 people of that template
     dummyBlob.move_profile(10, dummyPopTemplate, 'healthy', 'infected')
 
@@ -731,11 +730,10 @@ if __name__ == "__main__":
 
     # selects some works to go work
     healthy_old_workers_blob = dummyBlob.split_blob(('healthy', 'cured'), 40, dummyPopTemplate)
-
+    
     output_list.append(str(dummyBlob).replace('\'', '\"'))
 
     healthy_old_workers_blob2 = dummyBlob.split_blob(('healthy', 'cured'), 20, dummyPopTemplate)
-
     output_list.append(str(dummyBlob).replace('\'', '\"'))
 
     # merges blobs again
@@ -746,5 +744,4 @@ if __name__ == "__main__":
     output_list.append(str(dummyBlob).replace('\'', '\"'))
     output_list.append(str(healthy_old_workers_blob).replace('\'', '\"'))
     output_list.append(str(healthy_old_workers_blob2).replace('\'', '\"'))
-
     print(output_list)

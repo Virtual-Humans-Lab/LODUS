@@ -188,6 +188,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         pt.add_block('vaccinated')
         prev_pop = target_node.get_population_size(pt)
         
+        print("prev vacc: ", target_node.get_population_size(pt))
         # pt_i = PopTemplate()
         # pt_i.add_block('infected')
         # target_region = self.graph.get_region_by_name(target_node.containing_region_name)

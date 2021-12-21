@@ -1,10 +1,10 @@
 import sys
 sys.path.append('../')
-
-import unittest
-import environment
-import util
+sys.path.append('../../')
 from population import *
+import environment
+import unittest
+import util
 
 
 def verify_block_validity(block):
@@ -52,6 +52,7 @@ def verify_blobs_validity(blobs):
 class PopulationTests(unittest.TestCase):
 
     def setUp(self):
+        FixedRandom()
         pass
 
     def tearDown(self):

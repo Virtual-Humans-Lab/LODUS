@@ -92,9 +92,7 @@ def distribute_ints_from_weights_with_limit(quantity, weight_list:list[float], l
     weights_sum = sum(weight_list)
     adjusted_weights = [w/weights_sum for w in weight_list]
     int_quantities = [math.floor(aw*quantity) for aw in adjusted_weights]
-    sumA = sum(int_quantities)  
     int_quantities = [min(limits[i],int_quantities[i]) for i in range(len(int_quantities))] 
-    sumB = sum(int_quantities)
     
     if sum(int_quantities) == quantity:
         return int_quantities
@@ -112,10 +110,6 @@ def distribute_ints_from_weights_with_limit(quantity, weight_list:list[float], l
         int_quantities[largest_index] += 1;
         adjusted_weights[largest_index] -= 1.0/quantity;
     
-    #if sumA != sumB:
-    #    print("CHANGED req:", quantity, " floor: ",sumA, " limited: ", sumB, "after: ", sum(int_quantities), "limitsum: ", sum(limits))
-    #if quantity != sum(int_quantities):
-    #    print("-------------HERE", quantity, sum(int_quantities))
     return int_quantities
 
 

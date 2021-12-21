@@ -105,7 +105,9 @@ for i in range(simulation_steps):
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
     env_graph.update_time_step(i % day_duration, i)
-
+    count = sum([len(nd.contained_blobs) for nd in env_graph.node_list])
+    #print(f"Number of blobs: {count}")
+    #print(env_graph.get_population_size())
     logger.record_frame(env_graph, i)
     # Direct Action Invoke example
     # if i == 50:

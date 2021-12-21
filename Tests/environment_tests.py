@@ -10,7 +10,7 @@ from population_tests import verify_blob_validity
 from util import *
 from data_parse_util import *
 
-from GatherPopulationPlugin import GatherPopulationPlugin
+from GatherPopulationNewPlugin import GatherPopulationNewPlugin
 from ReturnPopulationPlugin import ReturnPopulationPlugin
 
 def verify_node_validity(node):
@@ -65,10 +65,10 @@ class EnvironmentTests(unittest.TestCase):
 
     def setUp(self):
         #sets up the test environment
-        environment_path = '../DataInput/dummy_input_2.json'
+        environment_path = '../DataInput/Old/dummy_input_2.json'
         self.env = generate_EnvironmentGraph(environment_path)
 
-        p1 = GatherPopulationPlugin(self.env)
+        p1 = GatherPopulationNewPlugin(self.env)
         p2 = ReturnPopulationPlugin(self.env)
 
         self.env.LoadPlugin(p1)
@@ -517,16 +517,14 @@ class EnvironmentTests(unittest.TestCase):
         """
         pop_template  = PopTemplate()
 
-        values = {'region': 'Petropolis', 'node': 'work', 'quantity':50, 'population_template':pop_template}
+        values = {'destination_region': 'Petropolis', 'destination_node': 'work', 'quantity':50, 'population_template':pop_template}
 
         action = TimeAction('gather_population', values)
         old_graph_size = self.env.get_population_size()
 
         node = self.env.get_region_by_name('Petropolis').get_node_by_name('work')
         old_node_size = node.get_population_size()
-
         self.env.consume_time_action(action, 0, 0)
-
         new_graph_size  = self.env.get_population_size()
         new_node_size = node.get_population_size()
 
@@ -948,5 +946,6 @@ def suite():
     return suite       
 
 if __name__ == "__main__":
+    FixedRandom()
     runner = unittest.TextTestRunner()
     runner.run(suite())

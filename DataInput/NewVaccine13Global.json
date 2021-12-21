@@ -25,7 +25,7 @@
   ],
   "repeating_global_actions": [
     {
-      "frames": [ 9 ],
+      "frames": [ 9, 10 ,12 ],
       "type": "vaccinate2",
       "values": {
         "node_name": "pharmacy",
