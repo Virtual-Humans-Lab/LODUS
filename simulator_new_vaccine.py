@@ -26,7 +26,7 @@ arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-arg_parser.add_argument('--v', metavar="V", type=str, default = "DataInput/vaccine_data.csv", help='Number of vaccinated people each day (.csv)')
+arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.csv)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom()
@@ -40,7 +40,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 5
+days = 10
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -68,7 +68,7 @@ env_graph.LoadPlugin(return_to_prev)
 #social_distance.iso_mode = 'regular'
 #env_graph.LoadPlugin(social_distance)
 
-vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration, 0, multiplier=1.0)
+vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
 env_graph.LoadPlugin(vaccine_plugin)
 
 '''
@@ -78,10 +78,10 @@ Logging
 logger = SimulationLogger(f'{args["n"]}', day_duration)
 
 logger.set_to_record('global')
-logger.set_to_record('neighbourhood')
+#logger.set_to_record('neighbourhood')
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
-logger.set_to_record('nodes')
+#logger.set_to_record('nodes')
 #logger.set_to_record('positions')
 
 pop_temp = PopTemplate()
@@ -106,8 +106,12 @@ for i in range(simulation_steps):
     # These are defined in the input environment descriptor
     env_graph.update_time_step(i % day_duration, i)
     count = sum([len(nd.contained_blobs) for nd in env_graph.node_list])
-    #print(f"Number of blobs: {count}")
+    # print(f"Number of blobs: {count}")
     #print(env_graph.get_population_size())
+    
+    #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
+    #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
+    
     logger.record_frame(env_graph, i)
     # Direct Action Invoke example
     # if i == 50:

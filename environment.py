@@ -93,7 +93,6 @@ class EnvNode():
         count = 0
         for blob in self.contained_blobs:
             count += blob.get_population_size(population_template)
-
         return count
 
     ## TODO review code
@@ -438,7 +437,7 @@ class EnvironmentGraph():
         self.region_dict: dict[str,EnvRegion] = {}
         self.region_id_dict = {}
 
-        self.node_list = []
+        self.node_list: list[EnvNode] = []
         self.node_id_dict = {}
         self.node_dict = {}
 
@@ -706,19 +705,25 @@ class EnvironmentGraph():
                         current_blob.consume_blob(other_blob)
 
                 i+=1
+                
+    def add_blobs_traceable_property(self, key, value):
+        for node in self.node_list:
+            for blob in node.contained_blobs:
+                blob.traceable_properties[key] = value
+                blob.blob_factory.block_template.default_traceable_properties[key] = value
 
     def merge_node(self, node):
         i = 0
         blob_list  = node.contained_blobs
     
         while i < len(blob_list):
-            current_blob =  blob_list[i]
+            current_blob: population.Blob =  blob_list[i]
 
             j = i+1
             while j < len(blob_list):   
-                other_blob = blob_list[j]
+                other_blob: population.Blob = blob_list[j]
                 
-                if current_blob.mother_blob_id == other_blob.mother_blob_id:
+                if current_blob.mother_blob_id == other_blob.mother_blob_id and current_blob.traceable_properties == other_blob.traceable_properties:
                     current_blob.consume_blob(other_blob)
                     node.remove_blob(other_blob)
                 else:
@@ -758,15 +763,8 @@ class EnvironmentGraph():
         available = origin_node.get_population_size(pop_template)
 
         grabbed_population = origin_node.grab_population(quantity, pop_template)
-        
-        
-        pt = population.PopTemplate()
-        pt.add_block('vaccinated')       
+                   
         for grab_pop in grabbed_population:
-            if grab_pop.get_population_size(pt) > 0:
-                #print(grab_pop)
-                print("hour", hour, "quant", grab_pop.get_population_size(pt)) 
-            
             grab_pop.previous_node = origin_node.id
             if grab_pop.spawning_node is None:
                 grab_pop.spawning_node = origin_node.id
@@ -803,7 +801,7 @@ class TimeAction():
     TimeActions are either base actiors or composite actions.
 
     Each TimeAction is to be associated either:
-        With a graph operatior, for base actions; or
+        With a graph operator, for base actions; or
         A base TimeAction decomposition, for composite actions.
     """
     def __init__(self, _type = '', _values = {}):
@@ -832,7 +830,7 @@ class TimeActionPlugin():
     Added functions should be 
     (string, dict) -> [TimeAction]
 
-    the dict is a dictionary of values tu be read from the input json.
+    the dict is a dictionary of values to be read from the input json.
 
     This parameters passed in the dictionary are defined by the plugin contracts.
 

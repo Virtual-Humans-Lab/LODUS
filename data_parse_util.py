@@ -28,10 +28,7 @@ def generate_EnvironmentGraph(env_input):
         pop_buckets = descrip['population_template']
         for k in pop_buckets:
             block_template.add_bucket(k, pop_buckets[k])
-        block_keys = descrip['block_types']
-        pop_factory = BlobFactory(block_keys, block_template)
-        #print(block_template.buckets['age'])
-        env.original_blocks = block_keys
+        pop_factory = BlobFactory(block_template)
         env.original_block_template = block_template
 
         if 'repeating_global_actions' in descrip:
@@ -64,7 +61,7 @@ def generate_EnvironmentGraph(env_input):
 
             #env.add_region(region_description['long_lat_position'],
             env.add_region(region_description['world_position'],
-                           sum(region_description['population']), region_template, region_description['name'])
+                           region_description['population'], region_template, region_description['name'])
             env.region_list[-1].long_lat = region_description['long_lat_position']
             populate_EnvRegion(env.region_list[-1],
                                pop_factory,
@@ -74,21 +71,21 @@ def generate_EnvironmentGraph(env_input):
         return env
 
 
-def populate_EnvRegion(region, blob_factory, populations, profiles):
-    home_node = None
+def populate_EnvRegion(region, blob_factory: BlobFactory, populations, profiles):
+    home_node: EnvNode = None
     for node in  region.node_list:
         if node.name == 'home':
             home_node = node
-    pop_profiles = []
-
-    for key in blob_factory.block_keys:
-        if key in profiles:
-            pop_profiles.append(profiles[key])
-        else:
-            pop_profiles.append(dict())
-
-    blob = blob_factory.GenerateProfile(region.id, populations, pop_profiles)
-
+    # pop_profiles = []
+    # print("ergreg")
+    # print(profiles)
+    # for key in blob_factory.sampled_properties:
+    #     if key in profiles:
+    #         pop_profiles.append(profiles[key])
+    #     else:
+    #         pop_profiles.append(dict())
+    # print(pop_profiles)
+    blob = blob_factory.GenerateProfile(region.id, populations, profiles)
     home_node.add_blob(blob)
 
 

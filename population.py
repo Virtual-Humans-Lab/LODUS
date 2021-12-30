@@ -1,4 +1,5 @@
 #import random
+import copy
 from util import *
 from random_inst import FixedRandom
 
@@ -16,9 +17,13 @@ class BlockTemplate():
     
     def __init__(self):
         self.buckets = {}
+        self.default_traceable_properties:dict = {}
 
     def add_bucket(self, property, values):
         self.buckets[property] = values
+        
+    def add_traceable_property(self, value, key):
+        self.default_traceable_properties[value] = key
 
     def Generate(self, population):
         block = PropertyBlock(population)
@@ -258,7 +263,7 @@ class PropertyBlock():
         for k in self.buckets.keys():
             self.buckets[k].add_bucket(block.buckets[k])
 
-    def add_bucket(self, bucket):
+    def add_bucket(self, bucket: PropertyBucket):
         """Adds the values a PropertyBucket to the appropriate local PropertyBucket.
         
         Population balance between buckets is responsability of the caller.
@@ -276,11 +281,15 @@ class PropertyBlock():
             ## inefficient? change to be less janky
             a_bucket = list(self.buckets.values())[0]
             return a_bucket.get_population_size()
-
+        
+        if not bool(population_template.pairs.keys()):
+            a_bucket = list(self.buckets.values())[0]
+            return a_bucket.get_population_size()
+        
         min_value = float("inf")
-
         template_keys = population_template.pairs.keys()
-
+        
+        #print(population_template, template_keys)
         for key in self.buckets.keys():
             if key in template_keys:
                 val = population_template.pairs[key]
@@ -364,7 +373,7 @@ class PopTemplate():
     def __init__(self,  string_values= None):
         self.blob_id = None
         self.mother_blob_id = None
-        self.blocks = set()
+        self.traceable_properties:dict = {}
         self.pairs = {}
         self.empty = True
 
@@ -372,12 +381,12 @@ class PopTemplate():
             for k,v in string_values.items():
                 self.set_property(k, v)
 
-
-    def add_block(self, block):
-        self.blocks.add(block)
-
     def set_property(self, key, value):
         self.pairs[key] = value
+        self.empty = False
+        
+    def set_traceable_property(self, key, value):
+        self.traceable_properties[key] = value
         self.empty = False
 
     def set_properties(self, pairs):
@@ -392,9 +401,9 @@ class PopTemplate():
             return False
         if self.mother_blob_id != other.mother_blob_id:
             return False
-        if len(self.blocks.difference(other.blocks)) != 0:
-            return False
         if self.pairs.items() != other.pairs.items():
+            return False
+        if self.traceable_properties.items() != other.traceable_properties.items():
             return False
 
         return True
@@ -402,16 +411,16 @@ class PopTemplate():
     def __str__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
-        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \" pairs\"  : {2}}}'.format(blob_id,
+        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable prop\"  : {3}}}'.format(blob_id,
                                                                                              mother_blob_id,
-                                                                                             self.pairs)
+                                                                                             self.pairs, self.traceable_properties)
 
     def __repr__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
-        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \" pairs\"  : {2}}}'.format(blob_id,
+        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable prop\"  : {3}}}'.format(blob_id,
                                                                                              mother_blob_id,
-                                                                                             self.pairs)
+                                                                                             self.pairs, self.traceable_properties)
 
 
 
@@ -437,11 +446,10 @@ class BlobFactory():
         block_keys: A tuple of characteristic keys for blocks. Order matters.
         block_template: The BlockTemplate used by this factory.
     """
-    def __init__(self, block_keys, block_template):
-        self.block_keys = block_keys
-        self.block_template = block_template
+    def __init__(self, block_template:BlockTemplate):
+        self.block_template:BlockTemplate = block_template
     
-    def Generate(self, _mother_blob_id, _populations):
+    def Generate(self, _mother_blob_id, _population):
         """Generates a new Blob based on a pre-defined template.
         
         Params:
@@ -451,11 +459,11 @@ class BlobFactory():
         Returns:
             A new Blob with a block for each key in block_keys, each matching the template in block_template.
         """
-        blob = Blob(_mother_blob_id, sum(_populations), self)
-        blob.initialize_blocks(self.block_keys, self.block_template, _populations)
+        blob = Blob(_mother_blob_id, _population, self)
+        blob.initialize_blocks(self.block_template, _population)
         return blob
 
-    def GenerateProfile(self,_mother_blob_id, _populations, _profiles):
+    def GenerateProfile(self,_mother_blob_id, _population, _profiles):
         """Generates a new Blob based on a pre-defined template, population quantities
             and population profile.
 
@@ -477,8 +485,8 @@ class BlobFactory():
             A new Blob with a block for each key in block_keys, each matching the template in block_template.
             The new blob contains the desired number of people for profiled blocks.
         """
-        blob = Blob(_mother_blob_id, sum(_populations), self)
-        blob.initialize_blocks_profile(self.block_keys, self.block_template, _populations, _profiles)
+        blob = Blob(_mother_blob_id, _population, self)
+        blob.initialize_blocks_profile(self.block_template, _population, _profiles)
         return blob
 
 # tem blocks com dados de agentes com uma caracteristica similar
@@ -514,25 +522,26 @@ class Blob():
         frame_origin_node: The node where this blob started the frame.
     """
     
-    def __init__(self, _mother_blob_id, _population, _blob_factory):
-        self.blob_factory = _blob_factory
+    def __init__(self, _mother_blob_id, _population, _blob_factory:BlobFactory):
+        self.blob_factory:BlobFactory = _blob_factory
         self.profiles = None
         self.original_population = _population
         self.blob_id = IDGen('blobs').get_id()
         self.mother_blob_id = _mother_blob_id
-        self.blocks = {}
+        self.traceable_properties:dict = {}
+        self.sampled_properties:PropertyBlock = None
         self.spawning_node = None
         self.frame_origin_node = None
         self.previous_node = None
 
-    def initialize_blocks(self, block_keys, block_template, populations):
-        for i in range(len(block_keys)):
-            self.blocks[block_keys[i]] = block_template.Generate(populations[i])
+    def initialize_blocks(self, block_template:BlockTemplate, population):
+        self.sampled_properties = block_template.Generate(population)
+        self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
 
-    def initialize_blocks_profile(self, block_keys, block_template, populations, profiles):
+    def initialize_blocks_profile(self, block_template:BlockTemplate, population, profiles):
         self.profiles = profiles
-        for i in range(len(block_keys)):
-            self.blocks[block_keys[i]] = block_template.GenerateProfile(populations[i], profiles[i])
+        self.sampled_properties = block_template.GenerateProfile(population, profiles)
+        self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
         
 
     # used for infection for example
@@ -553,51 +562,56 @@ class Blob():
         extracted = self.blocks[origin_block].extract(quantity, pop_template)
         self.blocks[target_block].add_block(extracted)
         
-    def split_blob(self, block_keys, quantity, pop_template = None):
+    def split_blob(self, quantity, pop_template: PopTemplate = None):
         """Separates a blob into another blob. This is filtered by both PopTemplate and PropertyBlocks.
         
         Params:
             quantity: Population quantity to be separated into a new Blob.
             pop_template: The PopTemplate filter to be matched.
-            block_keys: the PropertyBlock keys to be used in the split.
 
         Returns:
             A new blob containing the extracted population
         """
-        new_blob = self.blob_factory.Generate(self.mother_blob_id, (0,0,0,0))
+        new_blob = self.blob_factory.Generate(self.mother_blob_id, 0)
         current_quantity = quantity
 
-        if pop_template is not None and pop_template.mother_blob_id is not None:
-            if pop_template.mother_blob_id != self.mother_blob_id:
+        if pop_template is not None:
+            if pop_template.mother_blob_id is not None and pop_template.mother_blob_id != self.mother_blob_id:
                 return new_blob
+            #if pop_template.traceable_properties is not None and pop_template.traceable_properties != self.traceable_properties:
+            #    return new_blob
 
-        len_block_keys = len(block_keys)
-        quantities = [0 for x in range(len_block_keys)]
+        quantities = 0
 
         # gets the available population size per block
-        available_quantities = [self.blocks[block_keys[x]].get_population_size(pop_template) for x in range(len_block_keys)]
-        total_available_population = sum(available_quantities)
+        #available_quantities = [self.blocks[block_keys[x]].get_population_size(pop_template) for x in range(len_block_keys)]
+        #total_available_population = sum(available_quantities)
+        
+        total_available_population = self.get_population_size(pop_template)
+        
         current_quantity = min(total_available_population, current_quantity)
-
+        #print("Available", total_available_population, "Current", current_quantity)
         # update in python 3.9
         # samples = random.sample([x for x in block_keys], current_quantity, counts = available_quantities)
 
-        sample_list = []
-
-        for i  in range(len_block_keys):
-            sample_list.extend([i] * available_quantities[i])
+        # sample_list = []
+        # sample_list.extend(total_available_population)
+        #for i  in range(len_block_keys):
+        #    sample_list.extend([i] * available_quantities[i])
 
         #samples = random.sample(sample_list, current_quantity)
-        samples = FixedRandom.instance.sample(sample_list, current_quantity)
-        
-        for i  in range(len_block_keys):
-            quantities[i] = samples.count(i)
+        # samples = FixedRandom.instance.sample(sample_list, current_quantity)
+        # print("Samples ", samples)
+        # for i  in range(len_block_keys):
+        #     quantities[i] = samples.count(i)
 
-        for i in range(len_block_keys):
-            k = list(block_keys)[i]
-            removed_block = self.blocks[k].extract(quantities[i], pop_template)
-            new_blob.blocks[k].add_block(removed_block)
+        # for i in range(len_block_keys):
+        #     k = list(block_keys)[i]
+        #     removed_block = self.blocks[k].extract(quantities[i], pop_template)
+        #     new_blob.blocks[k].add_block(removed_block)
 
+        removed_block = self.sampled_properties.extract(current_quantity, pop_template)
+        new_blob.sampled_properties = removed_block
         return new_blob
     
     ## TODO Correct for block keys
@@ -619,28 +633,25 @@ class Blob():
         if quantity >= self.get_population_size(population_template) and matching_template_total_population:
             return self
         else:
-            return self.split_blob(list(self.blocks.keys()), quantity, population_template)
+            return self.split_blob(quantity, population_template)
 
     # TODO correct for blocks keys
-    def get_population_size(self, population_template = None):
+    def get_population_size(self, population_template:PopTemplate = None):
         """Gets the population size matching a PopTemplate.
 
         If population_template is None, gets total population size.
         """
         
-        min_value = float("inf")
-
-        if population_template is not None and population_template.mother_blob_id is not None:
-            if population_template.mother_blob_id != self.mother_blob_id:
-                return 0
+        #min_value = float("inf")
 
         if population_template is None:
-            pop = 0
+            return self.sampled_properties.get_population_size()
             for block in self.blocks.values():
                 pop += block.get_population_size()
             return pop
 
         if population_template.is_empty():
+            return self.sampled_properties.get_population_size()
             pop = 0
             block_keys = []
             if len(population_template.blocks) == 0:
@@ -651,25 +662,18 @@ class Blob():
             for block_key in block_keys:
                 pop += self.blocks[block_key].get_population_size()
             return pop
-
-        template_keys = population_template.pairs.keys()
-
-        block_keys = []
-        if len(population_template.blocks) == 0:
-            block_keys = list(self.blocks.keys())
-        else:
-            block_keys = list(population_template.blocks)
-
-        min_total_val = 0
-        for key, val in population_template.pairs.items():
-            min_block_val = 0
-
-            for block_key in block_keys:
-                min_block_val += self.blocks[block_key].get_population_size(population_template)
-
-            min_value = min(min_value, min_block_val)
-
-        return min_value
+        
+        if population_template is not None and population_template.mother_blob_id is not None:
+            if population_template.mother_blob_id != self.mother_blob_id:
+                return 0
+        
+         
+        if population_template.traceable_properties is not None:
+            if bool(population_template.traceable_properties):
+                if population_template.traceable_properties != self.traceable_properties:
+                    return 0
+                
+        return self.sampled_properties.get_population_size(population_template)
 
     # merges a child blob into a mother blob
     # Outside code is responsible for deleting consumed blob
@@ -681,16 +685,16 @@ class Blob():
         Params:
             blob: Another blob to be consumed.
         """
-        for block_key in self.blocks.keys():
-            self.blocks[block_key].add_block(blob.blocks[block_key])
+        if self.traceable_properties == blob.traceable_properties:
+            self.sampled_properties.add_block(blob.sampled_properties)
 
     def __str__(self):
-        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"origin_node\" : {3}, \"frame_origin_node\" : {4}, \"blocks\" : {5}}}'
-        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.spawning_node, self.frame_origin_node, str(self.blocks))
+        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"origin_node\" : {3}, \"frame_origin_node\" : {4}}}'
+        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.spawning_node, self.frame_origin_node)
 
     def __repr__(self):
-        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"origin_node\" : {3}, \"frame_origin_node\" : {4}, \"blocks\" : {5}}}'
-        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.spawning_node, self.frame_origin_node, str(self.blocks))
+        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"origin_node\" : {3}, \"frame_origin_node\" : {4}}}'
+        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.spawning_node, self.frame_origin_node)
 
 
 
@@ -707,41 +711,59 @@ if __name__ == "__main__":
     dummyBlockTemplate.add_bucket('social_profile', ('low', 'mid', 'high'))
     dummyBlockTemplate.add_bucket('risk', ('low', 'mid', 'high'))
     dummyBlockTemplate.add_bucket('height', ('short', 'average', 'tall'))
+    dummyBlockTemplate.add_traceable_property('vaccine_level', 0)
+    dummyBlockTemplate.add_traceable_property('sir_state', 'susceptible')
 
-    types_of_blocks = ('healthy', 'infected', 'cured', 'dead')
-
-    dummyBlobFactory = BlobFactory(types_of_blocks, dummyBlockTemplate)
-
-    # creates a blob of 400 healthy individuals with random age, economic profile and social profile
-    # with mother id 0
-    dummyBlob = dummyBlobFactory.Generate(0, (100,100,100,100))
-
+    dummyBlobFactory = BlobFactory(dummyBlockTemplate)
+        
+    print("\nCREATING BLOB 1")
+    dummyBlob = dummyBlobFactory.Generate(0, 400)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("************")
+    
+    
+    print("\nSPLIT BLOB 1 INTO BLOB 2 - MATCHING TREACEABLE_PROP")
     # sets a population template
     dummyPopTemplate = PopTemplate()
     dummyPopTemplate.set_property('age', 'ancient')
     dummyPopTemplate.set_property('economic_profile', 'worker')
     dummyPopTemplate.set_property('risk', 'high')
-
-    output_list.append(str(dummyBlob).replace('\'', '\"'))
-    # infects 10 people of that template
-    dummyBlob.move_profile(10, dummyPopTemplate, 'healthy', 'infected')
-
-    output_list.append(str(dummyBlob).replace('\'', '\"'))
-
-    # selects some works to go work
-    healthy_old_workers_blob = dummyBlob.split_blob(('healthy', 'cured'), 40, dummyPopTemplate)
+    #dummyPopTemplate.set_traceable_property('vaccine_level', 0)
+    print("DummyPopTemplate", dummyPopTemplate)
+    print("------------")
+    dummyBlob2 = dummyBlob.split_blob(40, dummyPopTemplate)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("------------")
+    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    print("************")
     
-    output_list.append(str(dummyBlob).replace('\'', '\"'))
-
-    healthy_old_workers_blob2 = dummyBlob.split_blob(('healthy', 'cured'), 20, dummyPopTemplate)
-    output_list.append(str(dummyBlob).replace('\'', '\"'))
-
-    # merges blobs again
-    dummyBlob.consume_blob(healthy_old_workers_blob2)
-    # delete healthy_old_workers_blob2 from the simulation
-
-
-    output_list.append(str(dummyBlob).replace('\'', '\"'))
-    output_list.append(str(healthy_old_workers_blob).replace('\'', '\"'))
-    output_list.append(str(healthy_old_workers_blob2).replace('\'', '\"'))
-    print(output_list)
+    
+    print("\nSPLIT BLOB 1 INTO BLOB 3 - NOT MATCHING TREACEABLE_PROP")
+    dummyPopTemplate.set_traceable_property('vaccine_level', 1)
+    dummyBlob3 = dummyBlob.split_blob(20, dummyPopTemplate)
+    print("DummyPopTemplate", dummyPopTemplate)
+    print("------------")
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("------------")
+    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    print("------------")
+    print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3, dummyBlob3.traceable_properties, dummyBlob3.sampled_properties)
+    print("************")
+    
+    print("\nBLOB 1 CONSUMING BLOB 3 - NOT A MATCH")
+    dummyBlob.consume_blob(dummyBlob3)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("------------")
+    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    print("------------")
+    print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3, dummyBlob3.traceable_properties, dummyBlob3.sampled_properties)
+    print("************")
+    
+    print("\nCONSUMING BLOB 2 - IS A MATCH - SHOULD DELETE BLOB 2 AFTER")
+    dummyBlob.consume_blob(dummyBlob2)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("------------")
+    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    print("------------")
+    print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3, dummyBlob3.traceable_properties, dummyBlob3.sampled_properties)
+    print("************")

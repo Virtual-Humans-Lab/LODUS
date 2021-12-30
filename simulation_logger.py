@@ -16,11 +16,11 @@ class SimulationLogger():
 
 
         self.global_f = open('output_logs/' + base_filename + "//" + "global.csv", 'w', encoding='utf8')
-        self.global_f.write('Frame;Hour;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;\n')
+        self.global_f.write('Frame;Hour;Vacc0;Vacc1;Vacc2;dS;dI;dR;dV;\n')
         
         self.neigh_f = open('output_logs/' + base_filename + "//" +  "neigh.csv", 'w', encoding='utf8')
-        self.neigh_f.write('Frame;Hour;Neighbourhood;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;Total;Locals;Outsiders;\n')
-        
+        self.neigh_f.write('Frame;Hour;Neighbourhood;Vacc0;Vacc1;Vacc2;d0;d1;d2;Total;Locals;Outsiders;\n')
+                
         self.diss_f = open('output_logs/' + base_filename + "//" + "diss.csv", 'w', encoding='utf8')
         self.diss_f.write('Frame;Hour;Neighbourhood;Total;Locals;Outsiders;home_total;home_locals;home_outsiders;work_total;work_locals;work_outsiders;\n')
 
@@ -37,7 +37,7 @@ class SimulationLogger():
 
         self.data_to_record = set() #neighbourhood, global, graph, nodes, positions, metrics and neighbourhood_disserta
 
-        self.last_frame = (0, 0, 0, 0)
+        self.last_frame = (0, 0, 0)
         self.time_cycle = time_cycle
 
         self.neigh_last_frames = {}
@@ -98,61 +98,52 @@ class SimulationLogger():
         for region_name, region in graph.region_dict.items():
             
             if region.name not in self.neigh_last_frames:
-                self.neigh_last_frames[region.name] = (0,0,0,0)
+                self.neigh_last_frames[region.name] = (0,0,0)
 
             last_frame = self.neigh_last_frames[region.name]
 
-            susceptible = 0
-            infected = 0
-            removed = 0
-            vaccinated = 0
+            vac0_count = 0
+            vac1_count = 0
+            vac2_count = 0
 
+            vac0_template = PopTemplate()
+            vac0_template.set_traceable_property('vaccine_level', 0)
 
-            susc_tmp = PopTemplate()
-            susc_tmp.add_block('susceptible')
+            vac1_template = PopTemplate()
+            vac1_template.set_traceable_property('vaccine_level', 1)
 
-            inft_tmp = PopTemplate()
-            inft_tmp.add_block('infected')
-
-            remv_tmp = PopTemplate()
-            remv_tmp.add_block('removed')
-
-            vacc_tmp = PopTemplate()
-            vacc_tmp.add_block('vaccinated')
+            vac2_template = PopTemplate()
+            vac2_template.set_traceable_property('vaccine_level', 2)
 
             for node in region.node_list:
-                susceptible += node.get_population_size(susc_tmp)
-                infected += node.get_population_size(inft_tmp)
-                removed += node.get_population_size(remv_tmp)
-                vaccinated += node.get_population_size(vacc_tmp)
+                vac0_count += node.get_population_size(vac0_template)
+                vac1_count += node.get_population_size(vac1_template)
+                vac2_count += node.get_population_size(vac2_template)
 
-            totals = susceptible + infected + removed + vaccinated
+            totals = vac0_count + vac1_count + vac2_count
             
             
-            local_susceptible = 0
-            local_infected = 0
-            local_removed = 0
-            local_vaccinated = 0
+            local_vac0 = 0
+            local_vac1 = 0
+            local_vac2 = 0
 
-            susc_tmp.mother_blob_id = region.id
-            inft_tmp.mother_blob_id = region.id
-            remv_tmp.mother_blob_id = region.id
-            vacc_tmp.mother_blob_id = region.id
+            vac0_template.mother_blob_id = region.id
+            vac1_template.mother_blob_id = region.id
+            vac2_template.mother_blob_id = region.id
 
             for node in region.node_list:
-                local_susceptible += node.get_population_size(susc_tmp)
-                local_infected += node.get_population_size(inft_tmp)
-                local_removed += node.get_population_size(remv_tmp)
-                local_vaccinated += node.get_population_size(vacc_tmp)
+                local_vac0 += node.get_population_size(vac0_template)
+                local_vac1 += node.get_population_size(vac1_template)
+                local_vac2 += node.get_population_size(vac2_template)
 
-            local_people =  local_susceptible + local_infected + local_removed + local_vaccinated
+            local_people =  local_vac0 + local_vac1 + local_vac2
 
-            l_susc, l_inf, l_rem, l_vac = last_frame
+            l_0, l_1, l_2 = last_frame
 
-            s = f"{frame};{frame % self.time_cycle};{region.name};{susceptible};{infected};{removed};{vaccinated};{susceptible - l_susc};{infected - l_inf};{removed - l_rem};{vaccinated - l_vac};{totals};{local_people};{totals - local_people};\n"
+            s = f"{frame};{frame % self.time_cycle};{region.name};{vac0_count};{vac1_count};{vac2_count};{vac0_count - l_0};{vac1_count - l_1};{vac2_count - l_2};{totals};{local_people};{totals - local_people};\n"
 
 
-            last_frame = susceptible, infected, removed, vaccinated
+            last_frame = vac0_count, vac1_count, vac2_count
 
             self.neigh_last_frames[region.name] = last_frame
 
@@ -269,35 +260,30 @@ class SimulationLogger():
         # dS;dI;dR;dV
         # Total;Locals;Outsiders;"
 
-    def global_frame(self, graph, frame):
-        susceptible = 0
-        infected = 0
-        removed = 0
-        vaccinated = 0
+    def global_frame(self, graph: environment.EnvironmentGraph, frame:int):
+        vac0_count = 0
+        vac1_count = 0
+        vac2_count = 0
 
-        susc_tmp = PopTemplate()
-        susc_tmp.add_block('susceptible')
+        vac0_template = PopTemplate()
+        vac0_template.set_traceable_property('vaccine_level', 0)
 
-        inft_tmp = PopTemplate()
-        inft_tmp.add_block('infected')
+        vac1_template = PopTemplate()
+        vac1_template.set_traceable_property('vaccine_level', 1)
 
-        remv_tmp = PopTemplate()
-        remv_tmp.add_block('removed')
-
-        vacc_tmp = PopTemplate()
-        vacc_tmp.add_block('vaccinated')
+        vac2_template = PopTemplate()
+        vac2_template.set_traceable_property('vaccine_level', 2)
 
         for node in graph.node_list:
-            susceptible += node.get_population_size(susc_tmp)
-            infected += node.get_population_size(inft_tmp)
-            removed += node.get_population_size(remv_tmp)
-            vaccinated += node.get_population_size(vacc_tmp)
+            vac0_count += node.get_population_size(vac0_template)
+            vac1_count += node.get_population_size(vac1_template)
+            vac2_count += node.get_population_size(vac2_template)
 
-        l_susc, l_inf, l_rem, l_vac = self.last_frame
+        last_0, last_1, last_2 = self.last_frame
 
-        s = "{};{};{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, susceptible, infected, removed, vaccinated, susceptible - l_susc, infected - l_inf, removed - l_rem, vaccinated - l_vac)
+        s = "{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, vac0_count, vac1_count, vac2_count, vac0_count - last_0, vac1_count - last_1, vac2_count - last_2)
         
-        self.last_frame = susceptible, infected, removed, vaccinated
+        self.last_frame = vac0_count, vac1_count, vac2_count
 
         self.global_f.write(s)
 

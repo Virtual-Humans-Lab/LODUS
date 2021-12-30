@@ -5,6 +5,7 @@ from random_inst import FixedRandom
 import math
 import csv
 import util
+import json
 
 class VaccinePlugin(environment.TimeActionPlugin):
     '''
@@ -28,7 +29,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
 
     '''
 
-    def __init__(self, env_graph: environment.EnvironmentGraph, vaccine_file_path, day_duration: int, start_offset: int = 0, multiplier: float = 1.0):
+    def __init__(self, env_graph: environment.EnvironmentGraph, config_file_path, day_duration: int):
         super().__init__()
         
         self.DEBUG_VACC_DATA = True
@@ -36,20 +37,23 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.DEBUG_REGIONS = []
         self.DEBUG_MOVE_PROFILE = False
         
+        self.config = json.loads(open(config_file_path ,'r').read())
+        
         # Set the time/frame variables
         self.day_duration = day_duration
         self.hour = 0
         self.time = 0
         self.current_day = 0
-        self.start_offset = start_offset
-        print(f'Vaccine plugin loaded. Day duration is {day_duration}. Starting day offset is {start_offset}.')
+        self.start_offset = self.config["starting_days_offset"]
+        self.vaccine_levels = self.config["number_of_vaccine_levels"]
+        self.efficiency_per_level = self.config["efficiency_per_level"]
+        print(f'Vaccine plugin loaded. Day duration is {day_duration}. Starting days offset is {self.start_offset}.')
         
-        # Set the 'vaccinate' action (calls a gather_population), and the 'vaccine_move_profile' base action
+        # Set the 'vaccinate' action (calls a gather_population), and the 'change_vaccine_level' base action
         self.graph = env_graph
-        #self.set_pair('vaccinate', self.vaccinate)
-        self.set_pair('vaccinate2', self.vaccinate)
-        self.set_pair('vaccine_move_profile', self.vaccine_move_profile)
-        #self.graph.base_actions.add('vaccine_move_profile')
+        self.set_pair('vaccinate', self.vaccinate)
+        self.set_pair('change_vaccine_level', self.change_vaccine_level)
+        self.graph.add_blobs_traceable_property("vaccine_level", 0)
                 
         # Get the total population of the simulation, and a dict of population per region
         self.total_population = self.graph.get_population_size()
@@ -61,20 +65,19 @@ class VaccinePlugin(environment.TimeActionPlugin):
                 
         # Set a list of vaccines available per day
         self.vaccinations_per_day = 0
-        self.remainder = 0.0
         self.prev_vac = 0
         self.vaccine_data = list()
-        with open(vaccine_file_path) as csvfile:
+        with open(self.config["vaccinations_per_day_data"]) as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
-                self.vaccine_data.append(int(int(row[0]) * multiplier))
+                self.vaccine_data.append(int(int(row[0]) * self.config["number_of_vaccines_multiplier"]))
         
         print(f'Vaccine days available: {len(self.vaccine_data)}')
 
     def update_time_step(self, hour, time):
         self.hour = hour
         self.time = time
-        self.current_day = (time // self.day_duration) - self.start_offset
+        self.current_day = (time // self.day_duration) - self.start_offset[0]
         if self.current_day >= 0:
             self.to_vaccinate = self.vaccine_data[self.current_day]
         else:
@@ -89,14 +92,6 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.vac_per_region = dict([(list(self.pop_per_region.keys())[i], int_weights[i]) for i in range(len(self.pop_per_region))])
         self.remainder_per_region = dict([(list(self.pop_per_region.keys())[i], 0.0) for i in range(len(self.pop_per_region))])
         self.prev_vac = 0
-        self.remainder = 0.0
-
-
-    def vaccinate2(self, values, hour, time):
-        if values["node"] == "pharmacy":
-            print(values["node_id"], hour, time)
-            print(values)
-        return []
 
     def vaccinate(self, values, hour, time):
         if self.to_vaccinate == 0:
@@ -108,19 +103,6 @@ class VaccinePlugin(environment.TimeActionPlugin):
             return
         
         target_region = self.graph.get_region_by_name(target_node.containing_region_name)
-        
-        
-        # if isinstance(values['origin_region'], str):
-        #     target_region = self.graph.get_region_by_name(values['origin_region'])
-        # else:
-        #     print("origin_region not defined in Vaccinate action.")
-        #     return
-        
-        # if isinstance(values['origin_node'], str):
-        #     target_node = target_region.get_node_by_name(values['origin_node'])
-        # else:
-        #     print("origin_node not defined in Vaccinate action.")
-        #     return
         
         # Calculates the number of people to be vaccinated in this node
         # based on a proportion of: region.pop/env.total_pop
@@ -157,9 +139,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         new_action_values['different_node_name'] = "true"
         
         pop_template = PopTemplate()
-        pop_template.add_block('susceptible')
-        pop_template.add_block('infected')
-        pop_template.add_block('removed')
+        pop_template.set_traceable_property('vaccine_level', 0)
         new_action_values['population_template'] = pop_template
         
         new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
@@ -168,27 +148,28 @@ class VaccinePlugin(environment.TimeActionPlugin):
         #sub_list.append(new_action)
         
         new_action_values = {}
-        new_action_type = 'vaccine_move_profile'
+        new_action_type = 'change_vaccine_level'
         new_action_values['node_id'] = target_node.id
         new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
         #self.graph.queue_next_frame_action(new_action)
-        self.graph.direct_action_invoke(new_action, hour, time)
-        #sub_list.append(new_action)
+        #self.graph.direct_action_invoke(new_action, hour, time)
+        sub_list.append(new_action)
         return sub_list
         
-    def vaccine_move_profile(self, values, hour, time):
+    def change_vaccine_level(self, values, hour, time):
         
         if isinstance(values['node_id'], int):
             target_node = self.graph.get_node_by_id(values['node_id'])
         else:
-            print("origin_node not defined in vaccine_move_profile action.")
+            print("origin_node not defined in change_vaccine_level action.")
             return
         
+        print(values)
         pt = PopTemplate()
-        pt.add_block('vaccinated')
-        prev_pop = target_node.get_population_size(pt)
+        pt.set_traceable_property('vaccine_level', 1)
+        #prev_pop = target_node.get_population_size(pt)
         
-        print("prev vacc: ", target_node.get_population_size(pt))
+        #print("prev vacc: ", target_node.get_population_size(pt))
         # pt_i = PopTemplate()
         # pt_i.add_block('infected')
         # target_region = self.graph.get_region_by_name(target_node.containing_region_name)
@@ -202,9 +183,11 @@ class VaccinePlugin(environment.TimeActionPlugin):
         #print("number of blobs", len(target_node.contained_blobs), [n.blob_id for n in target_node.contained_blobs])
         for n in target_node.contained_blobs:
             size = n.get_population_size()
-            n.move_profile(size, PopTemplate(),'susceptible', 'vaccinated')
-            n.move_profile(size, PopTemplate(),'infected', 'vaccinated')
-            n.move_profile(size, PopTemplate(),'removed', 'vaccinated')
+            n.traceable_properties['vaccine_level'] = 1
+            #print(target_node.containing_region_name,"size", size, n.traceable_properties)
+            #n.move_profile(size, PopTemplate(),'susceptible', 'vaccinated')
+            #n.move_profile(size, PopTemplate(),'infected', 'vaccinated')
+            #n.move_profile(size, PopTemplate(),'removed', 'vaccinated')
             
             new_action_type = 'return_to_previous'
             new_action_values = {}
@@ -213,7 +196,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             new_action_values['population_template'] = pt
             new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
             #self.graph.direct_action_invoke(new_action,hour,time)
-            #sub_list.append(new_action)
+            sub_list.append(new_action)
             #print(hour,self.graph.get_node_by_id(n.previous_node).name)
             
         if self.DEBUG_MOVE_PROFILE or target_node.containing_region_name in self.DEBUG_REGIONS:
