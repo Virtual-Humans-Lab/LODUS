@@ -118,7 +118,6 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
     
     ## Complex time action. Will be broken up into smaller actions
     def converge_population(self, values, hour, time):
-        #print("CONVERGING")
         
         target_region = values['destination_region']
         if isinstance(target_region, str):
@@ -185,7 +184,7 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
                 #iso_factor = ( 1 - (self.isolation_rate + (random.random() * 0.05  - 0.025))) / (1 - self.to_total_ratio_correction) 
                 iso_factor = ( 1 - (self.isolation_rate + (FixedRandom.instance.random() * 0.05  - 0.025))) / (1 - self.to_total_ratio_correction) 
                 new_action_values['quantity'] = quantity * w * iso_factor
-            #print(new_action_values['quantity'])
+
             temp = pop_template
 
             if self.locals_only:
@@ -204,63 +203,4 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         if self.DEBUG_ALL_REQUESTS or target_region.name in self.DEBUG_REGIONS:
             print(f'To {target_region.name}\tReq: {quantity} Sent: {total_quant}')
         return sub_list
-    
-    
-        available_pop = []
-        for region in self.graph.region_list:
-            for node in region.node_list:
-                available_pop.append(node.get_population_size(pop_template))
-
-
-        weight_list = self.compute_weights(target_region, self.graph.region_list)
-        #print (available_pop)
-        #print (quantity)
-        #print (weight_list)
-        ratioed_pop = util.weighted_int_distribution_with_weights(available_pop, quantity, weight_list)
-
-        if self.DEBUG_OPERATION_OUTPUT :
-            print(f'converge Values: \n{ratioed_pop}\n')
-
-        list_count = 0
-        for x in range(len(self.graph.region_list)):
-            region = self.graph.region_list[x]
-            for node_aux in region.node_list:
-
-                new_action_values = {}
-                new_action_type = 'move_population'
-                
-                new_action_values['origin_region'] = region.name
-
-                new_action_values['origin_node'] = node_aux.name
-                new_action_values['destination_region'] = target_region.name
-
-                new_action_values['destination_node'] = target_node.name
-                
-                ### regular iso factor
-                if self.iso_mode == 'regular':
-                    new_action_values['quantity'] = ratioed_pop[list_count] * (1 - self.isolation_rate)
-                elif self.iso_mode == 'quantity_correction':
-                    iso_factor = ( 1 - self.isolation_rate) / (1 - self.to_total_ratio_correction) 
-                    new_action_values['quantity'] = ratioed_pop[list_count] * iso_factor
-
-                temp = pop_template
-
-                if self.locals_only:
-                    temp = copy.deepcopy(pop_template)
-                    temp.mother_blob_id = region.id
-
-                new_action_values['population_template'] = temp
-
-                new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
-                sub_list.append(new_action)
-                list_count +=1 
-
-                if self.DEBUG_OPERATION_OUTPUT :
-                    print("origin: ", region.name + '\\\\' + node_aux.name, ", target: ", region.name + '\\\\' + node_aux.name, ", quantity: ", new_action_values['quantity'])
-
-        if self.DEBUG_OPERATION_OUTPUT :
-            print("########## END CONVERGE_POPULATION")
-            print('\n\n\n')
-        return sub_list
-
     

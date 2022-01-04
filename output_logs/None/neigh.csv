@@ -1,1 +1,1 @@
-Frame;Hour;Neighbourhood;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;Total;Locals;Outsiders;
+Frame;Hour;Neighbourhood;Vacc0;Vacc1;Vacc2;d0;d1;d2;Total;Locals;Outsiders;
