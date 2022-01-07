@@ -57,11 +57,11 @@ class PropertyBucket():
             values: The mapping for characteristic-value to population quantity
     """
 
-    def __init__(self, _characteristic):
-        self.characteristic = _characteristic
-        self.values = {}
+    def __init__(self, _characteristic: str):
+        self.characteristic:str = _characteristic
+        self.values: dict[str,int] = {}
 
-    def get_population_size(self, key = None):
+    def get_population_size(self, key:str = None):
         """Returns the population size in this bucket. If key is not None, returns the population size of the matching value.
         
         Args:
@@ -72,9 +72,13 @@ class PropertyBucket():
         """
         if key is None:
             return sum(self.values.values())
-        else:
+        if isinstance(key, str):
             return self.values[key]
-
+        if isinstance(key, list):
+            return sum([self.values[k] for k in set(key)])
+        if isinstance(key, set):
+            return sum([self.values[k] for k in key])
+    
     # bruteforcey
     def set_values_rand(self, keys, population = 0):
         """Initializes random values for a set of values and population quantity."""
@@ -84,7 +88,6 @@ class PropertyBucket():
             self.values[key] = 0
 
         for i in range(population):
-            #self.values[keys[random.randint(0, qtd_keys-1)]] += 1
             self.values[keys[FixedRandom.instance.randint(0, qtd_keys-1)]] += 1
 
     def set_values(self, keys, populations):
@@ -118,45 +121,59 @@ class PropertyBucket():
         Returns:
             An auxiliary PropertyBucket containing the extracted population, with same characteristic and keys.
         """
+        # if key is a set, convert it to a list
+        if isinstance(key, set):
+            key = list(key)
+        # if key is a list with only one entry, convert it to a string
+        if isinstance(key, list) and len(key) == 1:
+            key = key[0]
+
         aux_bucket = PropertyBucket(self.characteristic)
         values = []
-        keys = list(self.values.keys())
-        qtd_keys = len(keys)
+        bucket_keys = list(self.values.keys())
+        qtd_keys = len(bucket_keys)
 
         if quantity > self.get_population_size(key):
             quantity = self.get_population_size(key)
-            
-        if key is not None:
-            for k in keys:
-                if k == key:
-                    values.append(quantity)
-                else:
-                    values.append(0)
-        else:
+        
+        if quantity == 0:
             values = [0 for i in range(qtd_keys)]
+            aux_bucket.set_values(bucket_keys, values)
+            return aux_bucket
 
+        if key is None:
             sample_list = []
             values = [0 for i in range(qtd_keys)]
             for i  in range(qtd_keys):
-                sample_list.extend([i] * self.values[keys[i]])
-            #samples = random.sample(sample_list, quantity)
+                sample_list.extend([i] * self.values[bucket_keys[i]])
             samples = FixedRandom.instance.sample(sample_list, quantity)
             for i  in range(qtd_keys):
                 values[i] = samples.count(i)
-            
-            # TODO make this uniformly distributed according to population size
-            # i = 0
-            # while i < quantity:
-            #     index = random.randint(0, qtd_keys-1)
-            #     if values[index] < self.values[keys[index]]:
-            #         values[index] += 1
-            #         i+=1
+        # key is not None
+        else:
+            if isinstance(key, str):
+                for k in bucket_keys:
+                    if k == key:
+                        values.append(quantity)
+                    else:
+                        values.append(0)
+            elif isinstance(key, list):
+                # TODO test the ratio_to_int distribution in Util.py
+                values = [0 for i in range(qtd_keys)]
+                sample_list = []
+                for i in range(qtd_keys):
+                    if bucket_keys[i] in key:
+                        sample_list.extend([i] * self.values[bucket_keys[i]])
+                samples = FixedRandom.instance.sample(sample_list, quantity)
+                for i  in range(qtd_keys):
+                    values[i] = samples.count(i)
+            else:
+                sys.exit("Key \"{key}\" requested for a property bucket is not a str nor a list. {self}")
 
         for i in range(qtd_keys):
-            self.values[keys[i]] -= values[i]
+            self.values[bucket_keys[i]] -= values[i]
 
-        aux_bucket.set_values(keys, values)
-
+        aux_bucket.set_values(bucket_keys, values)
         return aux_bucket
 
     def __str__(self):
@@ -184,7 +201,7 @@ class PropertyBlock():
     def __init__(self, _population):
         self.population: int = _population
         self.template: BlockTemplate = None
-        self.buckets: dict[PropertyBucket] = {}
+        self.buckets: dict[str,PropertyBucket] = {}
     
     def initialize_buckets(self, block_template):
         """Initializes buckets according to a BlockTemplate."""
@@ -319,14 +336,12 @@ class PropertyBlock():
             population_template = PopTemplate()
 
         template_keys = population_template.pairs.keys()
-
         # corrects for a bucket limiting the quantity
         min_val = quantity
         for k, v in population_template.pairs.items():
             bucket_size = self.buckets[k].get_population_size(v)
             min_val = min(min_val, bucket_size)
         quantity = min_val
-
         buckets = {}
         for key in self.buckets.keys():
             if key in template_keys:
@@ -582,54 +597,30 @@ class Blob():
         Returns:
             A new blob containing the extracted population
         """
-        new_blob = self.blob_factory.Generate(self.mother_blob_id, 0)
-        current_quantity = quantity
+        
+        total_available_population = self.get_population_size(pop_template)
+        current_quantity = min(total_available_population, quantity)
+        if current_quantity == 0:
+            return None
 
+        new_blob = self.blob_factory.Generate(self.mother_blob_id, 0)
+        
         if pop_template is not None:
             if pop_template.mother_blob_id is not None and pop_template.mother_blob_id != self.mother_blob_id:
                 return new_blob
-            #if pop_template.traceable_properties is not None and pop_template.traceable_properties != self.traceable_properties:
-            #    return new_blob
 
-        quantities = 0
-        # gets the available population size per block
-        #available_quantities = [self.blocks[block_keys[x]].get_population_size(pop_template) for x in range(len_block_keys)]
-        #total_available_population = sum(available_quantities)
         
-        total_available_population = self.get_population_size(pop_template)
-        
-        current_quantity = min(total_available_population, current_quantity)
-        #print("Available", total_available_population, "Current", current_quantity)
-        # update in python 3.9
-        # samples = random.sample([x for x in block_keys], current_quantity, counts = available_quantities)
-
-        # sample_list = []
-        # sample_list.extend(total_available_population)
-        #for i  in range(len_block_keys):
-        #    sample_list.extend([i] * available_quantities[i])
-
-        #samples = random.sample(sample_list, current_quantity)
-        # samples = FixedRandom.instance.sample(sample_list, current_quantity)
-        # print("Samples ", samples)
-        # for i  in range(len_block_keys):
-        #     quantities[i] = samples.count(i)
-
-        # for i in range(len_block_keys):
-        #     k = list(block_keys)[i]
-        #     removed_block = self.blocks[k].extract(quantities[i], pop_template)
-        #     new_blob.blocks[k].add_block(removed_block)
-
         removed_block = self.sampled_properties.extract(current_quantity, pop_template)
         new_blob.sampled_properties = removed_block
+        #for (k,v) in pop_template.traceable_properties.items():
+        #    new_blob.traceable_properties[k] = v
         return new_blob
     
-    ## TODO Correct for block keys
     def grab_population(self, quantity, population_template = None):
         """Grabs a population from this Blob.
         
         Returns either a new Blob, or the own blob, if it matches the entire population.
 
-        TODO Currently ignores PropertyBlock selection.
         Params:
             quantity: The population quantity to be grabbed.
             population_template: the population template to be matched.
@@ -709,7 +700,10 @@ class Blob():
         Params:
             blob: Another blob to be consumed.
         """
+        if not isinstance(blob, Blob):
+            return
         if self.compare_traceable_properties_to_other(blob):
+            print("CAN CONSUME")
             self.sampled_properties.add_block(blob.sampled_properties)
 
     def verbose_str(self) -> str:
@@ -739,7 +733,6 @@ if __name__ == "__main__":
     #dummyBlockTemplate.add_bucket('height', ('short', 'average', 'tall'))
     dummyBlockTemplate.add_traceable_property('vaccine_level', 0)
     dummyBlockTemplate.add_traceable_property('sir_state', 'susceptible')
-
     dummyBlobFactory = BlobFactory(dummyBlockTemplate)
         
     print("\nCREATING BLOB 1")
@@ -747,21 +740,22 @@ if __name__ == "__main__":
     print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
     print("************")
     
-    
+    print(dummyBlob.sampled_properties, type(dummyBlob.sampled_properties.buckets['age']))
+    print(dummyBlob.sampled_properties.buckets['age'].characteristic, type(dummyBlob.sampled_properties.buckets['age'].characteristic))
     print("\nSPLIT BLOB 1 INTO BLOB 2 - MATCHING TREACEABLE_PROP")
     # sets a population template
     dummyPopTemplate = PopTemplate()
-    dummyPopTemplate.set_property('age', 'ancient')
-    dummyPopTemplate.set_property('economic_profile', 'worker')
-    #dummyPopTemplate.set_property('risk', 'high')
-    #dummyPopTemplate.set_traceable_property('vaccine_level', 0)
+    dummyPopTemplate.set_property('age', ['child', 'adult', 'ancient'])
+    # dummyPopTemplate.set_property('economic_profile', 'worker')
+    # dummyPopTemplate.set_property('risk', 'high')
+    # dummyPopTemplate.set_traceable_property('vaccine_level', 0)
     print("DummyPopTemplate", dummyPopTemplate)
     print("------------")
-    dummyBlob2 = dummyBlob.split_blob(40, dummyPopTemplate)
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
-    print("------------")
-    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
-    print("************")
+    # dummyBlob2 = dummyBlob.split_blob(40, dummyPopTemplate)
+    # print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    # print("------------")
+    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    # print("************")
     
     
     print("\nSPLIT BLOB 1 INTO BLOB 3 - NOT MATCHING TREACEABLE_PROP")
@@ -771,25 +765,59 @@ if __name__ == "__main__":
     print("------------")
     print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
     print("------------")
-    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
-    print("------------")
-    print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3, dummyBlob3.traceable_properties, dummyBlob3.sampled_properties)
+    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    # print("------------")
+    print("Dummy3", dummyBlob3)
     print("************")
+
+    # print("\nFACTORY BLOB 4 - NOT MATCHING TREACEABLE_PROP")
+    # dummyBlobFactory.block_template.add_traceable_property('vaccine_level', 1)
+    # dummyBlob4 = dummyBlobFactory.Generate(0, 100)
+    # print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
+    # print("------------")
+    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
+    # print("------------")
+    # print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3.verbose_str())
+    # print("************")
+    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
+    # print("************")
     
     print("\nBLOB 1 CONSUMING BLOB 3 - NOT A MATCH")
     dummyBlob.consume_blob(dummyBlob3)
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("DummyPopTemplate", dummyPopTemplate)
     print("------------")
-    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
     print("------------")
-    print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3, dummyBlob3.traceable_properties, dummyBlob3.sampled_properties)
+    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
+    # print("------------")
+    print("Dummy3", dummyBlob3)
     print("************")
+    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
+    # print("************")
     
-    print("\nCONSUMING BLOB 2 - IS A MATCH - SHOULD DELETE BLOB 2 AFTER")
-    dummyBlob.consume_blob(dummyBlob2)
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
-    print("------------")
-    print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
-    print("------------")
-    print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3, dummyBlob3.traceable_properties, dummyBlob3.sampled_properties)
-    print("************")
+    # print("\nCONSUMING BLOB 2 - IS A MATCH - SHOULD DELETE BLOB 2 AFTER")
+    # dummyBlob.consume_blob(dummyBlob2)
+    # print("DummyPopTemplate", dummyPopTemplate)
+    # print("------------")
+    # print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
+    # print("------------")
+    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
+    # print("------------")
+    # print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3.verbose_str())
+    # print("************")
+    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
+    # print("************")
+
+    # print("\nBLOB 1 CONSUMING BLOB 4 AFTER CHANGE - IS A MATCH")
+    # dummyBlob4.traceable_properties['vaccine_level'] = 0
+    # dummyBlob.consume_blob(dummyBlob4)
+    # print("DummyPopTemplate", dummyPopTemplate)
+    # print("------------")
+    # print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
+    # print("------------")
+    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
+    # print("------------")
+    # print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3.verbose_str())
+    # print("************")
+    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
+    # print("************")

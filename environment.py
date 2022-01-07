@@ -149,7 +149,6 @@ class EnvNode():
             if blob in self.contained_blobs:
                 self.contained_blobs.remove(blob)
 
-        # TODO fix merging of same type blobs
         return new_blobs
 
     def get_unique_name(self):
@@ -712,7 +711,7 @@ class EnvironmentGraph():
                 blob.traceable_properties[key] = value
                 blob.blob_factory.block_template.default_traceable_properties[key] = value
 
-    def merge_node(self, node):
+    def merge_node(self, node: EnvNode):
         i = 0
         blob_list  = node.contained_blobs
     

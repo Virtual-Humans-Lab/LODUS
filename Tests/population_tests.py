@@ -7,7 +7,7 @@ import unittest
 import util
 
 
-def verify_block_validity(block):
+def verify_block_validity(block:PropertyBlock):
     """Verifies if every bucket in a block has the same population size.
     
         A Valid PropertyBlock has the same PropertyBucket.get_population_size
@@ -18,7 +18,7 @@ def verify_block_validity(block):
     bucket_sizes  = set()
     for bucket in block.buckets.values():
         bucket_sizes.add(bucket.get_population_size())
-
+    
     for bucket in block.buckets.values():
         for val in bucket.values.values():
             if val < 0:
@@ -58,43 +58,47 @@ class PopulationTests(unittest.TestCase):
     def tearDown(self):
         pass
     
-    #### bucket tests
-    ## add bucket
+    #### PropertyBucket tests
+    ## PropertyBucket.add_bucket
     def test_bucket_add_bucket(self):
         """Tests PropertyBucket.add_bucket"""
 
-        # create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values_rand(('prop_1_1', 'prop_1_2', 'prop_1_3') , 60)
+        # Create a PropertyBucket with the 'characteristic_A', 3 different values, and population = 60 with random distribution
+        aux_bucket1 = PropertyBucket('characteristic_A')
+        aux_bucket1.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 60)
 
-        # Create a same property aux bucket
-        aux_bucket2 = PropertyBucket('bucket_1')
-        aux_bucket2.set_values_rand(('prop_1_1', 'prop_1_2', 'prop_1_3') , 60)
+        # Create another PropertyBucket with the same characteristic and values, but population = 30
+        aux_bucket2 = PropertyBucket('characteristic_A')
+        aux_bucket2.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 30)
 
-        # Test adding same characteristic PropertyBuckets
-        aux_bucket_size = aux_bucket.get_population_size()
+        # Test adding PropertyBuckets with the same characteristic 
+        aux_bucket_size1 = aux_bucket1.get_population_size()
         aux_bucket_size2 = aux_bucket2.get_population_size()
-        aux_bucket.add_bucket(aux_bucket2)
+        aux_bucket1.add_bucket(aux_bucket2)
 
-        merge_size = aux_bucket.get_population_size()
+        # Should be the sum of population_size in both aux buckets
+        merge_size_test_1 = aux_bucket1.get_population_size()
 
         # assert if bucket was added correctly
-        self.assertEqual(merge_size, aux_bucket_size + aux_bucket_size2,
+        self.assertEqual(merge_size_test_1, aux_bucket_size1 + aux_bucket_size2,
                         'Add bucket not adding same property buckets correctly.')
 
-        # Test adding different characteristic PropertyBuckets
-        aux_bucket3 = PropertyBucket('bucket_2')
-        aux_bucket3.set_values_rand(('prop_2_1', 'prop_2_2') , 60)
+        # Create a PropertyBucket with different characteristic and values
+        # The values("ids/keys/str"), their quantity, and the population are irrelevant in this test due to the characteristic being different
+        aux_bucket3 = PropertyBucket('characteristic_B')
+        aux_bucket3.set_values_rand(('char_B_value_1', 'char_B_value_2') , 60)
 
-        aux_bucket.add_bucket(aux_bucket3)
-        merge_size = aux_bucket.get_population_size()
+        # Test adding PropertyBuckets with a different characteristic 
+        aux_bucket1.add_bucket(aux_bucket3)
+
+        # Should be the same value as 'merge_size_test_1'
+        merge_size_test_2 = aux_bucket1.get_population_size()
 
         # assert whether bucket was skipped
-        self.assertEqual(merge_size, aux_bucket_size + aux_bucket_size2,
+        self.assertEqual(merge_size_test_2, aux_bucket_size1 + aux_bucket_size2,
                         'Add bucket adding different property buckets incorrectly.')
-
         
-    ## extract
+    ## PropertyBucket.extract - without key
     def test_extract_bucket_without_key(self):
         """ Tests PropertyBucket.extract
 
@@ -117,66 +121,63 @@ class PopulationTests(unittest.TestCase):
         """
 
         # Case 1:
-        # Create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values(('prop_1_1', 'prop_1_2', 'prop_1_3') , (60,60,60))
+        # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
-        #extract
-        characteristic = aux_bucket.characteristic
-        bucket_size = aux_bucket.get_population_size()
+        # Extracting 100 people
+        original_bucket_size = aux_bucket.get_population_size()
         extracted_bucket = aux_bucket.extract(100)
         smaller_bucket_size = aux_bucket.get_population_size()
         extracted_bucket_size = extracted_bucket.get_population_size()
 
-        #compare
-        self.assertEqual(bucket_size, smaller_bucket_size + extracted_bucket_size,
+        # Comparing bucket sizes
+        self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
                         'Case 1 buckets do not add up.')
         self.assertEqual(100, extracted_bucket_size,
                         'Case 1 extracted bucket is not the correct size.')
-        self.assertEqual(smaller_bucket_size, bucket_size - extracted_bucket_size,
-                        'Case 1 original bucket is not the corrected suze.')
+        self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                        'Case 1 original bucket is not the corrected size.')
 
         # Case 2:
-        # Create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values(('prop_1_1', 'prop_1_2', 'prop_1_3') , (60,60,60))
+        # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
-        #extract
-        characteristic = aux_bucket.characteristic
-        bucket_size = aux_bucket.get_population_size()
+        # Extracting 180 people - the exact amount available (could use the original_bucket_size)
+        original_bucket_size = aux_bucket.get_population_size()
         extracted_bucket = aux_bucket.extract(180)
         smaller_bucket_size = aux_bucket.get_population_size()
         extracted_bucket_size = extracted_bucket.get_population_size()
         
-        #compare
-        self.assertEqual(bucket_size, smaller_bucket_size + extracted_bucket_size,
+        # Comparing bucket sizes
+        self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
                         'Case 2 buckets do not add up.')
-        self.assertEqual(bucket_size, extracted_bucket_size,
+        self.assertEqual(original_bucket_size, extracted_bucket_size,
                         'Case 2 extracted bucket is not the total size.')
         self.assertEqual(smaller_bucket_size, 0,
                         'Case 2 original bucket is not the zero.')                
 
         # Case 3:
-        # Create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values(('prop_1_1', 'prop_1_2', 'prop_1_3') , (60,60,60))
+        # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
-        #extract
-        characteristic = aux_bucket.characteristic
-        bucket_size = aux_bucket.get_population_size()
+        # Extracting 300 people - more than available
+        original_bucket_size = aux_bucket.get_population_size()
         extracted_bucket = aux_bucket.extract(300)
         smaller_bucket_size = aux_bucket.get_population_size()
         extracted_bucket_size = extracted_bucket.get_population_size()
         
-        #compare
-        self.assertEqual(bucket_size, smaller_bucket_size + extracted_bucket_size,
+        # Comparing bucket sizes
+        self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
                         'Case 3 buckets do not add up.')
-        self.assertEqual(bucket_size, extracted_bucket_size,
+        self.assertEqual(original_bucket_size, extracted_bucket_size,
                         'Case 3 extracted bucket is not the total size.')
         self.assertEqual(smaller_bucket_size, 0,
                         'Case 3 original bucket is not the zero.')
 
-    ## extract
+    ## PropertyBucket.extract - with key
     def test_extract_bucket_with_key(self):
         """ Tests PropertyBucket.extract
 
@@ -199,62 +200,341 @@ class PopulationTests(unittest.TestCase):
         """
 
         # Case 1:
-        # Create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values(('prop_1_1', 'prop_1_2', 'prop_1_3') , (60,60,60))
+        # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
         
-        #extract
-        bucket_size = aux_bucket.get_population_size(key='prop_1_1')
-        extracted_bucket = aux_bucket.extract(30, key='prop_1_1')
-        smaller_bucket_size = aux_bucket.get_population_size(key='prop_1_1')
-        extracted_bucket_size = extracted_bucket.get_population_size(key='prop_1_1')
+        # Extracting 30 people from 'value_1'
+        original_bucket_size = aux_bucket.get_population_size()
+        original_value_count = aux_bucket.get_population_size(key='value_1')
+        extracted_bucket = aux_bucket.extract(30, key='value_1')
+        smaller_bucket_size = aux_bucket.get_population_size()
+        smaller_value_count = aux_bucket.get_population_size(key='value_1')
+        extracted_bucket_size = extracted_bucket.get_population_size()
+        extracted_value_count = extracted_bucket.get_population_size(key='value_1')
 
-        #compare
-        self.assertEqual(bucket_size, smaller_bucket_size + extracted_bucket_size,
+        # Comparing bucket sizes
+        self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
                         'Case 1 buckets do not add up.')
         self.assertEqual(30, extracted_bucket_size,
                         'Case 1 extracted bucket is not the correct size.')
-        self.assertEqual(smaller_bucket_size, bucket_size - extracted_bucket_size,
-                        'Case 1 original bucket is not the corrected size.')
-
-        # Case 2:
-        # Create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values(('prop_1_1', 'prop_1_2', 'prop_1_3') , (60,60,60))
-
-        #extract
-        bucket_size = aux_bucket.get_population_size(key='prop_1_1')
-        extracted_bucket = aux_bucket.extract(60, key='prop_1_1')
-        smaller_bucket_size = aux_bucket.get_population_size(key='prop_1_1')
-        extracted_bucket_size = extracted_bucket.get_population_size(key='prop_1_1')
+        self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                        'Case 1 original bucket is not the correct size.')
         
-        #compare
-        self.assertEqual(bucket_size, smaller_bucket_size + extracted_bucket_size,
+        # Comparing count of 'value_1'
+        self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                        'Case 1 property values do not add up.')
+        self.assertEqual(30,  extracted_value_count,
+                        'Case 1 extracted property is not the correct size.')
+        self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                        'Case 1 original property count is not the correct size.')
+        # Case 2:
+        # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+
+        # Extracting 60 people from 'value_1' - the exact amount available
+        original_bucket_size = aux_bucket.get_population_size()
+        original_value_count = aux_bucket.get_population_size(key='value_1')
+        extracted_bucket = aux_bucket.extract(60, key='value_1')
+        smaller_bucket_size = aux_bucket.get_population_size()
+        smaller_value_count = aux_bucket.get_population_size(key='value_1')
+        extracted_bucket_size = extracted_bucket.get_population_size()
+        extracted_value_count = extracted_bucket.get_population_size(key='value_1')
+        
+        # Comparing bucket sizes
+        self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
                         'Case 2 buckets do not add up.')
-        self.assertEqual(bucket_size, extracted_bucket_size,
-                        'Case 2 extracted bucket is not the total size.')
-        self.assertEqual(smaller_bucket_size, 0,
-                        'Case 2 original bucket is not the zero.')                
+        self.assertEqual(120, smaller_bucket_size,
+                        'Case 2 original bucket is not the correct size.')  
+        self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                        'Case 2  original bucket is not the correct size.')
+
+        # Comparing count of 'value_1'
+        self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                        'Case 2 property values do not add up.')
+        self.assertEqual(60,  extracted_value_count,
+                        'Case 2 extracted property is not the correct size.')
+        self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                        'Case 2 original property count is not the correct size.')
 
         # Case 3:
-        # Create aux bucket
-        aux_bucket = PropertyBucket('bucket_1')
-        aux_bucket.set_values(('prop_1_1', 'prop_1_2', 'prop_1_3') , (60,60,60))
+        # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
-        #extract
-        bucket_size = aux_bucket.get_population_size(key='prop_1_1')
-        extracted_bucket = aux_bucket.extract(120, key='prop_1_1')
-        smaller_bucket_size = aux_bucket.get_population_size(key='prop_1_1')
-        extracted_bucket_size = extracted_bucket.get_population_size(key='prop_1_1')
-        
-        #compare
-        self.assertEqual(bucket_size, smaller_bucket_size + extracted_bucket_size,
+        # Extracting 120 people from 'value_1' - more than available
+        original_bucket_size = aux_bucket.get_population_size()
+        original_value_count = aux_bucket.get_population_size(key='value_1')
+        extracted_bucket = aux_bucket.extract(120, key='value_1')
+        smaller_bucket_size = aux_bucket.get_population_size()
+        smaller_value_count = aux_bucket.get_population_size(key='value_1')
+        extracted_bucket_size = extracted_bucket.get_population_size()
+        extracted_value_count = extracted_bucket.get_population_size(key='value_1')
+
+        # Comparing bucket sizes
+        self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
                         'Case 3 buckets do not add up.')
-        self.assertEqual(bucket_size, extracted_bucket_size,
-                        'Case 3 extracted bucket is not the total size.')
-        self.assertEqual(smaller_bucket_size, 0,
-                        'Case 3 original bucket is not the zero.')
+        self.assertEqual(120, smaller_bucket_size,
+                        'Case 3 original bucket is not the correct size.')  
+        self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                        'Case 3  original bucket is not the correct size.')
 
+        # Comparing count of 'value_1'
+        self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                        'Case 3 property values do not add up.')
+        self.assertEqual(60,  extracted_value_count,
+                        'Case 3 extracted property is not the correct size.')
+        self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                        'Case 3 original property count is not the correct size.')
+
+    ## PropertyBucket.extract - with key list
+    def test_extract_bucket_with_key_list(self):
+        """ Tests PropertyBucket.extract
+
+            Original size of bucket equals final size of bucket + extrected bucket size.
+
+            Case 1: 
+                action : Extract less population than available matching keys (as list)
+                result : Extracted bucket contains requested population quantity.
+                         Original bucket has original population minus requested population.
+
+            Case 2: 
+                action : Extract Equal population as available matching keys (as list).
+                result : Extracted bucket contains requested population quantity.
+                         Original bucket has original population minus requested population.
+                         Original bucket contains zero population in the requested keys.
+
+            Case 3:
+                action : Extract more population than available matching keys (as list). 
+                result : Extracted bucket contains original bucket population.
+                         Original bucket has original population minus requested population.
+                         Original bucket contains zero population in the requested keys.
+        """
+        # Tests different combinations of keys as lists
+        test_keys_scenarios = [[],['value_1'], ['value_2'], ['value_3'], ['value_1', 'value_2'], ['value_1', 'value_3'], ['value_2', 'value_3'], ['value_1', 'value_2', 'value_3']]
+
+        # Also tests combinations with repeated key entries. Multiple entries do not change behavior
+        test_keys_scenarios.extend([['value_1', 'value_1'], ['value_1', 'value_1', 'value_2'], ['value_1', 'value_1', 'value_2', 'value_3'], ['value_1', 'value_1', 'value_2', 'value_1', 'value_3']])
+
+        total_population = 180
+
+        for key_list in test_keys_scenarios:
+
+            # available population for this combination of keys (60 for each key)
+            available_population = len(set(key_list)) * 60 
+            
+            # Case 1:
+            # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            
+            # Extracting half of the available population (30 for each key)
+            original_bucket_size = aux_bucket.get_population_size()
+            original_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket = aux_bucket.extract(available_population//2, key_list)
+            smaller_bucket_size = aux_bucket.get_population_size()
+            smaller_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket_size = extracted_bucket.get_population_size()
+            extracted_value_count = extracted_bucket.get_population_size(key_list)
+
+            # Comparing bucket sizes
+            self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
+                            'Case 1 buckets do not add up.')
+            self.assertEqual(available_population//2, extracted_bucket_size,
+                            'Case 1 extracted bucket is not the correct size.')
+            self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                            'Case 1 original bucket is not the correct size.')
+            
+            # Comparing count of values in key_list
+            self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                            'Case 1 property values do not add up.')
+            self.assertEqual(available_population//2,  extracted_value_count,
+                            'Case 1 extracted property is not the correct size.')
+            self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                            'Case 1 original property count is not the correct size.')
+            
+            # Case 2:
+            # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+
+            # Extracting the total available population (60 for each key)
+            original_bucket_size = aux_bucket.get_population_size()
+            original_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket = aux_bucket.extract(available_population, key_list)
+            smaller_bucket_size = aux_bucket.get_population_size()
+            smaller_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket_size = extracted_bucket.get_population_size()
+            extracted_value_count = extracted_bucket.get_population_size(key_list)
+            
+            # Comparing bucket sizes
+            self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
+                            'Case 2 buckets do not add up.')
+            self.assertEqual(total_population - available_population, smaller_bucket_size,
+                            'Case 2 original bucket is not the correct size.')  
+            self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                            'Case 2  original bucket is not the correct size.')
+
+            # Comparing count of values in key_list
+            self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                            'Case 2 property values do not add up.')
+            self.assertEqual(available_population,  extracted_value_count,
+                            'Case 2 extracted property is not the correct size.')
+            self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                            'Case 2 original property count is not the correct size.')
+
+            # Case 3:
+            # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+
+            # Extracting more than the total available population (120 for each key)
+            original_bucket_size = aux_bucket.get_population_size()
+            original_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket = aux_bucket.extract(int(available_population*2), key_list)
+            smaller_bucket_size = aux_bucket.get_population_size()
+            smaller_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket_size = extracted_bucket.get_population_size()
+            extracted_value_count = extracted_bucket.get_population_size(key_list)
+
+            # Comparing bucket sizes
+            self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
+                            'Case 3 buckets do not add up.')
+            self.assertEqual(total_population - available_population, smaller_bucket_size,
+                            'Case 3 original bucket is not the correct size.')  
+            self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                            'Case 3  original bucket is not the correct size.')
+
+            # Comparing count of values in key_list
+            self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                            'Case 3 property values do not add up.')
+            self.assertEqual(available_population,  extracted_value_count,
+                            'Case 3 extracted property is not the correct size.')
+            self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                            'Case 3 original property count is not the correct size.')
+
+    def test_extract_bucket_with_key_set(self):
+        """ Tests PropertyBucket.extract
+
+            Original size of bucket equals final size of bucket + extrected bucket size.
+
+            Case 1: 
+                action : Extract less population than available matching keys (as set)
+                result : Extracted bucket contains requested population quantity.
+                         Original bucket has original population minus requested population.
+
+            Case 2: 
+                action : Extract Equal population as available matching keys (as set).
+                result : Extracted bucket contains requested population quantity.
+                         Original bucket has original population minus requested population.
+                         Original bucket contains zero population in the requested keys.
+
+            Case 3:
+                action : Extract more population than available matching keys (as set). 
+                result : Extracted bucket contains original bucket population.
+                         Original bucket has original population minus requested population.
+                         Original bucket contains zero population in the requested keys.
+        """
+        # Tests different combinations of keys as sets
+        test_keys_scenarios = [(set()),{'value_1'}, {'value_2'}, {'value_3'}, {'value_1', 'value_2'}, {'value_1', 'value_3'}, {'value_2', 'value_3'}, {'value_1', 'value_2', 'value_3'}]
+        
+        total_population = 180
+
+        for key_list in test_keys_scenarios:
+
+            # available population for this combination of keys (60 for each key)
+            available_population = len(key_list) * 60 
+            
+            # Case 1:
+            # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            
+            # Extracting half of the available population (30 for each key)
+            original_bucket_size = aux_bucket.get_population_size()
+            original_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket = aux_bucket.extract(available_population//2, key_list)
+            smaller_bucket_size = aux_bucket.get_population_size()
+            smaller_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket_size = extracted_bucket.get_population_size()
+            extracted_value_count = extracted_bucket.get_population_size(key_list)
+
+            # Comparing bucket sizes
+            self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
+                            'Case 1 buckets do not add up.')
+            self.assertEqual(available_population//2, extracted_bucket_size,
+                            'Case 1 extracted bucket is not the correct size.')
+            self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                            'Case 1 original bucket is not the correct size.')
+            
+            # Comparing count of values in key_list
+            self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                            'Case 1 property values do not add up.')
+            self.assertEqual(available_population//2,  extracted_value_count,
+                            'Case 1 extracted property is not the correct size.')
+            self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                            'Case 1 original property count is not the correct size.')
+            
+            # Case 2:
+            # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+
+            # Extracting the total available population (60 for each key)
+            original_bucket_size = aux_bucket.get_population_size()
+            original_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket = aux_bucket.extract(available_population, key_list)
+            smaller_bucket_size = aux_bucket.get_population_size()
+            smaller_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket_size = extracted_bucket.get_population_size()
+            extracted_value_count = extracted_bucket.get_population_size(key_list)
+            
+            # Comparing bucket sizes
+            self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
+                            'Case 2 buckets do not add up.')
+            self.assertEqual(total_population - available_population, smaller_bucket_size,
+                            'Case 2 original bucket is not the correct size.')  
+            self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                            'Case 2  original bucket is not the correct size.')
+
+            # Comparing count of values in key_list
+            self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                            'Case 2 property values do not add up.')
+            self.assertEqual(available_population,  extracted_value_count,
+                            'Case 2 extracted property is not the correct size.')
+            self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                            'Case 2 original property count is not the correct size.')
+
+            # Case 3:
+            # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
+            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+
+            # Extracting more than the total available population (120 for each key)
+            original_bucket_size = aux_bucket.get_population_size()
+            original_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket = aux_bucket.extract(int(available_population*2), key_list)
+            smaller_bucket_size = aux_bucket.get_population_size()
+            smaller_value_count = aux_bucket.get_population_size(key_list)
+            extracted_bucket_size = extracted_bucket.get_population_size()
+            extracted_value_count = extracted_bucket.get_population_size(key_list)
+
+            # Comparing bucket sizes
+            self.assertEqual(original_bucket_size, smaller_bucket_size + extracted_bucket_size,
+                            'Case 3 buckets do not add up.')
+            self.assertEqual(total_population - available_population, smaller_bucket_size,
+                            'Case 3 original bucket is not the correct size.')  
+            self.assertEqual(smaller_bucket_size, original_bucket_size - extracted_bucket_size,
+                            'Case 3  original bucket is not the correct size.')
+
+            # Comparing count of values in key_list
+            self.assertEqual(original_value_count, smaller_value_count + extracted_value_count,
+                            'Case 3 property values do not add up.')
+            self.assertEqual(available_population,  extracted_value_count,
+                            'Case 3 extracted property is not the correct size.')
+            self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
+                            'Case 3 original property count is not the correct size.')
 
     ## tests add block function
     def test_block_add_block(self):
@@ -1025,19 +1305,21 @@ def suite():
     suite.addTest(PopulationTests('test_bucket_add_bucket'))
     suite.addTest(PopulationTests('test_extract_bucket_without_key'))
     suite.addTest(PopulationTests('test_extract_bucket_with_key'))
+    suite.addTest(PopulationTests('test_extract_bucket_with_key_list'))
+    suite.addTest(PopulationTests('test_extract_bucket_with_key_set'))
 
-    # block tests
-    suite.addTest(PopulationTests('test_block_add_block'))
-    suite.addTest(PopulationTests('test_initialize_buckets_profile'))
-    suite.addTest(PopulationTests('test_block_extract'))
+    # # block tests
+    # suite.addTest(PopulationTests('test_block_add_block'))
+    # suite.addTest(PopulationTests('test_initialize_buckets_profile'))
+    # suite.addTest(PopulationTests('test_block_extract'))
 
-    # blob tests
-    suite.addTest(PopulationTests('test_blob_move_profile_without_template'))
-    suite.addTest(PopulationTests('test_blob_move_profile_with_template'))
-    suite.addTest(PopulationTests('test_blob_split_blob_without_profile_unbalanced_pop'))
-    suite.addTest(PopulationTests('test_blob_split_blob_without_profile_balanced_pop'))
-    suite.addTest(PopulationTests('test_blob_grab_pop'))
-    suite.addTest(PopulationTests('test_blob_consume_blob'))
+    # # blob tests
+    # suite.addTest(PopulationTests('test_blob_move_profile_without_template'))
+    # suite.addTest(PopulationTests('test_blob_move_profile_with_template'))
+    # suite.addTest(PopulationTests('test_blob_split_blob_without_profile_unbalanced_pop'))
+    # suite.addTest(PopulationTests('test_blob_split_blob_without_profile_balanced_pop'))
+    # suite.addTest(PopulationTests('test_blob_grab_pop'))
+    # suite.addTest(PopulationTests('test_blob_consume_blob'))
 
     # missing test_initialize_buckets_profile
     # missing test_blob_split_blob_with_profile
