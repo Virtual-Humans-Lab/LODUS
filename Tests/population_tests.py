@@ -414,6 +414,7 @@ class PopulationTests(unittest.TestCase):
             self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
                             'Case 3 original property count is not the correct size.')
 
+    ## PropertyBucket.extract - with key set
     def test_extract_bucket_with_key_set(self):
         """ Tests PropertyBucket.extract
 
@@ -438,7 +439,7 @@ class PopulationTests(unittest.TestCase):
         """
         # Tests different combinations of keys as sets
         test_keys_scenarios = [(set()),{'value_1'}, {'value_2'}, {'value_3'}, {'value_1', 'value_2'}, {'value_1', 'value_3'}, {'value_2', 'value_3'}, {'value_1', 'value_2', 'value_3'}]
-        
+
         total_population = 180
 
         for key_list in test_keys_scenarios:
@@ -536,7 +537,8 @@ class PopulationTests(unittest.TestCase):
             self.assertEqual(smaller_value_count, original_value_count - extracted_value_count,
                             'Case 3 original property count is not the correct size.')
 
-    ## tests add block function
+    #### PropertyBlock tests
+    ## PropertyBlock.add_block
     def test_block_add_block(self):
         """ Tests PropertyBlock.add_block
 
@@ -1308,10 +1310,10 @@ def suite():
     suite.addTest(PopulationTests('test_extract_bucket_with_key_list'))
     suite.addTest(PopulationTests('test_extract_bucket_with_key_set'))
 
-    # # block tests
-    # suite.addTest(PopulationTests('test_block_add_block'))
-    # suite.addTest(PopulationTests('test_initialize_buckets_profile'))
-    # suite.addTest(PopulationTests('test_block_extract'))
+    # block tests
+    suite.addTest(PopulationTests('test_block_add_block'))
+    suite.addTest(PopulationTests('test_initialize_buckets_profile'))
+    suite.addTest(PopulationTests('test_block_extract'))
 
     # # blob tests
     # suite.addTest(PopulationTests('test_blob_move_profile_without_template'))
