@@ -1,4 +1,5 @@
 #import random
+from __future__ import annotations
 import copy
 import sys
 from util import *
@@ -17,24 +18,40 @@ class BlockTemplate():
     """
     
     def __init__(self):
-        self.buckets = {}
+        self.buckets:dict = {}
         self.default_traceable_properties:dict = {}
 
-    def add_bucket(self, property, values):
+    def add_bucket(self, property: str, values: list):
         self.buckets[property] = values
         
-    def add_traceable_property(self, value, key):
-        self.default_traceable_properties[value] = key
+    def add_traceable_property(self, key: str, value):
+        self.default_traceable_properties[key] = value
 
-    def Generate(self, population):
+    def Generate(self, population: int):
+        if not bool(self.buckets):
+            return None
+        if population <= 0:
+            return None
         block = PropertyBlock(population)
         block.initialize_buckets(self)
         return block
+    
+    def GenerateEmpty(self):
+        if not bool(self.buckets):
+            return None
+        block = PropertyBlock(0)
+        block.initialize_buckets(self)
+        return block
 
-    def GenerateProfile(self, population, pop_profile):
+    def GenerateProfile(self, population: int, pop_profile: dict):
+        if not bool(self.buckets):
+            return None
+        if population <= 0:
+            return None
         block = PropertyBlock(population)
         block.initialize_buckets_profile(self, pop_profile)
         return block
+    
 
 class PropertyBucket():
     """"A property bucket models a single characteristic of a population.
@@ -75,9 +92,15 @@ class PropertyBucket():
         if isinstance(key, str):
             return self.values[key]
         if isinstance(key, list):
-            return sum([self.values[k] for k in set(key)])
+            if len(key) == 0: return sum(self.values.values())
+            else: return sum([self.values[k] for k in set(key)])
         if isinstance(key, set):
-            return sum([self.values[k] for k in key])
+            if len(key) == 0: return sum(self.values.values())
+            else: return sum([self.values[k] for k in key])
+        # if isinstance(key, list):
+        #     return sum([self.values[k] for k in set(key)])
+        # if isinstance(key, set):
+        #     return sum([self.values[k] for k in key])
     
     # bruteforcey
     def set_values_rand(self, keys, population = 0):
@@ -127,6 +150,9 @@ class PropertyBucket():
         # if key is a list with only one entry, convert it to a string
         if isinstance(key, list) and len(key) == 1:
             key = key[0]
+        # if key is a list with only no entry, set it to None
+        if isinstance(key, list) and len(key) == 0:
+            key = None
 
         aux_bucket = PropertyBucket(self.characteristic)
         values = []
@@ -202,6 +228,9 @@ class PropertyBlock():
         self.population: int = _population
         self.template: BlockTemplate = None
         self.buckets: dict[str,PropertyBucket] = {}
+        
+    def get_mapping_of_property_values(self):
+        return [ list(v.values.values()) for v in self.buckets.values()]
     
     def initialize_buckets(self, block_template):
         """Initializes buckets according to a BlockTemplate."""
@@ -213,7 +242,7 @@ class PropertyBlock():
             bucket.set_values_rand(template_buckets[key], self.population)
             self.buckets[key] = bucket
 
-    def initialize_buckets_profile(self, block_template, profile):
+    def initialize_buckets_profile(self, block_template: BlockTemplate, profile: dict):
         """Initializes buckets according to a BlockTemplate and population description.
         
         Profile is a dictionary with any number of bucket characteristics as keys, and
@@ -243,7 +272,7 @@ class PropertyBlock():
         """
         self.template = block_template
         template_buckets = self.template.buckets
-
+                
         for key in template_buckets:
             if key not in profile:
                 bucket = PropertyBucket(key)
@@ -255,26 +284,40 @@ class PropertyBlock():
                 profile_values = profile[key].values()
                 profile_keys = profile[key].keys()
                 total_profiled_population = sum(profile_values)
-
+                non_profiled_keys = list(set(bucket_keys) - set(profile_keys))
+                
+                
+                for k in profile_keys:
+                    if k not in bucket_keys:
+                        sys.exit(f"Error occured in PropertyBlock.initialize_buckets_profile(): The key \'{k}\' defined in a population profile is not a possible value for this PropertyBucket. Available keys: {bucket_keys}. Verify the BlockTemplate and its buckets before trying to assign population values do a PropertyBlock")
+                
+                
                 values = {}
-
                 for k in bucket_keys:
                     values[k] = 0
+                        
+                if total_profiled_population > self.population:
+                    weights = [profile[key][x]/total_profiled_population for x in profile_keys]
+                    int_distribution = distribute_ints_from_weights(self.population,weights)
+                    for index, value in enumerate(profile_keys):
+                        values[value] = int_distribution[index]
+                else:
+                    for k in profile_keys:
+                        values[k] = profile[key][k]
+                    
+                    if len(non_profiled_keys) == 0:
+                        for i in range(self.population - total_profiled_population):
+                            rand_key = bucket_keys[FixedRandom.instance.randint(0, len(bucket_keys)-1)]
 
-                for k in profile_keys:
-                    values[k] = profile[key][k]
-
-                non_profiled_keys = list(set(bucket_keys) - set(profile_keys))
-
-                for i in range(self.population - total_profiled_population):
-                    #rand_key = non_profiled_keys[random.randint(0, len(non_profiled_keys)-1)]
-                    rand_key = non_profiled_keys[FixedRandom.instance.randint(0, len(non_profiled_keys)-1)]
-
-                    values[rand_key] += 1
-
+                            values[rand_key] += 1
+                    else:
+                        for i in range(self.population - total_profiled_population):
+                            rand_key = non_profiled_keys[FixedRandom.instance.randint(0, len(non_profiled_keys)-1)]
+                            values[rand_key] += 1
 
                 bucket.set_values(list(values.keys()), list(values.values()))
                 self.buckets[key] = bucket
+             
 
     def add_block(self, block):
         """Adds the values of another PropertyBlock to this one."""
@@ -304,7 +347,7 @@ class PropertyBlock():
             a_bucket = list(self.buckets.values())[0]
             return a_bucket.get_population_size()
         
-        min_value = float("inf")
+        min_value = sys.maxsize
         template_keys = population_template.pairs.keys()
         
         #print(population_template, template_keys)
@@ -342,6 +385,10 @@ class PropertyBlock():
             bucket_size = self.buckets[k].get_population_size(v)
             min_val = min(min_val, bucket_size)
         quantity = min_val
+        
+        if quantity <= 0:
+            return None
+        
         buckets = {}
         for key in self.buckets.keys():
             if key in template_keys:
@@ -350,7 +397,7 @@ class PropertyBlock():
             else:
                 buckets[key] = self.buckets[key].extract(quantity)
 
-        aux = self.template.Generate(0)
+        aux = self.template.GenerateEmpty()
         for k in buckets.keys():
             aux.add_bucket(buckets[k])
 
@@ -459,16 +506,13 @@ class BlobFactory():
         template.add_bucket('social_profile', ('low', 'mid', 'high'))
         template.add_bucket('risk', ('low', 'mid', 'high'))
     
-        types_of_blocks = ('healthy', 'infected', 'cured', 'dead')
+        blobFactory = BlobFactory(template)
 
-        blobFactory = BlobFactory(types_of_blocks, template)
-
-        blob = blobFactory.Generate(0, (100,100,100,100))
-        blob2 = blobFactory.Generate(1, (100,0,0,0))
+        blob = blobFactory.Generate(0, 100)
+        blob2 = blobFactory.Generate(1, 350)
 
 
     Attributes:
-        block_keys: A tuple of characteristic keys for blocks. Order matters.
         block_template: The BlockTemplate used by this factory.
     """
     def __init__(self, block_template:BlockTemplate):
@@ -479,43 +523,44 @@ class BlobFactory():
         
         Params:
             _mother_blob_id: A mother_blob_id. ID uniqueness is responsability of the caller.
-            _populations: A collection of ordered population quantities for block each block in block_keys.
+            _population: The population quantity for each sampled property/characteristic of the BlockTemplate.
 
         Returns:
-            A new Blob with a block for each key in block_keys, each matching the template in block_template.
+            A new Blob with characteristics matching the template in block_template.
         """
+        if not bool(self.block_template.buckets):
+            return None
+        if _population <= 0:
+            return None
         blob = Blob(_mother_blob_id, _population, self)
         blob.initialize_blocks(self.block_template, _population)
         return blob
 
-    def GenerateProfile(self,_mother_blob_id, _population, _profiles):
-        """Generates a new Blob based on a pre-defined template, population quantities
-            and population profile.
+    def GenerateProfile(self,_mother_blob_id, _population, _profile):
+        """Generates a new Blob based on a pre-defined template, population quantity and population profile.
 
         Example of profile:
-            pop_profile_1 = {\'bucket_1\' : {\'prop_1_1\' : 30, \'prop_1_2\' : 50},
-                            \'bucket_2\' : {\'prop_2_1\' : 50, \'prop_2_2\' : 50}}
-            defines values for two characteristics in bucket_1 and two characteristics in bucket_2
-        
-        Pre-Condition:
-            Each population decripiton dictionary either maps the entire population of that block,
-            or has at least one non-described PropertyBucket property to receive the remained population.
+            pop_profile_1 = {\'characteristic_A\' : {\'value_A1\' : 30, \'value_A2\' : 50},
+                            \'characteristic_B\' : {\'value_B1\' : 50, \'value_B2\' : 50}}
+            defines two characteristics with two distinct values
 
         Params:
             _mother_blob_id: A mother_blob_id. ID uniqueness is responsability of the caller.
             _populations: A collection of ordered population quantities for block each block in block_keys.
-            _profiles : A collection containing an ordered population profile description dictionaries.
+            _profile : A collection containing an ordered population profile description dictionaries.
 
         Returns:
-            A new Blob with a block for each key in block_keys, each matching the template in block_template.
-            The new blob contains the desired number of people for profiled blocks.
+            A new Blob with characteristics matching the template in block_template.
+            The new blob contains the desired number of people for profiled characteristics.
         """
+        if not bool(self.block_template.buckets):
+            return None
+        if _population <= 0:
+            return None
         blob = Blob(_mother_blob_id, _population, self)
-        blob.initialize_blocks_profile(self.block_template, _population, _profiles)
+        blob.initialize_blocks_profile(self.block_template, _population, _profile)
         return blob
 
-# tem blocks com dados de agentes com uma caracteristica similar
-# block para saudaveis, block para infectados, block para mortos, block para 
 class Blob():
     """Blobs represent a part of a population.
     
@@ -527,12 +572,7 @@ class Blob():
     The characteristic values are not tied to each individual person, however. Being just a 
     statistical descriptor of the modeled population.
 
-    Blobs also have a property which is trackable over time, defined by blocks of properties.
-
-
-    Moving 1 population from the 'healthy' to the 'infected' block, tracks the kind of population who gets infected.
-    For example, the histograms for 'healthy' and 'infected' are distributed with different rations given a simulation.
-
+    Blobs also have properties which is trackable over time, defined by treaceable properties.
 
     Blobs contain a mother_blob_id which describes their population's original blob id, as well as origin region.
 
@@ -542,7 +582,7 @@ class Blob():
         original_population: Original population size.
         blob_id: Unique blob identifier.
         mother_blob_id: Original blob identifier, also denotes region of origin.
-        blocks: The PropertyBlocks for this block. Each key denotes a trackable characteristic.
+        sampled_properties: The PropertyBlock for this blob. Each key denotes a sampled characteristic.
         spawning_node: The node were this blob was created.
         frame_origin_node: The node where this blob started the frame.
     """
@@ -635,7 +675,7 @@ class Blob():
         else:
             return self.split_blob(quantity, population_template)
 
-    def get_population_size(self, population_template:PopTemplate = None) -> int:
+    def get_population_size(self, population_template:PopTemplate = None):
         """Gets the population size matching a PopTemplate.
 
         If population_template is None, gets total population size.
@@ -692,7 +732,7 @@ class Blob():
 
     # merges a child blob into a mother blob
     # Outside code is responsible for deleting consumed blob
-    def consume_blob(self, blob):
+    def consume_blob(self, blob: Blob):
         """Consumes the population of another blob.
         
         IMPORTANT: The exclusion of the consumed blob from the simulation is responsability of the caller of this function.
@@ -703,10 +743,9 @@ class Blob():
         if not isinstance(blob, Blob):
             return
         if self.compare_traceable_properties_to_other(blob):
-            print("CAN CONSUME")
             self.sampled_properties.add_block(blob.sampled_properties)
 
-    def verbose_str(self) -> str:
+    def verbose_str(self):
         return "{0} {1} {2}".format(self, self.traceable_properties, self.sampled_properties)
 
     def __str__(self):
