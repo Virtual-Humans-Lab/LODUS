@@ -442,9 +442,9 @@ class PopTemplate():
 
         if string_values is not None:
             for k,v in string_values.items():
-                self.set_property(k, v)
+                self.set_sampled_property(k, v)
 
-    def set_property(self, key, value):
+    def set_sampled_property(self, key, value):
         self.pairs[key] = value
         self.empty = False
         
@@ -452,9 +452,9 @@ class PopTemplate():
         self.traceable_properties[key] = value
         self.empty = False
 
-    def set_properties(self, pairs):
+    def set_sampled_properties(self, pairs):
         for (key, value) in pairs:
-            self.set_property(key, value)
+            self.set_sampled_property(key, value)
 
     def is_empty(self):
         return self.empty
@@ -536,6 +536,21 @@ class BlobFactory():
         blob.initialize_blocks(self.block_template, _population)
         return blob
 
+    def GenerateEmpty(self, _mother_blob_id):
+        """Generates a new empty Blob based on a pre-defined template.
+        
+        Params:
+            _mother_blob_id: A mother_blob_id. ID uniqueness is responsability of the caller.
+
+        Returns:
+            A new Blob with characteristics matching the template in block_template and population 0.
+        """
+        if not bool(self.block_template.buckets):
+            return None
+        blob = Blob(_mother_blob_id, 0, self)
+        blob.initialize_blocks_empty(self.block_template, 0)
+        return blob
+
     def GenerateProfile(self,_mother_blob_id, _population, _profile):
         """Generates a new Blob based on a pre-defined template, population quantity and population profile.
 
@@ -603,6 +618,10 @@ class Blob():
         self.sampled_properties = block_template.Generate(population)
         self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
 
+    def initialize_blocks_empty(self, block_template:BlockTemplate, population):
+        self.sampled_properties = block_template.GenerateEmpty()
+        self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+
     def initialize_blocks_profile(self, block_template:BlockTemplate, population, profiles):
         self.profiles = profiles
         self.sampled_properties = block_template.GenerateProfile(population, profiles)
@@ -643,7 +662,7 @@ class Blob():
         if current_quantity == 0:
             return None
 
-        new_blob = self.blob_factory.Generate(self.mother_blob_id, 0)
+        new_blob = self.blob_factory.GenerateEmpty(self.mother_blob_id)
         
         if pop_template is not None:
             if pop_template.mother_blob_id is not None and pop_template.mother_blob_id != self.mother_blob_id:
@@ -652,8 +671,6 @@ class Blob():
         
         removed_block = self.sampled_properties.extract(current_quantity, pop_template)
         new_blob.sampled_properties = removed_block
-        #for (k,v) in pop_template.traceable_properties.items():
-        #    new_blob.traceable_properties[k] = v
         return new_blob
     
     def grab_population(self, quantity, population_template = None):
@@ -713,6 +730,8 @@ class Blob():
         for k,v in population_template.traceable_properties.items():
             if k not in self.traceable_properties.keys():
                 sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
+            if isinstance(v,(list,set)):
+                return self.traceable_properties[k] in v
             if self.traceable_properties[k] != v:
                 return False
 
@@ -784,7 +803,7 @@ if __name__ == "__main__":
     print("\nSPLIT BLOB 1 INTO BLOB 2 - MATCHING TREACEABLE_PROP")
     # sets a population template
     dummyPopTemplate = PopTemplate()
-    dummyPopTemplate.set_property('age', ['child', 'adult', 'ancient'])
+    dummyPopTemplate.set_sampled_property('age', ['child', 'adult', 'ancient'])
     # dummyPopTemplate.set_property('economic_profile', 'worker')
     # dummyPopTemplate.set_property('risk', 'high')
     # dummyPopTemplate.set_traceable_property('vaccine_level', 0)

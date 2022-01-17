@@ -32,18 +32,9 @@ def verify_block_validity(block:PropertyBlock):
 def verify_blob_validity(blob: Blob):
     """Verifies if all sampled properties of a blob have the same population for each of its buckets.
     
-    A Blob is Valid if all of its PropertyBlock is Valid,
-        and its population size is greater or equal to 0.
+    A Blob is Valid if all of its PropertyBlock is Valid.
     """
-    return verify_block_validity(blob.sampled_properties) and blob.get_population_size() > 0
-    
-    results = []
-    for char, block in blob.blocks.items():
-        block_result = verify_block_validity(blob.sampled_properties)
-        if block_result is False:
-            print('\n\t\t\tBlock with chracteristic {0} is Invalid'.format(char))
-        results.append(block_result)
-    return all(results)
+    return verify_block_validity(blob.sampled_properties)
 
 
 def verify_blobs_validity(blobs):
@@ -65,8 +56,18 @@ class PopulationTests(unittest.TestCase):
     #### PropertyBucket tests
     ## PropertyBucket.add_bucket
     def test_property_bucket_add_bucket(self):
-        """Tests PropertyBucket.add_bucket"""
+        """Tests PropertyBucket.add_bucket
 
+        Case 1: 
+            action : Creates 2 PropertyBuckets with the same characteristic. Add the second to the first one.
+            result : Bucket1 should contain the sum of both populations.
+                     
+        Case 2: 
+            action : Creates a thrid PropertyBucket with a different characteristic. Add the third to the first one.
+            result : Operation does nothing and populations remain the same.
+        """
+
+        # Case 1:
         # Create a PropertyBucket with the 'characteristic_A', 3 different values, and population = 60 with random distribution
         aux_bucket1 = PropertyBucket('characteristic_A')
         aux_bucket1.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 60)
@@ -87,6 +88,7 @@ class PopulationTests(unittest.TestCase):
         self.assertEqual(merge_size_test_1, aux_bucket_size1 + aux_bucket_size2,
                         'Add bucket not adding same property buckets correctly.')
 
+        # Case 2:
         # Create a PropertyBucket with different characteristic and values
         # The values("ids/keys/str"), their quantity, and the population are irrelevant in this test due to the characteristic being different
         aux_bucket3 = PropertyBucket('characteristic_B')
@@ -1079,8 +1081,8 @@ class PopulationTests(unittest.TestCase):
         
         # Creates a PopTemplate
         pop_template = PopTemplate()
-        pop_template.set_property('characteristic_A', 'value_A1')
-        pop_template.set_property('characteristic_B', 'value_B1')
+        pop_template.set_sampled_property('characteristic_A', 'value_A1')
+        pop_template.set_sampled_property('characteristic_B', 'value_B1')
 
         # Case 1
         target_block = block_template.GenerateProfile(initial_block_size, pop_profile)
@@ -1226,9 +1228,9 @@ class PopulationTests(unittest.TestCase):
         
         # Creates a PopTemplate
         pop_template = PopTemplate()
-        pop_template.set_property('characteristic_A', ['value_A1', 'value_A2'])
-        pop_template.set_property('characteristic_B', ['value_B1', 'value_B2'])
-        pop_template.set_property('characteristic_C', [])
+        pop_template.set_sampled_property('characteristic_A', ['value_A1', 'value_A2'])
+        pop_template.set_sampled_property('characteristic_B', ['value_B1', 'value_B2'])
+        pop_template.set_sampled_property('characteristic_C', [])
 
 
         # Case 1
@@ -1375,9 +1377,9 @@ class PopulationTests(unittest.TestCase):
         
         # Creates a PopTemplate
         pop_template = PopTemplate()
-        pop_template.set_property('characteristic_A', {'value_A1', 'value_A2'})
-        pop_template.set_property('characteristic_B', {'value_B1', 'value_B2'})
-        pop_template.set_property('characteristic_C', set())
+        pop_template.set_sampled_property('characteristic_A', {'value_A1', 'value_A2'})
+        pop_template.set_sampled_property('characteristic_B', {'value_B1', 'value_B2'})
+        pop_template.set_sampled_property('characteristic_C', set())
 
         # Case 1
         target_block = block_template.GenerateProfile(initial_block_size, pop_profile)
@@ -1594,6 +1596,37 @@ class PopulationTests(unittest.TestCase):
 
         # Verify Blob validity
         self.assertEqual(blob5, None, 'Case 5 Target Blob should be None.')
+
+     ## BlobFactory.GenerateEmpty    
+    def test_blob_factory_generate_empty(self):
+        """ Tests BlobFactory.GenerateEmpty
+
+            Generate returns a valid Blob with population 0
+
+            Case 1: 
+                action : Create a Blob from a BlobFactory using GenerateEmpty
+                result : Blob should be valid.
+        """
+        
+        # Create a BlockTemplate with 3 characteristics
+        block_template = BlockTemplate()
+        block_template.add_bucket('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
+        block_template.add_bucket('characteristic_B', ('value_B1', 'value_B2',))
+        block_template.add_bucket('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        blob_factory = BlobFactory(block_template)
+
+        # Case 1:
+        # Create a PropertyBlock using the BlockTemplate
+        blob_1 = blob_factory.GenerateEmpty(0)
+        blob_1_size = blob_1.get_population_size()
+        
+        # Compare size, PropertyBuckets count and verify block validity
+        self.assertEqual(blob_1_size, 0,
+                        'Case 1 Target Blob size is not the correct amount.')
+        self.assertEqual(len(blob_1.sampled_properties.buckets.keys()), 3,
+                        'Case 1 Target Blob sampled properties count is not the correct amount.')
+        self.assertTrue(verify_blob_validity(blob_1),
+                        'Case 1 Target Blob is not valid.')
     
     ## BlobFactory.GenerateProfile
     def test_blob_factory_generate_profile(self):
@@ -1847,7 +1880,7 @@ class PopulationTests(unittest.TestCase):
     def test_blob_consume_blob(self):
         """Tests Blob.consume_blob
         
-        A Blob can consume another when their traceable properties are a match. Blobs should remain valid after the operation.
+        A Blob can consume another when their traceable properties match. Blobs should remain valid after the operation.
         
         Case 1: 
             action : A blob consumes an auxiliary blob with the same traceable properties
@@ -1860,7 +1893,7 @@ class PopulationTests(unittest.TestCase):
                      Both blobs should be valid.
         """
 
-        # get blob factory
+        # Set blob factory
         block_template = BlockTemplate()
         block_template.add_bucket('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
         block_template.add_bucket('characteristic_B', ('value_B1', 'value_B2',))
@@ -1920,238 +1953,9 @@ class PopulationTests(unittest.TestCase):
                          'Case 2 Blob 1 final size was altered.')
         self.assertEqual(blob_2_original_size, blob_2_final_size, 
                          'Case 2 Blob 2 final was altered.')
-    
-    ## move pop
-    def test_blob_move_profile_without_template(self):
-        """Tests Blob.move_profile
-        
-        Blob blocks should remain valid after the operation.
-        Population size should remain the same.
-
-        Case 1: 
-            action : Moves less population than avaiable from origin block to target block. 
-            result : Target block should be valid.
-                     Origin block should valid.
-                     Old blob size and new blob size should be equal.
-                     New target block size minus moved quantity equals old target block size.
-                     Old origin block size minus moved quantity equals new origin block size.
-        
-        Case 2: 
-            action : Moves population equal to avaiable from origin block to target block. 
-            result : Target block should be valid.
-                     Origin block should valid.
-                     New target block size minus moved quantity equals old target block size.
-                     Old origin block size minus moved quantity equals new origin block size.
-        
-        Case 3: 
-            action : Moves more population than avaiable from origin block to target block. 
-            result : Target block should be valid.
-                     Origin block should valid.
-                     New origin block size should be zero.
-                     New target block size should be equal to old target block 
-                        size plus old origin block size.
-        """
-        # Get an auxiliary blob factory.
-        block_template = BlockTemplate()
-        block_template.add_bucket('bucket_1', ('prop_1_1', 'prop_1_2', 'prop_1_3'))
-        block_template.add_bucket('bucket_2', ('prop_2_1', 'prop_2_2'))
-        block_template.add_bucket('bucket_3', ('prop_3_1', 'prop_3_2', 'prop_3_3'))
-        block_template.add_bucket('bucket_4', ('prop_4_1', 'prop_4_2'))
-        blob_factory = BlobFactory(block_template)
-        pop_template = PopTemplate()
-
-        # Case 1:
-        blob = blob_factory.Generate(0, 100)
-        # get pop size
-        old_blob_size = blob.get_population_size()
-        old_origin_size = blob.blocks['block_1'].get_population_size()
-        old_target_size = blob.blocks['block_2'].get_population_size()
-        # move pop from block_1 to block_2
-        blob.move_profile(50, pop_template, 'block_1', 'block_2')
-        # compare pop size (should be the same)
-        new_blob_size = blob.get_population_size()
-        new_origin_size = blob.blocks['block_1'].get_population_size()
-        new_target_size = blob.blocks['block_2'].get_population_size()
-        # verify blob validity
-        self.assertTrue(verify_blob_validity(blob),
-        'Case 1: Blob is not valid.')
-        self.assertEqual(old_blob_size, new_blob_size,
-        'Case 1: Blob size changed.')
-        self.assertEqual(50, new_target_size - old_target_size,
-        'Case 1: Target block did not incremet correctly.')
-        self.assertEqual(50, old_origin_size - new_origin_size,
-        'Case 1: Origin block did not decrement correctly.')
-
-
-        # Case 2:
-        blob = blob_factory.Generate(0, (100, 100))
-
-        # get pop size
-        old_blob_size = blob.get_population_size()
-        old_origin_size = blob.blocks['block_1'].get_population_size()
-        old_target_size = blob.blocks['block_2'].get_population_size()
-        # move pop from block_1 to block_2
-        blob.move_profile(100, pop_template, 'block_1', 'block_2')
-        # compare pop size (should be the same)
-        new_blob_size = blob.get_population_size()
-        new_origin_size = blob.blocks['block_1'].get_population_size()
-        new_target_size = blob.blocks['block_2'].get_population_size()
-
-        # verify blob validity
-        self.assertTrue(verify_blob_validity(blob),
-        'Case 2: Blob is not valid.')
-        self.assertEqual(old_blob_size, new_blob_size,
-        'Case 2: Blob size changed.')
-        self.assertEqual(100, new_target_size - old_target_size,
-        'Case 2: Target block did not incremet correctly.')
-        self.assertEqual(100, old_origin_size - new_origin_size,
-        'Case 2: Origin block did not decrement correctly.')
-        self.assertEqual(0, new_origin_size,
-        'Case 2: Origin block is not 0.')
-
-        # Case 3:
-        blob = blob_factory.Generate(0, (100, 100))
-        # get pop size
-        old_blob_size = blob.get_population_size()
-        old_origin_size = blob.blocks['block_1'].get_population_size()
-        old_target_size = blob.blocks['block_2'].get_population_size()
-        # move pop from block_1 to block_2
-        blob.move_profile(100, pop_template, 'block_1', 'block_2')
-        # compare pop size (should be the same)
-        new_blob_size = blob.get_population_size()
-        new_origin_size = blob.blocks['block_1'].get_population_size()
-        new_target_size = blob.blocks['block_2'].get_population_size()
-        # verify blob validity
-        self.assertTrue(verify_blob_validity(blob),
-        'Case 3: Blob is not valid.')
-        self.assertEqual(old_blob_size, new_blob_size,
-        'Case 3: Blob size changed.')
-        self.assertEqual(0, new_origin_size,
-        'Case 3: Origin block is not 0.')
-        self.assertEqual(new_target_size, old_origin_size + old_target_size,
-        'Case 3: Target block size is not the correct value.')
-    
-    def test_blob_move_profile_with_template(self):
-        """Tests Blob.move_profile
-        
-        Blob blocks should remain valid after the operation.
-        Population size should remain the same.
-
-        Case 1: 
-            action : Moves less population than avaiable from origin block to target block. 
-            result : Target block should be valid.
-                     Origin block should valid.
-                     Old blob size and new blob size should be equal.
-                     New target block size minus moved quantity equals old target block size.
-                     Old origin block size minus moved quantity equals new origin block size.
-        
-        Case 2: 
-            action : Moves population equal to avaiable from origin block to target block. 
-            result : Target block should be valid.
-                     Origin block should valid.
-                     New target block size minus moved quantity equals old target block size.
-                     Old origin block size minus moved quantity equals new origin block size.
-        
-        Case 3: 
-            action : Moves more population than avaiable from origin block to target block. 
-            result : Target block should be valid.
-                     Origin block should valid.
-                     New origin block size should be zero.
-                     New target block size should be equal to old target block 
-                        size plus old origin block size.
-        """
-        # Get an auxiliary blob factory.
-        block_template = BlockTemplate()
-        block_template.add_bucket('bucket_1', ('prop_1_1', 'prop_1_2', 'prop_1_3'))
-        block_template.add_bucket('bucket_2', ('prop_2_1', 'prop_2_2'))
-        block_template.add_bucket('bucket_3', ('prop_3_1', 'prop_3_2', 'prop_3_3'))
-        block_template.add_bucket('bucket_4', ('prop_4_1', 'prop_4_2'))
-        block_types = ('block_1', 'block_2')
-        blob_factory = BlobFactory(block_types, block_template)
-        pop_template = PopTemplate()
-        pop_template.set_property('bucket_1', 'prop_1_1')
-        pop_template.set_property('bucket_2', 'prop_2_2')
-
-        pop_profile_1 = {'bucket_1' : {'prop_1_1' : 50, 'prop_1_2' : 30},
-                        'bucket_2' : {'prop_2_1' : 50, 'prop_2_2' : 50}}
-
-        pop_profile_2 = {'bucket_1' : {'prop_1_1' : 30, 'prop_1_2' : 50},
-                        'bucket_2' : {'prop_2_1' : 50, 'prop_2_2' : 50}}
-
-        # Case 1:
-        blob = blob_factory.GenerateProfile(0, (100, 100), (pop_profile_1, pop_profile_2))
-
-        # get pop size
-        old_blob_size = blob.get_population_size(pop_template)
-        old_origin_size = blob.blocks['block_1'].get_population_size(pop_template)
-        old_target_size = blob.blocks['block_2'].get_population_size(pop_template)
-        # move pop from block_1 to block_2
-        blob.move_profile(30, pop_template, 'block_1', 'block_2')
-        # compare pop size (should be the same)
-        new_blob_size = blob.get_population_size(pop_template)
-        new_origin_size = blob.blocks['block_1'].get_population_size(pop_template)
-        new_target_size = blob.blocks['block_2'].get_population_size(pop_template)
-        # verify blob validity
-        self.assertTrue(verify_blob_validity(blob),
-        'Case 1: Blob is not valid.')
-        self.assertEqual(old_blob_size, new_blob_size,
-        'Case 1: Blob size changed.')
-        self.assertEqual(30, new_target_size - old_target_size,
-        'Case 1: Target block did not incremet correctly.')
-        self.assertEqual(30, old_origin_size - new_origin_size,
-        'Case 1: Origin block did not decrement correctly.')
-
-        # Case 2:
-        blob = blob_factory.GenerateProfile(0, (100, 100), (pop_profile_1, pop_profile_2))
-
-        # get pop size
-        old_blob_size = blob.get_population_size(pop_template)
-        old_origin_size = blob.blocks['block_1'].get_population_size(pop_template)
-        old_target_size = blob.blocks['block_2'].get_population_size(pop_template)
-        # move pop from block_1 to block_2
-        blob.move_profile(50, pop_template, 'block_1', 'block_2')
-        # compare pop size (should be the same)
-        new_blob_size = blob.get_population_size(pop_template)
-        new_origin_size = blob.blocks['block_1'].get_population_size(pop_template)
-        new_target_size = blob.blocks['block_2'].get_population_size(pop_template)
-        # verify blob validity
-        self.assertTrue(verify_blob_validity(blob),
-        'Case 2: Blob is not valid.')
-        self.assertEqual(old_blob_size, new_blob_size,
-        'Case 2: Blob size changed.')
-        self.assertEqual(50, new_target_size - old_target_size,
-        'Case 2: Target block did not incremet correctly.')
-        self.assertEqual(50, old_origin_size - new_origin_size,
-        'Case 2: Origin block did not decrement correctly.')
-        self.assertEqual(0, new_origin_size,
-        'Case 2: Origin block is not 0.')
-
-        # Case 3:
-        blob = blob_factory.GenerateProfile(0, (100, 100), (pop_profile_1, pop_profile_2))
-
-        # get pop size
-        old_blob_size = blob.get_population_size(pop_template)
-        old_origin_size = blob.blocks['block_1'].get_population_size(pop_template)
-        old_target_size = blob.blocks['block_2'].get_population_size(pop_template)
-        # move pop from block_1 to block_2
-        blob.move_profile(80, pop_template, 'block_1', 'block_2')
-        # compare pop size (should be the same)
-        new_blob_size = blob.get_population_size(pop_template)
-        new_origin_size = blob.blocks['block_1'].get_population_size(pop_template)
-        new_target_size = blob.blocks['block_2'].get_population_size(pop_template)
-        # verify blob validity
-        self.assertTrue(verify_blob_validity(blob),
-        'Case 3: Blob is not valid.')
-        self.assertEqual(old_blob_size, new_blob_size,
-        'Case 3: Blob size changed.')
-        self.assertEqual(0, new_origin_size,
-        'Case 3: Origin block is not 0.')
-        self.assertEqual(new_target_size, old_origin_size + old_target_size,
-        'Case 3: Target block size is not the correct value.')
-
-
-    ## split blob
-    def test_blob_split_blob_without_profile_unbalanced_pop(self):
+   
+    ## Blob.split_blob - unbalanced population in profile 
+    def test_blob_split_blob_unbalanced_population(self):
         """Tests Blob.split_blob
         
         Blobs should remain valid after the operation.
@@ -2171,7 +1975,6 @@ class PopulationTests(unittest.TestCase):
                      Split blob size equal to split blob quantity.
                      New origin blob size should be 0.
 
-                     
         Case 3: 
             action : Splits more population than avaiable from origin blob. 
             result : Both blobs should be valid.
@@ -2181,21 +1984,19 @@ class PopulationTests(unittest.TestCase):
         """
         # get blob factory
         block_template = BlockTemplate()
-        block_template.add_bucket('bucket_1', ('prop_1_1', 'prop_1_2', 'prop_1_3'))
-        block_template.add_bucket('bucket_2', ('prop_2_1', 'prop_2_2'))
-        block_template.add_bucket('bucket_3', ('prop_3_1', 'prop_3_2', 'prop_3_3'))
-        block_template.add_bucket('bucket_4', ('prop_4_1', 'prop_4_2'))
-        block_types = ('block_1', 'block_2')
-        blob_factory = BlobFactory(block_types, block_template)
-        pop_template = PopTemplate()
+        block_template.add_bucket('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
+        block_template.add_bucket('characteristic_B', ('value_B1', 'value_B2', 'value_B3'))
+        blob_factory = BlobFactory(block_template)
+
+        pop_profile = {'characteristic_A' : {'value_A1' : 100}}
 
         # Case 1:
-        blob_1 = blob_factory.Generate(0, (100, 0,))
+        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(block_types, 50, pop_template)
+        blob_2 = blob_1.split_blob(50)
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2211,12 +2012,12 @@ class PopulationTests(unittest.TestCase):
         'Case 1: Split blob quantity does not match blob 2 size.')
 
         # Case 2:
-        blob_1 = blob_factory.Generate(0, (100, 0))
+        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(block_types, 100, pop_template)
+        blob_2 = blob_1.split_blob(100)
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2237,12 +2038,12 @@ class PopulationTests(unittest.TestCase):
         'Case 2: Blob 2 size is not equal to old blob 1 size.')
 
         # Case 3:
-        blob_1 = blob_factory.Generate(0, (100, 0))
+        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(block_types, 300, pop_template)
+        blob_2 = blob_1.split_blob(300)
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2260,7 +2061,7 @@ class PopulationTests(unittest.TestCase):
 
 
     ## split blob
-    def test_blob_split_blob_without_profile_balanced_pop(self):
+    def test_blob_split_blob_balanced_population(self):
         """Tests Blob.split_blob
         
         Blobs should remain valid after the operation.
@@ -2290,21 +2091,21 @@ class PopulationTests(unittest.TestCase):
         """
         # get blob factory
         block_template = BlockTemplate()
-        block_template.add_bucket('bucket_1', ('prop_1_1', 'prop_1_2', 'prop_1_3'))
-        block_template.add_bucket('bucket_2', ('prop_2_1', 'prop_2_2'))
-        block_template.add_bucket('bucket_3', ('prop_3_1', 'prop_3_2', 'prop_3_3'))
-        block_template.add_bucket('bucket_4', ('prop_4_1', 'prop_4_2'))
-        block_types = ('block_1', 'block_2')
-        blob_factory = BlobFactory(block_types, block_template)
+        block_template.add_bucket('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
+        block_template.add_bucket('characteristic_B', ('value_B1', 'value_B2', 'value_B3'))
+        blob_factory = BlobFactory(block_template)
+
+        pop_profile = {'characteristic_A' : {'value_A1' : 100, 'value_A2' : 100}}
+        blob_factory = BlobFactory(block_template)
         pop_template = PopTemplate()
 
         # Case 1:
-        blob_1 = blob_factory.Generate(0, (100, 100))
+        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(block_types, 50, pop_template)
+        blob_2 = blob_1.split_blob(50, pop_template)
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2320,12 +2121,12 @@ class PopulationTests(unittest.TestCase):
         'Case 1: Split blob quantity does not match blob 2 size.')
 
         # Case 2:
-        blob_1 = blob_factory.Generate(0, (100, 100))
+        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(block_types, 200, pop_template)
+        blob_2 = blob_1.split_blob(200, pop_template)
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2338,7 +2139,7 @@ class PopulationTests(unittest.TestCase):
         'Case 2: Blob 2 is not valid.')
         self.assertEqual(old_blob_1_size, new_blob_1_size + new_blob_2_size,
         'Case 2: Old blob 1 size is not the sum of new blob 1 size and blob 2 size.')
-        self.assertEqual(200, new_blob_2_size,
+        self.assertEqual(100, new_blob_2_size,
         'Case 2: Split blob quantity does not match blob 2 size.')
         self.assertEqual(0, new_blob_1_size,
         'Case 2: Blob 1 new size is not 0.')
@@ -2346,12 +2147,12 @@ class PopulationTests(unittest.TestCase):
         'Case 2: Blob 2 size is not equal to old blob 1 size.')
 
         # Case 3:
-        blob_1 = blob_factory.Generate(0, (100, 100))
+        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(block_types, 300, pop_template)
+        blob_2 = blob_1.split_blob(300, pop_template)
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2367,15 +2168,15 @@ class PopulationTests(unittest.TestCase):
         self.assertEqual(old_blob_1_size, new_blob_2_size,
         'Case 3: Blob 2 size is not equal to old blob 1 size.')
                 
-    ## grab population
-    def test_blob_grab_pop(self):
+    ## Blob.grab_population - without template
+    def test_blob_grab_population_without_template(self):
         """Tests Blob.grab_population
         
         Blobs should remain valid after the operation.
         Sum of population sizes should remain the same.
 
         Case 1: 
-            action : Grabs less population than available in the blob.
+            action : Grabs less population than available in the target blob.
             result : Both blobs should be valid.
                      Sum of blob sizes is equal to original blob size.
                      Grabbed blob size equal to grab quantity.
@@ -2387,90 +2188,250 @@ class PopulationTests(unittest.TestCase):
                      Split blob size equal to origin blob size.
                      Split blob size equal to grab population quantity.
                      Both blobs are the same.
-
                      
         Case 3: 
             action : Grabs more population than available than available.
             result : Both blobs should be valid.
                      Split blob size equal to origin blob size.
                      Both blobs are the same.
+                     
         """
         
-        # get blob factory
+        # Set a BlobFactory
         block_template = BlockTemplate()
-        block_template.add_bucket('bucket_1', ('prop_1_1', 'prop_1_2', 'prop_1_3'))
-        block_template.add_bucket('bucket_2', ('prop_2_1', 'prop_2_2'))
-        block_template.add_bucket('bucket_3', ('prop_3_1', 'prop_3_2', 'prop_3_3'))
-        block_template.add_bucket('bucket_4', ('prop_4_1', 'prop_4_2'))
-        block_types = ('block_1', 'block_2')
-        blob_factory = BlobFactory(block_types, block_template)
-        pop_template = PopTemplate()
+        block_template.add_bucket('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
+        block_template.add_bucket('characteristic_B', ('value_B1', 'value_B2',))
+        block_template.add_bucket('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        block_template.add_traceable_property('traceable_A', 0)
+        blob_factory = BlobFactory(block_template)
 
         # Case 1:
-        blob_1 = blob_factory.Generate(0, (100, 100))
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_original_size = blob_1.get_population_size()
         
-        # get orginal size
-        old_blob_1_size = blob_1.get_population_size()
-        # split blob
+        # Grab population from Blob1
         blob_2 = blob_1.grab_population(50)
-        # compare original size with blob + blob2 sizes
-        new_blob_1_size = blob_1.get_population_size()
-        new_blob_2_size = blob_2.get_population_size()
-        # verify blob validity for blob and blob2
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_2_final_size = blob_2.get_population_size()
+
+        # Verify Blob validity and sizes
         self.assertTrue(verify_blob_validity(blob_1),
         'Case 1: Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2),
         'Case 1: Blob 2 is not valid.')
-        self.assertEqual(old_blob_1_size, new_blob_1_size + new_blob_2_size,
+        self.assertEqual(blob_1_original_size, blob_1_final_size + blob_2_final_size,
         'Case 1: Old blob 1 size is not the sum of new blob 1 size and blob 2 size.')
-        self.assertEqual(50, new_blob_2_size,
+        self.assertEqual(50, blob_2_final_size,
         'Case 1: Grabbed quantity does not match blob 2 size.')
         self.assertTrue(blob_1.blob_id is not blob_2.blob_id,
         'Case 1: Blobs are the same.')
 
         # Case 2:
-        blob_1 = blob_factory.Generate(0, (100, 100))
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_original_size = blob_1.get_population_size()
         
-        # get orginal size
-        old_blob_1_size = blob_1.get_population_size()
-        # split blob
+        # Grab population from Blob1
         blob_2 = blob_1.grab_population(200)
-        # compare original size with blob + blob2 sizes
-        new_blob_1_size = blob_1.get_population_size()
-        new_blob_2_size = blob_2.get_population_size()
-        # verify blob validity for blob and blob2
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_2_final_size = blob_2.get_population_size()
+
+        # Verify Blob validity and sizes
         self.assertTrue(verify_blob_validity(blob_1),
         'Case 2: Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2),
         'Case 2: Blob 2 is not valid.')
-        self.assertEqual(200, new_blob_2_size,
+        self.assertEqual(200, blob_2_final_size,
         'Case 2: Grabbed quantity does not match blob 2 size.')
-        self.assertEqual(new_blob_1_size, new_blob_2_size,
+        self.assertEqual(blob_1_final_size, blob_2_final_size,
         'Case 2: Blob sizes are not the same.')
         self.assertTrue(blob_1.blob_id is blob_2.blob_id,
         'Case 2: Blobs are not the same.')
 
         # Case 3:
-        blob_1 = blob_factory.Generate(0, (100, 100))
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_original_size = blob_1.get_population_size()
         
-        # get orginal size
-        old_blob_1_size = blob_1.get_population_size()
-        # split blob
+        # Grab population from Blob1
         blob_2 = blob_1.grab_population(300)
-        # compare original size with blob + blob2 sizes
-        new_blob_1_size = blob_1.get_population_size()
-        new_blob_2_size = blob_2.get_population_size()
-        # verify blob validity for blob and blob2
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_2_final_size = blob_2.get_population_size()
+
+        # Verify Blob validity and sizes
         self.assertTrue(verify_blob_validity(blob_1),
         'Case 3: Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2),
         'Case 3: Blob 2 is not valid.')
-        self.assertEqual(new_blob_1_size, new_blob_2_size,
+        self.assertEqual(blob_1_final_size, blob_2_final_size,
         'Case 3: Blob sizes are not the same.')
         self.assertTrue(blob_1.blob_id is blob_2.blob_id,
         'Case 3: Blobs are not the same.')
-
     
+    ## Blob.grab_population - with template
+    def test_blob_grab_population_with_template(self):
+        """Tests Blob.grab_population
+        
+        Blobs should remain valid after the operation.
+        Uses a PopTemplate to filter available population.
+        Sum of population sizes should remain the same.
+
+        Case 1: 
+            action : Grabs less population than available in the target blob.
+            result : Both blobs should be valid.
+                     Sum of blob sizes is equal to original blob size.
+                     Grabbed blob size equal to grab quantity.
+                     Grabbed blob and original blob are not the same blob.
+        
+        Case 2: 
+            action : Grabs as much population as available in the blob.
+            result : Both blobs should be valid.
+                     Split blob size equal to origin blob size.
+                     Split blob size equal to grab population quantity.
+                     Both blobs are the same.
+                     
+        Case 3: 
+            action : Grabs more population than available than available.
+            result : Both blobs should be valid.
+                     Split blob size equal to origin blob size.
+                     Both blobs are the same.
+                     
+         Case 4: 
+            action : Tries to grab population with an unmatching template.
+            result :  Original Blob should be valid. Second Blob should be None.
+
+        """
+        
+        # Set a BlobFactory
+        block_template = BlockTemplate()
+        block_template.add_bucket('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
+        block_template.add_bucket('characteristic_B', ('value_B1', 'value_B2',))
+        block_template.add_bucket('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        block_template.add_traceable_property('traceable_A', 0)
+        blob_factory = BlobFactory(block_template)
+
+        #Set a PopTemplate
+        pop_template = PopTemplate()
+        pop_template.set_sampled_property('characteristic_A', ['value_A1', 'value_A2'])
+        pop_template.set_traceable_property('traceable_A', {0, 1})
+
+        # Case 1:
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_available_size = blob_1.get_population_size(pop_template)
+        blob_1_original_size = blob_1.get_population_size()
+        
+        # Grab population from Blob1
+        blob_2 = blob_1.grab_population(blob_1_available_size // 2, pop_template)
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_1_final_available_size = blob_1.get_population_size(pop_template)
+        blob_2_final_size = blob_2.get_population_size()
+
+        # Verify Blob validity and sizes
+        self.assertTrue(verify_blob_validity(blob_1),
+        'Case 1: Blob 1 is not valid.')
+        self.assertTrue(verify_blob_validity(blob_2),
+        'Case 1: Blob 2 is not valid.')
+        self.assertTrue(blob_1.compare_traceable_properties_to_template(pop_template), 'Case 1: Blob does not match with Template')
+        self.assertTrue(blob_2.compare_traceable_properties_to_template(pop_template), 'Case 1: Blob does not match with Template')
+        self.assertEqual(blob_1_original_size, blob_1_final_size + blob_2_final_size,
+        'Case 1: Old blob 1 size is not the sum of new blob 1 size and blob 2 size.')
+        self.assertEqual(blob_1_available_size//2, blob_2_final_size,
+        'Case 1: Grabbed quantity does not match blob 2 size.')
+        self.assertEqual(blob_1_available_size, blob_1_final_available_size + blob_2_final_size, 'Case 1: Final available populations does not match')
+        self.assertTrue(blob_1.blob_id is not blob_2.blob_id,
+        'Case 1: Blobs are the same.')
+
+        # Case 2:
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_available_size = blob_1.get_population_size(pop_template)
+        blob_1_original_size = blob_1.get_population_size()
+        
+        # Grab population from Blob1
+        blob_2 = blob_1.grab_population(blob_1_available_size, pop_template)
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_1_final_available_size = blob_1.get_population_size(pop_template)
+        blob_2_final_size = blob_2.get_population_size()
+
+        # Verify Blob validity and sizes
+        self.assertTrue(verify_blob_validity(blob_1),
+        'Case 2: Blob 1 is not valid.')
+        self.assertTrue(verify_blob_validity(blob_2),
+        'Case 2: Blob 2 is not valid.')
+        self.assertTrue(blob_1.compare_traceable_properties_to_template(pop_template), 'Case 2: Blob does not match with Template')
+        self.assertTrue(blob_2.compare_traceable_properties_to_template(pop_template), 'Case 2: Blob does not match with Template')
+        self.assertEqual(blob_1_available_size, blob_2_final_size,
+        'Case 2: Grabbed quantity does not match blob 2 size.')
+        self.assertEqual(blob_1_final_size, blob_1_original_size - blob_1_available_size,
+        'Case 2: Blob sizes are not the same.')
+        self.assertTrue(blob_1.blob_id is not blob_2.blob_id,
+        'Case 2: Blobs are the same.')
+
+        # Case 3:
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_available_size = blob_1.get_population_size(pop_template)
+        blob_1_original_size = blob_1.get_population_size()
+        
+        # Grab population from Blob1
+        blob_2 = blob_1.grab_population(blob_1_available_size * 2, pop_template)
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_1_final_available_size = blob_1.get_population_size(pop_template)
+        blob_2_final_size = blob_2.get_population_size()
+
+
+        # Verify Blob validity and sizes
+        self.assertTrue(verify_blob_validity(blob_1),
+        'Case 3: Blob 1 is not valid.')
+        self.assertTrue(verify_blob_validity(blob_2),
+        'Case 3: Blob 2 is not valid.')
+        self.assertTrue(blob_1.compare_traceable_properties_to_template(pop_template), 'Case 3: Blob does not match with Template')
+        self.assertTrue(blob_2.compare_traceable_properties_to_template(pop_template), 'Case 3: Blob does not match with Template')
+        self.assertEqual(blob_1_available_size, blob_2_final_size,
+        'Case 3: Grabbed quantity does not match blob 2 size.')
+        self.assertEqual(blob_1_final_size, blob_1_original_size - blob_1_available_size,
+        'Case 3: Blob sizes are not the same.')
+        self.assertTrue(blob_1.blob_id is not blob_2.blob_id,
+        'Case 3: Blobs are the same.')
+        
+        # Case 4:
+        # Create a Blob using the BlobFactory
+        blob_1 = blob_factory.Generate(0, 200)
+        blob_1_available_size = blob_1.get_population_size(pop_template)
+        blob_1_original_size = blob_1.get_population_size()
+
+        # Change the PopTemplate and tries to grab population from Blob1
+        pop_template.set_traceable_property('traceable_A', 2)
+
+        blob_2 = blob_1.grab_population(blob_1_available_size * 2, pop_template)
+
+        # Get final Blob sizes
+        blob_1_final_size = blob_1.get_population_size()
+        blob_1_final_available_size = blob_1.get_population_size(pop_template)
+
+        # Verify Blob validity and sizes
+        self.assertTrue(verify_blob_validity(blob_1), 'Case 4: Blob 1 is not valid.')
+        self.assertTrue(blob_2 == None, 'Case 4: Blob 2 is not None.')
+        self.assertTrue(not blob_1.compare_traceable_properties_to_template(pop_template), 'Case 4: Blob matches with Template')
+        self.assertEqual(0, blob_1_final_available_size,
+        'Case 4: There is population available after changing the template.')
+        self.assertEqual(blob_1_final_size, blob_1_original_size,
+        'Case 4: Blob 1 size changed.')
+
 
 
 def suite():
@@ -2498,18 +2459,17 @@ def suite():
      
     # BlobFactory tests 
     suite.addTest(PopulationTests('test_blob_factory_generate'))
+    suite.addTest(PopulationTests('test_blob_factory_generate_empty'))
     suite.addTest(PopulationTests('test_blob_factory_generate_profile'))
-    # suite.addTest(PopulationTests('test_block_template_generate_empty'))
+    suite.addTest(PopulationTests('test_block_template_generate_empty'))
     
     # Blob tests
     suite.addTest(PopulationTests('test_blob_consume_blob'))
-    # suite.addTest(PopulationTests('test_blob_move_profile_without_template'))
-    # suite.addTest(PopulationTests('test_blob_move_profile_with_template'))
-    # suite.addTest(PopulationTests('test_blob_split_blob_without_profile_unbalanced_pop'))
-    # suite.addTest(PopulationTests('test_blob_split_blob_without_profile_balanced_pop'))
-    # suite.addTest(PopulationTests('test_blob_grab_pop'))
-
-    # missing test_initialize_buckets_profile
+    suite.addTest(PopulationTests('test_blob_split_blob_unbalanced_population'))
+    suite.addTest(PopulationTests('test_blob_split_blob_balanced_population'))
+    suite.addTest(PopulationTests('test_blob_grab_population_without_template'))
+    suite.addTest(PopulationTests('test_blob_grab_population_with_template'))
+    
     # missing test_blob_split_blob_with_profile
 
     # missing get_population_size tests
