@@ -656,7 +656,6 @@ class Blob():
         Returns:
             A new blob containing the extracted population
         """
-        
         total_available_population = self.get_population_size(pop_template)
         current_quantity = min(total_available_population, quantity)
         if current_quantity == 0:
@@ -671,6 +670,9 @@ class Blob():
         
         removed_block = self.sampled_properties.extract(current_quantity, pop_template)
         new_blob.sampled_properties = removed_block
+        
+        for k,v in self.traceable_properties.items():
+            new_blob.traceable_properties[k] = v
         return new_blob
     
     def grab_population(self, quantity, population_template = None):

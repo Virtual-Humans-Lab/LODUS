@@ -13,8 +13,8 @@ from data_parse_util import *
 from GatherPopulationNewPlugin import GatherPopulationNewPlugin
 from ReturnPopulationPlugin import ReturnPopulationPlugin
 
-def verify_node_validity(node):
-    """Checks whether all blobs in node contained are valid."""
+def verify_node_validity(node:EnvNode)-> bool:
+    """Checks whether all Blobs contained in a EnvNode are valid."""
     result = True
     for blob in node.contained_blobs:
         blob_result = verify_blob_validity(blob)
@@ -24,8 +24,8 @@ def verify_node_validity(node):
 
     return result
 
-def verify_region_validity(region):
-    """Checks whether all nodes in region contained are valid."""
+def verify_region_validity(region:EnvRegion)-> bool:
+    """Checks whether all EnvNodes contained in a EnvRegion are valid."""
     result = True
     for node in region.node_list:
         node_result = verify_node_validity(node)
@@ -35,8 +35,8 @@ def verify_region_validity(region):
 
     return result
 
-def verify_graph_validity(graph):
-    """Checks whether all regions in graph contained are valid."""
+def verify_graph_validity(graph:EnvironmentGraph) -> bool:
+    """Checks whether all EnvRegions contained in a EnvironmentGraph are valid."""
     result = True
     for region in graph.region_list:
         region_result = verify_region_validity(region)
@@ -46,26 +46,27 @@ def verify_graph_validity(graph):
     
     return result
 
-def verify_graph_validty_size(graph, desired_size, population_template = None):
-    """Checks whether graph is valid and desired size."""
+def verify_graph_validity_size(graph: EnvironmentGraph, desired_size: int, population_template = None):
+    """Checks whether an EnvironmentGraph is valid and desired size."""
     valid = verify_graph_validity(graph)
     return valid and (desired_size == graph.get_population_size(population_template))
 
-def blobs_contained_in_node(blobs, node):
-    result = False
-    for blob in blobs:
-        for blob_in_node in node.contained_blobs:
-            result = result or blob == blob_in_node
-    return result
+def verify_blob_contained_in_node(blob: Blob, node: EnvNode):
+    """Checks whether a Blob is contained in a EnvNode."""
+    return blob in node.contained_blobs
 
-def blobs_total_size(blobs, population_template = None):
+def verify_blobs_contained_in_node(blobs: list[Blob], node: EnvNode):
+    """Checks whether an list of Blobs are contained in a EnvNode."""
+    return all([b in node.contained_blobs for b in blobs])
+
+def blobs_total_size(blobs: list[Blob], population_template = None):
     return sum([x.get_population_size(population_template) for x in blobs])
 
 class EnvironmentTests(unittest.TestCase):
 
     def setUp(self):
         #sets up the test environment
-        environment_path = '../DataInput/Old/dummy_input_2.json'
+        environment_path = '../DataInput/Tests/environment_tests_dummy_input_3.json'
         self.env = generate_EnvironmentGraph(environment_path)
 
         p1 = GatherPopulationNewPlugin(self.env)
@@ -78,39 +79,51 @@ class EnvironmentTests(unittest.TestCase):
         #resets the test environment
         pass
 
+    ### EnvNode tests
+    ## EnvNode.grab_population - without template 
     def test_node_grab_population_no_template_one_blob_case1(self):
         """Tests EnvNode.grab_population
         
         Case 1: 
-            action: Less population than available.
+            action: Requests less population than available.
             result: Node is valid.
                     Blobs are valid.
-                    Blob is different than one in the node.
+                    Grabbed Blob is different than one in the node.
                     Total population size unchanged.
                     Blob size equals extracted quantity.      
         """
-        node = self.env.get_region_by_name("Petropolis").get_node_by_name("home")
-        node_blobs = node.contained_blobs
-        pop_template = PopTemplate()
-        old_pop_size = node.get_population_size()
 
-        pop = node.grab_population(50, pop_template)
-        
-        new_pop_size = node.get_population_size()
+        # Gets a target EnvNode with population 100
+        target_node = self.env.get_node_by_name("Petropolis", "home")
+        source_blob = target_node.contained_blobs[0]
+        node_original_size = target_node.get_population_size()
+        source_original_size = source_blob.get_population_size()
 
-        blob_pop_size = blobs_total_size(pop)
+        # Grabs 50 people from the target node - less than available
+        grabbed_population = target_node.grab_population(50)
+        node_final_size = target_node.get_population_size()
+        source_final_size = source_blob.get_population_size()
+        grabbed_population_size = blobs_total_size(grabbed_population)
 
-        self.assertTrue(verify_blobs_validity(pop),
+        # assert validity and correct sizes
+        self.assertTrue(verify_blobs_validity(grabbed_population),
         'Case 1: Grabbed population is not valid.')
-        self.assertTrue(not blobs_contained_in_node(pop, node),
-        'Case 1: Grabbed pop still in node.')
-        self.assertEqual(old_pop_size,
-                        new_pop_size + blob_pop_size,
+        self.assertTrue(not verify_blobs_contained_in_node(grabbed_population, target_node),
+        'Case 1: Grabbed population still in EnvNode.')
+        self.assertTrue(verify_blob_contained_in_node(source_blob, target_node),
+        'Case 1: Source Blob is not in EnvNode.')
+        self.assertEqual(node_original_size,
+                        node_final_size + grabbed_population_size,
         'Case 1: Total population size changed.')
-        self.assertEqual(blob_pop_size,
+        self.assertEqual(source_original_size,
+                        source_final_size + grabbed_population_size,
+        'Case 1: Source population size changed.')
+        self.assertEqual(grabbed_population_size,
                         50,
         'Case 1: Grabbed population size is not equal to grabbed amount.')
-        self.assertTrue(verify_node_validity(node),
+        self.assertTrue(verify_graph_validity_size(self.env, 300 - grabbed_population_size),
+        'Case 1: EnvironmentGraph changed in size.')
+        self.assertTrue(verify_node_validity(target_node),
         'Case 1: Grabbed pop still in node.')
 
     def test_node_grab_population_no_template_one_blob_case2(self):
@@ -126,32 +139,46 @@ class EnvironmentTests(unittest.TestCase):
                     Blob size equals extracted quantity.
         
         """
-        node = self.env.get_region_by_name("Petropolis").get_node_by_name("home")
-        node_blobs = node.contained_blobs
-        pop_template = PopTemplate()
-        old_blob = node.contained_blobs[0]
-        old_pop_size = node.get_population_size()
-        pop = node.grab_population(100, pop_template)
-        new_pop_size = node.get_population_size()
-        blob_pop_size = blobs_total_size(pop)
 
-        self.assertTrue(verify_blobs_validity(pop),
+        # Gets a target EnvNode with population 100
+        target_node = self.env.get_node_by_name("Petropolis", "home")
+        source_blob = target_node.contained_blobs[0]
+        node_original_size = target_node.get_population_size()
+        source_original_size = source_blob.get_population_size()
+
+        # Grabs 100 people from the target node - equal as available
+        grabbed_population = target_node.grab_population(100)
+        node_final_size = target_node.get_population_size()
+        source_final_size = source_blob.get_population_size()
+        grabbed_population_size = blobs_total_size(grabbed_population)
+
+        # assert validity and correct sizes
+        self.assertTrue(verify_blobs_validity(grabbed_population),
         'Case 2: Grabbed population is not valid.')
-        self.assertTrue(verify_node_validity(node),
-        'Case 2: Grabbed pop still in node.')
-        self.assertTrue(len(node_blobs) == 0,
+        self.assertTrue(verify_node_validity(target_node),
+        'Case 2: Grabbed population still in node.')
+        self.assertTrue(len(target_node.contained_blobs) == 0,
         'Case 2: Node is not empty.')
-        self.assertEqual(old_pop_size,
-                        new_pop_size + blob_pop_size,
+        self.assertEqual(node_original_size, node_final_size + grabbed_population_size,
         'Case 2: Total population size changed.')
-        self.assertEqual(blob_pop_size,
-                        100,
+        self.assertEqual(grabbed_population_size, 100,
         'Case 2: Grabbed population size is not equal to grabbed amount.')
-        self.assertEqual(old_blob,
-                        pop[0],
+        self.assertEqual(source_blob, grabbed_population[0],
         'Case 2: Blob is not the same which was in the node.')
+        self.assertTrue(not verify_blobs_contained_in_node(grabbed_population, target_node),
+        'Case 2: Grabbed population still in EnvNode.')
+        self.assertTrue(not verify_blob_contained_in_node(source_blob, target_node),
+        'Case 2: Source Blob is not in EnvNode.')
+        self.assertEqual(source_original_size, source_final_size,
+        'Case 2: Source population size changed.')
+        self.assertEqual(grabbed_population_size, source_final_size,
+        'Case 2: Source population size changed.')
+        self.assertEqual(grabbed_population_size, 100,
+        'Case 2: Grabbed population size is not equal to grabbed amount.')
+        self.assertTrue(verify_graph_validity_size(self.env, 300 - grabbed_population_size),
+        'Case 2: EnvironmentGraph changed in size.')
 
-
+        
     def test_node_grab_population_no_template_one_blob_case3(self):
         """Tests EnvNode.grab_population
 
@@ -164,35 +191,51 @@ class EnvironmentTests(unittest.TestCase):
                     Total population size unchanged.
         
         """
-        node = self.env.get_region_by_name("Petropolis").get_node_by_name("home")
-        node_blobs = node.contained_blobs
-        pop_template = PopTemplate()
-        old_blob = node.contained_blobs[0]
-        old_pop_size = node.get_population_size()
-        pop = node.grab_population(200, pop_template)
-        new_pop_size = node.get_population_size()
-        blob_pop_size = blobs_total_size(pop)
 
-        self.assertTrue(verify_blobs_validity(pop),
+        # Gets a target EnvNode with population 100
+        target_node = self.env.get_node_by_name("Petropolis", "home")
+        source_blob = target_node.contained_blobs[0]
+        node_original_size = target_node.get_population_size()
+        source_original_size = source_blob.get_population_size()
+
+        # Grabs 200 people from the target node - more than available
+        grabbed_population = target_node.grab_population(100)
+        node_final_size = target_node.get_population_size()
+        source_final_size = source_blob.get_population_size()
+        grabbed_population_size = blobs_total_size(grabbed_population)
+
+        # assert validity and correct sizes
+        self.assertTrue(verify_blobs_validity(grabbed_population),
         'Case 3: Grabbed population is not valid.')
-        self.assertTrue(verify_node_validity(node),
-        'Case 3: Grabbed pop still in node.')
-        self.assertTrue(len(node_blobs) == 0,
+        self.assertTrue(verify_node_validity(target_node),
+        'Case 3: Grabbed population still in node.')
+        self.assertTrue(len(target_node.contained_blobs) == 0,
         'Case 3: Node is not empty.')
-        self.assertEqual(old_pop_size,
-                        new_pop_size + blob_pop_size,
+        self.assertEqual(node_original_size, node_final_size + grabbed_population_size,
         'Case 3: Total population size changed.')
-        self.assertEqual(blob_pop_size,
-                        old_pop_size,
-        'Case 3: Grabbed population size is not the original node side.')
-        self.assertEqual(old_blob,
-                        pop[0],
+        self.assertEqual(grabbed_population_size, 100,
+        'Case 3: Grabbed population size is not equal to grabbed amount.')
+        self.assertEqual(source_blob, grabbed_population[0],
         'Case 3: Blob is not the same which was in the node.')
+        self.assertTrue(not verify_blobs_contained_in_node(grabbed_population, target_node),
+        'Case 3: Grabbed population still in EnvNode.')
+        self.assertTrue(not verify_blob_contained_in_node(source_blob, target_node),
+        'Case 3: Source Blob is not in EnvNode.')
+        self.assertEqual(source_original_size, source_final_size,
+        'Case 3: Source population size changed.')
+        self.assertEqual(grabbed_population_size, source_final_size,
+        'Case 3: Source population size changed.')
+        self.assertEqual(grabbed_population_size, 100,
+        'Case 3: Grabbed population size is not equal to grabbed amount.')
+        self.assertTrue(verify_graph_validity_size(self.env, 300 - grabbed_population_size),
+        'Case 3: EnvironmentGraph changed in size.')
 
 
     def test_node_grab_population_no_template_three_blobs_case1(self):
         """Tests EnvNode.grab_population
         
+        Clone two extra Blobs in a EnvNode. Then, grabs population from node
+
         Case 1: 
             action: Less population than available.
             result: Node is valid.
@@ -200,38 +243,42 @@ class EnvironmentTests(unittest.TestCase):
                     Blobs in list are different than one in the node.
                     Total population size unchanged.    
         """
-        #gets the chosen region
-        node = self.env.get_region_by_name("Petropolis").get_node_by_name("home")
-        node_blobs = node.contained_blobs
 
-        #gets the one blob
-        blob_1 = node_blobs[0]
+        # Gets a target EnvNode with population 100
+        target_node = self.env.get_node_by_name("Petropolis", "home")
+        node_blobs = target_node.contained_blobs
 
-        #copy extra blobs with same profile
-        clone_blob_2 = blob_1.blob_factory.GenerateProfile(0, (100,0,0,0), blob_1.profiles)
-        clone_blob_3 = blob_1.blob_factory.GenerateProfile(0, (100,0,0,0), blob_1.profiles)
+        # Gets the first Blob in target node
+        source_blob = node_blobs[0]
 
-        # add extra blobs
-        node.add_blobs([clone_blob_2, clone_blob_3])
+        # Copy two extra Blobs with same profile
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
 
-        pop_template = PopTemplate()
-        old_pop_size = node.get_population_size()
-        pop = node.grab_population(150, pop_template)
-        new_pop_size = node.get_population_size()
-        blob_pop_size = blobs_total_size(pop)
+        # Adds extra Blobs to target node
+        target_node.add_blobs([clone_blob_1, clone_blob_2])
 
-        self.assertTrue(verify_blobs_validity(pop),
+        # Grabs 150 people from the target node - less than available
+        node_original_size = target_node.get_population_size()
+        grabbed_population = target_node.grab_population(150)
+        source_final_size = target_node.get_population_size()
+        grabbed_population_size = blobs_total_size(grabbed_population)
+
+        # assert validity and correct sizes
+        self.assertTrue(verify_blobs_validity(grabbed_population),
         'Case 1: Grabbed population is not valid.')
-        self.assertTrue(not blobs_contained_in_node(pop, node),
+        self.assertTrue(not verify_blobs_contained_in_node(grabbed_population, target_node),
         'Case 1: Grabbed pop still in node.')
-        self.assertEqual(old_pop_size,
-                        new_pop_size + blob_pop_size,
+        self.assertEqual(node_original_size, source_final_size + grabbed_population_size,
         'Case 1: Total population size changed.')
-        self.assertEqual(blob_pop_size,
-                        150,
+        self.assertEqual(grabbed_population_size, 150,
         'Case 1: Grabbed population size is not equal to grabbed amount.')
-        self.assertTrue(verify_node_validity(node),
+        self.assertTrue(len(target_node.contained_blobs) == 3,
+        'Case 1: Target EnvNode has a different number of Blobs than intended.')
+        self.assertTrue(verify_node_validity(target_node),
         'Case 1: Grabbed pop still in node.')
+        self.assertTrue(verify_graph_validity_size(self.env, 500 - grabbed_population_size),
+        'Case 1: EnvironmentGraph changed in size.')
 
     def test_node_grab_population_no_template_three_blobs_case2(self):
         """Tests EnvNode.grab_population
@@ -245,42 +292,50 @@ class EnvironmentTests(unittest.TestCase):
                     Total population size unchanged.
         
         """
-        node = self.env.get_region_by_name("Petropolis").get_node_by_name("home")
-        node_blobs = node.contained_blobs
-        pop_template = PopTemplate()
-        old_blob = node_blobs[0]
 
-        #gets the one blob
-        blob_1 = node_blobs[0]
+         # Gets a target EnvNode with population 100
+        target_node = self.env.get_node_by_name("Petropolis", "home")
+        node_blobs = target_node.contained_blobs
 
-        #copy extra blobs with same profile
-        clone_blob_2 = blob_1.blob_factory.GenerateProfile(0, (100,0,0,0), blob_1.profiles)
-        clone_blob_3 = blob_1.blob_factory.GenerateProfile(0, (100,0,0,0), blob_1.profiles)
+        # Gets the first Blob in target node
+        source_blob = node_blobs[0]
 
-        og_blobs = [blob_1, clone_blob_2, clone_blob_3]
+        # Copy two extra Blobs with same profile
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        
+        # Adds extra Blobs to target node
+        target_node.add_blobs([clone_blob_1, clone_blob_2])
 
-        # add extra blobs
-        node.add_blobs([clone_blob_2, clone_blob_3])
+        original_blobs = [source_blob, clone_blob_1, clone_blob_2]
 
+        # Grabs 150 people from the target node - less than available
+        node_original_size = target_node.get_population_size()
+        grabbed_population = target_node.grab_population(300)
+        node_final_size = target_node.get_population_size()
+        source_final_size = target_node.get_population_size()
+        grabbed_population_size = blobs_total_size(grabbed_population)
 
-        old_pop_size = node.get_population_size()
-        pop = node.grab_population(300, pop_template)
-        new_pop_size = node.get_population_size()
-        blob_pop_size = blobs_total_size(pop)
-
-        self.assertTrue(verify_blobs_validity(pop),
+        # assert validity and correct sizes
+        self.assertTrue(verify_blobs_validity(grabbed_population),
         'Case 2: Grabbed population is not valid.')
-        self.assertTrue(verify_node_validity(node),
+        self.assertTrue(not verify_blobs_contained_in_node(grabbed_population, target_node),
         'Case 2: Grabbed pop still in node.')
-        self.assertTrue(len(node_blobs) == 0,
-        'Case 2: Node is not empty.')
-        self.assertEqual(old_pop_size,
-                        new_pop_size + blob_pop_size,
+        self.assertTrue(not verify_blobs_contained_in_node(original_blobs, target_node),
+        'Case 2: Grabbed pop still in node.')
+        self.assertEqual(node_original_size, node_final_size + grabbed_population_size,
         'Case 2: Total population size changed.')
-        self.assertEqual(blob_pop_size,
-                        old_pop_size,
-        'Case 2: Grabbed population size is not the original node side.')
-        self.assertTrue(all([(x in pop) for x in og_blobs]),
+        self.assertEqual(node_final_size, 0,
+        'Case 2: Target EnvNode is not empty.')
+        self.assertEqual(grabbed_population_size, 300,
+        'Case 2: Grabbed population size is not equal to grabbed amount.')
+        self.assertTrue(len(target_node.contained_blobs) == 0,
+        'Case 2: Target EnvNode has a different number of Blobs than intended.')
+        self.assertTrue(verify_node_validity(target_node),
+        'Case 2: Grabbed pop still in node.')
+        self.assertTrue(verify_graph_validity_size(self.env, 500 - grabbed_population_size),
+        'Case 2: EnvironmentGraph changed in size.')
+        self.assertTrue(all([(x in grabbed_population) for x in original_blobs]),
         'Case 2: Blob is not the same which was in the node.')
 
 
@@ -375,7 +430,7 @@ class EnvironmentTests(unittest.TestCase):
 
         self.assertTrue(verify_blobs_validity(pop),
         'Case 1: Grabbed population is not valid.')
-        self.assertTrue(not blobs_contained_in_node(pop, node),
+        self.assertTrue(not verify_blobs_contained_in_node(pop, node),
         'Case 1: Grabbed pop still in node.')
         self.assertEqual(old_pop_size,
                         new_pop_size + blob_pop_size,
@@ -904,10 +959,10 @@ def suite():
     suite.addTest(EnvironmentTests('test_node_grab_population_no_template_one_blob_case3'))
     suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_case1'))
     suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_case2'))
-    suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_case3'))
-    suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_unbalanced_case1'))
-    suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_unbalanced_case2'))
-    suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_unbalanced_case3'))
+    # suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_case3'))
+    # suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_unbalanced_case1'))
+    # suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_unbalanced_case2'))
+    # suite.addTest(EnvironmentTests('test_node_grab_population_no_template_three_blobs_unbalanced_case3'))
         
     ## TODO NOT DONE YET
     # suite.addTest(EnvironmentTests('test_node_grab_population_template_one_blob_case1'))
@@ -920,17 +975,17 @@ def suite():
 
     
     #### Region tests
-    #### Graph tests
-        ## consume time action
-            ## converge population
-    suite.addTest(EnvironmentTests('test_graph_converge_population')) 
-    ###         ## return population home
-    suite.addTest(EnvironmentTests('test_graph_return_population_home')) 
-    ###         ## move population
-    suite.addTest(EnvironmentTests('test_graph_move_population_case1')) 
-    suite.addTest(EnvironmentTests('test_graph_move_population_case2')) 
-    suite.addTest(EnvironmentTests('test_graph_move_population_case3'))
-    suite.addTest(EnvironmentTests('test_graph_move_population_case4'))
+    # #### Graph tests
+    #     ## consume time action
+    #         ## converge population
+    # suite.addTest(EnvironmentTests('test_graph_converge_population')) 
+    # ###         ## return population home
+    # suite.addTest(EnvironmentTests('test_graph_return_population_home')) 
+    # ###         ## move population
+    # suite.addTest(EnvironmentTests('test_graph_move_population_case1')) 
+    # suite.addTest(EnvironmentTests('test_graph_move_population_case2')) 
+    # suite.addTest(EnvironmentTests('test_graph_move_population_case3'))
+    # suite.addTest(EnvironmentTests('test_graph_move_population_case4'))
 
     #TODO not implemented yet
         ## balance action list
@@ -940,7 +995,7 @@ def suite():
     #TODO END not implemented yet
 
         ## merge blobs
-    suite.addTest(EnvironmentTests('test_graph_merge_blobs'))
+    # suite.addTest(EnvironmentTests('test_graph_merge_blobs'))
 
     # missing test generate action list (mightnot be necessary)
     return suite       

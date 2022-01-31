@@ -148,7 +148,7 @@ t = time.time()
 
 
 worker_temp = PopTemplate()
-worker_temp.set_property('occupation', 'worker') 
+worker_temp.set_sampled_property('occupation', 'worker') 
 worker_temp.mother_blob_id = env_graph.get_region_by_name("Centro").id
 for i in range(simulation_steps):
     print(i, end='\r')

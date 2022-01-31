@@ -17,8 +17,7 @@
           "high"
       ]
   },
-  "block_types" : ["healthy", "infected", "cured", "dead"],
-"regions":[
+  "regions":[
   {
     "name": "Petropolis",
     "long_lat_position": [
@@ -83,7 +82,7 @@
       "Centro",
       "Partenon"
     ],
-    "population": [ 100, 0, 0, 0 ],
+    "population": 100,
     "population_description": {
       "healthy": {
         "age": {
@@ -182,7 +181,7 @@
         ]
       }
     },
-    "population": [ 100, 0, 0, 0 ],
+    "population": 100,
     "population_description": {
       "healthy": {
         "age": {
@@ -277,7 +276,7 @@
         ]
       }
     },
-    "population": [ 100, 0, 0, 0 ],
+    "population": 100,
     "population_description": {
       "healthy": {
         "age": {

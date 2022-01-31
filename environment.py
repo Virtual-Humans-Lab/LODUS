@@ -1,7 +1,7 @@
+from __future__ import annotations
 import population
 import copy
 import util
-#import random
 from random_inst import FixedRandom
 
 DEBUG_OPERATION_OUTPUT =  False
@@ -96,7 +96,7 @@ class EnvNode():
         return count
 
     ## TODO review code
-    def grab_population(self, quantity, template):
+    def grab_population(self, quantity: int, template : population.PopTemplate = None) -> list[population.Blob]:
         """Gets and removes a population matching a template from this EnvNode.
         
         The population removed is returned as a list of blobs, each with a unique mother_blob_id.
@@ -126,12 +126,8 @@ class EnvNode():
 
         available_quantities = [blob.get_population_size(template) for blob in self.contained_blobs]
         blob = self.contained_blobs[0]
-        # print('data:', blob, '\n', template,  '\n', blob.get_population_size(template))
-
-        # print('available quantities', available_quantities)
-        # print(template)
-        # print("\n blobs, \'n", self.contained_blobs)
         int_adjusted_quantities = util.weighted_int_distribution(available_quantities, quantity)
+
 
         for x in range(len(self.contained_blobs)):
             # quantity * ratio of this blobs contribution to the total
@@ -182,6 +178,7 @@ class EnvNodeTemplate():
     def __init__(self):
         self.characteristics = {}
         self.routine_template = {}
+        self.blob_descriptions = []
 
     def add_characteristic(self, key, value):
         self.characteristics[key] = value
@@ -189,6 +186,11 @@ class EnvNodeTemplate():
     def add_routine_template(self, hour, actions):
         """Adds a TimeAction to the designated time slot."""
         self.routine_template[str(hour)] = actions
+
+    def add_blob_description(self, population, traceable_properties, description, blob_factory):
+        self.blob_descriptions.append((population, traceable_properties, description, blob_factory
+        
+        ))
 
 
 class EnvNodeFactory():
@@ -198,7 +200,7 @@ class EnvNodeFactory():
     
     """
     def __init__(self, _node_template):
-        self.template = _node_template
+        self.template:EnvNodeTemplate = _node_template
 
     def GenerateRoutine(self, routine_template):
         routine = Routine()
@@ -207,13 +209,19 @@ class EnvNodeFactory():
         
         return routine
 
-    def Generate(self, _name):
+    def Generate(self, region:EnvRegion, _name):
         node  = EnvNode()
         node.name = _name
         node.routine = self.GenerateRoutine(self.template.routine_template)
         for k in self.template.characteristics.keys():
             node.characteristics[k] = self.template.characteristics[k]
 
+        for (pop,trace,desc,factory) in self.template.blob_descriptions:
+            blob: population.Blob = factory.GenerateProfile(region.id, pop, desc)
+            for k in trace.keys():
+                blob.traceable_properties[k] = trace[k]
+                # blob.blob_factory.block_template.add_traceable_property(k, trace[k])
+            node.add_blob(blob)
         return node
 
 
@@ -252,11 +260,11 @@ class EnvRegion():
         self.position = _position
         self.long_lat = _long_lat
         self.population = population
-        self.node_list: list(EnvNode) = []
+        self.node_list: list[EnvNode] = []
         self.node_dict = {}
         self.neighbours = [[]]
 
-    def add_node(self, _node):
+    def add_node(self, _node: EnvNode):
         self.node_list.append(_node)
         self.node_dict[_node.name] = _node
         _node.containing_region_name = self.name
@@ -357,15 +365,16 @@ class EnvRegionFactory():
     def __init__(self, _template):
         self.region_template = _template
     
-    def Generate(self, _position, _population):
-        region = EnvRegion(_position, _population)
+    def Generate(self, _position):
+        region = EnvRegion(_position)
 
         for c in self.region_template.template:
             node_name, node_template = c
             factory = EnvNodeFactory(node_template)
-            node = factory.Generate(node_name)
+            node = factory.Generate(region,node_name)
+            
             region.add_node(node)
-
+        
         return region
 
 
@@ -649,11 +658,13 @@ class EnvironmentGraph():
 
         return action_list
 
-    def add_region(self, _position, _population, _template, name):
+    def add_region(self, _position, _template: EnvRegionTemplate, name):
         factory = EnvRegionFactory(_template)
-        new_region = factory.Generate(_position, _population)
+        new_region = factory.Generate(_position)
         new_region.name = name
+        new_region.population = new_region.get_population_size()
         self.edge_table.append(['' for x in range(len(self.region_list))])
+
         for node in new_region.node_list:
             node.containing_region_name = new_region.name
             self.node_list.append(node)

@@ -1,24 +1,29 @@
 {
   "population_template": {
+    "traceable_properties": {
+      "traceable_A": "default",
+      "traceable_B": 0
+    },
+    "sampled_properties": {
       "age": [
-          "adults",
-          "elders",
-          "young",
-          "children"
+        "adults",
+        "elders",
+        "young",
+        "children"
       ],
       "occupation": [
-          "idle",
-          "student",
-          "worker"
+        "idle",
+        "student",
+        "worker"
       ],
-      "social_profile":[
-          "low",
-          "mid",
-          "high"
+      "social_profile": [
+        "low",
+        "mid",
+        "high"
       ]
+    }
   },
-  "block_types" : ["healthy", "infected", "cured", "dead"],
-"regions":[
+  "regions":[
   {
     "name": "Petropolis",
     "long_lat_position": [
@@ -83,7 +88,7 @@
       "Centro",
       "Partenon"
     ],
-    "population": [ 100, 0, 0, 0 ],
+    "population": 100,
     "population_description": {
       "healthy": {
         "age": {
@@ -182,7 +187,7 @@
         ]
       }
     },
-    "population": [ 100, 0, 0, 0 ],
+    "population": 100,
     "population_description": {
       "healthy": {
         "age": {
@@ -277,7 +282,7 @@
         ]
       }
     },
-    "population": [ 100, 0, 0, 0 ],
+    "population": 100,
     "population_description": {
       "healthy": {
         "age": {
