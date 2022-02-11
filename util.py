@@ -162,7 +162,7 @@ class IDGen:
         if attribute not in IDGen.stacks:
             IDGen.stacks[attribute] = current_id
 
-    def get_id(self):
+    def get_id(self) -> int:
         current_id = IDGen.stacks[self.attribute]
         IDGen.stacks[self.attribute] += 1
         return current_id

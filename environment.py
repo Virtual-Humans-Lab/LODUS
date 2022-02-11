@@ -45,7 +45,7 @@ class EnvNode():
         """"Inits EnvNode with an empty template."""
         self.name = ''
         self.contained_blobs:list[population.Blob] = [] 
-        self.routine = None
+        self.routine: Routine = None
         self.characteristics = {}
         self.id = util.IDGen('nodes').get_id()
         self.containing_region_name = None
@@ -56,7 +56,7 @@ class EnvNode():
     def add_characteristic(self, key, value):
         self.characteristics[key] = value
 
-    def process_routine(self, hour):
+    def process_routine(self, hour) -> list[TimeAction]:
         """Generates and returns the TimeAction list of the routine for a certain time.
         
         Args:
@@ -67,13 +67,19 @@ class EnvNode():
         """
         return self.routine.process_routine(hour)
 
-    def remove_blob(self, blob):
-        self.contained_blobs.remove(blob)
+    def remove_blob(self, blob: population.Blob):
+        if isinstance(blob, population.Blob) and blob in self.contained_blobs:
+            self.contained_blobs.remove(blob)
+            
+    def remove_blobs(self, blobs: list[population.Blob]):
+        for blob in blobs:
+            self.remove_blob(blob)
 
-    def add_blob(self, blob):
-        self.contained_blobs.append(blob)
+    def add_blob(self, blob: population.Blob):
+        if isinstance(blob, population.Blob):
+            self.contained_blobs.append(blob)
 
-    def add_blobs(self, blobs):
+    def add_blobs(self, blobs: list[population.Blob]):
         for blob in blobs:
             self.add_blob(blob)
 
@@ -95,15 +101,13 @@ class EnvNode():
             count += blob.get_population_size(population_template)
         return count
 
-    ## TODO review code
     def grab_population(self, quantity: int, template : population.PopTemplate = None) -> list[population.Blob]:
         """Gets and removes a population matching a template from this EnvNode.
         
         The population removed is returned as a list of blobs, each with a unique mother_blob_id.
 
         If quantity is larger than the current population size matching the tamplate,
-        this method returns the largest possible population. --
-        TODO  REFACTOR
+        this method returns the largest possible population.
 
         Args:
             quantity: The desired population size to be grabbed from this EnvNode.
@@ -112,23 +116,19 @@ class EnvNode():
         Returns:
             If there are enough population, a list containing the grabbed population. This list might have more than one Blob.
                 In such case, each blob is guaranteed to be from different mother_blob_id.
-            If there are not enough population, an empty list.
+            If there are not enough population, returns the available amount.
         """
-        total_population = 0 
-        for blob in self.contained_blobs:
-            total_population += blob.get_population_size(template)
+        total_available_population = self.get_population_size(template)
 
-        if total_population == 0:
+        if total_available_population == 0:
             return []
 
-        quantity = min(quantity, total_population)
+        quantity = min(quantity, total_available_population)
         new_blobs = []
 
         available_quantities = [blob.get_population_size(template) for blob in self.contained_blobs]
-        blob = self.contained_blobs[0]
         int_adjusted_quantities = util.weighted_int_distribution(available_quantities, quantity)
-
-
+        
         for x in range(len(self.contained_blobs)):
             # quantity * ratio of this blobs contribution to the total
             if int_adjusted_quantities[x] == 0:
@@ -139,12 +139,7 @@ class EnvNode():
             grabbed_blob = blob.grab_population(adjusted_quantity, template)
             new_blobs.append(grabbed_blob)
 
-        blob_sizes = [blob.get_population_size() for blob in new_blobs]
-
-        for blob in new_blobs:
-            if blob in self.contained_blobs:
-                self.contained_blobs.remove(blob)
-
+        self.remove_blobs(new_blobs)
         return new_blobs
 
     def get_unique_name(self):
@@ -170,7 +165,6 @@ class EnvNodeTemplate():
     """Describes an EnvNode generation template.
     
     EnvNodeFactory objects can generate EnvNodes based on templates.
-
         
     TODO Use case.
     """
@@ -188,9 +182,7 @@ class EnvNodeTemplate():
         self.routine_template[str(hour)] = actions
 
     def add_blob_description(self, population, traceable_properties, description, blob_factory):
-        self.blob_descriptions.append((population, traceable_properties, description, blob_factory
-        
-        ))
+        self.blob_descriptions.append((population, traceable_properties, description, blob_factory))
 
 
 class EnvNodeFactory():
@@ -199,17 +191,17 @@ class EnvNodeFactory():
     Generates both an EnvNode and the respective Routine.
     
     """
-    def __init__(self, _node_template):
+    def __init__(self, _node_template: EnvNodeTemplate):
         self.template:EnvNodeTemplate = _node_template
 
-    def GenerateRoutine(self, routine_template):
+    def GenerateRoutine(self, routine_template)->Routine:
         routine = Routine()
         for k, v in routine_template.items():
             routine.add_time_action(v, k)
         
         return routine
 
-    def Generate(self, region:EnvRegion, _name):
+    def Generate(self, region:EnvRegion, _name)->EnvNode:
         node  = EnvNode()
         node.name = _name
         node.routine = self.GenerateRoutine(self.template.routine_template)
@@ -217,10 +209,7 @@ class EnvNodeFactory():
             node.characteristics[k] = self.template.characteristics[k]
 
         for (pop,trace,desc,factory) in self.template.blob_descriptions:
-            blob: population.Blob = factory.GenerateProfile(region.id, pop, desc)
-            for k in trace.keys():
-                blob.traceable_properties[k] = trace[k]
-                # blob.blob_factory.block_template.add_traceable_property(k, trace[k])
+            blob: population.Blob = factory.GenerateProfile(region.id, pop, desc, trace)
             node.add_blob(blob)
         return node
 
@@ -253,15 +242,15 @@ class EnvRegion():
 
     def __init__(self, _position = (0.0, 0.0), _long_lat = (0.0, 0.0), population = 0, _id = None):
         """Initializes an empty EnvRegion"""
-        self.name = ''
-        self.id = _id
+        self.name:str = ''
+        self.id: int = _id
         if _id is None:
             self.id = util.IDGen("regions").get_id()
-        self.position = _position
-        self.long_lat = _long_lat
-        self.population = population
-        self.node_list: list[EnvNode] = []
-        self.node_dict = {}
+        self.position:tuple[float, float] = _position
+        self.long_lat:tuple[float, float] = _long_lat
+        self.population:int = population
+        self.node_list:list[EnvNode] = []
+        self.node_dict:dict[str, EnvNode] = {}
         self.neighbours = [[]]
 
     def add_node(self, _node: EnvNode):
@@ -288,7 +277,7 @@ class EnvRegion():
 
         return count
 
-    def generate_action_list(self, hour):
+    def generate_action_list(self, hour: int):
         """Gets the TimeAction list for each EnvNode in this EnvRegion for this time slot.
         
         Generate a TimeAction list which contais  each TimeAction for EnvNodes in this EnvRegion. 
@@ -353,19 +342,19 @@ class EnvRegionTemplate():
     """Describes a template for generating EnvRegions"""
 
     def __init__(self):
-        self.template = []
+        self.template:list[tuple[str,EnvNodeTemplate]] = []
 
-    def add_template_node(self, node_name, _node_template):
+    def add_template_node(self, node_name:str, _node_template:EnvNodeTemplate):
         self.template.append((node_name, _node_template))
     
 
 class EnvRegionFactory():
     """Generates EnvRegions based on a specific EnvRegionTemplate."""
 
-    def __init__(self, _template):
+    def __init__(self, _template:EnvRegionTemplate):
         self.region_template = _template
     
-    def Generate(self, _position):
+    def Generate(self, _position:tuple[float,float]):
         region = EnvRegion(_position)
 
         for c in self.region_template.template:
@@ -463,7 +452,6 @@ class EnvironmentGraph():
 
         # Logging data
         self.original_population_template = None
-        self.original_blocks = None
         self.original_block_template: population.BlockTemplate = None
         self.original_repeating_actions = None
 
@@ -719,8 +707,7 @@ class EnvironmentGraph():
     def add_blobs_traceable_property(self, key, value):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.traceable_properties[key] = value
-                blob.blob_factory.block_template.default_traceable_properties[key] = value
+                blob.set_traceable_property(key, value)
 
     def merge_node(self, node: EnvNode):
         i = 0
@@ -733,7 +720,7 @@ class EnvironmentGraph():
             while j < len(blob_list):   
                 other_blob: population.Blob = blob_list[j]
                 
-                if current_blob.mother_blob_id == other_blob.mother_blob_id and current_blob.traceable_properties == other_blob.traceable_properties:
+                if current_blob.mother_blob_id == other_blob.mother_blob_id and current_blob.compare_traceable_properties_to_other(other_blob):
                     current_blob.consume_blob(other_blob)
                     node.remove_blob(other_blob)
                 else:
@@ -748,6 +735,10 @@ class EnvironmentGraph():
             Grabs population according to a population template. and moves between nodes.
             quantity -1 moves every person matching template.
         """
+        
+        if values['quantity'] == 0:
+            return
+        
         origin_region = values['origin_region']
         if isinstance(origin_region, str):
             origin_region = self.get_region_by_name(origin_region)
@@ -875,7 +866,7 @@ class Routine():
         # self.time_actions[time].append(time_action)
         self.time_actions[str(hour)] = time_action
 
-    def process_routine(self, hour):
+    def process_routine(self, hour) -> list[TimeAction]:
         if str(hour) in self.time_actions:
             return self.time_actions[str(hour)]
         else:

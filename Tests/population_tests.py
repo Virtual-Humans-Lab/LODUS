@@ -1670,6 +1670,7 @@ class PopulationTests(unittest.TestCase):
         block_template.add_bucket('characteristic_D', ('value_D1', 'value_D2', 'value_D3'))
         block_template.add_bucket('characteristic_E', ('value_E1', 'value_E2'))
         block_template.add_bucket('characteristic_F', ('value_F1', 'value_F2'))
+        block_template.add_bucket('characteristic_G', ('value_G1', 'value_G2'))
         block_template.add_traceable_property('traceable_A', 0)
         blob_factory = BlobFactory(block_template)
         
@@ -1679,13 +1680,15 @@ class PopulationTests(unittest.TestCase):
         # B: Total population distributed in a two or more values, but not all - others sould be 0
         # C: Total population distributed in a single value - others sould be 0
         # D: Partial population in a single value - remaining population distributed in other values
-        # E: Empty dict - should be randomly distributed
-        # F: Not in profile - should be randomly distributed
+        # E: One value set to 0. Other value should be 100
+        # F: Empty dict - should be randomly distributed
+        # G: Not in profile - should be randomly distributed
         pop_profile = {'characteristic_A' : {'value_A1' : 30, 'value_A2' : 50, 'value_A3': 20},
                         'characteristic_B' : {'value_B1' : 40, 'value_B2': 60},
                         'characteristic_C' : {'value_C1' : 100},
                         'characteristic_D' : {'value_D1' : 30},
-                        'characteristic_E' : {}}
+                        'characteristic_E' : {'value_E1' : 0}, 
+                        'characteristic_F' : {}}
         
         # Case 1:
         # Create a Blob using the BlobFactory. 100 is the highest sum defined in a single characteristic (A, B and C) 
@@ -1698,7 +1701,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 1 Target Blob is not valid.')
         self.assertEqual(blob1_size, 100,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 6,
+        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 7,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob1.traceable_properties.keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
@@ -1710,6 +1713,7 @@ class PopulationTests(unittest.TestCase):
         
         # Verify that a value is as defined when the sum of all values is less than the requested amount
         self.assertTrue(values[3][0] == 30, 'Case 1 Sampled property value is not the expected amount')
+        self.assertTrue(values[4] == [0, 100], 'Case 1 Sampled property value is not the expected amount')
         
         # Case 2:
         # Requested population is higher than the max defined value, the following behaviours should occur:
@@ -1717,13 +1721,15 @@ class PopulationTests(unittest.TestCase):
         # B: Remaining population distributed in the undefined values - equal to (40, 60, 100)
         # C: Remaining population distributed in the undefined values - ranges of (100, 0-100, 0-100)
         # D: Remaining population distributed in the undefined values - ranges of (30, 0-170, 0-170)
-        # E: Empty dict - should be randomly distributed
-        # F: Not in profile - should be randomly distributed
+        # E: One value set to 0. Other value should be 200
+        # F: Empty dict - should be randomly distributed
+        # G: Not in profile - should be randomly distributed
         pop_profile = {'characteristic_A' : {'value_A1' : 30, 'value_A2' : 50, 'value_A3': 20},
                         'characteristic_B' : {'value_B1' : 40, 'value_B2': 60},
                         'characteristic_C' : {'value_C1' : 100},
                         'characteristic_D' : {'value_D1' : 30},
-                        'characteristic_E' : {}}
+                        'characteristic_E' : {'value_E1' : 0}, 
+                        'characteristic_F' : {}}
         
         # Create a Blob using the template. 200 is the more than the highest sum defined in a single characteristic (A, B and C)
         blob2 = blob_factory.GenerateProfile(0, 200, pop_profile)
@@ -1735,7 +1741,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 2 Target Blob is not valid.')
         self.assertEqual(blob2_size, 200,
                         'Case 2 Target Blob size is not the corrected amount.')
-        self.assertEqual(len(blob2.sampled_properties.buckets.keys()), 6,
+        self.assertEqual(len(blob2.sampled_properties.buckets.keys()), 7,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob2.traceable_properties.keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
@@ -1760,20 +1766,24 @@ class PopulationTests(unittest.TestCase):
         self.assertTrue(values[3][2] >= 0 and values[3][2] <= 170,
                         'Case 2 Sampled property value is not the expected amount')
         
-        
+        # Verify that a value is as defined when the sum of all values is less than the requested amount
+        self.assertTrue(values[4] == [0, 200], 'Case 2 Sampled property value is not the expected amount')
+                
         # Case 3:
         # Requested population is fewer than the max defined value, the following behaviours should occur:
         # A: Population distributed through all values - maximum values of (20, 20, 20)
         # B: Defined values reduced to fit requested amount - ranges of (0-20, 0-20, 0)
         # C: Defined values reduced to fit requested amount - equals to (20, 0, 0)
         # D: Defined values reduced to fit requested amount - equals of (30, 0-170, 0-170)
-        # E: Empty dict - should be randomly distributed
-        # F: Not in profile - should be randomly distributed
+        # E: One value set to 0. Other value should be 20
+        # F: Empty dict - should be randomly distributed
+        # G: Not in profile - should be randomly distributed
         pop_profile = {'characteristic_A' : {'value_A1' : 30, 'value_A2' : 50, 'value_A3': 20},
                         'characteristic_B' : {'value_B1' : 40, 'value_B2': 60},
                         'characteristic_C' : {'value_C1' : 100},
                         'characteristic_D' : {'value_D1' : 30},
-                        'characteristic_E' : {}}
+                        'characteristic_E' : {'value_E1' : 0}, 
+                        'characteristic_F' : {}}
         
         # Create a PropertyBlock using the template. 20 is the lower then the minimum defined in a single characteristic (D)
         blob3 = blob_factory.GenerateProfile(0, 20, pop_profile)
@@ -1785,7 +1795,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 3 Target Blob is not valid.')
         self.assertEqual(blob3_size, 20,
                         'Case 3 Target Blob size is not the corrected amount.')
-        self.assertEqual(len(blob3.sampled_properties.buckets.keys()), 6,
+        self.assertEqual(len(blob3.sampled_properties.buckets.keys()), 7,
                         'Case 3 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob3.traceable_properties.keys()), 1,
                         'Case 3 Target Blob traceable properties count is not the correct amount.')
@@ -1802,7 +1812,9 @@ class PopulationTests(unittest.TestCase):
         self.assertTrue(values[2] == [20,0,0], 'Case 3 Sampled property value is not the expected amount')
         self.assertTrue(values[3] == [20,0,0], 'Case 3 Sampled property value is not the expected amount')
         
-        
+        # Verify that a value is as defined when the sum of all values is less than the requested amount
+        self.assertTrue(values[4] == [0, 20], 'Case 3 Sampled property value is not the expected amount')
+                
         # Case 4:
         # Requested 0 population:
         blob4 = blob_factory.GenerateProfile(0, 0, pop_profile)

@@ -83,26 +83,99 @@
           "population_groups": [
             {
               "size": 100,
-              "traceable_properties": { },
+              "traceable_properties": {},
               "description": {
-                  "age": {
-                    "adults": 40,
-                    "elders": 20,
-                    "young": 15,
-                    "children": 25
-                  },
-                  "occupation": {
-                    "idle": 20,
-                    "student": 40,
-                    "worker": 40
-                  },
-                  "social_profile": {
-                    "low": 40,
-                    "mid": 35,
-                    "high": 25
-                  }
+                "age": {
+                  "adults": 40,
+                  "elders": 20,
+                  "young": 15,
+                  "children": 25
+                },
+                "occupation": {
+                  "idle": 20,
+                  "student": 40,
+                  "worker": 40
+                },
+                "social_profile": {
+                  "low": 40,
+                  "mid": 35,
+                  "high": 25
                 }
-              
+              }
+
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_B": 1
+              },
+              "description": {
+                "age": {
+                  "adults": 40,
+                  "elders": 20,
+                  "young": 15,
+                  "children": 25
+                },
+                "occupation": {
+                  "idle": 20,
+                  "student": 40,
+                  "worker": 40
+                },
+                "social_profile": {
+                  "low": 40,
+                  "mid": 35,
+                  "high": 25
+                }
+              }
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_A": "other_value"
+              },
+              "description": {
+                "age": {
+                  "adults": 40,
+                  "elders": 20,
+                  "young": 15,
+                  "children": 25
+                },
+                "occupation": {
+                  "idle": 20,
+                  "student": 40,
+                  "worker": 40
+                },
+                "social_profile": {
+                  "low": 40,
+                  "mid": 35,
+                  "high": 25
+                }
+              }
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_A": "other_value",
+                "traceable_B": 1
+              },
+              "description": {
+                "age": {
+                  "adults": 40,
+                  "elders": 20,
+                  "young": 15,
+                  "children": 25
+                },
+                "occupation": {
+                  "idle": 20,
+                  "student": 40,
+                  "worker": 40
+                },
+                "social_profile": {
+                  "low": 40,
+                  "mid": 35,
+                  "high": 25
+                }
+              }
             }
           ],
           "time_actions": [
@@ -204,7 +277,7 @@
           "population_groups": [
             {
               "size": 100,
-              "traceable_properties": { },
+              "traceable_properties": {},
               "description": {
                 "age": {
                   "adults": 40,
@@ -218,6 +291,28 @@
                   "worker": 40
                 }
               }
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_B": 1
+              },
+              "description": {}
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_A": "other_value"
+              },
+              "description": {}
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_A": "other_value",
+                "traceable_B": 1
+              },
+              "description": {}
             }
           ],
           "time_actions": [
@@ -315,7 +410,7 @@
           "population_groups": [
             {
               "size": 100,
-              "traceable_properties": { },
+              "traceable_properties": {},
               "description": {
                 "age": {
                   "adults": 40,
@@ -329,6 +424,28 @@
                   "worker": 40
                 }
               }
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_B": 1
+              },
+              "description": {}
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_A": "other_value"
+              },
+              "description": {}
+            },
+            {
+              "size": 100,
+              "traceable_properties": {
+                "traceable_A": "other_value",
+                "traceable_B": 1
+              },
+              "description": {}
             }
           ],
           "time_actions": [

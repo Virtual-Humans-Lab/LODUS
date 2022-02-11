@@ -41,6 +41,19 @@
             {
               "7": [
                 {
+                  "name": "gather_youngs_to_school",
+                  "type": "gather_population",
+                  "values": {
+                    "quantity": 5,
+                    "origin_region": "Petropolis",
+                    "node": "school",
+                    "population_template": {
+                      "age": "young",
+                      "occupation": "student"
+                    }
+                  }
+                },
+                {
                   "name": "gather_children_to_school",
                   "type": "gather_population",
                   "values": {
@@ -83,7 +96,10 @@
           "population_groups": [
             {
               "size": 100,
-              "traceable_properties": { },
+              "traceable_properties": {
+                "traceable_A": "other_value",
+                "traceable_B": 1
+              },
               "description": {
                   "age": {
                     "adults": 40,

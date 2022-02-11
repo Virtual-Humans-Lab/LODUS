@@ -97,10 +97,6 @@ class PropertyBucket():
         if isinstance(key, set):
             if len(key) == 0: return sum(self.values.values())
             else: return sum([self.values[k] for k in key])
-        # if isinstance(key, list):
-        #     return sum([self.values[k] for k in set(key)])
-        # if isinstance(key, set):
-        #     return sum([self.values[k] for k in key])
     
     # bruteforcey
     def set_values_rand(self, keys, population = 0):
@@ -464,9 +460,7 @@ class PopTemplate():
             return False
         if self.traceable_properties is None:
             return False
-        if not bool(self.traceable_properties):
-            return False
-        return True
+        return bool(self.traceable_properties)
 
     def compare(self, other):
         if self.blob_id != other.blob_id:
@@ -518,7 +512,7 @@ class BlobFactory():
     def __init__(self, block_template:BlockTemplate):
         self.block_template:BlockTemplate = block_template
     
-    def Generate(self, _mother_blob_id, _population):
+    def Generate(self, _mother_blob_id: int, _population: int, traceable_prop_override:dict = {}):
         """Generates a new Blob based on a pre-defined template.
         
         Params:
@@ -534,9 +528,11 @@ class BlobFactory():
             return None
         blob = Blob(_mother_blob_id, _population, self)
         blob.initialize_blocks(self.block_template, _population)
+        for k,v in traceable_prop_override.items():
+            blob.traceable_properties[k] = v
         return blob
 
-    def GenerateEmpty(self, _mother_blob_id):
+    def GenerateEmpty(self, _mother_blob_id, traceable_prop_override:dict = {}):
         """Generates a new empty Blob based on a pre-defined template.
         
         Params:
@@ -548,10 +544,12 @@ class BlobFactory():
         if not bool(self.block_template.buckets):
             return None
         blob = Blob(_mother_blob_id, 0, self)
-        blob.initialize_blocks_empty(self.block_template, 0)
+        blob.initialize_blocks_empty(self.block_template)
+        for k,v in traceable_prop_override.items():
+            blob.traceable_properties[k] = v
         return blob
 
-    def GenerateProfile(self,_mother_blob_id, _population, _profile):
+    def GenerateProfile(self,_mother_blob_id, _population, _profile, traceable_prop_override:dict = {}):
         """Generates a new Blob based on a pre-defined template, population quantity and population profile.
 
         Example of profile:
@@ -574,6 +572,8 @@ class BlobFactory():
             return None
         blob = Blob(_mother_blob_id, _population, self)
         blob.initialize_blocks_profile(self.block_template, _population, _profile)
+        for k,v in traceable_prop_override.items():
+            blob.traceable_properties[k] = v
         return blob
 
 class Blob():
@@ -613,12 +613,12 @@ class Blob():
         self.spawning_node = None
         self.frame_origin_node = None
         self.previous_node = None
-
+              
     def initialize_blocks(self, block_template:BlockTemplate, population):
         self.sampled_properties = block_template.Generate(population)
         self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
 
-    def initialize_blocks_empty(self, block_template:BlockTemplate, population):
+    def initialize_blocks_empty(self, block_template:BlockTemplate):
         self.sampled_properties = block_template.GenerateEmpty()
         self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
 
@@ -675,7 +675,7 @@ class Blob():
             new_blob.traceable_properties[k] = v
         return new_blob
     
-    def grab_population(self, quantity, population_template = None):
+    def grab_population(self, quantity, population_template = None)->Blob:
         """Grabs a population from this Blob.
         
         Returns either a new Blob, or the own blob, if it matches the entire population.
@@ -694,7 +694,7 @@ class Blob():
         else:
             return self.split_blob(quantity, population_template)
 
-    def get_population_size(self, population_template:PopTemplate = None):
+    def get_population_size(self, population_template:PopTemplate = None)->int:
         """Gets the population size matching a PopTemplate.
 
         If population_template is None, gets total population size.
@@ -726,21 +726,22 @@ class Blob():
         # If PopTemplate does not have traceable properties defined
         if not population_template.has_traceable_properties():
             return True
-
+    
         # Compares traceable properties set in the PopTemplate
         # The PopTemplate may have fewer properties than the Blob
         for k,v in population_template.traceable_properties.items():
             if k not in self.traceable_properties.keys():
                 sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
             if isinstance(v,(list,set)):
-                return self.traceable_properties[k] in v
-            if self.traceable_properties[k] != v:
+                if self.traceable_properties[k] not in v:
+                    return False
+            elif self.traceable_properties[k] != v:
                 return False
-
+            
         # All defined properties matched
         return True
 
-    def compare_traceable_properties_to_other(self, other_blob, check_missing_keys = True):
+    def compare_traceable_properties_to_other(self, other_blob: Blob, check_missing_keys = True):
         if check_missing_keys:
             for k in self.traceable_properties.keys():
                 if k not in other_blob.traceable_properties.keys():
@@ -765,7 +766,7 @@ class Blob():
             return
         if self.compare_traceable_properties_to_other(blob):
             self.sampled_properties.add_block(blob.sampled_properties)
-
+            
     def verbose_str(self):
         return "{0} {1} {2}".format(self, self.traceable_properties, self.sampled_properties)
 
@@ -869,7 +870,7 @@ if __name__ == "__main__":
     # print("************")
 
     # print("\nBLOB 1 CONSUMING BLOB 4 AFTER CHANGE - IS A MATCH")
-    # dummyBlob4.traceable_properties['vaccine_level'] = 0
+    # dummyBlob4.set_traceable_property('vaccine_level', 0)
     # dummyBlob.consume_blob(dummyBlob4)
     # print("DummyPopTemplate", dummyPopTemplate)
     # print("------------")
