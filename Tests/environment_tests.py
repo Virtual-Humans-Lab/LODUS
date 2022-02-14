@@ -3681,9 +3681,9 @@ def suite():
     suite.addTest(EnvironmentTests('test_graph_consume_time_action_move_population'))
     suite.addTest(EnvironmentTests('test_graph_consume_time_action_move_population_with_template'))
     suite.addTest(EnvironmentTests('test_graph_consume_time_action_move_population_with_complementing_templates'))
-    
     suite.addTest(EnvironmentTests('test_graph_consume_time_action_move_population_traceable_properties'))
     suite.addTest(EnvironmentTests('test_graph_consume_time_action_move_population_traceable_properties_multiple_values'))
+    
     #     ## consume time action
     #         ## converge population
     # suite.addTest(EnvironmentTests('test_graph_converge_population')) 

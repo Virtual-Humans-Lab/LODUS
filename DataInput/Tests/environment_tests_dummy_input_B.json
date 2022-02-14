@@ -37,7 +37,7 @@
       "nodes": {
         "school": {
           "population_groups": [],
-          "time_actions": [
+          "time_actions":
             {
               "7": [
                 {
@@ -55,11 +55,10 @@
                 }
               ]
             }
-          ]
         },
         "work": {
           "population_groups": [],
-          "time_actions": [
+          "time_actions":
             {
               "7": [
                 {
@@ -77,7 +76,7 @@
                 }
               ]
             }
-          ]
+          
         },
         "home": {
           "population_groups": [
@@ -178,7 +177,7 @@
               }
             }
           ],
-          "time_actions": [
+          "time_actions":
             {
               "18": [
                 {
@@ -193,7 +192,7 @@
                 }
               ]
             }
-          ]
+          
         }
       },
       "neighbors": [
@@ -218,7 +217,7 @@
       "nodes": {
         "school": {
           "population_groups": [],
-          "time_actions": [
+          "time_actions":
             {
               "7": [
                 {
@@ -249,11 +248,11 @@
                 }
               ]
             }
-          ]
+          
         },
         "work": {
           "population_groups": [],
-          "time_actions": [
+          "time_actions":
             {
               "7": [
                 {
@@ -271,7 +270,7 @@
                 }
               ]
             }
-          ]
+          
         },
         "home": {
           "population_groups": [
@@ -315,7 +314,7 @@
               "description": {}
             }
           ],
-          "time_actions": [
+          "time_actions":
             {
               "18": [
                 {
@@ -330,7 +329,7 @@
                 }
               ]
             }
-          ]
+          
         }
       }
     },
@@ -351,7 +350,7 @@
       "nodes": {
         "school": {
           "population_groups": [],
-          "time_actions": [
+          "time_actions":
             {
               "7": [
                 {
@@ -382,11 +381,11 @@
                 }
               ]
             }
-          ]
+          
         },
         "work": {
           "population_groups": [],
-          "time_actions": [
+          "time_actions":
             {
               "7": [
                 {
@@ -404,7 +403,7 @@
                 }
               ]
             }
-          ]
+          
         },
         "home": {
           "population_groups": [
@@ -448,7 +447,7 @@
               "description": {}
             }
           ],
-          "time_actions": [
+          "time_actions":
             {
               "18": [
                 {
@@ -464,7 +463,7 @@
                 }
               ]
             }
-          ]
+          
         }
       }
     }

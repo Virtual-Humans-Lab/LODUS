@@ -39,7 +39,7 @@ def generate_EnvironmentGraph(env_input):
             for k in sp:
                 block_template.add_bucket(k, sp[k])
 
-        pop_factory = BlobFactory(block_template)
+        blob_factory = BlobFactory(block_template)
         env.original_block_template = block_template
 
         # Process repeating global actions
@@ -58,9 +58,7 @@ def generate_EnvironmentGraph(env_input):
             for node_k, node_value in region_description['nodes'].items():
                 node_template = EnvNodeTemplate()
 
-               
                 for key, characteristic in node_value.items():
-                   
                     # Add characteristics to the EnvNode
                     if key == 'characteristics':
                         for a, b in characteristic.items():
@@ -68,24 +66,20 @@ def generate_EnvironmentGraph(env_input):
 
                     elif key == 'population_groups':
                         for group in characteristic:
-                            node_template.add_blob_description(group['size'],group['traceable_properties'],group['description'], pop_factory
-                            )
+                            node_template.add_blob_description(group['size'],group['traceable_properties'],group['description'], blob_factory)
 
                     # Add TimeActions to the EnvNode
                     elif key == 'time_actions':
-                        # Each Node description contains a list of frames
-                        for frame_list in characteristic:
-                            # Each frame contains a list of TimeActions
-                            for frame_key, actions_list in frame_list.items():
-                                node_actions = []
-                                # Each TimeAction description in the actions list
-                                for _a in actions_list:
-                                    action = TimeAction(_a['type'], _a['values'])
-                                    node_actions.append(action)
-                                node_template.add_routine_template(frame_key, node_actions)
+                        # Each frame contains a list of TimeActions
+                        for frame_key, actions_list in characteristic.items():
+                            node_actions = []
+                            # Each TimeAction description in the actions list
+                            for _a in actions_list:
+                                action = TimeAction(_a['type'], _a['values'])
+                                node_actions.append(action)
+                            node_template.add_routine_template(frame_key, node_actions)
 
-
-            region_template.add_template_node(node_k, node_template)
+                region_template.add_template_node(node_k, node_template)
             
             env.add_region(region_description['world_position'], region_template, region_description['name'])
             env.region_list[-1].long_lat = region_description['long_lat_position']

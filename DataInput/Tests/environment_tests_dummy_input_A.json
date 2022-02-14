@@ -37,8 +37,7 @@
       "nodes": {
         "school": {
           "population_groups": [],
-          "time_actions": [
-            {
+          "time_actions": {
               "7": [
                 {
                   "name": "gather_youngs_to_school",
@@ -68,12 +67,10 @@
                 }
               ]
             }
-          ]
         },
         "work": {
           "population_groups": [],
-          "time_actions": [
-            {
+          "time_actions": {
               "7": [
                 {
                   "name": "adults_come_to_work",
@@ -90,7 +87,7 @@
                 }
               ]
             }
-          ]
+          
         },
         "home": {
           "population_groups": [
@@ -121,8 +118,7 @@
               
             }
           ],
-          "time_actions": [
-            {
+          "time_actions": {
               "18": [
                 {
                   "name": "everyone_goes_back_home",
@@ -136,7 +132,6 @@
                 }
               ]
             }
-          ]
         }
       },
       "neighbors": [
@@ -161,8 +156,7 @@
       "nodes": {
         "school": {
           "population_groups": [],
-          "time_actions": [
-            {
+          "time_actions": {
               "7": [
                 {
                   "name": "gather_youngs_to_school",
@@ -192,12 +186,10 @@
                 }
               ]
             }
-          ]
         },
         "work": {
           "population_groups": [],
-          "time_actions": [
-            {
+          "time_actions": {
               "7": [
                 {
                   "name": "adults_come_to_work",
@@ -214,7 +206,6 @@
                 }
               ]
             }
-          ]
         },
         "home": {
           "population_groups": [
@@ -236,8 +227,7 @@
               }
             }
           ],
-          "time_actions": [
-            {
+          "time_actions": {
               "18": [
                 {
                   "name": "everyone_goes_back_home",
@@ -251,7 +241,6 @@
                 }
               ]
             }
-          ]
         }
       }
     },
@@ -272,8 +261,7 @@
       "nodes": {
         "school": {
           "population_groups": [],
-          "time_actions": [
-            {
+          "time_actions": {
               "7": [
                 {
                   "name": "gather_youngs_to_school",
@@ -303,12 +291,10 @@
                 }
               ]
             }
-          ]
         },
         "work": {
           "population_groups": [],
-          "time_actions": [
-            {
+          "time_actions": {
               "7": [
                 {
                   "name": "adults_come_to_work",
@@ -325,7 +311,6 @@
                 }
               ]
             }
-          ]
         },
         "home": {
           "population_groups": [
@@ -347,8 +332,7 @@
               }
             }
           ],
-          "time_actions": [
-            {
+          "time_actions": {
               "18": [
                 {
                   "name": "everyone_goes_back_home",
@@ -363,7 +347,6 @@
                 }
               ]
             }
-          ]
         }
       }
     }

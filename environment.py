@@ -707,7 +707,7 @@ class EnvironmentGraph():
     def add_blobs_traceable_property(self, key, value):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.set_traceable_property(key, value)
+                blob.traceable_properties[key] = value
 
     def merge_node(self, node: EnvNode):
         i = 0
