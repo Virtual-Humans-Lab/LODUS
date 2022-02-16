@@ -1,4 +1,5 @@
 from __future__ import annotations
+from pprint import pprint
 import population
 import copy
 import util
@@ -708,6 +709,19 @@ class EnvironmentGraph():
         for node in self.node_list:
             for blob in node.contained_blobs:
                 blob.traceable_properties[key] = value
+                
+    # def lambda_blobs_traceable_property(self, key, lambda_funtion):
+    #     for node in self.node_list:
+    #         for blob in node.contained_blobs:
+    #             blob.traceable_properties[key] = lambda_funtion(blob.traceable_properties[key])
+                #print("days", blob.traceable_properties[key])
+                
+    def lambda_blobs_traceable_property(self, key, lambda_funtion):
+        for node in self.node_list:
+            for blob in node.contained_blobs:
+                blob.traceable_properties[key] = lambda_funtion(blob, blob.traceable_properties[key])
+                if blob.traceable_properties["vaccine_level"] == 3:
+                    print((blob.blob_id,blob.traceable_properties["vaccine_level"], blob.traceable_properties["days_since_last_vaccine"], blob.get_population_size(), node.containing_region_name))
 
     def merge_node(self, node: EnvNode):
         i = 0

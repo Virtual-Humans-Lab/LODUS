@@ -1,32 +1,24 @@
 {
   "population_template": {
-    "age": [
-      "adults",
-      "elders",
-      "young",
-      "children"
-    ],
-    "occupation": [
-      "idle",
-      "student",
-      "worker"
-    ],
-    "social_profile": [
-      "low",
-      "mid",
-      "high"
-    ]
+    "traceable_properties": {},
+    "sampled_properties": {
+      "age": [
+        "adults",
+        "elders",
+        "young",
+        "children"
+      ],
+      "occupation": [
+        "idle",
+        "student",
+        "worker"
+      ]
+    }
   },
-  "block_types": [
-    "susceptible",
-    "infected",
-    "removed",
-    "vaccinated"
-  ],
   "repeating_global_actions": [
     {
-      "frames": [ 9, 10 ,12 ],
-      "type": "vaccinate2",
+      "frames": [ 9, 10, 12 ],
+      "type": "vaccinate",
       "values": {
         "node_name": "pharmacy",
         "population_template": {}
@@ -54,27 +46,6 @@
         "Santana",
         "Menino Deus"
       ],
-      "population": [
-        13804,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 6904,
-            "elders": 2760,
-            "young": 2760,
-            "children": 1380
-          },
-          "occupation": {
-            "idle": 4140,
-            "student": 2760,
-            "worker": 6904
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -90,7 +61,27 @@
               103.99069556314498,
               -1433.4860698804259
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 13804,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 6904,
+                  "elders": 2760,
+                  "young": 2760,
+                  "children": 1380
+                },
+                "occupation": {
+                  "idle": 4140,
+                  "student": 2760,
+                  "worker": 6904
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -106,7 +97,9 @@
               458.67767676431686,
               -2129.9575969800353
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -122,7 +115,9 @@
               138.52452429849654,
               -1875.2422649487853
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -138,7 +133,9 @@
               538.19182166177779,
               -1974.2082988843322
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -154,7 +151,9 @@
               530.18266638834029,
               -1249.9621440991759
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -170,7 +169,9 @@
               94.4446292789653,
               -1630.9140178784728
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -186,7 +187,9 @@
               481.45814856607467,
               -1234.5239116773009
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "shopping_mall": {
           "characteristics": {
@@ -202,7 +205,9 @@
               635.79901465494186,
               -1262.0099346265197
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -229,27 +234,6 @@
         "Centro",
         "Moinhos de Vento"
       ],
-      "population": [
-        11593,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 5798,
-            "elders": 2318,
-            "young": 2318,
-            "children": 1159
-          },
-          "occupation": {
-            "idle": 3477,
-            "student": 2318,
-            "worker": 5798
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -265,7 +249,27 @@
               798.86066632997245,
               1243.3664478827268
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 11593,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 5798,
+                  "elders": 2318,
+                  "young": 2318,
+                  "children": 1159
+                },
+                "occupation": {
+                  "idle": 3477,
+                  "student": 2318,
+                  "worker": 5798
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -281,7 +285,9 @@
               521.7753830505535,
               348.03557630069554
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -297,7 +303,9 @@
               83.688377435319126,
               1042.2281727362424
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -313,7 +321,9 @@
               854.67234044801444,
               1013.5755848456174
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -329,7 +339,9 @@
               205.08394628297538,
               509.964394049719
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -345,7 +357,9 @@
               1108.6596298767254,
               193.91774793155491
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -371,27 +385,6 @@
         "Cidade Baixa",
         "Praia de Belas"
       ],
-      "population": [
-        39153,
-        1,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 19579,
-            "elders": 7830,
-            "young": 7830,
-            "children": 3915
-          },
-          "occupation": {
-            "idle": 11745,
-            "student": 7830,
-            "worker": 19579
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -407,7 +400,27 @@
               -922.80529776029289,
               1644.8078522342257
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 39154,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 19579,
+                  "elders": 7830,
+                  "young": 7830,
+                  "children": 3915
+                },
+                "occupation": {
+                  "idle": 11745,
+                  "student": 7830,
+                  "worker": 19579
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -423,7 +436,9 @@
               -668.73767080716789,
               486.64891668735072
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -439,7 +454,9 @@
               -1823.2809752505273,
               1425.4416718143038
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -455,7 +472,9 @@
               -891.19525137357414,
               1533.554007019382
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -471,7 +490,9 @@
               -1492.5172728579491,
               581.04112860141322
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -487,7 +508,9 @@
               -1524.1107787173241,
               980.628596748691
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -503,7 +526,9 @@
               -1124.8630942385644,
               339.98229071078822
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "shopping_mall": {
           "characteristics": {
@@ -519,7 +544,9 @@
               -1007.2588500063866,
               1553.086721863132
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -545,27 +572,6 @@
         "Menino Deus",
         "Praia de Belas"
       ],
-      "population": [
-        15379,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 7692,
-            "elders": 3075,
-            "young": 3075,
-            "children": 1537
-          },
-          "occupation": {
-            "idle": 4612,
-            "student": 3075,
-            "worker": 7692
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -581,7 +587,27 @@
               -954.49386355280876,
               4.5485692997463048
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 15379,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 7692,
+                  "elders": 3075,
+                  "young": 3075,
+                  "children": 1537
+                },
+                "occupation": {
+                  "idle": 4612,
+                  "student": 3075,
+                  "worker": 7692
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -597,7 +623,9 @@
               -667.550679653883,
               -2.3568109492771327
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -613,7 +641,9 @@
               -898.055448025465,
               -434.75749149126932
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -629,7 +659,9 @@
               -789.29130312800407,
               -505.60955753130838
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -645,7 +677,9 @@
               -1055.5686011016369,
               -692.64712466998026
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -661,7 +695,9 @@
               -1131.8102087676525,
               -263.30754794878885
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -688,27 +724,6 @@
         "Rio Branco",
         "Santa Cecília"
       ],
-      "population": [
-        961,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 481,
-            "elders": 192,
-            "young": 192,
-            "children": 96
-          },
-          "occupation": {
-            "idle": 288,
-            "student": 192,
-            "worker": 481
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -724,7 +739,27 @@
               -0.83669824246317148,
               4.2822721507400274
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 961,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 481,
+                  "elders": 192,
+                  "young": 192,
+                  "children": 96
+                },
+                "occupation": {
+                  "idle": 288,
+                  "student": 192,
+                  "worker": 481
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -740,7 +775,9 @@
               178.00645666476339,
               -416.39210529066622
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -756,7 +793,9 @@
               -170.60940332058817,
               134.39712505601346
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -772,7 +811,9 @@
               44.1837790524587,
               -430.22196979261935
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -788,7 +829,9 @@
               -274.70486230496317,
               209.75335674546659
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -804,7 +847,9 @@
               -11.462644287385046,
               -215.28443927504122
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -820,7 +865,9 @@
               111.57663183566183,
               113.87833004258573
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -843,27 +890,6 @@
         "Independência",
         "Centro"
       ],
-      "population": [
-        11596,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 5799,
-            "elders": 2319,
-            "young": 2319,
-            "children": 1159
-          },
-          "occupation": {
-            "idle": 3478,
-            "student": 2319,
-            "worker": 5799
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -879,7 +905,27 @@
               851.47489793039858,
               1947.6198968552053
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 11596,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 5799,
+                  "elders": 2319,
+                  "young": 2319,
+                  "children": 1159
+                },
+                "occupation": {
+                  "idle": 3478,
+                  "student": 2319,
+                  "worker": 5799
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -895,7 +941,9 @@
               814.49436814524233,
               2217.1494950912893
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -911,7 +959,9 @@
               262.061918804422,
               1867.5791864059865
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -927,7 +977,9 @@
               351.56771714426577,
               1812.850548710674
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -943,7 +995,9 @@
               982.793119976297,
               2375.7267999313772
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -959,7 +1013,9 @@
               217.4792466852814,
               2757.2383050583303
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -984,27 +1040,6 @@
         "Bom Fim",
         "Centro"
       ],
-      "population": [
-        8112,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 4057,
-            "elders": 1622,
-            "young": 1622,
-            "children": 811
-          },
-          "occupation": {
-            "idle": 2433,
-            "student": 1622,
-            "worker": 4057
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -1020,7 +1055,27 @@
               893.06724255066365,
               1376.9545444329269
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 8112,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 4057,
+                  "elders": 1622,
+                  "young": 1622,
+                  "children": 811
+                },
+                "occupation": {
+                  "idle": 2433,
+                  "student": 1622,
+                  "worker": 4057
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -1036,7 +1091,9 @@
               374.69967358093709,
               1758.0678867180832
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -1052,7 +1109,9 @@
               811.60828869324178,
               1956.7830661614425
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -1068,7 +1127,9 @@
               236.36294262390584,
               1842.7440036614425
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -1084,7 +1145,9 @@
               1269.3927888153121,
               1372.7413600762375
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -1100,7 +1163,9 @@
               215.87780468445271,
               1587.2597812493332
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -1116,7 +1181,9 @@
               244.59393017273396,
               1450.9988025506027
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "shopping_mall": {
           "characteristics": {
@@ -1132,7 +1199,9 @@
               337.20461742859334,
               924.57868994073942
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -1155,27 +1224,6 @@
         "Azenha",
         "Praia de Belas"
       ],
-      "population": [
-        31650,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 15825,
-            "elders": 6330,
-            "young": 6330,
-            "children": 3165
-          },
-          "occupation": {
-            "idle": 9495,
-            "student": 6330,
-            "worker": 15825
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -1191,7 +1239,27 @@
               -440.67711704876274,
               -2198.3879013033584
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 31650,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 15825,
+                  "elders": 6330,
+                  "young": 6330,
+                  "children": 3165
+                },
+                "occupation": {
+                  "idle": 9495,
+                  "student": 6330,
+                  "worker": 15825
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -1207,7 +1275,9 @@
               -159.27695530559868,
               -1724.5954055758193
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -1223,7 +1293,9 @@
               -840.05207127239555,
               -1570.4894332857803
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -1239,7 +1311,9 @@
               -38.475563704036176,
               -2108.850944516249
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -1255,7 +1329,9 @@
               -717.96587437298149,
               -2196.4171371432021
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -1271,7 +1347,9 @@
               -814.60514134075493,
               -2127.9890670748428
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -1287,7 +1365,9 @@
               -407.80414646770805,
               -1237.0618209810928
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -1311,27 +1391,6 @@
         "Independência",
         "Bom Fim"
       ],
-      "population": [
-        11937,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 5970,
-            "elders": 2387,
-            "young": 2387,
-            "children": 1193
-          },
-          "occupation": {
-            "idle": 3580,
-            "student": 2387,
-            "worker": 5970
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -1347,7 +1406,27 @@
               1792.663447085768,
               2710.332339416258
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 11937,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 5970,
+                  "elders": 2387,
+                  "young": 2387,
+                  "children": 1193
+                },
+                "occupation": {
+                  "idle": 3580,
+                  "student": 2387,
+                  "worker": 5970
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -1363,7 +1442,9 @@
               1043.2497736848891,
               2322.0861541135237
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -1379,7 +1460,9 @@
               967.10805005207658,
               1876.476138244383
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -1395,7 +1478,9 @@
               1193.7785212434828,
               1569.59549249243
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -1411,7 +1496,9 @@
               1494.3209864534438,
               1308.9139434201643
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -1427,7 +1514,9 @@
               1526.9823023714125,
               1772.0111419064924
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -1443,7 +1532,9 @@
               2095.1863886751235,
               1922.0656362278387
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "shopping_mall": {
           "characteristics": {
@@ -1459,7 +1550,9 @@
               1471.9022700227797,
               1882.788752685301
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -1482,27 +1575,6 @@
         "Cidade Baixa",
         "Menino Deus"
       ],
-      "population": [
-        2281,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 1141,
-            "elders": 456,
-            "young": 456,
-            "children": 228
-          },
-          "occupation": {
-            "idle": 684,
-            "student": 456,
-            "worker": 1141
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -1518,7 +1590,27 @@
               -1530.2586491676047,
               -442.8054550262168
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 2281,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 1141,
+                  "elders": 456,
+                  "young": 456,
+                  "children": 228
+                },
+                "occupation": {
+                  "idle": 684,
+                  "student": 456,
+                  "worker": 1141
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -1534,7 +1626,9 @@
               -1200.6358693214133,
               -1697.9272201629356
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -1550,7 +1644,9 @@
               -1201.273000058718,
               -1117.4898288818076
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -1566,7 +1662,9 @@
               -1266.3488972755149,
               -1539.6751449676231
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -1582,7 +1680,9 @@
               -1191.3081868262962,
               -1662.5482528777793
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -1598,7 +1698,9 @@
               -1209.1970418067649,
               -606.2084091277793
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "stadium": {
           "characteristics": {
@@ -1614,7 +1716,9 @@
               -838.69908648449928,
               -1054.7314498992637
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "shopping_mall": {
           "characteristics": {
@@ -1630,7 +1734,9 @@
               -2093.9506733985618,
               -825.6999862762168
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -1656,27 +1762,6 @@
         "Bom Fim",
         "Farroupilha"
       ],
-      "population": [
-        17531,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 8766,
-            "elders": 3506,
-            "young": 3506,
-            "children": 1753
-          },
-          "occupation": {
-            "idle": 5259,
-            "student": 3506,
-            "worker": 8766
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -1692,7 +1777,27 @@
               1777.7626688573509,
               1105.2820178880356
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 17531,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 8766,
+                  "elders": 3506,
+                  "young": 3506,
+                  "children": 1753
+                },
+                "occupation": {
+                  "idle": 5259,
+                  "student": 3506,
+                  "worker": 8766
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -1708,7 +1813,9 @@
               1404.8334925267845,
               428.78552740952
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -1724,7 +1831,9 @@
               2224.2444422338158,
               1190.1808521165513
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -1740,7 +1849,9 @@
               1373.0958521459252,
               544.24695319077
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -1756,7 +1867,9 @@
               2100.2628748510033,
               647.75116461655125
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -1772,7 +1885,9 @@
               2017.720577487722,
               659.700135411229
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -1788,7 +1903,9 @@
               1625.4499781224877,
               1194.1232654466294
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -1812,27 +1929,6 @@
         "Santana",
         "Farroupilha"
       ],
-      "population": [
-        5768,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 2886,
-            "elders": 1153,
-            "young": 1153,
-            "children": 576
-          },
-          "occupation": {
-            "idle": 1729,
-            "student": 1153,
-            "worker": 2886
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -1848,7 +1944,27 @@
               1628.9772470761091,
               52.704374385531992
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 5768,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 2886,
+                  "elders": 1153,
+                  "young": 1153,
+                  "children": 576
+                },
+                "occupation": {
+                  "idle": 1729,
+                  "student": 1153,
+                  "worker": 2886
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -1864,7 +1980,9 @@
               1393.7879007626325,
               -474.10898010665551
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -1880,7 +1998,9 @@
               2125.3462808895856,
               49.499479366000742
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -1896,7 +2016,9 @@
               2446.4169901181012,
               -327.77388565475121
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -1912,7 +2034,9 @@
               1828.638421850279,
               413.66290099686012
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -1928,7 +2052,9 @@
               2277.9809549618512,
               300.20239074295387
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -1944,7 +2070,9 @@
               1136.819272832945,
               -489.71336548263207
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     },
@@ -1970,27 +2098,6 @@
         "Farroupilha",
         "Rio Branco"
       ],
-      "population": [
-        20723,
-        0,
-        0,
-        0
-      ],
-      "population_description": {
-        "susceptible": {
-          "age": {
-            "adults": 10363,
-            "elders": 4144,
-            "young": 4144,
-            "children": 2072
-          },
-          "occupation": {
-            "idle": 6216,
-            "student": 4144,
-            "worker": 10363
-          }
-        }
-      },
       "nodes": {
         "home": {
           "characteristics": {
@@ -2006,7 +2113,27 @@
               1058.9470753995702,
               -1432.5380807556212
             ]
-          }
+          },
+          "population_groups": [
+            {
+              "size": 20723,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 10363,
+                  "elders": 4144,
+                  "young": 4144,
+                  "children": 2072
+                },
+                "occupation": {
+                  "idle": 6216,
+                  "student": 4144,
+                  "worker": 10363
+                }
+              }
+            }
+          ],
+          "time_actions": {}
         },
         "work": {
           "characteristics": {
@@ -2022,7 +2149,9 @@
               1018.6459889737889,
               -1540.54217011109
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "school": {
           "characteristics": {
@@ -2038,7 +2167,9 @@
               886.77672627847642,
               -831.84153229370713
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "marketplace": {
           "characteristics": {
@@ -2054,7 +2185,9 @@
               1484.373055013828,
               -579.89040619507432
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "pharmacy": {
           "characteristics": {
@@ -2070,7 +2203,9 @@
               1201.3602605191991,
               -633.88607269898057
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "gas_station": {
           "characteristics": {
@@ -2086,7 +2221,9 @@
               1555.2529836026952,
               -1328.8113046325743
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         },
         "hospital": {
           "characteristics": {
@@ -2102,7 +2239,9 @@
               1128.3101582853124,
               -849.93102509155869
             ]
-          }
+          },
+          "population_groups": [],
+          "time_actions": {}
         }
       }
     }

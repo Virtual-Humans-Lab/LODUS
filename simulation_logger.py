@@ -16,7 +16,7 @@ class SimulationLogger():
 
 
         self.global_f = open('output_logs/' + base_filename + "//" + "global.csv", 'w', encoding='utf8')
-        self.global_f.write('Frame;Hour;Vacc0;Vacc1;Vacc2;dS;dI;dR;dV;\n')
+        self.global_f.write('Frame;Hour;Vacc0;Vacc1;Vacc2;Vacc3;dI;dR;dV;\n')
         
         self.neigh_f = open('output_logs/' + base_filename + "//" +  "neigh.csv", 'w', encoding='utf8')
         self.neigh_f.write('Frame;Hour;Neighbourhood;Vacc0;Vacc1;Vacc2;d0;d1;d2;Total;Locals;Outsiders;\n')
@@ -37,7 +37,7 @@ class SimulationLogger():
 
         self.data_to_record = set() #neighbourhood, global, graph, nodes, positions, metrics and neighbourhood_disserta
 
-        self.last_frame = (0, 0, 0)
+        self.last_frame = (0, 0, 0, 0)
         self.time_cycle = time_cycle
 
         self.neigh_last_frames = {}
@@ -264,6 +264,7 @@ class SimulationLogger():
         vac0_count = 0
         vac1_count = 0
         vac2_count = 0
+        vac3_count = 0
 
         vac0_template = PopTemplate()
         vac0_template.set_traceable_property('vaccine_level', 0)
@@ -273,17 +274,21 @@ class SimulationLogger():
 
         vac2_template = PopTemplate()
         vac2_template.set_traceable_property('vaccine_level', 2)
+        
+        vac3_template = PopTemplate()
+        vac3_template.set_traceable_property('vaccine_level', 3)
 
         for node in graph.node_list:
             vac0_count += node.get_population_size(vac0_template)
             vac1_count += node.get_population_size(vac1_template)
             vac2_count += node.get_population_size(vac2_template)
+            vac3_count += node.get_population_size(vac3_template)
 
-        last_0, last_1, last_2 = self.last_frame
+        last_0, last_1, last_2, last_3 = self.last_frame
 
-        s = "{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, vac0_count, vac1_count, vac2_count, vac0_count - last_0, vac1_count - last_1, vac2_count - last_2)
+        s = "{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, vac0_count, vac1_count, vac2_count, vac3_count, vac0_count - last_0, vac1_count - last_1, vac2_count - last_2)
         
-        self.last_frame = vac0_count, vac1_count, vac2_count
+        self.last_frame = vac0_count, vac1_count, vac2_count, vac3_count
 
         self.global_f.write(s)
 

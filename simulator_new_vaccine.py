@@ -40,7 +40,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 10
+days = 80
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -78,10 +78,10 @@ Logging
 logger = SimulationLogger(f'{args["n"]}', day_duration)
 
 logger.set_to_record('global')
-#logger.set_to_record('neighbourhood')
+logger.set_to_record('neighbourhood')
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
-#logger.set_to_record('nodes')
+logger.set_to_record('nodes')
 #logger.set_to_record('positions')
 
 pop_temp = PopTemplate()
@@ -106,11 +106,10 @@ for i in range(simulation_steps):
     # These are defined in the input environment descriptor
     env_graph.update_time_step(i % day_duration, i)
     count = sum([len(nd.contained_blobs) for nd in env_graph.node_list])
-    # print(f"Number of blobs: {count}")
     #print(env_graph.get_population_size())
     
-    #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
-    #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
+    if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
+        print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
     
     logger.record_frame(env_graph, i)
     # Direct Action Invoke example

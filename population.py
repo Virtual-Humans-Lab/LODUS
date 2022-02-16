@@ -732,7 +732,10 @@ class Blob():
         for k,v in population_template.traceable_properties.items():
             if k not in self.traceable_properties.keys():
                 sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
-            if isinstance(v,(list,set)):
+            if callable(v):
+                if not v(self.traceable_properties[k]):
+                    return False
+            elif isinstance(v,(list,set)):
                 if self.traceable_properties[k] not in v:
                     return False
             elif self.traceable_properties[k] != v:
