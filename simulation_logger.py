@@ -1,46 +1,53 @@
+
 import environment
 from population import PopTemplate
 import os 
 import util
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
+
 import numpy as np
+import pandas as pd
+pd.options.plotting.backend = "plotly"
 from pathlib import Path
 
 import copy
+from enum import Enum
+
+class LoggerDefaultRecordKey(Enum):
+    BLOB_COUNT_GLOBAL = 0
+    BLOB_COUNT_REGION = 1
+    BLOB_COUNT_NODE = 2
+    ENV_GLOBAL_POPULATION = 3
+    ENV_REGION_POPULATION = 4
+    ENV_NODE_POPULATION = 5
 
 class SimulationLogger():
 
-    def __init__(self, base_filename, time_cycle=24):
-        self.base_filename = base_filename
-
-        Path('output_logs/' + base_filename).mkdir(parents=True, exist_ok=True)
-
-
-        self.global_f = open('output_logs/' + base_filename + "//" + "global.csv", 'w', encoding='utf8')
-        self.global_f.write('Frame;Hour;Vacc0;Vacc1;Vacc2;Vacc3;dI;dR;dV;\n')
+    
+    def __init__(self, base_filename, graph:environment.EnvironmentGraph, time_cycle=24):
+        self.graph = graph
         
-        self.neigh_f = open('output_logs/' + base_filename + "//" +  "neigh.csv", 'w', encoding='utf8')
-        self.neigh_f.write('Frame;Hour;Neighbourhood;Vacc0;Vacc1;Vacc2;d0;d1;d2;Total;Locals;Outsiders;\n')
-                
-        self.diss_f = open('output_logs/' + base_filename + "//" + "diss.csv", 'w', encoding='utf8')
-        self.diss_f.write('Frame;Hour;Neighbourhood;Total;Locals;Outsiders;home_total;home_locals;home_outsiders;work_total;work_locals;work_outsiders;\n')
-
-        self.nodes_f = open('output_logs/' + base_filename + "//" +  "nodes.csv", 'w', encoding='utf8')
-        self.nodes_f.write('Frame;Hour;Node;Total;Locals;Outsiders;\n')
-
-        self.nodes_sir_f = open('output_logs/' + base_filename + "//" +  "nodes_sir.csv", 'w', encoding='utf8')
-        self.nodes_sir_f.write('Frame;Hour;Date;NHnode;NHLat;NHLong;InnerNHnode;InnerLat;InnerLong;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;Total;Locals;Outsiders;\n')
-
-        #"Frame;Hour;Date;NHnode;NHLat;NHLong;InnerNHnode;InnerLat;InnerLong;Susceptible;Infected;Removed;dS;dI;dR;Total;Locals;Outsiders;"
-
-        self.positions_f = open('output_logs/' + base_filename + "//" + "node_positions.csv", 'w', encoding='utf8')
-        self.positions_f.write('Frame;ID;RegionPosition;NodeImagePosition;Quantity;\n')
-
-        self.data_to_record = set() #neighbourhood, global, graph, nodes, positions, metrics and neighbourhood_disserta
-
-        self.last_frame = (0, 0, 0, 0)
+        # Sets paths and create folders
+        self.base_filename = base_filename
+        self.base_path = 'output_logs/' + base_filename + '/'
+        self.data_frames_path = self.base_path + "/data_frames/"
+        self.figures_path = self.base_path + "/figures/"
+        self.html_plots_path = self.base_path + "/html_plots/"
+        Path(self.base_path).mkdir(parents=True, exist_ok=True)
+        Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
+        Path(self.figures_path).mkdir(parents=True, exist_ok=True)
+        Path(self.html_plots_path).mkdir(parents=True, exist_ok=True)
+        
+        self.data_to_record:set[LoggerDefaultRecordKey] = set()
+        self.plugins_to_record: list[environment.TimeActionPlugin] = []
+        
         self.time_cycle = time_cycle
 
-        self.neigh_last_frames = {}
+        self.global_last_frame = {}
+        self.regions_last_frame = {n:{} for n in self.graph.region_dict}
+        self.nodes_last_frame = {n:{} for n in self.graph.node_dict}
         self.nodes_sir_last_frames = {}
 
         self.logs = {}
@@ -55,12 +62,222 @@ class SimulationLogger():
 
 
         self.pop_template = None
+        
+        self.blob_global_count = []
+        self.blob_region_count = {r:[] for r in self.graph.region_dict}
+        self.blob_node_count = {n:[] for n in self.graph.node_dict}
+        
+        # Custom Logging
+        self.global_custom_templates: dict[str, PopTemplate] = {}
+        self.region_custom_templates: dict[str, PopTemplate] = {}
+        self.node_custom_templates: dict[str, PopTemplate] = {}
+        self.global_custom_line_plots: dict = {}
+        self.region_custom_line_plots: dict = {}
+        self.node_custom_line_plots: dict = {}
 
-    def set_to_record(self, type):
+    def set_default_data_to_record(self, type: LoggerDefaultRecordKey):
         self.data_to_record.add(type)
+        
+    def set_pluggin_to_record(self, p:environment.TimeActionPlugin):
+        assert isinstance(p, environment.TimeActionPlugin), "Argument should be a TimeActionPlugin"
+        self.plugins_to_record.append(p)
+        p.setup_logger(self)
+        
+    def add_global_custom_line_plot(self, _key:str, x_label:str, y_label:str, columns:list[str] = None, hours: list[str] =None):
+        self.global_custom_line_plots[_key] = (x_label, y_label, columns, hours)
+        
+    def add_region_custom_line_plot(self, _key:str, x_label:str, y_label:str, columns:list[str] = None, regions:list[str] = None, hours: list[str] =None):
+        self.region_custom_line_plots[_key] = (x_label, y_label, columns, regions, hours)
+        
+    def add_node_custom_line_plot(self, _key:str, x_label:str, y_label:str, columns:list[str] = None, node_types:list[str] = None, hours: list[str] =None):
+        self.node_custom_line_plots[_key] = (x_label, y_label, columns, node_types, hours)
+        
+    def start_logging(self):
+        
+        # Global data file
+        self.global_last_frame = {k:0 for k in self.global_custom_templates}
+        header = "Frame;Hour;Day"
+        if self.global_custom_templates: 
+            header += ';' + ';'.join(list(self.global_custom_templates.keys()))
+            header += ';d' + ';d'.join(list(self.global_custom_templates.keys()))
+        self.global_f = open(self.base_path + "global.csv", 'w', encoding='utf8')
+        self.global_f.write(header + '\n')
+        
+        # Regions data file
+        for n, r in self.graph.region_dict.items():
+            self.regions_last_frame[n]['__populations'] = [r.get_population_size()] * 2
+            for k in self.region_custom_templates:
+                self.regions_last_frame[n][k] = 0
+        header = "Frame;Hour;Day;Region;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders"
+        if self.region_custom_templates: 
+            header += ';' + ';'.join(list(self.region_custom_templates.keys()))
+            header += ';d' + ';d'.join(list(self.region_custom_templates.keys()))
+        self.regions_f = open(self.base_path +  "regions.csv", 'w', encoding='utf8')
+        self.regions_f.write(header + '\n')
+        
+        # Nodes data file
+        for _name, _node in self.graph.node_dict.items():
+            self.nodes_last_frame[_name]['__populations'] = [_node.get_population_size()] * 2
+            for k in self.node_custom_templates:
+                self.nodes_last_frame[_name][k] = 0
+        header = "Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders"
+        if self.node_custom_templates: 
+            header += ';' + ';'.join(list(self.node_custom_templates.keys()))
+            header += ';d' + ';d'.join(list(self.node_custom_templates.keys()))
+        self.nodes_f = open(self.base_path +  "nodes.csv", 'w', encoding='utf8')
+        self.nodes_f.write(header + '\n')
+                
+        self.diss_f = open(self.base_path + "diss.csv", 'w', encoding='utf8')
+        self.diss_f.write('Frame;Hour;Neighbourhood;Total;Locals;Outsiders;home_total;home_locals;home_outsiders;work_total;work_locals;work_outsiders;\n')
+
+        
+
+        self.nodes_sir_f = open(self.base_path +  "nodes_sir.csv", 'w', encoding='utf8')
+        self.nodes_sir_f.write('Frame;Hour;Date;NHnode;NHLat;NHLong;InnerNHnode;InnerLat;InnerLong;Susceptible;Infected;Removed;Vaccinated;dS;dI;dR;dV;Total;Locals;Outsiders;\n')
+
+        #"Frame;Hour;Date;NHnode;NHLat;NHLong;InnerNHnode;InnerLat;InnerLong;Susceptible;Infected;Removed;dS;dI;dR;Total;Locals;Outsiders;"
+
+        self.positions_f = open(self.base_path + "node_positions.csv", 'w', encoding='utf8')
+        self.positions_f.write('Frame;ID;RegionPosition;NodeImagePosition;Quantity;\n')
+
+    def stop_logging(self, show_figures: bool = True, export_html: bool = False, export_figures: bool = False):
+        self.global_f.close()
+        self.regions_f.close()
+        self.nodes_f.close()
+        self.positions_f.close()
+        self.diss_f.close()
+        
+        for p in self.plugins_to_record:
+            if isinstance(p, environment.TimeActionPlugin):
+                p.stop_logger()
+        
+        if not (show_figures or export_figures or export_html): return
+        
+        layout_update = {"font_size":24, "legend_font_size":18, "width": 1920, "height": 1080, "autosize":False}
+        self.process_blob_count_line_plots(show_figures, export_html, export_figures, layout_update)
+        self.process_env_population_line_plots(show_figures, export_html, export_figures, layout_update)
+        self.process_custom_line_plots(show_figures, export_html, export_figures, layout_update)
+            
+    
+    def record_frame(self, _graph:environment.EnvironmentGraph, _frame:int):
+        if LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL in self.data_to_record:
+            self.blob_global_count.append(_graph.get_blob_count())
+        if LoggerDefaultRecordKey.BLOB_COUNT_REGION in self.data_to_record:
+            for r,v in self.graph.region_dict.items():
+                self.blob_region_count[r].append(v.get_blob_count())
+        if LoggerDefaultRecordKey.BLOB_COUNT_NODE in self.data_to_record:
+            for n,v in self.graph.node_dict.items():
+                self.blob_node_count[n].append(len(v.contained_blobs))
+                
+        if LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION in self.data_to_record:
+            self.global_frame(_graph, _frame)
+        if LoggerDefaultRecordKey.ENV_REGION_POPULATION in self.data_to_record:
+            self.region_frame(_graph, _frame)
+        if LoggerDefaultRecordKey.ENV_NODE_POPULATION in self.data_to_record:
+            self.node_frame(_graph, _frame)
+            
+            
+        if 'graph' in self.data_to_record:
+            self.graph_frame(_graph, _frame)
+        if 'metrics' in self.data_to_record:
+            self.record_metrics(_graph, _frame)
+        if 'nodes_sir' in self.data_to_record:
+            self.node_sir_frame(_graph, _frame)
+        if 'positions' in self.data_to_record:
+            self.positions_frame(_graph, _frame)
+        if 'neighbourhood_disserta' in self.data_to_record:
+            self.disserta_frame(_graph, _frame)
+        
+        for p in self.plugins_to_record:
+            if isinstance(p,environment.TimeActionPlugin):
+                p.log_data(graph=_graph, frame=_frame)
+    
+    
+    
+    def global_frame(self, graph: environment.EnvironmentGraph, frame:int):
+        
+        # Sets the default row
+        _row = f"{frame};{frame % self.time_cycle};{frame // self.time_cycle}"
+        
+        # Adds any custom template data
+        _current_frame = {}
+        for h,pt in self.global_custom_templates.items():
+            _current_frame[h] = graph.get_population_size(pt)
+            _row += ";" + str(_current_frame[h])
+
+        # Adds deltas of any custom template data
+        for h in self.global_custom_templates:
+            _row += ";" + str(_current_frame[h] - self.global_last_frame[h])
+        
+        # Updates last frame and writes the data
+        self.global_last_frame = {k:v for k,v in _current_frame.items()}
+        self.global_f.write(_row + '\n')
+
+    def region_frame(self, graph: environment.EnvironmentGraph, frame:int):
+        
+        for _name, _rg in graph.region_dict.items():
+            # Gets populations from this frame
+            total_pop = _rg.get_population_size()
+            pop_template = PopTemplate()
+            pop_template.mother_blob_id = _rg.id
+            local_pop = _rg.get_population_size(pop_template)
+            outside_pop = total_pop - local_pop
+            
+            # Gets populations from last frame
+            last_total, last_local = self.regions_last_frame[_name]['__populations']
+            last_ouside = last_total - last_local
+            
+            # Sets the default row
+            _row = f"{frame};{frame % self.time_cycle};{frame // self.time_cycle};{_name};{total_pop};{local_pop};{outside_pop};{total_pop-last_total};{local_pop-last_local};{outside_pop-last_ouside}"
+            
+            
+            # Adds any custom data
+            _current_frame = {}
+            for h,pt in self.region_custom_templates.items():
+                _current_frame[h] = _rg.get_population_size(pt)
+                _row += ";" + str(_current_frame[h])
+             # Adds deltas of any custom template data
+            for h in self.region_custom_templates:
+                _row += ";" + str(_current_frame[h] - self.regions_last_frame[_name][h])
+
+            # Updates last frame and writes the data
+            self.regions_last_frame[_name] = {k:v for k,v in _current_frame.items()}
+            self.regions_last_frame[_name]['__populations'] = [total_pop, local_pop]
+            self.regions_f.write(_row + '\n')
+            
+    def node_frame(self, graph:environment.EnvironmentGraph, frame:int):
+        
+        for _name, _nd in graph.node_dict.items():
+            # Gets populations from this frame
+            total_pop = _nd.get_population_size()
+            pop_template = PopTemplate()
+            pop_template.mother_blob_id = _nd.id
+            local_pop = _nd.get_population_size(pop_template)
+            outside_pop = total_pop - local_pop
+            
+            # Gets populations from last frame
+            last_total, last_local = self.nodes_last_frame[_name]['__populations']
+            last_ouside = last_total - last_local
+            
+            # Sets the default row
+            _row = f"{frame};{frame % self.time_cycle};{frame // self.time_cycle};{_name};{total_pop};{local_pop};{outside_pop};{total_pop-last_total};{local_pop-last_local};{outside_pop-last_ouside}"
+                        
+            # Adds any custom data
+            _current_frame = {}
+            for h,pt in self.node_custom_templates.items():
+                _current_frame[h] = _nd.get_population_size(pt)
+                _row += ";" + str(_current_frame[h])
+            # Adds deltas of any custom template data
+            for h in self.node_custom_templates:
+                _row += ";" + str(_current_frame[h] - self.nodes_last_frame[_name][h])
+
+            # Updates last frame and writes the data
+            self.nodes_last_frame[_name] = {k:v for k,v in _current_frame.items()}
+            self.nodes_last_frame[_name]['__populations'] = [total_pop, local_pop]
+            self.nodes_f.write(_row + '\n')
 
 
-    def node_region_id2position(self, graph):
+    def node_region_id2position(self, graph: environment.EnvironmentGraph):
         region_f =  open('output_logs/' + self.base_filename + "//" + "region_ids.csv", 'w', encoding='utf8')
         region_f.write('ID;ImagePosition;Name;\n')
         node_f =  open('output_logs/' + self.base_filename + "//" +  "node_ids.csv", 'w', encoding='utf8')
@@ -93,62 +310,7 @@ class SimulationLogger():
         f.close()
         
 
-    def neighbourhood_frame(self, graph, frame):
-        
-        for region_name, region in graph.region_dict.items():
-            
-            if region.name not in self.neigh_last_frames:
-                self.neigh_last_frames[region.name] = (0,0,0)
-
-            last_frame = self.neigh_last_frames[region.name]
-
-            vac0_count = 0
-            vac1_count = 0
-            vac2_count = 0
-
-            vac0_template = PopTemplate()
-            vac0_template.set_traceable_property('vaccine_level', 0)
-
-            vac1_template = PopTemplate()
-            vac1_template.set_traceable_property('vaccine_level', 1)
-
-            vac2_template = PopTemplate()
-            vac2_template.set_traceable_property('vaccine_level', 2)
-
-            for node in region.node_list:
-                vac0_count += node.get_population_size(vac0_template)
-                vac1_count += node.get_population_size(vac1_template)
-                vac2_count += node.get_population_size(vac2_template)
-
-            totals = vac0_count + vac1_count + vac2_count
-            
-            
-            local_vac0 = 0
-            local_vac1 = 0
-            local_vac2 = 0
-
-            vac0_template.mother_blob_id = region.id
-            vac1_template.mother_blob_id = region.id
-            vac2_template.mother_blob_id = region.id
-
-            for node in region.node_list:
-                local_vac0 += node.get_population_size(vac0_template)
-                local_vac1 += node.get_population_size(vac1_template)
-                local_vac2 += node.get_population_size(vac2_template)
-
-            local_people =  local_vac0 + local_vac1 + local_vac2
-
-            l_0, l_1, l_2 = last_frame
-
-            s = f"{frame};{frame % self.time_cycle};{region.name};{vac0_count};{vac1_count};{vac2_count};{vac0_count - l_0};{vac1_count - l_1};{vac2_count - l_2};{totals};{local_people};{totals - local_people};\n"
-
-
-            last_frame = vac0_count, vac1_count, vac2_count
-
-            self.neigh_last_frames[region.name] = last_frame
-
-
-            self.neigh_f.write(s)
+    
 
     def disserta_frame(self, graph, frame):
         
@@ -174,20 +336,7 @@ class SimulationLogger():
             self.diss_f.write(s)
 
 
-    def node_frame(self, graph, frame):
-        
-        for node in graph.node_list:
-            tmp = copy.deepcopy(self.pop_template)
-
-            total = node.get_population_size(tmp)
-
-            tmp.mother_blob_id = graph.get_region_by_name(node.containing_region_name).id
-
-            local_people = node.get_population_size(tmp)
-
-            s = f"{frame};{frame % self.time_cycle};{node.get_unique_name()};{total};{local_people};{total - local_people};\n"
-
-            self.nodes_f.write(s)
+    
 
     def node_sir_frame(self, graph, frame):
         
@@ -260,37 +409,7 @@ class SimulationLogger():
         # dS;dI;dR;dV
         # Total;Locals;Outsiders;"
 
-    def global_frame(self, graph: environment.EnvironmentGraph, frame:int):
-        vac0_count = 0
-        vac1_count = 0
-        vac2_count = 0
-        vac3_count = 0
-
-        vac0_template = PopTemplate()
-        vac0_template.set_traceable_property('vaccine_level', 0)
-
-        vac1_template = PopTemplate()
-        vac1_template.set_traceable_property('vaccine_level', 1)
-
-        vac2_template = PopTemplate()
-        vac2_template.set_traceable_property('vaccine_level', 2)
-        
-        vac3_template = PopTemplate()
-        vac3_template.set_traceable_property('vaccine_level', 3)
-
-        for node in graph.node_list:
-            vac0_count += node.get_population_size(vac0_template)
-            vac1_count += node.get_population_size(vac1_template)
-            vac2_count += node.get_population_size(vac2_template)
-            vac3_count += node.get_population_size(vac3_template)
-
-        last_0, last_1, last_2, last_3 = self.last_frame
-
-        s = "{};{};{};{};{};{};{};{};\n".format(frame, frame % self.time_cycle, vac0_count, vac1_count, vac2_count, vac3_count, vac0_count - last_0, vac1_count - last_1, vac2_count - last_2)
-        
-        self.last_frame = vac0_count, vac1_count, vac2_count, vac3_count
-
-        self.global_f.write(s)
+    
 
 
     def node_od_matrix_frame(self, graph, frame, foreign_only = False):
@@ -591,28 +710,167 @@ class SimulationLogger():
         #         self.write_od_matrix(self.region_OD_matrix[i], region_od_matrix_file)
 
 
-    def record_frame(self, graph, frame):
-        if 'global' in self.data_to_record:
-            self.global_frame(graph, frame)
-        if 'neighbourhood' in self.data_to_record:
-            self.neighbourhood_frame(graph, frame)
-        if 'graph' in self.data_to_record:
-            self.graph_frame(graph, frame)
-        if 'metrics' in self.data_to_record:
-            self.record_metrics(graph, frame)
-        if 'nodes' in self.data_to_record:
-            self.node_frame(graph, frame)
-        if 'nodes_sir' in self.data_to_record:
-            self.node_sir_frame(graph, frame)
-        if 'positions' in self.data_to_record:
-            self.positions_frame(graph, frame)
-        if 'neighbourhood_disserta' in self.data_to_record:
-            self.disserta_frame(graph, frame)
-
-
-    def close(self):
-        self.global_f.close()
-        self.neigh_f.close()
-        self.nodes_f.close()
-        self.positions_f.close()
-        self.diss_f.close()
+    def process_blob_count_line_plots(self, show_figures: bool, export_html: bool, export_figures: bool, layout_update):
+        
+        figures = []
+        xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
+        
+        if LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL in self.data_to_record:
+            df = pd.DataFrame({'Blob Count': self.blob_global_count})
+            df = df.rename_axis('Simulation Frame')
+            df.to_csv(self.data_frames_path + 'blob_count_global.csv', sep = ';')
+            fig = px.line(df, y="Blob Count", title="Blob Count - Global")
+            fig.update_xaxes(xaxes_upt)
+            figures.append(fig)
+            
+            df = pd.DataFrame({'Blob Count': self.blob_global_count})
+            df = df.iloc[::24].reset_index(drop = True)
+            df.index = range(1,len(df)+1)
+            df.rename_axis('Simulation Day', inplace = True)
+            fig = px.line(df, y="Blob Count", title="Blob Count - Global - Hour 0", markers=True)
+            figures.append(fig)
+            
+            
+        if LoggerDefaultRecordKey.BLOB_COUNT_REGION in self.data_to_record:
+            df = pd.DataFrame(self.blob_region_count)
+            df = df.rename_axis('Simulation Frame').rename_axis('Region', axis=1)
+            df.to_csv(self.data_frames_path + 'blob_count_region.csv', sep = ';')
+            fig = px.line(df, labels={'value':'Blob Count'}, 
+                                            title="Blob Count - Per Region")
+            fig.update_xaxes(xaxes_upt)
+            figures.append(fig)
+            
+            df = pd.DataFrame(self.blob_region_count)
+            df = df.iloc[::24].reset_index(drop = True)
+            df.index = range(1,len(df)+1)
+            df = df.rename_axis('Simulation Day').rename_axis('Region', axis=1)
+            fig = px.line(df, labels={'value':'Blob Count'}, 
+                            title="Blob Count - Per Region - Hour 0", markers=True)
+            figures.append(fig)
+            
+        if LoggerDefaultRecordKey.BLOB_COUNT_NODE in self.data_to_record:
+            df = pd.DataFrame(self.blob_node_count)
+            df = df.rename_axis('Simulation Frame').rename_axis('Node', axis=1)
+            df.to_csv(self.data_frames_path + 'blob_count_node.csv', sep = ';')
+            fig = px.line(df, labels={'value':'Blob Count'}, 
+                            title="Blob Count - Per Node")
+            fig.update_xaxes(xaxes_upt)
+            figures.append(fig)
+            
+            df = pd.DataFrame(self.blob_node_count)
+            df = df.iloc[::24].reset_index(drop = True)
+            df.index = range(1,len(df)+1)
+            df = df.rename_axis('Simulation Day').rename_axis('Node', axis=1)
+            fig = px.line(df, labels={'value':'Blob Count'}, 
+                            title="Blob Count - Per Node - Hour 0", markers=True)
+            figures.append(fig)
+            
+        self.generate_figures(show_figures,export_figures, export_html, layout_update, figures)
+      
+    def process_env_population_line_plots(self, show_figures: bool, export_html: bool, export_figures: bool, layout_update):
+        
+        figures = []
+        xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
+                    
+        if LoggerDefaultRecordKey.ENV_REGION_POPULATION in self.data_to_record:
+            # Default Region Population Plot
+            df = pd.read_csv(self.base_path +  "regions.csv", sep = ';')
+            fig = px.line(df, x = 'Frame',y = 'Total',color="Region", 
+                          labels={'Total':'Region Population'}, 
+                          title="Total Population - Per Region")
+            fig.update_xaxes(xaxes_upt)
+            figures.append(fig)
+            # Default Region Population Plot - Hour 0
+            df = df[df['Hour'] == 0].reset_index(drop = True)
+            df.index = range(1,len(df)+1)
+            fig = px.line(df, x = 'Day',y = 'Total',color="Region", 
+                          labels={'Total':'Region Population', 'Day':'Simulation Day'}, 
+                          title="Total Population - Per Region - Hour 0", markers=True)
+            figures.append(fig)
+            
+        if LoggerDefaultRecordKey.ENV_NODE_POPULATION in self.data_to_record:
+            # Default Node Population Plot
+            df = pd.read_csv(self.base_path +  "nodes.csv", sep = ';')
+            fig = px.line(df, x = 'Frame',y = 'Total',color="Node", 
+                          labels={'Total':'Node Population'}, 
+                          title="Total Population - Per Node")
+            fig.update_xaxes(xaxes_upt)
+            figures.append(fig)
+            
+            # Default Node Population Plot - Hour 0
+            df = df[df['Hour'] == 0].reset_index(drop = True)
+            df.index = range(1,len(df)+1)
+            fig = px.line(df, x = 'Day',y = 'Total',color="Node", 
+                          labels={'Total':'Node Population', 'Day':'Simulation Day'}, 
+                          title="Total Population - Per Node - Hour 0", markers=True)
+            figures.append(fig)
+                
+        self.generate_figures(show_figures,export_figures, export_html, layout_update, figures)         
+                
+    def process_custom_line_plots(self, show_figures: bool, export_html: bool, export_figures: bool, layout_update):
+        
+        figures = []
+        xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
+        
+        #Custom Global Line Plots
+        if LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION in self.data_to_record:
+            for name, config in self.global_custom_line_plots.items():
+                _x, _y, _c, _h = config
+                df = pd.read_csv(self.base_path +  "global.csv", sep = ';')
+                if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+                fig = px.line(df, y = _c,
+                           labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+                           title=name)
+                fig.update_xaxes(xaxes_upt)
+                figures.append(fig)
+                
+        #Custom Region Line Plots       
+        if LoggerDefaultRecordKey.ENV_REGION_POPULATION in self.data_to_record:
+            for name, config in self.region_custom_line_plots.items():
+                _x, _y, _c, _n, _h = config
+                df = pd.read_csv(self.base_path +  "regions.csv", sep = ';')
+                if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+                if _n: df = df[df['Region'].isin(_n)].reset_index(drop = True)
+                to_track = []
+                df2 = pd.DataFrame()
+                for r in df['Region'].unique():
+                    for c in _c:
+                        df2[r + ": " + c] =  df[df['Region'] == r].reset_index()[c]
+                        to_track.append(r + ": " + c)
+                fig = px.line(df2,y = to_track,
+                           labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+                           title=name)
+                fig.update_xaxes(xaxes_upt)
+                figures.append(fig)
+                
+        #Custom Node Line Plots
+        if LoggerDefaultRecordKey.ENV_NODE_POPULATION in self.data_to_record:
+            for name, config in self.node_custom_line_plots.items():
+                _x, _y, _c, _n, _h = config
+                df = pd.read_csv(self.base_path +  "nodes.csv", sep = ';')
+                if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+                if _n: df = df[df['Node'].str.contains('|'.join(_n))].reset_index(drop = True)
+                to_track = []
+                df2 = pd.DataFrame()
+                for r in df['Node'].unique():
+                    for c in _c:
+                        df2[r + ": " + c] =  df[df['Node'] == r].reset_index()[c]
+                        to_track.append(r + ": " + c)
+                fig = px.line(df2,y = to_track,
+                           labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+                           title=name)
+                fig.update_xaxes(xaxes_upt)
+                figures.append(fig)
+                
+        self.generate_figures(show_figures, export_figures, export_html, layout_update, figures)
+                
+    def generate_figures(self, show_figures:bool, export_figures:bool, export_html:bool, layout_update:dict, figures):
+        for f in figures: 
+            f.update_layout(layout_update)
+            if show_figures:
+                f.show()
+        for f in figures:
+            if export_figures:
+                f.write_image(self.figures_path + f.layout.title.text.replace(" ","") + ".png", format = 'png')
+            if export_html:
+                f.write_html(self.html_plots_path + f.layout.title.text.replace(" ","") + ".html")

@@ -453,7 +453,7 @@ class PopTemplate():
             self.set_sampled_property(key, value)
 
     def is_empty(self):
-        return self.empty
+        return self.empty and self.mother_blob_id is None
 
     def has_traceable_properties(self):
         if self.empty:
@@ -710,7 +710,9 @@ class Blob():
         
         # Template defined with a mother_blob_id different than this blob - returns 0
         if population_template is not None and population_template.mother_blob_id is not None:
+            #print("testing mother blob", population_template.mother_blob_id , self.mother_blob_id)
             if population_template.mother_blob_id != self.mother_blob_id:
+                #print("Different")
                 return 0
         
         # Compares the traceable properties defined in the Template to the ones in the Blob

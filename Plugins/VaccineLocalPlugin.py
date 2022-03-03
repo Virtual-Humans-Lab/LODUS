@@ -1,10 +1,10 @@
-from typing import Set
 import environment
 from population import PopTemplate
 import copy
 from random_inst import FixedRandom
 import math
 import csv
+from simulation_logger import SimulationLogger
 import util
 import json
 
@@ -85,7 +85,6 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.to_vaccinate_per_dose = [0] * self.dosages
         self.prev_vac = [0] * self.dosages
         
-        
 
     def update_time_step(self, hour, time):
         # Updates time step data
@@ -97,12 +96,13 @@ class VaccinePlugin(environment.TimeActionPlugin):
         # Increases the days_since_last_vaccine for all blobs
         if self.day > 0:
             self.graph.lambda_blobs_traceable_property("days_since_last_vaccine", lambda b,v:v+1 if b.traceable_properties["vaccine_level"] < self.dosages else 0)
+        
         # Checks vaccines available for each dosage
         for dose_index,starting_day in enumerate(self.dosage_offsets):
             _dose_offset = self.day - starting_day
             
             # Vaccination not started for this dose_index or offset bigger than available data (i.e. used all day entries for that dose_index)
-            if _dose_offset < 0 or _dose_offset >= len(self.vaccine_data):
+            if _dose_offset < 0 or _dose_offset > len(self.vaccine_data):
                 self.to_vaccinate_per_dose[dose_index] = 0
             # Vaccine data available for this dose_index
             else:
@@ -201,15 +201,6 @@ class VaccinePlugin(environment.TimeActionPlugin):
         
         pt = PopTemplate()
         pt.set_traceable_property('vaccine_level', current_level + 1)
-        #prev_pop = target_node.get_population_size(pt)
-        
-        #print("prev vacc: ", target_node.get_population_size(pt))
-        # pt_i = PopTemplate()
-        # pt_i.add_block('infected')
-        # target_region = self.graph.get_region_by_name(target_node.containing_region_name)
-        # print(f'{target_node.id} is {self.graph.get_node_by_id(target_node.id).containing_region_name}-{self.graph.get_node_by_id(target_node.id).name}')
-        # if target_region.get_population_size(pt_i) > 0:
-        #         print("-------",target_region.name,target_region.get_population_size(pt_i))
         
         sub_list = []
         
@@ -229,22 +220,99 @@ class VaccinePlugin(environment.TimeActionPlugin):
                 new_action_values['population_template'] = pt
                 new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
                 #self.graph.direct_action_invoke(new_action,hour,time)
-                sub_list.append(new_action)
-                #print(hour,self.graph.get_node_by_id(n.previous_node).name)
-        #print(target_node.get_unique_name(), "hour", hour, "number of blobs", 
-        #      len(target_node.contained_blobs), [n.blob_id for n in target_node.contained_blobs])  
-        #print(target_node.get_unique_name(), "hour", hour, "vacc_lvl", current_level, "number of blobs", 
-        #      len(blob_ids), blob_ids)  
-          
-        if self.DEBUG_MOVE_PROFILE or target_node.containing_region_name in self.DEBUG_REGIONS:
-            print(f'{(target_node.containing_region_name)[:12]:}   \t{target_node.get_population_size()}\t{prev_pop} -> {target_node.get_population_size(pt)}')
-                
-            #for x in sub_list:
-            #    self.graph.direct_action_invoke(x,hour,time)  
+                #sub_list.append(new_action)
+                #print(hour,self.graph.get_node_by_id(n.previous_node).name)  
         return sub_list
 
-    def lalalala(self, env_graph, use_infect_move_pop = False, day_length = 24, default_beta = 0.25, default_gamma = 0.08):
+    #### Logging Functions
+    def setup_logger(self,logger:SimulationLogger):        
+        self.logger = logger 
+        if not self.logger: return
+        
+        self.log_file_vacc = open(logger.base_path + "vaccine_level.csv", 'w', encoding='utf8')
+        _header = 'Frame;Hour;Day'
+        for lvl in range(self.vacc_levels):
+            _header += ";Vacc" + str(lvl)
+        for lvl in range(self.vacc_levels):
+            _header += ";dVacc" + str(lvl)
+        self.log_file_vacc.write(_header + '\n')
+        self.last_frame = [0] * self.vacc_levels
+        
+        for lvl in range(self.vacc_levels):
+            pop_template = PopTemplate()
+            pop_template.set_traceable_property("vaccine_level", lvl)
+            logger.global_custom_templates['VaccLvl_' + str(lvl)] = pop_template
+            logger.region_custom_templates['VaccLvl_' + str(lvl)] = pop_template
+            logger.node_custom_templates['VaccLvl_' + str(lvl)] = pop_template
+        
+        logger.add_global_custom_line_plot('Vaccination Levels - Global', "Frame", "Population",
+                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)])
+        logger.add_region_custom_line_plot('Vaccination Levels - Azenha and Bom Fim', "Frames", "Population", 
+                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)], 
+                                            regions = ['Azenha', 'Bom Fim']) 
+        logger.add_region_custom_line_plot('Vaccination Levels - Per Region', "Frames", "Population",
+                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)])
+        logger.add_region_custom_line_plot('Vaccination Level 2 - Per Region', "Frame", "Population",
+                                            columns= ['VaccLvl_2'])
+        logger.add_node_custom_line_plot('Vaccination Levels - Pharmacy Nodes', "Frames", "Population",
+                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)], 
+                                            node_types=['pharmacy'])
+        logger.add_node_custom_line_plot('Total Population - Pharmacy Nodes', "Frame", "Population",
+                                            columns= ['Total'], 
+                                            node_types=['pharmacy'])
+        
+    def log_data(self, **kwargs):
+        assert 'graph' in kwargs and 'frame' in kwargs, "Invalid inputs for logging"
+        
+        # Gets data from logger
+        _graph:environment.EnvironmentGraph = kwargs.get('graph')
+        _frame:int = kwargs.get('frame')
+        
+        _current_frame_counts = [0] * self.vacc_levels
+        _pop_template = PopTemplate()
+        
+        # Gets number of vaccinated ler level
+        for lvl in range(self.vacc_levels):
+            _pop_template.set_traceable_property('vaccine_level', lvl)
+            for node in _graph.node_list:
+                _current_frame_counts[lvl] += node.get_population_size(_pop_template)
+        
+        # Output string/row
+        _row = f"{_frame};{_frame % self.day_duration};{_frame//self.day_duration}"
+        for lvl in range(self.vacc_levels):
+            _row += ";" + str(_current_frame_counts[lvl])
+        for lvl in range(self.vacc_levels):
+            _row += ";" + str(_current_frame_counts[lvl] - self.last_frame[lvl])
+        _row+= "\n"
+        
+        self.last_frame = _current_frame_counts
+        self.log_file_vacc.write(_row)
+        
+    def stop_logger(self, **kwargs):
+        self.log_file_vacc.close()
 
+
+    def lalalala(self, env_graph, use_infect_move_pop = False, day_length = 24, default_beta = 0.25, default_gamma = 0.08):
+        '''
+        Adds TimeActions to model infection behavior.
+                Requires specific Property Blocks:
+                    susceptible
+                    infected
+                    removed
+
+                infect
+                    infects population in a node.
+                        Params:
+                            region : region of the node
+                            node : node to set desire
+                            beta : beta for infection equations
+                            gamma : gamma value for infection equation
+                            sigma : sigma value for infection equation
+                            mu: mu value for infection equation
+                            nu: nu value for infection equation
+                            population_template :  susceptible population. Block types should be empty.
+
+        '''
         self.env_graph = env_graph
         self.set_pair('infect', self.infect)
         self.env_graph.base_actions.add('infect')

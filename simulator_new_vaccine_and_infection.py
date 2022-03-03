@@ -15,7 +15,7 @@ from ReturnPopulationPlugin import ReturnPopulationPlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
-from ExamplePlugin import ExamplePlugin
+from NewInfectionPlugin import NewInfectionPlugin
 
 from simulation_logger import LoggerDefaultRecordKey, SimulationLogger
 from pathlib import Path
@@ -27,6 +27,7 @@ arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simula
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
 arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.csv)')
+arg_parser.add_argument('--i', metavar="I", type=str, default = ".\DataInput\SIRPluginSetup.json", help='SIR Plugin Configuration File (.csv)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom()
@@ -53,9 +54,6 @@ simulation_steps = days * day_duration
 '''
 Load Plugins Examples
 '''
-plug = ExamplePlugin(env_graph)
-plug.example_parameter = 'bar'
-env_graph.LoadPlugin(plug)
 
 gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
@@ -72,6 +70,8 @@ env_graph.LoadPlugin(return_to_prev)
 #social_distance.iso_mode = 'regular'
 #env_graph.LoadPlugin(social_distance)
 
+infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
+
 vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
 env_graph.LoadPlugin(vaccine_plugin)
 
@@ -81,12 +81,12 @@ Logging
 
 logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
 
-logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
@@ -131,4 +131,4 @@ for i in range(simulation_steps):
     #     env_graph.queue_next_frame_action(dummy_action)
 
 #logger.compute_composite_data(env_graph, simulation_steps)
-logger.stop_logging(show_figures=True, export_figures=False, export_html=True)
+logger.stop_logging(show_figures=False, export_figures=False, export_html=True)

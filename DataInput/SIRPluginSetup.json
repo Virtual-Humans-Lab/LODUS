@@ -1,0 +1,14 @@
+{
+  "default_beta": 0.25,
+  "default_gamma": 0.08,
+  "use_infect_move_pop": false,
+
+  "default_infection_value": 50,
+  "default_infection_node": "home",
+
+  "custom_infection_values": [
+    [ "Azenha", 0.1 ],
+    [ "Centro", 1 ]
+  ],
+  "custom_infection_node_types": []
+}

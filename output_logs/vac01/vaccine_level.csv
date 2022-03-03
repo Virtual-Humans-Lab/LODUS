@@ -1,4 +1,4 @@
-Frame;Hour;Day;VaccLvl_0;VaccLvl_1;VaccLvl_2;dVaccLvl_0;dVaccLvl_1;dVaccLvl_2
+Frame;Hour;Day;Vacc0;Vacc1;Vacc2;dVacc0;dVacc1;dVacc2
 0;0;0;190489;0;0;190489;0;0
 1;1;0;190489;0;0;0;0;0
 2;2;0;190489;0;0;0;0;0

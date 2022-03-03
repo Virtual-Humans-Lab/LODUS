@@ -1,4 +1,5 @@
 from __future__ import annotations
+from logging import Logger
 from pprint import pprint
 import population
 import copy
@@ -78,6 +79,7 @@ class EnvNode():
 
     def add_blob(self, blob: population.Blob):
         if isinstance(blob, population.Blob):
+            assert blob not in self.contained_blobs, "BLOB ALREADY HERE"
             self.contained_blobs.append(blob)
 
     def add_blobs(self, blobs: list[population.Blob]):
@@ -143,6 +145,16 @@ class EnvNode():
         self.remove_blobs(new_blobs)
         return new_blobs
 
+    def change_blobs_traceable_property(self, key, value,quantity: int, template : population.PopTemplate = None):
+        _grabbed = self.grab_population(quantity, template)
+        for _blob in _grabbed:
+            _blob.traceable_properties[key] = value
+            _blob.previous_node = self.id
+            if _blob.spawning_node is None:
+                _blob.spawning_node = self.id
+                _blob.frame_origin_node = self.id
+        self.add_blobs(_grabbed)
+    
     def get_unique_name(self):
         return f"{self.containing_region_name}//{self.name}"
 
@@ -277,6 +289,10 @@ class EnvRegion():
             count += node.get_population_size(template)
 
         return count
+    
+    def get_blob_count(self)->int:
+        """Gets the total number of Blobs contained in this EnvRegion."""
+        return sum([len(nd.contained_blobs) for nd in self.node_list])
 
     def generate_action_list(self, hour: int):
         """Gets the TimeAction list for each EnvNode in this EnvRegion for this time slot.
@@ -437,7 +453,7 @@ class EnvironmentGraph():
 
         self.node_list: list[EnvNode] = []
         self.node_id_dict = {}
-        self.node_dict = {}
+        self.node_dict: dict[str,EnvNode]= {}
 
         self.edge_table = [[]]
 
@@ -531,6 +547,10 @@ class EnvironmentGraph():
         for node in self.node_list:
             size += node.get_population_size(population_template)
         return size
+    
+    def get_blob_count(self)->int:
+        """Gets the total number of Blobs contained in this EnvironmentGraph."""
+        return sum([rg.get_blob_count() for rg in self.region_list])
 
     def update_time_step(self, hour, time):
         """Updates a time step for a given time.
@@ -657,7 +677,7 @@ class EnvironmentGraph():
         for node in new_region.node_list:
             node.containing_region_name = new_region.name
             self.node_list.append(node)
-            self.node_dict[node.name] = node
+            self.node_dict[node.get_unique_name()] = node
             self.node_id_dict[node.id] = node
 
         self.region_dict[name] = new_region        
@@ -684,7 +704,7 @@ class EnvironmentGraph():
         if is_base:
             self.base_actions.add(action_type)
 
-    def LoadPlugin(self, plugin):
+    def LoadPlugin(self, plugin:TimeActionPlugin):
         for k, v in plugin.get_pairs().items():
             self.time_action_map[k] = v
 
@@ -720,8 +740,6 @@ class EnvironmentGraph():
         for node in self.node_list:
             for blob in node.contained_blobs:
                 blob.traceable_properties[key] = lambda_funtion(blob, blob.traceable_properties[key])
-                if blob.traceable_properties["vaccine_level"] == 3:
-                    print((blob.blob_id,blob.traceable_properties["vaccine_level"], blob.traceable_properties["days_since_last_vaccine"], blob.get_population_size(), node.containing_region_name))
 
     def merge_node(self, node: EnvNode):
         i = 0
@@ -852,12 +870,22 @@ class TimeActionPlugin():
     """ 
     def __init__(self):
         self.type_action_pairs = {}
+        self.logger = None
 
     def set_pair(self, action_type, action_function):
         self.type_action_pairs[action_type] = action_function
 
     def get_pairs(self):
         return self.type_action_pairs
+    
+    def setup_logger(self,logger):    
+        raise NotImplementedError("SubClass should implement this method")
+    
+    def log_data(self,logger):    
+        raise NotImplementedError("SubClass should implement this method")
+    
+    def stop_logger(self,logger):    
+        raise NotImplementedError("SubClass should implement this method")
 
 class Routine():
     """Describes a mapping of time slot -> TimeAction.
