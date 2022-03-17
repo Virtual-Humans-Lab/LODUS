@@ -16,6 +16,8 @@ from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
 from NewInfectionPlugin import NewInfectionPlugin
+from NodeDensityPlugin import NodeDensityPlugin
+from CustomTimeActionPlugin import CustomTimeActionPlugin
 
 from simulation_logger import LoggerDefaultRecordKey, SimulationLogger
 from pathlib import Path
@@ -26,8 +28,10 @@ arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.csv)')
-arg_parser.add_argument('--i', metavar="I", type=str, default = ".\DataInput\SIRPluginSetup.json", help='SIR Plugin Configuration File (.csv)')
+arg_parser.add_argument('--c', metavar="C", type=str, default = ".\DataInput\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
+arg_parser.add_argument('--d', metavar="D", type=str, default = ".\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
+arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
+arg_parser.add_argument('--i', metavar="I", type=str, default = ".\DataInput\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom()
@@ -41,7 +45,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 10
+days = 50
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -70,10 +74,18 @@ env_graph.LoadPlugin(return_to_prev)
 #social_distance.iso_mode = 'regular'
 #env_graph.LoadPlugin(social_distance)
 
-infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
+
+density_plugin = NodeDensityPlugin(env_graph, args['d'])
+env_graph.LoadPlugin(density_plugin)
+
+#custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
+#env_graph.LoadPlugin(custom_action_plugin)
 
 vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
 env_graph.LoadPlugin(vaccine_plugin)
+
+infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
+env_graph.LoadPlugin(infection_plugin)
 
 '''
 Logging
@@ -81,11 +93,11 @@ Logging
 
 logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
 
-#logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
+logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
-#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
+logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
@@ -97,7 +109,9 @@ logger.pop_template = pop_temp
 # logger.foreign_only = True
 # this option saves REALLY big files
 # logger.set_to_record('graph')
-logger.set_pluggin_to_record(vaccine_plugin)
+logger.set_pluggin_to_record(infection_plugin)
+#logger.set_pluggin_to_record(vaccine_plugin)
+
 
 '''
 Simulation
@@ -105,6 +119,8 @@ Simulation
 logger.start_logging()
 for i in range(simulation_steps):
     print(i, end='\r')
+        
+    infection_plugin.update_time_step(i % day_duration, i)
 
     if i % day_duration == 0:
         vaccine_plugin.update_time_step(i % day_duration, i)
@@ -131,4 +147,4 @@ for i in range(simulation_steps):
     #     env_graph.queue_next_frame_action(dummy_action)
 
 #logger.compute_composite_data(env_graph, simulation_steps)
-logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
+logger.stop_logging(show_figures=True, export_figures=False, export_html=True)

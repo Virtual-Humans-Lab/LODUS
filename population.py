@@ -673,7 +673,25 @@ class Blob():
         
         for k,v in self.traceable_properties.items():
             new_blob.traceable_properties[k] = v
+        
+        new_blob.spawning_node = self.spawning_node
+        new_blob.previous_node = self.previous_node
+        new_blob.frame_origin_node = self.frame_origin_node
         return new_blob
+    
+    def change_blob_traceable_property(self, key, value, quantity: int, template : PopTemplate = None) -> Blob:
+        
+        _blob = self.grab_population(quantity, template)
+        if not isinstance(_blob, Blob):
+            return
+        _blob.traceable_properties[key] = value
+        
+        if _blob is not self:
+            _blob.previous_node = self.previous_node
+            if _blob.spawning_node is None:
+                _blob.spawning_node = self.spawning_node
+                _blob.frame_origin_node = self.frame_origin_node
+        return _blob
     
     def grab_population(self, quantity, population_template = None)->Blob:
         """Grabs a population from this Blob.

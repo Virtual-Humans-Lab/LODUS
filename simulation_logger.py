@@ -1,4 +1,5 @@
 
+from time import sleep
 import environment
 from population import PopTemplate
 import os 
@@ -45,9 +46,10 @@ class SimulationLogger():
         
         self.time_cycle = time_cycle
 
-        self.global_last_frame = {}
-        self.regions_last_frame = {n:{} for n in self.graph.region_dict}
-        self.nodes_last_frame = {n:{} for n in self.graph.node_dict}
+        # Data recorded in previous frame
+        self.global_prev_frame = {}
+        self.regions_prev_frame = {n:{} for n in self.graph.region_dict}
+        self.nodes_prev_frame = {n:{} for n in self.graph.node_dict}
         self.nodes_sir_last_frames = {}
 
         self.logs = {}
@@ -63,6 +65,7 @@ class SimulationLogger():
 
         self.pop_template = None
         
+        # Blob Count Logging
         self.blob_global_count = []
         self.blob_region_count = {r:[] for r in self.graph.region_dict}
         self.blob_node_count = {n:[] for n in self.graph.node_dict}
@@ -95,7 +98,7 @@ class SimulationLogger():
     def start_logging(self):
         
         # Global data file
-        self.global_last_frame = {k:0 for k in self.global_custom_templates}
+        self.global_prev_frame = {k:0 for k in self.global_custom_templates}
         header = "Frame;Hour;Day"
         if self.global_custom_templates: 
             header += ';' + ';'.join(list(self.global_custom_templates.keys()))
@@ -105,9 +108,9 @@ class SimulationLogger():
         
         # Regions data file
         for n, r in self.graph.region_dict.items():
-            self.regions_last_frame[n]['__populations'] = [r.get_population_size()] * 2
+            self.regions_prev_frame[n]['__populations'] = [r.get_population_size()] * 2
             for k in self.region_custom_templates:
-                self.regions_last_frame[n][k] = 0
+                self.regions_prev_frame[n][k] = 0
         header = "Frame;Hour;Day;Region;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders"
         if self.region_custom_templates: 
             header += ';' + ';'.join(list(self.region_custom_templates.keys()))
@@ -117,9 +120,9 @@ class SimulationLogger():
         
         # Nodes data file
         for _name, _node in self.graph.node_dict.items():
-            self.nodes_last_frame[_name]['__populations'] = [_node.get_population_size()] * 2
+            self.nodes_prev_frame[_name]['__populations'] = [_node.get_population_size()] * 2
             for k in self.node_custom_templates:
-                self.nodes_last_frame[_name][k] = 0
+                self.nodes_prev_frame[_name][k] = 0
         header = "Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders"
         if self.node_custom_templates: 
             header += ';' + ';'.join(list(self.node_custom_templates.keys()))
@@ -207,10 +210,10 @@ class SimulationLogger():
 
         # Adds deltas of any custom template data
         for h in self.global_custom_templates:
-            _row += ";" + str(_current_frame[h] - self.global_last_frame[h])
+            _row += ";" + str(_current_frame[h] - self.global_prev_frame[h])
         
         # Updates last frame and writes the data
-        self.global_last_frame = {k:v for k,v in _current_frame.items()}
+        self.global_prev_frame = {k:v for k,v in _current_frame.items()}
         self.global_f.write(_row + '\n')
 
     def region_frame(self, graph: environment.EnvironmentGraph, frame:int):
@@ -224,7 +227,7 @@ class SimulationLogger():
             outside_pop = total_pop - local_pop
             
             # Gets populations from last frame
-            last_total, last_local = self.regions_last_frame[_name]['__populations']
+            last_total, last_local = self.regions_prev_frame[_name]['__populations']
             last_ouside = last_total - last_local
             
             # Sets the default row
@@ -238,11 +241,11 @@ class SimulationLogger():
                 _row += ";" + str(_current_frame[h])
              # Adds deltas of any custom template data
             for h in self.region_custom_templates:
-                _row += ";" + str(_current_frame[h] - self.regions_last_frame[_name][h])
+                _row += ";" + str(_current_frame[h] - self.regions_prev_frame[_name][h])
 
             # Updates last frame and writes the data
-            self.regions_last_frame[_name] = {k:v for k,v in _current_frame.items()}
-            self.regions_last_frame[_name]['__populations'] = [total_pop, local_pop]
+            self.regions_prev_frame[_name] = {k:v for k,v in _current_frame.items()}
+            self.regions_prev_frame[_name]['__populations'] = [total_pop, local_pop]
             self.regions_f.write(_row + '\n')
             
     def node_frame(self, graph:environment.EnvironmentGraph, frame:int):
@@ -256,7 +259,7 @@ class SimulationLogger():
             outside_pop = total_pop - local_pop
             
             # Gets populations from last frame
-            last_total, last_local = self.nodes_last_frame[_name]['__populations']
+            last_total, last_local = self.nodes_prev_frame[_name]['__populations']
             last_ouside = last_total - last_local
             
             # Sets the default row
@@ -269,11 +272,11 @@ class SimulationLogger():
                 _row += ";" + str(_current_frame[h])
             # Adds deltas of any custom template data
             for h in self.node_custom_templates:
-                _row += ";" + str(_current_frame[h] - self.nodes_last_frame[_name][h])
+                _row += ";" + str(_current_frame[h] - self.nodes_prev_frame[_name][h])
 
             # Updates last frame and writes the data
-            self.nodes_last_frame[_name] = {k:v for k,v in _current_frame.items()}
-            self.nodes_last_frame[_name]['__populations'] = [total_pop, local_pop]
+            self.nodes_prev_frame[_name] = {k:v for k,v in _current_frame.items()}
+            self.nodes_prev_frame[_name]['__populations'] = [total_pop, local_pop]
             self.nodes_f.write(_row + '\n')
 
 
@@ -868,6 +871,7 @@ class SimulationLogger():
         for f in figures: 
             f.update_layout(layout_update)
             if show_figures:
+                sleep(0.5)
                 f.show()
         for f in figures:
             if export_figures:

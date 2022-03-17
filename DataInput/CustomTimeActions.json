@@ -1,0 +1,13 @@
+{
+  "custom_actions": [
+    {
+      "name": "return_workers",
+      "type": "return_population_home",
+      "values": {
+        "region": "Azenha",
+        "node": "home",
+        "quantity": -1
+      }
+    }
+  ]
+}

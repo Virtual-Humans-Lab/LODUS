@@ -1,0 +1,10 @@
+{
+  "default_density": 1.0,
+  "custom_density_values": [
+    [ "Azenha//home", 1.2 ],
+    [ "Centro", 1.1 ],
+    [ "home", 1.1 ],
+    [ "work", 1.5 ],
+    [ "stadium", 10.0]
+  ]
+}

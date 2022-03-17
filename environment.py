@@ -127,6 +127,10 @@ class EnvNode():
             return []
 
         quantity = min(quantity, total_available_population)
+        
+        if quantity <= 0:
+            return []
+        
         new_blobs = []
 
         available_quantities = [blob.get_population_size(template) for blob in self.contained_blobs]
@@ -145,7 +149,7 @@ class EnvNode():
         self.remove_blobs(new_blobs)
         return new_blobs
 
-    def change_blobs_traceable_property(self, key, value,quantity: int, template : population.PopTemplate = None):
+    def change_blobs_traceable_property(self, key, value, quantity:int, template:population.PopTemplate = None):
         _grabbed = self.grab_population(quantity, template)
         for _blob in _grabbed:
             _blob.traceable_properties[key] = value
@@ -462,9 +466,11 @@ class EnvironmentGraph():
         self.time_action_map = { 'move_population' : self.move_population }
         self.base_actions = {'move_population'}
         
+        self.loaded_plugins: list[TimeActionPlugin] = []
+        
         self.global_actions = set()
 
-        # repeating actions are a tuple of (cycle_length, time_action)
+        # repeating actions are a tuple of (cycle_length or frame_list, time_action)
         self.repeating_global_actions = []
 
         # Logging data
@@ -705,8 +711,20 @@ class EnvironmentGraph():
             self.base_actions.add(action_type)
 
     def LoadPlugin(self, plugin:TimeActionPlugin):
+        self.loaded_plugins.append(plugin)
         for k, v in plugin.get_pairs().items():
             self.time_action_map[k] = v
+            
+    def has_plugin(self, _type:type) -> bool:
+        return any(isinstance(x, _type) for x in self.loaded_plugins)
+            
+    def get_plugins(self, _type:type) -> list:
+        return [p for p in self.loaded_plugins if isinstance(p,_type)]
+    
+    def get_first_plugin(self, _type:type):
+        for p in self.loaded_plugins:
+            if isinstance(p,_type): return p
+        return None
 
     def merge_blobs(self):
         """Merges every blob with a compatible mother_blob_id in a given EnvNode."""
@@ -879,13 +897,13 @@ class TimeActionPlugin():
         return self.type_action_pairs
     
     def setup_logger(self,logger):    
-        raise NotImplementedError("SubClass should implement this method")
+        raise NotImplementedError("SubClass should implement the \"setup_logger\" method")
     
     def log_data(self,logger):    
-        raise NotImplementedError("SubClass should implement this method")
+        raise NotImplementedError("SubClass should implement the \"log_data\"  method")
     
     def stop_logger(self,logger):    
-        raise NotImplementedError("SubClass should implement this method")
+        raise NotImplementedError("SubClass should implement the \"stop_logger\"  method")
 
 class Routine():
     """Describes a mapping of time slot -> TimeAction.
