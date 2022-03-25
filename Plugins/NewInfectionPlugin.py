@@ -391,8 +391,10 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
         logger.node_custom_templates['Infected'] = self.pt_inf
         logger.node_custom_templates['Removed'] = self.pt_rem
         
-        logger.add_global_custom_line_plot('SIR Status - Global', "Frame", "Population",
-                                            columns= ['Susceptible', 'Infected', 'Removed'])
+        logger.add_custom_line_plot('SIR Status - Global', 
+                                    file = 'global.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['Susceptible', 'Infected', 'Removed'])
         
     def log_data(self, **kwargs):
         assert 'graph' in kwargs and 'frame' in kwargs, "Invalid inputs for logging"

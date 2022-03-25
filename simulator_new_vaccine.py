@@ -1,5 +1,6 @@
 #encoding: utf-8
 import sys
+
 sys.path.append('./Plugins/')
 
 import argparse
@@ -15,6 +16,7 @@ from ReturnPopulationPlugin import ReturnPopulationPlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
+from NewInfectionPlugin import NewInfectionPlugin
 from ExamplePlugin import ExamplePlugin
 
 from simulation_logger import LoggerDefaultRecordKey, SimulationLogger
@@ -40,7 +42,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 10
+days = 50
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -72,8 +74,11 @@ env_graph.LoadPlugin(return_to_prev)
 #social_distance.iso_mode = 'regular'
 #env_graph.LoadPlugin(social_distance)
 
+
+
 vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
 env_graph.LoadPlugin(vaccine_plugin)
+
 
 '''
 Logging
@@ -84,9 +89,9 @@ logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
+#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')

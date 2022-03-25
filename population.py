@@ -440,6 +440,9 @@ class PopTemplate():
             for k,v in string_values.items():
                 self.set_sampled_property(k, v)
 
+    def set_mother_blob_id(self, value):
+        self.mother_blob_id = int(value)
+        
     def set_sampled_property(self, key, value):
         self.pairs[key] = value
         self.empty = False
@@ -532,7 +535,7 @@ class BlobFactory():
             blob.traceable_properties[k] = v
         return blob
 
-    def GenerateEmpty(self, _mother_blob_id, traceable_prop_override:dict = {}):
+    def GenerateEmpty(self, _mother_blob_id, _node_of_origin, traceable_prop_override:dict = {}):
         """Generates a new empty Blob based on a pre-defined template.
         
         Params:
@@ -543,13 +546,13 @@ class BlobFactory():
         """
         if not bool(self.block_template.buckets):
             return None
-        blob = Blob(_mother_blob_id, 0, self)
+        blob = Blob(_mother_blob_id, _node_of_origin, 0, self)
         blob.initialize_blocks_empty(self.block_template)
         for k,v in traceable_prop_override.items():
             blob.traceable_properties[k] = v
         return blob
 
-    def GenerateProfile(self,_mother_blob_id, _population, _profile, traceable_prop_override:dict = {}):
+    def GenerateProfile(self,_mother_blob_id, _node_of_origin, _population, _profile, traceable_prop_override:dict = {}):
         """Generates a new Blob based on a pre-defined template, population quantity and population profile.
 
         Example of profile:
@@ -570,7 +573,7 @@ class BlobFactory():
             return None
         if _population <= 0:
             return None
-        blob = Blob(_mother_blob_id, _population, self)
+        blob = Blob(_mother_blob_id, _node_of_origin, _population, self)
         blob.initialize_blocks_profile(self.block_template, _population, _profile)
         for k,v in traceable_prop_override.items():
             blob.traceable_properties[k] = v
@@ -602,17 +605,17 @@ class Blob():
         frame_origin_node: The node where this blob started the frame.
     """
     
-    def __init__(self, _mother_blob_id, _population, _blob_factory:BlobFactory):
+    def __init__(self, _mother_blob_id, _node_of_origin, _population, _blob_factory:BlobFactory):
         self.blob_factory:BlobFactory = _blob_factory
         self.profiles = None
         self.original_population = _population
         self.blob_id = IDGen('blobs').get_id()
         self.mother_blob_id = _mother_blob_id
+        self.node_of_origin: int = _node_of_origin
         self.traceable_properties:dict = {}
         self.sampled_properties:PropertyBlock = None
-        self.spawning_node = None
         self.frame_origin_node = None
-        self.previous_node = None
+        self.previous_node = _node_of_origin
               
     def initialize_blocks(self, block_template:BlockTemplate, population):
         self.sampled_properties = block_template.Generate(population)
@@ -661,7 +664,7 @@ class Blob():
         if current_quantity == 0:
             return None
 
-        new_blob = self.blob_factory.GenerateEmpty(self.mother_blob_id)
+        new_blob = self.blob_factory.GenerateEmpty(self.mother_blob_id, self.node_of_origin)
         
         if pop_template is not None:
             if pop_template.mother_blob_id is not None and pop_template.mother_blob_id != self.mother_blob_id:
@@ -674,7 +677,7 @@ class Blob():
         for k,v in self.traceable_properties.items():
             new_blob.traceable_properties[k] = v
         
-        new_blob.spawning_node = self.spawning_node
+        # new_blob.spawning_node = self.spawning_node
         new_blob.previous_node = self.previous_node
         new_blob.frame_origin_node = self.frame_origin_node
         return new_blob
@@ -688,9 +691,7 @@ class Blob():
         
         if _blob is not self:
             _blob.previous_node = self.previous_node
-            if _blob.spawning_node is None:
-                _blob.spawning_node = self.spawning_node
-                _blob.frame_origin_node = self.frame_origin_node
+            _blob.frame_origin_node = self.frame_origin_node
         return _blob
     
     def grab_population(self, quantity, population_template = None)->Blob:

@@ -250,8 +250,8 @@ for arg, val in args.items():
 filename = f'{config.basename}{argsName}'
 logger = SimulationLogger(f'{config.basename}-infection_data-i{str(args["i"])}-s{str(args["s"])}', config.day_duration)
 
-logger.set_to_record('global')
-logger.set_to_record('neighbourhood')
+logger.set_default_data_to_record('global')
+logger.set_default_data_to_record('neighbourhood')
 #logger.set_to_record('graph')
 
 betaWriterPath = config.beta_history_output_file

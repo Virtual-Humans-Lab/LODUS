@@ -247,21 +247,35 @@ class VaccinePlugin(environment.TimeActionPlugin):
             logger.region_custom_templates['VaccLvl_' + str(lvl)] = pop_template
             logger.node_custom_templates['VaccLvl_' + str(lvl)] = pop_template
         
-        logger.add_global_custom_line_plot('Vaccination Levels - Global', "Frame", "Population",
-                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)])
-        logger.add_region_custom_line_plot('Vaccination Levels - Azenha and Bom Fim', "Frames", "Population", 
-                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)], 
-                                            regions = ['Azenha', 'Bom Fim']) 
-        logger.add_region_custom_line_plot('Vaccination Levels - Per Region', "Frames", "Population",
-                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)])
-        logger.add_region_custom_line_plot('Vaccination Level 2 - Per Region', "Frame", "Population",
-                                            columns= ['VaccLvl_2'])
-        logger.add_node_custom_line_plot('Vaccination Levels - Pharmacy Nodes', "Frames", "Population",
-                                            columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)], 
-                                            node_types=['pharmacy'])
-        logger.add_node_custom_line_plot('Total Population - Pharmacy Nodes', "Frame", "Population",
-                                            columns= ['Total'], 
-                                            node_types=['pharmacy'])
+        logger.add_custom_line_plot('Vaccination Levels - Global', 
+                                    file = 'global.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)])
+        logger.add_custom_line_plot('Vaccination Levels - Azenha and Bom Fim', 
+                                    file = 'regions.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)],
+                                    level="Region", filter=['Azenha', 'Bom Fim'])
+        logger.add_custom_line_plot('Vaccination Levels - Per Region', 
+                                    file = 'regions.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)],
+                                    level="Region")
+        logger.add_custom_line_plot('Vaccination Level 2 - Per Region', 
+                                    file = 'regions.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['VaccLvl_2'],
+                                    level="Region")
+        logger.add_custom_line_plot('Vaccination Levels - Pharmacy Nodes', 
+                                    file = 'nodes.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)],
+                                    level="Node", filter=['pharmacy'])
+        logger.add_custom_line_plot('Total Population - Pharmacy Nodes', 
+                                    file = 'nodes.csv',
+                                    x_label="Frame", y_label="Population",
+                                    columns= ['Total'],
+                                    level="Node", filter=['pharmacy'])
         
     def log_data(self, **kwargs):
         assert 'graph' in kwargs and 'frame' in kwargs, "Invalid inputs for logging"

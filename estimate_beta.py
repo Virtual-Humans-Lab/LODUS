@@ -343,9 +343,9 @@ if args['i'] != 0:
 else:
     logger = SimulationLogger(f'{basename}-m{str(args["m"])}', day_duration)
 
-logger.set_to_record('global')
-logger.set_to_record('neighbourhood')
-logger.set_to_record('nodes_sir')
+logger.set_default_data_to_record('global')
+logger.set_default_data_to_record('neighbourhood')
+logger.set_default_data_to_record('nodes_sir')
 
 pop_temp = PopTemplate()
 logger.pop_template = pop_temp

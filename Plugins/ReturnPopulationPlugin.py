@@ -1,4 +1,6 @@
+import copy
 import sys
+from types import new_class
 sys.path.append('../')
 
 import environment 
@@ -6,7 +8,7 @@ from population import PopTemplate
 
 class ReturnPopulationPlugin(environment.TimeActionPlugin):
 
-    def __init__(self, env_graph):
+    def __init__(self, env_graph: environment.EnvironmentGraph):
         '''gather_population
             Pushes population to nearby nodes into a requesting node.
                 Params:
@@ -33,10 +35,12 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
 
         self.graph = env_graph
         self.set_pair('return_population_home', self.return_population_home)
+        self.set_pair('send_population_back', self.send_population_back)
 
 
         ## returns everyone home
     def return_population_home(self, values, hour, time):
+        # print(values)
         target_region = values['region']
         if isinstance(target_region, str):
             target_region = self.graph.get_region_by_name(target_region)
@@ -73,4 +77,45 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
                     new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
                     sub_list.append(new_action)
                     
+        return sub_list
+    
+    def send_population_back(self, values, hour, time):
+        #print(values)
+        assert 'region' in values, "region is not defined in Gather Population TimeAction"
+        assert 'node' in values, "node is not defined in Gather Population TimeAction"
+        
+        current_region = self.graph.get_region_by_name(values['region'])
+        current_node = current_region.get_node_by_name(values['node'])
+        
+        
+
+        sub_list = []
+        for b in current_node.contained_blobs:
+            pop_template = PopTemplate()
+            if 'population_template' in values:
+                pop_template = values['population_template']
+            
+            new_action_values = {}
+            new_action_type = 'move_population'
+            
+            new_action_values['origin_region'] = current_region.name
+            new_action_values['origin_node'] = current_node.name
+            
+            node_of_origin = self.graph.get_node_by_id(b.node_of_origin)
+            region_of_origin = self.graph.get_region_by_name(node_of_origin.containing_region_name)
+            # print(b.mother_blob_id, b.node_of_origin)
+            # print(self.graph.get_node_by_id(b.node_of_origin).get_unique_name())
+            # print(self.graph.get_region_by_id(b.mother_blob_id).name)
+            
+            new_action_values['destination_region'] = region_of_origin.name
+            new_action_values['destination_node'] = node_of_origin.name
+            
+            new_action_values['quantity'] = values['quantity']
+            pop_template.set_mother_blob_id(region_of_origin.id)
+            new_action_values['population_template'] = pop_template
+            #print(new_action_values)
+            new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+            sub_list.append(new_action)
+        
+
         return sub_list

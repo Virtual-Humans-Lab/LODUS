@@ -1,11 +1,11 @@
 {
   "custom_actions": [
     {
-      "name": "return_workers",
-      "type": "return_population_home",
+      "name": "soccer_match",
+      "type": "gather_population",
       "values": {
-        "region": "Azenha",
-        "node": "home",
+        "destination_region": "Azenha",
+        "destination_node": "home",
         "quantity": -1
       }
     }

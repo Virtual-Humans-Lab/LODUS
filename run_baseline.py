@@ -161,8 +161,8 @@ else:
     #Path(f'{basename}-m{str(args["m"])}').mkdir(parents=True, exist_ok=True)
     logger = SimulationLogger(f'{basename}-m{str(args["m"])}', day_duration)
 
-logger.set_to_record('global')
-logger.set_to_record('neighbourhood')
+logger.set_default_data_to_record('global')
+logger.set_default_data_to_record('neighbourhood')
 
 pop_temp = PopTemplate()
 logger.pop_template = pop_temp

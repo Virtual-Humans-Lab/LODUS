@@ -154,9 +154,9 @@ class EnvNode():
         for _blob in _grabbed:
             _blob.traceable_properties[key] = value
             _blob.previous_node = self.id
-            if _blob.spawning_node is None:
-                _blob.spawning_node = self.id
-                _blob.frame_origin_node = self.id
+            #if _blob.spawning_node is None:
+            #    _blob.spawning_node = self.id
+            _blob.frame_origin_node = self.id
         self.add_blobs(_grabbed)
     
     def get_unique_name(self):
@@ -226,7 +226,7 @@ class EnvNodeFactory():
             node.characteristics[k] = self.template.characteristics[k]
 
         for (pop,trace,desc,factory) in self.template.blob_descriptions:
-            blob: population.Blob = factory.GenerateProfile(region.id, pop, desc, trace)
+            blob: population.Blob = factory.GenerateProfile(region.id, node.id, pop, desc, trace)
             node.add_blob(blob)
         return node
 
@@ -493,7 +493,7 @@ class EnvironmentGraph():
     def get_region_by_name(self, name) -> EnvRegion:
         return self.region_dict[name]
 
-    def get_region_by_id(self, _id):
+    def get_region_by_id(self, _id) -> EnvRegion:
         return self.region_id_dict[_id]
     
     # Action Invoke Modes
@@ -738,7 +738,9 @@ class EnvironmentGraph():
                 for j in range(i+1, len(blob_list[i+1:])):   
                     other_blob = blob_list[j]
                     node.remove_blob(other_blob)
-                    if current_blob.mother_blob_id == other_blob.mother_blob_id:
+                    #if current_blob.mother_blob_id == other_blob.mother_blob_id:
+                    #    current_blob.consume_blob(other_blob)
+                    if current_blob.node_of_origin == other_blob.node_of_origin:
                         current_blob.consume_blob(other_blob)
 
                 i+=1
@@ -809,24 +811,26 @@ class EnvironmentGraph():
         quantity = values['quantity']
         if quantity == -1:
             quantity = origin_node.get_population_size(pop_template)
-
+            
+        if quantity == 0:
+            return
+        
         available_total = origin_node.get_population_size()
         available = origin_node.get_population_size(pop_template)
 
-        grabbed_population = origin_node.grab_population(quantity, pop_template)
-                   
+        grabbed_population = origin_node.grab_population(quantity, pop_template)     
         for grab_pop in grabbed_population:
-            grab_pop.previous_node = origin_node.id
-            if grab_pop.spawning_node is None:
-                grab_pop.spawning_node = origin_node.id
-                grab_pop.frame_origin_node = origin_node.id
+            #if grab_pop.previous_node != origin_node.id:
+            #    grab_pop.previous_node = origin_node.id
+            grab_pop.frame_origin_node = origin_node.id
         
         destination_node.add_blobs(grabbed_population)
         
     def set_spawning_nodes(self):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                if blob.spawning_node is None:
+                if blob.node_of_origin is None:
+                    print("WTF SPAWN")
                     blob.spawning_node = node.id
 
     def set_frame_origin_nodes(self):

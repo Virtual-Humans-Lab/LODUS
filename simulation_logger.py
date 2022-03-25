@@ -74,6 +74,7 @@ class SimulationLogger():
         self.global_custom_templates: dict[str, PopTemplate] = {}
         self.region_custom_templates: dict[str, PopTemplate] = {}
         self.node_custom_templates: dict[str, PopTemplate] = {}
+        self.custom_line_plots: dict = {}
         self.global_custom_line_plots: dict = {}
         self.region_custom_line_plots: dict = {}
         self.node_custom_line_plots: dict = {}
@@ -85,6 +86,9 @@ class SimulationLogger():
         assert isinstance(p, environment.TimeActionPlugin), "Argument should be a TimeActionPlugin"
         self.plugins_to_record.append(p)
         p.setup_logger(self)
+    
+    def add_custom_line_plot(self, _key:str, file, x_label:str, y_label:str, columns:list[str] = None, hours: list[str] = None, level:str = None, filter: list[str] = None):
+        self.custom_line_plots[_key] = (file, x_label, y_label, columns, hours, level, filter)    
         
     def add_global_custom_line_plot(self, _key:str, x_label:str, y_label:str, columns:list[str] = None, hours: list[str] =None):
         self.global_custom_line_plots[_key] = (x_label, y_label, columns, hours)
@@ -254,7 +258,7 @@ class SimulationLogger():
             # Gets populations from this frame
             total_pop = _nd.get_population_size()
             pop_template = PopTemplate()
-            pop_template.mother_blob_id = _nd.id
+            pop_template.mother_blob_id = graph.get_region_by_name(_nd.containing_region_name).id
             local_pop = _nd.get_population_size(pop_template)
             outside_pop = total_pop - local_pop
             
@@ -814,56 +818,95 @@ class SimulationLogger():
         
         figures = []
         xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
+        print("processing custom line plots")
+        # Custom Plot lines
+        for name, config in self.custom_line_plots.items():
+            print("Here")
+            _file, _x, _y, _cols, _h, _lvl, _f = config
+            
+            # Skip unrecorded data
+            if _lvl == 'Region' and LoggerDefaultRecordKey.ENV_REGION_POPULATION not in self.data_to_record: continue
+            if _lvl == 'Node' and LoggerDefaultRecordKey.ENV_NODE_POPULATION not in self.data_to_record: continue
+            
+            # Read the file
+            print("Reading file: ", self.base_path +  _file)
+            df = pd.read_csv(self.base_path +  _file, sep = ';')
+            
+            # Filter columns and entries accordingly
+            if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+            if _f and _lvl == 'Region': df = df[df['Region'].isin(_f)].reset_index(drop = True)
+            if _f and _lvl == 'Node': df = df[df['Node'].str.contains('|'.join(_f))].reset_index(drop = True)
+            
+            # No level or filter (global) = can be plotted directly
+            if _lvl is None and _f is None:
+                fig = px.line(df,y = _cols,
+                        labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+                        title=name)
+            # Filters EnvRegions or EnvNode types as requested
+            else:
+                to_track = []
+                df2 = pd.DataFrame()
+                for r in df[_lvl].unique():
+                    for c in _cols:
+                        df2[r + ": " + c] =  df[df[_lvl] == r].reset_index()[c]
+                        to_track.append(r + ": " + c)
+                fig = px.line(df2,y = to_track,
+                            labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+                            title=name)
+            fig.update_xaxes(xaxes_upt)
+            figures.append(fig)
+        #  def add_custom_line_plot(self, _key:str, file, x_label:str, y_label:str, columns:list[str] = None, hours: list[str] = None, _level_to_filter:str = None, _to_filter: list[str] = None):
+        # self.custom_line_plots[_key] = (file, x_label, y_label, columns, hours, _level_to_filter, _to_filter)    
         
-        #Custom Global Line Plots
-        if LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION in self.data_to_record:
-            for name, config in self.global_custom_line_plots.items():
-                _x, _y, _c, _h = config
-                df = pd.read_csv(self.base_path +  "global.csv", sep = ';')
-                if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
-                fig = px.line(df, y = _c,
-                           labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
-                           title=name)
-                fig.update_xaxes(xaxes_upt)
-                figures.append(fig)
+        # #Custom Global Line Plots
+        # if LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION in self.data_to_record:
+        #     for name, config in self.global_custom_line_plots.items():
+        #         _x, _y, _c, _h = config
+        #         df = pd.read_csv(self.base_path +  "global.csv", sep = ';')
+        #         if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+        #         fig = px.line(df, y = _c,
+        #                    labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+        #                    title=name)
+        #         fig.update_xaxes(xaxes_upt)
+        #         figures.append(fig)
                 
-        #Custom Region Line Plots       
-        if LoggerDefaultRecordKey.ENV_REGION_POPULATION in self.data_to_record:
-            for name, config in self.region_custom_line_plots.items():
-                _x, _y, _c, _n, _h = config
-                df = pd.read_csv(self.base_path +  "regions.csv", sep = ';')
-                if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
-                if _n: df = df[df['Region'].isin(_n)].reset_index(drop = True)
-                to_track = []
-                df2 = pd.DataFrame()
-                for r in df['Region'].unique():
-                    for c in _c:
-                        df2[r + ": " + c] =  df[df['Region'] == r].reset_index()[c]
-                        to_track.append(r + ": " + c)
-                fig = px.line(df2,y = to_track,
-                           labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
-                           title=name)
-                fig.update_xaxes(xaxes_upt)
-                figures.append(fig)
+        # #Custom Region Line Plots       
+        # if LoggerDefaultRecordKey.ENV_REGION_POPULATION in self.data_to_record:
+        #     for name, config in self.region_custom_line_plots.items():
+        #         _x, _y, _c, _n, _h = config
+        #         df = pd.read_csv(self.base_path +  "regions.csv", sep = ';')
+        #         if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+        #         if _n: df = df[df['Region'].isin(_n)].reset_index(drop = True)
+        #         to_track = []
+        #         df2 = pd.DataFrame()
+        #         for r in df['Region'].unique():
+        #             for c in _c:
+        #                 df2[r + ": " + c] =  df[df['Region'] == r].reset_index()[c]
+        #                 to_track.append(r + ": " + c)
+        #         fig = px.line(df2,y = to_track,
+        #                    labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+        #                    title=name)
+        #         fig.update_xaxes(xaxes_upt)
+        #         figures.append(fig)
                 
-        #Custom Node Line Plots
-        if LoggerDefaultRecordKey.ENV_NODE_POPULATION in self.data_to_record:
-            for name, config in self.node_custom_line_plots.items():
-                _x, _y, _c, _n, _h = config
-                df = pd.read_csv(self.base_path +  "nodes.csv", sep = ';')
-                if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
-                if _n: df = df[df['Node'].str.contains('|'.join(_n))].reset_index(drop = True)
-                to_track = []
-                df2 = pd.DataFrame()
-                for r in df['Node'].unique():
-                    for c in _c:
-                        df2[r + ": " + c] =  df[df['Node'] == r].reset_index()[c]
-                        to_track.append(r + ": " + c)
-                fig = px.line(df2,y = to_track,
-                           labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
-                           title=name)
-                fig.update_xaxes(xaxes_upt)
-                figures.append(fig)
+        # #Custom Node Line Plots
+        # if LoggerDefaultRecordKey.ENV_NODE_POPULATION in self.data_to_record:
+        #     for name, config in self.node_custom_line_plots.items():
+        #         _x, _y, _c, _n, _h = config
+        #         df = pd.read_csv(self.base_path +  "nodes.csv", sep = ';')
+        #         if _h: df = df[df['Hour'].isin(_h)].reset_index(drop = True)
+        #         if _n: df = df[df['Node'].str.contains('|'.join(_n))].reset_index(drop = True)
+        #         to_track = []
+        #         df2 = pd.DataFrame()
+        #         for r in df['Node'].unique():
+        #             for c in _c:
+        #                 df2[r + ": " + c] =  df[df['Node'] == r].reset_index()[c]
+        #                 to_track.append(r + ": " + c)
+        #         fig = px.line(df2,y = to_track,
+        #                    labels={'index': _x, 'value': _y, 'variable': 'Legend'}, 
+        #                    title=name)
+        #         fig.update_xaxes(xaxes_upt)
+        #         figures.append(fig)
                 
         self.generate_figures(show_figures, export_figures, export_html, layout_update, figures)
                 

@@ -45,7 +45,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 50
+days = 1
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -81,11 +81,11 @@ env_graph.LoadPlugin(density_plugin)
 #custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
 #env_graph.LoadPlugin(custom_action_plugin)
 
-vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
-env_graph.LoadPlugin(vaccine_plugin)
+#vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
+#env_graph.LoadPlugin(vaccine_plugin)
 
-infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
-env_graph.LoadPlugin(infection_plugin)
+#infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
+#env_graph.LoadPlugin(infection_plugin)
 
 '''
 Logging
@@ -94,11 +94,11 @@ Logging
 logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
 
 logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
-#logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
-#logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
+logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
+logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
 logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
-#logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
+logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
@@ -109,8 +109,8 @@ logger.pop_template = pop_temp
 # logger.foreign_only = True
 # this option saves REALLY big files
 # logger.set_to_record('graph')
-logger.set_pluggin_to_record(infection_plugin)
-#logger.set_pluggin_to_record(vaccine_plugin)
+# logger.set_pluggin_to_record(infection_plugin)
+# logger.set_pluggin_to_record(vaccine_plugin)
 
 
 '''
@@ -120,10 +120,10 @@ logger.start_logging()
 for i in range(simulation_steps):
     print(i, end='\r')
         
-    infection_plugin.update_time_step(i % day_duration, i)
+    #infection_plugin.update_time_step(i % day_duration, i)
 
-    if i % day_duration == 0:
-        vaccine_plugin.update_time_step(i % day_duration, i)
+    #if i % day_duration == 0:
+    #    vaccine_plugin.update_time_step(i % day_duration, i)
 
     # Routine/Repeating Global Action Invoke example
     # Updates Node Routines and Repeating Global Actions

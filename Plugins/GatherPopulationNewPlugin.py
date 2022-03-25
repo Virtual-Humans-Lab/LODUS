@@ -118,14 +118,12 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
     
     ## Complex time action. Will be broken up into smaller actions
     def converge_population(self, values, hour, time):
+        #print(values)
+        assert ('region' in values, "region is not defined in Gather Population TimeAction")
+        assert ('node' in values, "node is not defined in Gather Population TimeAction")
         
-        target_region = values['destination_region']
-        if isinstance(target_region, str):
-            target_region = self.graph.get_region_by_name(values['destination_region'])
-
-        target_node = values['destination_node']
-        if isinstance(target_node, str):
-            target_node = target_region.get_node_by_name(target_node)
+        target_region = self.graph.get_region_by_name(values['region'])
+        target_node = target_region.get_node_by_name(values['node'])
             
         if self.DEBUG_OPERATION_OUTPUT and target_node.containing_region_name in self.DEBUG_OPERATION_REGIONS:
             print("########## CONVERGE_POPULATION")
@@ -133,14 +131,16 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
             
         sub_list = [] 
         quantity = values['quantity']
-        pop_template = values['population_template']
+        pop_template = PopTemplate()
+        if 'population_template' in values:
+            pop_template = values['population_template']
         
         weight_list = self.compute_weights(target_region, self.graph.region_list)
         #filtering undesired nodes
         weight_list = [(n, w) for (n,w) in weight_list if (n.get_population_size(pop_template) > 0)]
         if 'only_locals' in values and values['only_locals'] == "true":
             weight_list = [(n, w) for (n,w) in weight_list if (n.containing_region_name == target_node.containing_region_name)]
-        if 'different_node_name' in values and values['different_node_name'] == "true":
+        if 'different_node_name' in values and bool(values['different_node_name']):
             weight_list = [(n, w) for (n,w) in weight_list if (n.name != target_node.name)]
         
         available_pop = [node.get_population_size(pop_template) for (node,w) in weight_list]
