@@ -505,8 +505,8 @@ class BlobFactory():
     
         blobFactory = BlobFactory(template)
 
-        blob = blobFactory.Generate(0, 100)
-        blob2 = blobFactory.Generate(1, 350)
+        blob = blobFactory.Generate(0, 0, 100)
+        blob2 = blobFactory.Generate(1, 0, 350)
 
 
     Attributes:
@@ -515,7 +515,7 @@ class BlobFactory():
     def __init__(self, block_template:BlockTemplate):
         self.block_template:BlockTemplate = block_template
     
-    def Generate(self, _mother_blob_id: int, _population: int, traceable_prop_override:dict = {}):
+    def Generate(self, _mother_blob_id: int, _node_of_origin, _population: int, traceable_prop_override:dict = {}):
         """Generates a new Blob based on a pre-defined template.
         
         Params:
@@ -529,7 +529,7 @@ class BlobFactory():
             return None
         if _population <= 0:
             return None
-        blob = Blob(_mother_blob_id, _population, self)
+        blob = Blob(_mother_blob_id, _node_of_origin, _population, self)
         blob.initialize_blocks(self.block_template, _population)
         for k,v in traceable_prop_override.items():
             blob.traceable_properties[k] = v
@@ -795,12 +795,12 @@ class Blob():
         return "{0} {1} {2}".format(self, self.traceable_properties, self.sampled_properties)
 
     def __str__(self):
-        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"origin_node\" : {3}, \"frame_origin_node\" : {4}}}'
-        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.spawning_node, self.frame_origin_node)
+        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"previous_node\" : {3}, \"frame_origin_node\" : {4}}}'
+        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.previous_node, self.frame_origin_node)
 
     def __repr__(self):
-        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"origin_node\" : {3}, \"frame_origin_node\" : {4}}}'
-        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.spawning_node, self.frame_origin_node)
+        template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"previous_node\" : {3}, \"frame_origin_node\" : {4}}}'
+        return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.previous_node, self.frame_origin_node)
 
 
 
@@ -821,7 +821,7 @@ if __name__ == "__main__":
     dummyBlobFactory = BlobFactory(dummyBlockTemplate)
         
     print("\nCREATING BLOB 1")
-    dummyBlob = dummyBlobFactory.Generate(0, 400)
+    dummyBlob = dummyBlobFactory.Generate(0, 0, 400)
     print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
     print("************")
     

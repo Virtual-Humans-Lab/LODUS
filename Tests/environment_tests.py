@@ -433,8 +433,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
 
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -473,8 +473,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -520,8 +520,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
 
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -601,10 +601,10 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy four extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        extra_blob_2 = source_blob.blob_factory.Generate(0, 190)
-        extra_blob_3 = source_blob.blob_factory.Generate(0, 10)
-        extra_blob_4 = source_blob.blob_factory.Generate(0, 0)
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        extra_blob_2 = source_blob.blob_factory.Generate(0, 0, 190)
+        extra_blob_3 = source_blob.blob_factory.Generate(0, 0, 10)
+        extra_blob_4 = source_blob.blob_factory.Generate(0, 0, 0)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3, extra_blob_4])
@@ -647,10 +647,10 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy four extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        extra_blob_2 = source_blob.blob_factory.Generate(0, 190)
-        extra_blob_3 = source_blob.blob_factory.Generate(0, 10)
-        extra_blob_4 = source_blob.blob_factory.Generate(0, 0)
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        extra_blob_2 = source_blob.blob_factory.Generate(0, 0, 190)
+        extra_blob_3 = source_blob.blob_factory.Generate(0, 0, 10)
+        extra_blob_4 = source_blob.blob_factory.Generate(0, 0, 0)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3, extra_blob_4])
@@ -699,10 +699,10 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy four extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        extra_blob_2 = source_blob.blob_factory.Generate(0, 190)
-        extra_blob_3 = source_blob.blob_factory.Generate(0, 10)
-        extra_blob_4 = source_blob.blob_factory.Generate(0, 0)
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        extra_blob_2 = source_blob.blob_factory.Generate(0, 0, 190)
+        extra_blob_3 = source_blob.blob_factory.Generate(0, 0, 10)
+        extra_blob_4 = source_blob.blob_factory.Generate(0, 0, 0)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3, extra_blob_4])
@@ -917,8 +917,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = target_node.contained_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles, source_blob.traceable_properties)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles, source_blob.traceable_properties)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles, source_blob.traceable_properties)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles, source_blob.traceable_properties)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -960,8 +960,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -1005,8 +1005,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
 
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -1082,10 +1082,10 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = target_node.contained_blobs[0]
         
         # Copy four extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        extra_blob_2 = source_blob.blob_factory.Generate(0, 190)
-        extra_blob_3 = source_blob.blob_factory.Generate(0, 10)
-        extra_blob_4 = source_blob.blob_factory.Generate(0, 0)
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        extra_blob_2 = source_blob.blob_factory.Generate(0, 0, 190)
+        extra_blob_3 = source_blob.blob_factory.Generate(0, 0, 10)
+        extra_blob_4 = source_blob.blob_factory.Generate(0, 0, 0)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3, extra_blob_4])
@@ -1129,10 +1129,10 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy four extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        extra_blob_2 = source_blob.blob_factory.Generate(0, 190)
-        extra_blob_3 = source_blob.blob_factory.Generate(0, 10)
-        extra_blob_4 = source_blob.blob_factory.Generate(0, 0)
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        extra_blob_2 = source_blob.blob_factory.Generate(0, 0, 190)
+        extra_blob_3 = source_blob.blob_factory.Generate(0, 0, 10)
+        extra_blob_4 = source_blob.blob_factory.Generate(0, 0, 0)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3, extra_blob_4])
@@ -1178,10 +1178,10 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
 
         # Copy four extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 100, source_blob.profiles)
-        extra_blob_2 = source_blob.blob_factory.Generate(0, 190)
-        extra_blob_3 = source_blob.blob_factory.Generate(0, 10)
-        extra_blob_4 = source_blob.blob_factory.Generate(0, 0)
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles)
+        extra_blob_2 = source_blob.blob_factory.Generate(0, 0, 190)
+        extra_blob_3 = source_blob.blob_factory.Generate(0, 0, 10)
+        extra_blob_4 = source_blob.blob_factory.Generate(0, 0, 0)
         
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3, extra_blob_4])
@@ -1993,9 +1993,9 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
         
         # Copy three extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(source_blob.mother_blob_id, 100, source_blob.profiles, source_blob.traceable_properties)
-        extra_blob_2 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 190, source_blob.traceable_properties)
-        extra_blob_3 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 10, source_blob.traceable_properties) 
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(source_blob.mother_blob_id, 0, 100, source_blob.profiles, source_blob.traceable_properties)
+        extra_blob_2 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 0, 190, source_blob.traceable_properties)
+        extra_blob_3 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 0, 10, source_blob.traceable_properties) 
                 
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3])

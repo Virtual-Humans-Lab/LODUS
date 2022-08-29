@@ -63,7 +63,7 @@ class PopulationTests(unittest.TestCase):
             result : Bucket1 should contain the sum of both populations.
                      
         Case 2: 
-            action : Creates a thrid PropertyBucket with a different characteristic. Add the third to the first one.
+            action : Creates a third PropertyBucket with a different characteristic. Add the third to the first one.
             result : Operation does nothing and populations remain the same.
         """
 
@@ -1516,7 +1516,7 @@ class PopulationTests(unittest.TestCase):
         
         # Case 1:
         # Create a Blob using the BlobFactory
-        blob1 = blob_factory.Generate(0, 300)
+        blob1 = blob_factory.Generate(0, 0, 300)
         blob1_size = blob1.get_population_size()
             
         # Compare size, sampled properties count and verify block validity
@@ -1532,7 +1532,7 @@ class PopulationTests(unittest.TestCase):
         # Case 2:
         # Adds a new sampled property/bucket to the BlobFactory.BlockTemplate and creates a new Blob
         blob_factory.block_template.add_bucket('characteristic_D', ('value_D1', 'value_D2'))
-        blob2 = blob_factory.Generate(0, 50)
+        blob2 = blob_factory.Generate(0, 0, 50)
         blob2_size = blob2.get_population_size()
         
         # Compare size, sampled properties count and verify block validity
@@ -1552,7 +1552,7 @@ class PopulationTests(unittest.TestCase):
         # Case 3:
         # Adds a new traceable property to the BlobFactory.BlockTemplate and creates a new Blob
         blob_factory.block_template.add_traceable_property('traceable_B', 'abc')
-        blob3 = blob_factory.Generate(0, 20)
+        blob3 = blob_factory.Generate(0, 0, 20)
         blob3_size = blob3.get_population_size()
         
         # Compare size, sampled properties count and verify block validity
@@ -1573,7 +1573,7 @@ class PopulationTests(unittest.TestCase):
         # Adds a new sampled property/bucket and a traceable property directly to the BlockTemplate and creates a new Blob
         block_template.add_bucket('characteristic_E', ('value_E1', 'value_E2'))
         block_template.add_traceable_property('traceable_c', { 0, 1, 2})
-        blob4 = blob_factory.Generate(0, 500)
+        blob4 = blob_factory.Generate(0, 0, 500)
         blob4_size = blob4.get_population_size()
         
         # Compare size, sampled properties count and verify block validity
@@ -1592,7 +1592,7 @@ class PopulationTests(unittest.TestCase):
         
         # Case 5:
         # Creates a Blob with 0 population - Should be None
-        blob5 = blob_factory.Generate(0, 0)
+        blob5 = blob_factory.Generate(0, 0, 0)
 
         # Verify Blob validity
         self.assertEqual(blob5, None, 'Case 5 Target Blob should be None.')
@@ -1617,7 +1617,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Create a PropertyBlock using the BlockTemplate
-        blob_1 = blob_factory.GenerateEmpty(0)
+        blob_1 = blob_factory.GenerateEmpty(0, 0)
         blob_1_size = blob_1.get_population_size()
         
         # Compare size, PropertyBuckets count and verify block validity
@@ -1692,7 +1692,7 @@ class PopulationTests(unittest.TestCase):
         
         # Case 1:
         # Create a Blob using the BlobFactory. 100 is the highest sum defined in a single characteristic (A, B and C) 
-        blob1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         blob1_size = blob1.get_population_size()
         values = blob1.sampled_properties.get_mapping_of_property_values()
         
@@ -1732,7 +1732,7 @@ class PopulationTests(unittest.TestCase):
                         'characteristic_F' : {}}
         
         # Create a Blob using the template. 200 is the more than the highest sum defined in a single characteristic (A, B and C)
-        blob2 = blob_factory.GenerateProfile(0, 200, pop_profile)
+        blob2 = blob_factory.GenerateProfile(0, 0, 200, pop_profile)
         blob2_size = blob2.get_population_size()
         values = blob2.sampled_properties.get_mapping_of_property_values()
         
@@ -1786,7 +1786,7 @@ class PopulationTests(unittest.TestCase):
                         'characteristic_F' : {}}
         
         # Create a PropertyBlock using the template. 20 is the lower then the minimum defined in a single characteristic (D)
-        blob3 = blob_factory.GenerateProfile(0, 20, pop_profile)
+        blob3 = blob_factory.GenerateProfile(0, 0, 20, pop_profile)
         blob3_size = blob3.get_population_size()
         values = blob3.sampled_properties.get_mapping_of_property_values()
         
@@ -1817,7 +1817,7 @@ class PopulationTests(unittest.TestCase):
                 
         # Case 4:
         # Requested 0 population:
-        blob4 = blob_factory.GenerateProfile(0, 0, pop_profile)
+        blob4 = blob_factory.GenerateProfile(0, 0, 0, pop_profile)
 
         # Verify block validity
         self.assertEqual(blob4, None, 'Case 4 Blob should be None.')
@@ -1915,8 +1915,8 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Creates 2 Blobs with the same traceable properties
-        blob_1 = blob_factory.Generate(0, 100)
-        blob_2 = blob_factory.Generate(0, 50)
+        blob_1 = blob_factory.Generate(0, 0, 100)
+        blob_2 = blob_factory.Generate(0, 0, 50)
         
         # Get original Blob sizes
         blob_1_original_size = blob_1.get_population_size()
@@ -1941,9 +1941,9 @@ class PopulationTests(unittest.TestCase):
         
         # Case 2:
         # Creates 2 Blobs with differente traceable properties
-        blob_1 = blob_factory.Generate(0, 100)
+        blob_1 = blob_factory.Generate(0, 0, 100)
         block_template.add_traceable_property('traceable_A', 1)
-        blob_2 = blob_factory.Generate(0, 50)
+        blob_2 = blob_factory.Generate(0, 0, 50)
         
         # Get original Blob sizes
         blob_1_original_size = blob_1.get_population_size()
@@ -2003,7 +2003,7 @@ class PopulationTests(unittest.TestCase):
         pop_profile = {'characteristic_A' : {'value_A1' : 100}}
 
         # Case 1:
-        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
@@ -2024,7 +2024,7 @@ class PopulationTests(unittest.TestCase):
         'Case 1: Split blob quantity does not match blob 2 size.')
 
         # Case 2:
-        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
@@ -2050,7 +2050,7 @@ class PopulationTests(unittest.TestCase):
         'Case 2: Blob 2 size is not equal to old blob 1 size.')
 
         # Case 3:
-        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
@@ -2112,7 +2112,7 @@ class PopulationTests(unittest.TestCase):
         pop_template = PopTemplate()
 
         # Case 1:
-        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
@@ -2133,7 +2133,7 @@ class PopulationTests(unittest.TestCase):
         'Case 1: Split blob quantity does not match blob 2 size.')
 
         # Case 2:
-        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
@@ -2159,7 +2159,7 @@ class PopulationTests(unittest.TestCase):
         'Case 2: Blob 2 size is not equal to old blob 1 size.')
 
         # Case 3:
-        blob_1 = blob_factory.GenerateProfile(0, 100, pop_profile)
+        blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
         
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
@@ -2219,7 +2219,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
@@ -2243,7 +2243,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 2:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
@@ -2267,7 +2267,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 3:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
@@ -2336,7 +2336,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_available_size = blob_1.get_population_size(pop_template)
         blob_1_original_size = blob_1.get_population_size()
         
@@ -2365,7 +2365,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 2:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_available_size = blob_1.get_population_size(pop_template)
         blob_1_original_size = blob_1.get_population_size()
         
@@ -2393,7 +2393,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 3:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_available_size = blob_1.get_population_size(pop_template)
         blob_1_original_size = blob_1.get_population_size()
         
@@ -2422,7 +2422,7 @@ class PopulationTests(unittest.TestCase):
         
         # Case 4:
         # Create a Blob using the BlobFactory
-        blob_1 = blob_factory.Generate(0, 200)
+        blob_1 = blob_factory.Generate(0, 0, 200)
         blob_1_available_size = blob_1.get_population_size(pop_template)
         blob_1_original_size = blob_1.get_population_size()
 

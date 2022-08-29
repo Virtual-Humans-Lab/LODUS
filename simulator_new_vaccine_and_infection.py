@@ -147,4 +147,5 @@ for i in range(simulation_steps):
     #     env_graph.queue_next_frame_action(dummy_action)
 
 #logger.compute_composite_data(env_graph, simulation_steps)
-logger.stop_logging(show_figures=True, export_figures=False, export_html=True)
+
+logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
