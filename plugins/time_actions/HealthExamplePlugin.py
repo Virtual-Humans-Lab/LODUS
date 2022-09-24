@@ -27,9 +27,6 @@ class HealthExamplePlugin(environment.TimeActionPlugin):
         self.hour = 0
         self.time = 0
         self.current_day = 0
-        
-        
-
 
         #, default_beta = 0.25, default_gamma = 0.08
         # Sets the 'infect' action
@@ -39,10 +36,9 @@ class HealthExamplePlugin(environment.TimeActionPlugin):
         #self.graph.base_actions.add('health_call')
 
         # Sets a traceable properties for all blobs in the simulation
-        self.graph.add_blobs_traceable_property("health_status", 'healthy')
+        self.graph.add_blobs_traceable_property("health_status", 'total')
         
         print("original Pop", self.graph.get_population_size())
-        
         
         # Sets a number of infected people in the start of the simulation
         # for _name, _node in self.graph.node_dict.items():
@@ -53,13 +49,12 @@ class HealthExamplePlugin(environment.TimeActionPlugin):
         #             print(_b.verbose_str())   
 
         # JSON file containing the configuration of the Infection Plugin
-        with open(config_file_path, newline='') as csvfile:
+        with open(config_file_path, newline='', encoding='utf-8') as csvfile:
             healty_count = csv.reader(csvfile, delimiter=',', quotechar='|')
             next(healty_count)
             for row in healty_count:
                 _target_node = self.graph.get_region_by_name(row[0]).get_node_by_name("home")
-                _target_node.change_blobs_traceable_property('health_status', 'sick', int(row[1]))
-
+                _target_node.change_blobs_traceable_property('health_status', 'attendance', int(row[1]))
 
         # for _name, _node in self.graph.node_dict.items():
         #     #print(_node.get_unique_name() + str(_node.get_population_size()))
@@ -72,12 +67,12 @@ class HealthExamplePlugin(environment.TimeActionPlugin):
         
         # Sets PopTemplates to be used later
         self.pt_healthy = PopTemplate()
-        self.pt_healthy.set_traceable_property("health_status", 'healthy')
+        self.pt_healthy.set_traceable_property("health_status", 'total')
         self.pt_sick = PopTemplate()
-        self.pt_sick.set_traceable_property("health_status", 'sick')
+        self.pt_sick.set_traceable_property("health_status", 'attendance')
     
-        print("initially healthy:", self.graph.get_population_size(self.pt_healthy))
-        print("initially sick:", self.graph.get_population_size(self.pt_sick))
+        print("initially total:", self.graph.get_population_size(self.pt_healthy))
+        print("initially attendance:", self.graph.get_population_size(self.pt_sick))
 
 
     def update_time_step(self, hour, time):

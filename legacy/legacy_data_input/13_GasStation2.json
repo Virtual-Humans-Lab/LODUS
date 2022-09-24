@@ -1,0 +1,509 @@
+{
+  "population_template": {
+    "traceable_properties": {},
+    "sampled_properties": {
+      "age": [
+        "adults",
+        "elders",
+        "young",
+        "children"
+      ],
+      "occupation": [
+        "idle",
+        "student",
+        "worker"
+      ],
+      "social_profile": [
+        "low",
+        "mid",
+        "high"
+      ]
+    }
+  },
+  "regions": [
+    {
+      "name": "Azenha",
+      "image_position": [
+        987.0,
+        1657.0
+      ],
+      "long_lat_position": [
+        -51.2147436812232,
+        -30.0510199525848
+      ],
+      "world_position": [
+        301.17566260416061,
+        -1566.5962688550353
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Farroupilha",
+        "Santana",
+        "Menino Deus"
+      ],
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [
+              971.2252,
+              1667.6488
+            ],
+            "long_lat_position": [
+              -51.216515023920117,
+              -30.049979704285192
+            ],
+            "world_position": [
+              103.99069556314498,
+              -1433.4860698804259
+            ]
+          },
+          "population_groups": [
+            {
+              "size": 13804,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 6904,
+                  "elders": 2760,
+                  "young": 2760,
+                  "children": 1380
+                },
+                "occupation": {
+                  "idle": 4140,
+                  "student": 2760,
+                  "worker": 6904
+                }
+              }
+            }
+          ],
+          "time_actions": {}
+        },
+        "work": {
+          "characteristics": {
+            "image_position": [
+              999.600159,
+              1611.93115
+            ],
+            "long_lat_position": [
+              -51.2133288165572,
+              -30.055422465151622
+            ],
+            "world_position": [
+              458.67767676431686,
+              -2129.9575969800353
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        },
+        "school": {
+          "characteristics": {
+            "image_position": [
+              973.9879,
+              1632.30835
+            ],
+            "long_lat_position": [
+              -51.216204801258392,
+              -30.053431959898088
+            ],
+            "world_position": [
+              138.52452429849654,
+              -1875.2422649487853
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        },
+        "marketplace": {
+          "characteristics": {
+            "image_position": [
+              1005.9613,
+              1624.391
+            ],
+            "long_lat_position": [
+              -51.212614528840547,
+              -30.054205347317385
+            ],
+            "world_position": [
+              538.19182166177779,
+              -1974.2082988843322
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        },
+        "pharmacy": {
+          "characteristics": {
+            "image_position": [
+              1005.32056,
+              1682.33069
+            ],
+            "long_lat_position": [
+              -51.2126864763065,
+              -30.048545457753939
+            ],
+            "world_position": [
+              530.18266638834029,
+              -1249.9621440991759
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        },
+        "gas_station": {
+          "characteristics": {
+            "image_position": [
+              970.461548,
+              1651.85461
+            ],
+            "long_lat_position": [
+              -51.216600777692584,
+              -30.051522587861516
+            ],
+            "world_position": [
+              94.4446292789653,
+              -1630.9140178784728
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [
+              1001.42261,
+              1683.5658
+            ],
+            "long_lat_position": [
+              -51.21312417609721,
+              -30.048424806417824
+            ],
+            "world_position": [
+              481.45814856607467,
+              -1234.5239116773009
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {
+            "0": [
+              {
+                "name": "requests_workers_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 10,
+                  "different_node_name": true,
+                  "population_template": {}
+                }
+              }
+            ],
+            "1": [
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 14,
+                  "different_node_name": true,
+                  "population_template": {}
+                }
+              }
+            ],
+            "2": [
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 14,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 10,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "3": [
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 10,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 13,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "4": [
+              {
+                "name": "requests_workers_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 10,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ],
+                    "occupation": [
+                      "worker"
+                    ]
+                  }
+                }
+              },
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 13,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 19,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "5": [
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 19,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 16,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "6": [
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 16,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 11,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "7": [
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 11,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 23,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "8": [
+              {
+                "name": "requests_workers_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 10,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ],
+                    "occupation": [
+                      "worker"
+                    ]
+                  }
+                }
+              },
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 23,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 35,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ],
+            "9": [
+              {
+                "name": "send_people_back_from_hospital",
+                "type": "return_to_previous",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 35,
+                  "different_node_name": true
+                }
+              },
+              {
+                "name": "request_people_to_hospital",
+                "type": "gather_population",
+                "values": {
+                  "region": "Azenha",
+                  "node": "hospital",
+                  "quantity": 34,
+                  "different_node_name": true,
+                  "population_template": {
+                    "age": [
+                      "young",
+                      "adults",
+                      "elders"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "shopping_mall": {
+          "characteristics": {
+            "image_position": [
+              1013.7699,
+              1681.367
+            ],
+            "long_lat_position": [
+              -51.211737708507492,
+              -30.048639612343162
+            ],
+            "world_position": [
+              635.79901465494186,
+              -1262.0099346265197
+            ]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        }
+      }
+    }
+  ]
+}
