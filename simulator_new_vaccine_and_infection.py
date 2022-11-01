@@ -1,7 +1,7 @@
 #encoding: utf-8
 import sys
 
-from od_matrix_logger import ODMatrixLogger
+from od_matrix_logger import LoggerODRecordKey, ODMatrixLogger
 sys.path.append('./Plugins/')
 
 import argparse
@@ -105,7 +105,7 @@ logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
-od_logger = ODMatrixLogger(env_graph, day_duration)
+
 
 pop_temp = PopTemplate()
 #pop_temp.set_property('age', 'adults')
@@ -116,6 +116,36 @@ logger.pop_template = pop_temp
 # logger.set_pluggin_to_record(infection_plugin)
 # logger.set_pluggin_to_record(vaccine_plugin)
 
+# OD-Matrix logger
+od_logger = ODMatrixLogger(f'{args["n"]}', env_graph, day_duration)
+od_logger.data_to_record.add(LoggerODRecordKey.REGION_TO_REGION)
+
+# Age tracking
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("age", "children")
+od_logger.region_custom_templates["age: [children]"] = od_pop_template
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("age", "young")
+od_logger.region_custom_templates["age: [young]"] = od_pop_template
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("age", "adults")
+od_logger.region_custom_templates["age: [adults]"] = od_pop_template
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("age", "elders")
+od_logger.region_custom_templates["age: [elders]"] = od_pop_template
+
+# Occupation tracking
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("occupation", "idle")
+od_logger.region_custom_templates["occupation: [idle]"] = od_pop_template
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("occupation", "student")
+od_logger.region_custom_templates["occupation: [student]"] = od_pop_template
+od_pop_template = PopTemplate()
+od_pop_template.set_sampled_property("occupation", "worker")
+od_logger.region_custom_templates["occupation: [worker]"] = od_pop_template
+
+#-------------
 
 '''
 Simulation
@@ -132,6 +162,7 @@ for i in range(simulation_steps):
     # Routine/Repeating Global Action Invoke example
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
+    od_logger.update_time_step(i % day_duration, i)
     env_graph.update_time_step(i % day_duration, i)
     #print(env_graph.get_blob_count())
     #print(env_graph.get_population_size())
@@ -153,3 +184,4 @@ for i in range(simulation_steps):
 #logger.compute_composite_data(env_graph, simulation_steps)
 
 logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
+od_logger.stop_logging()
