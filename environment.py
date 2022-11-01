@@ -1,6 +1,7 @@
 from __future__ import annotations
 from logging import Logger
 from pprint import pprint
+import od_matrix_logger
 import population
 import copy
 import util
@@ -482,6 +483,8 @@ class EnvironmentGraph():
         self.next_frame_queue = []
         # Queued actions priority 'first' or 'last'
         self.queued_action_priority = 'first'
+
+        self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
       
 
     def get_node_by_name(self, region_name, node_name):
@@ -761,6 +764,9 @@ class EnvironmentGraph():
             for blob in node.contained_blobs:
                 blob.traceable_properties[key] = lambda_funtion(blob, blob.traceable_properties[key])
 
+    def log_blob_movement(self, origin_node:EnvNode, destination_node:EnvNode, blobs:list[population.Blob]):
+        self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
+
     def merge_node(self, node: EnvNode):
         i = 0
         blob_list  = node.contained_blobs
@@ -817,13 +823,14 @@ class EnvironmentGraph():
         
         available_total = origin_node.get_population_size()
         available = origin_node.get_population_size(pop_template)
-
+        
         grabbed_population = origin_node.grab_population(quantity, pop_template)     
         for grab_pop in grabbed_population:
             #if grab_pop.previous_node != origin_node.id:
             #    grab_pop.previous_node = origin_node.id
             grab_pop.frame_origin_node = origin_node.id
         
+        self.log_blob_movement(origin_node, destination_node, grabbed_population)
         destination_node.add_blobs(grabbed_population)
         
     def set_spawning_nodes(self):

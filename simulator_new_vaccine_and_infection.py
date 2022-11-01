@@ -1,5 +1,7 @@
 #encoding: utf-8
 import sys
+
+from od_matrix_logger import ODMatrixLogger
 sys.path.append('./Plugins/')
 
 import argparse
@@ -102,6 +104,8 @@ logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
+
+od_logger = ODMatrixLogger(env_graph, day_duration)
 
 pop_temp = PopTemplate()
 #pop_temp.set_property('age', 'adults')
