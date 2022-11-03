@@ -124,15 +124,15 @@ class ODMatrixLogger():
 
         # Data per SimulationStep
         df = pd.DataFrame(data = _data, columns= _columns)
-        df.to_csv(self.data_frames_path + "od_matrix_" + label + "_step.csv", sep=";")
+        df.to_csv(self.data_frames_path + "od_matrix_" + label + "_step.csv", sep=";", encoding="utf-8-sig")
 
         # Data per Cycle
         df.drop('SimulationStep', inplace=True, axis=1) 
         df.drop('Cycle Step', inplace=True, axis=1) 
         df_cycle = df.groupby(['Origin', "Destination", "Cycle"]).sum().reset_index()
-        df_cycle.to_csv(self.data_frames_path + "od_matrix_" + label + "_cycle.csv", sep=";")
+        df_cycle.to_csv(self.data_frames_path + "od_matrix_" + label + "_cycle.csv", sep=";", encoding="utf-8-sig")
 
         # Data in entire Simulation
         df_cycle.drop('Cycle', inplace=True, axis=1) 
         df_sim = df_cycle.groupby(['Origin', "Destination"]).sum().reset_index()
-        df_sim.to_csv(self.data_frames_path + "od_matrix_" + label + ".csv", sep=";")
+        df_sim.to_csv(self.data_frames_path + "od_matrix_" + label + ".csv", sep=";", encoding="utf-8-sig")
