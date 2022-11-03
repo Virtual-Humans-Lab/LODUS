@@ -119,6 +119,7 @@ logger.pop_template = pop_temp
 # OD-Matrix logger
 od_logger = ODMatrixLogger(f'{args["n"]}', env_graph, day_duration)
 od_logger.data_to_record.add(LoggerODRecordKey.REGION_TO_REGION)
+od_logger.data_to_record.add(LoggerODRecordKey.NODE_TO_NODE)
 
 # Age tracking
 od_pop_template = PopTemplate()
