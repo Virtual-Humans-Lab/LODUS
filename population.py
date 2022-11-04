@@ -329,7 +329,7 @@ class PropertyBlock():
         """
         self.buckets[bucket.characteristic].add_bucket(bucket)
 
-    def get_population_size(self, population_template = None):
+    def get_population_size(self, population_template:PopTemplate = None):
         """Gets the population size matching a PopTemplate.
         
         If population_template is None, gets total population size.
@@ -339,17 +339,17 @@ class PropertyBlock():
             a_bucket = list(self.buckets.values())[0]
             return a_bucket.get_population_size()
         
-        if not bool(population_template.pairs.keys()):
+        if not bool(population_template.sampled_properties.keys()):
             a_bucket = list(self.buckets.values())[0]
             return a_bucket.get_population_size()
         
         min_value = sys.maxsize
-        template_keys = population_template.pairs.keys()
+        template_keys = population_template.sampled_properties.keys()
         
         #print(population_template, template_keys)
         for key in self.buckets.keys():
             if key in template_keys:
-                val = population_template.pairs[key]
+                val = population_template.sampled_properties[key]
 
                 min_value = min(min_value, self.buckets[key].get_population_size(val))
 
@@ -374,10 +374,10 @@ class PropertyBlock():
         if population_template is None:
             population_template = PopTemplate()
 
-        template_keys = population_template.pairs.keys()
+        template_keys = population_template.sampled_properties.keys()
         # corrects for a bucket limiting the quantity
         min_val = quantity
-        for k, v in population_template.pairs.items():
+        for k, v in population_template.sampled_properties.items():
             bucket_size = self.buckets[k].get_population_size(v)
             min_val = min(min_val, bucket_size)
         quantity = min_val
@@ -388,7 +388,7 @@ class PropertyBlock():
         buckets = {}
         for key in self.buckets.keys():
             if key in template_keys:
-                bucket_prop = population_template.pairs[key]
+                bucket_prop = population_template.sampled_properties[key]
                 buckets[key] = self.buckets[key].extract(quantity, bucket_prop)
             else:
                 buckets[key] = self.buckets[key].extract(quantity)
@@ -429,22 +429,26 @@ class PopTemplate():
         blocks: The filtered property characteristics.
     """
 
-    def __init__(self,  string_values= None):
+    def __init__(self,  sampled_properties:dict = None, traceable_properties:dict= None):
         self.blob_id = None
         self.mother_blob_id = None
+        self.sampled_properties:dict = {}
         self.traceable_properties:dict = {}
-        self.pairs = {}
         self.empty = True
 
-        if string_values is not None:
-            for k,v in string_values.items():
+        #if sampled_properties is not None:
+        if sampled_properties:
+            for k,v in sampled_properties.items():
                 self.set_sampled_property(k, v)
+        if traceable_properties:
+            for k,v in traceable_properties.items():
+                self.set_traceable_property(k, v)
 
     def set_mother_blob_id(self, value):
         self.mother_blob_id = int(value)
         
     def set_sampled_property(self, key, value):
-        self.pairs[key] = value
+        self.sampled_properties[key] = value
         self.empty = False
         
     def set_traceable_property(self, key, value):
@@ -470,7 +474,7 @@ class PopTemplate():
             return False
         if self.mother_blob_id != other.mother_blob_id:
             return False
-        if self.pairs.items() != other.pairs.items():
+        if self.sampled_properties.items() != other.pairs.items():
             return False
         if self.traceable_properties.items() != other.traceable_properties.items():
             return False
@@ -482,14 +486,14 @@ class PopTemplate():
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
         return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable prop\"  : {3}}}'.format(blob_id,
                                                                                              mother_blob_id,
-                                                                                             self.pairs, self.traceable_properties)
+                                                                                             self.sampled_properties, self.traceable_properties)
 
     def __repr__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
         return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable prop\"  : {3}}}'.format(blob_id,
                                                                                              mother_blob_id,
-                                                                                             self.pairs, self.traceable_properties)
+                                                                                             self.sampled_properties, self.traceable_properties)
 
 
 

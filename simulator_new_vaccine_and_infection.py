@@ -122,31 +122,16 @@ od_logger.data_to_record.add(LoggerODRecordKey.REGION_TO_REGION)
 od_logger.data_to_record.add(LoggerODRecordKey.NODE_TO_NODE)
 
 # Age tracking
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("age", "children")
-od_logger.region_custom_templates["age: [children]"] = od_pop_template
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("age", "young")
-od_logger.region_custom_templates["age: [young]"] = od_pop_template
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("age", "adults")
-od_logger.region_custom_templates["age: [adults]"] = od_pop_template
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("age", "elders")
-od_logger.region_custom_templates["age: [elders]"] = od_pop_template
+od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
+od_logger.region_custom_templates["age: [young]"] = PopTemplate(sampled_properties={"age": "young"})
+od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
+od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
 
 # Occupation tracking
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("occupation", "idle")
-od_logger.region_custom_templates["occupation: [idle]"] = od_pop_template
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("occupation", "student")
-od_logger.region_custom_templates["occupation: [student]"] = od_pop_template
-od_pop_template = PopTemplate()
-od_pop_template.set_sampled_property("occupation", "worker")
-od_logger.region_custom_templates["occupation: [worker]"] = od_pop_template
-
-#-------------
+od_logger.region_custom_templates["occupation: [idle]"] = PopTemplate(sampled_properties={"occupation": "idle"})
+od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
+od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
+#----------------------------
 
 '''
 Simulation
