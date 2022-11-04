@@ -86,9 +86,9 @@ Logging
 
 logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
 
-logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
-logger.set_default_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
+logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
+logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
+logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)

@@ -87,8 +87,8 @@ logger = SimulationLogger(f'{args["n"]}', day_duration)
 
 #logger.set_to_record('global')
 #logger.set_to_record('neighbourhood')
-logger.set_default_data_to_record('neighbourhood_disserta')
-logger.set_default_data_to_record('metrics')
+logger.set_data_to_record('neighbourhood_disserta')
+logger.set_data_to_record('metrics')
 #logger.set_to_record('nodes')
 #logger.set_to_record('positions')
 

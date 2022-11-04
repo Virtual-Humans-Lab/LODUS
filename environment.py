@@ -1,8 +1,8 @@
 from __future__ import annotations
 from logging import Logger
 from pprint import pprint
-import od_matrix_logger
 import population
+import od_matrix_logger
 import copy
 import util
 from random_inst import FixedRandom
@@ -765,7 +765,8 @@ class EnvironmentGraph():
                 blob.traceable_properties[key] = lambda_funtion(blob, blob.traceable_properties[key])
 
     def log_blob_movement(self, origin_node:EnvNode, destination_node:EnvNode, blobs:list[population.Blob]):
-        self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
+        if self.od_matrix_logger:
+            self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
 
     def merge_node(self, node: EnvNode):
         i = 0

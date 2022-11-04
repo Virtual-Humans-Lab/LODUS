@@ -4,6 +4,7 @@ from numpy import character
 sys.path.append('../')
 sys.path.append('../../')
 from population import *
+import od_matrix_logger
 import environment
 import unittest
 import util

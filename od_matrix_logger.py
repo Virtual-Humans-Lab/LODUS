@@ -1,19 +1,15 @@
-from time import sleep
-import environment
+# LODUS core
+from environment import EnvRegion, EnvNode, EnvironmentGraph
 from population import Blob, PopTemplate
-import os 
-import util
+
+# Graphic and data libraries
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
-import csv
-
-import numpy as np
-import pandas as pd
 pd.options.plotting.backend = "plotly"
-from pathlib import Path
+import numpy as np
 
-import copy
+from pathlib import Path
 from enum import Enum
 
 
@@ -23,9 +19,9 @@ class LoggerODRecordKey(Enum):
 
 class ODMatrixLogger():
 
-    def __init__(self, base_filename:str, graph:environment.EnvironmentGraph, cycle_length: int=24) -> None:
+    def __init__(self, base_filename:str, graph:EnvironmentGraph, cycle_length: int=24) -> None:
         # Attaches itself to the EnvGraph
-        self.graph: environment.EnvironmentGraph = graph
+        self.graph: EnvironmentGraph = graph
         graph.od_matrix_logger = self
 
         # Cycle length and Current SimulationStep
@@ -75,7 +71,7 @@ class ODMatrixLogger():
                         self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()][_key] = 0
             
 
-    def log_od_movement(self, _ori:environment.EnvNode, _dest:environment.EnvNode, _blobs:list[Blob]):
+    def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
         total = sum([b.get_population_size() for b in _blobs])
         

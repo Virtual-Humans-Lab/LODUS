@@ -4,6 +4,7 @@ sys.path.append('../')
 sys.path.append('../Plugins')
 
 import unittest
+import od_matrix_logger
 import environment
 import population
 from population_tests import verify_blobs_validity
@@ -1635,9 +1636,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_B.values['node'] == "school",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_B.values['population_template'].pairs['age'] == 'young',
+        self.assertTrue(target_action_B.values['population_template'].sampled_properties['age'] == 'young',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_B.values['population_template'].pairs['occupation'] == 'student',
+        self.assertTrue(target_action_B.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_C.type == "gather_population",
         'Case 2: TimeAction type not as expected.')
@@ -1645,9 +1646,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_C.values['node'] == "school",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.values['population_template'].pairs['age'] == 'children',
+        self.assertTrue(target_action_C.values['population_template'].sampled_properties['age'] == 'children',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.values['population_template'].pairs['occupation'] == 'student',
+        self.assertTrue(target_action_C.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         # TimeAction_D - "work" EnvNode
         self.assertTrue(target_action_D.type == "gather_population",
@@ -1656,9 +1657,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_D.values['node'] == "work",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_D.values['population_template'].pairs['age'] == 'adults',
+        self.assertTrue(target_action_D.values['population_template'].sampled_properties['age'] == 'adults',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_D.values['population_template'].pairs['occupation'] == 'worker',
+        self.assertTrue(target_action_D.values['population_template'].sampled_properties['occupation'] == 'worker',
         'Case 2: TimeAction value not as expected.')
        
     
@@ -1867,9 +1868,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_B.values['node'] == "school",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_B.values['population_template'].pairs['age'] == 'young',
+        self.assertTrue(target_action_B.values['population_template'].sampled_properties['age'] == 'young',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_B.values['population_template'].pairs['occupation'] == 'student',
+        self.assertTrue(target_action_B.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_C.type == "gather_population",
         'Case 2: TimeAction type not as expected.')
@@ -1877,9 +1878,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_C.values['node'] == "school",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.values['population_template'].pairs['age'] == 'children',
+        self.assertTrue(target_action_C.values['population_template'].sampled_properties['age'] == 'children',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.values['population_template'].pairs['occupation'] == 'student',
+        self.assertTrue(target_action_C.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         # TimeAction_D - "work" EnvNode
         self.assertTrue(target_action_D.type == "gather_population",
@@ -1888,9 +1889,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_D.values['node'] == "work",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_D.values['population_template'].pairs['age'] == 'adults',
+        self.assertTrue(target_action_D.values['population_template'].sampled_properties['age'] == 'adults',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_D.values['population_template'].pairs['occupation'] == 'worker',
+        self.assertTrue(target_action_D.values['population_template'].sampled_properties['occupation'] == 'worker',
         'Case 2: TimeAction value not as expected.')
     
     
@@ -1950,9 +1951,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_B.values['node'] == "school",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_B.values['population_template'].pairs['age'] == 'young',
+        self.assertTrue(target_action_B.values['population_template'].sampled_properties['age'] == 'young',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_B.values['population_template'].pairs['occupation'] == 'student',
+        self.assertTrue(target_action_B.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_C.type == "gather_population",
         'Case 2: TimeAction type not as expected.')
@@ -1960,9 +1961,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_C.values['node'] == "school",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.values['population_template'].pairs['age'] == 'children',
+        self.assertTrue(target_action_C.values['population_template'].sampled_properties['age'] == 'children',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.values['population_template'].pairs['occupation'] == 'student',
+        self.assertTrue(target_action_C.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         # TimeAction_D - "work" EnvNode
         self.assertTrue(target_action_D.type == "gather_population",
@@ -1971,9 +1972,9 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_D.values['node'] == "work",
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_D.values['population_template'].pairs['age'] == 'adults',
+        self.assertTrue(target_action_D.values['population_template'].sampled_properties['age'] == 'adults',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_D.values['population_template'].pairs['occupation'] == 'worker',
+        self.assertTrue(target_action_D.values['population_template'].sampled_properties['occupation'] == 'worker',
         'Case 2: TimeAction value not as expected.')
     
     ## EnvironmentGraph.merge_node - Cloned Blobs

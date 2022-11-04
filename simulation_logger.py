@@ -79,8 +79,11 @@ class SimulationLogger():
         self.region_custom_line_plots: dict = {}
         self.node_custom_line_plots: dict = {}
 
-    def set_default_data_to_record(self, type: LoggerDefaultRecordKey):
-        self.data_to_record.add(type)
+    def set_data_to_record(self, _data: LoggerDefaultRecordKey):
+        self.data_to_record.add(_data)
+
+    def set_data_list_to_record(self, _types: list[LoggerDefaultRecordKey]):
+        self.data_to_record.update(_types)
         
     def set_pluggin_to_record(self, p:environment.TimeActionPlugin):
         assert isinstance(p, environment.TimeActionPlugin), "Argument should be a TimeActionPlugin"

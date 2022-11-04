@@ -89,8 +89,8 @@ basename = environment_path.split('\\')[-1].split('.')[0]
 
 logger = SimulationLogger(f'{basename}-infection_data-i{str(args["i"])}-s{str(args["s"])}-fixed_20', day_duration)
 
-logger.set_default_data_to_record('global')
-logger.set_default_data_to_record('neighbourhood')
+logger.set_data_to_record('global')
+logger.set_data_to_record('neighbourhood')
 #logger.set_to_record('graph')
 
 '''

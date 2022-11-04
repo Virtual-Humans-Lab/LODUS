@@ -125,12 +125,12 @@ else:
     #Path(f'{basename}-m{str(args["m"])}').mkdir(parents=True, exist_ok=True)
     logger = SimulationLogger(f'{basename}-m{str(args["m"])}', day_duration)
 
-logger.set_default_data_to_record('global')
-logger.set_default_data_to_record('neighbourhood')
-logger.set_default_data_to_record('neighbourhood_disserta')
-logger.set_default_data_to_record('metrics')
-logger.set_default_data_to_record('nodes')
-logger.set_default_data_to_record('positions')
+logger.set_data_to_record('global')
+logger.set_data_to_record('neighbourhood')
+logger.set_data_to_record('neighbourhood_disserta')
+logger.set_data_to_record('metrics')
+logger.set_data_to_record('nodes')
+logger.set_data_to_record('positions')
 
 pop_temp = PopTemplate()
 #pop_temp.set_property('age', 'adults')
