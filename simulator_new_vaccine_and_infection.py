@@ -136,7 +136,12 @@ od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_
 '''
 Simulation
 '''
-logger.start_logging()
+#logger.start_logging()
+
+env_graph.LoadLoggerPlugin(od_logger)
+print(env_graph.loaded_logger_plugins)
+env_graph.start_logging()
+
 for i in range(simulation_steps):
     print(i, end='\r')
         
@@ -148,15 +153,16 @@ for i in range(simulation_steps):
     # Routine/Repeating Global Action Invoke example
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
-    od_logger.update_time_step(i % day_duration, i)
+    # od_logger.update_time_step(i % day_duration, i)
     env_graph.update_time_step(i % day_duration, i)
+    env_graph.log_simulation_step()
     #print(env_graph.get_blob_count())
     #print(env_graph.get_population_size())
     
     #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
     #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
     
-    logger.record_frame(env_graph, i)
+    #logger.record_frame(env_graph, i)
     # Direct Action Invoke example
     # if i == 50:
     #     dummy_action = TimeAction('push_population', {'region':'example1', 'node':'example2', 'quantity':50})
@@ -169,5 +175,6 @@ for i in range(simulation_steps):
 
 #logger.compute_composite_data(env_graph, simulation_steps)
 
-logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
-od_logger.stop_logging()
+#logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
+# od_logger.stop_logging()
+env_graph.stop_logging()

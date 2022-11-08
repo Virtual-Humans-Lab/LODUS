@@ -1,5 +1,6 @@
 # LODUS core
 from environment import EnvRegion, EnvNode, EnvironmentGraph
+from logger_plugin import LoggerPlugin
 from population import Blob, PopTemplate
 
 # Graphic and data libraries
@@ -17,15 +18,16 @@ class LoggerODRecordKey(Enum):
     REGION_TO_REGION = 0,
     NODE_TO_NODE = 0
 
-class ODMatrixLogger():
+class ODMatrixLogger(LoggerPlugin):
 
     def __init__(self, base_filename:str, graph:EnvironmentGraph, cycle_length: int=24) -> None:
         # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = graph
-        graph.od_matrix_logger = self
+        self.graph.od_matrix_logger["od_logger"] = self.log_od_movement
+        #graph.od_matrix_logger = self
 
         # Cycle length and Current SimulationStep
-        self.time_cycle:int = cycle_length
+        self.cycle_lenght:int = cycle_length
         self.sim_step: int = 0 
 
         # Which data is being recorded
@@ -42,9 +44,10 @@ class ODMatrixLogger():
         # Create the required directories
         self.base_path = 'output_logs/' + base_filename + '/'
         self.data_frames_path = self.base_path + "/data_frames/"
+
+    def setup_logger(self):
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
-        
 
     def update_time_step(self, cycle_step, simulation_step) -> None:
         # Update SimulationStep
@@ -70,6 +73,8 @@ class ODMatrixLogger():
                     for _key in self.node_custom_templates:
                         self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()][_key] = 0
             
+    def log_simulation_step(self):
+        return
 
     def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
@@ -90,8 +95,8 @@ class ODMatrixLogger():
             for _b in _blobs:
                 for _key, _pt in self.node_custom_templates.items():
                     _x[_key] += _b.get_population_size(_pt)
-
-    def stop_logging(self):
+    
+    def stop_logger(self):
         
         # Write Region to Region files
         if LoggerODRecordKey.REGION_TO_REGION in self.data_to_record:
@@ -102,7 +107,6 @@ class ODMatrixLogger():
             self.write_od_matrix_to_csv("node", list(self.node_custom_templates.keys()), self.node_od_matrix)
                
     
-
     def write_od_matrix_to_csv(self, label:str, custom_columns:list[str], od_matrix:dict[str,dict[str,dict[str,dict[str,int]]]]):
         
         # Columns and Data Setup
@@ -113,7 +117,7 @@ class ODMatrixLogger():
         for _sim_step_key, _sim_step_val in od_matrix.items():
             for _or_key, _or_val in _sim_step_val.items():
                 for _dest_key, _dest_val in _or_val.items():
-                    _row = [_sim_step_key, _sim_step_key % self.time_cycle, _sim_step_key // self.time_cycle, _or_key, _dest_key]
+                    _row = [_sim_step_key, _sim_step_key % self.cycle_lenght, _sim_step_key // self.cycle_lenght, _or_key, _dest_key]
                     for _key, _val in _dest_val.items():
                         _row.append(_val)
                     _data.append(_row)

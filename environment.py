@@ -1,6 +1,6 @@
 from __future__ import annotations
-from logging import Logger
 from pprint import pprint
+import logger_plugin
 import population
 import od_matrix_logger
 import copy
@@ -468,7 +468,8 @@ class EnvironmentGraph():
         self.base_actions = {'move_population'}
         
         self.loaded_plugins: list[TimeActionPlugin] = []
-        
+        self.loaded_logger_plugins: list[LoggerPlugin] = []
+
         self.global_actions = set()
 
         # repeating actions are a tuple of (cycle_length or frame_list, time_action)
@@ -484,7 +485,8 @@ class EnvironmentGraph():
         # Queued actions priority 'first' or 'last'
         self.queued_action_priority = 'first'
 
-        self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
+        #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
+        self.od_matrix_logger = {}
       
 
     def get_node_by_name(self, region_name, node_name):
@@ -561,24 +563,25 @@ class EnvironmentGraph():
         """Gets the total number of Blobs contained in this EnvironmentGraph."""
         return sum([rg.get_blob_count() for rg in self.region_list])
 
-    def update_time_step(self, hour, time):
+    def update_time_step(self, cycle_step, simulation_step):
         """Updates a time step for a given time.
         Updates Routines and Repeating Global Actions.
 
         Applies every TimeAction which matches time argument.
         """
+        for l in self.loaded_logger_plugins:
+            l.update_time_step(cycle_step, simulation_step)
 
+        actions = self.generate_action_list(cycle_step)
 
-        actions = self.generate_action_list(hour)
-
-        simplified_actions   = self.simplify_action_list(actions, hour, time)
+        simplified_actions   = self.simplify_action_list(actions, cycle_step, simulation_step)
         #balanced_actions     = self.balance_action_list(simplified_actions)
 
         #for action in balanced_actions:
         #     self.consume_time_action(action, hour, time)
 
         for action in simplified_actions:
-            self.consume_time_action(action, hour, time)
+            self.consume_time_action(action, cycle_step, simulation_step)
 
         #merge all nodes coming from the same origin
         for node in self.node_list:
@@ -717,7 +720,7 @@ class EnvironmentGraph():
         self.loaded_plugins.append(plugin)
         for k, v in plugin.get_pairs().items():
             self.time_action_map[k] = v
-            
+                
     def has_plugin(self, _type:type) -> bool:
         return any(isinstance(x, _type) for x in self.loaded_plugins)
             
@@ -728,6 +731,32 @@ class EnvironmentGraph():
         for p in self.loaded_plugins:
             if isinstance(p,_type): return p
         return None
+
+    def LoadLoggerPlugin(self, plugin:LoggerPlugin):
+        self.loaded_logger_plugins.append(plugin)
+
+    def has__logger_plugin(self, _type:type) -> bool:
+        return any(isinstance(x, _type) for x in self.loaded_logger_plugins)
+            
+    def get_logger_plugins(self, _type:type) -> list:
+        return [p for p in self.loaded_logger_plugins if isinstance(p,_type)]
+    
+    def get_first_logger_plugin(self, _type:type):
+        for p in self.loaded_logger_plugins:
+            if isinstance(p,_type): return p
+        return None 
+
+    def start_logging(self):  
+        for l in self.loaded_logger_plugins:
+            l.setup_logger()
+    
+    def log_simulation_step(self):    
+        for l in self.loaded_logger_plugins:
+            l.log_simulation_step()
+    
+    def stop_logging(self):    
+        for l in self.loaded_logger_plugins:
+            l.stop_logger()
 
     def merge_blobs(self):
         """Merges every blob with a compatible mother_blob_id in a given EnvNode."""
@@ -765,8 +794,9 @@ class EnvironmentGraph():
                 blob.traceable_properties[key] = lambda_funtion(blob, blob.traceable_properties[key])
 
     def log_blob_movement(self, origin_node:EnvNode, destination_node:EnvNode, blobs:list[population.Blob]):
-        if self.od_matrix_logger:
-            self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
+        for k,v in self.od_matrix_logger.items():
+            v(origin_node, destination_node, blobs)
+            #self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
 
     def merge_node(self, node: EnvNode):
         i = 0
@@ -916,6 +946,7 @@ class TimeActionPlugin():
     
     def stop_logger(self,logger):    
         raise NotImplementedError("SubClass should implement the \"stop_logger\"  method")
+
 
 class Routine():
     """Describes a mapping of time slot -> TimeAction.
