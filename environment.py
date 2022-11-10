@@ -2,7 +2,7 @@ from __future__ import annotations
 from pprint import pprint
 import logger_plugin
 import population
-import od_matrix_logger
+#import Plugins.Loggers.od_matrix_logger as od_matrix_logger
 import copy
 import util
 from random_inst import FixedRandom
@@ -468,7 +468,7 @@ class EnvironmentGraph():
         self.base_actions = {'move_population'}
         
         self.loaded_plugins: list[TimeActionPlugin] = []
-        self.loaded_logger_plugins: list[LoggerPlugin] = []
+        self.loaded_logger_plugins: list[logger_plugin.LoggerPlugin] = []
 
         self.global_actions = set()
 
@@ -569,8 +569,10 @@ class EnvironmentGraph():
 
         Applies every TimeAction which matches time argument.
         """
-        for l in self.loaded_logger_plugins:
-            l.update_time_step(cycle_step, simulation_step)
+        for _lp in self.loaded_plugins:
+            _lp.update_time_step(cycle_step, simulation_step)
+        for _llp in self.loaded_logger_plugins:
+            _llp.update_time_step(cycle_step, simulation_step)
 
         actions = self.generate_action_list(cycle_step)
 
@@ -940,6 +942,9 @@ class TimeActionPlugin():
     
     def setup_logger(self,logger):    
         raise NotImplementedError("SubClass should implement the \"setup_logger\" method")
+
+    def update_time_step(self, cycle_step, simulation_step):
+        raise NotImplementedError("SubClass should implement the \"update_time_step\"  method" + str(type(self)))
     
     def log_data(self,logger):    
         raise NotImplementedError("SubClass should implement the \"log_data\"  method")

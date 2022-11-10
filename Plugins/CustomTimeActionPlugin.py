@@ -8,7 +8,6 @@ from random_inst import FixedRandom
 import math
 import numpy as np
 import csv
-from simulation_logger import SimulationLogger
 import util
 import json
 

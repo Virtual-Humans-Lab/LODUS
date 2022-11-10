@@ -8,7 +8,7 @@ from random_inst import FixedRandom
 import math
 import numpy as np
 import csv
-from simulation_logger import SimulationLogger
+from Loggers.population_count_logger import PopulationCountLogger
 import util
 import json
 
@@ -368,7 +368,7 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
         return [[dS,dI,dR],[newS,newI,newR]]
 
     #### Logging Functions
-    def setup_logger(self,logger:SimulationLogger):        
+    def setup_logger(self,logger:PopulationCountLogger):        
         self.logger = logger 
         if not self.logger: return
         

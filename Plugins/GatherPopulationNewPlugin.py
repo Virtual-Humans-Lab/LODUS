@@ -55,6 +55,8 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         self.weights_map = {}
 
 
+    def update_time_step(self, cycle_step, simulation_step):
+        return #super().update_time_step(cycle_step, simulation_step)
 
     def get_distance(self, name1, name2, pos1, pos2):
         if name1 + name2 is self.distance_map:

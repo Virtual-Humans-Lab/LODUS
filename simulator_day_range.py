@@ -15,7 +15,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 
-from simulation_logger import SimulationLogger
+from Loggers.population_count_logger import PopulationCountLogger
 
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
@@ -87,7 +87,7 @@ Logging
 '''
 basename = environment_path.split('\\')[-1].split('.')[0]
 
-logger = SimulationLogger(f'{basename}-infection_data-i{str(args["i"])}-s{str(args["s"])}-fixed_20', day_duration)
+logger = PopulationCountLogger(f'{basename}-infection_data-i{str(args["i"])}-s{str(args["s"])}-fixed_20', day_duration)
 
 logger.set_data_to_record('global')
 logger.set_data_to_record('neighbourhood')
@@ -104,7 +104,7 @@ for i in range(28):
 
         env_graph.update_time_step(hour, hour + i * (24 * 7))
         
-        logger.record_frame(env_graph, hour + i * (24 * 7))
+        logger.log_simulation_step(env_graph, hour + i * (24 * 7))
 
 
 '''

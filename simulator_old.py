@@ -37,7 +37,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 
-from simulation_logger import SimulationLogger
+from Loggers.population_count_logger import PopulationCountLogger
 import new_random
 import random
 from config_module import config
@@ -248,7 +248,7 @@ argsName = ''
 for arg, val in args.items():
 	argsName = argsName + '-' + arg + str(val)
 filename = f'{config.basename}{argsName}'
-logger = SimulationLogger(f'{config.basename}-infection_data-i{str(args["i"])}-s{str(args["s"])}', config.day_duration)
+logger = PopulationCountLogger(f'{config.basename}-infection_data-i{str(args["i"])}-s{str(args["s"])}', config.day_duration)
 
 logger.set_data_to_record('global')
 logger.set_data_to_record('neighbourhood')
@@ -496,7 +496,7 @@ for i in range(config.simulation_steps):
 		inf_plugin.beta = old_beta
 		new_random.new_random.set_random_instance(envRandom, "envRandom")
 
-	logger.record_frame(env_graph, i)
+	logger.log_simulation_step(env_graph, i)
 
 
 '''

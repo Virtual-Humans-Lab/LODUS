@@ -19,7 +19,7 @@ from VaccineLocalPlugin import VaccinePlugin
 from NewInfectionPlugin import NewInfectionPlugin
 from ExamplePlugin import ExamplePlugin
 
-from simulation_logger import LoggerDefaultRecordKey, SimulationLogger
+from Loggers.population_count_logger import LoggerDefaultRecordKey, PopulationCountLogger
 from pathlib import Path
 
 import time
@@ -84,7 +84,7 @@ env_graph.LoadPlugin(vaccine_plugin)
 Logging
 '''
 
-logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
+logger = PopulationCountLogger(f'{args["n"]}', env_graph, day_duration)
 
 logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
 logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
@@ -102,12 +102,12 @@ logger.pop_template = pop_temp
 # logger.foreign_only = True
 # this option saves REALLY big files
 # logger.set_to_record('graph')
-logger.set_pluggin_to_record(vaccine_plugin)
+#logger.set_pluggin_to_record(vaccine_plugin)
 
 '''
 Simulation
 '''
-logger.start_logging()
+logger.setup_logger()
 for i in range(simulation_steps):
     print(i, end='\r')
 
@@ -124,7 +124,7 @@ for i in range(simulation_steps):
     #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
     #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
     
-    logger.record_frame(env_graph, i)
+    logger.log_simulation_step(env_graph, i)
     # Direct Action Invoke example
     # if i == 50:
     #     dummy_action = TimeAction('push_population', {'region':'example1', 'node':'example2', 'quantity':50})
@@ -136,4 +136,4 @@ for i in range(simulation_steps):
     #     env_graph.queue_next_frame_action(dummy_action)
 
 #logger.compute_composite_data(env_graph, simulation_steps)
-logger.stop_logging(show_figures=True, export_figures=False, export_html=True)
+logger.stop_logger(show_figures=True, export_figures=False, export_html=True)

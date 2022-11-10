@@ -1,5 +1,7 @@
 # LODUS core
-from environment import EnvRegion, EnvNode, EnvironmentGraph
+import sys
+sys.path.append('/../../')
+from environment import EnvironmentGraph, EnvNode, EnvRegion
 from logger_plugin import LoggerPlugin
 from population import Blob, PopTemplate
 
@@ -14,7 +16,7 @@ from pathlib import Path
 from enum import Enum
 
 
-class LoggerODRecordKey(Enum):
+class ODMovementRecordKey(Enum):
     REGION_TO_REGION = 0,
     NODE_TO_NODE = 0
 
@@ -31,7 +33,7 @@ class ODMatrixLogger(LoggerPlugin):
         self.sim_step: int = 0 
 
         # Which data is being recorded
-        self.data_to_record:set[LoggerODRecordKey] = set()
+        self.data_to_record:set[ODMovementRecordKey] = set()
 
         # OD Dicts: SimulationStep > Origin > Destination > Quantities
         self.region_od_matrix:dict[str,dict[str,dict[str,dict[str,int]]]] = {}
@@ -54,7 +56,7 @@ class ODMatrixLogger(LoggerPlugin):
         self.sim_step = simulation_step
 
         # Setup Region-Region dict: SimulationStep > Origin > Destination > Quantities
-        if LoggerODRecordKey.REGION_TO_REGION in self.data_to_record:
+        if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
             self.region_od_matrix[self.sim_step] = {}
             for orig in self.graph.region_list:
                 self.region_od_matrix[self.sim_step][orig.name] = {}
@@ -64,7 +66,7 @@ class ODMatrixLogger(LoggerPlugin):
                         self.region_od_matrix[self.sim_step][orig.name][dest.name][_key] = 0
         
         # Setup Node-Node dict: SimulationStep > Origin > Destination > Quantities
-        if LoggerODRecordKey.NODE_TO_NODE in self.data_to_record:
+        if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
             self.node_od_matrix[self.sim_step] = {}
             for orig in self.graph.node_list:
                 self.node_od_matrix[self.sim_step][orig.get_unique_name()] = {}
@@ -81,7 +83,7 @@ class ODMatrixLogger(LoggerPlugin):
         total = sum([b.get_population_size() for b in _blobs])
         
         # Record Region-Region movement 
-        if LoggerODRecordKey.REGION_TO_REGION in self.data_to_record:
+        if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
             _x = self.region_od_matrix[self.sim_step][_ori.containing_region_name][_dest.containing_region_name]
             _x["Total"] += total
             for _b in _blobs:
@@ -89,7 +91,7 @@ class ODMatrixLogger(LoggerPlugin):
                     _x[_key] += _b.get_population_size(_pt)
         
         # Record Node-Node movement
-        if LoggerODRecordKey.NODE_TO_NODE in self.data_to_record:
+        if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
             _x = self.node_od_matrix[self.sim_step][_ori.get_unique_name()][_dest.get_unique_name()]
             _x["Total"] += total
             for _b in _blobs:
@@ -99,11 +101,11 @@ class ODMatrixLogger(LoggerPlugin):
     def stop_logger(self):
         
         # Write Region to Region files
-        if LoggerODRecordKey.REGION_TO_REGION in self.data_to_record:
+        if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
             self.write_od_matrix_to_csv("region", list(self.region_custom_templates.keys()), self.region_od_matrix)
 
         # Write Node to Node files
-        if LoggerODRecordKey.NODE_TO_NODE in self.data_to_record:
+        if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
             self.write_od_matrix_to_csv("node", list(self.node_custom_templates.keys()), self.node_od_matrix)
                
     

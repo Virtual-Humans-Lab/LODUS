@@ -1,8 +1,11 @@
 #encoding: utf-8
 import sys
 
-from od_matrix_logger import LoggerODRecordKey, ODMatrixLogger
 sys.path.append('./Plugins/')
+from Loggers.od_matrix_logger import ODMovementRecordKey, ODMatrixLogger
+from Loggers.vaccine_level_logger import VaccineLevelLogger
+from Loggers.population_count_logger import LoggerDefaultRecordKey, PopulationCountLogger
+from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 
 import argparse
 import environment
@@ -21,7 +24,6 @@ from NewInfectionPlugin import NewInfectionPlugin
 from NodeDensityPlugin import NodeDensityPlugin
 from CustomTimeActionPlugin import CustomTimeActionPlugin
 
-from simulation_logger import LoggerDefaultRecordKey, SimulationLogger
 from pathlib import Path
 
 import time
@@ -47,7 +49,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 #how many steps each day has
-days = 1
+days = 2
 day_duration = 24
 env_graph.routine_day_length = day_duration
 
@@ -93,23 +95,23 @@ env_graph.LoadPlugin(density_plugin)
 Logging
 '''
 
-logger = SimulationLogger(f'{args["n"]}', env_graph, day_duration)
-
-logger.set_data_list_to_record([LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL,
-    LoggerDefaultRecordKey.BLOB_COUNT_REGION,
-    LoggerDefaultRecordKey.BLOB_COUNT_NODE,
-    LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION,
-    LoggerDefaultRecordKey.ENV_REGION_POPULATION,
-    LoggerDefaultRecordKey.ENV_NODE_POPULATION])
+pop_count_logger = PopulationCountLogger(f'{args["n"]}', env_graph, day_duration)
+pop_count_logger.data_to_record = [LoggerDefaultRecordKey.POPULATION_COUNT_GLOBAL,
+                                    LoggerDefaultRecordKey.POPULATION_COUNT_Region,
+                                    LoggerDefaultRecordKey.POPULATION_COUNT_NODE]
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
+blob_count_logger = BlobCountLogger(f'{args["n"]}', env_graph, day_duration)
+blob_count_logger.data_to_record = [BlobCountRecordKey.BLOB_COUNT_GLOBAL,
+                                    BlobCountRecordKey.BLOB_COUNT_REGION,
+                                    BlobCountRecordKey.BLOB_COUNT_NODE]
 
 
 pop_temp = PopTemplate()
 #pop_temp.set_property('age', 'adults')
-logger.pop_template = pop_temp
+pop_count_logger.pop_template = pop_temp
 # logger.foreign_only = True
 # this option saves REALLY big files
 # logger.set_to_record('graph')
@@ -118,8 +120,8 @@ logger.pop_template = pop_temp
 
 # OD-Matrix logger
 od_logger = ODMatrixLogger(f'{args["n"]}', env_graph, day_duration)
-od_logger.data_to_record.add(LoggerODRecordKey.REGION_TO_REGION)
-od_logger.data_to_record.add(LoggerODRecordKey.NODE_TO_NODE)
+od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
+                            ODMovementRecordKey.NODE_TO_NODE]
 
 # Age tracking
 od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
@@ -133,13 +135,19 @@ od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled
 od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
 #----------------------------
 
+# Vaccine Logger
+#vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
+
 '''
 Simulation
 '''
-#logger.start_logging()
 
+env_graph.LoadLoggerPlugin(pop_count_logger)
 env_graph.LoadLoggerPlugin(od_logger)
-print(env_graph.loaded_logger_plugins)
+env_graph.LoadLoggerPlugin(blob_count_logger)
+#env_graph.LoadLoggerPlugin(vacc_logger)
+#print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
+#print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
 env_graph.start_logging()
 
 for i in range(simulation_steps):
@@ -151,27 +159,17 @@ for i in range(simulation_steps):
     #    vaccine_plugin.update_time_step(i % day_duration, i)
 
     # Routine/Repeating Global Action Invoke example
+
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
-    # od_logger.update_time_step(i % day_duration, i)
     env_graph.update_time_step(i % day_duration, i)
+
+    # Log current simulation step
     env_graph.log_simulation_step()
-    #print(env_graph.get_blob_count())
-    #print(env_graph.get_population_size())
     
     #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
     #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
     
-    #logger.record_frame(env_graph, i)
-    # Direct Action Invoke example
-    # if i == 50:
-    #     dummy_action = TimeAction('push_population', {'region':'example1', 'node':'example2', 'quantity':50})
-    #     env_graph.direct_action_invoke(dummy_action)
-    
-    # Next frame queue action example
-    # if i == 60:
-    #     dummy_action = TimeAction('push_population', {'region':'example1', 'node':'example2', 'quantity':50})
-    #     env_graph.queue_next_frame_action(dummy_action)
 
 #logger.compute_composite_data(env_graph, simulation_steps)
 

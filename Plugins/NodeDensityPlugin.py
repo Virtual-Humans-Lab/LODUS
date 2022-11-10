@@ -8,7 +8,6 @@ from random_inst import FixedRandom
 import math
 import numpy as np
 import csv
-from simulation_logger import SimulationLogger
 import util
 import json
 
@@ -35,3 +34,6 @@ class NodeDensityPlugin(environment.TimeActionPlugin):
             else:
                 _density = self.default_density
             _node.add_characteristic('density', _density)
+
+    def update_time_step(self, cycle_step, simulation_step):
+        return #super().update_time_step(cycle_step, simulation_step)

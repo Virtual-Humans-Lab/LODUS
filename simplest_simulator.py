@@ -21,7 +21,6 @@ from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationPlugin import ReturnPopulationPlugin
 from LevyWalkPlugin import LevyWalkPlugin
 
-from simulation_logger import SimulationLogger
 
 from pathlib import Path
 
@@ -83,7 +82,7 @@ env_graph.LoadPlugin(return_plugin)
 Logging
 '''
 
-logger = SimulationLogger(f'{args["n"]}', day_duration)
+logger = PopulationCountLogger(f'{args["n"]}', day_duration)
 
 #logger.set_to_record('global')
 #logger.set_to_record('neighbourhood')

@@ -12,6 +12,9 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
         self.graph = env_graph
         self.set_pair('return_to_previous', self.return_to_previous)
 
+    def update_time_step(self, cycle_step, simulation_step):
+        return #super().update_time_step(cycle_step, simulation_step)
+
     def return_to_previous(self, values, hour, time):
         
         #assert('node_id' in values or ('region' in values and 'node' in values), 

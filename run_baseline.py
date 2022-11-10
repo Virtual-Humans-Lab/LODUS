@@ -19,7 +19,7 @@ from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationPlugin import ReturnPopulationPlugin
 from LevyWalkPlugin import LevyWalkPlugin
 
-from simulation_logger import SimulationLogger
+from Loggers.population_count_logger import PopulationCountLogger
 from pathlib import Path
 
 import time
@@ -156,10 +156,10 @@ basename = environment_path.split('\\')[-1].split('.')[0]
 if args['i'] != 0:
     #Path(f'{basename}-i{str(args["i"])}-m{str(args["m"])}').mkdir(parents=True,
     #exist_ok=True)
-    logger = SimulationLogger(f'{basename}-i{str(args["i"])}-m{str(args["m"])}', day_duration)
+    logger = PopulationCountLogger(f'{basename}-i{str(args["i"])}-m{str(args["m"])}', day_duration)
 else:
     #Path(f'{basename}-m{str(args["m"])}').mkdir(parents=True, exist_ok=True)
-    logger = SimulationLogger(f'{basename}-m{str(args["m"])}', day_duration)
+    logger = PopulationCountLogger(f'{basename}-m{str(args["m"])}', day_duration)
 
 logger.set_data_to_record('global')
 logger.set_data_to_record('neighbourhood')
@@ -193,7 +193,7 @@ for i in range(simulation_steps):
     env_graph.update_time_step(hour, i)
 
     # records frame I data
-    logger.record_frame(env_graph, i)
+    logger.log_simulation_step(env_graph, i)
 
 
 print(time.time() - t)

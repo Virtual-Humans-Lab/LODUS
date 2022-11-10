@@ -37,6 +37,8 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
         self.set_pair('return_population_home', self.return_population_home)
         self.set_pair('send_population_back', self.send_population_back)
 
+    def update_time_step(self, cycle_step, simulation_step):
+        return #super().update_time_step(cycle_step, simulation_step)
 
         ## returns everyone home
     def return_population_home(self, values, hour, time):

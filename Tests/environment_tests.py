@@ -4,7 +4,7 @@ sys.path.append('../')
 sys.path.append('../Plugins')
 
 import unittest
-import od_matrix_logger
+import Loggers.od_matrix_logger as od_matrix_logger
 import environment
 import population
 from population_tests import verify_blobs_validity
