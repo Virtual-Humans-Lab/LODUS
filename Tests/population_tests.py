@@ -2,9 +2,8 @@ import sys
 
 from numpy import character
 sys.path.append('../')
-sys.path.append('../../')
 from population import *
-import Loggers.od_matrix_logger as od_matrix_logger
+import Plugins.Loggers.od_matrix_logger as od_matrix_logger
 import environment
 import unittest
 import util
