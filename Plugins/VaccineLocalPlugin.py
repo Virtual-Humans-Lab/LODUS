@@ -40,9 +40,9 @@ class VaccinePlugin(environment.TimeActionPlugin):
         
         # Set the time/frame variables
         self.day_duration = day_duration
-        self.hour = 0
-        self.time = 0
-        self.current_day = 0
+        self.cycle_step = 0
+        self.sim_step = 0
+        self.current_vacc_cycle = 0
         
         # JSON file containing the configuration of the Vaccine Plugin
         self.config = json.loads(open(config_file_path ,'r').read())
@@ -86,20 +86,20 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.prev_vac = [0] * self.dosages
         
 
-    def update_time_step(self, hour, time):
+    def update_time_step(self, cycle_step, simulation_step):
         # Updates time step data
-        self.hour = hour
-        self.time = time
-        self.current_day = (time // self.day_duration) - self.dosage_offsets[0]
-        self.day = (time // self.day_duration)
+        self.cycle_step = cycle_step
+        self.sim_step = simulation_step
+        self.cycle = (simulation_step // self.day_duration)
+        self.current_vacc_cycle = (simulation_step // self.day_duration) - self.dosage_offsets[0]
         
         # Increases the days_since_last_vaccine for all blobs
-        if self.day > 0:
-            self.graph.lambda_blobs_traceable_property("days_since_last_vaccine", lambda b,v:v+1 if b.traceable_properties["vaccine_level"] < self.dosages else 0)
+        if self.cycle > 0 and cycle_step == 0:
+            self.graph.lambda_blobs_traceable_property("days_since_last_vaccine", lambda b,v:v+1 if b.get_traceable_property("vaccine_level") < self.dosages else 0)
         
         # Checks vaccines available for each dosage
         for dose_index,starting_day in enumerate(self.dosage_offsets):
-            _dose_offset = self.day - starting_day
+            _dose_offset = self.cycle - starting_day
             
             # Vaccination not started for this dose_index or offset bigger than available data (i.e. used all day entries for that dose_index)
             if _dose_offset < 0 or _dose_offset > len(self.vaccine_data):
@@ -117,14 +117,14 @@ class VaccinePlugin(environment.TimeActionPlugin):
             
         if self.DEBUG_VACC_DATA:    
             print('------------------------')   
-            print(f'Vaccine day {self.current_day}. Qnt to Vacc: {self.to_vaccinate_per_dose}. Prev Vacc: {self.prev_vac}\n')
+            print(f'Vaccine day {self.current_vacc_cycle}. Qnt to Vacc: {self.to_vaccinate_per_dose}. Prev Vacc: {self.prev_vac}\n')
         
         # Resets vaccines given in the previous day and their remainders
         self.prev_vac = [0] * self.dosages
         self.remainder_per_region = {r: [0.0] * self.dosages for r in self.graph.region_dict}
     
     def get_blob_vacc_efficiency(self, blob:Blob):
-        return self.efficiency_per_level[blob.traceable_properties['vaccine_level']]    
+        return self.efficiency_per_level[blob.get_traceable_property('vaccine_level')]    
 
     def vaccinate(self, values, hour, time):
         assert "node_id" in values, "node_id not defined in Vaccinate action."
@@ -163,8 +163,8 @@ class VaccinePlugin(environment.TimeActionPlugin):
             # Sets a gather_population TimeAction, moving the requested amount of people to be vaccinated
             new_action_values = {}
             new_action_type = 'gather_population'
-            new_action_values['destination_region'] = target_region.name
-            new_action_values['destination_node'] = target_node.name
+            new_action_values['region'] = target_region.name
+            new_action_values['node'] = target_node.name
             new_action_values['quantity'] = to_vacc
             new_action_values['different_node_name'] = "true"
             
@@ -209,9 +209,16 @@ class VaccinePlugin(environment.TimeActionPlugin):
         blob_ids = []
         
         for n in target_node.contained_blobs:
-            if n.traceable_properties['vaccine_level'] == current_level and n.traceable_properties["days_since_last_vaccine"] >= values["min_dose_offset"]:
-                n.traceable_properties['vaccine_level'] = current_level + 1
-                n.traceable_properties['days_since_last_vaccine'] = 0
+            if n.get_traceable_property('vaccine_level') == current_level and n.get_traceable_property("days_since_last_vaccine") >= values["min_dose_offset"]:
+                
+                #prev_val = n._traceable_properties['vaccine_level']
+                #print("before" + str(n._traceable_properties['vaccine_level']))
+                n.set_traceable_property('vaccine_level', n.get_traceable_property('vaccine_level') + 1)
+                n.set_traceable_property('days_since_last_vaccine', 0)
+                #n._traceable_properties['vaccine_level'] = current_level + 1
+                #print("after" + str(n._traceable_properties['vaccine_level']))
+                #self.graph.log_traceable_change('vaccine_level', prev_val, n._traceable_properties['vaccine_level'])
+                #n._traceable_properties['days_since_last_vaccine'] = 0
                 #print("blob id",n.blob_id)
                 blob_ids.append(n.blob_id)
                 

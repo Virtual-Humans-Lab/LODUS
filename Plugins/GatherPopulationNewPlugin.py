@@ -121,8 +121,8 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
     ## Complex time action. Will be broken up into smaller actions
     def converge_population(self, values, hour, time):
         #print(values)
-        assert ('region' in values, "region is not defined in Gather Population TimeAction")
-        assert ('node' in values, "node is not defined in Gather Population TimeAction")
+        assert 'region' in values, "region is not defined in Gather Population TimeAction"
+        assert 'node' in values, "node is not defined in Gather Population TimeAction"
         
         target_region = self.graph.get_region_by_name(values['region'])
         target_node = target_region.get_node_by_name(values['node'])

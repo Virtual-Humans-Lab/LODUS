@@ -264,7 +264,7 @@ Parameters
 #how many steps each day has
 days = 80
 day_duration = 24
-env_graph.routine_day_length = day_duration
+env_graph.routine_cycle_length = day_duration
 beta_search = 20
 
 ## how many steps to run for, days * day_duration

@@ -17,9 +17,9 @@ from pathlib import Path
 import copy
 from enum import Enum
 
-class LoggerDefaultRecordKey(Enum):
+class PopulationCountRecordKey(Enum):
     POPULATION_COUNT_GLOBAL = 0
-    POPULATION_COUNT_Region = 1
+    POPULATION_COUNT_REGION = 1
     POPULATION_COUNT_NODE = 2
 
 class PopulationCountLogger(LoggerPlugin):
@@ -39,7 +39,7 @@ class PopulationCountLogger(LoggerPlugin):
         Path(self.figures_path).mkdir(parents=True, exist_ok=True)
         Path(self.html_plots_path).mkdir(parents=True, exist_ok=True)
         
-        self.data_to_record:set[LoggerDefaultRecordKey] = set()
+        self.data_to_record:set[PopulationCountRecordKey] = set()
         
         self.cycle_length = time_cycle
 
@@ -71,10 +71,14 @@ class PopulationCountLogger(LoggerPlugin):
         self.region_custom_line_plots: dict = {}
         self.node_custom_line_plots: dict = {}
 
-    def set_data_to_record(self, _data: LoggerDefaultRecordKey):
+    def load_to_enviroment(self, env):
+        pass
+        #return super().load_to_enviroment(env)
+
+    def set_data_to_record(self, _data: PopulationCountRecordKey):
         self.data_to_record.add(_data)
 
-    def set_data_list_to_record(self, _types: list[LoggerDefaultRecordKey]):
+    def set_data_list_to_record(self, _types: list[PopulationCountRecordKey]):
         self.data_to_record.update(_types)
             
     def add_custom_line_plot(self, _key:str, file, x_label:str, y_label:str, columns:list[str] = None, hours: list[str] = None, level:str = None, filter: list[str] = None):
@@ -89,7 +93,7 @@ class PopulationCountLogger(LoggerPlugin):
     def add_node_custom_line_plot(self, _key:str, x_label:str, y_label:str, columns:list[str] = None, node_types:list[str] = None, hours: list[str] =None):
         self.node_custom_line_plots[_key] = (x_label, y_label, columns, node_types, hours)
         
-    def setup_logger(self):
+    def start_logger(self):
         
         self.simulation_step = 0
 
@@ -148,11 +152,11 @@ class PopulationCountLogger(LoggerPlugin):
             
     
     def log_simulation_step(self):
-        if LoggerDefaultRecordKey.POPULATION_COUNT_GLOBAL in self.data_to_record:
+        if PopulationCountRecordKey.POPULATION_COUNT_GLOBAL in self.data_to_record:
             self.global_frame(self.graph, self.simulation_step)
-        if LoggerDefaultRecordKey.POPULATION_COUNT_Region in self.data_to_record:
+        if PopulationCountRecordKey.POPULATION_COUNT_REGION in self.data_to_record:
             self.region_frame(self.graph, self.simulation_step)
-        if LoggerDefaultRecordKey.POPULATION_COUNT_NODE in self.data_to_record:
+        if PopulationCountRecordKey.POPULATION_COUNT_NODE in self.data_to_record:
             self.node_frame(self.graph, self.simulation_step)
                                 
         if 'graph' in self.data_to_record:
@@ -704,7 +708,7 @@ class PopulationCountLogger(LoggerPlugin):
         figures = []
         xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
                     
-        if LoggerDefaultRecordKey.POPULATION_COUNT_Region in self.data_to_record:
+        if PopulationCountRecordKey.POPULATION_COUNT_REGION in self.data_to_record:
             # Default Region Population Plot
             df = pd.read_csv(self.base_path +  "regions.csv", sep = ';')
             fig = px.line(df, x = 'Frame',y = 'Total',color="Region", 
@@ -720,7 +724,7 @@ class PopulationCountLogger(LoggerPlugin):
                           title="Total Population - Per Region - Hour 0", markers=True)
             figures.append(fig)
             
-        if LoggerDefaultRecordKey.POPULATION_COUNT_NODE in self.data_to_record:
+        if PopulationCountRecordKey.POPULATION_COUNT_NODE in self.data_to_record:
             # Default Node Population Plot
             df = pd.read_csv(self.base_path +  "nodes.csv", sep = ';')
             fig = px.line(df, x = 'Frame',y = 'Total',color="Node", 
@@ -750,8 +754,8 @@ class PopulationCountLogger(LoggerPlugin):
             _file, _x, _y, _cols, _h, _lvl, _f = config
             
             # Skip unrecorded data
-            if _lvl == 'Region' and LoggerDefaultRecordKey.POPULATION_COUNT_Region not in self.data_to_record: continue
-            if _lvl == 'Node' and LoggerDefaultRecordKey.POPULATION_COUNT_NODE not in self.data_to_record: continue
+            if _lvl == 'Region' and PopulationCountRecordKey.POPULATION_COUNT_REGION not in self.data_to_record: continue
+            if _lvl == 'Node' and PopulationCountRecordKey.POPULATION_COUNT_NODE not in self.data_to_record: continue
             
             # Read the file
             print("Reading file: ", self.base_path +  _file)

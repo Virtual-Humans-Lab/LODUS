@@ -20,35 +20,38 @@ class BlobCountRecordKey(Enum):
 class BlobCountLogger(LoggerPlugin):
 
     
-    def __init__(self, base_filename, graph:EnvironmentGraph, time_cycle=24):
-        self.graph = graph
-        self.cycle_length = time_cycle
+    def __init__(self, base_filename):
 
         # Sets paths and create folders
         self.base_path = 'output_logs/' + base_filename + '/'
         self.data_frames_path = self.base_path + "/data_frames/"
-        Path(self.base_path).mkdir(parents=True, exist_ok=True)
-        Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
         
         # Which data is being recorded
         self.data_to_record:set[BlobCountRecordKey] = set()
                
         # Blob Count Logging
         self.blob_global_count = []
+        self.blob_region_count = {}
+        self.blob_node_count = {}
+
+    def load_to_enviroment(self, env:EnvironmentGraph):
+         # Attaches itself to the EnvGraph
+        self.graph = env
+
+        # Cycle length and Current SimulationStep
+        self.cycle_lenght:int = self.graph.routine_cycle_length
+        self.sim_step: int = 0 
+
+        self.blob_global_count = []
         self.blob_region_count = {r:[] for r in self.graph.region_dict}
         self.blob_node_count = {n:[] for n in self.graph.node_dict}
-        
-    def set_data_to_record(self, _data: BlobCountRecordKey):
-        self.data_to_record.add(_data)
 
-    def set_data_list_to_record(self, _types: list[BlobCountRecordKey]):
-        self.data_to_record.update(_types)
-
-    def setup_logger(self):
-        self.simulation_step = 0
+    def start_logger(self):
+        Path(self.base_path).mkdir(parents=True, exist_ok=True)
+        Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
 
     def update_time_step(self, cycle_step, simulation_step):
-        self.simulation_step = simulation_step
+        self.sim_step = simulation_step
 
     def log_simulation_step(self):
         if BlobCountRecordKey.BLOB_COUNT_GLOBAL in self.data_to_record:

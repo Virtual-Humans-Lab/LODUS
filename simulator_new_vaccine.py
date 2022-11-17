@@ -19,7 +19,7 @@ from VaccineLocalPlugin import VaccinePlugin
 from NewInfectionPlugin import NewInfectionPlugin
 from ExamplePlugin import ExamplePlugin
 
-from Loggers.population_count_logger import LoggerDefaultRecordKey, PopulationCountLogger
+from Loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
 from pathlib import Path
 
 import time
@@ -44,7 +44,7 @@ Parameters
 #how many steps each day has
 days = 50
 day_duration = 24
-env_graph.routine_day_length = day_duration
+env_graph.routine_cycle_length = day_duration
 
 simulation_steps = days * day_duration
 
@@ -86,9 +86,9 @@ Logging
 
 logger = PopulationCountLogger(f'{args["n"]}', env_graph, day_duration)
 
-logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_GLOBAL)
-logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_REGION)
-logger.set_data_to_record(LoggerDefaultRecordKey.BLOB_COUNT_NODE)
+logger.set_data_to_record(PopulationCountRecordKey.BLOB_COUNT_GLOBAL)
+logger.set_data_to_record(PopulationCountRecordKey.BLOB_COUNT_REGION)
+logger.set_data_to_record(PopulationCountRecordKey.BLOB_COUNT_NODE)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_GLOBAL_POPULATION)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_REGION_POPULATION)
 #logger.set_default_data_to_record(LoggerDefaultRecordKey.ENV_NODE_POPULATION)
@@ -107,7 +107,7 @@ logger.pop_template = pop_temp
 '''
 Simulation
 '''
-logger.setup_logger()
+logger.start_logger()
 for i in range(simulation_steps):
     print(i, end='\r')
 

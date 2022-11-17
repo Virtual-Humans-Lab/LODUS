@@ -1,6 +1,6 @@
 # LODUS core
 import sys
-sys.path.append('/../../')
+sys.path.append("/../../")
 from environment import EnvironmentGraph, EnvNode, EnvRegion
 from logger_plugin import LoggerPlugin
 from population import Blob, PopTemplate
@@ -22,16 +22,7 @@ class ODMovementRecordKey(Enum):
 
 class ODMatrixLogger(LoggerPlugin):
 
-    def __init__(self, base_filename:str, graph:EnvironmentGraph, cycle_length: int=24) -> None:
-        # Attaches itself to the EnvGraph
-        self.graph: EnvironmentGraph = graph
-        self.graph.od_matrix_logger["od_logger"] = self.log_od_movement
-        #graph.od_matrix_logger = self
-
-        # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = cycle_length
-        self.sim_step: int = 0 
-
+    def __init__(self, base_filename:str):
         # Which data is being recorded
         self.data_to_record:set[ODMovementRecordKey] = set()
 
@@ -43,11 +34,22 @@ class ODMatrixLogger(LoggerPlugin):
         self.region_custom_templates: dict[str,PopTemplate] = {}
         self.node_custom_templates: dict[str,PopTemplate] = {}
 
-        # Create the required directories
-        self.base_path = 'output_logs/' + base_filename + '/'
+        # Paths for folders
+        self.base_path = "output_logs/" + base_filename + "/"
         self.data_frames_path = self.base_path + "/data_frames/"
 
-    def setup_logger(self):
+    def load_to_enviroment(self, env:EnvironmentGraph):
+         # Attaches itself to the EnvGraph
+        self.graph: EnvironmentGraph = env
+        self.graph.od_matrix_logger["od_logger"] = self.log_od_movement
+        #graph.od_matrix_logger = self
+
+        # Cycle length and Current SimulationStep
+        self.cycle_lenght:int = env.routine_cycle_length
+        self.sim_step: int = 0 
+
+    def start_logger(self):
+        # Create the required directories
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
 
@@ -76,7 +78,7 @@ class ODMatrixLogger(LoggerPlugin):
                         self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()][_key] = 0
             
     def log_simulation_step(self):
-        return
+        pass
 
     def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
@@ -129,12 +131,12 @@ class ODMatrixLogger(LoggerPlugin):
         df.to_csv(self.data_frames_path + "od_matrix_" + label + "_step.csv", sep=";", encoding="utf-8-sig")
 
         # Data per Cycle
-        df.drop('SimulationStep', inplace=True, axis=1) 
-        df.drop('Cycle Step', inplace=True, axis=1) 
-        df_cycle = df.groupby(['Origin', "Destination", "Cycle"]).sum().reset_index()
+        df.drop("SimulationStep", inplace=True, axis=1) 
+        df.drop("Cycle Step", inplace=True, axis=1) 
+        df_cycle = df.groupby(["Cycle", "Origin", "Destination"]).sum().reset_index()
         df_cycle.to_csv(self.data_frames_path + "od_matrix_" + label + "_cycle.csv", sep=";", encoding="utf-8-sig")
 
         # Data in entire Simulation
-        df_cycle.drop('Cycle', inplace=True, axis=1) 
-        df_sim = df_cycle.groupby(['Origin', "Destination"]).sum().reset_index()
+        df_cycle.drop("Cycle", inplace=True, axis=1) 
+        df_sim = df_cycle.groupby(["Origin", "Destination"]).sum().reset_index()
         df_sim.to_csv(self.data_frames_path + "od_matrix_" + label + ".csv", sep=";", encoding="utf-8-sig")

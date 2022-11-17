@@ -5,6 +5,7 @@ import population
 #import Plugins.Loggers.od_matrix_logger as od_matrix_logger
 import copy
 import util
+from events import Events
 from random_inst import FixedRandom
 
 DEBUG_OPERATION_OUTPUT =  False
@@ -153,7 +154,7 @@ class EnvNode():
     def change_blobs_traceable_property(self, key, value, quantity:int, template:population.PopTemplate = None):
         _grabbed = self.grab_population(quantity, template)
         for _blob in _grabbed:
-            _blob.traceable_properties[key] = value
+            _blob._traceable_properties[key] = value
             _blob.previous_node = self.id
             #if _blob.spawning_node is None:
             #    _blob.spawning_node = self.id
@@ -462,7 +463,7 @@ class EnvironmentGraph():
 
         self.edge_table = [[]]
 
-        self.routine_day_length = 24
+        self.routine_cycle_length = 24
 
         self.time_action_map = { 'move_population' : self.move_population }
         self.base_actions = {'move_population'}
@@ -487,6 +488,10 @@ class EnvironmentGraph():
 
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
         self.od_matrix_logger = {}
+        self.characteristic_change_logger = {}
+        
+        # Events test
+        population.Blob.events.on_traceable_property_changed += self.log_traceable_change
       
 
     def get_node_by_name(self, region_name, node_name):
@@ -734,10 +739,13 @@ class EnvironmentGraph():
             if isinstance(p,_type): return p
         return None
 
+    ## ----------- Logging Functions ----------- ##
+
     def LoadLoggerPlugin(self, plugin:LoggerPlugin):
+        plugin.load_to_enviroment(self)
         self.loaded_logger_plugins.append(plugin)
 
-    def has__logger_plugin(self, _type:type) -> bool:
+    def has_logger_plugin(self, _type:type) -> bool:
         return any(isinstance(x, _type) for x in self.loaded_logger_plugins)
             
     def get_logger_plugins(self, _type:type) -> list:
@@ -747,10 +755,10 @@ class EnvironmentGraph():
         for p in self.loaded_logger_plugins:
             if isinstance(p,_type): return p
         return None 
-
+    
     def start_logging(self):  
         for l in self.loaded_logger_plugins:
-            l.setup_logger()
+            l.start_logger()
     
     def log_simulation_step(self):    
         for l in self.loaded_logger_plugins:
@@ -759,6 +767,18 @@ class EnvironmentGraph():
     def stop_logging(self):    
         for l in self.loaded_logger_plugins:
             l.stop_logger()
+
+
+    def log_blob_movement(self, origin_node:EnvNode, destination_node:EnvNode, blobs:list[population.Blob]):
+        for k,v in self.od_matrix_logger.items():
+            v(origin_node, destination_node, blobs)
+            #self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
+
+    def log_traceable_change(self, blob:population.Blob, key, prev_val, new_val):
+        for k,v in self.characteristic_change_logger.items():
+            v(blob, key, prev_val, new_val)
+
+    # -----------------------------------
 
     def merge_blobs(self):
         """Merges every blob with a compatible mother_blob_id in a given EnvNode."""
@@ -782,7 +802,7 @@ class EnvironmentGraph():
     def add_blobs_traceable_property(self, key, value):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.traceable_properties[key] = value
+                blob._traceable_properties[key] = value
                 
     # def lambda_blobs_traceable_property(self, key, lambda_funtion):
     #     for node in self.node_list:
@@ -793,12 +813,9 @@ class EnvironmentGraph():
     def lambda_blobs_traceable_property(self, key, lambda_funtion):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.traceable_properties[key] = lambda_funtion(blob, blob.traceable_properties[key])
+                blob.set_traceable_property(key, lambda_funtion(blob, blob._traceable_properties[key]))
 
-    def log_blob_movement(self, origin_node:EnvNode, destination_node:EnvNode, blobs:list[population.Blob]):
-        for k,v in self.od_matrix_logger.items():
-            v(origin_node, destination_node, blobs)
-            #self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
+    
 
     def merge_node(self, node: EnvNode):
         i = 0

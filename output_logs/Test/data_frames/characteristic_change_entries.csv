@@ -1,0 +1,1067 @@
+﻿;Simulation Step;Cycle Step;Cycle;Region;Node;Characteristic;Previous Value;New Value;Population Size
+0;8;8;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+1;8;8;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;1
+2;8;8;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+3;8;8;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+4;8;8;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+5;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+6;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;18
+7;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+8;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+9;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+10;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+11;8;8;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+12;8;8;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+13;8;8;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;1
+14;8;8;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;1
+15;8;8;0;Floresta;Floresta//pharmacy;vaccine_level;0;1;5
+16;8;8;0;Floresta;Floresta//pharmacy;vaccine_level;0;1;1
+17;8;8;0;Independência;Independência//pharmacy;vaccine_level;0;1;1
+18;8;8;0;Independência;Independência//pharmacy;vaccine_level;0;1;3
+19;8;8;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+20;8;8;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+21;8;8;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;15
+22;8;8;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+23;8;8;0;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;1
+24;8;8;0;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;5
+25;8;8;0;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+26;8;8;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;1
+27;8;8;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;8
+28;8;8;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;1
+29;8;8;0;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+30;8;8;0;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+31;8;8;0;Santana;Santana//pharmacy;vaccine_level;0;1;1
+32;8;8;0;Santana;Santana//pharmacy;vaccine_level;0;1;2
+33;8;8;0;Santana;Santana//pharmacy;vaccine_level;0;1;8
+34;10;10;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+35;10;10;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;1
+36;10;10;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+37;10;10;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+38;10;10;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+39;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+40;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;18
+41;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+42;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+43;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+44;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+45;10;10;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+46;10;10;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+47;10;10;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;1
+48;10;10;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;1
+49;10;10;0;Floresta;Floresta//pharmacy;vaccine_level;0;1;5
+50;10;10;0;Floresta;Floresta//pharmacy;vaccine_level;0;1;1
+51;10;10;0;Independência;Independência//pharmacy;vaccine_level;0;1;1
+52;10;10;0;Independência;Independência//pharmacy;vaccine_level;0;1;3
+53;10;10;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+54;10;10;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+55;10;10;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;15
+56;10;10;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+57;10;10;0;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;1
+58;10;10;0;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;5
+59;10;10;0;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+60;10;10;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;1
+61;10;10;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;8
+62;10;10;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;1
+63;10;10;0;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+64;10;10;0;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+65;10;10;0;Santana;Santana//pharmacy;vaccine_level;0;1;1
+66;10;10;0;Santana;Santana//pharmacy;vaccine_level;0;1;2
+67;10;10;0;Santana;Santana//pharmacy;vaccine_level;0;1;8
+68;12;12;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+69;12;12;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;1
+70;12;12;0;Azenha;Azenha//pharmacy;vaccine_level;0;1;1
+71;12;12;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+72;12;12;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+73;12;12;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+74;12;12;0;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;1
+75;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+76;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;19
+77;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+78;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+79;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+80;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+81;12;12;0;Centro;Centro//pharmacy;vaccine_level;0;1;1
+82;12;12;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+83;12;12;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;1
+84;12;12;0;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;1
+85;12;12;0;Floresta;Floresta//pharmacy;vaccine_level;0;1;6
+86;12;12;0;Floresta;Floresta//pharmacy;vaccine_level;0;1;1
+87;12;12;0;Independência;Independência//pharmacy;vaccine_level;0;1;1
+88;12;12;0;Independência;Independência//pharmacy;vaccine_level;0;1;1
+89;12;12;0;Independência;Independência//pharmacy;vaccine_level;0;1;3
+90;12;12;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+91;12;12;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+92;12;12;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;15
+93;12;12;0;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;1
+94;12;12;0;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;1
+95;12;12;0;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;6
+96;12;12;0;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+97;12;12;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;1
+98;12;12;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;8
+99;12;12;0;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;1
+100;12;12;0;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+101;12;12;0;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+102;12;12;0;Santana;Santana//pharmacy;vaccine_level;0;1;2
+103;12;12;0;Santana;Santana//pharmacy;vaccine_level;0;1;10
+104;23;23;0;Azenha;Azenha//home;days_since_last_vaccine;0;1;13781
+105;23;23;0;Azenha;Azenha//pharmacy;days_since_last_vaccine;0;1;18
+106;23;23;0;Azenha;Azenha//pharmacy;days_since_last_vaccine;0;1;3
+107;23;23;0;Azenha;Azenha//pharmacy;days_since_last_vaccine;0;1;1
+108;23;23;0;Bom Fim;Bom Fim//home;days_since_last_vaccine;0;1;11572
+109;23;23;0;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;0;1;12
+110;23;23;0;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;0;1;3
+111;23;23;0;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;0;1;3
+112;23;23;0;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;0;1;1
+113;23;23;0;Centro;Centro//home;days_since_last_vaccine;0;1;39099
+114;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;3
+115;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;55
+116;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;3
+117;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;3
+118;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;3
+119;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;3
+120;23;23;0;Centro;Centro//pharmacy;days_since_last_vaccine;0;1;3
+121;23;23;0;Cidade Baixa;Cidade Baixa//home;days_since_last_vaccine;0;1;15354
+122;23;23;0;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;0;1;19
+123;23;23;0;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;0;1;3
+124;23;23;0;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;0;1;3
+125;23;23;0;Farroupilha;Farroupilha//home;days_since_last_vaccine;0;1;952
+126;23;23;0;Floresta;Floresta//home;days_since_last_vaccine;0;1;11573
+127;23;23;0;Floresta;Floresta//pharmacy;days_since_last_vaccine;0;1;16
+128;23;23;0;Floresta;Floresta//pharmacy;days_since_last_vaccine;0;1;3
+129;23;23;0;Independência;Independência//home;days_since_last_vaccine;0;1;8094
+130;23;23;0;Independência;Independência//pharmacy;days_since_last_vaccine;0;1;3
+131;23;23;0;Independência;Independência//pharmacy;days_since_last_vaccine;0;1;9
+132;23;23;0;Independência;Independência//pharmacy;days_since_last_vaccine;0;1;1
+133;23;23;0;Menino Deus;Menino Deus//home;days_since_last_vaccine;0;1;31602
+134;23;23;0;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;0;1;3
+135;23;23;0;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;0;1;3
+136;23;23;0;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;0;1;45
+137;23;23;0;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;0;1;3
+138;23;23;0;Moinhos de Vento;Moinhos de Vento//home;days_since_last_vaccine;0;1;11921
+139;23;23;0;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;0;1;3
+140;23;23;0;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;0;1;16
+141;23;23;0;Praia de Belas;Praia de Belas//home;days_since_last_vaccine;0;1;2269
+142;23;23;0;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;0;1;3
+143;23;23;0;Rio Branco;Rio Branco//home;days_since_last_vaccine;0;1;17506
+144;23;23;0;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;0;1;3
+145;23;23;0;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;0;1;24
+146;23;23;0;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;0;1;3
+147;23;23;0;Santa Cecília;Santa Cecília//home;days_since_last_vaccine;0;1;5753
+148;23;23;0;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;0;1;6
+149;23;23;0;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;0;1;3
+150;23;23;0;Santana;Santana//home;days_since_last_vaccine;0;1;20693
+151;23;23;0;Santana;Santana//pharmacy;days_since_last_vaccine;0;1;2
+152;23;23;0;Santana;Santana//pharmacy;days_since_last_vaccine;0;1;6
+153;23;23;0;Santana;Santana//pharmacy;days_since_last_vaccine;0;1;26
+154;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;63
+155;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;63
+156;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;5
+157;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;5
+158;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+159;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+160;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;7
+161;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;7
+162;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;7
+163;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;7
+164;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;3
+165;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;3
+166;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+167;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+168;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;14
+169;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;14
+170;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;3
+171;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;3
+172;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+173;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;6
+174;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+175;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+176;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+177;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;6
+178;32;8;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;10
+179;32;8;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;10
+180;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;3
+181;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;3
+182;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;48
+183;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;48
+184;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+185;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;4
+186;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+187;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+188;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;10
+189;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;10
+190;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+191;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+192;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;13
+193;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;13
+194;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;2
+195;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;2
+196;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+197;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+198;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;2
+199;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;2
+200;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;8
+201;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;8
+202;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+203;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+204;32;8;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+205;32;8;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;4
+206;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;12
+207;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;12
+208;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;19
+209;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;19
+210;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;196
+211;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;196
+212;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;28
+213;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;28
+214;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;20
+215;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;20
+216;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;17
+217;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;17
+218;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;20
+219;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;20
+220;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;13
+221;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;13
+222;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;12
+223;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;12
+224;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;18
+225;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;18
+226;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;13
+227;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;13
+228;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;11
+229;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;11
+230;32;8;1;Centro;Centro//pharmacy;vaccine_level;0;1;11
+231;32;8;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;11
+232;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+233;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+234;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+235;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+236;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;9
+237;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;9
+238;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;70
+239;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;70
+240;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;12
+241;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;12
+242;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;4
+243;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;4
+244;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+245;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;6
+246;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+247;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+248;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;4
+249;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;4
+250;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;10
+251;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;10
+252;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;5
+253;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;5
+254;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;5
+255;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;5
+256;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+257;32;8;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;6
+258;32;8;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+259;32;8;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+260;32;8;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+261;32;8;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+262;32;8;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;6
+263;32;8;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;6
+264;32;8;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+265;32;8;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+266;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+267;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+268;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;7
+269;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;7
+270;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;4
+271;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;4
+272;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+273;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+274;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;4
+275;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;4
+276;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;58
+277;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;58
+278;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;12
+279;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;12
+280;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+281;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+282;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;9
+283;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;9
+284;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+285;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+286;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;5
+287;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;5
+288;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+289;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+290;32;8;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+291;32;8;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+292;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;2
+293;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;2
+294;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;9
+295;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;9
+296;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+297;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+298;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+299;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+300;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;4
+301;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;4
+302;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;7
+303;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;7
+304;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;36
+305;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;36
+306;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;1
+307;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;1
+308;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;5
+309;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;5
+310;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;1
+311;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;1
+312;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;4
+313;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;4
+314;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+315;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+316;32;8;1;Independência;Independência//pharmacy;vaccine_level;0;1;2
+317;32;8;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;2
+318;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;34
+319;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;34
+320;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+321;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+322;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+323;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+324;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;18
+325;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;18
+326;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;13
+327;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;13
+328;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;7
+329;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;7
+330;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;8
+331;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;8
+332;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;150
+333;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;150
+334;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;6
+335;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;6
+336;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;25
+337;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;25
+338;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;8
+339;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;8
+340;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+341;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+342;32;8;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;14
+343;32;8;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;14
+344;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+345;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+346;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;7
+347;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;7
+348;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+349;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+350;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+351;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+352;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;4
+353;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;4
+354;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;9
+355;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;9
+356;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;9
+357;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;9
+358;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+359;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+360;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;62
+361;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;62
+362;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+363;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+364;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;8
+365;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;8
+366;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;4
+367;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;4
+368;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+369;32;8;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+370;32;8;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+371;32;8;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+372;32;8;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+373;32;8;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+374;32;8;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+375;32;8;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+376;32;8;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+377;32;8;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+378;32;8;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;18
+379;32;8;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;18
+380;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;5
+381;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;5
+382;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;14
+383;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;14
+384;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;4
+385;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;4
+386;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;5
+387;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;5
+388;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;9
+389;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;9
+390;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;7
+391;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;7
+392;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;11
+393;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;11
+394;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;4
+395;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;4
+396;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;11
+397;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;11
+398;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;3
+399;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;3
+400;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;79
+401;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;79
+402;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;14
+403;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;14
+404;32;8;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;7
+405;32;8;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;7
+406;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+407;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+408;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;3
+409;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;3
+410;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+411;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+412;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+413;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+414;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;3
+415;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;3
+416;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+417;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+418;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+419;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+420;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+421;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+422;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+423;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+424;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+425;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+426;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;4
+427;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;4
+428;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;30
+429;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;30
+430;32;8;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;5
+431;32;8;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;5
+432;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;15
+433;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;15
+434;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;9
+435;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;9
+436;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+437;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+438;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;8
+439;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;8
+440;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;12
+441;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;12
+442;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+443;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+444;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;7
+445;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;7
+446;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;8
+447;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;8
+448;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+449;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+450;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;6
+451;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;6
+452;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;9
+453;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;9
+454;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;20
+455;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;20
+456;32;8;1;Santana;Santana//pharmacy;vaccine_level;0;1;96
+457;32;8;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;96
+458;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;63
+459;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;63
+460;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;5
+461;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;5
+462;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+463;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+464;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;7
+465;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;7
+466;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;7
+467;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;7
+468;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;3
+469;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;3
+470;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+471;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+472;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;14
+473;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;14
+474;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;3
+475;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;3
+476;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+477;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;6
+478;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+479;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+480;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+481;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;6
+482;34;10;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;10
+483;34;10;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;10
+484;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;3
+485;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;3
+486;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;48
+487;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;48
+488;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+489;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;4
+490;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+491;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+492;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;10
+493;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;10
+494;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+495;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+496;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;13
+497;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;13
+498;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;2
+499;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;2
+500;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+501;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+502;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;2
+503;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;2
+504;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;8
+505;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;8
+506;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+507;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+508;34;10;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+509;34;10;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;4
+510;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;12
+511;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;12
+512;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;19
+513;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;19
+514;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;196
+515;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;196
+516;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;28
+517;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;28
+518;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;20
+519;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;20
+520;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;17
+521;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;17
+522;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;20
+523;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;20
+524;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;13
+525;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;13
+526;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;12
+527;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;12
+528;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;18
+529;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;18
+530;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;13
+531;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;13
+532;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;11
+533;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;11
+534;34;10;1;Centro;Centro//pharmacy;vaccine_level;0;1;11
+535;34;10;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;11
+536;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+537;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+538;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+539;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+540;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;9
+541;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;9
+542;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;70
+543;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;70
+544;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;12
+545;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;12
+546;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;4
+547;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;4
+548;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+549;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;6
+550;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+551;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+552;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;4
+553;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;4
+554;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;10
+555;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;10
+556;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;5
+557;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;5
+558;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;5
+559;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;5
+560;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+561;34;10;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;6
+562;34;10;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+563;34;10;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+564;34;10;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+565;34;10;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+566;34;10;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;6
+567;34;10;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;6
+568;34;10;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+569;34;10;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+570;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+571;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+572;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;7
+573;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;7
+574;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;4
+575;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;4
+576;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+577;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+578;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;4
+579;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;4
+580;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;58
+581;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;58
+582;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;12
+583;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;12
+584;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+585;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+586;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;9
+587;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;9
+588;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+589;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+590;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;5
+591;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;5
+592;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+593;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+594;34;10;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+595;34;10;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+596;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;2
+597;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;2
+598;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;9
+599;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;9
+600;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+601;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+602;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+603;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+604;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;4
+605;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;4
+606;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;7
+607;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;7
+608;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;36
+609;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;36
+610;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;1
+611;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;1
+612;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;5
+613;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;5
+614;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;1
+615;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;1
+616;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;4
+617;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;4
+618;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+619;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+620;34;10;1;Independência;Independência//pharmacy;vaccine_level;0;1;2
+621;34;10;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;2
+622;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;34
+623;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;34
+624;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+625;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+626;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+627;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+628;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;18
+629;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;18
+630;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;13
+631;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;13
+632;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;7
+633;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;7
+634;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;8
+635;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;8
+636;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;150
+637;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;150
+638;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;6
+639;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;6
+640;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;25
+641;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;25
+642;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;8
+643;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;8
+644;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+645;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+646;34;10;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;14
+647;34;10;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;14
+648;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+649;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+650;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;7
+651;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;7
+652;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+653;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+654;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+655;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+656;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;4
+657;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;4
+658;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;9
+659;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;9
+660;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;9
+661;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;9
+662;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+663;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+664;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;62
+665;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;62
+666;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+667;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+668;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;8
+669;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;8
+670;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;4
+671;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;4
+672;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+673;34;10;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+674;34;10;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+675;34;10;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+676;34;10;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+677;34;10;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+678;34;10;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+679;34;10;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+680;34;10;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+681;34;10;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+682;34;10;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;18
+683;34;10;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;18
+684;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;5
+685;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;5
+686;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;14
+687;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;14
+688;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;4
+689;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;4
+690;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;5
+691;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;5
+692;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;9
+693;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;9
+694;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;7
+695;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;7
+696;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;11
+697;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;11
+698;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;4
+699;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;4
+700;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;11
+701;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;11
+702;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;3
+703;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;3
+704;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;79
+705;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;79
+706;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;14
+707;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;14
+708;34;10;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;7
+709;34;10;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;7
+710;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+711;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+712;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;3
+713;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;3
+714;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+715;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+716;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+717;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+718;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;3
+719;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;3
+720;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+721;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+722;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+723;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+724;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+725;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+726;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+727;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+728;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+729;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+730;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;4
+731;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;4
+732;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;30
+733;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;30
+734;34;10;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;5
+735;34;10;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;5
+736;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;15
+737;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;15
+738;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;9
+739;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;9
+740;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+741;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+742;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;8
+743;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;8
+744;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;12
+745;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;12
+746;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+747;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+748;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;7
+749;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;7
+750;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;8
+751;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;8
+752;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+753;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+754;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;6
+755;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;6
+756;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;9
+757;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;9
+758;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;20
+759;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;20
+760;34;10;1;Santana;Santana//pharmacy;vaccine_level;0;1;96
+761;34;10;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;96
+762;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;64
+763;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;64
+764;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;5
+765;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;5
+766;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+767;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+768;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;7
+769;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;7
+770;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;7
+771;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;7
+772;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;3
+773;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;3
+774;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+775;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+776;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;14
+777;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;14
+778;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;3
+779;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;3
+780;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+781;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;6
+782;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;4
+783;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;4
+784;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;6
+785;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;6
+786;36;12;1;Azenha;Azenha//pharmacy;vaccine_level;0;1;10
+787;36;12;1;Azenha;Azenha//pharmacy;days_since_last_vaccine;1;0;10
+788;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;3
+789;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;3
+790;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;49
+791;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;49
+792;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+793;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;4
+794;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+795;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+796;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;10
+797;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;10
+798;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+799;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+800;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;13
+801;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;13
+802;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;2
+803;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;2
+804;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+805;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+806;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;2
+807;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;2
+808;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;8
+809;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;8
+810;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;5
+811;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;5
+812;36;12;1;Bom Fim;Bom Fim//pharmacy;vaccine_level;0;1;4
+813;36;12;1;Bom Fim;Bom Fim//pharmacy;days_since_last_vaccine;1;0;4
+814;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;12
+815;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;12
+816;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;19
+817;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;19
+818;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;196
+819;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;196
+820;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;28
+821;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;28
+822;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;20
+823;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;20
+824;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;17
+825;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;17
+826;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;20
+827;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;20
+828;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;13
+829;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;13
+830;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;12
+831;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;12
+832;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;18
+833;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;18
+834;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;13
+835;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;13
+836;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;11
+837;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;11
+838;36;12;1;Centro;Centro//pharmacy;vaccine_level;0;1;11
+839;36;12;1;Centro;Centro//pharmacy;days_since_last_vaccine;1;0;11
+840;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+841;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+842;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+843;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+844;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;9
+845;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;9
+846;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;70
+847;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;70
+848;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;12
+849;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;12
+850;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;4
+851;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;4
+852;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+853;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;6
+854;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;7
+855;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;7
+856;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;4
+857;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;4
+858;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;10
+859;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;10
+860;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;5
+861;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;5
+862;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;5
+863;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;5
+864;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;vaccine_level;0;1;6
+865;36;12;1;Cidade Baixa;Cidade Baixa//pharmacy;days_since_last_vaccine;1;0;6
+866;36;12;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+867;36;12;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+868;36;12;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+869;36;12;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+870;36;12;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;6
+871;36;12;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;6
+872;36;12;1;Farroupilha;Farroupilha//pharmacy;vaccine_level;0;1;1
+873;36;12;1;Farroupilha;Farroupilha//pharmacy;days_since_last_vaccine;1;0;1
+874;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+875;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+876;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;7
+877;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;7
+878;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;4
+879;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;4
+880;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+881;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+882;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;4
+883;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;4
+884;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;59
+885;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;59
+886;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;12
+887;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;12
+888;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+889;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+890;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;9
+891;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;9
+892;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;2
+893;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;2
+894;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;5
+895;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;5
+896;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+897;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+898;36;12;1;Floresta;Floresta//pharmacy;vaccine_level;0;1;3
+899;36;12;1;Floresta;Floresta//pharmacy;days_since_last_vaccine;1;0;3
+900;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;2
+901;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;2
+902;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;9
+903;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;9
+904;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+905;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+906;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+907;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+908;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;4
+909;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;4
+910;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;7
+911;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;7
+912;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;36
+913;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;36
+914;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;1
+915;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;1
+916;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;5
+917;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;5
+918;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;1
+919;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;1
+920;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;4
+921;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;4
+922;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;3
+923;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;3
+924;36;12;1;Independência;Independência//pharmacy;vaccine_level;0;1;2
+925;36;12;1;Independência;Independência//pharmacy;days_since_last_vaccine;1;0;2
+926;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;34
+927;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;34
+928;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+929;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+930;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+931;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+932;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;18
+933;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;18
+934;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;13
+935;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;13
+936;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;7
+937;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;7
+938;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;8
+939;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;8
+940;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;151
+941;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;151
+942;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;6
+943;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;6
+944;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;25
+945;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;25
+946;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;8
+947;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;8
+948;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;10
+949;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;10
+950;36;12;1;Menino Deus;Menino Deus//pharmacy;vaccine_level;0;1;14
+951;36;12;1;Menino Deus;Menino Deus//pharmacy;days_since_last_vaccine;1;0;14
+952;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+953;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+954;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;7
+955;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;7
+956;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+957;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+958;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+959;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+960;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;4
+961;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;4
+962;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;9
+963;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;9
+964;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;9
+965;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;9
+966;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+967;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+968;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;62
+969;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;62
+970;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;2
+971;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;2
+972;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;8
+973;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;8
+974;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;4
+975;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;4
+976;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;vaccine_level;0;1;3
+977;36;12;1;Moinhos de Vento;Moinhos de Vento//pharmacy;days_since_last_vaccine;1;0;3
+978;36;12;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+979;36;12;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+980;36;12;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+981;36;12;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+982;36;12;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+983;36;12;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+984;36;12;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;1
+985;36;12;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;1
+986;36;12;1;Praia de Belas;Praia de Belas//pharmacy;vaccine_level;0;1;18
+987;36;12;1;Praia de Belas;Praia de Belas//pharmacy;days_since_last_vaccine;1;0;18
+988;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;5
+989;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;5
+990;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;14
+991;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;14
+992;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;4
+993;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;4
+994;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;5
+995;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;5
+996;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;9
+997;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;9
+998;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;7
+999;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;7
+1000;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;11
+1001;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;11
+1002;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;4
+1003;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;4
+1004;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;11
+1005;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;11
+1006;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;3
+1007;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;3
+1008;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;79
+1009;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;79
+1010;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;14
+1011;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;14
+1012;36;12;1;Rio Branco;Rio Branco//pharmacy;vaccine_level;0;1;8
+1013;36;12;1;Rio Branco;Rio Branco//pharmacy;days_since_last_vaccine;1;0;8
+1014;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+1015;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+1016;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;3
+1017;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;3
+1018;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+1019;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+1020;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+1021;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+1022;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;3
+1023;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;3
+1024;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+1025;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+1026;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+1027;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+1028;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+1029;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+1030;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;2
+1031;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;2
+1032;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;1
+1033;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;1
+1034;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;4
+1035;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;4
+1036;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;30
+1037;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;30
+1038;36;12;1;Santa Cecília;Santa Cecília//pharmacy;vaccine_level;0;1;5
+1039;36;12;1;Santa Cecília;Santa Cecília//pharmacy;days_since_last_vaccine;1;0;5
+1040;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;15
+1041;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;15
+1042;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;9
+1043;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;9
+1044;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+1045;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+1046;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;8
+1047;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;8
+1048;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;12
+1049;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;12
+1050;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+1051;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+1052;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;7
+1053;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;7
+1054;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;8
+1055;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;8
+1056;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;5
+1057;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;5
+1058;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;6
+1059;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;6
+1060;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;9
+1061;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;9
+1062;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;20
+1063;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;20
+1064;36;12;1;Santana;Santana//pharmacy;vaccine_level;0;1;96
+1065;36;12;1;Santana;Santana//pharmacy;days_since_last_vaccine;1;0;96

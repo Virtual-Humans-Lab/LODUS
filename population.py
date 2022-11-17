@@ -4,6 +4,7 @@ import copy
 import sys
 from util import *
 from random_inst import FixedRandom
+from events import Events
 
 class BlockTemplate():
     """Defines a template for a population PropertyBlock
@@ -536,7 +537,7 @@ class BlobFactory():
         blob = Blob(_mother_blob_id, _node_of_origin, _population, self)
         blob.initialize_blocks(self.block_template, _population)
         for k,v in traceable_prop_override.items():
-            blob.traceable_properties[k] = v
+            blob._traceable_properties[k] = v
         return blob
 
     def GenerateEmpty(self, _mother_blob_id, _node_of_origin, traceable_prop_override:dict = {}):
@@ -553,7 +554,7 @@ class BlobFactory():
         blob = Blob(_mother_blob_id, _node_of_origin, 0, self)
         blob.initialize_blocks_empty(self.block_template)
         for k,v in traceable_prop_override.items():
-            blob.traceable_properties[k] = v
+            blob._traceable_properties[k] = v
         return blob
 
     def GenerateProfile(self,_mother_blob_id, _node_of_origin, _population, _profile, traceable_prop_override:dict = {}):
@@ -580,7 +581,7 @@ class BlobFactory():
         blob = Blob(_mother_blob_id, _node_of_origin, _population, self)
         blob.initialize_blocks_profile(self.block_template, _population, _profile)
         for k,v in traceable_prop_override.items():
-            blob.traceable_properties[k] = v
+            blob._traceable_properties[k] = v
         return blob
 
 class Blob():
@@ -608,6 +609,7 @@ class Blob():
         spawning_node: The node were this blob was created.
         frame_origin_node: The node where this blob started the frame.
     """
+    events = Events()
     
     def __init__(self, _mother_blob_id, _node_of_origin, _population, _blob_factory:BlobFactory):
         self.blob_factory:BlobFactory = _blob_factory
@@ -616,25 +618,34 @@ class Blob():
         self.blob_id = IDGen('blobs').get_id()
         self.mother_blob_id = _mother_blob_id
         self.node_of_origin: int = _node_of_origin
-        self.traceable_properties:dict = {}
+        self._traceable_properties:dict = {}
         self.sampled_properties:PropertyBlock = None
         self.frame_origin_node = None
         self.previous_node = _node_of_origin
+        
               
     def initialize_blocks(self, block_template:BlockTemplate, population):
         self.sampled_properties = block_template.Generate(population)
-        self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+        self._traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
 
     def initialize_blocks_empty(self, block_template:BlockTemplate):
         self.sampled_properties = block_template.GenerateEmpty()
-        self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+        self._traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
 
     def initialize_blocks_profile(self, block_template:BlockTemplate, population, profiles):
         self.profiles = profiles
         self.sampled_properties = block_template.GenerateProfile(population, profiles)
-        self.traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+        self._traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
         
+    def set_traceable_property(self, key, value):
+        prev_val = self._traceable_properties[key]
+        if prev_val == value:
+            return
+        self._traceable_properties[key] = value
+        Blob.events.on_traceable_property_changed(self, key, prev_val, value)
 
+    def get_traceable_property(self, key):
+        return self._traceable_properties[key]
     # used for infection for example
     # def move_profile(self, quantity, pop_template, origin_block, target_block):
     #     """Moves population from one PropertyBlock to another.
@@ -678,8 +689,8 @@ class Blob():
         removed_block = self.sampled_properties.extract(current_quantity, pop_template)
         new_blob.sampled_properties = removed_block
         
-        for k,v in self.traceable_properties.items():
-            new_blob.traceable_properties[k] = v
+        for k,v in self._traceable_properties.items():
+            new_blob._traceable_properties[k] = v
         
         # new_blob.spawning_node = self.spawning_node
         new_blob.previous_node = self.previous_node
@@ -691,7 +702,7 @@ class Blob():
         _blob = self.grab_population(quantity, template)
         if not isinstance(_blob, Blob):
             return
-        _blob.traceable_properties[key] = value
+        _blob.set_traceable_property(key, value)
         
         if _blob is not self:
             _blob.previous_node = self.previous_node
@@ -755,15 +766,15 @@ class Blob():
         # Compares traceable properties set in the PopTemplate
         # The PopTemplate may have fewer properties than the Blob
         for k,v in population_template.traceable_properties.items():
-            if k not in self.traceable_properties.keys():
+            if k not in self._traceable_properties.keys():
                 sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
             if callable(v):
-                if not v(self.traceable_properties[k]):
+                if not v(self._traceable_properties[k]):
                     return False
             elif isinstance(v,(list,set)):
-                if self.traceable_properties[k] not in v:
+                if self._traceable_properties[k] not in v:
                     return False
-            elif self.traceable_properties[k] != v:
+            elif self._traceable_properties[k] != v:
                 return False
             
         # All defined properties matched
@@ -771,14 +782,14 @@ class Blob():
 
     def compare_traceable_properties_to_other(self, other_blob: Blob, check_missing_keys = True):
         if check_missing_keys:
-            for k in self.traceable_properties.keys():
-                if k not in other_blob.traceable_properties.keys():
+            for k in self._traceable_properties.keys():
+                if k not in other_blob._traceable_properties.keys():
                     sys.exit(f"The traceable property \"{k}\" was not defined in other Blob. {other_blob.verbose_str()}")
-            for k in other_blob.traceable_properties.keys():
-                if k not in self.traceable_properties.keys():
+            for k in other_blob._traceable_properties.keys():
+                if k not in self._traceable_properties.keys():
                     sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. {self.verbose_str()}")
 
-        return self.traceable_properties == other_blob.traceable_properties
+        return self._traceable_properties == other_blob._traceable_properties
 
     # merges a child blob into a mother blob
     # Outside code is responsible for deleting consumed blob
@@ -796,7 +807,7 @@ class Blob():
             self.sampled_properties.add_block(blob.sampled_properties)
             
     def verbose_str(self):
-        return "{0} {1} {2}".format(self, self.traceable_properties, self.sampled_properties)
+        return "{0} {1} {2}".format(self, self._traceable_properties, self.sampled_properties)
 
     def __str__(self):
         template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"previous_node\" : {3}, \"frame_origin_node\" : {4}}}'
@@ -826,7 +837,7 @@ if __name__ == "__main__":
         
     print("\nCREATING BLOB 1")
     dummyBlob = dummyBlobFactory.Generate(0, 0, 400)
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob._traceable_properties, dummyBlob.sampled_properties)
     print("************")
     
     print(dummyBlob.sampled_properties, type(dummyBlob.sampled_properties.buckets['age']))
@@ -852,7 +863,7 @@ if __name__ == "__main__":
     dummyBlob3 = dummyBlob.split_blob(20, dummyPopTemplate)
     print("DummyPopTemplate", dummyPopTemplate)
     print("------------")
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.traceable_properties, dummyBlob.sampled_properties)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob._traceable_properties, dummyBlob.sampled_properties)
     print("------------")
     # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
     # print("------------")

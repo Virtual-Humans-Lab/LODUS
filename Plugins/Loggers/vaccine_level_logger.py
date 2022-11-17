@@ -59,7 +59,7 @@ class VaccineLevelLogger(LoggerPlugin):
 
 
     #### Logging Functions
-    def setup_logger(self):    
+    def start_logger(self):    
         
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)

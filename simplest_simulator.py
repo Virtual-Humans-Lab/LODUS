@@ -48,7 +48,7 @@ Parameters
 #how many steps each day has
 days = 3
 day_duration = 24
-env_graph.routine_day_length = day_duration
+env_graph.routine_cycle_length = day_duration
 
 simulation_steps = days * day_duration
 

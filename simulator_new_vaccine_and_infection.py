@@ -2,9 +2,10 @@
 import sys
 
 sys.path.append('./Plugins/')
+from Loggers.characteristic_change_logger import CharacteristicChangeLogger
 from Loggers.od_matrix_logger import ODMovementRecordKey, ODMatrixLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
-from Loggers.population_count_logger import LoggerDefaultRecordKey, PopulationCountLogger
+from Loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
 from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 
 import argparse
@@ -48,15 +49,11 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 '''
 Parameters
 '''
-#how many steps each day has
-days = 2
-day_duration = 24
-env_graph.routine_day_length = day_duration
-
-simulation_steps = days * day_duration
-
-
-
+# How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
+cycles = 2
+cycle_length = 24
+env_graph.routine_cycle_length = cycle_length
+simulation_steps = cycles * cycle_length
 
 
 '''
@@ -85,8 +82,8 @@ env_graph.LoadPlugin(density_plugin)
 #custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
 #env_graph.LoadPlugin(custom_action_plugin)
 
-#vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
-#env_graph.LoadPlugin(vaccine_plugin)
+vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
+env_graph.LoadPlugin(vaccine_plugin)
 
 #infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
 #env_graph.LoadPlugin(infection_plugin)
@@ -95,15 +92,15 @@ env_graph.LoadPlugin(density_plugin)
 Logging
 '''
 
-pop_count_logger = PopulationCountLogger(f'{args["n"]}', env_graph, day_duration)
-pop_count_logger.data_to_record = [LoggerDefaultRecordKey.POPULATION_COUNT_GLOBAL,
-                                    LoggerDefaultRecordKey.POPULATION_COUNT_Region,
-                                    LoggerDefaultRecordKey.POPULATION_COUNT_NODE]
+pop_count_logger = PopulationCountLogger(f'{args["n"]}', env_graph, cycle_length)
+pop_count_logger.data_to_record = [PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
+                                    PopulationCountRecordKey.POPULATION_COUNT_REGION,
+                                    PopulationCountRecordKey.POPULATION_COUNT_NODE]
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
-blob_count_logger = BlobCountLogger(f'{args["n"]}', env_graph, day_duration)
+blob_count_logger = BlobCountLogger(f'{args["n"]}')
 blob_count_logger.data_to_record = [BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                     BlobCountRecordKey.BLOB_COUNT_REGION,
                                     BlobCountRecordKey.BLOB_COUNT_NODE]
@@ -118,8 +115,11 @@ pop_count_logger.pop_template = pop_temp
 # logger.set_pluggin_to_record(infection_plugin)
 # logger.set_pluggin_to_record(vaccine_plugin)
 
+# CharacteristicChange logger
+traceable_logger = CharacteristicChangeLogger(f'{args["n"]}')
+
 # OD-Matrix logger
-od_logger = ODMatrixLogger(f'{args["n"]}', env_graph, day_duration)
+od_logger = ODMatrixLogger(f'{args["n"]}')
 od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
                             ODMovementRecordKey.NODE_TO_NODE]
 
@@ -133,6 +133,7 @@ od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_propert
 od_logger.region_custom_templates["occupation: [idle]"] = PopTemplate(sampled_properties={"occupation": "idle"})
 od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
 od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
+od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
 #----------------------------
 
 # Vaccine Logger
@@ -145,6 +146,7 @@ Simulation
 env_graph.LoadLoggerPlugin(pop_count_logger)
 env_graph.LoadLoggerPlugin(od_logger)
 env_graph.LoadLoggerPlugin(blob_count_logger)
+env_graph.LoadLoggerPlugin(traceable_logger)
 #env_graph.LoadLoggerPlugin(vacc_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
@@ -162,7 +164,7 @@ for i in range(simulation_steps):
 
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
-    env_graph.update_time_step(i % day_duration, i)
+    env_graph.update_time_step(i % cycle_length, i)
 
     # Log current simulation step
     env_graph.log_simulation_step()
