@@ -277,17 +277,16 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
             return
         
         if self.vacc_plugin is not None:
-            new_blobs = []
-            if to_inf > 0:
-                i_grabbed = node.grab_population(to_inf, pt_sus)
-                for b in i_grabbed:
-                    _eff = self.vacc_plugin.get_blob_vacc_efficiency(b)
-                    _pop = round(b.get_population_size() * (1.0 - _eff))
-                    new_blobs.append(b.change_blob_traceable_property('sir_status', 'infected', _pop))
             if to_rem > 0:
                 node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
-            node.add_blobs(new_blobs)
-            
+            if to_inf > 0:
+                i_grabbed = node.grab_population(to_inf, pt_sus)
+                node.add_blobs(i_grabbed)
+                for b in i_grabbed:
+                    _eff = self.vacc_plugin.get_blob_vacc_efficiency(b)
+                    _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
+                    node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
+                      
         else:
             node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
             node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)

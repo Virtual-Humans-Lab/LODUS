@@ -918,8 +918,8 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = target_node.contained_blobs[0]
 
         # Copy two extra Blobs with same profile
-        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles, source_blob._traceable_properties)
-        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles, source_blob._traceable_properties)
+        clone_blob_1 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles, source_blob.get_traceable_properties())
+        clone_blob_2 = source_blob.blob_factory.GenerateProfile(0, 0, 100, source_blob.profiles, source_blob.get_traceable_properties())
         
         # Adds extra Blobs to target node
         target_node.add_blobs([clone_blob_1, clone_blob_2])
@@ -1994,9 +1994,9 @@ class EnvironmentTests(unittest.TestCase):
         source_blob = node_blobs[0]
         
         # Copy three extra Blobs with same profile - clone_blob_4 should ne None
-        extra_blob_1 = source_blob.blob_factory.GenerateProfile(source_blob.mother_blob_id, 0, 100, source_blob.profiles, source_blob._traceable_properties)
-        extra_blob_2 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 0, 190, source_blob._traceable_properties)
-        extra_blob_3 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 0, 10, source_blob._traceable_properties) 
+        extra_blob_1 = source_blob.blob_factory.GenerateProfile(source_blob.mother_blob_id, 0, 100, source_blob.profiles, source_blob.get_traceable_properties())
+        extra_blob_2 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 0, 190, source_blob.get_traceable_properties())
+        extra_blob_3 = source_blob.blob_factory.Generate(source_blob.mother_blob_id, 0, 10, source_blob.get_traceable_properties()) 
                 
         # Adds extra Blobs to target node
         target_node.add_blobs([extra_blob_1, extra_blob_2, extra_blob_3])
@@ -2093,7 +2093,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Set a traceable property for all Blobs in node - two merges should occur
         for blob in target_node.contained_blobs:
-            blob._traceable_properties['traceable_B'] = 0
+            blob.set_traceable_property('traceable_B', 0)
         
         # Merge Blobs in target node - Blob0 should merge with Blob1, and Blob2 should merge with Blob3
         self.envB.merge_node(target_node)
@@ -2127,7 +2127,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Set a traceable property for all Blobs in node - one merge should occur
         for blob in target_node.contained_blobs:
-            blob._traceable_properties['traceable_A'] = 'default'
+            blob.set_traceable_property('traceable_A', 'default')
         
         # Merge Blobs in target node - Blob0 should merge with Blob1
         self.envB.merge_node(target_node)

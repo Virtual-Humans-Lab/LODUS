@@ -49,11 +49,12 @@ class CharacteristicChangeLogger(LoggerPlugin):
         pass
 
     def log_characteristic_change(self, blob:Blob, char_key, prev_value, new_value):
-        #node = None
+        node = None
         for n in self.graph.node_dict.values():
             if blob in n.contained_blobs:
                 node = n
                 break
+        
         self.char_change_logs.append([self.sim_step,
                                         self.sim_step % self.cycle_lenght,
                                         self.sim_step//self.cycle_lenght,

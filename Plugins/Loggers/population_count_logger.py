@@ -23,7 +23,6 @@ class PopulationCountRecordKey(Enum):
     POPULATION_COUNT_NODE = 2
 
 class PopulationCountLogger(LoggerPlugin):
-
     
     def __init__(self, base_filename, graph:environment.EnvironmentGraph, time_cycle=24):
         self.graph = graph

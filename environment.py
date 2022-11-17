@@ -153,13 +153,36 @@ class EnvNode():
 
     def change_blobs_traceable_property(self, key, value, quantity:int, template:population.PopTemplate = None):
         _grabbed = self.grab_population(quantity, template)
+        self.add_blobs(_grabbed)
+
         for _blob in _grabbed:
-            _blob._traceable_properties[key] = value
+            _blob.set_traceable_property(key, value)
             _blob.previous_node = self.id
             #if _blob.spawning_node is None:
             #    _blob.spawning_node = self.id
             _blob.frame_origin_node = self.id
-        self.add_blobs(_grabbed)
+
+    def change_blob_traceable_property(self, blob:population.Blob, key, value, quantity:int, template:population.PopTemplate = None) -> population.Blob:
+        
+        if quantity == 0:
+            return
+
+        assert blob in self.contained_blobs, "Blob is not in the contained blobs of node" + blob.verbose_str() + str(self)
+                    
+        _grabbed = blob.grab_population(quantity, template)
+
+        if _grabbed is None:
+            return
+        if blob is not _grabbed:
+            self.add_blob(_grabbed)
+        
+        _grabbed.set_traceable_property(key, value)
+        _grabbed.previous_node = blob.previous_node
+        #if _blob.spawning_node is None:
+        #    _blob.spawning_node = self.id
+        _grabbed.frame_origin_node = blob.frame_origin_node
+        return _grabbed
+        
     
     def get_unique_name(self):
         return f"{self.containing_region_name}//{self.name}"
@@ -574,10 +597,10 @@ class EnvironmentGraph():
 
         Applies every TimeAction which matches time argument.
         """
-        for _lp in self.loaded_plugins:
-            _lp.update_time_step(cycle_step, simulation_step)
         for _llp in self.loaded_logger_plugins:
             _llp.update_time_step(cycle_step, simulation_step)
+        for _lp in self.loaded_plugins:
+            _lp.update_time_step(cycle_step, simulation_step)
 
         actions = self.generate_action_list(cycle_step)
 
@@ -802,7 +825,7 @@ class EnvironmentGraph():
     def add_blobs_traceable_property(self, key, value):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob._traceable_properties[key] = value
+                blob.set_traceable_property(key, value)
                 
     # def lambda_blobs_traceable_property(self, key, lambda_funtion):
     #     for node in self.node_list:
@@ -813,7 +836,7 @@ class EnvironmentGraph():
     def lambda_blobs_traceable_property(self, key, lambda_funtion):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.set_traceable_property(key, lambda_funtion(blob, blob._traceable_properties[key]))
+                blob.set_traceable_property(key, lambda_funtion(blob, blob.get_traceable_property(key)))
 
     
 

@@ -18,7 +18,6 @@ class BlobCountRecordKey(Enum):
     BLOB_COUNT_NODE = 2
 
 class BlobCountLogger(LoggerPlugin):
-
     
     def __init__(self, base_filename):
 

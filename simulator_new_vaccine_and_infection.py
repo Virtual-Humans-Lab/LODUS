@@ -50,7 +50,7 @@ env_graph = generate_EnvironmentGraph(data_input_file_path)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 2
+cycles = 10
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -85,8 +85,8 @@ env_graph.LoadPlugin(density_plugin)
 vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
 env_graph.LoadPlugin(vaccine_plugin)
 
-#infection_plugin = NewInfectionPlugin(env_graph, args['i'], day_duration)
-#env_graph.LoadPlugin(infection_plugin)
+infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
+env_graph.LoadPlugin(infection_plugin)
 
 '''
 Logging

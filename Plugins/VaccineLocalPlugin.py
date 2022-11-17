@@ -93,8 +93,12 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.cycle = (simulation_step // self.day_duration)
         self.current_vacc_cycle = (simulation_step // self.day_duration) - self.dosage_offsets[0]
         
+        # Only Setup at the begining of the day
+        if cycle_step != 0:
+            return
+
         # Increases the days_since_last_vaccine for all blobs
-        if self.cycle > 0 and cycle_step == 0:
+        if self.cycle > 0:
             self.graph.lambda_blobs_traceable_property("days_since_last_vaccine", lambda b,v:v+1 if b.get_traceable_property("vaccine_level") < self.dosages else 0)
         
         # Checks vaccines available for each dosage
