@@ -44,13 +44,13 @@ FixedRandom()
 Data Loading
 '''
 data_input_file_path = args['f']
-env_graph = generate_EnvironmentGraph(data_input_file_path)
-
+#env_graph = generate_EnvironmentGraph(data_input_file_path)
+env_graph = generate_EnvGraphNew(data_input_file_path)
 '''
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 10
+cycles = 1
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -125,12 +125,12 @@ od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
 
 # Age tracking
 od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
-od_logger.region_custom_templates["age: [young]"] = PopTemplate(sampled_properties={"age": "young"})
+od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
 od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
 od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
 
 # Occupation tracking
-od_logger.region_custom_templates["occupation: [idle]"] = PopTemplate(sampled_properties={"occupation": "idle"})
+od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
 od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
 od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
 od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})

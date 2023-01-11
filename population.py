@@ -436,7 +436,6 @@ class PopTemplate():
         self.sampled_properties:dict = {}
         self.traceable_properties:dict = {}
         self.empty = True
-
         #if sampled_properties is not None:
         if sampled_properties:
             for k,v in sampled_properties.items():

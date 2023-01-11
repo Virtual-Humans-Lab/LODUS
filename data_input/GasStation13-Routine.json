@@ -1,0 +1,2360 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Azenha//home": [],
+    "Azenha//work": [],
+    "Azenha//school": [],
+    "Azenha//marketplace": [],
+    "Azenha//pharmacy": [],
+    "Azenha//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": 20,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": 20,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": 20,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": 20,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": 20,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": 20,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Azenha//hospital": [],
+    "Azenha//shopping_mall": [],
+    "Bom Fim//home": [],
+    "Bom Fim//work": [],
+    "Bom Fim//school": [],
+    "Bom Fim//marketplace": [],
+    "Bom Fim//pharmacy": [],
+    "Bom Fim//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home": [],
+    "Centro Histórico//work": [],
+    "Centro Histórico//school": [],
+    "Centro Histórico//marketplace": [],
+    "Centro Histórico//pharmacy": [],
+    "Centro Histórico//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": 58,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": 58,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": 58,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": 58,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": 58,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": 58,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Centro Histórico//hospital": [],
+    "Centro Histórico//shopping_mall": [],
+    "Cidade Baixa//home": [],
+    "Cidade Baixa//work": [],
+    "Cidade Baixa//school": [],
+    "Cidade Baixa//marketplace": [],
+    "Cidade Baixa//pharmacy": [],
+    "Cidade Baixa//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": 23,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": 23,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": 23,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": 23,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": 23,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": 23,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Farroupilha//home": [],
+    "Farroupilha//work": [],
+    "Farroupilha//school": [],
+    "Farroupilha//marketplace": [],
+    "Farroupilha//pharmacy": [],
+    "Farroupilha//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Farroupilha//hospital": [],
+    "Floresta//home": [],
+    "Floresta//work": [],
+    "Floresta//school": [],
+    "Floresta//marketplace": [],
+    "Floresta//pharmacy": [],
+    "Floresta//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Independência//home": [],
+    "Independência//work": [],
+    "Independência//school": [],
+    "Independência//marketplace": [],
+    "Independência//pharmacy": [],
+    "Independência//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": 12,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": 12,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": 12,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": 12,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": 12,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": 12,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Independência//hospital": [],
+    "Independência//shopping_mall": [],
+    "Menino Deus//home": [],
+    "Menino Deus//work": [],
+    "Menino Deus//school": [],
+    "Menino Deus//marketplace": [],
+    "Menino Deus//pharmacy": [],
+    "Menino Deus//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": 47,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": 47,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": 47,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": 47,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": 47,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": 47,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Menino Deus//hospital": [],
+    "Moinhos de Vento//home": [],
+    "Moinhos de Vento//work": [],
+    "Moinhos de Vento//school": [],
+    "Moinhos de Vento//marketplace": [],
+    "Moinhos de Vento//pharmacy": [],
+    "Moinhos de Vento//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": 17,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//hospital": [],
+    "Moinhos de Vento//shopping_mall": [],
+    "Praia de Belas//home": [],
+    "Praia de Belas//work": [],
+    "Praia de Belas//school": [],
+    "Praia de Belas//marketplace": [],
+    "Praia de Belas//pharmacy": [],
+    "Praia de Belas//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": 5,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Praia de Belas//stadium": [],
+    "Praia de Belas//shopping_mall": [],
+    "Rio Branco//home": [],
+    "Rio Branco//work": [],
+    "Rio Branco//school": [],
+    "Rio Branco//marketplace": [],
+    "Rio Branco//pharmacy": [],
+    "Rio Branco//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": 26,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": 26,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": 26,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": 26,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": 26,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": 26,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Rio Branco//hospital": [],
+    "Santa Cecília//home": [],
+    "Santa Cecília//work": [],
+    "Santa Cecília//school": [],
+    "Santa Cecília//marketplace": [],
+    "Santa Cecília//pharmacy": [],
+    "Santa Cecília//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": 8,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": 8,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": 8,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": 8,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": 8,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": 8,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Santa Cecília//hospital": [],
+    "Santana//home": [],
+    "Santana//work": [],
+    "Santana//school": [],
+    "Santana//marketplace": [],
+    "Santana//pharmacy": [],
+    "Santana//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": 31,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": 31,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": 31,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": 31,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": 31,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": 31,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "Santana//hospital": []
+  }
+}

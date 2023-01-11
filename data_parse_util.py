@@ -11,6 +11,96 @@ def DummyPop(env_graph):
     pass
 
 
+def generate_EnvGraphNew(env_input):
+    print("generating EnvGraph with new parsing. File:", env_input)
+    if env_input == 'dummy':
+        env = DummyEnv()
+        populate_EnvironmentGraph('dummy', env)
+        return env
+    
+    base_file_path = ".\data_input\\" + env_input
+    env_file = open(base_file_path + "-Environment.json",'r', encoding='utf8')
+    pop_file = open(base_file_path + "-Population.json",'r', encoding='utf8')
+    rot_file = open(base_file_path + "-Routine.json",'r', encoding='utf8')
+
+    env_json = json.load(env_file)
+    pop_json = json.load(pop_file)
+    rot_json = json.load(rot_file)
+
+    env = EnvironmentGraph()
+
+    block_template = BlockTemplate()
+    pop_template = { "traceable_properties": pop_json["default_traceable_characteristics"],
+                    "sampled_properties": pop_json["sampled_characteristics_bins"]}
+    
+    # Default values for traceable properties
+    if 'traceable_properties' in pop_template:
+        tp = pop_template['traceable_properties']
+        for k in tp:
+            block_template.add_traceable_property(k, tp[k])
+
+    # Default values for sampled properties
+    if 'sampled_properties' in pop_template:
+        sp = pop_template['sampled_properties']
+        for k in sp:
+            block_template.add_bucket(k, sp[k])
+
+    blob_factory = BlobFactory(block_template)
+    env.original_block_template = block_template
+
+    # Process repeating global actions
+    if 'repeating_global_actions' in rot_json:
+        repeating_global_actions = rot_json['repeating_global_actions']
+
+        for rga in repeating_global_actions:
+            if 'cycle_length' in rga:
+                env.set_repeating_action(int(rga['cycle_length']), TimeAction(rga['type'], rga['values']))
+            elif 'frames' in rga:
+                env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
+
+    # Creating Regions
+    for reg_dict in env_json['regions']:
+        region_template = EnvRegionTemplate()
+
+        # Creating each Point of Interest/Node
+        for poi_dict in reg_dict['points_of_interest']:
+            node_template = EnvNodeTemplate()
+
+            # Node Long-Lat position
+            node_template.long_lat = poi_dict["lng_lat"]
+
+            # Additional characteristics
+            if "characteristics" in poi_dict:
+                for a, b in poi_dict["characteristics"].items():
+                    node_template.add_characteristic(a, b)
+
+            # Add initial populations:
+            poi_unique_name = reg_dict["name"] + "//" + poi_dict["name"]
+            
+            if poi_unique_name in pop_json["initial_population"]:
+                for ip in pop_json["initial_population"][poi_unique_name]:
+                    node_template.add_blob_description(
+                        population=ip["total_population"],
+                        traceable_properties=ip['traceable_characteristics'],
+                        description=ip['sampled_characteristics'], 
+                        blob_factory=blob_factory)
+
+            # Add routines
+            if poi_unique_name in rot_json["routines"]:
+                for rt in rot_json["routines"][poi_unique_name]:
+                    action = TimeAction.CreateWithTemplate(_type=rt["action"]['type'], 
+                                        _values=rt["action"]['values'], 
+                                        _pop_template=rt["action"]['population_template'])
+                    node_template.add_action_to_template(rt["cycle_step"], action)
+
+
+            region_template.add_template_node(poi_dict["name"], node_template)
+        
+        env.add_region(reg_dict['lng_lat'], region_template, reg_dict['name'])
+        env.region_list[-1].long_lat = reg_dict['lng_lat']
+    env.set_spawning_nodes()
+    return env
+
 def generate_EnvironmentGraph(env_input):
 
     if env_input == 'dummy':
@@ -26,7 +116,7 @@ def generate_EnvironmentGraph(env_input):
 
         block_template = BlockTemplate()
         pop_template = descrip['population_template']
-        
+
         # Default values for traceable properties
         if 'traceable_properties' in pop_template:
             tp = pop_template['traceable_properties']

@@ -51,6 +51,7 @@ class EnvNode():
         self.contained_blobs:list[population.Blob] = [] 
         self.routine: Routine = None
         self.characteristics = {}
+        self.long_lat:tuple[float, float] = [0.0, 0.0]
         self.id = util.IDGen('nodes').get_id()
         self.containing_region_name = None
 
@@ -215,6 +216,7 @@ class EnvNodeTemplate():
         self.characteristics = {}
         self.routine_template = {}
         self.blob_descriptions = []
+        self.long_lat:tuple[float, float]
 
     def add_characteristic(self, key, value):
         self.characteristics[key] = value
@@ -222,6 +224,15 @@ class EnvNodeTemplate():
     def add_routine_template(self, hour, actions):
         """Adds a TimeAction to the designated time slot."""
         self.routine_template[str(hour)] = actions
+
+    def add_action_to_template(self, hour, action):
+        """Adds a TimeAction to the designated time slot."""
+        if str(hour) not in self.routine_template:
+            self.routine_template[str(hour)] = []
+        self.routine_template[str(hour)].append(action)
+
+    def add_long_lat_position(self, longitude:float, latitude:float):
+        self.long_lat = [longitude,latitude]
 
     def add_blob_description(self, population, traceable_properties, description, blob_factory):
         self.blob_descriptions.append((population, traceable_properties, description, blob_factory))
@@ -246,6 +257,7 @@ class EnvNodeFactory():
     def Generate(self, region:EnvRegion, _name)->EnvNode:
         node  = EnvNode()
         node.name = _name
+        node.long_lat = self.template.long_lat
         node.routine = self.GenerateRoutine(self.template.routine_template)
         for k in self.template.characteristics.keys():
             node.characteristics[k] = self.template.characteristics[k]
@@ -253,6 +265,7 @@ class EnvNodeFactory():
         for (pop,trace,desc,factory) in self.template.blob_descriptions:
             blob: population.Blob = factory.GenerateProfile(region.id, node.id, pop, desc, trace)
             node.add_blob(blob)
+            
         return node
 
 
@@ -944,7 +957,16 @@ class TimeAction():
         self.values = _values
         if "population_template" in self.values:
             if isinstance(self.values["population_template"], dict):
+                print(self.values["population_template"])
                 self.values["population_template"] = population.PopTemplate(self.values["population_template"])
+
+    #def __init__(self, _pop_template, _type, _values):
+    @classmethod
+    def CreateWithTemplate(cls, _pop_template, _type, _values):
+        _values["population_template"] = population.PopTemplate(
+            traceable_properties=_pop_template["traceable_characteristics"],
+            sampled_properties=_pop_template["sampled_characteristics"])
+        return cls(_type, _values)
 
 
     def __str__(self):
