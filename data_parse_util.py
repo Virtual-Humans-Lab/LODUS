@@ -11,7 +11,7 @@ def DummyPop(env_graph):
     pass
 
 
-def generate_EnvGraphNew(env_input):
+def Generate_EnvironmentGraph(env_input):
     print("generating EnvGraph with new parsing. File:", env_input)
     if env_input == 'dummy':
         env = DummyEnv()

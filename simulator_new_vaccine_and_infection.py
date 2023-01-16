@@ -45,7 +45,7 @@ Data Loading
 '''
 data_input_file_path = args['f']
 #env_graph = generate_EnvironmentGraph(data_input_file_path)
-env_graph = generate_EnvGraphNew(data_input_file_path)
+env_graph = Generate_EnvironmentGraph(data_input_file_path)
 '''
 Parameters
 '''

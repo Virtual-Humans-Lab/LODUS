@@ -1,0 +1,1505 @@
+{
+  "global_routine": [],
+  "routines": {
+    "RegionA//home": [
+      {
+        "cycle_step": 1,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "home",
+            "quantity": 300
+          }
+        }
+      },
+      {
+        "cycle_step": 1,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "home",
+            "quantity": 300
+          }
+        }
+      },
+      {
+        "cycle_step": 2,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "home",
+            "quantity": 400
+          }
+        }
+      },
+      {
+        "cycle_step": 2,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "home",
+            "quantity": 400
+          }
+        }
+      },
+      {
+        "cycle_step": 3,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "marketplace",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "cycle_step": 3,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "marketplace",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "marketplace",
+            "quantity": 200
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "marketplace",
+            "quantity": 200
+          }
+        }
+      },
+      {
+        "cycle_step": 5,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "pharmacy",
+            "quantity": 150
+          }
+        }
+      },
+      {
+        "cycle_step": 5,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "pharmacy",
+            "quantity": 150
+          }
+        }
+      },
+      {
+        "cycle_step": 6,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "pharmacy",
+            "quantity": 250
+          }
+        }
+      },
+      {
+        "cycle_step": 6,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionA",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "pharmacy",
+            "quantity": 250
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "work",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionA//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_work",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "work",
+            "quantity": 2000,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 13,
+        "action": {
+          "name": "requests_workers_to_work",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "work",
+            "quantity": 2000,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "work",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionA//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "pharmacy",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionA//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionA",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionB//home": [
+      {
+        "cycle_step": 1,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "home",
+            "quantity": 300
+          }
+        }
+      },
+      {
+        "cycle_step": 1,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "home",
+            "quantity": 300
+          }
+        }
+      },
+      {
+        "cycle_step": 2,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "home",
+            "quantity": 400
+          }
+        }
+      },
+      {
+        "cycle_step": 2,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "home",
+            "quantity": 400
+          }
+        }
+      },
+      {
+        "cycle_step": 3,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "marketplace",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "cycle_step": 3,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "marketplace",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "marketplace",
+            "quantity": 200
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "marketplace",
+            "quantity": 200
+          }
+        }
+      },
+      {
+        "cycle_step": 5,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "pharmacy",
+            "quantity": 150
+          }
+        }
+      },
+      {
+        "cycle_step": 5,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "pharmacy",
+            "quantity": 150
+          }
+        }
+      },
+      {
+        "cycle_step": 6,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "pharmacy",
+            "quantity": 250
+          }
+        }
+      },
+      {
+        "cycle_step": 6,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionB",
+            "origin_node": "home",
+            "destination_region": "RegionC",
+            "destination_node": "pharmacy",
+            "quantity": 250
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "work",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionB//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_work",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "work",
+            "quantity": 2000,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 13,
+        "action": {
+          "name": "requests_workers_to_work",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "work",
+            "quantity": 2000,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "work",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionB//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "pharmacy",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionB//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionB",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionC//home": [
+      {
+        "cycle_step": 1,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "home",
+            "quantity": 300
+          }
+        }
+      },
+      {
+        "cycle_step": 1,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "home",
+            "quantity": 300
+          }
+        }
+      },
+      {
+        "cycle_step": 2,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "home",
+            "quantity": 400
+          }
+        }
+      },
+      {
+        "cycle_step": 2,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "home",
+            "quantity": 400
+          }
+        }
+      },
+      {
+        "cycle_step": 3,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "marketplace",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "cycle_step": 3,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "marketplace",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "marketplace",
+            "quantity": 200
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "marketplace",
+            "quantity": 200
+          }
+        }
+      },
+      {
+        "cycle_step": 5,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "pharmacy",
+            "quantity": 150
+          }
+        }
+      },
+      {
+        "cycle_step": 5,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "pharmacy",
+            "quantity": 150
+          }
+        }
+      },
+      {
+        "cycle_step": 6,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionA",
+            "destination_node": "pharmacy",
+            "quantity": 250
+          }
+        }
+      },
+      {
+        "cycle_step": 6,
+        "action": {
+          "name": "move_population_to_poi_in_other_regions",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "origin_region": "RegionC",
+            "origin_node": "home",
+            "destination_region": "RegionB",
+            "destination_node": "pharmacy",
+            "quantity": 250
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "work",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionC//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_work",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "work",
+            "quantity": 2000,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 13,
+        "action": {
+          "name": "requests_workers_to_work",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "work",
+            "quantity": 2000,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "work",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionC//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "pharmacy",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ],
+    "RegionC//gas_station": [
+      {
+        "cycle_step": 0,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 4,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "requests_workers_to_gas_station",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {
+              "age": [
+                "youngs",
+                "adults",
+                "elders"
+              ],
+              "occupation": [
+                "worker"
+              ]
+            }
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": 15,
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "return_workers",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "RegionC",
+            "node": "gas_station",
+            "quantity": -1,
+            "different_node_name": true
+          }
+        }
+      }
+    ]
+  }
+}

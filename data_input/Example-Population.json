@@ -1,0 +1,79 @@
+{
+  "default_traceable_characteristics": {
+    "traceable_A": 0,
+    "traceable_B": false,
+    "traceable_C": "foo"
+  },
+  "sampled_characteristics_bins": {
+    "age": [
+      "children",
+      "youngs",
+      "adults",
+      "elders"
+    ],
+    "occupation": [
+      "student",
+      "worker",
+      "other"
+    ]
+  },
+  "initial_population": {
+    "RegionA//home": [
+      {
+        "total_population": 10000,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 2500,
+            "youngs": 500,
+            "adults": 5000,
+            "elders": 2000
+          },
+          "occupation": {
+            "student": 2157,
+            "worker": 5472,
+            "other": 2371
+          }
+        }
+      }
+    ],
+    "RegionB//home": [
+      {
+        "total_population": 10000,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 2000,
+            "youngs": 1000,
+            "adults": 6000,
+            "elders": 1000
+          },
+          "occupation": {
+            "student": 2157,
+            "worker": 5472,
+            "other": 2371
+          }
+        }
+      }
+    ],
+    "RegionC//home": [
+      {
+        "total_population": 10000,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 2000,
+            "youngs": 1000,
+            "adults": 4000,
+            "elders": 3000
+          },
+          "occupation": {
+            "student": 2157,
+            "worker": 5472,
+            "other": 2371
+          }
+        }
+      }
+    ]
+  }
+}
