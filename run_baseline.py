@@ -16,7 +16,7 @@ from InfectionVaccinePlugin import InfectionVaccinePlugin
 from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
-from ReturnPopulationPlugin import ReturnPopulationPlugin
+from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from LevyWalkPlugin import LevyWalkPlugin
 
 from Loggers.population_count_logger import PopulationCountLogger
@@ -144,7 +144,7 @@ elif args['m'] == 4:
     env_graph.LoadPlugin(social_distance)
 
 
-return_plugin = ReturnPopulationPlugin(env_graph)
+return_plugin = ReturnPopulationHomePlugin(env_graph)
 env_graph.LoadPlugin(return_plugin)
 
 

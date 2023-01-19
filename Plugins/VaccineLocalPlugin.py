@@ -177,7 +177,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             pop_template.set_traceable_property('days_since_last_vaccine', lambda n: n >= _dose_offset)
             new_action_values['population_template'] = pop_template
             
-            new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+            new_action = environment.TimeAction(action_type = new_action_type, values = new_action_values)
             self.graph.direct_action_invoke(new_action, hour, time)
             #self.graph.queue_next_frame_action(new_action)
             #sub_list.append(new_action)
@@ -189,7 +189,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             new_action_values['current_level'] = _dose_index
             new_action_values['min_dose_offset'] = _dose_offset
             new_action_values['quantity'] = to_vacc
-            new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+            new_action = environment.TimeAction(action_type = new_action_type, values = new_action_values)
             #self.graph.queue_next_frame_action(new_action)
             #self.graph.direct_action_invoke(new_action, hour, time)
             sub_list.append(new_action)
@@ -231,7 +231,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
                 new_action_values['node_id'] = target_node.id
                 new_action_values['blob_id'] = n.blob_id
                 new_action_values['population_template'] = pt
-                new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+                new_action = environment.TimeAction(action_type = new_action_type, values = new_action_values)
                 #self.graph.direct_action_invoke(new_action,hour,time)
                 #sub_list.append(new_action)
                 #print(hour,self.graph.get_node_by_id(n.previous_node).name)  

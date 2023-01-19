@@ -1,0 +1,29 @@
+ GatherPopulationNewPlugin Execution Time Data
+---Number of executions: 10010
+---Total execution time: 1539.7203829999817
+---Average execution time: 0.15381822007991824
+---Total subactions count: 3069775
+---Average subaction count: 306.67082917082917
+
+ ReturnPopulationHomePlugin Execution Time Data
+---Number of executions: 0
+---Total execution time: 0
+
+ SendPopulationBackPlugin Execution Time Data
+---Number of executions: 502
+---Total execution time: 0.10628720000522662
+---Average execution time: 0.00021172749005025224
+
+ ReturnToPreviousPlugin Execution Time Data
+---Number of executions: 7378
+---Total execution time: 702.1605245000076
+---Average execution time: 0.09516949369748001
+
+Move Population Execution Time Data
+---Number of executions: 754790
+---Total execution time: 891.3953584001199
+---Average execution time: 0.001180984589621113
+Total Simulation time
+3408.9599943
+Average Cycle time
+3408.9599943

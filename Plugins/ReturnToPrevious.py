@@ -1,4 +1,5 @@
 import sys
+import time
 sys.path.append('../')
 
 import environment
@@ -15,8 +16,8 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
     def update_time_step(self, cycle_step, simulation_step):
         return #super().update_time_step(cycle_step, simulation_step)
 
-    def return_to_previous(self, values, hour, time):
-        
+    def return_to_previous(self, pop_template:PopTemplate, values, cycle_step, simulation_step):
+        start_time = time.perf_counter()
         #assert('node_id' in values or ('region' in values and 'node' in values), 
         #       "No node_id or region/node pair defined in Return To Previous TimeAction")
         pop_prev = self.graph.get_population_size()
@@ -31,9 +32,9 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
             from_node = from_region.get_node_by_name(values['node'])
             node_id = from_node.id
         
-        pop_template = PopTemplate()
-        if 'population_template' in values:
-            pop_template = values['population_template']
+        #pop_template = PopTemplate()
+        #if 'population_template' in values:
+        #    pop_template = values['population_template']
         
         if 'blob_id' in values: 
             blob_id = values['blob_id']
@@ -69,5 +70,5 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
         if pop_prev != pop_aft:
             print ("WTF", pop_prev, pop_md1, pop_aft, grabbed_size, 
                    from_node.get_unique_name(),to_node.get_unique_name(),values,'\n')
-                
+        self.add_execution_time(time.perf_counter() - start_time)
         return []

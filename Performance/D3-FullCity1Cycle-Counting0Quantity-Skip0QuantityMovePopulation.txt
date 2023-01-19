@@ -1,0 +1,32 @@
+PS D:\GameProjects\LODUS> python .\TOMACS_simulation.py --n Full94 --f .\DataInput\94_Full.json
+23
+ GatherPopulationNewPlugin Execution Time Data
+---Number of executions: 10010
+---Total execution time: 1572.1313678003135
+---Average execution time: 0.15705608069933202
+---Total subactions count: 753992
+---Average subaction count: 75.32387612387612
+
+ ReturnPopulationHomePlugin Execution Time Data
+---Number of executions: 0
+---Total execution time: 0
+
+ SendPopulationBackPlugin Execution Time Data
+---Number of executions: 502
+---Total execution time: 0.019966099956945982
+---Average execution time: 3.9773107483956136e-05
+
+ ReturnToPreviousPlugin Execution Time Data
+---Number of executions: 7378
+---Total execution time: 762.2583090996995
+---Average execution time: 0.10331503240711569
+
+Move Population Execution Time Data
+---Number of executions: 757881
+---Total execution time: 910.8030331013797
+---Average execution time: 0.0012017757841948533
+Total Simulation time
+3329.3073337000023
+Average Cycle time
+3329.3073337000023
+dict_keys(['move_population', 'gather_population', 'return_population_home', 'send_population_back', 'return_to_previous'])

@@ -1,5 +1,6 @@
 from __future__ import annotations
 from pprint import pprint
+import time
 import logger_plugin
 import population
 #import Plugins.Loggers.od_matrix_logger as od_matrix_logger
@@ -500,8 +501,7 @@ class EnvironmentGraph():
         self.edge_table = [[]]
 
         self.routine_cycle_length = 24
-
-        self.time_action_map = { 'move_population' : self.move_population }
+        self.time_action_map:dict[str, callable] = { 'move_population' : self.move_population }
         self.base_actions = {'move_population'}
         
         self.loaded_plugins: list[TimeActionPlugin] = []
@@ -526,6 +526,7 @@ class EnvironmentGraph():
         self.od_matrix_logger = {}
         self.characteristic_change_logger = {}
         
+        self.execution_times=[]
         # Events test
         population.Blob.events.on_traceable_property_changed += self.log_traceable_change
       
@@ -616,7 +617,6 @@ class EnvironmentGraph():
             _lp.update_time_step(cycle_step, simulation_step)
 
         actions = self.generate_action_list(cycle_step)
-
         simplified_actions   = self.simplify_action_list(actions, cycle_step, simulation_step)
         #balanced_actions     = self.balance_action_list(simplified_actions)
 
@@ -650,19 +650,20 @@ class EnvironmentGraph():
 
         return action_list
 
-    def consume_time_action(self, time_action, hour, time):
+    def consume_time_action(self, time_action:TimeAction, hour, time):
         """Applies the graph operations (moving population, etc) of a given TimeAction.
         Args:
             time_action: A TimeAction to be processed.
         """
         
-        action_type = time_action.type
+        action_type = time_action.action_type
+        pop_template = time_action.pop_template
         values = time_action.values
 
         if action_type in self.base_actions:
-            self.time_action_map[action_type](values, hour, time)
+            self.time_action_map[action_type](pop_template,values, hour, time)
         else:
-            simplified_action = self.time_action_map[action_type](values, hour, time)
+            simplified_action = self.time_action_map[action_type](pop_template, values, hour, time)
             for action in simplified_action:
                 #print('\n\naction ', action, '\n\n')
                 self.consume_time_action(action, hour, time)
@@ -696,13 +697,13 @@ class EnvironmentGraph():
         for action in action_list:
             self.time_action_map[action.type](action.values)
 
-    def simplify_action_list(self, action_list, hour, time):
+    def simplify_action_list(self, action_list:list[TimeAction], hour, time):
         #simp_list = []
 
-        while not all([x.type in self.base_actions for x in action_list]):
+        while not all([x.action_type in self.base_actions for x in action_list]):
             i  = action_list.pop(0)
-            if i.type not in self.base_actions:
-                sub_list = self.time_action_map[i.type](i.values, hour, time)
+            if i.action_type not in self.base_actions:
+                sub_list = self.time_action_map[i.action_type](i.pop_template, i.values, hour, time)
                 action_list += sub_list
             else:
                 action_list += [i]
@@ -874,13 +875,14 @@ class EnvironmentGraph():
     ## time action functions
 
     ## Pre-condition: assumes move population operation is valid
-    def move_population(self, values, hour, time):
+    def move_population(self, pop_template ,values, cycle_step, simulation_step):
         """ Move population. Base Operation.
             Grabs population according to a population template. and moves between nodes.
             quantity -1 moves every person matching template.
         """
-        
+        start_time = time.perf_counter()
         if values['quantity'] == 0:
+            self.execution_times.append(time.perf_counter() - start_time)
             return
         
         origin_region = values['origin_region']
@@ -899,12 +901,13 @@ class EnvironmentGraph():
         if isinstance(destination_node, str):
             destination_node = destination_region.get_node_by_name(destination_node)
 
-        pop_template = values['population_template']
+        #pop_template = values['population_template']
         quantity = values['quantity']
         if quantity == -1:
             quantity = origin_node.get_population_size(pop_template)
             
         if quantity == 0:
+            self.execution_times.append(time.perf_counter() - start_time)
             return
         
         available_total = origin_node.get_population_size()
@@ -918,6 +921,7 @@ class EnvironmentGraph():
         
         self.log_blob_movement(origin_node, destination_node, grabbed_population)
         destination_node.add_blobs(grabbed_population)
+        self.execution_times.append(time.perf_counter() - start_time)
         
     def set_spawning_nodes(self):
         for node in self.node_list:
@@ -952,30 +956,32 @@ class TimeAction():
         With a graph operator, for base actions; or
         A base TimeAction decomposition, for composite actions.
     """
-    def __init__(self, _type = '', _values = {}):
-        self.type = _type
-        self.values = _values
-        if "population_template" in self.values:
-            if isinstance(self.values["population_template"], dict):
-                print(self.values["population_template"])
-                self.values["population_template"] = population.PopTemplate(self.values["population_template"])
+    def __init__(self, action_type:str, pop_template:population.PopTemplate, values:dict):
+        if type(pop_template) != population.PopTemplate:
+            print("FUCK")
 
-    #def __init__(self, _pop_template, _type, _values):
-    @classmethod
-    def CreateWithTemplate(cls, _pop_template, _type, _values):
-        _values["population_template"] = population.PopTemplate(
-            traceable_properties=_pop_template["traceable_characteristics"],
-            sampled_properties=_pop_template["sampled_characteristics"])
-        return cls(_type, _values)
+        self.action_type:str = action_type
+        self.pop_template:population.PopTemplate = pop_template
+        self.values:dict = values
+        if "population_template" in self.values:
+            self.values.pop("population_template")
+        #    if isinstance(self.values["population_template"], dict):
+        #        print("Adapting op template", self.values["population_template"])
+        #        self.pop_template = population.PopTemplate(self.values["population_template"])
+        #        self.values.pop("population_template")
+                #self.values["population_template"] = population.PopTemplate(self.values["population_template"])
+
 
 
     def __str__(self):
-        return '{{\"type\" : \"{0}\", \"values\"  : {1}}}'.format(self.type,
-                                                               self.values)
+        return '{{\"type\" : \"{0}\", \"pop_template\" : \"{1}\", \"values\"  : {2}}}'.format(self.action_type,
+                                                                                        self.pop_template,
+                                                                                        self.values)
 
     def __repr__(self):
-        return '{{\"type\" : \"{0}\", \"values\"  : {1}}}'.format(self.type,
-                                                               self.values)
+        return '{{\"type\" : \"{0}\", \"pop_template\" : \"{1}\", \"values\"  : {2}}}'.format(self.action_type,
+                                                                                        self.pop_template,
+                                                                                        self.values)
 
 
 
@@ -994,7 +1000,19 @@ class TimeActionPlugin():
     """ 
     def __init__(self):
         self.type_action_pairs = {}
-        self.logger = None
+        
+        # Perfomance
+        self.execution_times = []
+
+    def add_execution_time(self, time):
+        self.execution_times.append(time)
+
+    def print_execution_time_data(self):
+        print("\n",self.__class__.__name__,"Execution Time Data")
+        print("---Number of executions:", len(self.execution_times))
+        print("---Total execution time:", sum(self.execution_times))
+        if len(self.execution_times) > 0:
+            print("---Average execution time:", sum(self.execution_times)/len(self.execution_times))
 
     def set_pair(self, action_type, action_function):
         self.type_action_pairs[action_type] = action_function

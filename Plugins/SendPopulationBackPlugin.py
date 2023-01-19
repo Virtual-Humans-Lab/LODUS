@@ -1,12 +1,13 @@
 import copy
 import sys
+import time
 from types import new_class
 sys.path.append('../')
 
 import environment 
 from population import PopTemplate
 
-class ReturnPopulationPlugin(environment.TimeActionPlugin):
+class SendPopulationBackPlugin(environment.TimeActionPlugin):
 
     def __init__(self, env_graph: environment.EnvironmentGraph):
         '''gather_population
@@ -34,54 +35,13 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
         super().__init__()
 
         self.graph = env_graph
-        self.set_pair('return_population_home', self.return_population_home)
         self.set_pair('send_population_back', self.send_population_back)
 
     def update_time_step(self, cycle_step, simulation_step):
         return #super().update_time_step(cycle_step, simulation_step)
-
-        ## returns everyone home
-    def return_population_home(self, values, hour, time):
-        # print(values)
-        target_region = values['region']
-        if isinstance(target_region, str):
-            target_region = self.graph.get_region_by_name(target_region)
-
-        node = values['node']
-        if isinstance(node, str):
-            node = target_region.get_node_by_name(node)
-        
-        pop_template = PopTemplate()
-        if 'population_template' in values:
-            pop_template = values['population_template']
-
-        sub_list = []
-        
-        for region in self.graph.region_list:
-            for origin_node in region.node_list:
-                if node.id != origin_node.id:
-                    new_action_values = {}
-                    new_action_type = 'move_population'
-                    
-                    new_action_values['origin_region'] = region.name
-
-                    # TODO placeholder 
-                    new_action_values['origin_node'] = origin_node.name
-                    new_action_values['destination_region'] = target_region.name
-
-                    # TODO placeholder 
-                    new_action_values['destination_node'] = node.name
-                    
-                    new_action_values['quantity'] = -1
-                    pop_template.mother_blob_id = target_region.id
-                    new_action_values['population_template'] = pop_template
-
-                    new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
-                    sub_list.append(new_action)
-                    
-        return sub_list
     
-    def send_population_back(self, values, hour, time):
+    def send_population_back(self, pop_template, values, cycle_step, simulation_step):
+        start_time = time.perf_counter()
         #print(values)
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
@@ -93,9 +53,9 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
 
         sub_list = []
         for b in current_node.contained_blobs:
-            pop_template = PopTemplate()
-            if 'population_template' in values:
-                pop_template = values['population_template']
+            #pop_template = PopTemplate()
+            #if 'population_template' in values:
+            #    pop_template = values['population_template']
             
             new_action_values = {}
             new_action_type = 'move_population'
@@ -116,8 +76,10 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
             pop_template.set_mother_blob_id(region_of_origin.id)
             new_action_values['population_template'] = pop_template
             #print(new_action_values)
-            new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+            new_action = environment.TimeAction(action_type = new_action_type, 
+                                                pop_template = pop_template,
+                                                values = new_action_values)
             sub_list.append(new_action)
         
-
+        self.add_execution_time(time.perf_counter() - start_time)
         return sub_list

@@ -484,14 +484,14 @@ class PopTemplate():
     def __str__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
-        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable prop\"  : {3}}}'.format(blob_id,
+        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable_prop\"  : {3}}}'.format(blob_id,
                                                                                              mother_blob_id,
                                                                                              self.sampled_properties, self.traceable_properties)
 
     def __repr__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
-        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable prop\"  : {3}}}'.format(blob_id,
+        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable_prop\"  : {3}}}'.format(blob_id,
                                                                                              mother_blob_id,
                                                                                              self.sampled_properties, self.traceable_properties)
 

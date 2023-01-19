@@ -13,7 +13,7 @@ from util import *
 from data_parse_util import *
 
 from GatherPopulationNewPlugin import GatherPopulationNewPlugin
-from ReturnPopulationPlugin import ReturnPopulationPlugin
+from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 
 def verify_node_validity(node:EnvNode)-> bool:
     """Checks whether all Blobs contained in a EnvNode are valid."""
@@ -72,7 +72,7 @@ class EnvironmentTests(unittest.TestCase):
         self.envA = generate_EnvironmentGraph(environment_path)
 
         pA1 = GatherPopulationNewPlugin(self.envA)
-        pA2 = ReturnPopulationPlugin(self.envA)
+        pA2 = ReturnPopulationHomePlugin(self.envA)
 
         self.envA.LoadPlugin(pA1)
         self.envA.LoadPlugin(pA2)
@@ -81,7 +81,7 @@ class EnvironmentTests(unittest.TestCase):
         self.envB = generate_EnvironmentGraph(environment_path)
         
         pB1 = GatherPopulationNewPlugin(self.envB)
-        pB2 = ReturnPopulationPlugin(self.envB)
+        pB2 = ReturnPopulationHomePlugin(self.envB)
 
         self.envB.LoadPlugin(pB1)
         self.envB.LoadPlugin(pB2)
@@ -1621,7 +1621,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # assert correct values for TimeActions
         # TimeAction_A - "home" EnvNode
-        self.assertTrue(target_action_A.type == "return_population_home",
+        self.assertTrue(target_action_A.action_type == "return_population_home",
         'Case 2: TimeAction type not as expected.')
         self.assertTrue(target_action_A.values['quantity'] == -1,
         'Case 2: TimeAction value not as expected.')
@@ -1630,7 +1630,7 @@ class EnvironmentTests(unittest.TestCase):
         self.assertTrue(target_action_A.values['population_template'].is_empty(),
         'Case 2: TimeAction value not as expected.')
         # TimeAction_B and C - "school" EnvNode
-        self.assertTrue(target_action_B.type == "gather_population",
+        self.assertTrue(target_action_B.action_type == "gather_population",
         'Case 2: TimeAction type not as expected.')
         self.assertTrue(target_action_B.values['quantity'] == 5,
         'Case 2: TimeAction value not as expected.')
@@ -1640,7 +1640,7 @@ class EnvironmentTests(unittest.TestCase):
         'Case 2: TimeAction value not as expected.')
         self.assertTrue(target_action_B.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
-        self.assertTrue(target_action_C.type == "gather_population",
+        self.assertTrue(target_action_C.action_type == "gather_population",
         'Case 2: TimeAction type not as expected.')
         self.assertTrue(target_action_C.values['quantity'] == 5,
         'Case 2: TimeAction value not as expected.')
@@ -1651,7 +1651,7 @@ class EnvironmentTests(unittest.TestCase):
         self.assertTrue(target_action_C.values['population_template'].sampled_properties['occupation'] == 'student',
         'Case 2: TimeAction value not as expected.')
         # TimeAction_D - "work" EnvNode
-        self.assertTrue(target_action_D.type == "gather_population",
+        self.assertTrue(target_action_D.action_type == "gather_population",
         'Case 2: TimeAction type not as expected.')
         self.assertTrue(target_action_D.values['quantity'] == 20,
         'Case 2: TimeAction value not as expected.')

@@ -102,7 +102,7 @@ class AgentBasedPlugin(environment.TimeActionPlugin):
                     request_action_values['destination_node'] = other_node.name
                     request_action_values['quantity'] = request_quantity
                     request_action_values['population_template'] = request_pop_template
-                    request_action = environment.TimeAction(_type = request_action_type, _values = request_action_values)
+                    request_action = environment.TimeAction(action_type = request_action_type, values = request_action_values)
                     
                     send_action_values = {}
                     send_action_type = 'move_population'
@@ -112,7 +112,7 @@ class AgentBasedPlugin(environment.TimeActionPlugin):
                     send_action_values['destination_node'] = node.name
                     send_action_values['quantity'] = offer_quantity
                     send_action_values['population_template'] = offer_pop_template
-                    send_action = environment.TimeAction(_type = send_action_type, _values = send_action_values)
+                    send_action = environment.TimeAction(action_type = send_action_type, values = send_action_values)
                     
                     action_list.append(send_action)
                     action_list.append(request_action)

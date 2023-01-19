@@ -18,6 +18,7 @@ from random_inst import FixedRandom
 
 from GatherPopulationNewPlugin import GatherPopulationNewPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
+from SendPopulationBackPlugin import SendPopulationBackPlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
@@ -44,14 +45,16 @@ FixedRandom()
 Data Loading
 '''
 data_input_file_path = args['f']
-#env_graph = generate_EnvironmentGraph(data_input_file_path)
-env_graph = Generate_EnvironmentGraph(data_input_file_path)
+if ".json" in args['f']: 
+    env_graph = generate_EnvironmentGraph(data_input_file_path)
+else:
+    env_graph = Generate_EnvironmentGraph(data_input_file_path)
 '''
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles = 1
-cycle_length = 24
+cycle_length = 4
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
@@ -64,8 +67,10 @@ gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
 env_graph.LoadPlugin(gather_pop)
 
-return_plugin = ReturnPopulationHomePlugin(env_graph)
-env_graph.LoadPlugin(return_plugin)
+return_pop_home_plugin = ReturnPopulationHomePlugin(env_graph)
+env_graph.LoadPlugin(return_pop_home_plugin)
+send_pop_back_plugin = SendPopulationBackPlugin(env_graph)
+env_graph.LoadPlugin(send_pop_back_plugin)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)
 env_graph.LoadPlugin(return_to_prev)
@@ -82,11 +87,11 @@ env_graph.LoadPlugin(density_plugin)
 #custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
 #env_graph.LoadPlugin(custom_action_plugin)
 
-vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
-env_graph.LoadPlugin(vaccine_plugin)
+#vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
+#env_graph.LoadPlugin(vaccine_plugin)
 
-infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
-env_graph.LoadPlugin(infection_plugin)
+#infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
+#env_graph.LoadPlugin(infection_plugin)
 
 '''
 Logging
@@ -125,12 +130,12 @@ od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
 
 # Age tracking
 od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
-od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
+#od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
 od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
 od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
 
 # Occupation tracking
-od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
+#od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
 od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
 od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
 od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
@@ -143,15 +148,16 @@ od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_pr
 Simulation
 '''
 
-env_graph.LoadLoggerPlugin(pop_count_logger)
-env_graph.LoadLoggerPlugin(od_logger)
-env_graph.LoadLoggerPlugin(blob_count_logger)
-env_graph.LoadLoggerPlugin(traceable_logger)
+#env_graph.LoadLoggerPlugin(pop_count_logger)
+#env_graph.LoadLoggerPlugin(od_logger)
+#env_graph.LoadLoggerPlugin(blob_count_logger)
+#env_graph.LoadLoggerPlugin(traceable_logger)
 #env_graph.LoadLoggerPlugin(vacc_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
-env_graph.start_logging()
+#env_graph.start_logging()
 
+start_time = time.perf_counter()
 for i in range(simulation_steps):
     print(i, end='\r')
         
@@ -167,7 +173,7 @@ for i in range(simulation_steps):
     env_graph.update_time_step(i % cycle_length, i)
 
     # Log current simulation step
-    env_graph.log_simulation_step()
+    #env_graph.log_simulation_step()
     
     #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
     #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
@@ -177,4 +183,34 @@ for i in range(simulation_steps):
 
 #logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
 # od_logger.stop_logging()
-env_graph.stop_logging()
+#env_graph.stop_logging()
+
+end_time = time.perf_counter()
+
+#print("Gather population execution times")
+#print(gather_pop.execution_times)
+gather_pop.print_execution_time_data()
+return_pop_home_plugin.print_execution_time_data()
+send_pop_back_plugin.print_execution_time_data()
+return_to_prev.print_execution_time_data()
+
+
+print("\nMove Population Execution Time Data")
+print("---Number of executions:", len(env_graph.execution_times))
+print("---Total execution time:", sum(env_graph.execution_times))
+print("---Average execution time:", sum(env_graph.execution_times)/len(env_graph.execution_times))
+
+
+print("Total Simulation time")
+print(end_time - start_time)
+print("Average Cycle time")
+print((end_time - start_time)/cycles)
+
+print(env_graph.time_action_map.keys())
+
+#test_file = open("demofile2.txt", "a")
+#test_file.write(str(env_graph.time_action_map['move_population']))
+#test_file.close()
+#test_file = open("demofile21.txt", "a")
+#test_file.write(str(env_graph.time_action_map['gather_population']))
+#test_file.close()

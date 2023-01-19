@@ -12,7 +12,7 @@ import population
 from random_inst import FixedRandom
 
 from GatherPopulationNewPlugin import GatherPopulationNewPlugin
-from ReturnPopulationPlugin import ReturnPopulationPlugin
+from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
@@ -63,7 +63,7 @@ gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
 env_graph.LoadPlugin(gather_pop)
 
-return_plugin = ReturnPopulationPlugin(env_graph)
+return_plugin = ReturnPopulationHomePlugin(env_graph)
 env_graph.LoadPlugin(return_plugin)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)

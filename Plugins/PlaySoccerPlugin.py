@@ -158,7 +158,7 @@ class PlaySoccerPlugin(environment.TimeActionPlugin):
 
                 new_action_values['population_template'] = temp
 
-                new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
+                new_action = environment.TimeAction(action_type = new_action_type, values = new_action_values)
                 sub_list.append(new_action)
                 list_count +=1 
 

@@ -88,11 +88,13 @@ def Generate_EnvironmentGraph(env_input):
             # Add routines
             if poi_unique_name in rot_json["routines"]:
                 for rt in rot_json["routines"][poi_unique_name]:
-                    action = TimeAction.CreateWithTemplate(_type=rt["action"]['type'], 
-                                        _values=rt["action"]['values'], 
-                                        _pop_template=rt["action"]['population_template'])
+                    pt = population.PopTemplate(
+                        sampled_properties=rt["action"]['population_template']["sampled_characteristics"],
+                        traceable_properties=rt["action"]['population_template']["traceable_characteristics"])
+                    action = TimeAction(action_type=rt["action"]['type'], 
+                                        values=rt["action"]['values'], 
+                                        pop_template=pt)
                     node_template.add_action_to_template(rt["cycle_step"], action)
-
 
             region_template.add_template_node(poi_dict["name"], node_template)
         
@@ -147,7 +149,7 @@ def generate_EnvironmentGraph(env_input):
             
             for node_k, node_value in region_description['nodes'].items():
                 node_template = EnvNodeTemplate()
-
+                node_template.long_lat = node_value["characteristics"]["long_lat_position"]
                 for key, characteristic in node_value.items():
                     # Add characteristics to the EnvNode
                     if key == 'characteristics':
@@ -165,14 +167,20 @@ def generate_EnvironmentGraph(env_input):
                             node_actions = []
                             # Each TimeAction description in the actions list
                             for _a in actions_list:
-                                action = TimeAction(_a['type'], _a['values'])
+                                pop_template = PopTemplate()
+                                if 'population_template' in _a['values']:
+                                    pop_template = PopTemplate(_a['values']['population_template'])
+                                action = TimeAction(action_type=_a['type'], 
+                                                    pop_template=pop_template,
+                                                    values=_a['values'])
                                 node_actions.append(action)
                             node_template.add_routine_template(frame_key, node_actions)
 
                 region_template.add_template_node(node_k, node_template)
             
-            env.add_region(region_description['world_position'], region_template, region_description['name'])
+            env.add_region(region_description['long_lat_position'], region_template, region_description['name'])
             env.region_list[-1].long_lat = region_description['long_lat_position']
+
         env.set_spawning_nodes()
         return env
 
