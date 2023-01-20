@@ -1,0 +1,31 @@
+PS D:\GameProjects\LODUS> python .\TOMACS_simulation.py --n ExampleRoutine --f Example
+generating EnvGraph with new parsing. File: Example
+23999
+ GatherPopulationNewPlugin Execution Time Data
+---Number of executions: 24000
+---Total execution time: 7.9596810995280975
+---Average execution time: 0.00033165337914700405
+---Total subactions count: 51296
+---Average subaction count: 2.1373333333333333
+
+ ReturnPopulationHomePlugin Execution Time Data
+---Number of executions: 0
+---Total execution time: 0
+
+ SendPopulationBackPlugin Execution Time Data
+---Number of executions: 12000
+---Total execution time: 0.1045887006475823
+---Average execution time: 8.715725053965191e-06
+
+ ReturnToPreviousPlugin Execution Time Data
+---Total execution time: 0
+
+Move Population Execution Time Data
+---Number of executions: 109470
+---Total execution time: 23.355958003361593
+---Average execution time: 0.00021335487351202697
+Total Simulation time
+37.573672800004715
+Average Cycle time
+0.03757367280000472
+dict_keys(['move_population', 'gather_population', 'return_population_home', 'send_population_back', 'return_to_previous'])

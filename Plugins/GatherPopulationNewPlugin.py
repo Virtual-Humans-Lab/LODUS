@@ -53,10 +53,13 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         
         self.set_pair('gather_population', self.gather_population)
         # Distances between EnvNodes
+        self.distance_to_self = 0.01
         self.distances_map = {}
         self.weights_map = {}
 
         self.sublist_count = []
+
+        self.percentage_per_search = 0.20
 
 
     def update_time_step(self, cycle_step, simulation_step):
@@ -126,27 +129,16 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         
         distance_list:list[tuple[environment.EnvNode,float]] = []
 
+        # Gets distances to other EnvNodes
         for other in self.graph.node_list:
-            distance_to_other = 0.01
+            distance_to_other = self.distance_to_self
             
             if other.get_unique_name() != unique_name:
                 distance_to_other = self.get_nodes_distance(target_node, other)
 
             distance_list.append((other,distance_to_other))
 
-        #for region in self.graph.region_list:
-        #    distance_to_other = 0.01
-        #    
-        #    if region.name != target_region.name:
-        #        distance_to_other = self.get_distance(region.name, 
-        #                                                target_region.name, 
-        #                                                region.position, 
-        #                                                target_region.position)#
-        #
-        #    for node_aux in region.node_list:
-        #        distance_list.append((node_aux, distance_to_other))
-        #print("distances")
-        #print([ d for (n, d) in distance_list])
+        # Weights are according to the inverse of the distance
         total_dist = sum([ (1/d) for (n, d) in distance_list])
         weight_list = [(n,  ( (1/d) / total_dist)) for (n, d) in distance_list]
 
@@ -182,24 +174,47 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
         if 'different_node_name' in values and bool(values['different_node_name']):
             weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != target_node.name)]
         
-        # Adds available population and remove entries where available = 0
-        weight_and_available = [(n, w, n.get_population_size(pop_template)) for (n,w) in weight_list]
-        weight_and_available = [(n, w, a) for (n,w, a) in weight_and_available if a > 0]
+        # Shuffles the remaining EnvNodes
+        random.shuffle(weight_list)
+
+        # Searches the remaining EnvNodes. 
+        # The indexes searched are incremented based on self.percentage_per_search
+        # Search stops if the population_available is grater then requested in values
+        # Or if the last node is reached (not enough population)
+        weight_and_available:list[tuple[environment.EnvNode, float, int]] = []
+        population_available = 0
+        _start_index = 0
+        _max_index = len(weight_list)
+        _index_increment = math.ceil(_max_index * self.percentage_per_search)
+
+        while population_available < quantity:
+            # Searches a segment of the EnvNodes
+            for wl in range(_start_index, min(_start_index + _index_increment, _max_index)):
+                # Get the available population in the EnvNode, only adds to list if greater than 0
+                _pop_av_node = weight_list[wl][0].get_population_size(pop_template)
+                if _pop_av_node > 0:
+                    weight_and_available.append((weight_list[wl][0], weight_list[wl][1], _pop_av_node))
+                    population_available += _pop_av_node
+
+            # Increases the starting index for the next iteration. Breaks if all EnvNodes were searched    
+            _start_index += _index_increment
+            if _start_index >= _max_index:
+                break
 
         # Gets total population available and adjusts quantity if necessary
-        total_pop_available = sum([a for (n, w, a) in weight_and_available])
-        if total_pop_available < quantity:
-            quantity = total_pop_available
+        if population_available < quantity:
+            quantity = population_available
         if quantity == 0: 
             return sub_list
 
-        #available_pop = [a for (n, w, a) in weight_and_available if a > 0]
-        #weight_list = [(n, w) for (n, w, a) in weight_and_available]
-
+        # Distributes the weights and available population (limit)
+        # Gets a list of integers (quantities) of population to be moved per EnvNode
         int_weights = util.distribute_ints_from_weights_with_limit(quantity, 
             [w for (n, w, a) in weight_and_available],
             [a for (n, w, a) in weight_and_available])
         
+        # Creates node_targets with a reference to the EnvNode, proportial weight, and int_weight
+        # Only includes EnvNodes where their int_weight is greater than 0
         total_weight = sum([w for (n, w, a) in weight_and_available])
         node_targets = [(weight_and_available[i][0], 
                         weight_and_available[i][1] / total_weight,

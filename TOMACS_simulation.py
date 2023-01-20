@@ -54,7 +54,7 @@ Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles = 1
-cycle_length = 4
+cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 

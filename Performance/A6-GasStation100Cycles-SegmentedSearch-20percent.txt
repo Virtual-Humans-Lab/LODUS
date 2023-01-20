@@ -1,0 +1,32 @@
+PS D:\GameProjects\LODUS> python .\TOMACS_simulation.py --n GasStation13 --f .\DataInput\13_GasStation.json
+2399
+ GatherPopulationNewPlugin Execution Time Data
+---Number of executions: 36200
+---Total execution time: 7.949127899933956
+---Average execution time: 0.00021958916850646287
+---Total subactions count: 89598
+---Average subaction count: 2.475082872928177
+
+ ReturnPopulationHomePlugin Execution Time Data
+---Number of executions: 0
+---Total execution time: 0
+
+ SendPopulationBackPlugin Execution Time Data
+---Number of executions: 1300
+---Total execution time: 0.06698129962023813
+---Average execution time: 5.152407663095241e-05
+
+ ReturnToPreviousPlugin Execution Time Data
+---Number of executions: 28600
+---Total execution time: 61.113286198989954
+---Average execution time: 0.0021368281887758724
+
+Move Population Execution Time Data
+---Number of executions: 106424
+---Total execution time: 65.63882160004869
+---Average execution time: 0.0006167670976476047
+Total Simulation time
+141.37254419999954
+Average Cycle time
+1.4137254419999954
+dict_keys(['move_population', 'gather_population', 'return_population_home', 'send_population_back', 'return_to_previous'])
