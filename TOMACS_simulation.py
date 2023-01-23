@@ -16,6 +16,7 @@ import population
 
 from random_inst import FixedRandom
 
+from MovePopulationPlugin import MovePopulationPlugin
 from GatherPopulationNewPlugin import GatherPopulationNewPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from SendPopulationBackPlugin import SendPopulationBackPlugin
@@ -53,15 +54,18 @@ else:
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 1
+cycles = 100
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
-
+print("node count", len(env_graph.node_list))
 '''
 Load Plugins Examples
 '''
+
+move_population_plugin = MovePopulationPlugin(env_graph)
+env_graph.LoadPlugin(move_population_plugin)
 
 gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
@@ -183,9 +187,10 @@ for i in range(simulation_steps):
 
 #logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
 # od_logger.stop_logging()
-#env_graph.stop_logging()
 
 end_time = time.perf_counter()
+#env_graph.stop_logging()
+
 
 #print("Gather population execution times")
 #print(gather_pop.execution_times)
@@ -193,13 +198,7 @@ gather_pop.print_execution_time_data()
 return_pop_home_plugin.print_execution_time_data()
 send_pop_back_plugin.print_execution_time_data()
 return_to_prev.print_execution_time_data()
-
-
-print("\nMove Population Execution Time Data")
-print("---Number of executions:", len(env_graph.execution_times))
-print("---Total execution time:", sum(env_graph.execution_times))
-print("---Average execution time:", sum(env_graph.execution_times)/len(env_graph.execution_times))
-
+move_population_plugin.print_execution_time_data()
 
 print("Total Simulation time")
 print(end_time - start_time)

@@ -501,8 +501,10 @@ class EnvironmentGraph():
         self.edge_table = [[]]
 
         self.routine_cycle_length = 24
-        self.time_action_map:dict[str, callable] = { 'move_population' : self.move_population }
-        self.base_actions = {'move_population'}
+        self.time_action_map:dict[str, callable] = { }
+        self.base_actions = set()
+        # self.time_action_map:dict[str, callable] = { 'move_population' : self.move_population }
+        # self.base_actions = {'move_population'}
         
         self.loaded_plugins: list[TimeActionPlugin] = []
         self.loaded_logger_plugins: list[logger_plugin.LoggerPlugin] = []
@@ -526,7 +528,6 @@ class EnvironmentGraph():
         self.od_matrix_logger = {}
         self.characteristic_change_logger = {}
         
-        self.execution_times=[]
         # Events test
         population.Blob.events.on_traceable_property_changed += self.log_traceable_change
       
@@ -874,54 +875,7 @@ class EnvironmentGraph():
 
     ## time action functions
 
-    ## Pre-condition: assumes move population operation is valid
-    def move_population(self, pop_template ,values, cycle_step, simulation_step):
-        """ Move population. Base Operation.
-            Grabs population according to a population template. and moves between nodes.
-            quantity -1 moves every person matching template.
-        """
-        start_time = time.perf_counter()
-        if values['quantity'] == 0:
-            self.execution_times.append(time.perf_counter() - start_time)
-            return
-        
-        origin_region = values['origin_region']
-        if isinstance(origin_region, str):
-            origin_region = self.get_region_by_name(origin_region)
-
-        origin_node = values['origin_node']
-        if isinstance(origin_node, str):
-            origin_node = origin_region.get_node_by_name(origin_node)
-
-        destination_region = values['destination_region']
-        if isinstance(destination_region, str):
-            destination_region = self.get_region_by_name(destination_region)
-
-        destination_node = values['destination_node']
-        if isinstance(destination_node, str):
-            destination_node = destination_region.get_node_by_name(destination_node)
-
-        #pop_template = values['population_template']
-        quantity = values['quantity']
-        if quantity == -1:
-            quantity = origin_node.get_population_size(pop_template)
-            
-        if quantity == 0:
-            self.execution_times.append(time.perf_counter() - start_time)
-            return
-        
-        available_total = origin_node.get_population_size()
-        available = origin_node.get_population_size(pop_template)
-        
-        grabbed_population = origin_node.grab_population(quantity, pop_template)     
-        for grab_pop in grabbed_population:
-            #if grab_pop.previous_node != origin_node.id:
-            #    grab_pop.previous_node = origin_node.id
-            grab_pop.frame_origin_node = origin_node.id
-        
-        self.log_blob_movement(origin_node, destination_node, grabbed_population)
-        destination_node.add_blobs(grabbed_population)
-        self.execution_times.append(time.perf_counter() - start_time)
+    
         
     def set_spawning_nodes(self):
         for node in self.node_list:

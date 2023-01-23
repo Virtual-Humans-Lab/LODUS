@@ -12,6 +12,7 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
 
         self.graph = env_graph
         self.set_pair('return_to_previous', self.return_to_previous)
+        self.pop_prev = self.graph.get_population_size()
 
     def update_time_step(self, cycle_step, simulation_step):
         return #super().update_time_step(cycle_step, simulation_step)
@@ -20,8 +21,6 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
         start_time = time.perf_counter()
         #assert('node_id' in values or ('region' in values and 'node' in values), 
         #       "No node_id or region/node pair defined in Return To Previous TimeAction")
-        pop_prev = self.graph.get_population_size()
-        #print(values)
         
         # Identifies the target node
         if 'node_id' in values:
@@ -32,11 +31,18 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
             from_node = from_region.get_node_by_name(values['node'])
             node_id = from_node.id
         
+        
+        # print(pop_template)
+        # print(values)
+        # exit(0)
+
+        
         #pop_template = PopTemplate()
         #if 'population_template' in values:
         #    pop_template = values['population_template']
         
         if 'blob_id' in values: 
+            print("Blob id")
             blob_id = values['blob_id']
             target_blob = None
             for x in from_node.contained_blobs:
@@ -51,10 +57,10 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
             to_node.add_blob(grabbed)
             from_node.remove_blob(grabbed)
         else:
-            pop_md1 = self.graph.get_population_size()
+            #pop_md1 = self.graph.get_population_size()
             
             grabbed = from_node.grab_population(values['quantity'], pop_template)
-            grabbed_size = sum([g1.get_population_size() for g1 in grabbed])
+            #grabbed_size = sum([g1.get_population_size() for g1 in grabbed])
             #print(grabbed_size)
             for g in grabbed:
                 to_node = self.graph.get_node_by_id(g.previous_node)
@@ -66,9 +72,9 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
         #from_node = self.graph.get_node_by_id(node_id)
         
         
-        pop_aft = self.graph.get_population_size()
-        if pop_prev != pop_aft:
-            print ("WTF", pop_prev, pop_md1, pop_aft, grabbed_size, 
-                   from_node.get_unique_name(),to_node.get_unique_name(),values,'\n')
+        #pop_aft = self.graph.get_population_size()
+        #if self.pop_prev != pop_aft:
+        #    print ("WTF", self.pop_prev, pop_md1, pop_aft, grabbed_size, 
+        #           from_node.get_unique_name(),to_node.get_unique_name(),values,'\n')
         self.add_execution_time(time.perf_counter() - start_time)
         return []

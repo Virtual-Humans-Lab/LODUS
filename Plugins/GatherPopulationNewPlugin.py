@@ -59,7 +59,7 @@ class GatherPopulationNewPlugin(environment.TimeActionPlugin):
 
         self.sublist_count = []
 
-        self.percentage_per_search = 0.20
+        self.percentage_per_search = 0.05
 
 
     def update_time_step(self, cycle_step, simulation_step):
