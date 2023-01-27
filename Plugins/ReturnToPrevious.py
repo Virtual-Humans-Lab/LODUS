@@ -6,21 +6,40 @@ import environment
 from population import PopTemplate
 
 class ReturnToPreviousPlugin(environment.TimeActionPlugin):
+    '''return_to_previous
+            
+            Returns a population to the previous EnvNode they were occupying
+            Gathers population from nearby nodes into a requesting node. 
+            Quantity of population moved depends on distance and available population.
+
+            Params:
+                node_id: destination node ID
+                    OR
+                    region: destination region.
+                    node: destination node.
+                quantity: population size requested.
+                only_locals (optional): will only consider populations within the same region.
+                different_node_name (optional): will only consider population in EnvNodes with a different name
+                    E.g., this allows a pharmacy to requests population from anywhere but other pharmacies. 
+                population_template: PopTemplate to be matched by the operation.
+
+            
+    '''
 
     def __init__(self, env_graph: environment.EnvironmentGraph):
         super().__init__()
 
         self.graph = env_graph
         self.set_pair('return_to_previous', self.return_to_previous)
-        self.pop_prev = self.graph.get_population_size()
+        #self.pop_prev = self.graph.get_population_size()
 
     def update_time_step(self, cycle_step, simulation_step):
         return #super().update_time_step(cycle_step, simulation_step)
 
     def return_to_previous(self, pop_template:PopTemplate, values, cycle_step, simulation_step):
         start_time = time.perf_counter()
-        #assert('node_id' in values or ('region' in values and 'node' in values), 
-        #       "No node_id or region/node pair defined in Return To Previous TimeAction")
+        assert('node_id' in values or ('region' in values and 'node' in values), 
+               "No node_id or region/node pair defined in Return To Previous TimeAction")
         
         # Identifies the target node
         if 'node_id' in values:
@@ -30,16 +49,6 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
             from_region = self.graph.get_region_by_name(values['region'])
             from_node = from_region.get_node_by_name(values['node'])
             node_id = from_node.id
-        
-        
-        # print(pop_template)
-        # print(values)
-        # exit(0)
-
-        
-        #pop_template = PopTemplate()
-        #if 'population_template' in values:
-        #    pop_template = values['population_template']
         
         if 'blob_id' in values: 
             print("Blob id")

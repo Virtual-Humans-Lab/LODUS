@@ -17,7 +17,7 @@ import population
 from random_inst import FixedRandom
 
 from MovePopulationPlugin import MovePopulationPlugin
-from GatherPopulationNewPlugin import GatherPopulationNewPlugin
+from GatherPopulationPlugin import GatherPopulationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from SendPopulationBackPlugin import SendPopulationBackPlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
@@ -67,7 +67,7 @@ Load Plugins Examples
 move_population_plugin = MovePopulationPlugin(env_graph)
 env_graph.LoadPlugin(move_population_plugin)
 
-gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
+gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
 env_graph.LoadPlugin(gather_pop)
 
