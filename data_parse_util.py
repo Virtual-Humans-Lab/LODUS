@@ -49,14 +49,20 @@ def Generate_EnvironmentGraph(env_input):
     env.original_block_template = block_template
 
     # Process repeating global actions
-    if 'repeating_global_actions' in rot_json:
-        repeating_global_actions = rot_json['repeating_global_actions']
+    if 'global_routine' in rot_json:
+        repeating_global_actions = rot_json['global_routine']
 
         for rga in repeating_global_actions:
             if 'cycle_length' in rga:
                 env.set_repeating_action(int(rga['cycle_length']), TimeAction(rga['type'], rga['values']))
             elif 'frames' in rga:
                 env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
+            elif 'cycle_step' in rga:
+                env.set_repeating_action(int(rga['cycle_step']), 
+                                         TimeAction(action_type=rga['action']['type'], 
+                                                    pop_template=rga['action']['population_template'],
+                                                    values=rga['action']['values']))
+
 
     # Creating Regions
     for reg_dict in env_json['regions']:
