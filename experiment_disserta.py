@@ -17,7 +17,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from LevyWalkPlugin import LevyWalkPlugin
+from LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
 from Loggers.population_count_logger import PopulationCountLogger
 from pathlib import Path
@@ -64,7 +64,7 @@ simulation_steps = days * day_duration
 Load Plugins Examples
 '''
 
-walk = LevyWalkPlugin(env_graph)
+walk = LevyWalkLegacyPlugin(env_graph)
 walk.distribution_scale = int(args['s'])
 walk.levy_probability = float(args['l'])
 env_graph.LoadPlugin(walk)

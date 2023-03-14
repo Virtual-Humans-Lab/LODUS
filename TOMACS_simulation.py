@@ -21,6 +21,7 @@ from GatherPopulationPlugin import GatherPopulationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from SendPopulationBackPlugin import SendPopulationBackPlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
+from LevyWalkPlugin import LevyWalkPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
 from NewInfectionPlugin import NewInfectionPlugin
@@ -54,7 +55,7 @@ else:
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 100
+cycles = 1
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -78,6 +79,9 @@ env_graph.LoadPlugin(send_pop_back_plugin)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)
 env_graph.LoadPlugin(return_to_prev)
+
+levy_walk = LevyWalkPlugin(env_graph)
+env_graph.LoadPlugin(levy_walk)
 
 #social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 #social_distance.day_cycle = day_duration
@@ -194,6 +198,7 @@ end_time = time.perf_counter()
 
 #print("Gather population execution times")
 #print(gather_pop.execution_times)
+levy_walk.print_execution_time_data()
 gather_pop.print_execution_time_data()
 return_pop_home_plugin.print_execution_time_data()
 send_pop_back_plugin.print_execution_time_data()

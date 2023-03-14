@@ -18,7 +18,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from LevyWalkPlugin import LevyWalkPlugin
+from LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
 from Loggers.population_count_logger import PopulationCountLogger
 from pathlib import Path
@@ -310,13 +310,13 @@ elif args['m'] == 2:
     social_distance.iso_mode = 'regular'
     env_graph.LoadPlugin(social_distance)
 elif args['m'] == 3:
-    walk = LevyWalkPlugin(env_graph)
+    walk = LevyWalkLegacyPlugin(env_graph)
     walk.distribution_scale = 100
     walk.distribution_location = 0
     walk.mobility_scale = 100
     env_graph.LoadPlugin(walk)
 elif args['m'] == 4:
-    walk = LevyWalkPlugin(env_graph)
+    walk = LevyWalkLegacyPlugin(env_graph)
     walk.distribution_scale = 50
     walk.distribution_location = 0
     walk.mobility_scale = 10

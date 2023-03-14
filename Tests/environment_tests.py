@@ -12,7 +12,7 @@ from population_tests import verify_blob_validity
 from util import *
 from data_parse_util import *
 
-from GatherPopulationNewPlugin import GatherPopulationNewPlugin
+from GatherPopulationPlugin import GatherPopulationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 
 def verify_node_validity(node:EnvNode)-> bool:
@@ -71,7 +71,7 @@ class EnvironmentTests(unittest.TestCase):
         environment_path = '../DataInput/Tests/environment_tests_dummy_input_A.json'
         self.envA = generate_EnvironmentGraph(environment_path)
 
-        pA1 = GatherPopulationNewPlugin(self.envA)
+        pA1 = GatherPopulationPlugin(self.envA)
         pA2 = ReturnPopulationHomePlugin(self.envA)
 
         self.envA.LoadPlugin(pA1)
@@ -80,7 +80,7 @@ class EnvironmentTests(unittest.TestCase):
         environment_path = '../DataInput/Tests/environment_tests_dummy_input_B.json'
         self.envB = generate_EnvironmentGraph(environment_path)
         
-        pB1 = GatherPopulationNewPlugin(self.envB)
+        pB1 = GatherPopulationPlugin(self.envB)
         pB2 = ReturnPopulationHomePlugin(self.envB)
 
         self.envB.LoadPlugin(pB1)

@@ -19,7 +19,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from LevyWalkPlugin import LevyWalkPlugin
+from LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
 
 from pathlib import Path
@@ -62,7 +62,7 @@ env_graph.LoadPlugin(plug)
 
 
 
-walk = LevyWalkPlugin(env_graph)
+walk = LevyWalkLegacyPlugin(env_graph)
 walk.distribution_scale = int(args['s'])
 walk.levy_probability = float(args['l'])
 env_graph.LoadPlugin(walk)
