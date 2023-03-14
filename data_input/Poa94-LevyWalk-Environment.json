@@ -1,0 +1,5752 @@
+{
+  "regions": [
+    {
+      "name": "Aberta dos Morros",
+      "lng_lat": [
+        -51.1975768802765,
+        -30.1564777842068
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19859676508913,
+            -30.11396764012036
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.19164144496366,
+            -30.14961221525361
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.152585933206346,
+            -30.202001977819926
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19900229148991,
+            -30.202475162257983
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18414902090434,
+            -30.203615005460186
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19844602666146,
+            -30.11699047096384
+          ]
+        }
+      ],
+      "neighbors": [
+        "Campo Novo",
+        "Hípica",
+        "Espírito Santo",
+        "Guarujá",
+        "Serraria",
+        "Ponta Grossa"
+      ]
+    },
+    {
+      "name": "Agronomia",
+      "lng_lat": [
+        -51.1251443431221,
+        -30.0765791683866
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.13848656741376,
+            -30.054670754291518
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.103472560796455,
+            -30.080194786573664
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.1161376989377,
+            -30.080639478046564
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.12285611364528,
+            -30.117966050576108
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.14420798643073,
+            -30.084379502255953
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.161222827584176,
+            -30.036097816832868
+          ]
+        }
+      ],
+      "neighbors": [
+        "Morro Santana",
+        "Jardim Carvalho",
+        "Partenon",
+        "São José",
+        "Cascata",
+        "Lomba do Pinheiro"
+      ]
+    },
+    {
+      "name": "Anchieta",
+      "lng_lat": [
+        -51.1710672994942,
+        -29.9876687647294
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.190634082315064,
+            -30.022548820116604
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.13069816067899,
+            -30.001717423422175
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.12567431443838,
+            -29.947625778655624
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.16507427675319,
+            -30.01767754712953
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.209900674550006,
+            -30.025049374917902
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.14341234954625,
+            -29.946511791844515
+          ]
+        }
+      ],
+      "neighbors": [
+        "Humaitá",
+        "São João",
+        "Santa Maria Goretti",
+        "Jardim São Pedro",
+        "Jardim Floresta",
+        "Sarandi"
+      ]
+    },
+    {
+      "name": "Arquipélago",
+      "lng_lat": [
+        -51.2150073288261,
+        -29.9953102852364
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19708861412142,
+            -29.95795899621141
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.26087608753314,
+            -30.026757577416312
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17640413565983,
+            -30.014386498777817
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.230791620825045,
+            -29.948877302017596
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.20163867909874,
+            -30.042476151791735
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19704532500992,
+            -29.955540152657473
+          ]
+        }
+      ],
+      "neighbors": [
+        "Centro Histórico",
+        "Navegantes"
+      ]
+    },
+    {
+      "name": "Auxiliadora",
+      "lng_lat": [
+        -51.1914387184847,
+        -30.0217230293811
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.172854708137024,
+            -29.98677348280194
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.15776889743427,
+            -30.046838532310534
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.18244958265279,
+            -30.064378868218196
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19980223334414,
+            -30.005700807136687
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18613671533376,
+            -29.991335255658882
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.22550536389627,
+            -30.011582914174458
+          ]
+        }
+      ],
+      "neighbors": [
+        "São João",
+        "Higienópolis",
+        "Boa Vista",
+        "Mont'Serrat",
+        "Moinhos de Vento",
+        "Floresta",
+        "São Geraldo"
+      ]
+    },
+    {
+      "name": "Azenha",
+      "lng_lat": [
+        -51.2147436812232,
+        -30.0510199525848
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22949855638217,
+            -30.040552722817438
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.203827376925,
+            -30.068060244505336
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2094939185471,
+            -30.032423962146357
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.16928083135749,
+            -30.07932049481945
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.24256864965787,
+            -30.092221371665016
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19205618193746,
+            -30.094288765350296
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.1819939771727,
+            -30.034898231091194
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.212253707641516,
+            -30.00610066953866
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Farroupilha",
+        "Santana",
+        "Santo Antônio",
+        "Menino Deus",
+        "Medianeira"
+      ]
+    },
+    {
+      "name": "Bela Vista",
+      "lng_lat": [
+        -51.1908984265664,
+        -30.0337919612383
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.1970357881285,
+            -30.004114872965996
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.18119741208667,
+            -30.043017584394835
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.22349154677174,
+            -30.02505112991623
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.210763148008624,
+            -30.067874141044054
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.191489843848856,
+            -29.984973536267404
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.148202547006434,
+            -30.02503351486961
+          ]
+        }
+      ],
+      "neighbors": [
+        "Mont'Serrat",
+        "Rio Branco",
+        "Petrópolis",
+        "Boa Vista",
+        "Três Figueiras",
+        "Santa Cecília",
+        "Moinhos de Vento"
+      ]
+    },
+    {
+      "name": "Belém Novo",
+      "lng_lat": [
+        -51.1761378741623,
+        -30.2086566357334
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.17475563117548,
+            -30.18586653973319
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.168859529036645,
+            -30.172870677636933
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.222012184656826,
+            -30.246010516717373
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.155946838391884,
+            -30.249096294865556
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.1700503360899,
+            -30.183235766728927
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.127338387398574,
+            -30.245306663397283
+          ]
+        }
+      ],
+      "neighbors": [
+        "Ponta Grossa",
+        "Chapéu do Sol",
+        "Lageado",
+        "Boa Vista do Sul"
+      ]
+    },
+    {
+      "name": "Belém Velho",
+      "lng_lat": [
+        -51.1770457873857,
+        -30.1152236129312
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.18943594414483,
+            -30.1625468429374
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.14251441275739,
+            -30.119363160630026
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17772063473778,
+            -30.164255088273617
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.18685428100724,
+            -30.117623161386916
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15387447497264,
+            -30.088798217978805
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.14375584918222,
+            -30.07586174511646
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cascata",
+        "Lomba do Pinheiro",
+        "Restinga",
+        "Vila Nova"
+      ]
+    },
+    {
+      "name": "Boa Vista",
+      "lng_lat": [
+        -51.1745726986059,
+        -30.0225461039166
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19117452740903,
+            -29.9779136860891
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.14917709166901,
+            -30.060686309133313
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.210707385395686,
+            -29.984266761518317
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.22117851944555,
+            -29.99829318163431
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18627276851291,
+            -30.001219672454464
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.181583588788605,
+            -30.01852792642516
+          ]
+        }
+      ],
+      "neighbors": [
+        "Higienópolis",
+        "Passo D'Areia",
+        "Auxiliadora",
+        "Mont'Serrat;Bela Vista",
+        "Petrópolis",
+        "Três Figueiras",
+        "Chácara das Pedras",
+        "Jardim Europa"
+      ]
+    },
+    {
+      "name": "Boa Vista do Sul",
+      "lng_lat": [
+        -51.1285309151451,
+        -30.2139803381475
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.12170716821382,
+            -30.179560233539508
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.089011706778194,
+            -30.25984209739201
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.116513002581094,
+            -30.174120335729718
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.15552989664088,
+            -30.22331435484558
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.164600107000105,
+            -30.256343360035405
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.08452721746638,
+            -30.224514354593126
+          ]
+        }
+      ],
+      "neighbors": [
+        "Belém Novo",
+        "Lageado",
+        "São Caetano",
+        "Lami"
+      ]
+    },
+    {
+      "name": "Bom Fim",
+      "lng_lat": [
+        -51.2104807594223,
+        -30.0330589939714
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22673177817449,
+            -30.06418327431002
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17351801441449,
+            -30.075385568036967
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.242231252125045,
+            -30.010068837853552
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.22670288248047,
+            -30.081230177220313
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.16168557098006,
+            -30.07774628836847
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.17902190404662,
+            -30.049694669127078
+          ]
+        }
+      ],
+      "neighbors": [
+        "Independência",
+        "Rio Branco",
+        "Santa Cecília",
+        "Santana",
+        "Farroupilha",
+        "Centro Histórico",
+        "Moinhos de Vento"
+      ]
+    },
+    {
+      "name": "Bom Jesus",
+      "lng_lat": [
+        -51.1577957990433,
+        -30.0449931482782
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.186762160000114,
+            -30.08049787478677
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17155819529329,
+            -30.030672457172837
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.14828686483564,
+            -30.01553123531962
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.13051806077979,
+            -30.01771605868988
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.12650637009004,
+            -30.014644987788987
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.20426621262253,
+            -30.088476963804542
+          ]
+        }
+      ],
+      "neighbors": [
+        "Três Figueiras",
+        "Chácara das Pedras",
+        "Vila Jardim",
+        "Jardim Sabará",
+        "Jardim Carvalho",
+        "Jardim do Salso",
+        "Petrópolis"
+      ]
+    },
+    {
+      "name": "Camaquã",
+      "lng_lat": [
+        -51.2376726676268,
+        -30.1043845491444
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.25227830084585,
+            -30.12765214993247
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.22493864812022,
+            -30.134490966734027
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.190148442623844,
+            -30.08717317336076
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.26438828571552,
+            -30.13880298742722
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.25832746964484,
+            -30.12889312994893
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19667497075086,
+            -30.139893066046618
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cristal",
+        "Cavalhada",
+        "Tristeza",
+        "Sétimo Céu"
+      ]
+    },
+    {
+      "name": "Campo Novo",
+      "lng_lat": [
+        -51.1950480912986,
+        -30.1379242117638
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.20702842242182,
+            -30.146160239268124
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23503417853717,
+            -30.117569268792405
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.23745540796464,
+            -30.17310270230481
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.20028995788798,
+            -30.18094839413155
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.24244461065416,
+            -30.143620801148675
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.161607985002455,
+            -30.170938254025177
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Nova",
+        "Cavalhada",
+        "Hípica",
+        "Aberta dos Morros",
+        "Espírito Santo",
+        "Ipanema"
+      ]
+    },
+    {
+      "name": "Cascata",
+      "lng_lat": [
+        -51.1806328801207,
+        -30.0915442976803
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.21767654024964,
+            -30.071980837132493
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17845789892636,
+            -30.053907868859802
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.21857428367524,
+            -30.125237985555625
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.21131238792054,
+            -30.071364787135927
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15917657562994,
+            -30.115467649050018
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.200484937997516,
+            -30.06780163255961
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cel. Aparício Borges",
+        "São José",
+        "Agronomia",
+        "Lomba do Pinheiro",
+        "Belém Velho",
+        "Vila Nova",
+        "Teresópolis",
+        "Glória"
+      ]
+    },
+    {
+      "name": "Cavalhada",
+      "lng_lat": [
+        -51.2286910107397,
+        -30.1012402995036
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.20877682627495,
+            -30.093951704039725
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.214857595030544,
+            -30.05995877237433
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.23036806014467,
+            -30.07548116857869
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.256614504397156,
+            -30.148599512001493
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.19533818000002,
+            -30.147953072377824
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.18367072435471,
+            -30.148351894360143
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.26027218133707,
+            -30.078148425777897
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cristal",
+        "Nonoai",
+        "Vila Nova",
+        "Campo Novo",
+        "Ipanema",
+        "Jardim Isabel",
+        "Sétimo Céu",
+        "Camaquã"
+      ]
+    },
+    {
+      "name": "Centro Histórico",
+      "lng_lat": [
+        -51.2278480810808,
+        -30.031004727877
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.18973494276964,
+            -30.00230126280066
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.2027476642084,
+            -30.058988712066085
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2245482057953,
+            -30.028976859288502
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.21810882244499,
+            -30.062098053992596
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.25650697247856,
+            -30.02162346793838
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24134361064133,
+            -30.001400560185576
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.22531111738982,
+            -30.03898742298351
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.23340600053948,
+            -30.004408336954885
+          ]
+        }
+      ],
+      "neighbors": [
+        "Arquipélago",
+        "Floresta",
+        "Independência",
+        "Bom Fim",
+        "Farroupilha",
+        "Cidade Baixa",
+        "Praia de Belas"
+      ]
+    },
+    {
+      "name": "Chácara das Pedras",
+      "lng_lat": [
+        -51.163276698502,
+        -30.0357931271579
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.13570915877885,
+            -30.068655503410422
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.210005413627826,
+            -30.02049375073922
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.119202260987294,
+            -29.993854690167062
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.181032467245245,
+            -30.082834703024584
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.13395711479947,
+            -30.04599037414937
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.16416090605125,
+            -30.059748809029806
+          ]
+        }
+      ],
+      "neighbors": [
+        "Boa Vista",
+        "Jardim Europa",
+        "Vila Jardim",
+        "Bom Jesus",
+        "Três Figueiras"
+      ]
+    },
+    {
+      "name": "Chapéu do Sol",
+      "lng_lat": [
+        -51.1629759174341,
+        -30.1783214415483
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.1555127096323,
+            -30.19631903959388
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.15358369061273,
+            -30.199924235869332
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.16386347828656,
+            -30.17939544894104
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.11957064747454,
+            -30.201708146222337
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15615437671408,
+            -30.196402810526163
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.16660760426278,
+            -30.172277752178736
+          ]
+        }
+      ],
+      "neighbors": [
+        "Hípica",
+        "Restinga",
+        "Lageado",
+        "Belém Novo",
+        "Ponta Grossa"
+      ]
+    },
+    {
+      "name": "Cidade Baixa",
+      "lng_lat": [
+        -51.2224525885919,
+        -30.0404993243547
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.251327535322055,
+            -30.050488995664562
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.209828812292315,
+            -30.07537928533051
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.18544410878308,
+            -29.99827232967901
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.26604199089524,
+            -30.08339718320595
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.24178185063387,
+            -30.040262201380017
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19806413916038,
+            -30.060870278207368
+          ]
+        }
+      ],
+      "neighbors": [
+        "Centro Histórico",
+        "Farroupilha",
+        "Santana",
+        "Azenha",
+        "Menino Deus",
+        "Praia de Belas"
+      ]
+    },
+    {
+      "name": "Cel. Aparício Borges",
+      "lng_lat": [
+        -51.185133456099,
+        -30.0702984413031
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.14112918087655,
+            -30.020635391161505
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.137396312584066,
+            -30.0762132346854
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.16575498211123,
+            -30.10598146273118
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.22211745643836,
+            -30.056396726659326
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.19116462389516,
+            -30.100446998125815
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.13521211757258,
+            -30.11743314849887
+          ]
+        }
+      ],
+      "neighbors": [
+        "Partenon",
+        "Vila João Pessoa",
+        "São José",
+        "Cascata",
+        "Glória"
+      ]
+    },
+    {
+      "name": "Costa e Silva",
+      "lng_lat": [
+        -51.1182597986804,
+        -30.0093278582727
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.097016714005555,
+            -30.052205372951263
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.107124196756345,
+            -30.036252649081376
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.15048025730191,
+            -29.98108297269677
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.16014679997024,
+            -30.035626119011468
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.08708829046185,
+            -29.961874294575157
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.078997069686636,
+            -30.048687898018102
+          ]
+        }
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Santa Rosa de Lima",
+        "Parque Santa Fé",
+        "Jardim Leopoldina",
+        "Passo das Pedras"
+      ]
+    },
+    {
+      "name": "Cristal",
+      "lng_lat": [
+        -51.2397892751413,
+        -30.0847512289742
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.210409530086565,
+            -30.098500637431847
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.211226359905424,
+            -30.094969512638855
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.19382162503164,
+            -30.06529470375958
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.255109759536374,
+            -30.094110808209916
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.282150801758924,
+            -30.077756591245468
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.28636588346533,
+            -30.120795584856896
+          ]
+        }
+      ],
+      "neighbors": [
+        "Praia de Belas",
+        "Santa Tereza",
+        "Nonoai",
+        "Cavalhada",
+        "Camaquã",
+        "Tristeza",
+        "Vila Assunção"
+      ]
+    },
+    {
+      "name": "Cristo Redentor",
+      "lng_lat": [
+        -51.158022313181,
+        -30.0104082772241
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.1282765450725,
+            -29.99474548087026
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.16569792326706,
+            -30.031415832815266
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.199575855715935,
+            -30.001087390770156
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.18607758717833,
+            -30.022792918715563
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.19158716557355,
+            -30.053869816301457
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.193715947250325,
+            -29.988974384588
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.18545641344848,
+            -30.037091729713623
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.11946132418918,
+            -30.025684170190775
+          ]
+        }
+      ],
+      "neighbors": [
+        "Jardim São Pedro",
+        "Jardim Floresta",
+        "Jardim Lindóia",
+        "Vila Ipiranga",
+        "Passo D'Areia"
+      ]
+    },
+    {
+      "name": "Espírito Santo",
+      "lng_lat": [
+        -51.2173615905172,
+        -30.149301452718
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22144225895985,
+            -30.128571705834627
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.21649493289008,
+            -30.15388098391104
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.19801567074555,
+            -30.171753494013064
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.17888410566852,
+            -30.137268981972458
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.21571119821386,
+            -30.160885693331004
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.22635519119356,
+            -30.116693561042446
+          ]
+        }
+      ],
+      "neighbors": [
+        "Ipanema",
+        "Campo Novo",
+        "Aberta dos Morros",
+        "Guarujá"
+      ]
+    },
+    {
+      "name": "Extrema",
+      "lng_lat": [
+        -51.0626153011275,
+        -30.2109093767902
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.030453817162076,
+            -30.21339692712215
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.069855010953425,
+            -30.168019732736955
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.09721311068884,
+            -30.181995616869656
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.05300371385972,
+            -30.242950494718077
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.047725378103,
+            -30.170343886059193
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.10638082966072,
+            -30.173242058350237
+          ]
+        }
+      ],
+      "neighbors": [
+        "São Caetano",
+        "Lami"
+      ]
+    },
+    {
+      "name": "Farrapos",
+      "lng_lat": [
+        -51.1974023529904,
+        -29.9850699991564
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.23843022298948,
+            -29.95725880067084
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23391133436969,
+            -29.953204555785863
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.22172141032885,
+            -29.943064549102946
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.1726921597783,
+            -29.996265223549603
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.194485394368414,
+            -29.94403419579079
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19908726551533,
+            -29.971576563031032
+          ]
+        },
+        {
+          "name": "stadium",
+          "lng_lat": [
+            -51.19792308408372,
+            -29.97982384692894
+          ]
+        }
+      ],
+      "neighbors": [
+        "Humaitá",
+        "Navegantes"
+      ]
+    },
+    {
+      "name": "Farroupilha",
+      "lng_lat": [
+        -51.2136185372287,
+        -30.038368061923
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.21542151275572,
+            -30.04271894196724
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23893020523109,
+            -30.05975060500658
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17079045633562,
+            -30.01928283846747
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.21491595354333,
+            -30.055208245441285
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.21140867041109,
+            -30.03377924515979
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.17941982728617,
+            -30.036299021647743
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.20757069210586,
+            -30.040094241865884
+          ]
+        }
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Santana",
+        "Azenha",
+        "Cidade Baixa",
+        "Centro Histórico Histórico",
+        "Rio Branco",
+        "Santa Cecília"
+      ]
+    },
+    {
+      "name": "Floresta",
+      "lng_lat": [
+        -51.2120255115732,
+        -30.0218580655156
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.192609167596395,
+            -30.023984553308587
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.178258024599096,
+            -30.06414042349254
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.172861714251255,
+            -29.996310772739402
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.16330801365026,
+            -30.056752807060818
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.17187885123122,
+            -30.063920469423934
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.186038853934924,
+            -30.019438019019145
+          ]
+        }
+      ],
+      "neighbors": [
+        "São Geraldo",
+        "São João",
+        "Auxiliadora",
+        "Moinhos de Vento",
+        "Independência",
+        "Centro Histórico"
+      ]
+    },
+    {
+      "name": "Glória",
+      "lng_lat": [
+        -51.1985906238754,
+        -30.0785891096479
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22871375210891,
+            -30.06156756858704
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.246910668868736,
+            -30.04612317796779
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.204802829713444,
+            -30.117578521607122
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.2191611203909,
+            -30.118266227789277
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.17735798087802,
+            -30.04658111962394
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.23734235763421,
+            -30.1099431026115
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.20881739262294,
+            -30.084876590564107
+          ]
+        }
+      ],
+      "neighbors": [
+        "Medianeira",
+        "Partenon",
+        "Cel. Aparício Borges",
+        "Cascata",
+        "Teresópolis"
+      ]
+    },
+    {
+      "name": "Guarujá",
+      "lng_lat": [
+        -51.2191885570036,
+        -30.156853443553
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.216020088600494,
+            -30.159543720144228
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.18472195868805,
+            -30.10937576448652
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.180390465340395,
+            -30.138800981751203
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.2210234158053,
+            -30.132800011292186
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.220947349395246,
+            -30.153043633636386
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.21754031257803,
+            -30.118153416576288
+          ]
+        }
+      ],
+      "neighbors": [
+        "Espírito Santo",
+        "Aberta dos Morros",
+        "Serraria"
+      ]
+    },
+    {
+      "name": "Higienópolis",
+      "lng_lat": [
+        -51.1814201095827,
+        -30.0146237279222
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.174316371616605,
+            -29.989550867012817
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.19370489356837,
+            -30.004135731537662
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.159763116065655,
+            -30.02350792143125
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.20890757518693,
+            -30.022510114512137
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.19018659769561,
+            -29.996182778611573
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.166008307066505,
+            -30.031288429675108
+          ]
+        }
+      ],
+      "neighbors": [
+        "São João",
+        "Passo D'Areia",
+        "Boa Vista",
+        "Auxiliadora"
+      ]
+    },
+    {
+      "name": "Hípica",
+      "lng_lat": [
+        -51.1761044540436,
+        -30.1561358366347
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.20192596153973,
+            -30.140898230647785
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.19382595041021,
+            -30.15384472752758
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.14283388833102,
+            -30.136038174624286
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.17840404334913,
+            -30.13350281339227
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.13127949211722,
+            -30.11853159139598
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.182235909335084,
+            -30.11344427565377
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Nova",
+        "Restinga",
+        "Chapéu do Sol",
+        "Ponta Grossa",
+        "Aberta dos Morros",
+        "Campo Novo"
+      ]
+    },
+    {
+      "name": "Humaitá",
+      "lng_lat": [
+        -51.1876065448791,
+        -29.9843768763043
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.15595673265195,
+            -30.03183126828946
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.149891211131845,
+            -29.973180509702722
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.15226155633566,
+            -29.999951287650727
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.23020564396603,
+            -30.01898044373608
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.23609440235907,
+            -29.982976766220627
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.147592407027076,
+            -30.0115218341414
+          ]
+        }
+      ],
+      "neighbors": [
+        "Farrapos;Navegantes;Anchieta",
+        "São João"
+      ]
+    },
+    {
+      "name": "Independência",
+      "lng_lat": [
+        -51.2114165227445,
+        -30.0283138642156
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22310294622913,
+            -30.05580002667894
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.2214981207643,
+            -30.043731809135473
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.205269634902564,
+            -30.02952087788964
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.244970225504375,
+            -30.017233593987402
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.2579901050378,
+            -30.05068460549984
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.20152225172785,
+            -30.043671185157645
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.23139808748945,
+            -30.059385023805543
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.214911512502724,
+            -29.990226849639445
+          ]
+        }
+      ],
+      "neighbors": [
+        "Floresta",
+        "Moinhos de Vento",
+        "Rio Branco",
+        "Bom Fim",
+        "Centro Histórico"
+      ]
+    },
+    {
+      "name": "Ipanema",
+      "lng_lat": [
+        -51.2242015748011,
+        -30.135351867939
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19870529960933,
+            -30.16804303522163
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.231244356908014,
+            -30.15624531411124
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.27316301398522,
+            -30.174409747864846
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.24118889187179,
+            -30.161075478430327
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.24966048642529,
+            -30.14641947372181
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24824969611768,
+            -30.17328655816014
+          ]
+        }
+      ],
+      "neighbors": [
+        "Pedra Redonda",
+        "Jardim Isabel",
+        "Cavalhada",
+        "Campo Novo",
+        "Espírito Santo",
+        "Vila Nova"
+      ]
+    },
+    {
+      "name": "Jardim Botânico",
+      "lng_lat": [
+        -51.1866150813593,
+        -30.0541730304667
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.18140248594517,
+            -30.067882425003205
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.16907103463068,
+            -30.060574708702983
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.18415348396222,
+            -30.018222097031792
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19382222772499,
+            -30.036222980522027
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.16046343115218,
+            -30.004817193602424
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.15105788781752,
+            -30.05054111096597
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.20391616580501,
+            -30.052042829629627
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.188029927287296,
+            -30.067369928559454
+          ]
+        }
+      ],
+      "neighbors": [
+        "Petrópolis",
+        "Jardim do Salso",
+        "Partenon"
+      ]
+    },
+    {
+      "name": "Jardim Carvalho",
+      "lng_lat": [
+        -51.1462547180695,
+        -30.0520131347363
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.1504373673471,
+            -30.063783601122015
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.189308343901615,
+            -30.038133866754855
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17301473373959,
+            -30.031425427463322
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.174762088493196,
+            -30.02410628831768
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.098832717191826,
+            -30.09436112582321
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.175325614869465,
+            -30.02109146509195
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.10913907612345,
+            -30.021359347780134
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Jardim",
+        "Jardim Sabará",
+        "Morro Santana",
+        "Agronomia",
+        "Partenon",
+        "Jardim do Salso",
+        "Bom Jesus"
+      ]
+    },
+    {
+      "name": "Jardim do Salso",
+      "lng_lat": [
+        -51.1682005959831,
+        -30.0492071284135
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.21114926233867,
+            -30.02294764796005
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.175646148230875,
+            -30.01620050173774
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.15900711854117,
+            -30.064998864943316
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19548236197727,
+            -30.026096053821185
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.119377816399705,
+            -30.084749665232938
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.15846442663268,
+            -30.007998015099613
+          ]
+        }
+      ],
+      "neighbors": [
+        "Bom Jesus",
+        "Jardim Carvalho",
+        "Partenon",
+        "Jardim Botânico",
+        "Petrópolis"
+      ]
+    },
+    {
+      "name": "Jardim Leopoldina",
+      "lng_lat": [
+        -51.1110911832298,
+        -30.0215478036466
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.15758317974581,
+            -30.039701062816565
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.121240189720446,
+            -30.005334782569953
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.12543663713042,
+            -30.03344254219401
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.107267135322026,
+            -30.01419433848861
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.070797951095145,
+            -29.997743591499
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.15717365583668,
+            -30.002984075706816
+          ]
+        }
+      ],
+      "neighbors": [
+        "Costa e Silva",
+        "Parque Santa Fé",
+        "Rubem Berta",
+        "Mário Quintana",
+        "Passo das Pedras"
+      ]
+    },
+    {
+      "name": "Jardim Europa",
+      "lng_lat": [
+        -51.1601184972897,
+        -30.0228209964289
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.1783545042251,
+            -30.010011221188194
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.14742584693516,
+            -29.999390656301223
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.14084520310028,
+            -30.001590284596183
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.20402799402161,
+            -30.028347036499266
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.12486632802875,
+            -30.042651895720844
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.16403983408286,
+            -30.002144607627947
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.179066414344646,
+            -30.005660719060717
+          ]
+        }
+      ],
+      "neighbors": [
+        "Passo D'Areia",
+        "Vila Ipiranga",
+        "Vila Jardim",
+        "Chácara das Pedras",
+        "Boa Vista"
+      ]
+    },
+    {
+      "name": "Jardim Floresta",
+      "lng_lat": [
+        -51.1594853717086,
+        -30.0008770326953
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.13799157619355,
+            -30.031332411836086
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.13024315820785,
+            -29.96490274611946
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17257202808087,
+            -30.049056587805733
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.17173181755514,
+            -29.968788505000667
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.129502249379776,
+            -30.0116715265831
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.1279876213901,
+            -29.982415061284
+          ]
+        }
+      ],
+      "neighbors": [
+        "Anchieta",
+        "Sarandi",
+        "Jardim São Pedro",
+        "Jardim Lindóia",
+        "Cristo Redentor"
+      ]
+    },
+    {
+      "name": "Jardim Isabel",
+      "lng_lat": [
+        -51.2367285492751,
+        -30.1259771787583
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19327063868146,
+            -30.124604744243832
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.281846441379884,
+            -30.089749850199787
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.22463395394118,
+            -30.10577671228703
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.232279645446475,
+            -30.159041960718188
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.234490232776224,
+            -30.091645725183156
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.22807221245872,
+            -30.119833132902365
+          ]
+        }
+      ],
+      "neighbors": [
+        "Sétimo Céu",
+        "Cavalhada",
+        "Ipanema",
+        "Pedra Redonda"
+      ]
+    },
+    {
+      "name": "Jardim Itú",
+      "lng_lat": [
+        -51.138345289989,
+        -30.0211282251709
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.17131885629742,
+            -30.066546535419363
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.14162312453175,
+            -30.031295520972662
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.1102081410355,
+            -29.99250253790751
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.163887892275845,
+            -30.001854542780844
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15568495624146,
+            -30.003153872329165
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.12642243145726,
+            -30.023168629465996
+          ]
+        }
+      ],
+      "neighbors": [
+        "São Sebastião",
+        "Sarandi",
+        "Passo das Pedras",
+        "Jardim Sabará",
+        "Vila Ipiranga",
+        "Morro Santana",
+        "Vila Jardim"
+      ]
+    },
+    {
+      "name": "Jardim Lindóia",
+      "lng_lat": [
+        -51.1515796569746,
+        -30.0030091011001
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.184048343067495,
+            -30.022178137178514
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.11273320146249,
+            -30.009115048022686
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.14366501150835,
+            -29.979121820381945
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.138682503376856,
+            -29.99850541067618
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.13694284479063,
+            -30.027631008847873
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.17506489703329,
+            -30.017510602934948
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.188238587655164,
+            -30.022766110496775
+          ]
+        }
+      ],
+      "neighbors": [
+        "Sarandi",
+        "São Sebastião",
+        "Vila Ipiranga",
+        "Cristo Redentor",
+        "Jardim Floresta"
+      ]
+    },
+    {
+      "name": "Jardim Sabará",
+      "lng_lat": [
+        -51.1436646588742,
+        -30.030604478588
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.096702132049565,
+            -30.07851959780282
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.191698218869575,
+            -29.986419392050642
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.1761170534393,
+            -30.03257505513877
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.11133370031091,
+            -30.069965232778156
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.12648514553807,
+            -30.05769785130161
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.11700847496953,
+            -30.061650212549324
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Ipiranga",
+        "Jardim Itú",
+        "Passo das Pedras",
+        "Morro Santana",
+        "Jardim Carvalho",
+        "Bom Jesus",
+        "Vila Jardim"
+      ]
+    },
+    {
+      "name": "Jardim São Pedro",
+      "lng_lat": [
+        -51.1651556518396,
+        -30.0065367215187
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.17390568208174,
+            -29.995303320089125
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.19012981493552,
+            -30.00535550258746
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2031504690428,
+            -29.98704762311344
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.11604219320089,
+            -29.958421320602625
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15381394639648,
+            -30.047550475595834
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.1177623399534,
+            -30.0494506485616
+          ]
+        }
+      ],
+      "neighbors": [
+        "Anchieta",
+        "Jardim Floresta",
+        "Cristo Redentor",
+        "Passo D'Areia",
+        "Santa Maria Goretti"
+      ]
+    },
+    {
+      "name": "Lageado",
+      "lng_lat": [
+        -51.133789013813,
+        -30.189616989235
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.16655859911756,
+            -30.19089033233587
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.12019036437846,
+            -30.193091576153453
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.158406347217365,
+            -30.212476419550587
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.12541045244034,
+            -30.19532660969563
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.08391777681748,
+            -30.226648061538313
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.0930307510415,
+            -30.20817397225078
+          ]
+        }
+      ],
+      "neighbors": [
+        "Restinga",
+        "Pitinga",
+        "Lomba do Pinheiro",
+        "São Caetano",
+        "Boa Vista do Sul",
+        "Belém Novo",
+        "Chapéu do Sol"
+      ]
+    },
+    {
+      "name": "Lami",
+      "lng_lat": [
+        -51.0955285479783,
+        -30.2209883173142
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.10584032817227,
+            -30.204889495948645
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.12581198655196,
+            -30.1943872550408
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.09356974211277,
+            -30.177317850420177
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.066125477635104,
+            -30.2116468152969
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.12323925006764,
+            -30.200730571354352
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.12087116045182,
+            -30.180479355182577
+          ]
+        }
+      ],
+      "neighbors": [
+        "Boa Vista do Sul",
+        "São Caetano",
+        "Extrema"
+      ]
+    },
+    {
+      "name": "Lomba do Pinheiro",
+      "lng_lat": [
+        -51.1261023865233,
+        -30.0985224307081
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.17276781078706,
+            -30.115238761270245
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.11009133983477,
+            -30.11682284526641
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.12604523920151,
+            -30.121289425309524
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.12444874969893,
+            -30.14366783117607
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.09606424239388,
+            -30.071342514512917
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.14748334255929,
+            -30.075452956902456
+          ]
+        }
+      ],
+      "neighbors": [
+        "Agronomia",
+        "São José",
+        "Cascata",
+        "Belém Velho",
+        "Restinga",
+        "Pitinga",
+        "Lageado",
+        "São Caetano"
+      ]
+    },
+    {
+      "name": "Mário Quintana",
+      "lng_lat": [
+        -51.1064402167177,
+        -30.0308938155853
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.128894494593716,
+            -30.071747451472234
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.07228994794804,
+            -30.04862458488714
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.09220784129413,
+            -30.053226725670896
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.06705198483983,
+            -30.03784712078939
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.06342893578779,
+            -30.020750497987567
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.09481078394992,
+            -30.046991760865076
+          ]
+        }
+      ],
+      "neighbors": [
+        "Morro Santana",
+        "Passo das Pedras",
+        "Jardim Leopoldina",
+        "Rubem Berta"
+      ]
+    },
+    {
+      "name": "Medianeira",
+      "lng_lat": [
+        -51.2108669474596,
+        -30.0647837981581
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.18837385899791,
+            -30.09767210225504
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.180342533411576,
+            -30.104562277661277
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.23053463100067,
+            -30.073921763722016
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.18244201578424,
+            -30.09127155120207
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.22429870043379,
+            -30.04828059450246
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.247881387731844,
+            -30.086340845265816
+          ]
+        }
+      ],
+      "neighbors": [
+        "Menino Deus",
+        "Azenha",
+        "Santo Antônio",
+        "Partenon",
+        "Glória",
+        "Teresópolis",
+        "Santa Tereza"
+      ]
+    },
+    {
+      "name": "Menino Deus",
+      "lng_lat": [
+        -51.222051547168,
+        -30.0529677373194
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.2142829914789,
+            -30.033160840901047
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23717603148477,
+            -30.068421055474634
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2220246680345,
+            -30.080497961444603
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.21637922340975,
+            -30.037986790758804
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.26985207474578,
+            -30.031957570673512
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.22409653896993,
+            -30.096052831595703
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.25090359947996,
+            -30.096962535027618
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cidade Baixa",
+        "Azenha",
+        "Medianeira",
+        "Santa Tereza",
+        "Praia de Belas"
+      ]
+    },
+    {
+      "name": "Moinhos de Vento",
+      "lng_lat": [
+        -51.202415370788,
+        -30.0237549822533
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22232861280872,
+            -30.000675262889008
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17261585865944,
+            -30.013027237091872
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.20621859732412,
+            -30.031306077154984
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.24938545483672,
+            -30.027971718636085
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.2015176525946,
+            -30.0178235574724
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.17975655856512,
+            -30.032645186498858
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.2354878478799,
+            -29.991891935354072
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.17301477433006,
+            -30.06202603505728
+          ]
+        }
+      ],
+      "neighbors": [
+        "Floresta",
+        "São João",
+        "Auxiliadora",
+        "Mont'Serrat",
+        "Rio Branco",
+        "Independência",
+        "Bom Fim",
+        "Bela Vista",
+        "São Geraldo"
+      ]
+    },
+    {
+      "name": "Mont'Serrat",
+      "lng_lat": [
+        -51.1907313259732,
+        -30.0269442926526
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.16074232230745,
+            -30.00211751453141
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17900785939807,
+            -30.01212674101407
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.19880821645166,
+            -30.04335567125773
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.17370970783172,
+            -30.007244505032027
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15830462648641,
+            -30.06140726926329
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.207367249577025,
+            -30.02683441112999
+          ]
+        }
+      ],
+      "neighbors": [
+        "Moinhos de Vento",
+        "Auxiliadora",
+        "Boa Vista",
+        "Bela Vista",
+        "Rio Branco"
+      ]
+    },
+    {
+      "name": "Morro Santana",
+      "lng_lat": [
+        -51.129110197202,
+        -30.040364313615
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.15219150758032,
+            -30.002555774147233
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.135721451720315,
+            -30.043713411157654
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.09746060371104,
+            -30.07878455018338
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.10237443182757,
+            -30.08407397300454
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.09767465109204,
+            -30.012065112465926
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.13388139466806,
+            -30.081562597671347
+          ]
+        }
+      ],
+      "neighbors": [
+        "Passo das Pedras",
+        "Mário Quintana",
+        "Agronomia",
+        "Jardim Carvalho",
+        "Jardim Sabará",
+        "Jardim Itú"
+      ]
+    },
+    {
+      "name": "Navegantes",
+      "lng_lat": [
+        -51.1986723174991,
+        -30.0031248682091
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.24596699267107,
+            -30.003926509757473
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.16642145418329,
+            -29.96441035584546
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.24363283744085,
+            -30.038145920419264
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.18812726047138,
+            -29.986733463424418
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.21514283580371,
+            -30.00070931231895
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24131211741727,
+            -30.04430851862133
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.22208315130494,
+            -29.965027891358115
+          ]
+        }
+      ],
+      "neighbors": [
+        "Arquipélago",
+        "Farrapos",
+        "Humaitá",
+        "São João",
+        "São Geraldo"
+      ]
+    },
+    {
+      "name": "Nonoai",
+      "lng_lat": [
+        -51.2178406122179,
+        -30.0891731624708
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.261487054938,
+            -30.128705068618423
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.18284846483116,
+            -30.06533322053627
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.23232733666697,
+            -30.10387718189387
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.20535143214744,
+            -30.11115741759023
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.16848589956947,
+            -30.12134670940355
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.243371633848,
+            -30.05614148392667
+          ]
+        }
+      ],
+      "neighbors": [
+        "Santa Tereza",
+        "Teresópolis",
+        "Vila Nova",
+        "Cavalhada",
+        "Cristal"
+      ]
+    },
+    {
+      "name": "Parque Santa Fé",
+      "lng_lat": [
+        -51.1087313515186,
+        -30.0138777573214
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.084081821573285,
+            -30.060649438440077
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.06145895673551,
+            -29.97134953261235
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.157502462124896,
+            -30.04790213862873
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.136348611595494,
+            -30.054191863883702
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.07588949227165,
+            -30.05922436159372
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.12651989988588,
+            -30.01367175493044
+          ]
+        }
+      ],
+      "neighbors": [
+        "Santa Rosa de Lima",
+        "Rubem Berta",
+        "Jardim Leopoldina",
+        "Costa e Silva"
+      ]
+    },
+    {
+      "name": "Partenon",
+      "lng_lat": [
+        -51.1751631207019,
+        -30.0575959830085
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.157520081588565,
+            -30.102355438252296
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.21309461700735,
+            -30.077472634928345
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.16060523513144,
+            -30.062731568793147
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.129745172676984,
+            -30.053465520886817
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18531429752742,
+            -30.089195834278677
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.222857799197925,
+            -30.103122694704698
+          ]
+        }
+      ],
+      "neighbors": [
+        "Santana",
+        "Petrópolis",
+        "Jardim Botânico",
+        "Jardim do Salso",
+        "Jardim Carvalho",
+        "Agronomia",
+        "São José",
+        "Vila João Pessoa",
+        "Cel. Aparício Borges",
+        "Glória",
+        "Medianeira",
+        "Santo Antônio"
+      ]
+    },
+    {
+      "name": "Passo D'Areia",
+      "lng_lat": [
+        -51.1717152784613,
+        -30.014395435791
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.16854389138958,
+            -30.03004100802062
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.199698215419744,
+            -30.032109508867492
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.158174314103334,
+            -30.034438450036536
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.125495401294216,
+            -29.982144208655814
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.16951414212073,
+            -30.01531459436941
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.20885585139181,
+            -29.9713598659162
+          ]
+        }
+      ],
+      "neighbors": [
+        "Santa Maria Goretti",
+        "Jardim São Pedro",
+        "Cristo Redentor",
+        "Vila Ipiranga",
+        "Jardim Europa",
+        "Boa Vista",
+        "Higienópolis",
+        "São João"
+      ]
+    },
+    {
+      "name": "Passo das Pedras",
+      "lng_lat": [
+        -51.1265034279473,
+        -30.0188904433147
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.098646960566555,
+            -29.992384640571906
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.123967919689306,
+            -30.0450308245262
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.15062300130225,
+            -30.06276304840201
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.106161580827816,
+            -29.980811990011667
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.11601198667645,
+            -29.998911672610685
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.137681178095455,
+            -29.992039357349345
+          ]
+        }
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Costa e Silva",
+        "Jardim Leopoldina",
+        "Mário Quintana",
+        "Morro Santana",
+        "Jardim Sabará",
+        "Jardim Itú"
+      ]
+    },
+    {
+      "name": "Pedra Redonda",
+      "lng_lat": [
+        -51.2435128333611,
+        -30.1256110371717
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.27798062234354,
+            -30.119032202508574
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.22923212949069,
+            -30.172576541297754
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.258551090142646,
+            -30.076013581590587
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.26068463595936,
+            -30.087648505193194
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.230755458184234,
+            -30.110549220068194
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.292731070978206,
+            -30.095017877997766
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Conceição",
+        "Sétimo Céu",
+        "Jardim Isabel",
+        "Ipanema"
+      ]
+    },
+    {
+      "name": "Petrópolis",
+      "lng_lat": [
+        -51.1834624501667,
+        -30.0433923674216
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.15624589943775,
+            -30.058060982484076
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.20020716410902,
+            -30.02964470755301
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.170665146538475,
+            -30.08549660379396
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.14288735903073,
+            -30.0762810958602
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18850898879202,
+            -30.00541698663922
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.21816718586043,
+            -30.048178147034402
+          ]
+        }
+      ],
+      "neighbors": [
+        "Rio Branco",
+        "Bela Vista",
+        "Boa Vista",
+        "Três Figueiras",
+        "Bom Jesus",
+        "Jardim do Salso",
+        "Jardim Botânico",
+        "Partenon",
+        "Santana",
+        "Santa Cecília"
+      ]
+    },
+    {
+      "name": "Pitinga",
+      "lng_lat": [
+        -51.1042679090053,
+        -30.1419030235185
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.08912091911478,
+            -30.108138705729218
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.06481358180984,
+            -30.130271644690556
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.092151175930816,
+            -30.145766697973052
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.119360925308065,
+            -30.134042404889883
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.08812447997977,
+            -30.18440466344093
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.11761119365276,
+            -30.12910644587671
+          ]
+        }
+      ],
+      "neighbors": [
+        "Lomba do Pinheiro",
+        "Restinga",
+        "Lageado",
+        "São Caetano"
+      ]
+    },
+    {
+      "name": "Ponta Grossa",
+      "lng_lat": [
+        -51.1945022293607,
+        -30.1857845444933
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.223928539787664,
+            -30.21052644912981
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.15752442097443,
+            -30.172695507242548
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.21705527564695,
+            -30.168484903332978
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19410360889113,
+            -30.159356887897502
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.17917916056118,
+            -30.190006680314724
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.15415252932716,
+            -30.18602026442165
+          ]
+        }
+      ],
+      "neighbors": [
+        "Serraria",
+        "Aberta dos Morros",
+        "Hípica",
+        "Chapéu do Sol",
+        "Belém Novo"
+      ]
+    },
+    {
+      "name": "Praia de Belas",
+      "lng_lat": [
+        -51.230172636,
+        -30.0472881985923
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.2580095395781,
+            -30.020451832667984
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.27158043691739,
+            -30.050707008666144
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.20982152941835,
+            -30.049778281391866
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.27185032016987,
+            -30.079111976029488
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18154351320234,
+            -30.029890561421375
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.22743112903635,
+            -30.055615864248715
+          ]
+        },
+        {
+          "name": "stadium",
+          "lng_lat": [
+            -51.24055904943676,
+            -30.059552713039487
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.270911189858445,
+            -30.023830165872372
+          ]
+        }
+      ],
+      "neighbors": [
+        "Centro Histórico",
+        "Cidade Baixa",
+        "Menino Deus",
+        "Santa Tereza",
+        "Cristal"
+      ]
+    },
+    {
+      "name": "Restinga",
+      "lng_lat": [
+        -51.1393367535089,
+        -30.1549269702203
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.141763127958164,
+            -30.150639694526497
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.18688505970054,
+            -30.19450936181897
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.131997185647066,
+            -30.10616337349103
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.15525992648961,
+            -30.12920228652428
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.15225242779407,
+            -30.18788825026001
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.09835895651495,
+            -30.203568353185386
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.14567033224655,
+            -30.122080190225375
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Nova",
+        "Belém Velho",
+        "Lomba do Pinheiro",
+        "Pitinga",
+        "Lageado",
+        "Chapéu do Sol",
+        "Hípica"
+      ]
+    },
+    {
+      "name": "Rio Branco",
+      "lng_lat": [
+        -51.2019103556617,
+        -30.0331907998885
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19846756072126,
+            -30.0202004096476
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17666164306595,
+            -30.075333218786774
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.20407735772,
+            -30.05103949895915
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.1658503548785,
+            -30.078899955088993
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.23225910391764,
+            -30.068504149937862
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.19089620817448,
+            -30.048428200561027
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.21766745122115,
+            -30.019272692269055
+          ]
+        }
+      ],
+      "neighbors": [
+        "Independência",
+        "Moinhos de Vento",
+        "Mont'Serrat",
+        "Bela Vista",
+        "Petrópolis",
+        "Santa Cecília",
+        "Santana",
+        "Bom Fim",
+        "Farroupilha"
+      ]
+    },
+    {
+      "name": "Rubem Berta",
+      "lng_lat": [
+        -51.1044480063116,
+        -30.0209385301047
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.08608176113539,
+            -30.062377012109668
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.059586129517456,
+            -30.06177214951956
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.08227016469992,
+            -30.042427613349123
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.11257103540501,
+            -29.996520484948434
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.12882710670182,
+            -29.975630548779904
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.12524313435991,
+            -29.97653459801677
+          ]
+        }
+      ],
+      "neighbors": [
+        "Santa Rosa de Lima",
+        "Parque Santa Fé",
+        "Jardim Leopoldina",
+        "Mário Quintana"
+      ]
+    },
+    {
+      "name": "Santa Cecília",
+      "lng_lat": [
+        -51.201331073605,
+        -30.0408947118911
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.15258135907429,
+            -30.02993492746226
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.19552740663642,
+            -30.037189963814757
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.193822409105174,
+            -30.02168248606505
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19197559023691,
+            -30.040956058329602
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.24693873892243,
+            -30.046515976741244
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.231416249504065,
+            -30.069251631498684
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.164402036322294,
+            -30.001044023171552
+          ]
+        }
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Rio Branco",
+        "Petrópolis",
+        "Santana",
+        "Farroupilha",
+        "Bela Vista"
+      ]
+    },
+    {
+      "name": "Santa Maria Goretti",
+      "lng_lat": [
+        -51.1755307420072,
+        -30.0058292780705
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.16446472665188,
+            -30.00386051585025
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.15168712176854,
+            -30.0350745113736
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2021482970612,
+            -30.019087605824005
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.13861482885289,
+            -30.01820080155146
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.214433890954,
+            -30.009017558527514
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.22452548887098,
+            -29.973797410101586
+          ]
+        }
+      ],
+      "neighbors": [
+        "São João",
+        "Anchieta",
+        "Jardim São Pedro",
+        "Passo D'Areia"
+      ]
+    },
+    {
+      "name": "Santa Rosa de Lima",
+      "lng_lat": [
+        -51.1077101812265,
+        -30.0006905147282
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.13525349068655,
+            -29.992584669752976
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.07646540240252,
+            -29.980481845118618
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.12572430125849,
+            -30.04251134859955
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.11471824829076,
+            -29.993972868136055
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.13005978210359,
+            -29.99157882956005
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.07024587397327,
+            -30.045137015917128
+          ]
+        }
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Costa e Silva",
+        "Parque Santa Fé",
+        "Rubem Berta"
+      ]
+    },
+    {
+      "name": "Santa Tereza",
+      "lng_lat": [
+        -51.2223411881961,
+        -30.0756585341733
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.191132601427945,
+            -30.057245908206113
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.26367446178142,
+            -30.109580782277238
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.24195237451161,
+            -30.07623675554868
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.24615991769754,
+            -30.065133945275537
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.190590246603854,
+            -30.05350149301585
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24401795355119,
+            -30.028665127779306
+          ]
+        }
+      ],
+      "neighbors": [
+        "Praia de Belas",
+        "Menino Deus",
+        "Medianeira",
+        "Teresópolis",
+        "Nonoai",
+        "Cristal"
+      ]
+    },
+    {
+      "name": "Santana",
+      "lng_lat": [
+        -51.2055865687131,
+        -30.046728905517
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.17233727081823,
+            -30.06445778874432
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.24715206233312,
+            -30.078053092196207
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.23944741420395,
+            -30.034709543629955
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.18838096081409,
+            -30.00206193819132
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.17577781017033,
+            -30.070677662939996
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.18903344633281,
+            -30.09510200515655
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.22087951972768,
+            -30.023107273153833
+          ]
+        }
+      ],
+      "neighbors": [
+        "Bom Fim",
+        "Santa Cecília",
+        "Partenon",
+        "Santo Antônio",
+        "Azenha",
+        "Cidade Baixa",
+        "Farroupilha",
+        "Petrópolis",
+        "Rio Branco"
+      ]
+    },
+    {
+      "name": "Santo Antônio",
+      "lng_lat": [
+        -51.2034922412774,
+        -30.0581503937635
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.24242963130552,
+            -30.096722289413414
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.194742953495584,
+            -30.05940726525439
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.20964953528057,
+            -30.094985205566278
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.22622571782888,
+            -30.097649886385778
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.187718681805435,
+            -30.024304039094527
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.21887280907838,
+            -30.028245527050498
+          ]
+        }
+      ],
+      "neighbors": [
+        "Santana",
+        "Partenon",
+        "Medianeira",
+        "Azenha"
+      ]
+    },
+    {
+      "name": "São Caetano",
+      "lng_lat": [
+        -51.1057829543841,
+        -30.2049260216445
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.12450186547088,
+            -30.161157301182378
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.10617078137808,
+            -30.174395355067166
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.11790928638822,
+            -30.194798509268175
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.0782975291549,
+            -30.204106301933063
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.09811698672109,
+            -30.237045561921313
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.093111330117885,
+            -30.16768098090805
+          ]
+        }
+      ],
+      "neighbors": [
+        "Lomba do Pinheiro",
+        "Lageado",
+        "Boa Vista do Sul",
+        "Lami",
+        "Extrema",
+        "Pitinga"
+      ]
+    },
+    {
+      "name": "São Geraldo",
+      "lng_lat": [
+        -51.200194789571,
+        -30.0095047133709
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.161811172244775,
+            -30.039546155974854
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17603753541001,
+            -30.0419653889854
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.18968670826907,
+            -30.028583680593062
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.17847406430029,
+            -29.991719433804274
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.23620737612628,
+            -30.019734232971043
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24439797387624,
+            -29.970601229072717
+          ]
+        }
+      ],
+      "neighbors": [
+        "Navegantes",
+        "São João",
+        "Floresta",
+        "Auxiliadora",
+        "Moinhos de Vento"
+      ]
+    },
+    {
+      "name": "São João",
+      "lng_lat": [
+        -51.1886611352902,
+        -30.0080480610763
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.183066615628974,
+            -29.978321107297152
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.1550171151535,
+            -29.970268715323687
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.16820131029513,
+            -30.005416237186047
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.220084182891235,
+            -30.022431055153987
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.20118910651397,
+            -29.99810068113242
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.167118485951626,
+            -29.99029188894233
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.140247223954084,
+            -30.003497530214794
+          ]
+        }
+      ],
+      "neighbors": [
+        "Navegantes",
+        "Humaitá",
+        "Anchieta",
+        "Santa Maria Goretti",
+        "Passo D'Areia",
+        "Higienópolis",
+        "Auxiliadora",
+        "Floresta",
+        "São Geraldo",
+        "Moinhos de Vento"
+      ]
+    },
+    {
+      "name": "São Sebastião",
+      "lng_lat": [
+        -51.1459279435762,
+        -30.0023080640551
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.114345840802464,
+            -29.983962747422392
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17187497011317,
+            -30.016134912030072
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.14226699939105,
+            -29.984521639999357
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.129115927155866,
+            -29.97997149730135
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.14199798519661,
+            -30.01826509658774
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.126004921019245,
+            -30.02022706821836
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.13082864677785,
+            -29.979077045820006
+          ]
+        }
+      ],
+      "neighbors": [
+        "Sarandi",
+        "Jardim Itú",
+        "Vila Ipiranga",
+        "Jardim Lindóia"
+      ]
+    },
+    {
+      "name": "Sarandi",
+      "lng_lat": [
+        -51.1314013320029,
+        -30.0026489358974
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.14006097481227,
+            -29.975015711548036
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.170895195273395,
+            -29.988740545024278
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.16867329326922,
+            -30.018924145568338
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.09279192772542,
+            -29.98156861284442
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.17412369624707,
+            -30.03953805866006
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.12765418026254,
+            -30.03636445990106
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.099866716228505,
+            -30.03427523458026
+          ]
+        }
+      ],
+      "neighbors": [
+        "Anchieta",
+        "Jardim Floresta",
+        "Jardim Lindóia",
+        "São Sebastião",
+        "Vila Ipiranga",
+        "Jardim Itú",
+        "Passo das Pedras",
+        "Costa e Silva",
+        "Santa Rosa de Lima"
+      ]
+    },
+    {
+      "name": "Serraria",
+      "lng_lat": [
+        -51.2144874603135,
+        -30.1667067660624
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.16660734618797,
+            -30.179793696142028
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.243873037301746,
+            -30.182014394939706
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17183281417943,
+            -30.19620638174653
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.212260401980885,
+            -30.139644039049266
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.206106245452766,
+            -30.15670563964788
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24669756866175,
+            -30.1704923203517
+          ]
+        }
+      ],
+      "neighbors": [
+        "Guarujá",
+        "Aberta dos Morros",
+        "Ponta Grossa"
+      ]
+    },
+    {
+      "name": "Sétimo Céu",
+      "lng_lat": [
+        -51.2510435000969,
+        -30.1195984127114
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.26040753314781,
+            -30.077478813436592
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23993090522288,
+            -30.161531118952166
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.21314992871719,
+            -30.16446188227455
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.2929118124804,
+            -30.097343352501568
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.239128409343635,
+            -30.117120186105552
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.29029867899766,
+            -30.071911043007262
+          ]
+        }
+      ],
+      "neighbors": [
+        "Tristeza",
+        "Camaquã",
+        "Cavalhada",
+        "Jardim Isabel",
+        "Pedra Redonda",
+        "Vila Conceição"
+      ]
+    },
+    {
+      "name": "Teresópolis",
+      "lng_lat": [
+        -51.209418742318,
+        -30.0799772466779
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22963299139085,
+            -30.04690434615558
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17869032232874,
+            -30.052331084205715
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.244727085063495,
+            -30.080035115235276
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.16264834256397,
+            -30.055549868742485
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.205040147197764,
+            -30.030420233766915
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.16332490301207,
+            -30.118611941993063
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.251889281446445,
+            -30.070498359036563
+          ]
+        }
+      ],
+      "neighbors": [
+        "Medianeira",
+        "Glória",
+        "Cascata",
+        "Vila Nova",
+        "Nonoai",
+        "Santa Tereza"
+      ]
+    },
+    {
+      "name": "Três Figueiras",
+      "lng_lat": [
+        -51.1749180398318,
+        -30.0320173995828
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.19280765120851,
+            -30.053761744329982
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.14462280905096,
+            -30.046380162557803
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.134483767204024,
+            -30.05103430313768
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.179440418407,
+            -30.001147668849423
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.1989897816471,
+            -30.03243072119322
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.21799804838785,
+            -29.98966288776632
+          ]
+        },
+        {
+          "name": "shopping_mall",
+          "lng_lat": [
+            -51.16653739675579,
+            -30.03253503045938
+          ]
+        }
+      ],
+      "neighbors": [
+        "Bela Vista",
+        "Boa Vista",
+        "Chácara das Pedras",
+        "Bom Jesus",
+        "Petrópolis"
+      ]
+    },
+    {
+      "name": "Tristeza",
+      "lng_lat": [
+        -51.2514556815603,
+        -30.1090465282678
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.280805234894316,
+            -30.133973854961543
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.20482602456755,
+            -30.151977269898488
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.270268187527165,
+            -30.129439893867385
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.2299352054282,
+            -30.127854840298976
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.27714034026908,
+            -30.149721142958516
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.25309327613261,
+            -30.091688469414798
+          ]
+        }
+      ],
+      "neighbors": [
+        "Vila Assunção",
+        "Cristal",
+        "Camaquã",
+        "Sétimo Céu",
+        "Vila Conceição"
+      ]
+    },
+    {
+      "name": "Vila Assunção",
+      "lng_lat": [
+        -51.2550204942162,
+        -30.100180146807
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.217943529724614,
+            -30.087412646132314
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23980658274784,
+            -30.07939093160778
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2380348881822,
+            -30.147901832870666
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.24127776739103,
+            -30.13646674496367
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.239157965443276,
+            -30.082954088521358
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.29443928609019,
+            -30.132548944467462
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.249680809153794,
+            -30.060727803494935
+          ]
+        }
+      ],
+      "neighbors": [
+        "Cristal",
+        "Tristeza"
+      ]
+    },
+    {
+      "name": "Vila Conceição",
+      "lng_lat": [
+        -51.2585407467141,
+        -30.1211497819494
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.22664331232851,
+            -30.136658067345167
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.23376117642059,
+            -30.11552674552876
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.2446947283035,
+            -30.103923846959123
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.24813410073337,
+            -30.080908118844444
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.26759443488469,
+            -30.157965946240562
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.21712837543469,
+            -30.145368770292517
+          ]
+        }
+      ],
+      "neighbors": [
+        "Tristeza",
+        "Sétimo Céu",
+        "Pedra Redonda"
+      ]
+    },
+    {
+      "name": "Vila Ipiranga",
+      "lng_lat": [
+        -51.1489673177001,
+        -30.021489930859
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.18020916874526,
+            -30.005681017282136
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.14804773781659,
+            -30.050046039473074
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.10233557494451,
+            -30.04696377049409
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.19119813457097,
+            -29.97262556738351
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.18397841334672,
+            -29.991621413889323
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.15947990733473,
+            -30.042516665977423
+          ]
+        }
+      ],
+      "neighbors": [
+        "Jardim Lindóia",
+        "São Sebastião",
+        "Sarandi",
+        "Jardim Itú",
+        "Jardim Sabará",
+        "Vila Jardim",
+        "Jardim Europa;Passo D'Areia",
+        "Cristo Redentor"
+      ]
+    },
+    {
+      "name": "Vila Jardim",
+      "lng_lat": [
+        -51.1530055820369,
+        -30.0344525915643
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.18948133335006,
+            -30.03812396461151
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.145174423910696,
+            -30.031247408238205
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.12186280335,
+            -30.07501438937263
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.181956000019426,
+            -30.0232041638163
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.13503903627934,
+            -29.99447632214184
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.1736563413054,
+            -30.009711574234576
+          ]
+        }
+      ],
+      "neighbors": [
+        "Jardim Europa",
+        "Vila Ipiranga",
+        "Jardim Sabará",
+        "Jardim Carvalho",
+        "Bom Jesus",
+        "Chácara das Pedras",
+        "Jardim Itú"
+      ]
+    },
+    {
+      "name": "Vila João Pessoa",
+      "lng_lat": [
+        -51.1765277755466,
+        -30.067579722071
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.20368483511203,
+            -30.03330440849752
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.17017535920996,
+            -30.0930533014144
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.209033916181944,
+            -30.02727937975712
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.14470259256872,
+            -30.020176659350163
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.202074511584186,
+            -30.109151799269455
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.149133287644744,
+            -30.02443936374728
+          ]
+        }
+      ],
+      "neighbors": [
+        "Partenon",
+        "São José",
+        "Cel. Aparício Borges"
+      ]
+    },
+    {
+      "name": "Vila Nova",
+      "lng_lat": [
+        -51.2124293380064,
+        -30.1173459931917
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.250099636088,
+            -30.16125827600034
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.26106921861018,
+            -30.147113148035217
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.17089327857243,
+            -30.14838898888316
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.18893549866254,
+            -30.092221789978748
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.252039452287654,
+            -30.110124945492313
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.24896271670511,
+            -30.126669603870273
+          ]
+        },
+        {
+          "name": "hospital",
+          "lng_lat": [
+            -51.25594505606179,
+            -30.14060737514886
+          ]
+        }
+      ],
+      "neighbors": [
+        "Nonoai",
+        "Teresópolis",
+        "Cascata",
+        "Belém Velho",
+        "Restinga",
+        "Hípica",
+        "Campo Novo",
+        "Cavalhada",
+        "Ipanema"
+      ]
+    },
+    {
+      "name": "São José",
+      "lng_lat": [
+        -51.1661842488243,
+        -30.068548635895
+      ],
+      "points_of_interest": [
+        {
+          "name": "home",
+          "lng_lat": [
+            -51.20985220184453,
+            -30.05515453198073
+          ]
+        },
+        {
+          "name": "work",
+          "lng_lat": [
+            -51.1811948160075,
+            -30.10051466491572
+          ]
+        },
+        {
+          "name": "school",
+          "lng_lat": [
+            -51.18396189747225,
+            -30.03519052737919
+          ]
+        },
+        {
+          "name": "marketplace",
+          "lng_lat": [
+            -51.17116674080077,
+            -30.093943739853334
+          ]
+        },
+        {
+          "name": "pharmacy",
+          "lng_lat": [
+            -51.17830556327712,
+            -30.1166804563265
+          ]
+        },
+        {
+          "name": "gas_station",
+          "lng_lat": [
+            -51.16027749303397,
+            -30.06015190484442
+          ]
+        }
+      ],
+      "neighbors": [
+        "Partenon",
+        "Agronomia",
+        "Lomba do Pinheiro",
+        "Cascata",
+        "Cel. Aparício Borges",
+        "Vila João Pessoa"
+      ]
+    }
+  ]
+}

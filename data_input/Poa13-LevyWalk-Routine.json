@@ -1,0 +1,17 @@
+{
+  "global_routine": [
+    {
+      "cycle_step": 1,
+      "action": {
+        "name": "levy_walk_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {}
+        },
+        "values": {}
+      }
+    }
+  ],
+  "routines": {}
+}
