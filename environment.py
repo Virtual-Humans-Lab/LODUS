@@ -270,7 +270,7 @@ class EnvNodeFactory():
         return node
 
 
-#region
+# envregion
 class EnvRegion():
     """"Represents a particular region of simulation.
     
@@ -523,6 +523,8 @@ class EnvironmentGraph():
         self.next_frame_queue = []
         # Queued actions priority 'first' or 'last'
         self.queued_action_priority = 'first'
+
+        self.experiment_name = "test"
 
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
         self.od_matrix_logger = {}
