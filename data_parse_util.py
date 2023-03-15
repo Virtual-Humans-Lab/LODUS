@@ -58,9 +58,12 @@ def Generate_EnvironmentGraph(env_input):
             elif 'frames' in rga:
                 env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
             elif 'cycle_step' in rga:
+                pt = population.PopTemplate(
+                        sampled_properties=rga["action"]['population_template']["sampled_characteristics"],
+                        traceable_properties=rga["action"]['population_template']["traceable_characteristics"])
                 env.set_repeating_action(int(rga['cycle_step']), 
                                          TimeAction(action_type=rga['action']['type'], 
-                                                    pop_template=rga['action']['population_template'],
+                                                    pop_template=pt,
                                                     values=rga['action']['values']))
 
 
