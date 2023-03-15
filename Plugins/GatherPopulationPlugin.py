@@ -61,7 +61,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         self.distances_map = {}
         self.weights_map = {}
 
-        # Performance log for quantity of subactions
+        # Performance log for quantity of sub-actions
         self.sublist_count = []
 
         # Debug options
@@ -122,10 +122,10 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
         
-        target_region = self.graph.get_region_by_name(values['region'])
-        target_node = target_region.get_node_by_name(values['node'])
+        acting_region = self.graph.get_region_by_name(values['region'])
+        action_node = acting_region.get_node_by_name(values['node'])
             
-        if self.DEBUG_OPERATION_OUTPUT and target_node.containing_region_name in self.DEBUG_OPERATION_REGIONS:
+        if self.DEBUG_OPERATION_OUTPUT and action_node.containing_region_name in self.DEBUG_OPERATION_REGIONS:
             print("########## CONVERGE_POPULATION")
             print('converge Values: \n', values)
             
@@ -136,13 +136,13 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             return sub_list
 
         # Get node weights
-        weight_list = self.compute_node_weights(target_node)
+        weight_list = self.compute_node_weights(action_node)
 
         # Filters undesired EnvNodes
         if 'only_locals' in values and bool(values['only_locals']):
-            weight_list = [(node, weight) for (node,weight) in weight_list if (node.containing_region_name == target_node.containing_region_name)]
+            weight_list = [(node, weight) for (node,weight) in weight_list if (node.containing_region_name == action_node.containing_region_name)]
         if 'different_node_name' in values and bool(values['different_node_name']):
-            weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != target_node.name)]
+            weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != action_node.name)]
         
         # Shuffles the remaining EnvNodes
         random.shuffle(weight_list)
@@ -201,14 +201,14 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         
         for node_aux, w, i in node_targets:
             
-            region = self.graph.get_region_by_name(node_aux.containing_region_name)
+            origin_region = self.graph.get_region_by_name(node_aux.containing_region_name)
             isolation_factor = self.isolation_rate
             
             new_action_type = 'move_population'
-            new_action_values = { 'origin_region': region.name,
+            new_action_values = { 'origin_region': origin_region.name,
                                 'origin_node': node_aux.name,
-                                'destination_region': target_region.name,
-                                'destination_node': target_node.name}
+                                'destination_region': acting_region.name,
+                                'destination_node': action_node.name}
            
             if self.iso_mode == 'regular':
                 new_action_values['quantity'] = i
@@ -234,11 +234,11 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
             if self.locals_only:
                 temp = copy.deepcopy(pop_template)
-                temp.mother_blob_id = target_region.id
+                temp.mother_blob_id = acting_region.id
 
             total_quant += new_action_values['quantity']
             new_action = environment.TimeAction(action_type = new_action_type, 
-                                                pop_template = pop_template,
+                                                pop_template = temp,
                                                 values = new_action_values)
             #print(new_action_values)
             
@@ -246,8 +246,8 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             #self.graph.direct_action_invoke(new_action, hour, time)
             #list_count +=1 
 
-        if self.DEBUG_ALL_REQUESTS or target_region.name in self.DEBUG_REGIONS:
-            print(f'To {target_region.name}\tReq: {quantity} Sent: {total_quant}')
+        if self.DEBUG_ALL_REQUESTS or acting_region.name in self.DEBUG_REGIONS:
+            print(f'To {acting_region.name}\tReq: {quantity} Sent: {total_quant}')
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list

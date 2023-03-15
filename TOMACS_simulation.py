@@ -59,6 +59,7 @@ cycles = 1
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
+env_graph.experiment_name = args["n"]
 
 print("node count", len(env_graph.node_list))
 '''
@@ -156,14 +157,14 @@ od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_pr
 Simulation
 '''
 
-#env_graph.LoadLoggerPlugin(pop_count_logger)
-#env_graph.LoadLoggerPlugin(od_logger)
-#env_graph.LoadLoggerPlugin(blob_count_logger)
+env_graph.LoadLoggerPlugin(pop_count_logger)
+env_graph.LoadLoggerPlugin(od_logger)
+env_graph.LoadLoggerPlugin(blob_count_logger)
 #env_graph.LoadLoggerPlugin(traceable_logger)
 #env_graph.LoadLoggerPlugin(vacc_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
-#env_graph.start_logging()
+env_graph.start_logging()
 
 start_time = time.perf_counter()
 for i in range(simulation_steps):
@@ -181,7 +182,7 @@ for i in range(simulation_steps):
     env_graph.update_time_step(i % cycle_length, i)
 
     # Log current simulation step
-    #env_graph.log_simulation_step()
+    env_graph.log_simulation_step()
     
     #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
     #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
@@ -193,7 +194,7 @@ for i in range(simulation_steps):
 # od_logger.stop_logging()
 
 end_time = time.perf_counter()
-#env_graph.stop_logging()
+env_graph.stop_logging()
 
 
 #print("Gather population execution times")

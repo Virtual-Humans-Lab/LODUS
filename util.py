@@ -2,10 +2,19 @@ import math
 import json
 import typing
 import numpy
+from geopy import distance
+from pyproj import Proj
+from pyproj import Geod
 
 def distance2D(p1, p2):
     d = (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1])
     return math.sqrt(d)
+
+def geodesic_distance_metre(p1, p2):
+    return distance.distance(p1, p2).m
+
+def pyproj_distance_metre(p1, p2):
+    return Geod(ellps='WGS84').inv(p1[0], p1[1], p2[0],p2[1])[2]
 
 
 def weighted_int_distribution(available, quantity):
