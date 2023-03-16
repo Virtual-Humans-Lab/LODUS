@@ -17,7 +17,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
+from LegacyPlugins.LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
 from Loggers.population_count_logger import PopulationCountLogger
 from pathlib import Path

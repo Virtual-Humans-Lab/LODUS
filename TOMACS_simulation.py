@@ -34,6 +34,7 @@ import time
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
+arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Configuration File.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
 arg_parser.add_argument('--c', metavar="C", type=str, default = ".\DataInput\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
@@ -47,10 +48,11 @@ FixedRandom()
 Data Loading
 '''
 data_input_file_path = args['f']
+experiment_configuration_file = args['e']
 if ".json" in args['f']: 
     env_graph = generate_EnvironmentGraph(data_input_file_path)
 else:
-    env_graph = Generate_EnvironmentGraph(data_input_file_path)
+    env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 '''
 Parameters
 '''

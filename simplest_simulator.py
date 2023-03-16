@@ -19,7 +19,7 @@ from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
+from LegacyPlugins.LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
 
 from pathlib import Path

@@ -10,7 +10,7 @@ def distance2D(p1, p2):
     d = (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1])
     return math.sqrt(d)
 
-def geodesic_distance_metre(p1, p2):
+def geopy_distance_metre(p1, p2):
     return distance.distance(p1, p2).m
 
 def pyproj_distance_metre(p1, p2):

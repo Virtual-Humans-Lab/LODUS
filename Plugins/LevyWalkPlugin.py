@@ -1,4 +1,5 @@
 import copy
+from enum import Enum
 import sys
 from typing import Optional
 
@@ -15,6 +16,11 @@ from pathlib import Path
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+
+class LevyDistance(Enum):
+    LONG_LAT = 1
+    METRES_GEOPY = 2
+    METRES_PYPROJ = 3
 
 class LevyWalkPlugin(environment.TimeActionPlugin):
 
@@ -43,29 +49,33 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         self.graph = env_graph
         self.set_pair('levy_walk', self.levy_walk)
+        
+        self.distance_type:LevyDistance = LevyDistance.LONG_LAT
 
-        self.mobility_scale = 50
+        self.distribution_sampler = scipy_levy
+        self.use_buckets:bool  = True
+        self.mobility_scale:int = 50
+        self.levy_probability:float = 0.05
 
         self.dist_dict = {}
         self.dist_buckets = {}
-        #self.bucket_size:float = 0.015
-        self.bucket_size:float = 500
-        self.use_buckets:bool  = True
 
-        self.distribution_sampler = scipy_levy
-        # self.distribution_scale = 50
-        # self.distribution_location = 30
-        self.distribution_scale = 0.005
-        self.distribution_location = 0.0
-
-        self.levy_probability = 0.05
-
+        if self.distance_type == LevyDistance.LONG_LAT:
+            self.bucket_size:float = 0.0075
+            self.distribution_location:float = 0.0
+            self.distribution_scale:float = 0.005
+        else:
+            self.bucket_size:float = 500
+            self.distribution_location:float = 0.0
+            self.distribution_scale:float = 200.0
+        
         # Performance log for quantity of sub-actions
         self.sublist_count = []
 
-        self.calculate_all_distances()
-        self.generate_distante_distribution_figure()
-        exit(0)
+        # Generate figures for debug
+        # self.calculate_all_distances()
+        # self.generate_node_distante_distribution_figure(y_limit=20000)
+        # exit(0)
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -148,6 +158,17 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             self.get_node_distance(node, self.graph)
             self.get_node_distance_bucket(node, self.graph)
 
+    # Gets distances based on selected distance type
+    def get_distance(self, p1, p2):
+        if self.distance_type == LevyDistance.LONG_LAT:
+            return util.distance2D(p1, p2)
+        elif self.distance_type == LevyDistance.METRES_GEOPY:
+            return util.geopy_distance_metre(p1, p2)
+        elif self.distance_type == LevyDistance.METRES_PYPROJ:
+            return util.pyproj_distance_metre(p1, p2)
+        else:
+            exit("Levy Distance Type is invalid")
+
     # Gets distances between current node and all other nodes
     def get_node_distance(self, node:environment.EnvNode, graph:environment.EnvironmentGraph):
         unique_name = node.get_unique_name()
@@ -160,7 +181,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         for other in graph.node_list:
             if unique_name == other.get_unique_name():
                 continue
-            distance_list.append((util.pyproj_distance_metre(node_pos, other.long_lat), other.get_unique_name()))
+            distance_list.append((self.get_distance(node_pos, other.long_lat), other.get_unique_name()))
         distance_list = sorted(distance_list)
 
         self.dist_dict[unique_name] = distance_list
@@ -233,19 +254,26 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if len(self.sublist_count) > 0:
             print("---Average subaction count:", sum(self.sublist_count)/len(self.sublist_count))
 
-    def generate_distante_distribution_figure(self) -> None:
+    def generate_node_distante_distribution_figure(self, y_limit = 15000) -> None:
         dir_path = Path(__file__).parent / "levy_distribution"
         dir_path.mkdir(parents=True, exist_ok=True)
-        
+
         distances = []
         for node in self.graph.node_list:
             distances.extend([x[0] for x in self.get_node_distance(node, self.graph)])
         max_distante = max(distances) * 1.05
+
         bins = np.arange(0, max_distante, self.bucket_size)
         s = sns.histplot(distances, bins=bins) # type: ignore
         self.graph.experiment_name
-        fig_path = dir_path / f"{self.graph.experiment_name}_node_distances_{self.bucket_size}.png"
-        print(fig_path)
+        fig_path = dir_path / f"node_distances_{self.graph.experiment_name}_{self.bucket_size}.png"
+        plt.ylim(0, y_limit)
+        plt.savefig(fig_path, dpi=400)
+        plt.clf()
+        s = sns.histplot(distances, bins=bins, cumulative=True) # type: ignore
+        self.graph.experiment_name
+        fig_path = dir_path / f"node_distances_{self.graph.experiment_name}_{self.bucket_size}_cumulative.png"
+        #plt.ylim(0, y_limit)
         plt.savefig(fig_path, dpi=400)
         plt.clf()
 
@@ -255,7 +283,14 @@ def generate_levy_distribution_figure(dir_path:Path, location: int, scale: int, 
     bins = np.arange(bin_start, bin_stop, bin_step)
     s = sns.histplot(dist, bins=bins) # type: ignore
     fig_path = dir_path / f"levy-distribution-l{location}-s{scale}-q{size}.png"
-    print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {sum(dist)/size}, Max {max(dist)}')
+    print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {dist.mean()}, Max {dist.max()}')
+    plt.savefig(fig_path, dpi=400)
+    plt.clf()
+    bins = np.arange(bin_start, bin_stop/2.0, bin_step)
+    s = sns.histplot(dist, bins=bins, cumulative=True) # type: ignore
+    fig_path = dir_path / f"levy-distribution-l{location}-s{scale}-q{size}-cumulative.png"
+    print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {dist.mean()}, Max {dist.max()}')
+    plt.ylim(0, size)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -263,18 +298,30 @@ if __name__ == "__main__":
     print("Generating Levy Walk sampling figures")
     dir_path = Path("./levy_distribution")
     dir_path.mkdir(parents=True, exist_ok=True)
-    dist_configs = [ {"location":1, "scale":1, "start":0, "stop":10, "step":0.1},
-                    {"location":50, "scale":50, "start":0, "stop":600, "step":1},
-                    {"location":100, "scale":50, "start":0, "stop":600, "step":1},
-                    {"location":50, "scale":100, "start":0, "stop":600, "step":1},
-                    {"location":75, "scale":75, "start":0, "stop":600, "step":1},
-                    {"location":400, "scale":100, "start":390, "stop":1000, "step":1},
-                    {"location":0, "scale":600, "start":0, "stop":2500, "step":10},
-                    {"location":0, "scale":100, "start":0, "stop":1200, "step":10},
-                    {"location":0, "scale":200, "start":0, "stop":1200, "step":10},
-                    {"location":0, "scale":50, "start":0, "stop":1200, "step":10},
-                    {"location":0, "scale":0.025, "start":0, "stop":2, "step":0.01}]
+    dist_configs = []
+    # dist_configs = [ {"location":1, "scale":1, "start":0, "stop":10, "step":0.1},
+    #                 {"location":50, "scale":50, "start":0, "stop":600, "step":1},
+    #                 {"location":100, "scale":50, "start":0, "stop":600, "step":1},
+    #                 {"location":50, "scale":100, "start":0, "stop":600, "step":1},
+    #                 {"location":75, "scale":75, "start":0, "stop":600, "step":1},
+    #                 {"location":400, "scale":100, "start":390, "stop":1000, "step":1},
+    #                 {"location":0, "scale":600, "start":0, "stop":2500, "step":10},
+    #                 {"location":0, "scale":100, "start":0, "stop":1200, "step":10},
+    #                 {"location":0, "scale":200, "start":0, "stop":1200, "step":10},
+    #                 {"location":0, "scale":50, "start":0, "stop":1200, "step":10},
+    #                 {"location":0, "scale":0.025, "start":0, "stop":2, "step":0.01}]
+
+    # Tests for long-lat distance type
+    dist_configs.extend([{"location":0, "scale":0.0075, "start":0, "stop":0.4, "step":0.0075},
+                         {"location":0, "scale":0.010, "start":0, "stop":0.4, "step":0.0075},
+                         {"location":0, "scale":0.015, "start":0, "stop":0.4, "step":0.0075},
+                         {"location":0, "scale":0.020, "start":0, "stop":0.4, "step":0.0075}])
     
+    # Tests for Geopy/PyProj distance type
+    dist_configs.extend([{"location":0, "scale":500, "start":0, "stop":40000, "step":500},
+                         {"location":0, "scale":750, "start":0, "stop":40000, "step":500},
+                         {"location":0, "scale":1000, "start":0, "stop":40000, "step":500}])
+
     for config in dist_configs:
         generate_levy_distribution_figure(
             dir_path=dir_path, location=config["location"],
