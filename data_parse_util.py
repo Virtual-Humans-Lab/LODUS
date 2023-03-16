@@ -1,5 +1,6 @@
 import math
 import json
+from pathlib import Path
 from environment import *
 from population import *
 
@@ -12,22 +13,28 @@ def DummyPop(env_graph):
 
 
 def Generate_EnvironmentGraph(env_input):
-    print("generating EnvGraph with new parsing. File:", env_input)
+    print("Generating EnvGraph with new parsing. Experiment Config File:", env_input)
     if env_input == 'dummy':
         env = DummyEnv()
         populate_EnvironmentGraph('dummy', env)
         return env
     
-    base_file_path = ".\data_input\\" + env_input
-    env_file = open(base_file_path + "-Environment.json",'r', encoding='utf8')
-    pop_file = open(base_file_path + "-Population.json",'r', encoding='utf8')
-    rot_file = open(base_file_path + "-Routine.json",'r', encoding='utf8')
+    exp_path = Path() / "experiments"
+    data_path =  Path() / "data_input"
+
+    exp_config = json.load(open(exp_path / (env_input + ".json"), 'r', encoding='utf8'))
+    input_files = exp_config["envgraph_inputs_files"]
+
+    env_file = open(data_path / input_files["environment_file"],'r', encoding='utf8')
+    pop_file = open(data_path / input_files["population_file"],'r', encoding='utf8')
+    rot_file = open(data_path / input_files["routine_file"],'r', encoding='utf8')
 
     env_json = json.load(env_file)
     pop_json = json.load(pop_file)
     rot_json = json.load(rot_file)
 
     env = EnvironmentGraph()
+    env.experiment_config = exp_config
 
     block_template = BlockTemplate()
     pop_template = { "traceable_properties": pop_json["default_traceable_characteristics"],

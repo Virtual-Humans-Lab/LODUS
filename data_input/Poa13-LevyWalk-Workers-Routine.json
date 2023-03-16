@@ -1,0 +1,33 @@
+{
+  "global_routine": [
+    {
+      "cycle_step": 2,
+      "action": {
+        "name": "levy_walk_workers_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs",
+              "adults",
+              "elders"
+            ],
+            "occupation": [
+              "worker"
+            ]
+          }
+        },
+        "values": {
+          "ignore_acting_node_type": [
+            "work"
+          ],
+          "target_node_type": [
+            "work"
+          ]
+        }
+      }
+    }
+  ],
+  "routines": {}
+}

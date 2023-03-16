@@ -525,6 +525,7 @@ class EnvironmentGraph():
         self.queued_action_priority = 'first'
 
         self.experiment_name = "test"
+        self.experiment_config = {}
 
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
         self.od_matrix_logger = {}

@@ -1,0 +1,7 @@
+{
+    "envgraph_inputs_files": {
+        "environment_file": "Environment-PortoAlegre94RegionsDefault.json",
+        "population_file": "Population-PortoAlegre94RegionsDefault.json",
+        "routine_file": "Poa94-LevyWalk-Workers-Routine.json"
+    }
+}
