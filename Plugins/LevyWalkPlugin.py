@@ -50,15 +50,16 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.graph = env_graph
         self.set_pair('levy_walk', self.levy_walk)
         
+        self.distribution_sampler = scipy_levy
+        self.config = {}
+        #if "levy_walk_plugin" in self.graph.experiment_config:
+
         self.distance_type:LevyDistance = LevyDistance.LONG_LAT
 
-        self.distribution_sampler = scipy_levy
         self.use_buckets:bool  = True
         self.mobility_scale:int = 50
         self.levy_probability:float = 0.05
 
-        self.dist_dict = {}
-        self.dist_buckets = {}
 
         if self.distance_type == LevyDistance.LONG_LAT:
             self.bucket_size:float = 0.0075
@@ -69,6 +70,10 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             self.distribution_location:float = 0.0
             self.distribution_scale:float = 200.0
         
+        # Distaces from one EnvNode to others
+        self.dist_dict = {}
+        self.dist_buckets = {}
+
         # Performance log for quantity of sub-actions
         self.sublist_count = []
 
@@ -96,10 +101,17 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if node_population == 0:
             return sub_list
         
+        if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
+            return sub_list
+        
         if self.use_buckets:
             distances = self.get_node_distance_bucket(acting_node, self.graph)
         else:
             distances = self.get_node_distance(acting_node, self.graph)
+        
+        if "target_node_type" in values:
+            distances = self.filter_target_node_types(distances=distances,
+                                                      target_nodes=values["target_node_type"])
 
         # Divides the population amount in packets to be sent to other nodes
         packets = node_population // self.mobility_scale
@@ -206,6 +218,16 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         return self.dist_buckets[unique_name]
 
+    def filter_target_node_types(self, distances, target_nodes:list[str]):
+        if self.use_buckets:
+            for bucket in distances:
+                distances[bucket] = [dist for dist in distances[bucket] if 
+                                     str(dist[1]).split("//")[1] in target_nodes]
+                
+        else: 
+            raise "error"
+        return distances
+
     def levy_sample(self, location:Optional[float] = None,
                     scale:Optional[float] = None):
         if location is not None and scale is not None:
@@ -248,6 +270,8 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         
         return l
     
+    
+
     def print_execution_time_data(self):
         super().print_execution_time_data()
         print("---Total subactions count:", sum(self.sublist_count))
