@@ -18,14 +18,13 @@ class LevyWalkFigures:
         dist = np.array(scipy_levy.rvs(loc=location, scale= scale, size = size))
         bins = np.arange(bin_start, bin_stop, bin_step)
         s = sns.histplot(dist, bins=bins) # type: ignore
-        fig_path = dir_path / f"levy-distribution-l{location}-s{scale}-q{size}.png"
+        fig_path = dir_path / f"levy-distribution-L{location}-S{scale}-BS{bin_step}.png"
         print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {dist.mean()}, Max {dist.max()}')
         plt.savefig(fig_path, dpi=400)
         plt.clf()
         bins = np.arange(bin_start, bin_stop/2.0, bin_step)
         s = sns.histplot(dist, bins=bins, cumulative=True) # type: ignore
-        fig_path = dir_path / f"levy-distribution-l{location}-s{scale}-q{size}-cumulative.png"
-        print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {dist.mean()}, Max {dist.max()}')
+        fig_path = dir_path / f"levy-distribution-L{location}-S{scale}-BS{bin_step}-cumulative.png"
         plt.ylim(0, size)
         plt.savefig(fig_path, dpi=400)
         plt.clf()
@@ -43,13 +42,13 @@ class LevyWalkFigures:
         bins = np.arange(0, max_distante, levy_plugin.bucket_size)
         s = sns.histplot(distances, bins=bins) # type: ignore
         levy_plugin.graph.experiment_name
-        fig_path = dir_path / f"node_distances_{levy_plugin.graph.experiment_name}_{levy_plugin.bucket_size}.png"
+        fig_path = dir_path / f"node_distances_{levy_plugin.graph.experiment_name}_{levy_plugin.distance_type.name}_{levy_plugin.bucket_size}.png"
         plt.ylim(0, y_limit)
         plt.savefig(fig_path, dpi=400)
         plt.clf()
         s = sns.histplot(distances, bins=bins, cumulative=True) # type: ignore
         levy_plugin.graph.experiment_name
-        fig_path = dir_path / f"node_distances_{levy_plugin.graph.experiment_name}_{levy_plugin.bucket_size}_cumulative.png"
+        fig_path = dir_path / f"node_distances_{levy_plugin.graph.experiment_name}_{levy_plugin.distance_type.name}_{levy_plugin.bucket_size}_cumulative.png"
         plt.savefig(fig_path, dpi=400)
         plt.clf()
 
@@ -71,10 +70,11 @@ if __name__ == "__main__":
     #                     {"location":0, "scale":0.025, "start":0, "stop":2, "step":0.01}])
 
     # Tests for long-lat distance type
-    dist_configs.extend([{"location":0, "scale":0.0075, "start":0, "stop":0.4, "step":0.0075},
-                         {"location":0, "scale":0.010, "start":0, "stop":0.4, "step":0.0075},
-                         {"location":0, "scale":0.015, "start":0, "stop":0.4, "step":0.0075},
-                         {"location":0, "scale":0.020, "start":0, "stop":0.4, "step":0.0075}])
+    dist_configs.extend([{"location":0, "scale":0.005, "start":0, "stop":0.4, "step":0.005},
+                         {"location":0, "scale":0.0075, "start":0, "stop":0.4, "step":0.005},
+                         {"location":0, "scale":0.010, "start":0, "stop":0.4, "step":0.005},
+                         {"location":0, "scale":0.015, "start":0, "stop":0.4, "step":0.005},
+                         {"location":0, "scale":0.020, "start":0, "stop":0.4, "step":0.005}])
     
     # Tests for Geopy/PyProj distance type
     dist_configs.extend([{"location":0, "scale":500, "start":0, "stop":40000, "step":500},

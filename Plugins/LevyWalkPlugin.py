@@ -64,7 +64,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.distribution_location:float = self.config.get("distribution_location", 0.0)
 
         if self.distance_type == LevyDistance.LONG_LAT:
-            self.bucket_size:float = self.config.get("distance_bucket_size", 0.0075)
+            self.bucket_size:float = self.config.get("distance_bucket_size", 0.005)
             self.distribution_scale:float = self.config.get("distribution_scale", 0.005)
         else:
             self.bucket_size:float = self.config.get("distance_bucket_size", 500)
@@ -78,9 +78,9 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.sublist_count = []
 
         # Generate figures for debug
-        # self.calculate_all_distances()
-        # LevyWalkFigures.generate_node_distante_distribution_figure(self, y_limit=20000)
-        # exit(0)
+        self.calculate_all_distances()
+        LevyWalkFigures.generate_node_distante_distribution_figure(self, y_limit=17500) # 94:17500, 13:2000
+        exit(0)
 
     def update_time_step(self, cycle_step, simulation_step):
         return

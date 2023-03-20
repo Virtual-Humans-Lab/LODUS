@@ -1,7 +1,7 @@
 {
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": "Environment-PortoAlegre13RegionsDefault.json",
+        "environment_file": "Test13-Environment.json",
         "population_file": "Population-PortoAlegre13RegionsDefault.json",
         "routine_file": "Poa13-LevyWalk-Workers-Routine.json"
     },
