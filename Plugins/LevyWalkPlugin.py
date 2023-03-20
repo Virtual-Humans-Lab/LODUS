@@ -1,21 +1,20 @@
 import copy
-from enum import Enum
 import sys
+from enum import Enum
 from typing import Optional
 
-import numpy
+from LevyWalkFigures import LevyWalkFigures
+
 sys.path.append('../')
 
-import environment
-from population import PopTemplate
-import util
-from scipy.stats import levy as scipy_levy
 import random
 import time
-from pathlib import Path
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
+
+from scipy.stats import levy as scipy_levy
+
+import environment
+import util
+
 
 class LevyDistance(Enum):
     LONG_LAT = 1
@@ -51,24 +50,25 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.set_pair('levy_walk', self.levy_walk)
         
         self.distribution_sampler = scipy_levy
-        self.config = {}
-        #if "levy_walk_plugin" in self.graph.experiment_config:
+        if "levy_walk_plugin" not in self.graph.experiment_config:
+            print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry")
 
-        self.distance_type:LevyDistance = LevyDistance.LONG_LAT
-
-        self.use_buckets:bool  = True
-        self.mobility_scale:int = 50
-        self.levy_probability:float = 0.05
-
+        # Loads experiment configuration, if any
+        self.config:dict = self.graph.experiment_config.get("levy_walk_plugin", {})
+        
+        self.distance_type:LevyDistance = LevyDistance(self.config.get("distance_type",
+                                                                       LevyDistance.LONG_LAT))
+        self.use_buckets:bool = self.config.get("use_buckets", True)
+        self.population_group_size:int = self.config.get("population_group_size", 50)
+        self.movement_probability:float = self.config.get("movement_probability", 0.05)
+        self.distribution_location:float = self.config.get("distribution_location", 0.0)
 
         if self.distance_type == LevyDistance.LONG_LAT:
-            self.bucket_size:float = 0.0075
-            self.distribution_location:float = 0.0
-            self.distribution_scale:float = 0.005
+            self.bucket_size:float = self.config.get("distance_bucket_size", 0.0075)
+            self.distribution_scale:float = self.config.get("distribution_scale", 0.005)
         else:
-            self.bucket_size:float = 500
-            self.distribution_location:float = 0.0
-            self.distribution_scale:float = 200.0
+            self.bucket_size:float = self.config.get("distance_bucket_size", 500)
+            self.distribution_scale:float = self.config.get("distribution_scale", 200.0)
         
         # Distaces from one EnvNode to others
         self.dist_dict = {}
@@ -79,13 +79,13 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         # Generate figures for debug
         # self.calculate_all_distances()
-        # self.generate_node_distante_distribution_figure(y_limit=20000)
+        # LevyWalkFigures.generate_node_distante_distribution_figure(self, y_limit=20000)
         # exit(0)
 
     def update_time_step(self, cycle_step, simulation_step):
         return
 
-    def levy_walk(self, pop_template, values, cycle_step, sim_step):
+    def levy_walk(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         start_time = time.perf_counter()
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
@@ -104,7 +104,14 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
             return sub_list
         
-        if self.use_buckets:
+        # Loads optional action parameters, otherwise, use default values
+        _use_buckets:bool = values.get("use_buckets", self.use_buckets)
+        _pop_group_size:int = values.get("population_group_size", self.population_group_size)
+        _mov_probability:float = values.get("movement_probability", self.movement_probability)
+        _dist_location:float = values.get("distribution_location", self.distribution_location)
+        _dist_scale:float = values.get("distribution_location", self.distribution_scale)
+        
+        if _use_buckets:
             distances = self.get_node_distance_bucket(acting_node, self.graph)
         else:
             distances = self.get_node_distance(acting_node, self.graph)
@@ -114,29 +121,24 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
                                                       target_nodes=values["target_node_type"])
 
         # Divides the population amount in packets to be sent to other nodes
-        packets = node_population // self.mobility_scale
+        packets = node_population // _pop_group_size
 
         # Generates sub-actions for each packet
         for i in range(packets):
 
             # Reduces the chance for a levy walk to occur bor each packet
-            if self.levy_probability < random.random():
+            if _mov_probability < random.random():
                 continue
             
-            #print("TYPE", type(self.distribution_sampler.rvs()))
-            if 'dist_location' in values and 'dist_scale' in values:
-                distance = self.levy_sample(location=float(values['dist_location']),
-                                            scale=float(values['dist_scale']))
-            else:
-                distance = self.levy_sample()
-
-            if self.use_buckets:
-                selected = self.bucket_search(distances, distance)
+            sampled_dist = self.levy_sample(location=_dist_location, scale=_dist_scale)
+            
+            if _use_buckets:
+                selected = self.bucket_search(distances, sampled_dist)
                 if selected == None:
                     continue
                 target_node_u_name:str = selected[1]
             else:
-                ix = self.binary_search(distances, distance)
+                ix = self.binary_search(distances, sampled_dist)
                 if ix == -1:
                     continue
                 target_node_u_name:str =  distances[ix][1]
@@ -145,13 +147,13 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             target_region = self.graph.get_region_by_name(target_region)
             target_node = target_region.get_node_by_name(target_node)
 
-            # Creates a Move Population action
+            # Creates a Move Population action from the Acting Nodo to the Target Node
             new_action_type = 'move_population'
             new_action_values = {'origin_region': acting_region.name,
                                  'origin_node': acting_node.name,
                                  'destination_region': target_region.name,
                                  'destination_node': target_node.name,
-                                 'quantity': self.mobility_scale}
+                                 'quantity': self.population_group_size}
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
 
@@ -225,7 +227,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
                                      str(dist[1]).split("//")[1] in target_nodes]
                 
         else: 
-            raise "error"
+            raise Exception("Error in filter_target_node_types - Levy Walk Plugin")
         return distances
 
     def levy_sample(self, location:Optional[float] = None,
@@ -270,84 +272,11 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         
         return l
     
-    
-
     def print_execution_time_data(self):
         super().print_execution_time_data()
         print("---Total subactions count:", sum(self.sublist_count))
         if len(self.sublist_count) > 0:
             print("---Average subaction count:", sum(self.sublist_count)/len(self.sublist_count))
 
-    def generate_node_distante_distribution_figure(self, y_limit = 15000) -> None:
-        dir_path = Path(__file__).parent / "levy_distribution"
-        dir_path.mkdir(parents=True, exist_ok=True)
-
-        distances = []
-        for node in self.graph.node_list:
-            distances.extend([x[0] for x in self.get_node_distance(node, self.graph)])
-        max_distante = max(distances) * 1.05
-
-        bins = np.arange(0, max_distante, self.bucket_size)
-        s = sns.histplot(distances, bins=bins) # type: ignore
-        self.graph.experiment_name
-        fig_path = dir_path / f"node_distances_{self.graph.experiment_name}_{self.bucket_size}.png"
-        plt.ylim(0, y_limit)
-        plt.savefig(fig_path, dpi=400)
-        plt.clf()
-        s = sns.histplot(distances, bins=bins, cumulative=True) # type: ignore
-        self.graph.experiment_name
-        fig_path = dir_path / f"node_distances_{self.graph.experiment_name}_{self.bucket_size}_cumulative.png"
-        #plt.ylim(0, y_limit)
-        plt.savefig(fig_path, dpi=400)
-        plt.clf()
-
-def generate_levy_distribution_figure(dir_path:Path, location: int, scale: int, size: int,
-                            bin_start:float, bin_stop: float, bin_step:float) -> None:
-    dist = np.array(scipy_levy.rvs(loc=location, scale= scale, size = size))
-    bins = np.arange(bin_start, bin_stop, bin_step)
-    s = sns.histplot(dist, bins=bins) # type: ignore
-    fig_path = dir_path / f"levy-distribution-l{location}-s{scale}-q{size}.png"
-    print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {dist.mean()}, Max {dist.max()}')
-    plt.savefig(fig_path, dpi=400)
-    plt.clf()
-    bins = np.arange(bin_start, bin_stop/2.0, bin_step)
-    s = sns.histplot(dist, bins=bins, cumulative=True) # type: ignore
-    fig_path = dir_path / f"levy-distribution-l{location}-s{scale}-q{size}-cumulative.png"
-    print(f'Levy Distribution: Location {location}, Scale {scale}, Mean {dist.mean()}, Max {dist.max()}')
-    plt.ylim(0, size)
-    plt.savefig(fig_path, dpi=400)
-    plt.clf()
-
 if __name__ == "__main__":
-    print("Generating Levy Walk sampling figures")
-    dir_path = Path("./levy_distribution")
-    dir_path.mkdir(parents=True, exist_ok=True)
-    dist_configs = []
-    # dist_configs = [ {"location":1, "scale":1, "start":0, "stop":10, "step":0.1},
-    #                 {"location":50, "scale":50, "start":0, "stop":600, "step":1},
-    #                 {"location":100, "scale":50, "start":0, "stop":600, "step":1},
-    #                 {"location":50, "scale":100, "start":0, "stop":600, "step":1},
-    #                 {"location":75, "scale":75, "start":0, "stop":600, "step":1},
-    #                 {"location":400, "scale":100, "start":390, "stop":1000, "step":1},
-    #                 {"location":0, "scale":600, "start":0, "stop":2500, "step":10},
-    #                 {"location":0, "scale":100, "start":0, "stop":1200, "step":10},
-    #                 {"location":0, "scale":200, "start":0, "stop":1200, "step":10},
-    #                 {"location":0, "scale":50, "start":0, "stop":1200, "step":10},
-    #                 {"location":0, "scale":0.025, "start":0, "stop":2, "step":0.01}]
-
-    # Tests for long-lat distance type
-    dist_configs.extend([{"location":0, "scale":0.0075, "start":0, "stop":0.4, "step":0.0075},
-                         {"location":0, "scale":0.010, "start":0, "stop":0.4, "step":0.0075},
-                         {"location":0, "scale":0.015, "start":0, "stop":0.4, "step":0.0075},
-                         {"location":0, "scale":0.020, "start":0, "stop":0.4, "step":0.0075}])
-    
-    # Tests for Geopy/PyProj distance type
-    dist_configs.extend([{"location":0, "scale":500, "start":0, "stop":40000, "step":500},
-                         {"location":0, "scale":750, "start":0, "stop":40000, "step":500},
-                         {"location":0, "scale":1000, "start":0, "stop":40000, "step":500}])
-
-    for config in dist_configs:
-        generate_levy_distribution_figure(
-            dir_path=dir_path, location=config["location"],
-            scale=config["scale"], size=10000, bin_start=config["start"],
-            bin_stop=config["stop"], bin_step=config["step"])
+    pass
