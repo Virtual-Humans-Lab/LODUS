@@ -79,7 +79,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         # Generate figures for debug
         self.calculate_all_distances()
-        LevyWalkFigures.generate_node_distante_distribution_figure(self, y_limit=17500) # 94:17500, 13:2000
+        LevyWalkFigures.create_node_distante_distribution_figure(self, y_limit=17500) # 94:17500, 13:2000
         exit(0)
 
     def update_time_step(self, cycle_step, simulation_step):
