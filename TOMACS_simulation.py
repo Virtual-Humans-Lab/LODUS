@@ -77,14 +77,17 @@ env_graph.LoadPlugin(gather_pop)
 
 return_pop_home_plugin = ReturnPopulationHomePlugin(env_graph)
 env_graph.LoadPlugin(return_pop_home_plugin)
+
 send_pop_back_plugin = SendPopulationBackPlugin(env_graph)
 env_graph.LoadPlugin(send_pop_back_plugin)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)
 env_graph.LoadPlugin(return_to_prev)
 
-levy_walk = LevyWalkPlugin(env_graph)
-env_graph.LoadPlugin(levy_walk)
+levy_walk = None
+if 'levy_walk_plugin' in env_graph.experiment_config:
+    levy_walk = LevyWalkPlugin(env_graph)
+    env_graph.LoadPlugin(levy_walk)
 
 #social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 #social_distance.day_cycle = day_duration
@@ -201,7 +204,7 @@ env_graph.stop_logging()
 
 #print("Gather population execution times")
 #print(gather_pop.execution_times)
-levy_walk.print_execution_time_data()
+if levy_walk is not None: levy_walk.print_execution_time_data()
 gather_pop.print_execution_time_data()
 return_pop_home_plugin.print_execution_time_data()
 send_pop_back_plugin.print_execution_time_data()

@@ -1,7 +1,5 @@
-import copy
 import sys
 import time
-from types import new_class
 sys.path.append('../')
 
 import environment 

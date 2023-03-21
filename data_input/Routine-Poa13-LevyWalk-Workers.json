@@ -1,0 +1,2387 @@
+{
+  "global_routine": [
+    {
+      "cycle_step": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23
+      ],
+      "action": {
+        "name": "levy_walk_workers_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs",
+              "adults",
+              "elders"
+            ],
+            "occupation": [
+              "worker"
+            ]
+          }
+        },
+        "values": {
+          "ignore_acting_node_type": [
+            "work"
+          ],
+          "target_node_type": [
+            "work"
+          ],
+          "movement_probability": 0.15
+        }
+      }
+    },
+    {
+      "cycle_step": [
+        8,
+        12,
+        16,
+        20
+      ],
+      "action": {
+        "name": "levy_walk_workers_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs",
+              "adults",
+              "elders"
+            ],
+            "occupation": [
+              "worker"
+            ]
+          }
+        },
+        "values": {
+          "ignore_acting_node_type": [
+            "work"
+          ],
+          "target_node_type": [
+            "work"
+          ],
+          "movement_probability": 0.35
+        }
+      }
+    }
+  ],
+  "routines": {
+    "Azenha//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Azenha//shopping_mall": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Azenha",
+            "node": "shopping_mall",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Bom Fim//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Bom Fim//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Bom Fim//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Bom Fim//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Bom Fim//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Bom Fim//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Bom Fim",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Centro Histórico//shopping_mall": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "shopping_mall",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Farroupilha//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farroupilha",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Floresta//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Floresta//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Floresta//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Floresta//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Floresta//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Floresta//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Floresta",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Independência//shopping_mall": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Independência",
+            "node": "shopping_mall",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Menino Deus//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Menino Deus",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Moinhos de Vento//shopping_mall": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Moinhos de Vento",
+            "node": "shopping_mall",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//stadium": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "stadium",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Praia de Belas//shopping_mall": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "shopping_mall",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Rio Branco//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Rio Branco",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santa Cecília//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santa Cecília",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//home": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "home",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//work": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_portion_of_population_back",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "work",
+            "percentage": 0.2
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "work",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//school": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "school",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//marketplace": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "marketplace",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//pharmacy": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "pharmacy",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//gas_station": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "gas_station",
+            "quantity": -1
+          }
+        }
+      }
+    ],
+    "Santana//hospital": [
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Santana",
+            "node": "hospital",
+            "quantity": -1
+          }
+        }
+      }
+    ]
+  }
+}

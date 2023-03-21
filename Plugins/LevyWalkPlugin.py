@@ -78,9 +78,9 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.sublist_count = []
 
         # Generate figures for debug
-        self.calculate_all_distances()
-        LevyWalkFigures.create_node_distante_distribution_figure(self, y_limit=17500) # 94:17500, 13:2000
-        exit(0)
+        # self.calculate_all_distances()
+        # LevyWalkFigures.create_node_distante_distribution_figure(self, y_limit=17500) # 94:17500, 13:2000
+        # exit(0)
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -90,8 +90,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
 
-        if values['region'] == "Azenha" and values['node'] == "home":
-            print("LEVY WALKING", cycle_step)
+        self.values=values
 
         acting_region = self.graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_node_by_name(values['node'])
@@ -122,6 +121,9 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         # Divides the population amount in packets to be sent to other nodes
         packets = node_population // _pop_group_size
+
+        if values['region'] == "Azenha" and values['node'] == "home":
+            print("LEVY WALKING", cycle_step, packets, _mov_probability)
 
         # Generates sub-actions for each packet
         for i in range(packets):
@@ -251,8 +253,12 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         random_index = random.randint(0, len(target_bucket)-1)
 
-        if target_bucket[0][0] > distance:
-            return None
+        # if self.values['region'] == "Azenha" and self.values['node'] == "home":
+        #     print("---rand_index", random_index, "distance", distance, 
+        #           "bucket", target_bucket[0])
+
+        #if target_bucket[0][0] > distance:
+        #    return None
         return target_bucket[random_index]
     
     def binary_search(self, buckets_dict, distance):

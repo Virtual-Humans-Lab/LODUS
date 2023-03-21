@@ -1,4 +1,5 @@
 {
+    "__comment1__": "Experiment used to calculate node distances in PortoAlegre-94Regions. LevyWalkPlugin is used, only changing the distance type",
     "envgraph_inputs_files": {
         "environment_file": "Environment-PortoAlegre94RegionsDefault.json",
         "population_file": "Population-PortoAlegre94RegionsDefault.json",

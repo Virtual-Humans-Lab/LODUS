@@ -68,10 +68,16 @@ def Generate_EnvironmentGraph(env_input):
                 pt = population.PopTemplate(
                         sampled_properties=rga["action"]['population_template']["sampled_characteristics"],
                         traceable_properties=rga["action"]['population_template']["traceable_characteristics"])
-                env.set_repeating_action(int(rga['cycle_step']), 
-                                         TimeAction(action_type=rga['action']['type'], 
-                                                    pop_template=pt,
-                                                    values=rga['action']['values']))
+                if isinstance(rga['cycle_step'], list):
+                    env.set_repeating_action(rga['cycle_step'], 
+                                            TimeAction(action_type=rga['action']['type'], 
+                                                        pop_template=pt,
+                                                        values=rga['action']['values']))
+                else:
+                    env.set_repeating_action(int(rga['cycle_step']), 
+                                            TimeAction(action_type=rga['action']['type'], 
+                                                        pop_template=pt,
+                                                        values=rga['action']['values']))
 
 
     # Creating Regions

@@ -645,8 +645,8 @@ class EnvironmentGraph():
         if self.queued_action_priority == 'first':
             action_list += self.process_queued_actions()
 
-        action_list += self.process_routines(hour)
         action_list += self.process_repeating_global_actions(hour)
+        action_list += self.process_routines(hour)
 
         if self.queued_action_priority == 'last':
             action_list += self.process_queued_actions()
