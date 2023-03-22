@@ -15,7 +15,6 @@ from scipy.stats import levy as scipy_levy
 import environment
 import util
 
-
 class LevyDistance(Enum):
     LONG_LAT = 1
     METRES_GEOPY = 2
@@ -24,34 +23,50 @@ class LevyDistance(Enum):
 class LevyWalkPlugin(environment.TimeActionPlugin):
 
     def __init__(self, env_graph: environment.EnvironmentGraph):
-        '''levy_walk
-            Pushes population to nearby nodes into a requesting node.
+        '''
+        Plugin that consumes a 'levy_walk' TimeAction type.
+        Complex TimeAction that returns multiple 'move_population' actions
 
+        Moves population from the acting node to other nodes using distances sampled from a levy distribution.
+        The distance sampled indicates the 'desired travel distance', and the function identifies nodes in that distance.
+        Population is divided into packets, with each packet having a probability of moving to other nodes.
+        Can use buckets to group nodes based of distances (e.g., nodes from 0 to 500 metres, 501 to 1000 and so on).
+        
+        Requirements:
+            EnvNodes must have a 'long_lat' position value, represented as a list of 2 floats.
 
-                Requirements:
-                    Nodes must have position values in their characteristic dictionaries.
+        Plugin Parameters (default values can be overriden by the experiment configuration):
+            distance_type (enum): represents the distance type used to measure distances between EnvNodes (either Long_Lat or Metres with Geopy or PyProj)
+            use_buckets (bool): represents if the action with use distance buckets or a simples distance list
+            bucket_size (float): represents the size (width/range) for each distance bucket
+            population_group_size (int): represents the size of each population group trying to move to other nodes
+            movement_probability (float): represents the probability of a group moving to other node.
+            distribution_location (float): represents the location parameter of a levy distribution
+            distribution_scale (float): represents the scale parameter of a levy distirbution
+            
+        'levy_walk' Parameters:
+            region (str): acting_region (origin of population movement).
+            node (str): acting_node (origin of population movement).
+            population_template: PopTemplate to be matched by the operation.
+            ignore_acting_node_type (list[str]): optional parameter. If the acting_node type is in this list, 
+                the levy walk function returns an empty subaction list
+            target_node_type (list[str]): optional parameter used to filter possible destination for the population.
+                Can be used, e.g., to select only 'work' nodes as a possible destination
 
-                Params:
-                    region: origin region.
-                    node: origin node.
-                    dist_location: optional levy distribution location parameter.
-                    dist_scale: optional levy distribution scale parameter.
-                    population_template: PopTemplate to be matched by the operation.
-
-                    isolation_rate: the quantity to reduce movements by. simulates social isolation.
-
-                iso_mode: Can be:
-                    'regular'
-                        Normal plugin operation
+            ***The action may also receive the plugin parameters to override their values. 
+                Otherwise, the default plugin values are used.
+                This includes 'use_buckets', 'population_group_size', 'movement_probability', 
+                'distribution_location' and 'distribution_scale'.
+                The 'distance_type' and 'bucket_size' cannot be overridden.
         '''
         super().__init__()
-
+        
+        self.distribution_sampler = scipy_levy
         self.graph = env_graph
         self.set_pair('levy_walk', self.levy_walk)
         
-        self.distribution_sampler = scipy_levy
         if "levy_walk_plugin" not in self.graph.experiment_config:
-            print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry")
+            print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry (default plugin values)")
 
         # Loads experiment configuration, if any
         self.config:dict = self.graph.experiment_config.get("levy_walk_plugin", {})
@@ -71,8 +86,8 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             self.distribution_scale:float = self.config.get("distribution_scale", 200.0)
         
         # Distaces from one EnvNode to others
-        self.dist_dict = {}
-        self.dist_buckets = {}
+        self.dist_dict:dict[str,list[tuple[float,str]]] = {}
+        self.dist_buckets:dict[int, list[tuple[float,str]]] = {}
 
         # Performance log for quantity of sub-actions
         self.sublist_count = []
@@ -86,6 +101,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         return
 
     def levy_walk(self, pop_template, values:dict, cycle_step:int, sim_step:int):
+        '''Function to consume a 'levy_walk' TimeAction type.'''
         start_time = time.perf_counter()
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
@@ -96,11 +112,11 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         acting_node = acting_region.get_node_by_name(values['node'])
         sub_list = [] 
 
+        if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
+            return sub_list
+
         node_population = acting_node.get_population_size(pop_template)
         if node_population == 0:
-            return sub_list
-        
-        if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
             return sub_list
         
         # Loads optional action parameters, otherwise, use default values
@@ -108,7 +124,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         _pop_group_size:int = values.get("population_group_size", self.population_group_size)
         _mov_probability:float = values.get("movement_probability", self.movement_probability)
         _dist_location:float = values.get("distribution_location", self.distribution_location)
-        _dist_scale:float = values.get("distribution_location", self.distribution_scale)
+        _dist_scale:float = values.get("distribution_scale", self.distribution_scale)
         
         if _use_buckets:
             distances = self.get_node_distance_bucket(acting_node, self.graph)
@@ -116,7 +132,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             distances = self.get_node_distance(acting_node, self.graph)
         
         if "target_node_type" in values:
-            distances = self.filter_target_node_types(distances=distances,
+            distances = self.filter_target_node_types(buckets_dict=distances,
                                                       target_nodes=values["target_node_type"])
 
         # Divides the population amount in packets to be sent to other nodes
@@ -170,12 +186,13 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         return sub_list
 
     def calculate_all_distances(self):
+        ''' Auxiliary function to calculate all node distances and distance buckets'''
         for node in self.graph.node_list:
             self.get_node_distance(node, self.graph)
             self.get_node_distance_bucket(node, self.graph)
 
-    # Gets distances based on selected distance type
     def get_distance(self, p1, p2):
+        '''Gets distances based on selected distance type'''
         if self.distance_type == LevyDistance.LONG_LAT:
             return util.distance2D(p1, p2)
         elif self.distance_type == LevyDistance.METRES_GEOPY:
@@ -185,15 +202,16 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         else:
             exit("Levy Distance Type is invalid")
 
-    # Gets distances between current node and all other nodes
-    def get_node_distance(self, node:environment.EnvNode, graph:environment.EnvironmentGraph):
-        unique_name = node.get_unique_name()
+    
+    def get_node_distance(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
+        '''Gets distances between a target node and all other nodes'''
+        unique_name = target_node.get_unique_name()
         # Checks if the distance was calculated previously
         if unique_name in self.dist_dict:
             return self.dist_dict[unique_name]
         
-        distance_list = []
-        node_pos = node.long_lat
+        distance_list:list[tuple[float,str]] = []
+        node_pos = target_node.long_lat
         for other in graph.node_list:
             if unique_name == other.get_unique_name():
                 continue
@@ -203,15 +221,15 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.dist_dict[unique_name] = distance_list
         return self.dist_dict[unique_name]
     
-    # Gets distances in buckets (based on overall distance)
-    def get_node_distance_bucket(self, node:environment.EnvNode, graph:environment.EnvironmentGraph):
-        unique_name = node.get_unique_name()
+    def get_node_distance_bucket(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
+        '''Gets distances in buckets (based on overall distance)'''
+        unique_name = target_node.get_unique_name()
         # Checks if the distance was calculated previously
         if unique_name in self.dist_buckets:
             return self.dist_buckets[unique_name]
         
         # Gets distances in buckets (based on overall distance)
-        distance_list = self.get_node_distance(node, graph)
+        distance_list = self.get_node_distance(target_node, graph)
         max_bucket = int(distance_list[-1][0] // self.bucket_size)
         self.dist_buckets[unique_name] = {}
         for i in range(max_bucket+1):
@@ -222,18 +240,30 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         return self.dist_buckets[unique_name]
 
-    def filter_target_node_types(self, distances, target_nodes:list[str]):
+    def filter_target_node_types(self, buckets_dict, target_nodes:list[str]):
+        ''' 
+        Filters a distance bucket dict to only include entries where the node type is is 'target_nodes'
+        Raises an exception if the plugin shouldn't be using buckets
+        '''
         if self.use_buckets:
-            for bucket in distances:
-                distances[bucket] = [dist for dist in distances[bucket] if 
+            for bucket in buckets_dict:
+                buckets_dict[bucket] = [dist for dist in buckets_dict[bucket] if 
                                      str(dist[1]).split("//")[1] in target_nodes]
                 
         else: 
             raise Exception("Error in filter_target_node_types - Levy Walk Plugin")
-        return distances
+        return buckets_dict
 
     def levy_sample(self, location:Optional[float] = None,
                     scale:Optional[float] = None):
+        '''
+        Samples from a levy distribution using the distribution sampler (from scipy_levy)
+
+        Parameters:
+        ------
+        location: optional location parameter for the distribution. Only used if 'scale' is also provided.
+        scale: optional scale parameter for the distribution. Only used if 'location' is also provided.
+        '''
         if location is not None and scale is not None:
             return self.distribution_sampler.rvs(loc=location,
                                                  scale= scale)
@@ -241,42 +271,66 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             return self.distribution_sampler.rvs(loc=self.distribution_location,
                                                  scale= self.distribution_scale)
         
-    def bucket_search(self, buckets_dict, distance):
+    def bucket_search(self, buckets_dict:dict, distance:float) -> list[tuple[float,str]]:
+        '''
+        This function performs a bucket search to find the EnvNode with a distance value >= to the input distance. 
+        
+        Parameters:
+        -----------
+        buckets_dict: a dictionary of buckets (lists based of distances) of distances to other EnvNodes (tuples)
+        distance: distance to search for.
+
+        Returns:
+        -----------
+        A tuple (int, str) containing the distance to the selected EnvNode and the EnvNode unique name.
+        Return None if the distance input is lower or larger than all distances
+        Return None if no EnvNode is within the selected bucket
+        
+        '''
+        # Gets the bucket index based on distance and bucket sizes
         bucket = int(distance // self.bucket_size)
-        if bucket not in buckets_dict:
+        if bucket not in buckets_dict: # bucket not found (index too large)
             return None
         
+        # Gets the target bucket
         target_bucket = buckets_dict[bucket]
-
-        if len(target_bucket) == 0:
+        if len(target_bucket) == 0: # empty bucket
             return None
 
+        # Gets a random valid entry in the target bucket and returns it
         random_index = random.randint(0, len(target_bucket)-1)
-
-        # if self.values['region'] == "Azenha" and self.values['node'] == "home":
-        #     print("---rand_index", random_index, "distance", distance, 
-        #           "bucket", target_bucket[0])
-
-        #if target_bucket[0][0] > distance:
-        #    return None
         return target_bucket[random_index]
     
-    def binary_search(self, buckets_dict, distance):
-        l = 0
-        u = len(buckets_dict) - 1
-
-        while l < u and l != (u-1):
-            m = (l + u) // 2
-            v2 = buckets_dict[m][0]
-            if v2 > distance:
-                u = m
-            else:
-                l = m
-
-        if l == 0:
-            l =  ( -1 if buckets_dict[0][0] > distance else 0)
+    def binary_search(self, distances_dict:list[tuple[float, str]], distance: float) -> int:
+        '''
+        This function implements a binary search algorithm to find the EnvNode with a distance value >= to the input distance. 
         
-        return l
+        Parameters:
+        -----------
+        distances_dict: a dictionary of distances to other EnvNodes (tuples)
+        distance: distance to search for.
+
+        Returns:
+        -----------
+        The key of the distances_dict.
+        Return -1 if the distance input is lower than the lowest distances
+        '''
+        # Target distance is lower than minimun distance
+        if distances_dict[0][0] > distance:
+            return -1
+        
+        # Standard binary search
+        _lower = 0
+        _upper = len(distances_dict) - 1
+
+        while _lower < _upper and _lower != (_upper-1):
+            _middle = (_lower + _upper) // 2
+            v2 = distances_dict[_middle][0]
+            if v2 > distance:
+                _upper = _middle
+            else:
+                _lower = _middle
+        return _lower
     
     def print_execution_time_data(self):
         super().print_execution_time_data()

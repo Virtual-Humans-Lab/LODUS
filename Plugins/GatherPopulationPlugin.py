@@ -13,31 +13,32 @@ import time
 class GatherPopulationPlugin(environment.TimeActionPlugin):
 
     def __init__(self, env_graph: environment.EnvironmentGraph, isolation_rate = 0.0, to_total_ratio_correction = 0.2, locals_only = False):
-        '''gather_population
+        '''
+        Plugin that consumes a 'gather_population' TimeAction type
             
-            Gathers population from nearby nodes into a requesting node. 
-            Quantity of population moved depends on distance and available population.
+        Gathers population from nearby nodes into a requesting node. 
+        Quantity of population moved depends on distance and available population.
 
-            Params:
-                region: destination region.
-                node: destination node.
-                quantity: population size requested.
-                only_locals (optional): will only consider populations within the same region.
-                different_node_name (optional): will only consider population in EnvNodes with a different name
-                    E.g., this allows a pharmacy to requests population from anywhere but other pharmacies. 
-                population_template: PopTemplate to be matched by the operation.
+        Params:
+            region: destination region.
+            node: destination node.
+            quantity: population size requested.
+            only_locals (optional): will only consider populations within the same region.
+            different_node_name (optional): will only consider population in EnvNodes with a different name
+                E.g., this allows a pharmacy to requests population from anywhere but other pharmacies. 
+            population_template: PopTemplate to be matched by the operation.
 
-            
-            isolation_rate: the quantity to reduce movements by. simulates social isolation.
-            to_total_ratio_correction: corrects the ratio for gather_population operations, so that operations are based on the entire 
-                population of the node. a value between 0 and 1. However many % the original operation leaves in the node.
-            locals_only: forces gathering to only pull from native populations for each node.
-            
-            iso_mode: Can be:
-                'regular'
-                    changes movement quantities by isolation rate percentage. global.
-                'quantity_correction'
-                    corrects to assume the operation requested x% of the population, but wanted the entire population.
+        
+        isolation_rate: the quantity to reduce movements by. simulates social isolation.
+        to_total_ratio_correction: corrects the ratio for gather_population operations, so that operations are based on the entire 
+            population of the node. a value between 0 and 1. However many % the original operation leaves in the node.
+        locals_only: forces gathering to only pull from native populations for each node.
+        
+        iso_mode: Can be:
+            'regular'
+                changes movement quantities by isolation rate percentage. global.
+            'quantity_correction'
+                corrects to assume the operation requested x% of the population, but wanted the entire population.
         '''
         super().__init__()
         self.graph = env_graph
