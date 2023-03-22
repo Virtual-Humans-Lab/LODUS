@@ -3,43 +3,37 @@ import sys
 import time
 sys.path.append('../')
 
-import environment 
-from population import PopTemplate
+import environment
 
 class SendPopulationBackPlugin(environment.TimeActionPlugin):
 
     def __init__(self, env_graph: environment.EnvironmentGraph):
-        '''gather_population
-            Pushes population to nearby nodes into a requesting node.
-                Params:
-                    region: destination region.
-                    node: destination node.
-                    quantity: population size requested.
-                    population_template: PopTemplate to be matched by the operation.
+        '''
+        Plugin that consumes a 'send_population_back' TimeAction type.
+        Complex TimeAction that returns multiple 'move_population' actions.
 
-                    isolation_rate: the quantity to reduce movements by. simulates social isolation.
-                    to_total_ratio_correction: corrects the ratio for gather_population operations, so that operations are based on the entire 
-                        population of the node. a value between 0 and 1. However many % the original operation leaves in the node.
-                    locals_only: forces gathering to only pull from native populations for each node.
-                
-                iso_mode: Can be:
-                    'regular'
-                        changes movement quantities following an isolation table.
-                    'quantity_correction'
-                        same as 'regular' but
-                        corrects to assume the operation requested x% of the population, but wanted the entire population.
-                    'random_nudge' 
-                        fixed isolation rate with a random nudge to the isolation rate
+        Requirements:
+
+        Plugin Parameters: (default values can be overriden by the experiment configuration):
+            This plugin doesn't have default parameters
+
+        'send_population_back' Parameters:
+            region (str): acting_region (origin of population movement).
+            node (str): acting_node (origin of population movement).
+            population_template: PopTemplate to be matched by the operation (population moved).
+            quantity (int): population quantity to be moved. Either 'quantity' or 'percentage' should be defined.
+            percentage (float): population percentage to be moved.  Either 'quantity' or 'percentage' should be defined.
         '''
         super().__init__()
 
         self.graph = env_graph
         self.set_pair('send_population_back', self.send_population_back)
 
-    def update_time_step(self, cycle_step, simulation_step):
+    def update_time_step(self, cycle_step:int, simulation_step:int):
         return #super().update_time_step(cycle_step, simulation_step)
     
     def send_population_back(self, pop_template, values:dict, cycle_step:int, sim_step:int):
+        '''Function to consume a 'send_population_back' TimeAction type.'''
         start_time = time.perf_counter()
         
         assert 'region' in values, "region is not defined in Send Population Back TimeAction"
@@ -51,40 +45,29 @@ class SendPopulationBackPlugin(environment.TimeActionPlugin):
 
         sub_list = []
         for b in acting_node.contained_blobs:
-            #pop_template = PopTemplate()
-            #if 'population_template' in values:
-            #    pop_template = values['population_template']
-            
-            
-
-
-            new_action_values = {}
-            new_action_type = 'move_population'
-            
-            new_action_values['origin_region'] = acting_region.name
-            new_action_values['origin_node'] = acting_node.name
-            
-            node_of_origin = self.graph.get_node_by_id(b.node_of_origin)
-            region_of_origin = self.graph.get_region_by_name(node_of_origin.containing_region_name)
+            destination_node = self.graph.get_node_by_id(b.node_of_origin)
+            destination_region = self.graph.get_region_by_name(destination_node.containing_region_name)
            
-            if node_of_origin.get_unique_name() == acting_node.get_unique_name():
-                # print("Avoid shit", node_of_origin.get_unique_name())
+            if destination_node.get_unique_name() == acting_node.get_unique_name():
                 continue
             
-            new_action_values['destination_region'] = region_of_origin.name
-            new_action_values['destination_node'] = node_of_origin.name
-            
             temp = copy.deepcopy(pop_template)
+            temp.set_mother_blob_id(destination_region.id)
+
+            # Calculates the population to be moved based on 
             total_population = b.get_population_size(temp)
             if 'quantity' in values:
                 quant = values['quantity']
-            else:
+            else: # assumes 'percentage' is in values from assert
                 quant = int(total_population * values['percentage'])
 
-            new_action_values['quantity'] = quant
-            temp.set_mother_blob_id(region_of_origin.id)
-            new_action_values['population_template'] = pop_template
-            #print(new_action_values)
+            # Creates a 'move_population' TimeAction
+            new_action_type = 'move_population'
+            new_action_values = {'origin_region': acting_region.name,
+                                 'origin_node': acting_node.name,
+                                 'destination_region': destination_region.name,
+                                 'destination_node': destination_node.name,
+                                 'quantity': quant}
             new_action = environment.TimeAction(action_type = new_action_type, 
                                                 pop_template = temp,
                                                 values = new_action_values)

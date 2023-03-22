@@ -575,6 +575,9 @@ class EnvironmentGraph():
                     for node in region.node_list:
                         if 'node_name' in rga[1].values and node.name != rga[1].values['node_name']:
                             continue
+
+                        if 'node_type' in rga[1].values and node.name != rga[1].values['node_type']:
+                            continue
                         
                         action = copy.deepcopy(rga[1])
                         if type(rga[0]) is list:

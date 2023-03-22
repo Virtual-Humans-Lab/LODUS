@@ -25,7 +25,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
     def __init__(self, env_graph: environment.EnvironmentGraph):
         '''
         Plugin that consumes a 'levy_walk' TimeAction type.
-        Complex TimeAction that returns multiple 'move_population' actions
+        Complex TimeAction that returns multiple 'move_population' actions.
 
         Moves population from the acting node to other nodes using distances sampled from a levy distribution.
         The distance sampled indicates the 'desired travel distance', and the function identifies nodes in that distance.
@@ -47,7 +47,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         'levy_walk' Parameters:
             region (str): acting_region (origin of population movement).
             node (str): acting_node (origin of population movement).
-            population_template: PopTemplate to be matched by the operation.
+            population_template: PopTemplate to be matched by the operation (population moved).
             ignore_acting_node_type (list[str]): optional parameter. If the acting_node type is in this list, 
                 the levy walk function returns an empty subaction list
             target_node_type (list[str]): optional parameter used to filter possible destination for the population.
