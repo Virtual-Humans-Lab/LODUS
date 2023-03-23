@@ -50,9 +50,8 @@ Data Loading
 data_input_file_path = args['f']
 experiment_configuration_file = args['e']
 if ".json" in args['f']: 
-    env_graph = generate_EnvironmentGraph(data_input_file_path)
-else:
-    env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
+    raise Exception("please use the new format of inputs (experiment config)")
+env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 '''
 Parameters
 '''
