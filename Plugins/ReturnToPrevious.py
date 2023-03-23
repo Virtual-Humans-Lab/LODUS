@@ -38,7 +38,7 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
 
     def return_to_previous(self, pop_template:PopTemplate, values, cycle_step, simulation_step):
         start_time = time.perf_counter()
-        assert('node_id' in values or ('region' in values and 'node' in values), 
+        assert 'node_id' in values or ('region' in values and 'node' in values, 
                "No node_id or region/node pair defined in Return To Previous TimeAction")
         
         # Identifies the target node
