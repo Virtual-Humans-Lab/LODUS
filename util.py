@@ -1,3 +1,4 @@
+from enum import Enum
 import math
 import json
 import typing
@@ -5,6 +6,11 @@ import numpy
 from geopy import distance
 from pyproj import Proj
 from pyproj import Geod
+
+class DistanceType(Enum):
+    LONG_LAT = 1
+    METRES_GEOPY = 2
+    METRES_PYPROJ = 3
 
 def distance2D(p1, p2):
     d = (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1])

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from dataclasses import dataclass, field
 from pprint import pprint
 import time
 import logger_plugin
@@ -6,6 +7,7 @@ import population
 #import Plugins.Loggers.od_matrix_logger as od_matrix_logger
 import copy
 import util
+from util import DistanceType as DistType
 from events import Events
 from random_inst import FixedRandom
 
@@ -426,6 +428,10 @@ class EnvRegionFactory():
         
         return region
 
+@dataclass
+class EnvNodeDistances():
+    node_name: str = ''
+    distance_to_others:list[tuple[float,str]] = field(default_factory=lambda: [])
 
 class EnvironmentGraph():
     """Models the top level of the Crowd Dynamics simulator. Additionally, handles TimeAction and Routine logic.
@@ -527,6 +533,10 @@ class EnvironmentGraph():
         self.experiment_name = "test"
         self.experiment_config = {}
 
+        # Distances:
+        # self.node_distances:dict[str,list[tuple[float,str]]] = {}
+        self.node_distances:dict[util.DistanceType, dict[str, EnvNodeDistances]] = {t:{} for t in util.DistanceType}
+
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
         self.od_matrix_logger = {}
         self.characteristic_change_logger = {}
@@ -547,6 +557,44 @@ class EnvironmentGraph():
     def get_region_by_id(self, _id) -> EnvRegion:
         return self.region_id_dict[_id]
     
+    # Node Distance Functions
+    def calculate_all_distances(self):
+        ''' Auxiliary function to calculate all node distances'''
+        for node in self.node_list:
+            self.get_node_distances(node)
+
+    def get_node_distances(self, 
+                          target_node:EnvNode, 
+                          dist_type:DistType = DistType.LONG_LAT) -> EnvNodeDistances:
+        '''Gets distances between a target node and all other nodes'''
+        unique_name = target_node.get_unique_name()
+
+        # Checks if the distance was calculated previously
+        if unique_name in self.node_distances[dist_type]:
+            self.node_distances[dist_type][unique_name]
+        
+        node_dist = EnvNodeDistances(unique_name)
+        node_pos = target_node.long_lat
+        for other in self.node_list:
+            if unique_name == other.get_unique_name():
+                continue
+            node_dist.distance_to_others.append((self.__get_distance(node_pos, other.long_lat, dist_type), other.get_unique_name()))
+        node_dist.distance_to_others = sorted(node_dist.distance_to_others)
+
+        self.node_distances[dist_type][unique_name] = node_dist
+        return self.node_distances[dist_type][unique_name]
+
+    def __get_distance(self, p1, p2, dist_type:DistType = DistType.LONG_LAT):
+        '''Gets distances based on selected distance type'''
+        if dist_type == DistType.LONG_LAT:
+            return util.distance2D(p1, p2)
+        elif dist_type == DistType.METRES_GEOPY:
+            return util.geopy_distance_metre(p1, p2)
+        elif dist_type == DistType.METRES_PYPROJ:
+            return util.pyproj_distance_metre(p1, p2)
+        else:
+            raise Exception("Distance Type is invalid")
+
     # Action Invoke Modes
     def process_routines(self, hour):
         action_list = []

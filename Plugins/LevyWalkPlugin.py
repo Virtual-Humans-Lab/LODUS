@@ -3,8 +3,6 @@ import sys
 from enum import Enum
 from typing import Optional
 
-from LevyWalkFigures import LevyWalkFigures
-
 sys.path.append('../')
 
 import random
@@ -13,12 +11,8 @@ import time
 from scipy.stats import levy as scipy_levy
 
 import environment
+from util import DistanceType
 import util
-
-class LevyDistance(Enum):
-    LONG_LAT = 1
-    METRES_GEOPY = 2
-    METRES_PYPROJ = 3
 
 class LevyWalkPlugin(environment.TimeActionPlugin):
 
@@ -71,31 +65,25 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         # Loads experiment configuration, if any
         self.config:dict = self.graph.experiment_config.get("levy_walk_plugin", {})
         
-        self.distance_type:LevyDistance = LevyDistance(self.config.get("distance_type",
-                                                                       LevyDistance.LONG_LAT))
+        self.distance_type:DistanceType = DistanceType(self.config.get("distance_type",
+                                                                       DistanceType.LONG_LAT))
         self.use_buckets:bool = self.config.get("use_buckets", True)
         self.population_group_size:int = self.config.get("population_group_size", 50)
         self.movement_probability:float = self.config.get("movement_probability", 0.05)
         self.distribution_location:float = self.config.get("distribution_location", 0.0)
 
-        if self.distance_type == LevyDistance.LONG_LAT:
+        if self.distance_type == DistanceType.LONG_LAT:
             self.bucket_size:float = self.config.get("distance_bucket_size", 0.005)
             self.distribution_scale:float = self.config.get("distribution_scale", 0.005)
         else:
             self.bucket_size:float = self.config.get("distance_bucket_size", 500)
             self.distribution_scale:float = self.config.get("distribution_scale", 200.0)
         
-        # Distaces from one EnvNode to others
-        self.dist_dict:dict[str,list[tuple[float,str]]] = {}
+        # Distaces buckets from one EnvNode to others
         self.dist_buckets:dict[int, list[tuple[float,str]]] = {}
 
         # Performance log for quantity of sub-actions
         self.sublist_count = []
-
-        # Generate figures for debug
-        # self.calculate_all_distances()
-        # LevyWalkFigures.create_node_distante_distribution_figure(self, y_limit=17500) # 94:17500, 13:2000
-        # exit(0)
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -184,42 +172,6 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list
-
-    def calculate_all_distances(self):
-        ''' Auxiliary function to calculate all node distances and distance buckets'''
-        for node in self.graph.node_list:
-            self.get_node_distance(node, self.graph)
-            self.get_node_distance_bucket(node, self.graph)
-
-    def get_distance(self, p1, p2):
-        '''Gets distances based on selected distance type'''
-        if self.distance_type == LevyDistance.LONG_LAT:
-            return util.distance2D(p1, p2)
-        elif self.distance_type == LevyDistance.METRES_GEOPY:
-            return util.geopy_distance_metre(p1, p2)
-        elif self.distance_type == LevyDistance.METRES_PYPROJ:
-            return util.pyproj_distance_metre(p1, p2)
-        else:
-            exit("Levy Distance Type is invalid")
-
-    
-    def get_node_distance(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
-        '''Gets distances between a target node and all other nodes'''
-        unique_name = target_node.get_unique_name()
-        # Checks if the distance was calculated previously
-        if unique_name in self.dist_dict:
-            return self.dist_dict[unique_name]
-        
-        distance_list:list[tuple[float,str]] = []
-        node_pos = target_node.long_lat
-        for other in graph.node_list:
-            if unique_name == other.get_unique_name():
-                continue
-            distance_list.append((self.get_distance(node_pos, other.long_lat), other.get_unique_name()))
-        distance_list = sorted(distance_list)
-
-        self.dist_dict[unique_name] = distance_list
-        return self.dist_dict[unique_name]
     
     def get_node_distance_bucket(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
         '''Gets distances in buckets (based on overall distance)'''
@@ -229,7 +181,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             return self.dist_buckets[unique_name]
         
         # Gets distances in buckets (based on overall distance)
-        distance_list = self.get_node_distance(target_node, graph)
+        distance_list = self.graph.get_node_distances(target_node).distance_to_others
         max_bucket = int(distance_list[-1][0] // self.bucket_size)
         self.dist_buckets[unique_name] = {}
         for i in range(max_bucket+1):

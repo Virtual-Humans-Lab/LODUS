@@ -94,8 +94,8 @@ if 'levy_walk_plugin' in env_graph.experiment_config:
 #env_graph.LoadPlugin(social_distance)
 
 
-density_plugin = NodeDensityPlugin(env_graph, args['d'])
-env_graph.LoadPlugin(density_plugin)
+# density_plugin = NodeDensityPlugin(env_graph, args['d'])
+# env_graph.LoadPlugin(density_plugin)
 
 #custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
 #env_graph.LoadPlugin(custom_action_plugin)

@@ -19,8 +19,8 @@ def Generate_EnvironmentGraph(env_input):
         populate_EnvironmentGraph('dummy', env)
         return env
     
-    exp_path = Path() / "experiments"
-    data_path =  Path() / "data_input"
+    exp_path = Path(__file__).parent / "experiments"
+    data_path =  Path(__file__).parent / "data_input"
 
     exp_config = json.load(open(exp_path / (env_input + ".json"), 'r', encoding='utf8'))
     input_files = exp_config["envgraph_inputs_files"]
