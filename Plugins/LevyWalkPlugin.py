@@ -142,12 +142,12 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
                 selected = self.bucket_search(distances, sampled_dist)
                 if selected == None:
                     continue
-                target_node_u_name:str = selected[1]
+                target_node_u_name:str = selected[0]
             else:
                 ix = self.binary_search(distances, sampled_dist)
                 if ix == -1:
                     continue
-                target_node_u_name:str =  distances[ix][1]
+                target_node_u_name:str =  distances[ix][0]
 
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.graph.get_region_by_name(target_region)
@@ -181,13 +181,13 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             return self.dist_buckets[unique_name]
         
         # Gets distances in buckets (based on overall distance)
-        distance_list = self.graph.get_node_distances(target_node).distance_to_others
-        max_bucket = int(distance_list[-1][0] // self.bucket_size)
+        distance_list = self.graph.get_node_distances(target_node).get_distance_tuples()
+        max_bucket = int(distance_list[-1][1] // self.bucket_size)
         self.dist_buckets[unique_name] = {}
         for i in range(max_bucket+1):
             self.dist_buckets[unique_name][i] = []
         for d in distance_list:
-            bucket = d[0] // self.bucket_size
+            bucket = d[1] // self.bucket_size
             self.dist_buckets[unique_name][bucket] += [d]
 
         return self.dist_buckets[unique_name]
@@ -200,7 +200,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if self.use_buckets:
             for bucket in buckets_dict:
                 buckets_dict[bucket] = [dist for dist in buckets_dict[bucket] if 
-                                     str(dist[1]).split("//")[1] in target_nodes]
+                                     str(dist[0]).split("//")[1] in target_nodes]
                 
         else: 
             raise Exception("Error in filter_target_node_types - Levy Walk Plugin")

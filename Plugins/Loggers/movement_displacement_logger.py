@@ -15,16 +15,13 @@ import numpy as np
 from pathlib import Path
 from enum import Enum
 
-
-class ODMovementRecordKey(Enum):
-    REGION_TO_REGION = 0,
-    NODE_TO_NODE = 0
-
-class ODMatrixLogger(LoggerPlugin):
+class MovementDisplacementLogger(LoggerPlugin):
 
     def __init__(self, base_filename:str):
-        # Which data is being recorded
-        self.data_to_record:set[ODMovementRecordKey] = set()
+
+        # Movement dicts 
+        self.movement_counter = {}
+        self.group_movement_counter = {}
 
         # OD Dicts: SimulationStep > Origin > Destination > Quantities
         self.region_od_matrix:dict[str,dict[str,dict[str,dict[str,int]]]] = {}
@@ -41,9 +38,9 @@ class ODMatrixLogger(LoggerPlugin):
     def load_to_enviroment(self, env:EnvironmentGraph):
          # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = env
-        self.graph.movement_logger_dict["od_logger"] = self.log_od_movement
+        self.graph.movement_logger_dict["displacement"] = self.log_od_movement
         #graph.od_matrix_logger = self
-
+        
         # Cycle length and Current SimulationStep
         self.cycle_lenght:int = env.routine_cycle_length
         self.sim_step: int = 0 
@@ -57,59 +54,29 @@ class ODMatrixLogger(LoggerPlugin):
         # Update SimulationStep
         self.sim_step = simulation_step
 
-        # Setup Region-Region dict: SimulationStep > Origin > Destination > Quantities
-        if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
-            self.region_od_matrix[self.sim_step] = {}
-            for orig in self.graph.region_list:
-                self.region_od_matrix[self.sim_step][orig.name] = {}
-                for dest in self.graph.region_list:
-                    self.region_od_matrix[self.sim_step][orig.name][dest.name] = {"Total" : 0}
-                    for _key in self.region_custom_templates:
-                        self.region_od_matrix[self.sim_step][orig.name][dest.name][_key] = 0
-        
-        # Setup Node-Node dict: SimulationStep > Origin > Destination > Quantities
-        if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
-            self.node_od_matrix[self.sim_step] = {}
-            for orig in self.graph.node_list:
-                self.node_od_matrix[self.sim_step][orig.get_unique_name()] = {}
-                for dest in self.graph.node_list:
-                    self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()] = {"Total" : 0}
-                    for _key in self.node_custom_templates:
-                        self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()][_key] = 0
-            
+                    
     def log_simulation_step(self):
         pass
 
     def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
         total = sum([b.get_population_size() for b in _blobs])
+        node_distances = self.graph.get_node_distances(_ori)
+        distance = node_distances.distance_to_others[_dest.get_unique_name()]
         
-        # Record Region-Region movement 
-        if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
-            _x = self.region_od_matrix[self.sim_step][_ori.containing_region_name][_dest.containing_region_name]
-            _x["Total"] += total
-            for _b in _blobs:
-                for _key, _pt in self.region_custom_templates.items():
-                    _x[_key] += _b.get_population_size(_pt)
-        
-        # Record Node-Node movement
-        if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
-            _x = self.node_od_matrix[self.sim_step][_ori.get_unique_name()][_dest.get_unique_name()]
-            _x["Total"] += total
-            for _b in _blobs:
-                for _key, _pt in self.node_custom_templates.items():
-                    _x[_key] += _b.get_population_size(_pt)
+        self.movement_counter[distance] = self.movement_counter.get(distance,0) + total
+        self.group_movement_counter[distance] = self.group_movement_counter.get(distance,0) + len(_blobs)
+
     
     def stop_logger(self):
+        self.movement_counter = dict(sorted(self.movement_counter.items()))
+        movement_df = pd.DataFrame.from_dict(self.movement_counter, orient='index')
+        movement_df.to_csv(self.data_frames_path + "movement_counter.csv", sep=";", encoding="utf-8-sig")
         
-        # Write Region to Region files
-        if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
-            self.write_od_matrix_to_csv("region", list(self.region_custom_templates.keys()), self.region_od_matrix)
+        self.group_movement_counter = dict(sorted(self.group_movement_counter.items()))
+        group_movement_df = pd.DataFrame.from_dict(self.group_movement_counter, orient='index')
+        group_movement_df.to_csv(self.data_frames_path + "group_movement_counter.csv", sep=";", encoding="utf-8-sig")
 
-        # Write Node to Node files
-        if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
-            self.write_od_matrix_to_csv("node", list(self.node_custom_templates.keys()), self.node_od_matrix)
-               
     
     def write_od_matrix_to_csv(self, label:str, custom_columns:list[str], od_matrix:dict[str,dict[str,dict[str,dict[str,int]]]]):
         

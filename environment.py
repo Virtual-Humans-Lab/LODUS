@@ -431,7 +431,12 @@ class EnvRegionFactory():
 @dataclass
 class EnvNodeDistances():
     node_name: str = ''
-    distance_to_others:list[tuple[float,str]] = field(default_factory=lambda: [])
+    distance_to_others:dict[str, float] = field(default_factory = lambda: ({}))
+
+    def get_distance_tuples(self):
+        return sorted(self.distance_to_others.items(), key=lambda item: item[1])
+    
+    #distance_to_others:list[tuple[float,str]] = field(default_factory=lambda: [])
 
 class EnvironmentGraph():
     """Models the top level of the Crowd Dynamics simulator. Additionally, handles TimeAction and Routine logic.
@@ -538,7 +543,7 @@ class EnvironmentGraph():
         self.node_distances:dict[util.DistanceType, dict[str, EnvNodeDistances]] = {t:{} for t in util.DistanceType}
 
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
-        self.od_matrix_logger = {}
+        self.movement_logger_dict = {}
         self.characteristic_change_logger = {}
         
         # Events test
@@ -578,8 +583,9 @@ class EnvironmentGraph():
         for other in self.node_list:
             if unique_name == other.get_unique_name():
                 continue
-            node_dist.distance_to_others.append((self.__get_distance(node_pos, other.long_lat, dist_type), other.get_unique_name()))
-        node_dist.distance_to_others = sorted(node_dist.distance_to_others)
+            node_dist.distance_to_others[other.get_unique_name()] = self.__get_distance(node_pos, other.long_lat, dist_type)
+            #node_dist.distance_to_others.append((self.__get_distance(node_pos, other.long_lat, dist_type), other.get_unique_name()))
+        #node_dist.distance_to_others = sorted(node_dist.distance_to_others)
 
         self.node_distances[dist_type][unique_name] = node_dist
         return self.node_distances[dist_type][unique_name]
@@ -862,7 +868,7 @@ class EnvironmentGraph():
 
 
     def log_blob_movement(self, origin_node:EnvNode, destination_node:EnvNode, blobs:list[population.Blob]):
-        for k,v in self.od_matrix_logger.items():
+        for k,v in self.movement_logger_dict.items():
             v(origin_node, destination_node, blobs)
             #self.od_matrix_logger.log_od_movement(origin_node, destination_node, blobs)
 

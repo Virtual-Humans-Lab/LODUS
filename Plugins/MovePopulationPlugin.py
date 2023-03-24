@@ -55,21 +55,6 @@ class MovePopulationPlugin(environment.TimeActionPlugin):
             self.execution_times.append(time.perf_counter() - start_time)
             return
         
-        # origin_region = values['origin_region']
-        # if isinstance(origin_region, str):
-        #     origin_region = self.get_region_by_name(origin_region)
-
-        # origin_node = values['origin_node']
-        # if isinstance(origin_node, str):
-        #     origin_node = origin_region.get_node_by_name(origin_node)
-
-        # destination_region = values['destination_region']
-        # if isinstance(destination_region, str):
-        #     destination_region = self.get_region_by_name(destination_region)
-
-        # destination_node = values['destination_node']
-        # if isinstance(destination_node, str):
-        #     destination_node = destination_region.get_node_by_name(destination_node)
         origin_region = self.graph.get_region_by_name(values['origin_region'])
         origin_node = origin_region.get_node_by_name(values['origin_node'])
         destination_region = self.graph.get_region_by_name(values['destination_region'])

@@ -7,6 +7,7 @@ from Loggers.od_matrix_logger import ODMovementRecordKey, ODMatrixLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
 from Loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
 from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from Loggers.movement_displacement_logger import MovementDisplacementLogger
 
 import argparse
 import environment
@@ -154,6 +155,9 @@ od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_
 od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
 #----------------------------
 
+# Movement Displacement Logger
+displacement_logger = MovementDisplacementLogger(f'{args["n"]}')
+
 # Vaccine Logger
 #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
 
@@ -166,6 +170,7 @@ env_graph.LoadLoggerPlugin(od_logger)
 env_graph.LoadLoggerPlugin(blob_count_logger)
 #env_graph.LoadLoggerPlugin(traceable_logger)
 #env_graph.LoadLoggerPlugin(vacc_logger)
+env_graph.LoadLoggerPlugin(displacement_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
 env_graph.start_logging()
