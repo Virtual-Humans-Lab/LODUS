@@ -57,7 +57,7 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 1
+cycles = 10
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -165,9 +165,9 @@ displacement_logger = MovementDisplacementLogger(f'{args["n"]}')
 Simulation
 '''
 
-env_graph.LoadLoggerPlugin(pop_count_logger)
-env_graph.LoadLoggerPlugin(od_logger)
-env_graph.LoadLoggerPlugin(blob_count_logger)
+# env_graph.LoadLoggerPlugin(pop_count_logger)
+# env_graph.LoadLoggerPlugin(od_logger)
+# env_graph.LoadLoggerPlugin(blob_count_logger)
 #env_graph.LoadLoggerPlugin(traceable_logger)
 #env_graph.LoadLoggerPlugin(vacc_logger)
 env_graph.LoadLoggerPlugin(displacement_logger)

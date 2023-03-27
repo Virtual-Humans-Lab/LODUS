@@ -71,39 +71,17 @@ class MovementDisplacementLogger(LoggerPlugin):
     def stop_logger(self):
         self.movement_counter = dict(sorted(self.movement_counter.items()))
         movement_df = pd.DataFrame.from_dict(self.movement_counter, orient='index')
-        movement_df.to_csv(self.data_frames_path + "movement_counter.csv", sep=";", encoding="utf-8-sig")
+        movement_df.index.name = "distance"
+        movement_df.to_csv(self.data_frames_path + "movement_counter.csv", 
+                           sep=";", 
+                           encoding="utf-8-sig",
+                           header=["frequency"])
+        
         
         self.group_movement_counter = dict(sorted(self.group_movement_counter.items()))
         group_movement_df = pd.DataFrame.from_dict(self.group_movement_counter, orient='index')
-        group_movement_df.to_csv(self.data_frames_path + "group_movement_counter.csv", sep=";", encoding="utf-8-sig")
-
-    
-    def write_od_matrix_to_csv(self, label:str, custom_columns:list[str], od_matrix:dict[str,dict[str,dict[str,dict[str,int]]]]):
-        
-        # Columns and Data Setup
-        _columns = ["SimulationStep", "Cycle Step", "Cycle", "Origin", "Destination", "Total"] + custom_columns
-        _data = []
-        
-        # Get data entries in dict: SimulationStep > Origin > Destination > Quantities
-        for _sim_step_key, _sim_step_val in od_matrix.items():
-            for _or_key, _or_val in _sim_step_val.items():
-                for _dest_key, _dest_val in _or_val.items():
-                    _row = [_sim_step_key, _sim_step_key % self.cycle_lenght, _sim_step_key // self.cycle_lenght, _or_key, _dest_key]
-                    for _key, _val in _dest_val.items():
-                        _row.append(_val)
-                    _data.append(_row)
-
-        # Data per SimulationStep
-        df = pd.DataFrame(data = _data, columns= _columns)
-        df.to_csv(self.data_frames_path + "od_matrix_" + label + "_step.csv", sep=";", encoding="utf-8-sig")
-
-        # Data per Cycle
-        df.drop("SimulationStep", inplace=True, axis=1) 
-        df.drop("Cycle Step", inplace=True, axis=1) 
-        df_cycle = df.groupby(["Cycle", "Origin", "Destination"]).sum().reset_index()
-        df_cycle.to_csv(self.data_frames_path + "od_matrix_" + label + "_cycle.csv", sep=";", encoding="utf-8-sig")
-
-        # Data in entire Simulation
-        df_cycle.drop("Cycle", inplace=True, axis=1) 
-        df_sim = df_cycle.groupby(["Origin", "Destination"]).sum().reset_index()
-        df_sim.to_csv(self.data_frames_path + "od_matrix_" + label + ".csv", sep=";", encoding="utf-8-sig")
+        group_movement_df.index.name = "distance"
+        group_movement_df.to_csv(self.data_frames_path + "group_movement_counter.csv", 
+                                 sep=";", 
+                                 encoding="utf-8-sig",
+                                 header=["frequency"])

@@ -126,8 +126,8 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         # Divides the population amount in packets to be sent to other nodes
         packets = node_population // _pop_group_size
 
-        if values['region'] == "Azenha" and values['node'] == "home":
-            print("LEVY WALKING", cycle_step, packets, _mov_probability)
+        #if values['region'] == "Azenha" and values['node'] == "home":
+        #    print("LEVY WALKING", cycle_step, packets, _mov_probability)
 
         # Generates sub-actions for each packet
         for i in range(packets):
