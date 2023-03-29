@@ -91,10 +91,8 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
     def levy_walk(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         '''Function to consume a 'levy_walk' TimeAction type.'''
         start_time = time.perf_counter()
-        assert 'region' in values, "region is not defined in Gather Population TimeAction"
-        assert 'node' in values, "node is not defined in Gather Population TimeAction"
-
-        self.values=values
+        assert 'region' in values, "region is not defined in Levy Walk TimeAction"
+        assert 'node' in values, "node is not defined in Levy Walk TimeAction"
 
         acting_region = self.graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_node_by_name(values['node'])
@@ -123,6 +121,10 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             distances = self.filter_target_node_types(buckets_dict=distances,
                                                       target_nodes=values["target_node_type"])
 
+        # if 'node_type' in values and 'home' in values['node_type']:
+        #     print(distances)
+        #     exit()
+
         # Divides the population amount in packets to be sent to other nodes
         packets = node_population // _pop_group_size
 
@@ -131,13 +133,13 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         # Generates sub-actions for each packet
         for i in range(packets):
-
+            
             # Reduces the chance for a levy walk to occur bor each packet
             if _mov_probability < random.random():
                 continue
-            
+        
             sampled_dist = self.levy_sample(location=_dist_location, scale=_dist_scale)
-            
+                
             if _use_buckets:
                 selected = self.bucket_search(distances, sampled_dist)
                 if selected == None:
@@ -168,7 +170,6 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
                                                 values = new_action_values)
             #print(new_action)
             sub_list.append(new_action)
-
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list
@@ -189,22 +190,23 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         for d in distance_list:
             bucket = d[1] // self.bucket_size
             self.dist_buckets[unique_name][bucket] += [d]
+        
+        return self.dist_buckets[unique_name].copy()
 
-        return self.dist_buckets[unique_name]
-
-    def filter_target_node_types(self, buckets_dict, target_nodes:list[str]):
+    def filter_target_node_types(self, buckets_dict:dict, target_nodes:list[str]):
         ''' 
         Filters a distance bucket dict to only include entries where the node type is is 'target_nodes'
         Raises an exception if the plugin shouldn't be using buckets
         '''
+        __filtered = {}
         if self.use_buckets:
             for bucket in buckets_dict:
-                buckets_dict[bucket] = [dist for dist in buckets_dict[bucket] if 
+                __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
                                      str(dist[0]).split("//")[1] in target_nodes]
                 
         else: 
             raise Exception("Error in filter_target_node_types - Levy Walk Plugin")
-        return buckets_dict
+        return __filtered
 
     def levy_sample(self, location:Optional[float] = None,
                     scale:Optional[float] = None):

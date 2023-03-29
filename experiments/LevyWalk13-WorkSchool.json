@@ -1,8 +1,9 @@
 {
     "envgraph_inputs_files": {
-        "environment_file": "Environment-PortoAlegre94RegionsDefault.json",
-        "population_file": "Population-PortoAlegre94RegionsDefault.json",
-        "routine_file": "Routine-Poa94-LevyWalk-Workers.json"
+        "__comment1__": "Files will be loaded from the 'data_input' folder",
+        "environment_file": "Environment-PortoAlegre13RegionsDefault.json",
+        "population_file": "Population-PortoAlegre13RegionsDefault.json",
+        "routine_file": "Routine-Poa13-LevyWalk-WorkSchool.json"
     },
     "levy_walk_plugin": {
         "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",
@@ -10,7 +11,7 @@
         "population_group_size": 50,
         "movement_probability": 0.05,
         "distribution_location": 0.0,
-        "distraibution_scale": 0.0075,
+        "distribution_scale": 0.0075,
         "use_buckets": true,
         "__comment2__": "'distance_bucket_size' only used in 'use_buckets' is true",
         "distance_bucket_size": 0.0075

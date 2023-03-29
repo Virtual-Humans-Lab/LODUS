@@ -15,7 +15,7 @@ import plotly.express as px
 def movement_displacement_histogram(experiment_name:str, bucket_size:float = 0.005):
     dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
     output_path = dir_path / "movement_displacement"
-    dir_path.mkdir(parents=True, exist_ok=True)
+    output_path.mkdir(parents=True, exist_ok=True)
 
     # Load dataframs from CSVs
     df_movement = pd.read_csv(dir_path / "movement_counter.csv", sep=';')
@@ -82,7 +82,7 @@ def movement_displacement_linechart(experiment_name:str, bucket_size:float = 0.0
     fig.update_layout(xaxis = xaxis, hovermode="x")
     fig.show()
     fig.write_html(output_path / f"movement_distance_bar_chart.html")
-    print(fig.layout["hover_data"])
+    
     # Repeats process for the group movement data
     df_group_movement = pd.read_csv(dir_path / "group_movement_counter.csv", sep=';')
     #df_group_movement = df_group_movement.set_axis(["distance", "frequency"], axis=1)

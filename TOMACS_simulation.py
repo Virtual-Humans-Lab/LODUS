@@ -57,12 +57,13 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 10
+cycles = 1
 cycle_length = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
-env_graph.experiment_name = args["n"]
 
+env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
+print(env_graph.experiment_name)
 print("node count", len(env_graph.node_list))
 '''
 Load Plugins Examples
@@ -111,7 +112,7 @@ if 'levy_walk_plugin' in env_graph.experiment_config:
 Logging
 '''
 
-pop_count_logger = PopulationCountLogger(f'{args["n"]}', env_graph, cycle_length)
+pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
 pop_count_logger.data_to_record = [PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
                                     PopulationCountRecordKey.POPULATION_COUNT_REGION,
                                     PopulationCountRecordKey.POPULATION_COUNT_NODE]
@@ -119,7 +120,7 @@ pop_count_logger.data_to_record = [PopulationCountRecordKey.POPULATION_COUNT_GLO
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
-blob_count_logger = BlobCountLogger(f'{args["n"]}')
+blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
 blob_count_logger.data_to_record = [BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                     BlobCountRecordKey.BLOB_COUNT_REGION,
                                     BlobCountRecordKey.BLOB_COUNT_NODE]
@@ -135,12 +136,13 @@ pop_count_logger.pop_template = pop_temp
 # logger.set_pluggin_to_record(vaccine_plugin)
 
 # CharacteristicChange logger
-traceable_logger = CharacteristicChangeLogger(f'{args["n"]}')
+traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
 
 # OD-Matrix logger
-od_logger = ODMatrixLogger(f'{args["n"]}')
-od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
-                            ODMovementRecordKey.NODE_TO_NODE]
+od_logger = ODMatrixLogger(f'{env_graph.experiment_name}')
+od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION]
+# od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
+#                             ODMovementRecordKey.NODE_TO_NODE]
 
 # Age tracking
 od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
@@ -156,7 +158,7 @@ od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_pr
 #----------------------------
 
 # Movement Displacement Logger
-displacement_logger = MovementDisplacementLogger(f'{args["n"]}')
+displacement_logger = MovementDisplacementLogger(f'{env_graph.experiment_name}')
 
 # Vaccine Logger
 #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
@@ -165,9 +167,9 @@ displacement_logger = MovementDisplacementLogger(f'{args["n"]}')
 Simulation
 '''
 
-# env_graph.LoadLoggerPlugin(pop_count_logger)
-# env_graph.LoadLoggerPlugin(od_logger)
-# env_graph.LoadLoggerPlugin(blob_count_logger)
+env_graph.LoadLoggerPlugin(pop_count_logger)
+env_graph.LoadLoggerPlugin(od_logger)
+env_graph.LoadLoggerPlugin(blob_count_logger)
 #env_graph.LoadLoggerPlugin(traceable_logger)
 #env_graph.LoadLoggerPlugin(vacc_logger)
 env_graph.LoadLoggerPlugin(displacement_logger)
@@ -190,6 +192,30 @@ for i in range(simulation_steps):
     # These are defined in the input environment descriptor
     env_graph.update_time_step(i % cycle_length, i)
 
+    if i == 19 and len(env_graph.region_list) == 94:
+        new_action_values = {}
+        new_action_type = 'gather_population'
+        new_action_values['region'] = "Farrapos"
+        new_action_values['node'] = "stadium"
+        new_action_values['quantity'] = 300000
+        new_action_values['mode'] = 1
+        pop_template = PopTemplate()
+        new_action = environment.TimeAction(action_type = new_action_type,
+                                            pop_template=pop_template, 
+                                            values = new_action_values)
+        env_graph.direct_action_invoke(new_action, i % cycle_length, i)
+    elif i == 19 and len(env_graph.region_list) == 13:
+        new_action_values = {}
+        new_action_type = 'gather_population'
+        new_action_values['region'] = "Praia de Belas"
+        new_action_values['node'] = "stadium"
+        new_action_values['quantity'] = 300000
+        new_action_values['mode'] = 1
+        pop_template = PopTemplate()
+        new_action = environment.TimeAction(action_type = new_action_type,
+                                            pop_template=pop_template, 
+                                            values = new_action_values)
+        env_graph.direct_action_invoke(new_action, i % cycle_length, i)
     # Log current simulation step
     env_graph.log_simulation_step()
     
