@@ -179,7 +179,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         unique_name = target_node.get_unique_name()
         # Checks if the distance was calculated previously
         if unique_name in self.dist_buckets:
-            return self.dist_buckets[unique_name]
+            return self.dist_buckets[unique_name].copy()
         
         # Gets distances in buckets (based on overall distance)
         distance_list = self.graph.get_node_distances(target_node).get_distance_tuples()

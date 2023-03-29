@@ -1,3 +1,4 @@
+from enum import Enum
 import sys
 sys.path.append('../')
 
@@ -9,6 +10,10 @@ import random
 import math
 import util
 import time
+
+class WeightingMode(Enum):
+    DISTANCE = 1,
+    POPULATION = 2
 
 class GatherPopulationPlugin(environment.TimeActionPlugin):
 
@@ -51,7 +56,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         self.isolation_rate = isolation_rate
 
         self.locals_only = locals_only
-
+        self.weighting_mode:WeightingMode = WeightingMode.DISTANCE
         
         # Percentage of EnvNodes per population search. 
         # Bigger values will search population in more locations, but takes more time
@@ -60,7 +65,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         # Distances between EnvNodes
         self.distance_to_self = 0.01
         self.distances_map = {}
-        self.weights_map = {}
+        self.dist_weights_map = {}
 
         # Performance log for quantity of sub-actions
         self.sublist_count = []
@@ -91,12 +96,28 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         return self.distances_map[n1_name+n2_name]
 
 
-    def compute_node_weights(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
+    def compute_node_weights(self, target_node:environment.EnvNode, mode:WeightingMode)->list[tuple[environment.EnvNode,float]]:
+        if mode == WeightingMode.DISTANCE:
+            return self.distance_weighting(target_node=target_node)
+        else:
+            return self.population_weighting(target_node=target_node)
+    
+    def population_weighting(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
+        print("POP WEIGHT")
+        pop_list = []
+        # Gets distances to other EnvNodes
+        for other in self.graph.node_list:
+            pop_list.append((other,other.get_population_size()))
+        total_pop = sum([ d for (n, d) in pop_list])
+        pop_list = [(n,  ( d / total_pop)) for (n, d) in pop_list]
+        return pop_list
+    
+    def distance_weighting(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
         
         # Checks if weights were calculated previously
         unique_name = target_node.get_unique_name()
-        if unique_name in self.weights_map:
-            return self.weights_map[unique_name]
+        if unique_name in self.dist_weights_map:
+            return self.dist_weights_map[unique_name]
         
         distance_list:list[tuple[environment.EnvNode,float]] = []
 
@@ -114,8 +135,8 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         weight_list = [(n,  ( (1/d) / total_dist)) for (n, d) in distance_list]
 
         # Adds new entry and returns it
-        self.weights_map[unique_name] = weight_list
-        return self.weights_map[unique_name]
+        self.dist_weights_map[unique_name] = weight_list
+        return self.dist_weights_map[unique_name]
     
     ## Complex time action. Will be broken up into smaller actions
     def gather_population(self, pop_template, values, cycle_step, sim_step):
@@ -137,7 +158,8 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             return sub_list
 
         # Get node weights
-        weight_list = self.compute_node_weights(action_node)
+        _weighting_mode:WeightingMode = values.get("weighting_mode", self.weighting_mode)
+        weight_list = self.compute_node_weights(action_node, _weighting_mode)
 
         # Filters undesired EnvNodes
         if 'only_locals' in values and bool(values['only_locals']):
@@ -171,7 +193,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             _start_index += _index_increment
             if _start_index >= _max_index:
                 break
-
+        
         # Gets total population available and adjusts quantity if necessary
         if population_available < quantity:
             quantity = population_available
@@ -199,7 +221,6 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         list_count = 0
         total_quant = 0
         remainder = 0.0
-        
         for node_aux, w, i in node_targets:
             
             origin_region = self.graph.get_region_by_name(node_aux.containing_region_name)
@@ -241,8 +262,8 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             new_action = environment.TimeAction(action_type = new_action_type, 
                                                 pop_template = temp,
                                                 values = new_action_values)
-            #print(new_action_values)
-            
+            print(new_action_values)
+            print(total_quant)
             sub_list.append(new_action)
             #self.graph.direct_action_invoke(new_action, hour, time)
             #list_count +=1 

@@ -198,7 +198,7 @@ for i in range(simulation_steps):
         new_action_values['region'] = "Farrapos"
         new_action_values['node'] = "stadium"
         new_action_values['quantity'] = 300000
-        new_action_values['mode'] = 1
+        new_action_values['weighting_mode'] = 2
         pop_template = PopTemplate()
         new_action = environment.TimeAction(action_type = new_action_type,
                                             pop_template=pop_template, 
@@ -210,7 +210,7 @@ for i in range(simulation_steps):
         new_action_values['region'] = "Praia de Belas"
         new_action_values['node'] = "stadium"
         new_action_values['quantity'] = 300000
-        new_action_values['mode'] = 1
+        new_action_values['weighting_mode'] = 2
         pop_template = PopTemplate()
         new_action = environment.TimeAction(action_type = new_action_type,
                                             pop_template=pop_template, 
