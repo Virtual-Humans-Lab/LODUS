@@ -14,10 +14,10 @@ def DummyPop(env_graph):
 
 def Generate_EnvironmentGraph(env_input):
     print("Generating EnvGraph with new parsing. Experiment Config File:", env_input)
-    if env_input == 'dummy':
-        env = DummyEnv()
-        populate_EnvironmentGraph('dummy', env)
-        return env
+    # if env_input == 'dummy':
+    #     env = DummyEnv()
+    #     populate_EnvironmentGraph('dummy', env)
+    #     return env
     
     exp_path = Path(__file__).parent / "experiments"
     data_path =  Path(__file__).parent / "data_input"

@@ -1,6 +1,5 @@
 import copy
 import sys
-from enum import Enum
 from typing import Optional
 
 sys.path.append('../')
@@ -12,7 +11,7 @@ from scipy.stats import levy as scipy_levy
 
 import environment
 from util import DistanceType
-import util
+
 
 class LevyWalkPlugin(environment.TimeActionPlugin):
 

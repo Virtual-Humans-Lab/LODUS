@@ -297,7 +297,7 @@ if args['i'] != 0:
 
 if args['m'] == 0:
     gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.8)
-    gather_pop.iso_mode = 'quantity_correction'
+    gather_pop.isolation_mode = 'quantity_correction'
     env_graph.LoadPlugin(gather_pop)
 elif args['m'] == 1:
     social_distance = SocialIsolationPlugin(env_graph, social_table_path)

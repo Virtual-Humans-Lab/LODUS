@@ -29,6 +29,9 @@ class SendPopulationBackPlugin(environment.TimeActionPlugin):
         self.graph = env_graph
         self.set_pair('send_population_back', self.send_population_back)
 
+        if "send_population_back" not in self.graph.experiment_config:
+            print("Experiment config should have a 'send_population_back' key.")
+
     def update_time_step(self, cycle_step:int, simulation_step:int):
         return #super().update_time_step(cycle_step, simulation_step)
     

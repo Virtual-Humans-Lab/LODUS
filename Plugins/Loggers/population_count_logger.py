@@ -59,7 +59,7 @@ class PopulationCountLogger(LoggerPlugin):
         self.region_time_outside = {}
 
 
-        self.pop_template = None
+        self.pop_template:PopTemplate = None
                 
         # Custom Logging
         self.global_custom_templates: dict[str, PopTemplate] = {}

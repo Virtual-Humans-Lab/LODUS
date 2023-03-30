@@ -16,5 +16,6 @@
         "__comment2__": "'distance_bucket_size' only used in 'use_buckets' is true",
         "distance_bucket_size": 0.0075
     },
-    "return_population_home": {}
+    "send_population_back": {},
+    "gather_population": {}
 }

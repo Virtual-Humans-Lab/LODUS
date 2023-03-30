@@ -38,10 +38,10 @@ arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simula
 arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Configuration File.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-arg_parser.add_argument('--c', metavar="C", type=str, default = ".\DataInput\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
-arg_parser.add_argument('--d', metavar="D", type=str, default = ".\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
-arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
-arg_parser.add_argument('--i', metavar="I", type=str, default = ".\DataInput\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
+arg_parser.add_argument('--c', metavar="C", type=str, default = ".\\DataInput\\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
+arg_parser.add_argument('--d', metavar="D", type=str, default = ".\\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
+arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
+arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom()
@@ -57,14 +57,14 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles = 1
-cycle_length = 24
+cycles:int = 1
+cycle_length:int = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
 env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
-print(env_graph.experiment_name)
-print("node count", len(env_graph.node_list))
+print("Creating experiment:", env_graph.experiment_name)
+print("EnvNode Count", len(env_graph.node_list))
 '''
 Load Plugins Examples
 '''
@@ -72,15 +72,20 @@ Load Plugins Examples
 move_population_plugin = MovePopulationPlugin(env_graph)
 env_graph.LoadPlugin(move_population_plugin)
 
-gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.0)
-gather_pop.iso_mode = 'regular'
-env_graph.LoadPlugin(gather_pop)
+gather_pop = None
+if 'gather_population' in env_graph.experiment_config:
+    gather_pop = GatherPopulationPlugin(env_graph)
+    env_graph.LoadPlugin(gather_pop)
 
-return_pop_home_plugin = ReturnPopulationHomePlugin(env_graph)
-env_graph.LoadPlugin(return_pop_home_plugin)
+return_pop_home = None
+if 'return_population_home' in env_graph.experiment_config:
+    return_pop_home = ReturnPopulationHomePlugin(env_graph)
+    env_graph.LoadPlugin(return_pop_home)
 
-send_pop_back_plugin = SendPopulationBackPlugin(env_graph)
-env_graph.LoadPlugin(send_pop_back_plugin)
+send_pop_back = None
+if 'send_population_back' in env_graph.experiment_config:
+    send_pop_back = SendPopulationBackPlugin(env_graph)
+    env_graph.LoadPlugin(send_pop_back)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)
 env_graph.LoadPlugin(return_to_prev)
@@ -113,17 +118,17 @@ Logging
 '''
 
 pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
-pop_count_logger.data_to_record = [PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
+pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
                                     PopulationCountRecordKey.POPULATION_COUNT_REGION,
-                                    PopulationCountRecordKey.POPULATION_COUNT_NODE]
+                                    PopulationCountRecordKey.POPULATION_COUNT_NODE}
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
 blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
-blob_count_logger.data_to_record = [BlobCountRecordKey.BLOB_COUNT_GLOBAL,
+blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                     BlobCountRecordKey.BLOB_COUNT_REGION,
-                                    BlobCountRecordKey.BLOB_COUNT_NODE]
+                                    BlobCountRecordKey.BLOB_COUNT_NODE}
 
 
 pop_temp = PopTemplate()
@@ -140,7 +145,7 @@ traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
 
 # OD-Matrix logger
 od_logger = ODMatrixLogger(f'{env_graph.experiment_name}')
-od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION]
+od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
 # od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
 #                             ODMovementRecordKey.NODE_TO_NODE]
 
@@ -170,8 +175,8 @@ Simulation
 env_graph.LoadLoggerPlugin(pop_count_logger)
 env_graph.LoadLoggerPlugin(od_logger)
 env_graph.LoadLoggerPlugin(blob_count_logger)
-#env_graph.LoadLoggerPlugin(traceable_logger)
-#env_graph.LoadLoggerPlugin(vacc_logger)
+# env_graph.LoadLoggerPlugin(traceable_logger)
+# env_graph.LoadLoggerPlugin(vacc_logger)
 env_graph.LoadLoggerPlugin(displacement_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
@@ -192,30 +197,30 @@ for i in range(simulation_steps):
     # These are defined in the input environment descriptor
     env_graph.update_time_step(i % cycle_length, i)
 
-    if i == 19 and len(env_graph.region_list) == 94:
-        new_action_values = {}
-        new_action_type = 'gather_population'
-        new_action_values['region'] = "Farrapos"
-        new_action_values['node'] = "stadium"
-        new_action_values['quantity'] = 300000
-        new_action_values['weighting_mode'] = 2
-        pop_template = PopTemplate()
-        new_action = environment.TimeAction(action_type = new_action_type,
-                                            pop_template=pop_template, 
-                                            values = new_action_values)
-        env_graph.direct_action_invoke(new_action, i % cycle_length, i)
-    elif i == 19 and len(env_graph.region_list) == 13:
-        new_action_values = {}
-        new_action_type = 'gather_population'
-        new_action_values['region'] = "Praia de Belas"
-        new_action_values['node'] = "stadium"
-        new_action_values['quantity'] = 300000
-        new_action_values['weighting_mode'] = 2
-        pop_template = PopTemplate()
-        new_action = environment.TimeAction(action_type = new_action_type,
-                                            pop_template=pop_template, 
-                                            values = new_action_values)
-        env_graph.direct_action_invoke(new_action, i % cycle_length, i)
+    # if i == 19 and len(env_graph.region_list) == 94:
+    #     new_action_values = {}
+    #     new_action_type = 'gather_population'
+    #     new_action_values['region'] = "Farrapos"
+    #     new_action_values['node'] = "stadium"
+    #     new_action_values['quantity'] = 300000
+    #     new_action_values['weighting_mode'] = 2
+    #     pop_template = PopTemplate()
+    #     new_action = environment.TimeAction(action_type = new_action_type,
+    #                                         pop_template=pop_template, 
+    #                                         values = new_action_values)
+    #     env_graph.direct_action_invoke(new_action, i % cycle_length, i)
+    # elif i == 19 and len(env_graph.region_list) == 13:
+    #     new_action_values = {}
+    #     new_action_type = 'gather_population'
+    #     new_action_values['region'] = "Praia de Belas"
+    #     new_action_values['node'] = "stadium"
+    #     new_action_values['quantity'] = 100000
+    #     new_action_values['weighting_mode'] = 2
+    #     pop_template = PopTemplate()
+    #     new_action = environment.TimeAction(action_type = new_action_type,
+    #                                         pop_template=pop_template, 
+    #                                         values = new_action_values)
+    #     env_graph.direct_action_invoke(new_action, i % cycle_length, i)
     # Log current simulation step
     env_graph.log_simulation_step()
     
@@ -232,25 +237,17 @@ end_time = time.perf_counter()
 env_graph.stop_logging()
 
 
-#print("Gather population execution times")
-#print(gather_pop.execution_times)
+#print("TimeAction Plugins execution times")
 if levy_walk is not None: levy_walk.print_execution_time_data()
-gather_pop.print_execution_time_data()
-return_pop_home_plugin.print_execution_time_data()
-send_pop_back_plugin.print_execution_time_data()
-return_to_prev.print_execution_time_data()
-move_population_plugin.print_execution_time_data()
+if gather_pop is not None: gather_pop.print_execution_time_data()
+if return_pop_home is not None: return_pop_home.print_execution_time_data()
+if send_pop_back is not None: send_pop_back.print_execution_time_data()
+if return_to_prev is not None: return_to_prev.print_execution_time_data()
+if move_population_plugin is not None: move_population_plugin.print_execution_time_data()
 
 print("Total Simulation time")
 print(end_time - start_time)
 print("Average Cycle time")
 print((end_time - start_time)/cycles)
 
-print(env_graph.time_action_map.keys())
-
-#test_file = open("demofile2.txt", "a")
-#test_file.write(str(env_graph.time_action_map['move_population']))
-#test_file.close()
-#test_file = open("demofile21.txt", "a")
-#test_file.write(str(env_graph.time_action_map['gather_population']))
-#test_file.close()
+print("Loaded TimeAction keys:", env_graph.time_action_map.keys())

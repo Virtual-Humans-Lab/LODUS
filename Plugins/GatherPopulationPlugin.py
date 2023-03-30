@@ -15,9 +15,13 @@ class WeightingMode(Enum):
     DISTANCE = 1,
     POPULATION = 2
 
+class IsolationMode(Enum):
+    REGULAR = 1,
+    QUANTITY_CORRECTION = 2
+
 class GatherPopulationPlugin(environment.TimeActionPlugin):
 
-    def __init__(self, env_graph: environment.EnvironmentGraph, isolation_rate = 0.0, to_total_ratio_correction = 0.2, locals_only = False):
+    def __init__(self, env_graph: environment.EnvironmentGraph):
         '''
         Plugin that consumes a 'gather_population' TimeAction type
             
@@ -49,14 +53,18 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         self.graph = env_graph
         self.set_pair('gather_population', self.gather_population)
 
-        self.iso_mode = 'regular'
-        self.to_total_ratio_correction = to_total_ratio_correction
+        if "gather_population" not in self.graph.experiment_config:
+            print("Experiment config should have a 'gather_population' key. Using an empty entry (default plugin values)")
 
-
-        self.isolation_rate = isolation_rate
-
-        self.locals_only = locals_only
-        self.weighting_mode:WeightingMode = WeightingMode.DISTANCE
+        # Loads experiment configuration, if any
+        self.config:dict = self.graph.experiment_config.get("gather_population", {})
+        self.isolation_mode:IsolationMode = IsolationMode(self.config.get("isolation_mode",
+                                                                          IsolationMode.REGULAR))
+        self.weighting_mode:WeightingMode = WeightingMode(self.config.get("weighting_mode",
+                                                                          WeightingMode.DISTANCE))
+        self.isolation_rate:float = self.config.get("isolation_rate", 0.0)
+        self.to_total_ratio_correction:float = self.config.get("to_total_ratio_correction", 0.2)
+        self.locals_only:bool = self.config.get("locals_only", False)
         
         # Percentage of EnvNodes per population search. 
         # Bigger values will search population in more locations, but takes more time
@@ -69,14 +77,6 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
         # Performance log for quantity of sub-actions
         self.sublist_count = []
-
-        # Debug options
-        self.DEBUG_OPERATION_OUTPUT = False
-        self.DEBUG_OPERATION_REGIONS = ["Azenha"]
-        self.DEBUG_ALL_REQUESTS = False
-        self.DEBUG_REGIONS = []
-
-
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -103,7 +103,6 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             return self.population_weighting(target_node=target_node)
     
     def population_weighting(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
-        print("POP WEIGHT")
         pop_list = []
         # Gets distances to other EnvNodes
         for other in self.graph.node_list:
@@ -136,7 +135,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
         # Adds new entry and returns it
         self.dist_weights_map[unique_name] = weight_list
-        return self.dist_weights_map[unique_name]
+        return self.dist_weights_map[unique_name].copy()
     
     ## Complex time action. Will be broken up into smaller actions
     def gather_population(self, pop_template, values, cycle_step, sim_step):
@@ -146,23 +145,27 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         
         acting_region = self.graph.get_region_by_name(values['region'])
         action_node = acting_region.get_node_by_name(values['node'])
-            
-        if self.DEBUG_OPERATION_OUTPUT and action_node.containing_region_name in self.DEBUG_OPERATION_REGIONS:
-            print("########## CONVERGE_POPULATION")
-            print('converge Values: \n', values)
-            
         sub_list = [] 
-        quantity = values['quantity']
 
+        quantity = int(values['quantity'])
         if quantity == 0: 
             return sub_list
 
+        # Loads optional action parameters, otherwise, use default values
+        _isolation_mode:IsolationMode = IsolationMode(self.config.get("isolation_mode", 
+                                                                      self.isolation_mode))
+        _weighting_mode:WeightingMode = WeightingMode(self.config.get("weighting_mode",
+                                                                      self.weighting_mode))
+        _isolation_rate = self.config.get("isolation_rate", self.isolation_rate)
+        _to_total_ratio_correction = self.config.get("to_total_ratio_correction", 
+                                                     self.to_total_ratio_correction)
+        _locals_only = self.config.get("locals_only", self.locals_only)
+
         # Get node weights
-        _weighting_mode:WeightingMode = values.get("weighting_mode", self.weighting_mode)
         weight_list = self.compute_node_weights(action_node, _weighting_mode)
 
         # Filters undesired EnvNodes
-        if 'only_locals' in values and bool(values['only_locals']):
+        if _locals_only:
             weight_list = [(node, weight) for (node,weight) in weight_list if (node.containing_region_name == action_node.containing_region_name)]
         if 'different_node_name' in values and bool(values['different_node_name']):
             weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != action_node.name)]
@@ -224,30 +227,27 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         for node_aux, w, i in node_targets:
             
             origin_region = self.graph.get_region_by_name(node_aux.containing_region_name)
-            isolation_factor = self.isolation_rate
+            isolation_factor:float = _isolation_rate
             
             new_action_type = 'move_population'
-            new_action_values = { 'origin_region': origin_region.name,
+            new_action_values:dict = { 'origin_region': origin_region.name,
                                 'origin_node': node_aux.name,
                                 'destination_region': acting_region.name,
-                                'destination_node': action_node.name}
+                                'destination_node': action_node.name,
+                                'quantity': quantity}
            
-            if self.iso_mode == 'regular':
+            if _isolation_mode == IsolationMode.REGULAR:
                 new_action_values['quantity'] = i
-            elif self.iso == 'regular_isolation':
+            elif _isolation_mode == 'regular_isolation':
                 quant_float = float(i) + remainder
                 new_action_values['quantity'] = int(round(quant_float, 5))
                 remainder = quant_float % 1.0
-            elif self.iso_mode == 'quantity_correction':
-                iso_factor = (1 - isolation_factor) / (1 - self.to_total_ratio_correction) 
+            elif _isolation_mode == IsolationMode.QUANTITY_CORRECTION:
+                iso_factor:float = (1 - isolation_factor) / (1 - _to_total_ratio_correction) 
                 new_action_values['quantity'] = int(quantity * w * iso_factor)
-                # from legacy plugin
-                #     iso_factor = ( 1 - self.isolation_rate) / (1 - self.to_total_ratio_correction) 
-                #     new_action_values['quantity'] = ratioed_pop[list_count] * iso_factor 
-            elif self.iso_mode == 'random_nudge':
-                #iso_factor = ( 1 - (self.isolation_rate + (random.random() * 0.05  - 0.025))) / (1 - self.to_total_ratio_correction) 
-                iso_factor = ( 1 - (self.isolation_rate + (FixedRandom.instance.random() * 0.05  - 0.025))) / (1 - self.to_total_ratio_correction) 
-                new_action_values['quantity'] = quantity * w * iso_factor
+            elif _isolation_mode == 'random_nudge': 
+                iso_factor:float = ( 1 - (_isolation_rate + (FixedRandom.instance.random() * 0.05  - 0.025))) / (1 - _to_total_ratio_correction) 
+                new_action_values['quantity'] = int(quantity * w * iso_factor)
 
             if new_action_values['quantity'] == 0:
                 continue
@@ -258,18 +258,14 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
                 temp = copy.deepcopy(pop_template)
                 temp.mother_blob_id = acting_region.id
 
-            total_quant += new_action_values['quantity']
+            total_quant += int(new_action_values['quantity'])
             new_action = environment.TimeAction(action_type = new_action_type, 
                                                 pop_template = temp,
                                                 values = new_action_values)
-            print(new_action_values)
-            print(total_quant)
             sub_list.append(new_action)
             #self.graph.direct_action_invoke(new_action, hour, time)
             #list_count +=1 
 
-        if self.DEBUG_ALL_REQUESTS or acting_region.name in self.DEBUG_REGIONS:
-            print(f'To {acting_region.name}\tReq: {quantity} Sent: {total_quant}')
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list

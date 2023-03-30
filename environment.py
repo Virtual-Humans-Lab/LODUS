@@ -511,7 +511,7 @@ class EnvironmentGraph():
 
         self.edge_table = [[]]
 
-        self.routine_cycle_length = 24
+        self.routine_cycle_length:int = 24
         self.time_action_map:dict[str, callable] = { }
         self.base_actions = set()
         # self.time_action_map:dict[str, callable] = { 'move_population' : self.move_population }
@@ -763,6 +763,8 @@ class EnvironmentGraph():
         while not all([x.action_type in self.base_actions for x in action_list]):
             i  = action_list.pop(0)
             if i.action_type not in self.base_actions:
+                if i.action_type not in self.time_action_map:
+                    exit(f"ERROR: TimeAction type {i.action_type} cannot be consumed. Please check if correct plugins are loaded.")
                 sub_list = self.time_action_map[i.action_type](i.pop_template, i.values, hour, time)
                 action_list += sub_list
             else:
