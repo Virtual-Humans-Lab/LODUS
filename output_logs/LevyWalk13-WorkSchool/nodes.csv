@@ -1,0 +1,2233 @@
+Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
+0;0;0;Azenha//home;13804;13804;0;0;0;0
+0;0;0;Azenha//work;0;0;0;0;0;0
+0;0;0;Azenha//school;0;0;0;0;0;0
+0;0;0;Azenha//marketplace;0;0;0;0;0;0
+0;0;0;Azenha//pharmacy;0;0;0;0;0;0
+0;0;0;Azenha//gas_station;0;0;0;0;0;0
+0;0;0;Azenha//hospital;0;0;0;0;0;0
+0;0;0;Azenha//shopping_mall;0;0;0;0;0;0
+0;0;0;Bom Fim//home;11593;11593;0;0;0;0
+0;0;0;Bom Fim//work;0;0;0;0;0;0
+0;0;0;Bom Fim//school;0;0;0;0;0;0
+0;0;0;Bom Fim//marketplace;0;0;0;0;0;0
+0;0;0;Bom Fim//pharmacy;0;0;0;0;0;0
+0;0;0;Bom Fim//gas_station;0;0;0;0;0;0
+0;0;0;Centro Histórico//home;39154;39154;0;0;0;0
+0;0;0;Centro Histórico//work;0;0;0;0;0;0
+0;0;0;Centro Histórico//school;0;0;0;0;0;0
+0;0;0;Centro Histórico//marketplace;0;0;0;0;0;0
+0;0;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+0;0;0;Centro Histórico//gas_station;0;0;0;0;0;0
+0;0;0;Centro Histórico//hospital;0;0;0;0;0;0
+0;0;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+0;0;0;Cidade Baixa//home;15379;15379;0;0;0;0
+0;0;0;Cidade Baixa//work;0;0;0;0;0;0
+0;0;0;Cidade Baixa//school;0;0;0;0;0;0
+0;0;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+0;0;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+0;0;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+0;0;0;Farroupilha//home;961;961;0;0;0;0
+0;0;0;Farroupilha//work;0;0;0;0;0;0
+0;0;0;Farroupilha//school;0;0;0;0;0;0
+0;0;0;Farroupilha//marketplace;0;0;0;0;0;0
+0;0;0;Farroupilha//pharmacy;0;0;0;0;0;0
+0;0;0;Farroupilha//gas_station;0;0;0;0;0;0
+0;0;0;Farroupilha//hospital;0;0;0;0;0;0
+0;0;0;Floresta//home;11596;11596;0;0;0;0
+0;0;0;Floresta//work;0;0;0;0;0;0
+0;0;0;Floresta//school;0;0;0;0;0;0
+0;0;0;Floresta//marketplace;0;0;0;0;0;0
+0;0;0;Floresta//pharmacy;0;0;0;0;0;0
+0;0;0;Floresta//gas_station;0;0;0;0;0;0
+0;0;0;Independência//home;8112;8112;0;0;0;0
+0;0;0;Independência//work;0;0;0;0;0;0
+0;0;0;Independência//school;0;0;0;0;0;0
+0;0;0;Independência//marketplace;0;0;0;0;0;0
+0;0;0;Independência//pharmacy;0;0;0;0;0;0
+0;0;0;Independência//gas_station;0;0;0;0;0;0
+0;0;0;Independência//hospital;0;0;0;0;0;0
+0;0;0;Independência//shopping_mall;0;0;0;0;0;0
+0;0;0;Menino Deus//home;31650;31650;0;0;0;0
+0;0;0;Menino Deus//work;0;0;0;0;0;0
+0;0;0;Menino Deus//school;0;0;0;0;0;0
+0;0;0;Menino Deus//marketplace;0;0;0;0;0;0
+0;0;0;Menino Deus//pharmacy;0;0;0;0;0;0
+0;0;0;Menino Deus//gas_station;0;0;0;0;0;0
+0;0;0;Menino Deus//hospital;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//home;11937;11937;0;0;0;0
+0;0;0;Moinhos de Vento//work;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//school;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+0;0;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+0;0;0;Praia de Belas//home;2281;2281;0;0;0;0
+0;0;0;Praia de Belas//work;0;0;0;0;0;0
+0;0;0;Praia de Belas//school;0;0;0;0;0;0
+0;0;0;Praia de Belas//marketplace;0;0;0;0;0;0
+0;0;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+0;0;0;Praia de Belas//gas_station;0;0;0;0;0;0
+0;0;0;Praia de Belas//stadium;0;0;0;0;0;0
+0;0;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+0;0;0;Rio Branco//home;17531;17531;0;0;0;0
+0;0;0;Rio Branco//work;0;0;0;0;0;0
+0;0;0;Rio Branco//school;0;0;0;0;0;0
+0;0;0;Rio Branco//marketplace;0;0;0;0;0;0
+0;0;0;Rio Branco//pharmacy;0;0;0;0;0;0
+0;0;0;Rio Branco//gas_station;0;0;0;0;0;0
+0;0;0;Rio Branco//hospital;0;0;0;0;0;0
+0;0;0;Santa Cecília//home;5768;5768;0;0;0;0
+0;0;0;Santa Cecília//work;0;0;0;0;0;0
+0;0;0;Santa Cecília//school;0;0;0;0;0;0
+0;0;0;Santa Cecília//marketplace;0;0;0;0;0;0
+0;0;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+0;0;0;Santa Cecília//gas_station;0;0;0;0;0;0
+0;0;0;Santa Cecília//hospital;0;0;0;0;0;0
+0;0;0;Santana//home;20723;20723;0;0;0;0
+0;0;0;Santana//work;0;0;0;0;0;0
+0;0;0;Santana//school;0;0;0;0;0;0
+0;0;0;Santana//marketplace;0;0;0;0;0;0
+0;0;0;Santana//pharmacy;0;0;0;0;0;0
+0;0;0;Santana//gas_station;0;0;0;0;0;0
+0;0;0;Santana//hospital;0;0;0;0;0;0
+1;1;0;Azenha//home;13404;13404;0;-400;-400;0
+1;1;0;Azenha//work;850;0;850;850;0;850
+1;1;0;Azenha//school;0;0;0;0;0;0
+1;1;0;Azenha//marketplace;0;0;0;0;0;0
+1;1;0;Azenha//pharmacy;0;0;0;0;0;0
+1;1;0;Azenha//gas_station;0;0;0;0;0;0
+1;1;0;Azenha//hospital;0;0;0;0;0;0
+1;1;0;Azenha//shopping_mall;0;0;0;0;0;0
+1;1;0;Bom Fim//home;10843;10843;0;-750;-750;0
+1;1;0;Bom Fim//work;450;50;400;450;50;400
+1;1;0;Bom Fim//school;0;0;0;0;0;0
+1;1;0;Bom Fim//marketplace;0;0;0;0;0;0
+1;1;0;Bom Fim//pharmacy;0;0;0;0;0;0
+1;1;0;Bom Fim//gas_station;0;0;0;0;0;0
+1;1;0;Centro Histórico//home;37854;37854;0;-1300;-1300;0
+1;1;0;Centro Histórico//work;400;100;300;400;100;300
+1;1;0;Centro Histórico//school;0;0;0;0;0;0
+1;1;0;Centro Histórico//marketplace;0;0;0;0;0;0
+1;1;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+1;1;0;Centro Histórico//gas_station;0;0;0;0;0;0
+1;1;0;Centro Histórico//hospital;0;0;0;0;0;0
+1;1;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+1;1;0;Cidade Baixa//home;14529;14529;0;-850;-850;0
+1;1;0;Cidade Baixa//work;500;50;450;500;50;450
+1;1;0;Cidade Baixa//school;0;0;0;0;0;0
+1;1;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+1;1;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+1;1;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+1;1;0;Farroupilha//home;911;911;0;-50;-50;0
+1;1;0;Farroupilha//work;1250;0;1250;1250;0;1250
+1;1;0;Farroupilha//school;0;0;0;0;0;0
+1;1;0;Farroupilha//marketplace;0;0;0;0;0;0
+1;1;0;Farroupilha//pharmacy;0;0;0;0;0;0
+1;1;0;Farroupilha//gas_station;0;0;0;0;0;0
+1;1;0;Farroupilha//hospital;0;0;0;0;0;0
+1;1;0;Floresta//home;11296;11296;0;-300;-300;0
+1;1;0;Floresta//work;400;50;350;400;50;350
+1;1;0;Floresta//school;0;0;0;0;0;0
+1;1;0;Floresta//marketplace;0;0;0;0;0;0
+1;1;0;Floresta//pharmacy;0;0;0;0;0;0
+1;1;0;Floresta//gas_station;0;0;0;0;0;0
+1;1;0;Independência//home;7662;7662;0;-450;-450;0
+1;1;0;Independência//work;850;200;650;850;200;650
+1;1;0;Independência//school;0;0;0;0;0;0
+1;1;0;Independência//marketplace;0;0;0;0;0;0
+1;1;0;Independência//pharmacy;0;0;0;0;0;0
+1;1;0;Independência//gas_station;0;0;0;0;0;0
+1;1;0;Independência//hospital;0;0;0;0;0;0
+1;1;0;Independência//shopping_mall;0;0;0;0;0;0
+1;1;0;Menino Deus//home;30000;30000;0;-1650;-1650;0
+1;1;0;Menino Deus//work;650;200;450;650;200;450
+1;1;0;Menino Deus//school;0;0;0;0;0;0
+1;1;0;Menino Deus//marketplace;0;0;0;0;0;0
+1;1;0;Menino Deus//pharmacy;0;0;0;0;0;0
+1;1;0;Menino Deus//gas_station;0;0;0;0;0;0
+1;1;0;Menino Deus//hospital;0;0;0;0;0;0
+1;1;0;Moinhos de Vento//home;11587;11587;0;-350;-350;0
+1;1;0;Moinhos de Vento//work;350;200;150;350;200;150
+1;1;0;Moinhos de Vento//school;0;0;0;0;0;0
+1;1;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+1;1;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+1;1;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+1;1;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+1;1;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+1;1;0;Praia de Belas//home;2281;2281;0;0;0;0
+1;1;0;Praia de Belas//work;650;0;650;650;0;650
+1;1;0;Praia de Belas//school;0;0;0;0;0;0
+1;1;0;Praia de Belas//marketplace;0;0;0;0;0;0
+1;1;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+1;1;0;Praia de Belas//gas_station;0;0;0;0;0;0
+1;1;0;Praia de Belas//stadium;0;0;0;0;0;0
+1;1;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+1;1;0;Rio Branco//home;16731;16731;0;-800;-800;0
+1;1;0;Rio Branco//work;200;0;200;200;0;200
+1;1;0;Rio Branco//school;0;0;0;0;0;0
+1;1;0;Rio Branco//marketplace;0;0;0;0;0;0
+1;1;0;Rio Branco//pharmacy;0;0;0;0;0;0
+1;1;0;Rio Branco//gas_station;0;0;0;0;0;0
+1;1;0;Rio Branco//hospital;0;0;0;0;0;0
+1;1;0;Santa Cecília//home;5418;5418;0;-350;-350;0
+1;1;0;Santa Cecília//work;1000;250;750;1000;250;750
+1;1;0;Santa Cecília//school;0;0;0;0;0;0
+1;1;0;Santa Cecília//marketplace;0;0;0;0;0;0
+1;1;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+1;1;0;Santa Cecília//gas_station;0;0;0;0;0;0
+1;1;0;Santa Cecília//hospital;0;0;0;0;0;0
+1;1;0;Santana//home;19623;19623;0;-1100;-1100;0
+1;1;0;Santana//work;800;450;350;800;450;350
+1;1;0;Santana//school;0;0;0;0;0;0
+1;1;0;Santana//marketplace;0;0;0;0;0;0
+1;1;0;Santana//pharmacy;0;0;0;0;0;0
+1;1;0;Santana//gas_station;0;0;0;0;0;0
+1;1;0;Santana//hospital;0;0;0;0;0;0
+2;2;0;Azenha//home;13054;13054;0;-350;-350;0
+2;2;0;Azenha//work;1700;100;1600;850;100;750
+2;2;0;Azenha//school;0;0;0;0;0;0
+2;2;0;Azenha//marketplace;0;0;0;0;0;0
+2;2;0;Azenha//pharmacy;0;0;0;0;0;0
+2;2;0;Azenha//gas_station;0;0;0;0;0;0
+2;2;0;Azenha//hospital;0;0;0;0;0;0
+2;2;0;Azenha//shopping_mall;0;0;0;0;0;0
+2;2;0;Bom Fim//home;10393;10393;0;-450;-450;0
+2;2;0;Bom Fim//work;1150;50;1100;700;0;700
+2;2;0;Bom Fim//school;0;0;0;0;0;0
+2;2;0;Bom Fim//marketplace;0;0;0;0;0;0
+2;2;0;Bom Fim//pharmacy;0;0;0;0;0;0
+2;2;0;Bom Fim//gas_station;0;0;0;0;0;0
+2;2;0;Centro Histórico//home;36704;36704;0;-1150;-1150;0
+2;2;0;Centro Histórico//work;900;150;750;500;50;450
+2;2;0;Centro Histórico//school;0;0;0;0;0;0
+2;2;0;Centro Histórico//marketplace;0;0;0;0;0;0
+2;2;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+2;2;0;Centro Histórico//gas_station;0;0;0;0;0;0
+2;2;0;Centro Histórico//hospital;0;0;0;0;0;0
+2;2;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+2;2;0;Cidade Baixa//home;13529;13529;0;-1000;-1000;0
+2;2;0;Cidade Baixa//work;1200;200;1000;700;150;550
+2;2;0;Cidade Baixa//school;0;0;0;0;0;0
+2;2;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+2;2;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+2;2;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+2;2;0;Farroupilha//home;911;911;0;0;0;0
+2;2;0;Farroupilha//work;1850;0;1850;600;0;600
+2;2;0;Farroupilha//school;0;0;0;0;0;0
+2;2;0;Farroupilha//marketplace;0;0;0;0;0;0
+2;2;0;Farroupilha//pharmacy;0;0;0;0;0;0
+2;2;0;Farroupilha//gas_station;0;0;0;0;0;0
+2;2;0;Farroupilha//hospital;0;0;0;0;0;0
+2;2;0;Floresta//home;10846;10846;0;-450;-450;0
+2;2;0;Floresta//work;650;50;600;250;0;250
+2;2;0;Floresta//school;0;0;0;0;0;0
+2;2;0;Floresta//marketplace;0;0;0;0;0;0
+2;2;0;Floresta//pharmacy;0;0;0;0;0;0
+2;2;0;Floresta//gas_station;0;0;0;0;0;0
+2;2;0;Independência//home;7262;7262;0;-400;-400;0
+2;2;0;Independência//work;1650;250;1400;800;50;750
+2;2;0;Independência//school;0;0;0;0;0;0
+2;2;0;Independência//marketplace;0;0;0;0;0;0
+2;2;0;Independência//pharmacy;0;0;0;0;0;0
+2;2;0;Independência//gas_station;0;0;0;0;0;0
+2;2;0;Independência//hospital;0;0;0;0;0;0
+2;2;0;Independência//shopping_mall;0;0;0;0;0;0
+2;2;0;Menino Deus//home;28900;28900;0;-1100;-1100;0
+2;2;0;Menino Deus//work;1300;400;900;650;200;450
+2;2;0;Menino Deus//school;0;0;0;0;0;0
+2;2;0;Menino Deus//marketplace;0;0;0;0;0;0
+2;2;0;Menino Deus//pharmacy;0;0;0;0;0;0
+2;2;0;Menino Deus//gas_station;0;0;0;0;0;0
+2;2;0;Menino Deus//hospital;0;0;0;0;0;0
+2;2;0;Moinhos de Vento//home;10787;10787;0;-800;-800;0
+2;2;0;Moinhos de Vento//work;1200;600;600;850;400;450
+2;2;0;Moinhos de Vento//school;0;0;0;0;0;0
+2;2;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+2;2;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+2;2;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+2;2;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+2;2;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+2;2;0;Praia de Belas//home;2181;2181;0;-100;-100;0
+2;2;0;Praia de Belas//work;1500;0;1500;850;0;850
+2;2;0;Praia de Belas//school;0;0;0;0;0;0
+2;2;0;Praia de Belas//marketplace;0;0;0;0;0;0
+2;2;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+2;2;0;Praia de Belas//gas_station;0;0;0;0;0;0
+2;2;0;Praia de Belas//stadium;0;0;0;0;0;0
+2;2;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+2;2;0;Rio Branco//home;16031;16031;0;-700;-700;0
+2;2;0;Rio Branco//work;350;0;350;150;0;150
+2;2;0;Rio Branco//school;0;0;0;0;0;0
+2;2;0;Rio Branco//marketplace;0;0;0;0;0;0
+2;2;0;Rio Branco//pharmacy;0;0;0;0;0;0
+2;2;0;Rio Branco//gas_station;0;0;0;0;0;0
+2;2;0;Rio Branco//hospital;0;0;0;0;0;0
+2;2;0;Santa Cecília//home;5018;5018;0;-400;-400;0
+2;2;0;Santa Cecília//work;1550;450;1100;550;200;350
+2;2;0;Santa Cecília//school;0;0;0;0;0;0
+2;2;0;Santa Cecília//marketplace;0;0;0;0;0;0
+2;2;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+2;2;0;Santa Cecília//gas_station;0;0;0;0;0;0
+2;2;0;Santa Cecília//hospital;0;0;0;0;0;0
+2;2;0;Santana//home;18523;18523;0;-1100;-1100;0
+2;2;0;Santana//work;1350;900;450;550;450;100
+2;2;0;Santana//school;0;0;0;0;0;0
+2;2;0;Santana//marketplace;0;0;0;0;0;0
+2;2;0;Santana//pharmacy;0;0;0;0;0;0
+2;2;0;Santana//gas_station;0;0;0;0;0;0
+2;2;0;Santana//hospital;0;0;0;0;0;0
+3;3;0;Azenha//home;12654;12654;0;-400;-400;0
+3;3;0;Azenha//work;2350;100;2250;650;0;650
+3;3;0;Azenha//school;0;0;0;0;0;0
+3;3;0;Azenha//marketplace;0;0;0;0;0;0
+3;3;0;Azenha//pharmacy;0;0;0;0;0;0
+3;3;0;Azenha//gas_station;0;0;0;0;0;0
+3;3;0;Azenha//hospital;0;0;0;0;0;0
+3;3;0;Azenha//shopping_mall;0;0;0;0;0;0
+3;3;0;Bom Fim//home;9893;9893;0;-500;-500;0
+3;3;0;Bom Fim//work;1950;50;1900;800;0;800
+3;3;0;Bom Fim//school;0;0;0;0;0;0
+3;3;0;Bom Fim//marketplace;0;0;0;0;0;0
+3;3;0;Bom Fim//pharmacy;0;0;0;0;0;0
+3;3;0;Bom Fim//gas_station;0;0;0;0;0;0
+3;3;0;Centro Histórico//home;35654;35654;0;-1050;-1050;0
+3;3;0;Centro Histórico//work;1300;300;1000;400;150;250
+3;3;0;Centro Histórico//school;0;0;0;0;0;0
+3;3;0;Centro Histórico//marketplace;0;0;0;0;0;0
+3;3;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+3;3;0;Centro Histórico//gas_station;0;0;0;0;0;0
+3;3;0;Centro Histórico//hospital;0;0;0;0;0;0
+3;3;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+3;3;0;Cidade Baixa//home;12929;12929;0;-600;-600;0
+3;3;0;Cidade Baixa//work;1700;200;1500;500;0;500
+3;3;0;Cidade Baixa//school;0;0;0;0;0;0
+3;3;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+3;3;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+3;3;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+3;3;0;Farroupilha//home;911;911;0;0;0;0
+3;3;0;Farroupilha//work;2500;0;2500;650;0;650
+3;3;0;Farroupilha//school;0;0;0;0;0;0
+3;3;0;Farroupilha//marketplace;0;0;0;0;0;0
+3;3;0;Farroupilha//pharmacy;0;0;0;0;0;0
+3;3;0;Farroupilha//gas_station;0;0;0;0;0;0
+3;3;0;Farroupilha//hospital;0;0;0;0;0;0
+3;3;0;Floresta//home;10396;10396;0;-450;-450;0
+3;3;0;Floresta//work;1050;100;950;400;50;350
+3;3;0;Floresta//school;0;0;0;0;0;0
+3;3;0;Floresta//marketplace;0;0;0;0;0;0
+3;3;0;Floresta//pharmacy;0;0;0;0;0;0
+3;3;0;Floresta//gas_station;0;0;0;0;0;0
+3;3;0;Independência//home;6862;6862;0;-400;-400;0
+3;3;0;Independência//work;2200;400;1800;550;150;400
+3;3;0;Independência//school;0;0;0;0;0;0
+3;3;0;Independência//marketplace;0;0;0;0;0;0
+3;3;0;Independência//pharmacy;0;0;0;0;0;0
+3;3;0;Independência//gas_station;0;0;0;0;0;0
+3;3;0;Independência//hospital;0;0;0;0;0;0
+3;3;0;Independência//shopping_mall;0;0;0;0;0;0
+3;3;0;Menino Deus//home;27900;27900;0;-1000;-1000;0
+3;3;0;Menino Deus//work;1750;600;1150;450;200;250
+3;3;0;Menino Deus//school;0;0;0;0;0;0
+3;3;0;Menino Deus//marketplace;0;0;0;0;0;0
+3;3;0;Menino Deus//pharmacy;0;0;0;0;0;0
+3;3;0;Menino Deus//gas_station;0;0;0;0;0;0
+3;3;0;Menino Deus//hospital;0;0;0;0;0;0
+3;3;0;Moinhos de Vento//home;9937;9937;0;-850;-850;0
+3;3;0;Moinhos de Vento//work;1800;900;900;600;300;300
+3;3;0;Moinhos de Vento//school;0;0;0;0;0;0
+3;3;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+3;3;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+3;3;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+3;3;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+3;3;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+3;3;0;Praia de Belas//home;2081;2081;0;-100;-100;0
+3;3;0;Praia de Belas//work;1850;50;1800;350;50;300
+3;3;0;Praia de Belas//school;0;0;0;0;0;0
+3;3;0;Praia de Belas//marketplace;0;0;0;0;0;0
+3;3;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+3;3;0;Praia de Belas//gas_station;0;0;0;0;0;0
+3;3;0;Praia de Belas//stadium;0;0;0;0;0;0
+3;3;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+3;3;0;Rio Branco//home;15581;15581;0;-450;-450;0
+3;3;0;Rio Branco//work;800;100;700;450;100;350
+3;3;0;Rio Branco//school;0;0;0;0;0;0
+3;3;0;Rio Branco//marketplace;0;0;0;0;0;0
+3;3;0;Rio Branco//pharmacy;0;0;0;0;0;0
+3;3;0;Rio Branco//gas_station;0;0;0;0;0;0
+3;3;0;Rio Branco//hospital;0;0;0;0;0;0
+3;3;0;Santa Cecília//home;4718;4718;0;-300;-300;0
+3;3;0;Santa Cecília//work;2050;600;1450;500;150;350
+3;3;0;Santa Cecília//school;0;0;0;0;0;0
+3;3;0;Santa Cecília//marketplace;0;0;0;0;0;0
+3;3;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+3;3;0;Santa Cecília//gas_station;0;0;0;0;0;0
+3;3;0;Santa Cecília//hospital;0;0;0;0;0;0
+3;3;0;Santana//home;17323;17323;0;-1200;-1200;0
+3;3;0;Santana//work;2350;1700;650;1000;800;200
+3;3;0;Santana//school;0;0;0;0;0;0
+3;3;0;Santana//marketplace;0;0;0;0;0;0
+3;3;0;Santana//pharmacy;0;0;0;0;0;0
+3;3;0;Santana//gas_station;0;0;0;0;0;0
+3;3;0;Santana//hospital;0;0;0;0;0;0
+4;4;0;Azenha//home;12254;12254;0;-400;-400;0
+4;4;0;Azenha//work;2700;100;2600;350;0;350
+4;4;0;Azenha//school;0;0;0;0;0;0
+4;4;0;Azenha//marketplace;0;0;0;0;0;0
+4;4;0;Azenha//pharmacy;0;0;0;0;0;0
+4;4;0;Azenha//gas_station;0;0;0;0;0;0
+4;4;0;Azenha//hospital;0;0;0;0;0;0
+4;4;0;Azenha//shopping_mall;0;0;0;0;0;0
+4;4;0;Bom Fim//home;9393;9393;0;-500;-500;0
+4;4;0;Bom Fim//work;2350;50;2300;400;0;400
+4;4;0;Bom Fim//school;0;0;0;0;0;0
+4;4;0;Bom Fim//marketplace;0;0;0;0;0;0
+4;4;0;Bom Fim//pharmacy;0;0;0;0;0;0
+4;4;0;Bom Fim//gas_station;0;0;0;0;0;0
+4;4;0;Centro Histórico//home;35004;35004;0;-650;-650;0
+4;4;0;Centro Histórico//work;1850;450;1400;550;150;400
+4;4;0;Centro Histórico//school;0;0;0;0;0;0
+4;4;0;Centro Histórico//marketplace;0;0;0;0;0;0
+4;4;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+4;4;0;Centro Histórico//gas_station;0;0;0;0;0;0
+4;4;0;Centro Histórico//hospital;0;0;0;0;0;0
+4;4;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+4;4;0;Cidade Baixa//home;12529;12529;0;-400;-400;0
+4;4;0;Cidade Baixa//work;2100;250;1850;400;50;350
+4;4;0;Cidade Baixa//school;0;0;0;0;0;0
+4;4;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+4;4;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+4;4;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+4;4;0;Farroupilha//home;811;811;0;-100;-100;0
+4;4;0;Farroupilha//work;2850;0;2850;350;0;350
+4;4;0;Farroupilha//school;0;0;0;0;0;0
+4;4;0;Farroupilha//marketplace;0;0;0;0;0;0
+4;4;0;Farroupilha//pharmacy;0;0;0;0;0;0
+4;4;0;Farroupilha//gas_station;0;0;0;0;0;0
+4;4;0;Farroupilha//hospital;0;0;0;0;0;0
+4;4;0;Floresta//home;9846;9846;0;-550;-550;0
+4;4;0;Floresta//work;1300;150;1150;250;50;200
+4;4;0;Floresta//school;0;0;0;0;0;0
+4;4;0;Floresta//marketplace;0;0;0;0;0;0
+4;4;0;Floresta//pharmacy;0;0;0;0;0;0
+4;4;0;Floresta//gas_station;0;0;0;0;0;0
+4;4;0;Independência//home;6462;6462;0;-400;-400;0
+4;4;0;Independência//work;2850;550;2300;650;150;500
+4;4;0;Independência//school;0;0;0;0;0;0
+4;4;0;Independência//marketplace;0;0;0;0;0;0
+4;4;0;Independência//pharmacy;0;0;0;0;0;0
+4;4;0;Independência//gas_station;0;0;0;0;0;0
+4;4;0;Independência//hospital;0;0;0;0;0;0
+4;4;0;Independência//shopping_mall;0;0;0;0;0;0
+4;4;0;Menino Deus//home;26850;26850;0;-1050;-1050;0
+4;4;0;Menino Deus//work;2550;700;1850;800;100;700
+4;4;0;Menino Deus//school;0;0;0;0;0;0
+4;4;0;Menino Deus//marketplace;0;0;0;0;0;0
+4;4;0;Menino Deus//pharmacy;0;0;0;0;0;0
+4;4;0;Menino Deus//gas_station;0;0;0;0;0;0
+4;4;0;Menino Deus//hospital;0;0;0;0;0;0
+4;4;0;Moinhos de Vento//home;9287;9287;0;-650;-650;0
+4;4;0;Moinhos de Vento//work;2250;1050;1200;450;150;300
+4;4;0;Moinhos de Vento//school;0;0;0;0;0;0
+4;4;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+4;4;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+4;4;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+4;4;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+4;4;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+4;4;0;Praia de Belas//home;1981;1981;0;-100;-100;0
+4;4;0;Praia de Belas//work;2500;100;2400;650;50;600
+4;4;0;Praia de Belas//school;0;0;0;0;0;0
+4;4;0;Praia de Belas//marketplace;0;0;0;0;0;0
+4;4;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+4;4;0;Praia de Belas//gas_station;0;0;0;0;0;0
+4;4;0;Praia de Belas//stadium;0;0;0;0;0;0
+4;4;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+4;4;0;Rio Branco//home;14731;14731;0;-850;-850;0
+4;4;0;Rio Branco//work;1300;100;1200;500;0;500
+4;4;0;Rio Branco//school;0;0;0;0;0;0
+4;4;0;Rio Branco//marketplace;0;0;0;0;0;0
+4;4;0;Rio Branco//pharmacy;0;0;0;0;0;0
+4;4;0;Rio Branco//gas_station;0;0;0;0;0;0
+4;4;0;Rio Branco//hospital;0;0;0;0;0;0
+4;4;0;Santa Cecília//home;4518;4518;0;-200;-200;0
+4;4;0;Santa Cecília//work;2600;700;1900;550;100;450
+4;4;0;Santa Cecília//school;0;0;0;0;0;0
+4;4;0;Santa Cecília//marketplace;0;0;0;0;0;0
+4;4;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+4;4;0;Santa Cecília//gas_station;0;0;0;0;0;0
+4;4;0;Santa Cecília//hospital;0;0;0;0;0;0
+4;4;0;Santana//home;16773;16773;0;-550;-550;0
+4;4;0;Santana//work;2850;2000;850;500;300;200
+4;4;0;Santana//school;0;0;0;0;0;0
+4;4;0;Santana//marketplace;0;0;0;0;0;0
+4;4;0;Santana//pharmacy;0;0;0;0;0;0
+4;4;0;Santana//gas_station;0;0;0;0;0;0
+4;4;0;Santana//hospital;0;0;0;0;0;0
+5;5;0;Azenha//home;11804;11804;0;-450;-450;0
+5;5;0;Azenha//work;3750;200;3550;1050;100;950
+5;5;0;Azenha//school;0;0;0;0;0;0
+5;5;0;Azenha//marketplace;0;0;0;0;0;0
+5;5;0;Azenha//pharmacy;0;0;0;0;0;0
+5;5;0;Azenha//gas_station;0;0;0;0;0;0
+5;5;0;Azenha//hospital;0;0;0;0;0;0
+5;5;0;Azenha//shopping_mall;0;0;0;0;0;0
+5;5;0;Bom Fim//home;9093;9093;0;-300;-300;0
+5;5;0;Bom Fim//work;2550;50;2500;200;0;200
+5;5;0;Bom Fim//school;0;0;0;0;0;0
+5;5;0;Bom Fim//marketplace;0;0;0;0;0;0
+5;5;0;Bom Fim//pharmacy;0;0;0;0;0;0
+5;5;0;Bom Fim//gas_station;0;0;0;0;0;0
+5;5;0;Centro Histórico//home;33904;33904;0;-1100;-1100;0
+5;5;0;Centro Histórico//work;2100;600;1500;250;150;100
+5;5;0;Centro Histórico//school;0;0;0;0;0;0
+5;5;0;Centro Histórico//marketplace;0;0;0;0;0;0
+5;5;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+5;5;0;Centro Histórico//gas_station;0;0;0;0;0;0
+5;5;0;Centro Histórico//hospital;0;0;0;0;0;0
+5;5;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+5;5;0;Cidade Baixa//home;11879;11879;0;-650;-650;0
+5;5;0;Cidade Baixa//work;2650;550;2100;550;300;250
+5;5;0;Cidade Baixa//school;0;0;0;0;0;0
+5;5;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+5;5;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+5;5;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+5;5;0;Farroupilha//home;761;761;0;-50;-50;0
+5;5;0;Farroupilha//work;3750;50;3700;900;50;850
+5;5;0;Farroupilha//school;0;0;0;0;0;0
+5;5;0;Farroupilha//marketplace;0;0;0;0;0;0
+5;5;0;Farroupilha//pharmacy;0;0;0;0;0;0
+5;5;0;Farroupilha//gas_station;0;0;0;0;0;0
+5;5;0;Farroupilha//hospital;0;0;0;0;0;0
+5;5;0;Floresta//home;9446;9446;0;-400;-400;0
+5;5;0;Floresta//work;1500;250;1250;200;100;100
+5;5;0;Floresta//school;0;0;0;0;0;0
+5;5;0;Floresta//marketplace;0;0;0;0;0;0
+5;5;0;Floresta//pharmacy;0;0;0;0;0;0
+5;5;0;Floresta//gas_station;0;0;0;0;0;0
+5;5;0;Independência//home;6162;6162;0;-300;-300;0
+5;5;0;Independência//work;3150;600;2550;300;50;250
+5;5;0;Independência//school;0;0;0;0;0;0
+5;5;0;Independência//marketplace;0;0;0;0;0;0
+5;5;0;Independência//pharmacy;0;0;0;0;0;0
+5;5;0;Independência//gas_station;0;0;0;0;0;0
+5;5;0;Independência//hospital;0;0;0;0;0;0
+5;5;0;Independência//shopping_mall;0;0;0;0;0;0
+5;5;0;Menino Deus//home;25750;25750;0;-1100;-1100;0
+5;5;0;Menino Deus//work;3000;750;2250;450;50;400
+5;5;0;Menino Deus//school;0;0;0;0;0;0
+5;5;0;Menino Deus//marketplace;0;0;0;0;0;0
+5;5;0;Menino Deus//pharmacy;0;0;0;0;0;0
+5;5;0;Menino Deus//gas_station;0;0;0;0;0;0
+5;5;0;Menino Deus//hospital;0;0;0;0;0;0
+5;5;0;Moinhos de Vento//home;8937;8937;0;-350;-350;0
+5;5;0;Moinhos de Vento//work;2800;1200;1600;550;150;400
+5;5;0;Moinhos de Vento//school;0;0;0;0;0;0
+5;5;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+5;5;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+5;5;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+5;5;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+5;5;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+5;5;0;Praia de Belas//home;1931;1931;0;-50;-50;0
+5;5;0;Praia de Belas//work;3000;100;2900;500;0;500
+5;5;0;Praia de Belas//school;0;0;0;0;0;0
+5;5;0;Praia de Belas//marketplace;0;0;0;0;0;0
+5;5;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+5;5;0;Praia de Belas//gas_station;0;0;0;0;0;0
+5;5;0;Praia de Belas//stadium;0;0;0;0;0;0
+5;5;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+5;5;0;Rio Branco//home;14181;14181;0;-550;-550;0
+5;5;0;Rio Branco//work;1500;150;1350;200;50;150
+5;5;0;Rio Branco//school;0;0;0;0;0;0
+5;5;0;Rio Branco//marketplace;0;0;0;0;0;0
+5;5;0;Rio Branco//pharmacy;0;0;0;0;0;0
+5;5;0;Rio Branco//gas_station;0;0;0;0;0;0
+5;5;0;Rio Branco//hospital;0;0;0;0;0;0
+5;5;0;Santa Cecília//home;4218;4218;0;-300;-300;0
+5;5;0;Santa Cecília//work;3250;850;2400;650;150;500
+5;5;0;Santa Cecília//school;0;0;0;0;0;0
+5;5;0;Santa Cecília//marketplace;0;0;0;0;0;0
+5;5;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+5;5;0;Santa Cecília//gas_station;0;0;0;0;0;0
+5;5;0;Santa Cecília//hospital;0;0;0;0;0;0
+5;5;0;Santana//home;15923;15923;0;-850;-850;0
+5;5;0;Santana//work;3500;2400;1100;650;400;250
+5;5;0;Santana//school;0;0;0;0;0;0
+5;5;0;Santana//marketplace;0;0;0;0;0;0
+5;5;0;Santana//pharmacy;0;0;0;0;0;0
+5;5;0;Santana//gas_station;0;0;0;0;0;0
+5;5;0;Santana//hospital;0;0;0;0;0;0
+6;6;0;Azenha//home;11554;11554;0;-250;-250;0
+6;6;0;Azenha//work;4350;250;4100;600;50;550
+6;6;0;Azenha//school;0;0;0;0;0;0
+6;6;0;Azenha//marketplace;0;0;0;0;0;0
+6;6;0;Azenha//pharmacy;0;0;0;0;0;0
+6;6;0;Azenha//gas_station;0;0;0;0;0;0
+6;6;0;Azenha//hospital;0;0;0;0;0;0
+6;6;0;Azenha//shopping_mall;0;0;0;0;0;0
+6;6;0;Bom Fim//home;8643;8643;0;-450;-450;0
+6;6;0;Bom Fim//work;3050;100;2950;500;50;450
+6;6;0;Bom Fim//school;0;0;0;0;0;0
+6;6;0;Bom Fim//marketplace;0;0;0;0;0;0
+6;6;0;Bom Fim//pharmacy;0;0;0;0;0;0
+6;6;0;Bom Fim//gas_station;0;0;0;0;0;0
+6;6;0;Centro Histórico//home;33254;33254;0;-650;-650;0
+6;6;0;Centro Histórico//work;2400;650;1750;300;50;250
+6;6;0;Centro Histórico//school;0;0;0;0;0;0
+6;6;0;Centro Histórico//marketplace;0;0;0;0;0;0
+6;6;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+6;6;0;Centro Histórico//gas_station;0;0;0;0;0;0
+6;6;0;Centro Histórico//hospital;0;0;0;0;0;0
+6;6;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+6;6;0;Cidade Baixa//home;11629;11629;0;-250;-250;0
+6;6;0;Cidade Baixa//work;2900;550;2350;250;0;250
+6;6;0;Cidade Baixa//school;0;0;0;0;0;0
+6;6;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+6;6;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+6;6;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+6;6;0;Farroupilha//home;711;711;0;-50;-50;0
+6;6;0;Farroupilha//work;4100;50;4050;350;0;350
+6;6;0;Farroupilha//school;0;0;0;0;0;0
+6;6;0;Farroupilha//marketplace;0;0;0;0;0;0
+6;6;0;Farroupilha//pharmacy;0;0;0;0;0;0
+6;6;0;Farroupilha//gas_station;0;0;0;0;0;0
+6;6;0;Farroupilha//hospital;0;0;0;0;0;0
+6;6;0;Floresta//home;9096;9096;0;-350;-350;0
+6;6;0;Floresta//work;1800;400;1400;300;150;150
+6;6;0;Floresta//school;0;0;0;0;0;0
+6;6;0;Floresta//marketplace;0;0;0;0;0;0
+6;6;0;Floresta//pharmacy;0;0;0;0;0;0
+6;6;0;Floresta//gas_station;0;0;0;0;0;0
+6;6;0;Independência//home;6012;6012;0;-150;-150;0
+6;6;0;Independência//work;3650;700;2950;500;100;400
+6;6;0;Independência//school;0;0;0;0;0;0
+6;6;0;Independência//marketplace;0;0;0;0;0;0
+6;6;0;Independência//pharmacy;0;0;0;0;0;0
+6;6;0;Independência//gas_station;0;0;0;0;0;0
+6;6;0;Independência//hospital;0;0;0;0;0;0
+6;6;0;Independência//shopping_mall;0;0;0;0;0;0
+6;6;0;Menino Deus//home;24900;24900;0;-850;-850;0
+6;6;0;Menino Deus//work;3200;800;2400;200;50;150
+6;6;0;Menino Deus//school;0;0;0;0;0;0
+6;6;0;Menino Deus//marketplace;0;0;0;0;0;0
+6;6;0;Menino Deus//pharmacy;0;0;0;0;0;0
+6;6;0;Menino Deus//gas_station;0;0;0;0;0;0
+6;6;0;Menino Deus//hospital;0;0;0;0;0;0
+6;6;0;Moinhos de Vento//home;8687;8687;0;-250;-250;0
+6;6;0;Moinhos de Vento//work;3000;1250;1750;200;50;150
+6;6;0;Moinhos de Vento//school;0;0;0;0;0;0
+6;6;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+6;6;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+6;6;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+6;6;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+6;6;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+6;6;0;Praia de Belas//home;1881;1881;0;-50;-50;0
+6;6;0;Praia de Belas//work;3200;100;3100;200;0;200
+6;6;0;Praia de Belas//school;0;0;0;0;0;0
+6;6;0;Praia de Belas//marketplace;0;0;0;0;0;0
+6;6;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+6;6;0;Praia de Belas//gas_station;0;0;0;0;0;0
+6;6;0;Praia de Belas//stadium;0;0;0;0;0;0
+6;6;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+6;6;0;Rio Branco//home;13731;13731;0;-450;-450;0
+6;6;0;Rio Branco//work;1800;200;1600;300;50;250
+6;6;0;Rio Branco//school;0;0;0;0;0;0
+6;6;0;Rio Branco//marketplace;0;0;0;0;0;0
+6;6;0;Rio Branco//pharmacy;0;0;0;0;0;0
+6;6;0;Rio Branco//gas_station;0;0;0;0;0;0
+6;6;0;Rio Branco//hospital;0;0;0;0;0;0
+6;6;0;Santa Cecília//home;4018;4018;0;-200;-200;0
+6;6;0;Santa Cecília//work;3700;950;2750;450;100;350
+6;6;0;Santa Cecília//school;0;0;0;0;0;0
+6;6;0;Santa Cecília//marketplace;0;0;0;0;0;0
+6;6;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+6;6;0;Santa Cecília//gas_station;0;0;0;0;0;0
+6;6;0;Santa Cecília//hospital;0;0;0;0;0;0
+6;6;0;Santana//home;15373;15373;0;-550;-550;0
+6;6;0;Santana//work;3850;2700;1150;350;300;50
+6;6;0;Santana//school;0;0;0;0;0;0
+6;6;0;Santana//marketplace;0;0;0;0;0;0
+6;6;0;Santana//pharmacy;0;0;0;0;0;0
+6;6;0;Santana//gas_station;0;0;0;0;0;0
+6;6;0;Santana//hospital;0;0;0;0;0;0
+7;7;0;Azenha//home;11254;11254;0;-300;-300;0
+7;7;0;Azenha//work;5100;350;4750;750;100;650
+7;7;0;Azenha//school;0;0;0;0;0;0
+7;7;0;Azenha//marketplace;0;0;0;0;0;0
+7;7;0;Azenha//pharmacy;0;0;0;0;0;0
+7;7;0;Azenha//gas_station;0;0;0;0;0;0
+7;7;0;Azenha//hospital;0;0;0;0;0;0
+7;7;0;Azenha//shopping_mall;0;0;0;0;0;0
+7;7;0;Bom Fim//home;8493;8493;0;-150;-150;0
+7;7;0;Bom Fim//work;3450;100;3350;400;0;400
+7;7;0;Bom Fim//school;0;0;0;0;0;0
+7;7;0;Bom Fim//marketplace;0;0;0;0;0;0
+7;7;0;Bom Fim//pharmacy;0;0;0;0;0;0
+7;7;0;Bom Fim//gas_station;0;0;0;0;0;0
+7;7;0;Centro Histórico//home;32604;32604;0;-650;-650;0
+7;7;0;Centro Histórico//work;2550;700;1850;150;50;100
+7;7;0;Centro Histórico//school;0;0;0;0;0;0
+7;7;0;Centro Histórico//marketplace;0;0;0;0;0;0
+7;7;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+7;7;0;Centro Histórico//gas_station;0;0;0;0;0;0
+7;7;0;Centro Histórico//hospital;0;0;0;0;0;0
+7;7;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+7;7;0;Cidade Baixa//home;11479;11479;0;-150;-150;0
+7;7;0;Cidade Baixa//work;3150;550;2600;250;0;250
+7;7;0;Cidade Baixa//school;0;0;0;0;0;0
+7;7;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+7;7;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+7;7;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+7;7;0;Farroupilha//home;711;711;0;0;0;0
+7;7;0;Farroupilha//work;4400;50;4350;300;0;300
+7;7;0;Farroupilha//school;0;0;0;0;0;0
+7;7;0;Farroupilha//marketplace;0;0;0;0;0;0
+7;7;0;Farroupilha//pharmacy;0;0;0;0;0;0
+7;7;0;Farroupilha//gas_station;0;0;0;0;0;0
+7;7;0;Farroupilha//hospital;0;0;0;0;0;0
+7;7;0;Floresta//home;8646;8646;0;-450;-450;0
+7;7;0;Floresta//work;2300;600;1700;500;200;300
+7;7;0;Floresta//school;0;0;0;0;0;0
+7;7;0;Floresta//marketplace;0;0;0;0;0;0
+7;7;0;Floresta//pharmacy;0;0;0;0;0;0
+7;7;0;Floresta//gas_station;0;0;0;0;0;0
+7;7;0;Independência//home;5712;5712;0;-300;-300;0
+7;7;0;Independência//work;4050;800;3250;400;100;300
+7;7;0;Independência//school;0;0;0;0;0;0
+7;7;0;Independência//marketplace;0;0;0;0;0;0
+7;7;0;Independência//pharmacy;0;0;0;0;0;0
+7;7;0;Independência//gas_station;0;0;0;0;0;0
+7;7;0;Independência//hospital;0;0;0;0;0;0
+7;7;0;Independência//shopping_mall;0;0;0;0;0;0
+7;7;0;Menino Deus//home;24150;24150;0;-750;-750;0
+7;7;0;Menino Deus//work;3500;900;2600;300;100;200
+7;7;0;Menino Deus//school;0;0;0;0;0;0
+7;7;0;Menino Deus//marketplace;0;0;0;0;0;0
+7;7;0;Menino Deus//pharmacy;0;0;0;0;0;0
+7;7;0;Menino Deus//gas_station;0;0;0;0;0;0
+7;7;0;Menino Deus//hospital;0;0;0;0;0;0
+7;7;0;Moinhos de Vento//home;8487;8487;0;-200;-200;0
+7;7;0;Moinhos de Vento//work;3250;1250;2000;250;0;250
+7;7;0;Moinhos de Vento//school;0;0;0;0;0;0
+7;7;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+7;7;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+7;7;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+7;7;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+7;7;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+7;7;0;Praia de Belas//home;1731;1731;0;-150;-150;0
+7;7;0;Praia de Belas//work;3450;100;3350;250;0;250
+7;7;0;Praia de Belas//school;0;0;0;0;0;0
+7;7;0;Praia de Belas//marketplace;0;0;0;0;0;0
+7;7;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+7;7;0;Praia de Belas//gas_station;0;0;0;0;0;0
+7;7;0;Praia de Belas//stadium;0;0;0;0;0;0
+7;7;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+7;7;0;Rio Branco//home;13281;13281;0;-450;-450;0
+7;7;0;Rio Branco//work;1950;250;1700;150;50;100
+7;7;0;Rio Branco//school;0;0;0;0;0;0
+7;7;0;Rio Branco//marketplace;0;0;0;0;0;0
+7;7;0;Rio Branco//pharmacy;0;0;0;0;0;0
+7;7;0;Rio Branco//gas_station;0;0;0;0;0;0
+7;7;0;Rio Branco//hospital;0;0;0;0;0;0
+7;7;0;Santa Cecília//home;3968;3968;0;-50;-50;0
+7;7;0;Santa Cecília//work;3950;1000;2950;250;50;200
+7;7;0;Santa Cecília//school;0;0;0;0;0;0
+7;7;0;Santa Cecília//marketplace;0;0;0;0;0;0
+7;7;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+7;7;0;Santa Cecília//gas_station;0;0;0;0;0;0
+7;7;0;Santa Cecília//hospital;0;0;0;0;0;0
+7;7;0;Santana//home;14773;14773;0;-600;-600;0
+7;7;0;Santana//work;4100;2900;1200;250;200;50
+7;7;0;Santana//school;0;0;0;0;0;0
+7;7;0;Santana//marketplace;0;0;0;0;0;0
+7;7;0;Santana//pharmacy;0;0;0;0;0;0
+7;7;0;Santana//gas_station;0;0;0;0;0;0
+7;7;0;Santana//hospital;0;0;0;0;0;0
+8;8;0;Azenha//home;8964;8964;0;-2290;-2290;0
+8;8;0;Azenha//work;6080;430;5650;980;80;900
+8;8;0;Azenha//school;2450;650;1800;2450;650;1800
+8;8;0;Azenha//marketplace;0;0;0;0;0;0
+8;8;0;Azenha//pharmacy;0;0;0;0;0;0
+8;8;0;Azenha//gas_station;0;0;0;0;0;0
+8;8;0;Azenha//hospital;0;0;0;0;0;0
+8;8;0;Azenha//shopping_mall;0;0;0;0;0;0
+8;8;0;Bom Fim//home;6563;6563;0;-1930;-1930;0
+8;8;0;Bom Fim//work;3660;80;3580;210;-20;230
+8;8;0;Bom Fim//school;1400;150;1250;1400;150;1250
+8;8;0;Bom Fim//marketplace;0;0;0;0;0;0
+8;8;0;Bom Fim//pharmacy;0;0;0;0;0;0
+8;8;0;Bom Fim//gas_station;0;0;0;0;0;0
+8;8;0;Centro Histórico//home;24764;24764;0;-7840;-7840;0
+8;8;0;Centro Histórico//work;2440;660;1780;-110;-40;-70
+8;8;0;Centro Histórico//school;3850;3300;550;3850;3300;550
+8;8;0;Centro Histórico//marketplace;0;0;0;0;0;0
+8;8;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+8;8;0;Centro Histórico//gas_station;0;0;0;0;0;0
+8;8;0;Centro Histórico//hospital;0;0;0;0;0;0
+8;8;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+8;8;0;Cidade Baixa//home;8859;8859;0;-2620;-2620;0
+8;8;0;Cidade Baixa//work;3370;590;2780;220;40;180
+8;8;0;Cidade Baixa//school;4850;1650;3200;4850;1650;3200
+8;8;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+8;8;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+8;8;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+8;8;0;Farroupilha//home;711;711;0;0;0;0
+8;8;0;Farroupilha//work;4670;40;4630;270;-10;280
+8;8;0;Farroupilha//school;1950;0;1950;1950;0;1950
+8;8;0;Farroupilha//marketplace;0;0;0;0;0;0
+8;8;0;Farroupilha//pharmacy;0;0;0;0;0;0
+8;8;0;Farroupilha//gas_station;0;0;0;0;0;0
+8;8;0;Farroupilha//hospital;0;0;0;0;0;0
+8;8;0;Floresta//home;6136;6136;0;-2510;-2510;0
+8;8;0;Floresta//work;2690;680;2010;390;80;310
+8;8;0;Floresta//school;3050;1100;1950;3050;1100;1950
+8;8;0;Floresta//marketplace;0;0;0;0;0;0
+8;8;0;Floresta//pharmacy;0;0;0;0;0;0
+8;8;0;Floresta//gas_station;0;0;0;0;0;0
+8;8;0;Independência//home;4942;4942;0;-770;-770;0
+8;8;0;Independência//work;3840;690;3150;-210;-110;-100
+8;8;0;Independência//school;1350;100;1250;1350;100;1250
+8;8;0;Independência//marketplace;0;0;0;0;0;0
+8;8;0;Independência//pharmacy;0;0;0;0;0;0
+8;8;0;Independência//gas_station;0;0;0;0;0;0
+8;8;0;Independência//hospital;0;0;0;0;0;0
+8;8;0;Independência//shopping_mall;0;0;0;0;0;0
+8;8;0;Menino Deus//home;18400;18400;0;-5750;-5750;0
+8;8;0;Menino Deus//work;3650;970;2680;150;70;80
+8;8;0;Menino Deus//school;3550;2600;950;3550;2600;950
+8;8;0;Menino Deus//marketplace;0;0;0;0;0;0
+8;8;0;Menino Deus//pharmacy;0;0;0;0;0;0
+8;8;0;Menino Deus//gas_station;0;0;0;0;0;0
+8;8;0;Menino Deus//hospital;0;0;0;0;0;0
+8;8;0;Moinhos de Vento//home;7277;7277;0;-1210;-1210;0
+8;8;0;Moinhos de Vento//work;3400;1400;2000;150;150;0
+8;8;0;Moinhos de Vento//school;1750;450;1300;1750;450;1300
+8;8;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+8;8;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+8;8;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+8;8;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+8;8;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+8;8;0;Praia de Belas//home;1441;1441;0;-290;-290;0
+8;8;0;Praia de Belas//work;3560;80;3480;110;-20;130
+8;8;0;Praia de Belas//school;750;100;650;750;100;650
+8;8;0;Praia de Belas//marketplace;0;0;0;0;0;0
+8;8;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+8;8;0;Praia de Belas//gas_station;0;0;0;0;0;0
+8;8;0;Praia de Belas//stadium;0;0;0;0;0;0
+8;8;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+8;8;0;Rio Branco//home;10481;10481;0;-2800;-2800;0
+8;8;0;Rio Branco//work;2210;400;1810;260;150;110
+8;8;0;Rio Branco//school;1200;200;1000;1200;200;1000
+8;8;0;Rio Branco//marketplace;0;0;0;0;0;0
+8;8;0;Rio Branco//pharmacy;0;0;0;0;0;0
+8;8;0;Rio Branco//gas_station;0;0;0;0;0;0
+8;8;0;Rio Branco//hospital;0;0;0;0;0;0
+8;8;0;Santa Cecília//home;3528;3528;0;-440;-440;0
+8;8;0;Santa Cecília//work;3910;950;2960;-40;-50;10
+8;8;0;Santa Cecília//school;1300;50;1250;1300;50;1250
+8;8;0;Santa Cecília//marketplace;0;0;0;0;0;0
+8;8;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+8;8;0;Santa Cecília//gas_station;0;0;0;0;0;0
+8;8;0;Santa Cecília//hospital;0;0;0;0;0;0
+8;8;0;Santana//home;11363;11363;0;-3410;-3410;0
+8;8;0;Santana//work;4380;2970;1410;280;70;210
+8;8;0;Santana//school;1750;750;1000;1750;750;1000
+8;8;0;Santana//marketplace;0;0;0;0;0;0
+8;8;0;Santana//pharmacy;0;0;0;0;0;0
+8;8;0;Santana//gas_station;0;0;0;0;0;0
+8;8;0;Santana//hospital;0;0;0;0;0;0
+9;9;0;Azenha//home;8664;8664;0;-300;-300;0
+9;9;0;Azenha//work;6580;480;6100;500;50;450
+9;9;0;Azenha//school;2450;650;1800;0;0;0
+9;9;0;Azenha//marketplace;0;0;0;0;0;0
+9;9;0;Azenha//pharmacy;0;0;0;0;0;0
+9;9;0;Azenha//gas_station;0;0;0;0;0;0
+9;9;0;Azenha//hospital;0;0;0;0;0;0
+9;9;0;Azenha//shopping_mall;0;0;0;0;0;0
+9;9;0;Bom Fim//home;6313;6313;0;-250;-250;0
+9;9;0;Bom Fim//work;4110;80;4030;450;0;450
+9;9;0;Bom Fim//school;1400;150;1250;0;0;0
+9;9;0;Bom Fim//marketplace;0;0;0;0;0;0
+9;9;0;Bom Fim//pharmacy;0;0;0;0;0;0
+9;9;0;Bom Fim//gas_station;0;0;0;0;0;0
+9;9;0;Centro Histórico//home;24164;24164;0;-600;-600;0
+9;9;0;Centro Histórico//work;2590;660;1930;150;0;150
+9;9;0;Centro Histórico//school;3850;3300;550;0;0;0
+9;9;0;Centro Histórico//marketplace;0;0;0;0;0;0
+9;9;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+9;9;0;Centro Histórico//gas_station;0;0;0;0;0;0
+9;9;0;Centro Histórico//hospital;0;0;0;0;0;0
+9;9;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+9;9;0;Cidade Baixa//home;8259;8259;0;-600;-600;0
+9;9;0;Cidade Baixa//work;3720;640;3080;350;50;300
+9;9;0;Cidade Baixa//school;4850;1650;3200;0;0;0
+9;9;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+9;9;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+9;9;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+9;9;0;Farroupilha//home;711;711;0;0;0;0
+9;9;0;Farroupilha//work;5320;40;5280;650;0;650
+9;9;0;Farroupilha//school;1950;0;1950;0;0;0
+9;9;0;Farroupilha//marketplace;0;0;0;0;0;0
+9;9;0;Farroupilha//pharmacy;0;0;0;0;0;0
+9;9;0;Farroupilha//gas_station;0;0;0;0;0;0
+9;9;0;Farroupilha//hospital;0;0;0;0;0;0
+9;9;0;Floresta//home;5786;5786;0;-350;-350;0
+9;9;0;Floresta//work;2940;730;2210;250;50;200
+9;9;0;Floresta//school;3050;1100;1950;0;0;0
+9;9;0;Floresta//marketplace;0;0;0;0;0;0
+9;9;0;Floresta//pharmacy;0;0;0;0;0;0
+9;9;0;Floresta//gas_station;0;0;0;0;0;0
+9;9;0;Independência//home;4642;4642;0;-300;-300;0
+9;9;0;Independência//work;4340;790;3550;500;100;400
+9;9;0;Independência//school;1350;100;1250;0;0;0
+9;9;0;Independência//marketplace;0;0;0;0;0;0
+9;9;0;Independência//pharmacy;0;0;0;0;0;0
+9;9;0;Independência//gas_station;0;0;0;0;0;0
+9;9;0;Independência//hospital;0;0;0;0;0;0
+9;9;0;Independência//shopping_mall;0;0;0;0;0;0
+9;9;0;Menino Deus//home;17500;17500;0;-900;-900;0
+9;9;0;Menino Deus//work;3950;1120;2830;300;150;150
+9;9;0;Menino Deus//school;3550;2600;950;0;0;0
+9;9;0;Menino Deus//marketplace;0;0;0;0;0;0
+9;9;0;Menino Deus//pharmacy;0;0;0;0;0;0
+9;9;0;Menino Deus//gas_station;0;0;0;0;0;0
+9;9;0;Menino Deus//hospital;0;0;0;0;0;0
+9;9;0;Moinhos de Vento//home;7127;7127;0;-150;-150;0
+9;9;0;Moinhos de Vento//work;3600;1500;2100;200;100;100
+9;9;0;Moinhos de Vento//school;1750;450;1300;0;0;0
+9;9;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+9;9;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+9;9;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+9;9;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+9;9;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+9;9;0;Praia de Belas//home;1291;1291;0;-150;-150;0
+9;9;0;Praia de Belas//work;3960;130;3830;400;50;350
+9;9;0;Praia de Belas//school;750;100;650;0;0;0
+9;9;0;Praia de Belas//marketplace;0;0;0;0;0;0
+9;9;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+9;9;0;Praia de Belas//gas_station;0;0;0;0;0;0
+9;9;0;Praia de Belas//stadium;0;0;0;0;0;0
+9;9;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+9;9;0;Rio Branco//home;10031;10031;0;-450;-450;0
+9;9;0;Rio Branco//work;2310;400;1910;100;0;100
+9;9;0;Rio Branco//school;1200;200;1000;0;0;0
+9;9;0;Rio Branco//marketplace;0;0;0;0;0;0
+9;9;0;Rio Branco//pharmacy;0;0;0;0;0;0
+9;9;0;Rio Branco//gas_station;0;0;0;0;0;0
+9;9;0;Rio Branco//hospital;0;0;0;0;0;0
+9;9;0;Santa Cecília//home;3328;3328;0;-200;-200;0
+9;9;0;Santa Cecília//work;4360;1100;3260;450;150;300
+9;9;0;Santa Cecília//school;1300;50;1250;0;0;0
+9;9;0;Santa Cecília//marketplace;0;0;0;0;0;0
+9;9;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+9;9;0;Santa Cecília//gas_station;0;0;0;0;0;0
+9;9;0;Santa Cecília//hospital;0;0;0;0;0;0
+9;9;0;Santana//home;10913;10913;0;-450;-450;0
+9;9;0;Santana//work;4780;3120;1660;400;150;250
+9;9;0;Santana//school;1750;750;1000;0;0;0
+9;9;0;Santana//marketplace;0;0;0;0;0;0
+9;9;0;Santana//pharmacy;0;0;0;0;0;0
+9;9;0;Santana//gas_station;0;0;0;0;0;0
+9;9;0;Santana//hospital;0;0;0;0;0;0
+10;10;0;Azenha//home;8014;8014;0;-650;-650;0
+10;10;0;Azenha//work;7080;530;6550;500;50;450
+10;10;0;Azenha//school;2450;650;1800;0;0;0
+10;10;0;Azenha//marketplace;0;0;0;0;0;0
+10;10;0;Azenha//pharmacy;0;0;0;0;0;0
+10;10;0;Azenha//gas_station;0;0;0;0;0;0
+10;10;0;Azenha//hospital;0;0;0;0;0;0
+10;10;0;Azenha//shopping_mall;0;0;0;0;0;0
+10;10;0;Bom Fim//home;5763;5763;0;-550;-550;0
+10;10;0;Bom Fim//work;4610;130;4480;500;50;450
+10;10;0;Bom Fim//school;1400;150;1250;0;0;0
+10;10;0;Bom Fim//marketplace;0;0;0;0;0;0
+10;10;0;Bom Fim//pharmacy;0;0;0;0;0;0
+10;10;0;Bom Fim//gas_station;0;0;0;0;0;0
+10;10;0;Centro Histórico//home;23464;23464;0;-700;-700;0
+10;10;0;Centro Histórico//work;2740;710;2030;150;50;100
+10;10;0;Centro Histórico//school;3850;3300;550;0;0;0
+10;10;0;Centro Histórico//marketplace;0;0;0;0;0;0
+10;10;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+10;10;0;Centro Histórico//gas_station;0;0;0;0;0;0
+10;10;0;Centro Histórico//hospital;0;0;0;0;0;0
+10;10;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+10;10;0;Cidade Baixa//home;7959;7959;0;-300;-300;0
+10;10;0;Cidade Baixa//work;4070;690;3380;350;50;300
+10;10;0;Cidade Baixa//school;4850;1650;3200;0;0;0
+10;10;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+10;10;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+10;10;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+10;10;0;Farroupilha//home;711;711;0;0;0;0
+10;10;0;Farroupilha//work;5770;40;5730;450;0;450
+10;10;0;Farroupilha//school;1950;0;1950;0;0;0
+10;10;0;Farroupilha//marketplace;0;0;0;0;0;0
+10;10;0;Farroupilha//pharmacy;0;0;0;0;0;0
+10;10;0;Farroupilha//gas_station;0;0;0;0;0;0
+10;10;0;Farroupilha//hospital;0;0;0;0;0;0
+10;10;0;Floresta//home;5436;5436;0;-350;-350;0
+10;10;0;Floresta//work;3090;830;2260;150;100;50
+10;10;0;Floresta//school;3050;1100;1950;0;0;0
+10;10;0;Floresta//marketplace;0;0;0;0;0;0
+10;10;0;Floresta//pharmacy;0;0;0;0;0;0
+10;10;0;Floresta//gas_station;0;0;0;0;0;0
+10;10;0;Independência//home;4492;4492;0;-150;-150;0
+10;10;0;Independência//work;4790;840;3950;450;50;400
+10;10;0;Independência//school;1350;100;1250;0;0;0
+10;10;0;Independência//marketplace;0;0;0;0;0;0
+10;10;0;Independência//pharmacy;0;0;0;0;0;0
+10;10;0;Independência//gas_station;0;0;0;0;0;0
+10;10;0;Independência//hospital;0;0;0;0;0;0
+10;10;0;Independência//shopping_mall;0;0;0;0;0;0
+10;10;0;Menino Deus//home;16800;16800;0;-700;-700;0
+10;10;0;Menino Deus//work;4450;1170;3280;500;50;450
+10;10;0;Menino Deus//school;3550;2600;950;0;0;0
+10;10;0;Menino Deus//marketplace;0;0;0;0;0;0
+10;10;0;Menino Deus//pharmacy;0;0;0;0;0;0
+10;10;0;Menino Deus//gas_station;0;0;0;0;0;0
+10;10;0;Menino Deus//hospital;0;0;0;0;0;0
+10;10;0;Moinhos de Vento//home;6927;6927;0;-200;-200;0
+10;10;0;Moinhos de Vento//work;3900;1650;2250;300;150;150
+10;10;0;Moinhos de Vento//school;1750;450;1300;0;0;0
+10;10;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+10;10;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+10;10;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+10;10;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+10;10;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+10;10;0;Praia de Belas//home;1191;1191;0;-100;-100;0
+10;10;0;Praia de Belas//work;4460;130;4330;500;0;500
+10;10;0;Praia de Belas//school;750;100;650;0;0;0
+10;10;0;Praia de Belas//marketplace;0;0;0;0;0;0
+10;10;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+10;10;0;Praia de Belas//gas_station;0;0;0;0;0;0
+10;10;0;Praia de Belas//stadium;0;0;0;0;0;0
+10;10;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+10;10;0;Rio Branco//home;9781;9781;0;-250;-250;0
+10;10;0;Rio Branco//work;2460;450;2010;150;50;100
+10;10;0;Rio Branco//school;1200;200;1000;0;0;0
+10;10;0;Rio Branco//marketplace;0;0;0;0;0;0
+10;10;0;Rio Branco//pharmacy;0;0;0;0;0;0
+10;10;0;Rio Branco//gas_station;0;0;0;0;0;0
+10;10;0;Rio Branco//hospital;0;0;0;0;0;0
+10;10;0;Santa Cecília//home;3228;3228;0;-100;-100;0
+10;10;0;Santa Cecília//work;4610;1200;3410;250;100;150
+10;10;0;Santa Cecília//school;1300;50;1250;0;0;0
+10;10;0;Santa Cecília//marketplace;0;0;0;0;0;0
+10;10;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+10;10;0;Santa Cecília//gas_station;0;0;0;0;0;0
+10;10;0;Santa Cecília//hospital;0;0;0;0;0;0
+10;10;0;Santana//home;10213;10213;0;-700;-700;0
+10;10;0;Santana//work;5280;3420;1860;500;300;200
+10;10;0;Santana//school;1750;750;1000;0;0;0
+10;10;0;Santana//marketplace;0;0;0;0;0;0
+10;10;0;Santana//pharmacy;0;0;0;0;0;0
+10;10;0;Santana//gas_station;0;0;0;0;0;0
+10;10;0;Santana//hospital;0;0;0;0;0;0
+11;11;0;Azenha//home;7864;7864;0;-150;-150;0
+11;11;0;Azenha//work;7380;530;6850;300;0;300
+11;11;0;Azenha//school;2450;650;1800;0;0;0
+11;11;0;Azenha//marketplace;0;0;0;0;0;0
+11;11;0;Azenha//pharmacy;0;0;0;0;0;0
+11;11;0;Azenha//gas_station;0;0;0;0;0;0
+11;11;0;Azenha//hospital;0;0;0;0;0;0
+11;11;0;Azenha//shopping_mall;0;0;0;0;0;0
+11;11;0;Bom Fim//home;5563;5563;0;-200;-200;0
+11;11;0;Bom Fim//work;4960;130;4830;350;0;350
+11;11;0;Bom Fim//school;1400;150;1250;0;0;0
+11;11;0;Bom Fim//marketplace;0;0;0;0;0;0
+11;11;0;Bom Fim//pharmacy;0;0;0;0;0;0
+11;11;0;Bom Fim//gas_station;0;0;0;0;0;0
+11;11;0;Centro Histórico//home;23014;23014;0;-450;-450;0
+11;11;0;Centro Histórico//work;2790;760;2030;50;50;0
+11;11;0;Centro Histórico//school;3850;3300;550;0;0;0
+11;11;0;Centro Histórico//marketplace;0;0;0;0;0;0
+11;11;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+11;11;0;Centro Histórico//gas_station;0;0;0;0;0;0
+11;11;0;Centro Histórico//hospital;0;0;0;0;0;0
+11;11;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+11;11;0;Cidade Baixa//home;7559;7559;0;-400;-400;0
+11;11;0;Cidade Baixa//work;4370;840;3530;300;150;150
+11;11;0;Cidade Baixa//school;4850;1650;3200;0;0;0
+11;11;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+11;11;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+11;11;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+11;11;0;Farroupilha//home;611;611;0;-100;-100;0
+11;11;0;Farroupilha//work;6270;90;6180;500;50;450
+11;11;0;Farroupilha//school;1950;0;1950;0;0;0
+11;11;0;Farroupilha//marketplace;0;0;0;0;0;0
+11;11;0;Farroupilha//pharmacy;0;0;0;0;0;0
+11;11;0;Farroupilha//gas_station;0;0;0;0;0;0
+11;11;0;Farroupilha//hospital;0;0;0;0;0;0
+11;11;0;Floresta//home;5336;5336;0;-100;-100;0
+11;11;0;Floresta//work;3240;880;2360;150;50;100
+11;11;0;Floresta//school;3050;1100;1950;0;0;0
+11;11;0;Floresta//marketplace;0;0;0;0;0;0
+11;11;0;Floresta//pharmacy;0;0;0;0;0;0
+11;11;0;Floresta//gas_station;0;0;0;0;0;0
+11;11;0;Independência//home;4492;4492;0;0;0;0
+11;11;0;Independência//work;5090;840;4250;300;0;300
+11;11;0;Independência//school;1350;100;1250;0;0;0
+11;11;0;Independência//marketplace;0;0;0;0;0;0
+11;11;0;Independência//pharmacy;0;0;0;0;0;0
+11;11;0;Independência//gas_station;0;0;0;0;0;0
+11;11;0;Independência//hospital;0;0;0;0;0;0
+11;11;0;Independência//shopping_mall;0;0;0;0;0;0
+11;11;0;Menino Deus//home;16100;16100;0;-700;-700;0
+11;11;0;Menino Deus//work;4750;1420;3330;300;250;50
+11;11;0;Menino Deus//school;3550;2600;950;0;0;0
+11;11;0;Menino Deus//marketplace;0;0;0;0;0;0
+11;11;0;Menino Deus//pharmacy;0;0;0;0;0;0
+11;11;0;Menino Deus//gas_station;0;0;0;0;0;0
+11;11;0;Menino Deus//hospital;0;0;0;0;0;0
+11;11;0;Moinhos de Vento//home;6827;6827;0;-100;-100;0
+11;11;0;Moinhos de Vento//work;3950;1700;2250;50;50;0
+11;11;0;Moinhos de Vento//school;1750;450;1300;0;0;0
+11;11;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+11;11;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+11;11;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+11;11;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+11;11;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+11;11;0;Praia de Belas//home;1141;1141;0;-50;-50;0
+11;11;0;Praia de Belas//work;4710;130;4580;250;0;250
+11;11;0;Praia de Belas//school;750;100;650;0;0;0
+11;11;0;Praia de Belas//marketplace;0;0;0;0;0;0
+11;11;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+11;11;0;Praia de Belas//gas_station;0;0;0;0;0;0
+11;11;0;Praia de Belas//stadium;0;0;0;0;0;0
+11;11;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+11;11;0;Rio Branco//home;9481;9481;0;-300;-300;0
+11;11;0;Rio Branco//work;2510;500;2010;50;50;0
+11;11;0;Rio Branco//school;1200;200;1000;0;0;0
+11;11;0;Rio Branco//marketplace;0;0;0;0;0;0
+11;11;0;Rio Branco//pharmacy;0;0;0;0;0;0
+11;11;0;Rio Branco//gas_station;0;0;0;0;0;0
+11;11;0;Rio Branco//hospital;0;0;0;0;0;0
+11;11;0;Santa Cecília//home;3128;3128;0;-100;-100;0
+11;11;0;Santa Cecília//work;4810;1250;3560;200;50;150
+11;11;0;Santa Cecília//school;1300;50;1250;0;0;0
+11;11;0;Santa Cecília//marketplace;0;0;0;0;0;0
+11;11;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+11;11;0;Santa Cecília//gas_station;0;0;0;0;0;0
+11;11;0;Santa Cecília//hospital;0;0;0;0;0;0
+11;11;0;Santana//home;9813;9813;0;-400;-400;0
+11;11;0;Santana//work;5530;3620;1910;250;200;50
+11;11;0;Santana//school;1750;750;1000;0;0;0
+11;11;0;Santana//marketplace;0;0;0;0;0;0
+11;11;0;Santana//pharmacy;0;0;0;0;0;0
+11;11;0;Santana//gas_station;0;0;0;0;0;0
+11;11;0;Santana//hospital;0;0;0;0;0;0
+12;12;0;Azenha//home;9827;9827;0;1963;1963;0
+12;12;0;Azenha//work;6854;574;6280;-526;44;-570
+12;12;0;Azenha//school;371;98;273;-2079;-552;-1527
+12;12;0;Azenha//marketplace;0;0;0;0;0;0
+12;12;0;Azenha//pharmacy;0;0;0;0;0;0
+12;12;0;Azenha//gas_station;0;0;0;0;0;0
+12;12;0;Azenha//hospital;0;0;0;0;0;0
+12;12;0;Azenha//shopping_mall;0;0;0;0;0;0
+12;12;0;Bom Fim//home;7482;7482;0;1919;1919;0
+12;12;0;Bom Fim//work;4668;104;4564;-292;-26;-266
+12;12;0;Bom Fim//school;213;23;190;-1187;-127;-1060
+12;12;0;Bom Fim//marketplace;0;0;0;0;0;0
+12;12;0;Bom Fim//pharmacy;0;0;0;0;0;0
+12;12;0;Bom Fim//gas_station;0;0;0;0;0;0
+12;12;0;Centro Histórico//home;29255;29255;0;6241;6241;0
+12;12;0;Centro Histórico//work;2682;708;1974;-108;-52;-56
+12;12;0;Centro Histórico//school;580;495;85;-3270;-2805;-465
+12;12;0;Centro Histórico//marketplace;0;0;0;0;0;0
+12;12;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+12;12;0;Centro Histórico//gas_station;0;0;0;0;0;0
+12;12;0;Centro Histórico//hospital;0;0;0;0;0;0
+12;12;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+12;12;0;Cidade Baixa//home;10127;10127;0;2568;2568;0
+12;12;0;Cidade Baixa//work;4146;822;3324;-224;-18;-206
+12;12;0;Cidade Baixa//school;731;248;483;-4119;-1402;-2717
+12;12;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+12;12;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+12;12;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+12;12;0;Farroupilha//home;663;663;0;52;52;0
+12;12;0;Farroupilha//work;6066;72;5994;-204;-18;-186
+12;12;0;Farroupilha//school;295;0;295;-1655;0;-1655
+12;12;0;Farroupilha//marketplace;0;0;0;0;0;0
+12;12;0;Farroupilha//pharmacy;0;0;0;0;0;0
+12;12;0;Farroupilha//gas_station;0;0;0;0;0;0
+12;12;0;Farroupilha//hospital;0;0;0;0;0;0
+12;12;0;Floresta//home;7554;7554;0;2218;2218;0
+12;12;0;Floresta//work;2942;804;2138;-298;-76;-222
+12;12;0;Floresta//school;460;165;295;-2590;-935;-1655
+12;12;0;Floresta//marketplace;0;0;0;0;0;0
+12;12;0;Floresta//pharmacy;0;0;0;0;0;0
+12;12;0;Floresta//gas_station;0;0;0;0;0;0
+12;12;0;Independência//home;5330;5330;0;838;838;0
+12;12;0;Independência//work;4872;872;4000;-218;32;-250
+12;12;0;Independência//school;205;15;190;-1145;-85;-1060
+12;12;0;Independência//marketplace;0;0;0;0;0;0
+12;12;0;Independência//pharmacy;0;0;0;0;0;0
+12;12;0;Independência//gas_station;0;0;0;0;0;0
+12;12;0;Independência//hospital;0;0;0;0;0;0
+12;12;0;Independência//shopping_mall;0;0;0;0;0;0
+12;12;0;Menino Deus//home;20659;20659;0;4559;4559;0
+12;12;0;Menino Deus//work;4550;1436;3114;-200;16;-216
+12;12;0;Menino Deus//school;534;390;144;-3016;-2210;-806
+12;12;0;Menino Deus//marketplace;0;0;0;0;0;0
+12;12;0;Menino Deus//pharmacy;0;0;0;0;0;0
+12;12;0;Menino Deus//gas_station;0;0;0;0;0;0
+12;12;0;Menino Deus//hospital;0;0;0;0;0;0
+12;12;0;Moinhos de Vento//home;8096;8096;0;1269;1269;0
+12;12;0;Moinhos de Vento//work;3510;1560;1950;-440;-140;-300
+12;12;0;Moinhos de Vento//school;266;68;198;-1484;-382;-1102
+12;12;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+12;12;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+12;12;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+12;12;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+12;12;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+12;12;0;Praia de Belas//home;1380;1380;0;239;239;0
+12;12;0;Praia de Belas//work;4468;104;4364;-242;-26;-216
+12;12;0;Praia de Belas//school;115;15;100;-635;-85;-550
+12;12;0;Praia de Belas//marketplace;0;0;0;0;0;0
+12;12;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+12;12;0;Praia de Belas//gas_station;0;0;0;0;0;0
+12;12;0;Praia de Belas//stadium;0;0;0;0;0;0
+12;12;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+12;12;0;Rio Branco//home;11914;11914;0;2433;2433;0
+12;12;0;Rio Branco//work;2358;450;1908;-152;-50;-102
+12;12;0;Rio Branco//school;182;30;152;-1018;-170;-848
+12;12;0;Rio Branco//marketplace;0;0;0;0;0;0
+12;12;0;Rio Branco//pharmacy;0;0;0;0;0;0
+12;12;0;Rio Branco//gas_station;0;0;0;0;0;0
+12;12;0;Rio Branco//hospital;0;0;0;0;0;0
+12;12;0;Santa Cecília//home;3760;3760;0;632;632;0
+12;12;0;Santa Cecília//work;4598;1150;3448;-212;-100;-112
+12;12;0;Santa Cecília//school;197;8;189;-1103;-42;-1061
+12;12;0;Santa Cecília//marketplace;0;0;0;0;0;0
+12;12;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+12;12;0;Santa Cecília//gas_station;0;0;0;0;0;0
+12;12;0;Santa Cecília//hospital;0;0;0;0;0;0
+12;12;0;Santana//home;13139;13139;0;3326;3326;0
+12;12;0;Santana//work;5174;3396;1778;-356;-224;-132
+12;12;0;Santana//school;266;113;153;-1484;-637;-847
+12;12;0;Santana//marketplace;0;0;0;0;0;0
+12;12;0;Santana//pharmacy;0;0;0;0;0;0
+12;12;0;Santana//gas_station;0;0;0;0;0;0
+12;12;0;Santana//hospital;0;0;0;0;0;0
+13;13;0;Azenha//home;7677;7677;0;-2150;-2150;0
+13;13;0;Azenha//work;7104;574;6530;250;0;250
+13;13;0;Azenha//school;3071;798;2273;2700;700;2000
+13;13;0;Azenha//marketplace;0;0;0;0;0;0
+13;13;0;Azenha//pharmacy;0;0;0;0;0;0
+13;13;0;Azenha//gas_station;0;0;0;0;0;0
+13;13;0;Azenha//hospital;0;0;0;0;0;0
+13;13;0;Azenha//shopping_mall;0;0;0;0;0;0
+13;13;0;Bom Fim//home;5782;5782;0;-1700;-1700;0
+13;13;0;Bom Fim//work;4918;104;4814;250;0;250
+13;13;0;Bom Fim//school;1413;23;1390;1200;0;1200
+13;13;0;Bom Fim//marketplace;0;0;0;0;0;0
+13;13;0;Bom Fim//pharmacy;0;0;0;0;0;0
+13;13;0;Bom Fim//gas_station;0;0;0;0;0;0
+13;13;0;Centro Histórico//home;22405;22405;0;-6850;-6850;0
+13;13;0;Centro Histórico//work;2782;708;2074;100;0;100
+13;13;0;Centro Histórico//school;4530;3845;685;3950;3350;600
+13;13;0;Centro Histórico//marketplace;0;0;0;0;0;0
+13;13;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+13;13;0;Centro Histórico//gas_station;0;0;0;0;0;0
+13;13;0;Centro Histórico//hospital;0;0;0;0;0;0
+13;13;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+13;13;0;Cidade Baixa//home;7927;7927;0;-2200;-2200;0
+13;13;0;Cidade Baixa//work;4546;872;3674;400;50;350
+13;13;0;Cidade Baixa//school;4131;1048;3083;3400;800;2600
+13;13;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+13;13;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+13;13;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+13;13;0;Farroupilha//home;463;463;0;-200;-200;0
+13;13;0;Farroupilha//work;6166;72;6094;100;0;100
+13;13;0;Farroupilha//school;2245;50;2195;1950;50;1900
+13;13;0;Farroupilha//marketplace;0;0;0;0;0;0
+13;13;0;Farroupilha//pharmacy;0;0;0;0;0;0
+13;13;0;Farroupilha//gas_station;0;0;0;0;0;0
+13;13;0;Farroupilha//hospital;0;0;0;0;0;0
+13;13;0;Floresta//home;5954;5954;0;-1600;-1600;0
+13;13;0;Floresta//work;3042;854;2188;100;50;50
+13;13;0;Floresta//school;3010;915;2095;2550;750;1800
+13;13;0;Floresta//marketplace;0;0;0;0;0;0
+13;13;0;Floresta//pharmacy;0;0;0;0;0;0
+13;13;0;Floresta//gas_station;0;0;0;0;0;0
+13;13;0;Independência//home;3980;3980;0;-1350;-1350;0
+13;13;0;Independência//work;5022;872;4150;150;0;150
+13;13;0;Independência//school;1905;215;1690;1700;200;1500
+13;13;0;Independência//marketplace;0;0;0;0;0;0
+13;13;0;Independência//pharmacy;0;0;0;0;0;0
+13;13;0;Independência//gas_station;0;0;0;0;0;0
+13;13;0;Independência//hospital;0;0;0;0;0;0
+13;13;0;Independência//shopping_mall;0;0;0;0;0;0
+13;13;0;Menino Deus//home;15809;15809;0;-4850;-4850;0
+13;13;0;Menino Deus//work;4850;1486;3364;300;50;250
+13;13;0;Menino Deus//school;2934;2190;744;2400;1800;600
+13;13;0;Menino Deus//marketplace;0;0;0;0;0;0
+13;13;0;Menino Deus//pharmacy;0;0;0;0;0;0
+13;13;0;Menino Deus//gas_station;0;0;0;0;0;0
+13;13;0;Menino Deus//hospital;0;0;0;0;0;0
+13;13;0;Moinhos de Vento//home;6346;6346;0;-1750;-1750;0
+13;13;0;Moinhos de Vento//work;3960;1710;2250;450;150;300
+13;13;0;Moinhos de Vento//school;2116;618;1498;1850;550;1300
+13;13;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+13;13;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+13;13;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+13;13;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+13;13;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+13;13;0;Praia de Belas//home;1280;1280;0;-100;-100;0
+13;13;0;Praia de Belas//work;4718;104;4614;250;0;250
+13;13;0;Praia de Belas//school;1015;15;1000;900;0;900
+13;13;0;Praia de Belas//marketplace;0;0;0;0;0;0
+13;13;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+13;13;0;Praia de Belas//gas_station;0;0;0;0;0;0
+13;13;0;Praia de Belas//stadium;0;0;0;0;0;0
+13;13;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+13;13;0;Rio Branco//home;9014;9014;0;-2900;-2900;0
+13;13;0;Rio Branco//work;2458;450;2008;100;0;100
+13;13;0;Rio Branco//school;1132;130;1002;950;100;850
+13;13;0;Rio Branco//marketplace;0;0;0;0;0;0
+13;13;0;Rio Branco//pharmacy;0;0;0;0;0;0
+13;13;0;Rio Branco//gas_station;0;0;0;0;0;0
+13;13;0;Rio Branco//hospital;0;0;0;0;0;0
+13;13;0;Santa Cecília//home;3010;3010;0;-750;-750;0
+13;13;0;Santa Cecília//work;4898;1200;3698;300;50;250
+13;13;0;Santa Cecília//school;1347;8;1339;1150;0;1150
+13;13;0;Santa Cecília//marketplace;0;0;0;0;0;0
+13;13;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+13;13;0;Santa Cecília//gas_station;0;0;0;0;0;0
+13;13;0;Santa Cecília//hospital;0;0;0;0;0;0
+13;13;0;Santana//home;9889;9889;0;-3250;-3250;0
+13;13;0;Santana//work;5624;3546;2078;450;150;300
+13;13;0;Santana//school;2016;863;1153;1750;750;1000
+13;13;0;Santana//marketplace;0;0;0;0;0;0
+13;13;0;Santana//pharmacy;0;0;0;0;0;0
+13;13;0;Santana//gas_station;0;0;0;0;0;0
+13;13;0;Santana//hospital;0;0;0;0;0;0
+14;14;0;Azenha//home;7427;7427;0;-250;-250;0
+14;14;0;Azenha//work;7504;624;6880;400;50;350
+14;14;0;Azenha//school;3071;798;2273;0;0;0
+14;14;0;Azenha//marketplace;0;0;0;0;0;0
+14;14;0;Azenha//pharmacy;0;0;0;0;0;0
+14;14;0;Azenha//gas_station;0;0;0;0;0;0
+14;14;0;Azenha//hospital;0;0;0;0;0;0
+14;14;0;Azenha//shopping_mall;0;0;0;0;0;0
+14;14;0;Bom Fim//home;5382;5382;0;-400;-400;0
+14;14;0;Bom Fim//work;5368;154;5214;450;50;400
+14;14;0;Bom Fim//school;1413;23;1390;0;0;0
+14;14;0;Bom Fim//marketplace;0;0;0;0;0;0
+14;14;0;Bom Fim//pharmacy;0;0;0;0;0;0
+14;14;0;Bom Fim//gas_station;0;0;0;0;0;0
+14;14;0;Centro Histórico//home;21905;21905;0;-500;-500;0
+14;14;0;Centro Histórico//work;2882;708;2174;100;0;100
+14;14;0;Centro Histórico//school;4530;3845;685;0;0;0
+14;14;0;Centro Histórico//marketplace;0;0;0;0;0;0
+14;14;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+14;14;0;Centro Histórico//gas_station;0;0;0;0;0;0
+14;14;0;Centro Histórico//hospital;0;0;0;0;0;0
+14;14;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+14;14;0;Cidade Baixa//home;7727;7727;0;-200;-200;0
+14;14;0;Cidade Baixa//work;4746;872;3874;200;0;200
+14;14;0;Cidade Baixa//school;4131;1048;3083;0;0;0
+14;14;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+14;14;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+14;14;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+14;14;0;Farroupilha//home;463;463;0;0;0;0
+14;14;0;Farroupilha//work;6316;72;6244;150;0;150
+14;14;0;Farroupilha//school;2245;50;2195;0;0;0
+14;14;0;Farroupilha//marketplace;0;0;0;0;0;0
+14;14;0;Farroupilha//pharmacy;0;0;0;0;0;0
+14;14;0;Farroupilha//gas_station;0;0;0;0;0;0
+14;14;0;Farroupilha//hospital;0;0;0;0;0;0
+14;14;0;Floresta//home;5804;5804;0;-150;-150;0
+14;14;0;Floresta//work;3192;854;2338;150;0;150
+14;14;0;Floresta//school;3010;915;2095;0;0;0
+14;14;0;Floresta//marketplace;0;0;0;0;0;0
+14;14;0;Floresta//pharmacy;0;0;0;0;0;0
+14;14;0;Floresta//gas_station;0;0;0;0;0;0
+14;14;0;Independência//home;3930;3930;0;-50;-50;0
+14;14;0;Independência//work;5372;872;4500;350;0;350
+14;14;0;Independência//school;1905;215;1690;0;0;0
+14;14;0;Independência//marketplace;0;0;0;0;0;0
+14;14;0;Independência//pharmacy;0;0;0;0;0;0
+14;14;0;Independência//gas_station;0;0;0;0;0;0
+14;14;0;Independência//hospital;0;0;0;0;0;0
+14;14;0;Independência//shopping_mall;0;0;0;0;0;0
+14;14;0;Menino Deus//home;15109;15109;0;-700;-700;0
+14;14;0;Menino Deus//work;5150;1636;3514;300;150;150
+14;14;0;Menino Deus//school;2934;2190;744;0;0;0
+14;14;0;Menino Deus//marketplace;0;0;0;0;0;0
+14;14;0;Menino Deus//pharmacy;0;0;0;0;0;0
+14;14;0;Menino Deus//gas_station;0;0;0;0;0;0
+14;14;0;Menino Deus//hospital;0;0;0;0;0;0
+14;14;0;Moinhos de Vento//home;5946;5946;0;-400;-400;0
+14;14;0;Moinhos de Vento//work;4260;1860;2400;300;150;150
+14;14;0;Moinhos de Vento//school;2116;618;1498;0;0;0
+14;14;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+14;14;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+14;14;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+14;14;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+14;14;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+14;14;0;Praia de Belas//home;1230;1230;0;-50;-50;0
+14;14;0;Praia de Belas//work;4918;104;4814;200;0;200
+14;14;0;Praia de Belas//school;1015;15;1000;0;0;0
+14;14;0;Praia de Belas//marketplace;0;0;0;0;0;0
+14;14;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+14;14;0;Praia de Belas//gas_station;0;0;0;0;0;0
+14;14;0;Praia de Belas//stadium;0;0;0;0;0;0
+14;14;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+14;14;0;Rio Branco//home;8764;8764;0;-250;-250;0
+14;14;0;Rio Branco//work;2708;550;2158;250;100;150
+14;14;0;Rio Branco//school;1132;130;1002;0;0;0
+14;14;0;Rio Branco//marketplace;0;0;0;0;0;0
+14;14;0;Rio Branco//pharmacy;0;0;0;0;0;0
+14;14;0;Rio Branco//gas_station;0;0;0;0;0;0
+14;14;0;Rio Branco//hospital;0;0;0;0;0;0
+14;14;0;Santa Cecília//home;3010;3010;0;0;0;0
+14;14;0;Santa Cecília//work;5098;1200;3898;200;0;200
+14;14;0;Santa Cecília//school;1347;8;1339;0;0;0
+14;14;0;Santa Cecília//marketplace;0;0;0;0;0;0
+14;14;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+14;14;0;Santa Cecília//gas_station;0;0;0;0;0;0
+14;14;0;Santa Cecília//hospital;0;0;0;0;0;0
+14;14;0;Santana//home;9439;9439;0;-450;-450;0
+14;14;0;Santana//work;5974;3796;2178;350;250;100
+14;14;0;Santana//school;2016;863;1153;0;0;0
+14;14;0;Santana//marketplace;0;0;0;0;0;0
+14;14;0;Santana//pharmacy;0;0;0;0;0;0
+14;14;0;Santana//gas_station;0;0;0;0;0;0
+14;14;0;Santana//hospital;0;0;0;0;0;0
+15;15;0;Azenha//home;7327;7327;0;-100;-100;0
+15;15;0;Azenha//work;7854;674;7180;350;50;300
+15;15;0;Azenha//school;3071;798;2273;0;0;0
+15;15;0;Azenha//marketplace;0;0;0;0;0;0
+15;15;0;Azenha//pharmacy;0;0;0;0;0;0
+15;15;0;Azenha//gas_station;0;0;0;0;0;0
+15;15;0;Azenha//hospital;0;0;0;0;0;0
+15;15;0;Azenha//shopping_mall;0;0;0;0;0;0
+15;15;0;Bom Fim//home;5382;5382;0;0;0;0
+15;15;0;Bom Fim//work;5768;154;5614;400;0;400
+15;15;0;Bom Fim//school;1413;23;1390;0;0;0
+15;15;0;Bom Fim//marketplace;0;0;0;0;0;0
+15;15;0;Bom Fim//pharmacy;0;0;0;0;0;0
+15;15;0;Bom Fim//gas_station;0;0;0;0;0;0
+15;15;0;Centro Histórico//home;21405;21405;0;-500;-500;0
+15;15;0;Centro Histórico//work;3032;708;2324;150;0;150
+15;15;0;Centro Histórico//school;4530;3845;685;0;0;0
+15;15;0;Centro Histórico//marketplace;0;0;0;0;0;0
+15;15;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+15;15;0;Centro Histórico//gas_station;0;0;0;0;0;0
+15;15;0;Centro Histórico//hospital;0;0;0;0;0;0
+15;15;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+15;15;0;Cidade Baixa//home;7427;7427;0;-300;-300;0
+15;15;0;Cidade Baixa//work;4846;922;3924;100;50;50
+15;15;0;Cidade Baixa//school;4131;1048;3083;0;0;0
+15;15;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+15;15;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+15;15;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+15;15;0;Farroupilha//home;413;413;0;-50;-50;0
+15;15;0;Farroupilha//work;6566;72;6494;250;0;250
+15;15;0;Farroupilha//school;2245;50;2195;0;0;0
+15;15;0;Farroupilha//marketplace;0;0;0;0;0;0
+15;15;0;Farroupilha//pharmacy;0;0;0;0;0;0
+15;15;0;Farroupilha//gas_station;0;0;0;0;0;0
+15;15;0;Farroupilha//hospital;0;0;0;0;0;0
+15;15;0;Floresta//home;5554;5554;0;-250;-250;0
+15;15;0;Floresta//work;3342;854;2488;150;0;150
+15;15;0;Floresta//school;3010;915;2095;0;0;0
+15;15;0;Floresta//marketplace;0;0;0;0;0;0
+15;15;0;Floresta//pharmacy;0;0;0;0;0;0
+15;15;0;Floresta//gas_station;0;0;0;0;0;0
+15;15;0;Independência//home;3880;3880;0;-50;-50;0
+15;15;0;Independência//work;5622;872;4750;250;0;250
+15;15;0;Independência//school;1905;215;1690;0;0;0
+15;15;0;Independência//marketplace;0;0;0;0;0;0
+15;15;0;Independência//pharmacy;0;0;0;0;0;0
+15;15;0;Independência//gas_station;0;0;0;0;0;0
+15;15;0;Independência//hospital;0;0;0;0;0;0
+15;15;0;Independência//shopping_mall;0;0;0;0;0;0
+15;15;0;Menino Deus//home;14359;14359;0;-750;-750;0
+15;15;0;Menino Deus//work;5300;1636;3664;150;0;150
+15;15;0;Menino Deus//school;2934;2190;744;0;0;0
+15;15;0;Menino Deus//marketplace;0;0;0;0;0;0
+15;15;0;Menino Deus//pharmacy;0;0;0;0;0;0
+15;15;0;Menino Deus//gas_station;0;0;0;0;0;0
+15;15;0;Menino Deus//hospital;0;0;0;0;0;0
+15;15;0;Moinhos de Vento//home;5796;5796;0;-150;-150;0
+15;15;0;Moinhos de Vento//work;4510;1910;2600;250;50;200
+15;15;0;Moinhos de Vento//school;2116;618;1498;0;0;0
+15;15;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+15;15;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+15;15;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+15;15;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+15;15;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+15;15;0;Praia de Belas//home;1180;1180;0;-50;-50;0
+15;15;0;Praia de Belas//work;5168;104;5064;250;0;250
+15;15;0;Praia de Belas//school;1015;15;1000;0;0;0
+15;15;0;Praia de Belas//marketplace;0;0;0;0;0;0
+15;15;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+15;15;0;Praia de Belas//gas_station;0;0;0;0;0;0
+15;15;0;Praia de Belas//stadium;0;0;0;0;0;0
+15;15;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+15;15;0;Rio Branco//home;8464;8464;0;-300;-300;0
+15;15;0;Rio Branco//work;2708;550;2158;0;0;0
+15;15;0;Rio Branco//school;1132;130;1002;0;0;0
+15;15;0;Rio Branco//marketplace;0;0;0;0;0;0
+15;15;0;Rio Branco//pharmacy;0;0;0;0;0;0
+15;15;0;Rio Branco//gas_station;0;0;0;0;0;0
+15;15;0;Rio Branco//hospital;0;0;0;0;0;0
+15;15;0;Santa Cecília//home;2910;2910;0;-100;-100;0
+15;15;0;Santa Cecília//work;5548;1300;4248;450;100;350
+15;15;0;Santa Cecília//school;1347;8;1339;0;0;0
+15;15;0;Santa Cecília//marketplace;0;0;0;0;0;0
+15;15;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+15;15;0;Santa Cecília//gas_station;0;0;0;0;0;0
+15;15;0;Santa Cecília//hospital;0;0;0;0;0;0
+15;15;0;Santana//home;8939;8939;0;-500;-500;0
+15;15;0;Santana//work;6324;4046;2278;350;250;100
+15;15;0;Santana//school;2016;863;1153;0;0;0
+15;15;0;Santana//marketplace;0;0;0;0;0;0
+15;15;0;Santana//pharmacy;0;0;0;0;0;0
+15;15;0;Santana//gas_station;0;0;0;0;0;0
+15;15;0;Santana//hospital;0;0;0;0;0;0
+16;16;0;Azenha//home;7716;7716;0;389;389;0
+16;16;0;Azenha//work;6888;590;6298;-966;-84;-882
+16;16;0;Azenha//school;3071;798;2273;0;0;0
+16;16;0;Azenha//marketplace;0;0;0;0;0;0
+16;16;0;Azenha//pharmacy;0;0;0;0;0;0
+16;16;0;Azenha//gas_station;0;0;0;0;0;0
+16;16;0;Azenha//hospital;0;0;0;0;0;0
+16;16;0;Azenha//shopping_mall;0;0;0;0;0;0
+16;16;0;Bom Fim//home;5848;5848;0;466;466;0
+16;16;0;Bom Fim//work;5221;124;5097;-547;-30;-517
+16;16;0;Bom Fim//school;1413;23;1390;0;0;0
+16;16;0;Bom Fim//marketplace;0;0;0;0;0;0
+16;16;0;Bom Fim//pharmacy;0;0;0;0;0;0
+16;16;0;Bom Fim//gas_station;0;0;0;0;0;0
+16;16;0;Centro Histórico//home;22114;22114;0;709;709;0
+16;16;0;Centro Histórico//work;2682;617;2065;-350;-91;-259
+16;16;0;Centro Histórico//school;4530;3845;685;0;0;0
+16;16;0;Centro Histórico//marketplace;0;0;0;0;0;0
+16;16;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+16;16;0;Centro Histórico//gas_station;0;0;0;0;0;0
+16;16;0;Centro Histórico//hospital;0;0;0;0;0;0
+16;16;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+16;16;0;Cidade Baixa//home;7864;7864;0;437;437;0
+16;16;0;Cidade Baixa//work;4433;788;3645;-413;-134;-279
+16;16;0;Cidade Baixa//school;4131;1048;3083;0;0;0
+16;16;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+16;16;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+16;16;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+16;16;0;Farroupilha//home;439;439;0;26;26;0
+16;16;0;Farroupilha//work;5808;58;5750;-758;-14;-744
+16;16;0;Farroupilha//school;2245;50;2195;0;0;0
+16;16;0;Farroupilha//marketplace;0;0;0;0;0;0
+16;16;0;Farroupilha//pharmacy;0;0;0;0;0;0
+16;16;0;Farroupilha//gas_station;0;0;0;0;0;0
+16;16;0;Farroupilha//hospital;0;0;0;0;0;0
+16;16;0;Floresta//home;6136;6136;0;582;582;0
+16;16;0;Floresta//work;2878;684;2194;-464;-170;-294
+16;16;0;Floresta//school;3010;915;2095;0;0;0
+16;16;0;Floresta//marketplace;0;0;0;0;0;0
+16;16;0;Floresta//pharmacy;0;0;0;0;0;0
+16;16;0;Floresta//gas_station;0;0;0;0;0;0
+16;16;0;Independência//home;4323;4323;0;443;443;0
+16;16;0;Independência//work;4803;748;4055;-819;-124;-695
+16;16;0;Independência//school;1905;215;1690;0;0;0
+16;16;0;Independência//marketplace;0;0;0;0;0;0
+16;16;0;Independência//pharmacy;0;0;0;0;0;0
+16;16;0;Independência//gas_station;0;0;0;0;0;0
+16;16;0;Independência//hospital;0;0;0;0;0;0
+16;16;0;Independência//shopping_mall;0;0;0;0;0;0
+16;16;0;Menino Deus//home;15797;15797;0;1438;1438;0
+16;16;0;Menino Deus//work;4497;1309;3188;-803;-327;-476
+16;16;0;Menino Deus//school;2934;2190;744;0;0;0
+16;16;0;Menino Deus//marketplace;0;0;0;0;0;0
+16;16;0;Menino Deus//pharmacy;0;0;0;0;0;0
+16;16;0;Menino Deus//gas_station;0;0;0;0;0;0
+16;16;0;Menino Deus//hospital;0;0;0;0;0;0
+16;16;0;Moinhos de Vento//home;6168;6168;0;372;372;0
+16;16;0;Moinhos de Vento//work;4012;1728;2284;-498;-182;-316
+16;16;0;Moinhos de Vento//school;2116;618;1498;0;0;0
+16;16;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+16;16;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+16;16;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+16;16;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+16;16;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+16;16;0;Praia de Belas//home;1319;1319;0;139;139;0
+16;16;0;Praia de Belas//work;4639;84;4555;-529;-20;-509
+16;16;0;Praia de Belas//school;1015;15;1000;0;0;0
+16;16;0;Praia de Belas//marketplace;0;0;0;0;0;0
+16;16;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+16;16;0;Praia de Belas//gas_station;0;0;0;0;0;0
+16;16;0;Praia de Belas//stadium;0;0;0;0;0;0
+16;16;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+16;16;0;Rio Branco//home;9286;9286;0;822;822;0
+16;16;0;Rio Branco//work;2521;490;2031;-187;-60;-127
+16;16;0;Rio Branco//school;1132;130;1002;0;0;0
+16;16;0;Rio Branco//marketplace;0;0;0;0;0;0
+16;16;0;Rio Branco//pharmacy;0;0;0;0;0;0
+16;16;0;Rio Branco//gas_station;0;0;0;0;0;0
+16;16;0;Rio Branco//hospital;0;0;0;0;0;0
+16;16;0;Santa Cecília//home;3220;3220;0;310;310;0
+16;16;0;Santa Cecília//work;5243;1140;4103;-305;-160;-145
+16;16;0;Santa Cecília//school;1347;8;1339;0;0;0
+16;16;0;Santa Cecília//marketplace;0;0;0;0;0;0
+16;16;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+16;16;0;Santa Cecília//gas_station;0;0;0;0;0;0
+16;16;0;Santa Cecília//hospital;0;0;0;0;0;0
+16;16;0;Santana//home;10005;10005;0;1066;1066;0
+16;16;0;Santana//work;5764;3587;2177;-560;-459;-101
+16;16;0;Santana//school;2016;863;1153;0;0;0
+16;16;0;Santana//marketplace;0;0;0;0;0;0
+16;16;0;Santana//pharmacy;0;0;0;0;0;0
+16;16;0;Santana//gas_station;0;0;0;0;0;0
+16;16;0;Santana//hospital;0;0;0;0;0;0
+17;17;0;Azenha//home;9527;9527;0;1811;1811;0
+17;17;0;Azenha//work;7288;640;6648;400;50;350
+17;17;0;Azenha//school;466;120;346;-2605;-678;-1927
+17;17;0;Azenha//marketplace;0;0;0;0;0;0
+17;17;0;Azenha//pharmacy;0;0;0;0;0;0
+17;17;0;Azenha//gas_station;0;0;0;0;0;0
+17;17;0;Azenha//hospital;0;0;0;0;0;0
+17;17;0;Azenha//shopping_mall;0;0;0;0;0;0
+17;17;0;Bom Fim//home;7012;7012;0;1164;1164;0
+17;17;0;Bom Fim//work;5821;124;5697;600;0;600
+17;17;0;Bom Fim//school;218;4;214;-1195;-19;-1176
+17;17;0;Bom Fim//marketplace;0;0;0;0;0;0
+17;17;0;Bom Fim//pharmacy;0;0;0;0;0;0
+17;17;0;Bom Fim//gas_station;0;0;0;0;0;0
+17;17;0;Centro Histórico//home;27814;27814;0;5700;5700;0
+17;17;0;Centro Histórico//work;2782;617;2165;100;0;100
+17;17;0;Centro Histórico//school;686;577;109;-3844;-3268;-576
+17;17;0;Centro Histórico//marketplace;0;0;0;0;0;0
+17;17;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+17;17;0;Centro Histórico//gas_station;0;0;0;0;0;0
+17;17;0;Centro Histórico//hospital;0;0;0;0;0;0
+17;17;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+17;17;0;Cidade Baixa//home;9458;9458;0;1594;1594;0
+17;17;0;Cidade Baixa//work;4483;788;3695;50;0;50
+17;17;0;Cidade Baixa//school;626;158;468;-3505;-890;-2615
+17;17;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+17;17;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+17;17;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+17;17;0;Farroupilha//home;571;571;0;132;132;0
+17;17;0;Farroupilha//work;6258;58;6200;450;0;450
+17;17;0;Farroupilha//school;343;8;335;-1902;-42;-1860
+17;17;0;Farroupilha//marketplace;0;0;0;0;0;0
+17;17;0;Farroupilha//pharmacy;0;0;0;0;0;0
+17;17;0;Farroupilha//gas_station;0;0;0;0;0;0
+17;17;0;Farroupilha//hospital;0;0;0;0;0;0
+17;17;0;Floresta//home;7398;7398;0;1262;1262;0
+17;17;0;Floresta//work;3078;734;2344;200;50;150
+17;17;0;Floresta//school;457;138;319;-2553;-777;-1776
+17;17;0;Floresta//marketplace;0;0;0;0;0;0
+17;17;0;Floresta//pharmacy;0;0;0;0;0;0
+17;17;0;Floresta//gas_station;0;0;0;0;0;0
+17;17;0;Independência//home;5224;5224;0;901;901;0
+17;17;0;Independência//work;5053;798;4255;250;50;200
+17;17;0;Independência//school;291;33;258;-1614;-182;-1432
+17;17;0;Independência//marketplace;0;0;0;0;0;0
+17;17;0;Independência//pharmacy;0;0;0;0;0;0
+17;17;0;Independência//gas_station;0;0;0;0;0;0
+17;17;0;Independência//hospital;0;0;0;0;0;0
+17;17;0;Independência//shopping_mall;0;0;0;0;0;0
+17;17;0;Menino Deus//home;19211;19211;0;3414;3414;0
+17;17;0;Menino Deus//work;5147;1559;3588;650;250;400
+17;17;0;Menino Deus//school;443;329;114;-2491;-1861;-630
+17;17;0;Menino Deus//marketplace;0;0;0;0;0;0
+17;17;0;Menino Deus//pharmacy;0;0;0;0;0;0
+17;17;0;Menino Deus//gas_station;0;0;0;0;0;0
+17;17;0;Menino Deus//hospital;0;0;0;0;0;0
+17;17;0;Moinhos de Vento//home;7302;7302;0;1134;1134;0
+17;17;0;Moinhos de Vento//work;4262;1878;2384;250;150;100
+17;17;0;Moinhos de Vento//school;323;93;230;-1793;-525;-1268
+17;17;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+17;17;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+17;17;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+17;17;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+17;17;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+17;17;0;Praia de Belas//home;1433;1433;0;114;114;0
+17;17;0;Praia de Belas//work;4989;84;4905;350;0;350
+17;17;0;Praia de Belas//school;159;3;156;-856;-12;-844
+17;17;0;Praia de Belas//marketplace;0;0;0;0;0;0
+17;17;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+17;17;0;Praia de Belas//gas_station;0;0;0;0;0;0
+17;17;0;Praia de Belas//stadium;0;0;0;0;0;0
+17;17;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+17;17;0;Rio Branco//home;11107;11107;0;1821;1821;0
+17;17;0;Rio Branco//work;2571;490;2081;50;0;50
+17;17;0;Rio Branco//school;174;20;154;-958;-110;-848
+17;17;0;Rio Branco//marketplace;0;0;0;0;0;0
+17;17;0;Rio Branco//pharmacy;0;0;0;0;0;0
+17;17;0;Rio Branco//gas_station;0;0;0;0;0;0
+17;17;0;Rio Branco//hospital;0;0;0;0;0;0
+17;17;0;Santa Cecília//home;3833;3833;0;613;613;0
+17;17;0;Santa Cecília//work;5543;1190;4353;300;50;250
+17;17;0;Santa Cecília//school;206;2;204;-1141;-6;-1135
+17;17;0;Santa Cecília//marketplace;0;0;0;0;0;0
+17;17;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+17;17;0;Santa Cecília//gas_station;0;0;0;0;0;0
+17;17;0;Santa Cecília//hospital;0;0;0;0;0;0
+17;17;0;Santana//home;12560;12560;0;2555;2555;0
+17;17;0;Santana//work;6064;3837;2227;300;250;50
+17;17;0;Santana//school;308;130;178;-1708;-733;-975
+17;17;0;Santana//marketplace;0;0;0;0;0;0
+17;17;0;Santana//pharmacy;0;0;0;0;0;0
+17;17;0;Santana//gas_station;0;0;0;0;0;0
+17;17;0;Santana//hospital;0;0;0;0;0;0
+18;18;0;Azenha//home;9427;9427;0;-100;-100;0
+18;18;0;Azenha//work;7638;640;6998;350;0;350
+18;18;0;Azenha//school;466;120;346;0;0;0
+18;18;0;Azenha//marketplace;0;0;0;0;0;0
+18;18;0;Azenha//pharmacy;0;0;0;0;0;0
+18;18;0;Azenha//gas_station;0;0;0;0;0;0
+18;18;0;Azenha//hospital;0;0;0;0;0;0
+18;18;0;Azenha//shopping_mall;0;0;0;0;0;0
+18;18;0;Bom Fim//home;6912;6912;0;-100;-100;0
+18;18;0;Bom Fim//work;6221;124;6097;400;0;400
+18;18;0;Bom Fim//school;218;4;214;0;0;0
+18;18;0;Bom Fim//marketplace;0;0;0;0;0;0
+18;18;0;Bom Fim//pharmacy;0;0;0;0;0;0
+18;18;0;Bom Fim//gas_station;0;0;0;0;0;0
+18;18;0;Centro Histórico//home;27214;27214;0;-600;-600;0
+18;18;0;Centro Histórico//work;3032;717;2315;250;100;150
+18;18;0;Centro Histórico//school;686;577;109;0;0;0
+18;18;0;Centro Histórico//marketplace;0;0;0;0;0;0
+18;18;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+18;18;0;Centro Histórico//gas_station;0;0;0;0;0;0
+18;18;0;Centro Histórico//hospital;0;0;0;0;0;0
+18;18;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+18;18;0;Cidade Baixa//home;9058;9058;0;-400;-400;0
+18;18;0;Cidade Baixa//work;4583;838;3745;100;50;50
+18;18;0;Cidade Baixa//school;626;158;468;0;0;0
+18;18;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+18;18;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+18;18;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+18;18;0;Farroupilha//home;571;571;0;0;0;0
+18;18;0;Farroupilha//work;6458;58;6400;200;0;200
+18;18;0;Farroupilha//school;343;8;335;0;0;0
+18;18;0;Farroupilha//marketplace;0;0;0;0;0;0
+18;18;0;Farroupilha//pharmacy;0;0;0;0;0;0
+18;18;0;Farroupilha//gas_station;0;0;0;0;0;0
+18;18;0;Farroupilha//hospital;0;0;0;0;0;0
+18;18;0;Floresta//home;7198;7198;0;-200;-200;0
+18;18;0;Floresta//work;3078;734;2344;0;0;0
+18;18;0;Floresta//school;457;138;319;0;0;0
+18;18;0;Floresta//marketplace;0;0;0;0;0;0
+18;18;0;Floresta//pharmacy;0;0;0;0;0;0
+18;18;0;Floresta//gas_station;0;0;0;0;0;0
+18;18;0;Independência//home;5024;5024;0;-200;-200;0
+18;18;0;Independência//work;5203;848;4355;150;50;100
+18;18;0;Independência//school;291;33;258;0;0;0
+18;18;0;Independência//marketplace;0;0;0;0;0;0
+18;18;0;Independência//pharmacy;0;0;0;0;0;0
+18;18;0;Independência//gas_station;0;0;0;0;0;0
+18;18;0;Independência//hospital;0;0;0;0;0;0
+18;18;0;Independência//shopping_mall;0;0;0;0;0;0
+18;18;0;Menino Deus//home;18561;18561;0;-650;-650;0
+18;18;0;Menino Deus//work;5397;1709;3688;250;150;100
+18;18;0;Menino Deus//school;443;329;114;0;0;0
+18;18;0;Menino Deus//marketplace;0;0;0;0;0;0
+18;18;0;Menino Deus//pharmacy;0;0;0;0;0;0
+18;18;0;Menino Deus//gas_station;0;0;0;0;0;0
+18;18;0;Menino Deus//hospital;0;0;0;0;0;0
+18;18;0;Moinhos de Vento//home;7102;7102;0;-200;-200;0
+18;18;0;Moinhos de Vento//work;4662;1928;2734;400;50;350
+18;18;0;Moinhos de Vento//school;323;93;230;0;0;0
+18;18;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+18;18;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+18;18;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+18;18;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+18;18;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+18;18;0;Praia de Belas//home;1433;1433;0;0;0;0
+18;18;0;Praia de Belas//work;5389;84;5305;400;0;400
+18;18;0;Praia de Belas//school;159;3;156;0;0;0
+18;18;0;Praia de Belas//marketplace;0;0;0;0;0;0
+18;18;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+18;18;0;Praia de Belas//gas_station;0;0;0;0;0;0
+18;18;0;Praia de Belas//stadium;0;0;0;0;0;0
+18;18;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+18;18;0;Rio Branco//home;10757;10757;0;-350;-350;0
+18;18;0;Rio Branco//work;2671;490;2181;100;0;100
+18;18;0;Rio Branco//school;174;20;154;0;0;0
+18;18;0;Rio Branco//marketplace;0;0;0;0;0;0
+18;18;0;Rio Branco//pharmacy;0;0;0;0;0;0
+18;18;0;Rio Branco//gas_station;0;0;0;0;0;0
+18;18;0;Rio Branco//hospital;0;0;0;0;0;0
+18;18;0;Santa Cecília//home;3783;3783;0;-50;-50;0
+18;18;0;Santa Cecília//work;5793;1240;4553;250;50;200
+18;18;0;Santa Cecília//school;206;2;204;0;0;0
+18;18;0;Santa Cecília//marketplace;0;0;0;0;0;0
+18;18;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+18;18;0;Santa Cecília//gas_station;0;0;0;0;0;0
+18;18;0;Santa Cecília//hospital;0;0;0;0;0;0
+18;18;0;Santana//home;12110;12110;0;-450;-450;0
+18;18;0;Santana//work;6514;4137;2377;450;300;150
+18;18;0;Santana//school;308;130;178;0;0;0
+18;18;0;Santana//marketplace;0;0;0;0;0;0
+18;18;0;Santana//pharmacy;0;0;0;0;0;0
+18;18;0;Santana//gas_station;0;0;0;0;0;0
+18;18;0;Santana//hospital;0;0;0;0;0;0
+19;19;0;Azenha//home;8277;8277;0;-1150;-1150;0
+19;19;0;Azenha//work;8038;690;7348;400;50;350
+19;19;0;Azenha//school;1566;470;1096;1100;350;750
+19;19;0;Azenha//marketplace;0;0;0;0;0;0
+19;19;0;Azenha//pharmacy;0;0;0;0;0;0
+19;19;0;Azenha//gas_station;0;0;0;0;0;0
+19;19;0;Azenha//hospital;0;0;0;0;0;0
+19;19;0;Azenha//shopping_mall;0;0;0;0;0;0
+19;19;0;Bom Fim//home;5862;5862;0;-1050;-1050;0
+19;19;0;Bom Fim//work;6371;124;6247;150;0;150
+19;19;0;Bom Fim//school;1218;4;1214;1000;0;1000
+19;19;0;Bom Fim//marketplace;0;0;0;0;0;0
+19;19;0;Bom Fim//pharmacy;0;0;0;0;0;0
+19;19;0;Bom Fim//gas_station;0;0;0;0;0;0
+19;19;0;Centro Histórico//home;22314;22314;0;-4900;-4900;0
+19;19;0;Centro Histórico//work;3082;717;2365;50;0;50
+19;19;0;Centro Histórico//school;3236;2627;609;2550;2050;500
+19;19;0;Centro Histórico//marketplace;0;0;0;0;0;0
+19;19;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+19;19;0;Centro Histórico//gas_station;0;0;0;0;0;0
+19;19;0;Centro Histórico//hospital;0;0;0;0;0;0
+19;19;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+19;19;0;Cidade Baixa//home;7208;7208;0;-1850;-1850;0
+19;19;0;Cidade Baixa//work;4783;888;3895;200;50;150
+19;19;0;Cidade Baixa//school;3376;1208;2168;2750;1050;1700
+19;19;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+19;19;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+19;19;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+19;19;0;Farroupilha//home;471;471;0;-100;-100;0
+19;19;0;Farroupilha//work;6858;58;6800;400;0;400
+19;19;0;Farroupilha//school;1443;8;1435;1100;0;1100
+19;19;0;Farroupilha//marketplace;0;0;0;0;0;0
+19;19;0;Farroupilha//pharmacy;0;0;0;0;0;0
+19;19;0;Farroupilha//gas_station;0;0;0;0;0;0
+19;19;0;Farroupilha//hospital;0;0;0;0;0;0
+19;19;0;Floresta//home;5998;5998;0;-1200;-1200;0
+19;19;0;Floresta//work;3278;734;2544;200;0;200
+19;19;0;Floresta//school;2057;588;1469;1600;450;1150
+19;19;0;Floresta//marketplace;0;0;0;0;0;0
+19;19;0;Floresta//pharmacy;0;0;0;0;0;0
+19;19;0;Floresta//gas_station;0;0;0;0;0;0
+19;19;0;Independência//home;4424;4424;0;-600;-600;0
+19;19;0;Independência//work;5453;848;4605;250;0;250
+19;19;0;Independência//school;691;33;658;400;0;400
+19;19;0;Independência//marketplace;0;0;0;0;0;0
+19;19;0;Independência//pharmacy;0;0;0;0;0;0
+19;19;0;Independência//gas_station;0;0;0;0;0;0
+19;19;0;Independência//hospital;0;0;0;0;0;0
+19;19;0;Independência//shopping_mall;0;0;0;0;0;0
+19;19;0;Menino Deus//home;16011;16011;0;-2550;-2550;0
+19;19;0;Menino Deus//work;5597;1709;3888;200;0;200
+19;19;0;Menino Deus//school;1993;1479;514;1550;1150;400
+19;19;0;Menino Deus//marketplace;0;0;0;0;0;0
+19;19;0;Menino Deus//pharmacy;0;0;0;0;0;0
+19;19;0;Menino Deus//gas_station;0;0;0;0;0;0
+19;19;0;Menino Deus//hospital;0;0;0;0;0;0
+19;19;0;Moinhos de Vento//home;6102;6102;0;-1000;-1000;0
+19;19;0;Moinhos de Vento//work;4962;1978;2984;300;50;250
+19;19;0;Moinhos de Vento//school;973;343;630;650;250;400
+19;19;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+19;19;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+19;19;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+19;19;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+19;19;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+19;19;0;Praia de Belas//home;1333;1333;0;-100;-100;0
+19;19;0;Praia de Belas//work;5489;84;5405;100;0;100
+19;19;0;Praia de Belas//school;859;3;856;700;0;700
+19;19;0;Praia de Belas//marketplace;0;0;0;0;0;0
+19;19;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+19;19;0;Praia de Belas//gas_station;0;0;0;0;0;0
+19;19;0;Praia de Belas//stadium;0;0;0;0;0;0
+19;19;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+19;19;0;Rio Branco//home;9557;9557;0;-1200;-1200;0
+19;19;0;Rio Branco//work;2821;490;2331;150;0;150
+19;19;0;Rio Branco//school;824;20;804;650;0;650
+19;19;0;Rio Branco//marketplace;0;0;0;0;0;0
+19;19;0;Rio Branco//pharmacy;0;0;0;0;0;0
+19;19;0;Rio Branco//gas_station;0;0;0;0;0;0
+19;19;0;Rio Branco//hospital;0;0;0;0;0;0
+19;19;0;Santa Cecília//home;3383;3383;0;-400;-400;0
+19;19;0;Santa Cecília//work;5943;1240;4703;150;0;150
+19;19;0;Santa Cecília//school;656;2;654;450;0;450
+19;19;0;Santa Cecília//marketplace;0;0;0;0;0;0
+19;19;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+19;19;0;Santa Cecília//gas_station;0;0;0;0;0;0
+19;19;0;Santa Cecília//hospital;0;0;0;0;0;0
+19;19;0;Santana//home;10210;10210;0;-1900;-1900;0
+19;19;0;Santana//work;6714;4237;2477;200;100;100
+19;19;0;Santana//school;1058;380;678;750;250;500
+19;19;0;Santana//marketplace;0;0;0;0;0;0
+19;19;0;Santana//pharmacy;0;0;0;0;0;0
+19;19;0;Santana//gas_station;0;0;0;0;0;0
+19;19;0;Santana//hospital;0;0;0;0;0;0
+20;20;0;Azenha//home;7877;7877;0;-400;-400;0
+20;20;0;Azenha//work;8738;690;8048;700;0;700
+20;20;0;Azenha//school;1566;470;1096;0;0;0
+20;20;0;Azenha//marketplace;0;0;0;0;0;0
+20;20;0;Azenha//pharmacy;0;0;0;0;0;0
+20;20;0;Azenha//gas_station;0;0;0;0;0;0
+20;20;0;Azenha//hospital;0;0;0;0;0;0
+20;20;0;Azenha//shopping_mall;0;0;0;0;0;0
+20;20;0;Bom Fim//home;5312;5312;0;-550;-550;0
+20;20;0;Bom Fim//work;7471;124;7347;1100;0;1100
+20;20;0;Bom Fim//school;1218;4;1214;0;0;0
+20;20;0;Bom Fim//marketplace;0;0;0;0;0;0
+20;20;0;Bom Fim//pharmacy;0;0;0;0;0;0
+20;20;0;Bom Fim//gas_station;0;0;0;0;0;0
+20;20;0;Centro Histórico//home;20914;20914;0;-1400;-1400;0
+20;20;0;Centro Histórico//work;3432;867;2565;350;150;200
+20;20;0;Centro Histórico//school;3236;2627;609;0;0;0
+20;20;0;Centro Histórico//marketplace;0;0;0;0;0;0
+20;20;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+20;20;0;Centro Histórico//gas_station;0;0;0;0;0;0
+20;20;0;Centro Histórico//hospital;0;0;0;0;0;0
+20;20;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+20;20;0;Cidade Baixa//home;6608;6608;0;-600;-600;0
+20;20;0;Cidade Baixa//work;5083;938;4145;300;50;250
+20;20;0;Cidade Baixa//school;3376;1208;2168;0;0;0
+20;20;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+20;20;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+20;20;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+20;20;0;Farroupilha//home;421;421;0;-50;-50;0
+20;20;0;Farroupilha//work;7608;108;7500;750;50;700
+20;20;0;Farroupilha//school;1443;8;1435;0;0;0
+20;20;0;Farroupilha//marketplace;0;0;0;0;0;0
+20;20;0;Farroupilha//pharmacy;0;0;0;0;0;0
+20;20;0;Farroupilha//gas_station;0;0;0;0;0;0
+20;20;0;Farroupilha//hospital;0;0;0;0;0;0
+20;20;0;Floresta//home;5398;5398;0;-600;-600;0
+20;20;0;Floresta//work;3728;934;2794;450;200;250
+20;20;0;Floresta//school;2057;588;1469;0;0;0
+20;20;0;Floresta//marketplace;0;0;0;0;0;0
+20;20;0;Floresta//pharmacy;0;0;0;0;0;0
+20;20;0;Floresta//gas_station;0;0;0;0;0;0
+20;20;0;Independência//home;4124;4124;0;-300;-300;0
+20;20;0;Independência//work;5753;898;4855;300;50;250
+20;20;0;Independência//school;691;33;658;0;0;0
+20;20;0;Independência//marketplace;0;0;0;0;0;0
+20;20;0;Independência//pharmacy;0;0;0;0;0;0
+20;20;0;Independência//gas_station;0;0;0;0;0;0
+20;20;0;Independência//hospital;0;0;0;0;0;0
+20;20;0;Independência//shopping_mall;0;0;0;0;0;0
+20;20;0;Menino Deus//home;15111;15111;0;-900;-900;0
+20;20;0;Menino Deus//work;5997;1859;4138;400;150;250
+20;20;0;Menino Deus//school;1993;1479;514;0;0;0
+20;20;0;Menino Deus//marketplace;0;0;0;0;0;0
+20;20;0;Menino Deus//pharmacy;0;0;0;0;0;0
+20;20;0;Menino Deus//gas_station;0;0;0;0;0;0
+20;20;0;Menino Deus//hospital;0;0;0;0;0;0
+20;20;0;Moinhos de Vento//home;5702;5702;0;-400;-400;0
+20;20;0;Moinhos de Vento//work;5762;2228;3534;800;250;550
+20;20;0;Moinhos de Vento//school;973;343;630;0;0;0
+20;20;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+20;20;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+20;20;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+20;20;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+20;20;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+20;20;0;Praia de Belas//home;1233;1233;0;-100;-100;0
+20;20;0;Praia de Belas//work;6089;134;5955;600;50;550
+20;20;0;Praia de Belas//school;859;3;856;0;0;0
+20;20;0;Praia de Belas//marketplace;0;0;0;0;0;0
+20;20;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+20;20;0;Praia de Belas//gas_station;0;0;0;0;0;0
+20;20;0;Praia de Belas//stadium;0;0;0;0;0;0
+20;20;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+20;20;0;Rio Branco//home;8957;8957;0;-600;-600;0
+20;20;0;Rio Branco//work;2821;490;2331;0;0;0
+20;20;0;Rio Branco//school;824;20;804;0;0;0
+20;20;0;Rio Branco//marketplace;0;0;0;0;0;0
+20;20;0;Rio Branco//pharmacy;0;0;0;0;0;0
+20;20;0;Rio Branco//gas_station;0;0;0;0;0;0
+20;20;0;Rio Branco//hospital;0;0;0;0;0;0
+20;20;0;Santa Cecília//home;3083;3083;0;-300;-300;0
+20;20;0;Santa Cecília//work;6443;1490;4953;500;250;250
+20;20;0;Santa Cecília//school;656;2;654;0;0;0
+20;20;0;Santa Cecília//marketplace;0;0;0;0;0;0
+20;20;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+20;20;0;Santa Cecília//gas_station;0;0;0;0;0;0
+20;20;0;Santa Cecília//hospital;0;0;0;0;0;0
+20;20;0;Santana//home;9560;9560;0;-650;-650;0
+20;20;0;Santana//work;7314;4587;2727;600;350;250
+20;20;0;Santana//school;1058;380;678;0;0;0
+20;20;0;Santana//marketplace;0;0;0;0;0;0
+20;20;0;Santana//pharmacy;0;0;0;0;0;0
+20;20;0;Santana//gas_station;0;0;0;0;0;0
+20;20;0;Santana//hospital;0;0;0;0;0;0
+21;21;0;Azenha//home;7627;7627;0;-250;-250;0
+21;21;0;Azenha//work;9088;690;8398;350;0;350
+21;21;0;Azenha//school;1566;470;1096;0;0;0
+21;21;0;Azenha//marketplace;0;0;0;0;0;0
+21;21;0;Azenha//pharmacy;0;0;0;0;0;0
+21;21;0;Azenha//gas_station;0;0;0;0;0;0
+21;21;0;Azenha//hospital;0;0;0;0;0;0
+21;21;0;Azenha//shopping_mall;0;0;0;0;0;0
+21;21;0;Bom Fim//home;5212;5212;0;-100;-100;0
+21;21;0;Bom Fim//work;7671;124;7547;200;0;200
+21;21;0;Bom Fim//school;1218;4;1214;0;0;0
+21;21;0;Bom Fim//marketplace;0;0;0;0;0;0
+21;21;0;Bom Fim//pharmacy;0;0;0;0;0;0
+21;21;0;Bom Fim//gas_station;0;0;0;0;0;0
+21;21;0;Centro Histórico//home;20564;20564;0;-350;-350;0
+21;21;0;Centro Histórico//work;3432;867;2565;0;0;0
+21;21;0;Centro Histórico//school;3236;2627;609;0;0;0
+21;21;0;Centro Histórico//marketplace;0;0;0;0;0;0
+21;21;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+21;21;0;Centro Histórico//gas_station;0;0;0;0;0;0
+21;21;0;Centro Histórico//hospital;0;0;0;0;0;0
+21;21;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+21;21;0;Cidade Baixa//home;6358;6358;0;-250;-250;0
+21;21;0;Cidade Baixa//work;5233;938;4295;150;0;150
+21;21;0;Cidade Baixa//school;3376;1208;2168;0;0;0
+21;21;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+21;21;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+21;21;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+21;21;0;Farroupilha//home;421;421;0;0;0;0
+21;21;0;Farroupilha//work;7758;108;7650;150;0;150
+21;21;0;Farroupilha//school;1443;8;1435;0;0;0
+21;21;0;Farroupilha//marketplace;0;0;0;0;0;0
+21;21;0;Farroupilha//pharmacy;0;0;0;0;0;0
+21;21;0;Farroupilha//gas_station;0;0;0;0;0;0
+21;21;0;Farroupilha//hospital;0;0;0;0;0;0
+21;21;0;Floresta//home;5248;5248;0;-150;-150;0
+21;21;0;Floresta//work;3928;1034;2894;200;100;100
+21;21;0;Floresta//school;2057;588;1469;0;0;0
+21;21;0;Floresta//marketplace;0;0;0;0;0;0
+21;21;0;Floresta//pharmacy;0;0;0;0;0;0
+21;21;0;Floresta//gas_station;0;0;0;0;0;0
+21;21;0;Independência//home;4074;4074;0;-50;-50;0
+21;21;0;Independência//work;6003;948;5055;250;50;200
+21;21;0;Independência//school;691;33;658;0;0;0
+21;21;0;Independência//marketplace;0;0;0;0;0;0
+21;21;0;Independência//pharmacy;0;0;0;0;0;0
+21;21;0;Independência//gas_station;0;0;0;0;0;0
+21;21;0;Independência//hospital;0;0;0;0;0;0
+21;21;0;Independência//shopping_mall;0;0;0;0;0;0
+21;21;0;Menino Deus//home;14761;14761;0;-350;-350;0
+21;21;0;Menino Deus//work;5997;1859;4138;0;0;0
+21;21;0;Menino Deus//school;1993;1479;514;0;0;0
+21;21;0;Menino Deus//marketplace;0;0;0;0;0;0
+21;21;0;Menino Deus//pharmacy;0;0;0;0;0;0
+21;21;0;Menino Deus//gas_station;0;0;0;0;0;0
+21;21;0;Menino Deus//hospital;0;0;0;0;0;0
+21;21;0;Moinhos de Vento//home;5552;5552;0;-150;-150;0
+21;21;0;Moinhos de Vento//work;5912;2278;3634;150;50;100
+21;21;0;Moinhos de Vento//school;973;343;630;0;0;0
+21;21;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+21;21;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+21;21;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+21;21;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+21;21;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+21;21;0;Praia de Belas//home;1233;1233;0;0;0;0
+21;21;0;Praia de Belas//work;6239;134;6105;150;0;150
+21;21;0;Praia de Belas//school;859;3;856;0;0;0
+21;21;0;Praia de Belas//marketplace;0;0;0;0;0;0
+21;21;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+21;21;0;Praia de Belas//gas_station;0;0;0;0;0;0
+21;21;0;Praia de Belas//stadium;0;0;0;0;0;0
+21;21;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+21;21;0;Rio Branco//home;8857;8857;0;-100;-100;0
+21;21;0;Rio Branco//work;2821;490;2331;0;0;0
+21;21;0;Rio Branco//school;824;20;804;0;0;0
+21;21;0;Rio Branco//marketplace;0;0;0;0;0;0
+21;21;0;Rio Branco//pharmacy;0;0;0;0;0;0
+21;21;0;Rio Branco//gas_station;0;0;0;0;0;0
+21;21;0;Rio Branco//hospital;0;0;0;0;0;0
+21;21;0;Santa Cecília//home;3083;3083;0;0;0;0
+21;21;0;Santa Cecília//work;6443;1490;4953;0;0;0
+21;21;0;Santa Cecília//school;656;2;654;0;0;0
+21;21;0;Santa Cecília//marketplace;0;0;0;0;0;0
+21;21;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+21;21;0;Santa Cecília//gas_station;0;0;0;0;0;0
+21;21;0;Santa Cecília//hospital;0;0;0;0;0;0
+21;21;0;Santana//home;9510;9510;0;-50;-50;0
+21;21;0;Santana//work;7514;4637;2877;200;50;150
+21;21;0;Santana//school;1058;380;678;0;0;0
+21;21;0;Santana//marketplace;0;0;0;0;0;0
+21;21;0;Santana//pharmacy;0;0;0;0;0;0
+21;21;0;Santana//gas_station;0;0;0;0;0;0
+21;21;0;Santana//hospital;0;0;0;0;0;0
+22;22;0;Azenha//home;8821;8821;0;1194;1194;0
+22;22;0;Azenha//work;9238;690;8548;150;0;150
+22;22;0;Azenha//school;0;0;0;-1566;-470;-1096
+22;22;0;Azenha//marketplace;0;0;0;0;0;0
+22;22;0;Azenha//pharmacy;0;0;0;0;0;0
+22;22;0;Azenha//gas_station;0;0;0;0;0;0
+22;22;0;Azenha//hospital;0;0;0;0;0;0
+22;22;0;Azenha//shopping_mall;0;0;0;0;0;0
+22;22;0;Bom Fim//home;6295;6295;0;1083;1083;0
+22;22;0;Bom Fim//work;7871;124;7747;200;0;200
+22;22;0;Bom Fim//school;0;0;0;-1218;-4;-1214
+22;22;0;Bom Fim//marketplace;0;0;0;0;0;0
+22;22;0;Bom Fim//pharmacy;0;0;0;0;0;0
+22;22;0;Bom Fim//gas_station;0;0;0;0;0;0
+22;22;0;Centro Histórico//home;25831;25831;0;5267;5267;0
+22;22;0;Centro Histórico//work;3632;917;2715;200;50;150
+22;22;0;Centro Histórico//school;0;0;0;-3236;-2627;-609
+22;22;0;Centro Histórico//marketplace;0;0;0;0;0;0
+22;22;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+22;22;0;Centro Histórico//gas_station;0;0;0;0;0;0
+22;22;0;Centro Histórico//hospital;0;0;0;0;0;0
+22;22;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+22;22;0;Cidade Baixa//home;8050;8050;0;1692;1692;0
+22;22;0;Cidade Baixa//work;5433;988;4445;200;50;150
+22;22;0;Cidade Baixa//school;0;0;0;-3376;-1208;-2168
+22;22;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+22;22;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+22;22;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+22;22;0;Farroupilha//home;547;547;0;126;126;0
+22;22;0;Farroupilha//work;7958;108;7850;200;0;200
+22;22;0;Farroupilha//school;0;0;0;-1443;-8;-1435
+22;22;0;Farroupilha//marketplace;0;0;0;0;0;0
+22;22;0;Farroupilha//pharmacy;0;0;0;0;0;0
+22;22;0;Farroupilha//gas_station;0;0;0;0;0;0
+22;22;0;Farroupilha//hospital;0;0;0;0;0;0
+22;22;0;Floresta//home;6330;6330;0;1082;1082;0
+22;22;0;Floresta//work;3928;1034;2894;0;0;0
+22;22;0;Floresta//school;0;0;0;-2057;-588;-1469
+22;22;0;Floresta//marketplace;0;0;0;0;0;0
+22;22;0;Floresta//pharmacy;0;0;0;0;0;0
+22;22;0;Floresta//gas_station;0;0;0;0;0;0
+22;22;0;Independência//home;4669;4669;0;595;595;0
+22;22;0;Independência//work;6203;998;5205;200;50;150
+22;22;0;Independência//school;0;0;0;-691;-33;-658
+22;22;0;Independência//marketplace;0;0;0;0;0;0
+22;22;0;Independência//pharmacy;0;0;0;0;0;0
+22;22;0;Independência//gas_station;0;0;0;0;0;0
+22;22;0;Independência//hospital;0;0;0;0;0;0
+22;22;0;Independência//shopping_mall;0;0;0;0;0;0
+22;22;0;Menino Deus//home;17378;17378;0;2617;2617;0
+22;22;0;Menino Deus//work;6247;1909;4338;250;50;200
+22;22;0;Menino Deus//school;0;0;0;-1993;-1479;-514
+22;22;0;Menino Deus//marketplace;0;0;0;0;0;0
+22;22;0;Menino Deus//pharmacy;0;0;0;0;0;0
+22;22;0;Menino Deus//gas_station;0;0;0;0;0;0
+22;22;0;Menino Deus//hospital;0;0;0;0;0;0
+22;22;0;Moinhos de Vento//home;6471;6471;0;919;919;0
+22;22;0;Moinhos de Vento//work;5962;2328;3634;50;50;0
+22;22;0;Moinhos de Vento//school;0;0;0;-973;-343;-630
+22;22;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+22;22;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+22;22;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+22;22;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+22;22;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+22;22;0;Praia de Belas//home;1258;1258;0;25;25;0
+22;22;0;Praia de Belas//work;6289;134;6155;50;0;50
+22;22;0;Praia de Belas//school;0;0;0;-859;-3;-856
+22;22;0;Praia de Belas//marketplace;0;0;0;0;0;0
+22;22;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+22;22;0;Praia de Belas//gas_station;0;0;0;0;0;0
+22;22;0;Praia de Belas//stadium;0;0;0;0;0;0
+22;22;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+22;22;0;Rio Branco//home;9863;9863;0;1006;1006;0
+22;22;0;Rio Branco//work;2871;540;2331;50;50;0
+22;22;0;Rio Branco//school;0;0;0;-824;-20;-804
+22;22;0;Rio Branco//marketplace;0;0;0;0;0;0
+22;22;0;Rio Branco//pharmacy;0;0;0;0;0;0
+22;22;0;Rio Branco//gas_station;0;0;0;0;0;0
+22;22;0;Rio Branco//hospital;0;0;0;0;0;0
+22;22;0;Santa Cecília//home;3456;3456;0;373;373;0
+22;22;0;Santa Cecília//work;6543;1590;4953;100;100;0
+22;22;0;Santa Cecília//school;0;0;0;-656;-2;-654
+22;22;0;Santa Cecília//marketplace;0;0;0;0;0;0
+22;22;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+22;22;0;Santa Cecília//gas_station;0;0;0;0;0;0
+22;22;0;Santa Cecília//hospital;0;0;0;0;0;0
+22;22;0;Santana//home;11731;11731;0;2221;2221;0
+22;22;0;Santana//work;7614;4637;2977;100;0;100
+22;22;0;Santana//school;0;0;0;-1058;-380;-678
+22;22;0;Santana//marketplace;0;0;0;0;0;0
+22;22;0;Santana//pharmacy;0;0;0;0;0;0
+22;22;0;Santana//gas_station;0;0;0;0;0;0
+22;22;0;Santana//hospital;0;0;0;0;0;0
+23;23;0;Azenha//home;13804;13804;0;4983;4983;0
+23;23;0;Azenha//work;0;0;0;-9238;-690;-8548
+23;23;0;Azenha//school;0;0;0;0;0;0
+23;23;0;Azenha//marketplace;0;0;0;0;0;0
+23;23;0;Azenha//pharmacy;0;0;0;0;0;0
+23;23;0;Azenha//gas_station;0;0;0;0;0;0
+23;23;0;Azenha//hospital;0;0;0;0;0;0
+23;23;0;Azenha//shopping_mall;0;0;0;0;0;0
+23;23;0;Bom Fim//home;11593;11593;0;5298;5298;0
+23;23;0;Bom Fim//work;0;0;0;-7871;-124;-7747
+23;23;0;Bom Fim//school;0;0;0;0;0;0
+23;23;0;Bom Fim//marketplace;0;0;0;0;0;0
+23;23;0;Bom Fim//pharmacy;0;0;0;0;0;0
+23;23;0;Bom Fim//gas_station;0;0;0;0;0;0
+23;23;0;Centro Histórico//home;39154;39154;0;13323;13323;0
+23;23;0;Centro Histórico//work;0;0;0;-3632;-917;-2715
+23;23;0;Centro Histórico//school;0;0;0;0;0;0
+23;23;0;Centro Histórico//marketplace;0;0;0;0;0;0
+23;23;0;Centro Histórico//pharmacy;0;0;0;0;0;0
+23;23;0;Centro Histórico//gas_station;0;0;0;0;0;0
+23;23;0;Centro Histórico//hospital;0;0;0;0;0;0
+23;23;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
+23;23;0;Cidade Baixa//home;15379;15379;0;7329;7329;0
+23;23;0;Cidade Baixa//work;0;0;0;-5433;-988;-4445
+23;23;0;Cidade Baixa//school;0;0;0;0;0;0
+23;23;0;Cidade Baixa//marketplace;0;0;0;0;0;0
+23;23;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
+23;23;0;Cidade Baixa//gas_station;0;0;0;0;0;0
+23;23;0;Farroupilha//home;961;961;0;414;414;0
+23;23;0;Farroupilha//work;0;0;0;-7958;-108;-7850
+23;23;0;Farroupilha//school;0;0;0;0;0;0
+23;23;0;Farroupilha//marketplace;0;0;0;0;0;0
+23;23;0;Farroupilha//pharmacy;0;0;0;0;0;0
+23;23;0;Farroupilha//gas_station;0;0;0;0;0;0
+23;23;0;Farroupilha//hospital;0;0;0;0;0;0
+23;23;0;Floresta//home;11596;11596;0;5266;5266;0
+23;23;0;Floresta//work;0;0;0;-3928;-1034;-2894
+23;23;0;Floresta//school;0;0;0;0;0;0
+23;23;0;Floresta//marketplace;0;0;0;0;0;0
+23;23;0;Floresta//pharmacy;0;0;0;0;0;0
+23;23;0;Floresta//gas_station;0;0;0;0;0;0
+23;23;0;Independência//home;8112;8112;0;3443;3443;0
+23;23;0;Independência//work;0;0;0;-6203;-998;-5205
+23;23;0;Independência//school;0;0;0;0;0;0
+23;23;0;Independência//marketplace;0;0;0;0;0;0
+23;23;0;Independência//pharmacy;0;0;0;0;0;0
+23;23;0;Independência//gas_station;0;0;0;0;0;0
+23;23;0;Independência//hospital;0;0;0;0;0;0
+23;23;0;Independência//shopping_mall;0;0;0;0;0;0
+23;23;0;Menino Deus//home;31650;31650;0;14272;14272;0
+23;23;0;Menino Deus//work;0;0;0;-6247;-1909;-4338
+23;23;0;Menino Deus//school;0;0;0;0;0;0
+23;23;0;Menino Deus//marketplace;0;0;0;0;0;0
+23;23;0;Menino Deus//pharmacy;0;0;0;0;0;0
+23;23;0;Menino Deus//gas_station;0;0;0;0;0;0
+23;23;0;Menino Deus//hospital;0;0;0;0;0;0
+23;23;0;Moinhos de Vento//home;11937;11937;0;5466;5466;0
+23;23;0;Moinhos de Vento//work;0;0;0;-5962;-2328;-3634
+23;23;0;Moinhos de Vento//school;0;0;0;0;0;0
+23;23;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
+23;23;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
+23;23;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
+23;23;0;Moinhos de Vento//hospital;0;0;0;0;0;0
+23;23;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
+23;23;0;Praia de Belas//home;2281;2281;0;1023;1023;0
+23;23;0;Praia de Belas//work;0;0;0;-6289;-134;-6155
+23;23;0;Praia de Belas//school;0;0;0;0;0;0
+23;23;0;Praia de Belas//marketplace;0;0;0;0;0;0
+23;23;0;Praia de Belas//pharmacy;0;0;0;0;0;0
+23;23;0;Praia de Belas//gas_station;0;0;0;0;0;0
+23;23;0;Praia de Belas//stadium;0;0;0;0;0;0
+23;23;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
+23;23;0;Rio Branco//home;17531;17531;0;7668;7668;0
+23;23;0;Rio Branco//work;0;0;0;-2871;-540;-2331
+23;23;0;Rio Branco//school;0;0;0;0;0;0
+23;23;0;Rio Branco//marketplace;0;0;0;0;0;0
+23;23;0;Rio Branco//pharmacy;0;0;0;0;0;0
+23;23;0;Rio Branco//gas_station;0;0;0;0;0;0
+23;23;0;Rio Branco//hospital;0;0;0;0;0;0
+23;23;0;Santa Cecília//home;5768;5768;0;2312;2312;0
+23;23;0;Santa Cecília//work;0;0;0;-6543;-1590;-4953
+23;23;0;Santa Cecília//school;0;0;0;0;0;0
+23;23;0;Santa Cecília//marketplace;0;0;0;0;0;0
+23;23;0;Santa Cecília//pharmacy;0;0;0;0;0;0
+23;23;0;Santa Cecília//gas_station;0;0;0;0;0;0
+23;23;0;Santa Cecília//hospital;0;0;0;0;0;0
+23;23;0;Santana//home;20723;20723;0;8992;8992;0
+23;23;0;Santana//work;0;0;0;-7614;-4637;-2977
+23;23;0;Santana//school;0;0;0;0;0;0
+23;23;0;Santana//marketplace;0;0;0;0;0;0
+23;23;0;Santana//pharmacy;0;0;0;0;0;0
+23;23;0;Santana//gas_station;0;0;0;0;0;0
+23;23;0;Santana//hospital;0;0;0;0;0;0

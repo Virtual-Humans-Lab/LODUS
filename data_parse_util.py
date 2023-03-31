@@ -125,6 +125,44 @@ def Generate_EnvironmentGraph(env_input):
     env.set_spawning_nodes()
     return env
 
+def parse_routines(data:dict):
+     
+    _global_actions = []
+    _actions = []
+    # Global Routines
+    for _ga in data.get('global_routine', {}):
+        if 'cycle_length' in _ga:
+            _global_actions.append((int(_ga['cycle_length']),TimeAction(_ga['type'], _ga['values'])))
+        elif 'frames' in _ga:
+            _global_actions.append(_ga['frames'], TimeAction(_ga['type'], _ga['values']))
+            #env.set_repeating_action(_ga['frames'], TimeAction(_ga['type'], _ga['values']))
+        elif 'cycle_step' in _ga:
+            pt = population.PopTemplate(
+                    sampled_properties=_ga["action"]['population_template']["sampled_characteristics"],
+                    traceable_properties=_ga["action"]['population_template']["traceable_characteristics"])
+            if isinstance(_ga['cycle_step'], list):
+                _global_actions.append((_ga['cycle_step'], 
+                                        TimeAction(action_type=_ga['action']['type'], 
+                                                    pop_template=pt,
+                                                    values=_ga['action']['values'])))
+            else:
+                _global_actions.append((int(_ga['cycle_step']), 
+                                        TimeAction(action_type=_ga['action']['type'], 
+                                                    pop_template=pt,
+                                                    values=_ga['action']['values'])))
+    # EnvNode Routines
+    for _node in data.get('routines', []):
+        for _a in data['routines'][_node]:
+            pt = population.PopTemplate(
+                    sampled_properties=_a["action"]['population_template']["sampled_characteristics"],
+                    traceable_properties=_a["action"]['population_template']["traceable_characteristics"])
+            action = TimeAction(action_type=_a["action"]['type'], 
+                                values=_a["action"]['values'], 
+                                pop_template=pt) 
+            _actions.append((_a["cycle_step"], action))
+
+    return _global_actions, _actions
+
 def generate_EnvironmentGraph(env_input):
 
     if env_input == 'dummy':

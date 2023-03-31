@@ -2,7 +2,7 @@
 import sys
 sys.path.append('/../../')
 from environment import EnvironmentGraph, EnvNode, EnvRegion
-from VaccineLocalPlugin import VaccinePlugin
+from time_actions.vaccine_local_plugin import VaccinePlugin
 #import VaccineLocalPlugin
 #from VaccineLocalPlugin import VaccinePlugin 
 from logger_plugin import LoggerPlugin

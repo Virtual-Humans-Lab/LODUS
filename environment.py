@@ -620,10 +620,10 @@ class EnvironmentGraph():
         self.next_frame_queue.clear()
         return action_list
 
-    def process_repeating_global_actions(self, hour):
+    def process_repeating_global_actions(self, global_action_list, hour):
         action_list = []
         # do repeating actions
-        for rga in self.repeating_global_actions:
+        for rga in global_action_list:
             if (type(rga[0]) is int and hour % rga[0] == 0) or (type(rga[0]) is list and hour in rga[0]):
                 for region in self.region_list:
                     for node in region.node_list:
@@ -676,7 +676,7 @@ class EnvironmentGraph():
         for _lp in self.loaded_plugins:
             _lp.update_time_step(cycle_step, simulation_step)
 
-        actions = self.generate_action_list(cycle_step)
+        actions = self.generate_action_list(cycle_step, simulation_step)
         simplified_actions   = self.simplify_action_list(actions, cycle_step, simulation_step)
         #balanced_actions     = self.balance_action_list(simplified_actions)
 
@@ -694,19 +694,37 @@ class EnvironmentGraph():
         self.set_frame_origin_nodes()
 
 
-    def generate_action_list(self, hour):
+    def generate_action_list(self, cycle_step, simulation_step):
         """Generates the TimeAction list for every EnvRegion, for a given time slot and the Repeating Global Actions for this hour."""
         action_list = []
 
+        # Actions queued as first
         if self.queued_action_priority == 'first':
             action_list += self.process_queued_actions()
+        
+        # Default Repeating Global Actions + Routine Plugins Start Global Actions
+        for rp in self.loaded_routine_plugins:
+            action_list.extend(self.process_repeating_global_actions(rp.start_of_step_global_actions, cycle_step))
+        action_list += self.process_repeating_global_actions(self.repeating_global_actions, cycle_step)
 
-        action_list += self.process_repeating_global_actions(hour)
-        action_list += self.process_routines(hour)
+        # Routine Plugins Start Actions
+        for rp in self.loaded_routine_plugins:
+            action_list.extend(rp.process_start_of_step_actions(cycle_step=cycle_step, simulation_step=simulation_step))
 
+        # Default Routines
+        action_list += self.process_routines(cycle_step)
+
+        # Routine Plugins End Actions
+        for rp in self.loaded_routine_plugins:
+            action_list.extend(rp.process_end_of_step_actions(cycle_step=cycle_step, simulation_step=simulation_step))
+
+        # Routine Plugins End Global Actions
+        for rp in self.loaded_routine_plugins:
+            action_list.extend(self.process_repeating_global_actions(rp.end_of_step_global_actions, cycle_step))
+
+        # Actions queued as last
         if self.queued_action_priority == 'last':
             action_list += self.process_queued_actions()
-
 
         return action_list
 
@@ -1047,12 +1065,18 @@ class TimeActionPlugin():
     
     def stop_logger(self,logger):    
         raise NotImplementedError("SubClass should implement the \"stop_logger\"  method")
+    
+    def unload_plugin(self):
+        pass
 
 class RoutinePlugin():
     """
     """
     def __init__(self) -> None:
-        pass
+        self.start_of_step_global_actions = []
+        self.start_of_step_actions = []
+        self.end_of_step_global_actions = []
+        self.end_of_step_actions = []
 
     def process_start_of_step_actions(self, cycle_step, simulation_step):
         raise NotImplementedError("SubClass should implement the \"process_start_of_step_actions\"  method" + str(type(self)))

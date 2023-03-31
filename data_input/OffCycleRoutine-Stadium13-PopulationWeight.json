@@ -1,0 +1,25 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Praia de Belas//stadium": [
+      {
+        "cycle_step": 19,
+        "action": {
+          "name": "gather_population_to_stadium",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Praia de Belas",
+            "node": "stadium",
+            "quantity": 100000,
+            "percentage_per_search": 1.0,
+            "weighting_mode": 2
+          }
+        }
+      }
+    ]
+  }
+}

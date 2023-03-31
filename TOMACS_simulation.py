@@ -1,31 +1,32 @@
 #encoding: utf-8
 import sys
 
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 import argparse
 import time
 from pathlib import Path
 
-from CustomTimeActionPlugin import CustomTimeActionPlugin
-from GatherPopulationPlugin import GatherPopulationPlugin
-from LevyWalkPlugin import LevyWalkPlugin
-from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from Loggers.characteristic_change_logger import CharacteristicChangeLogger
-from Loggers.movement_displacement_logger import MovementDisplacementLogger
-from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from Loggers.population_count_logger import (PopulationCountLogger,
+from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from loggers.characteristic_change_logger import CharacteristicChangeLogger
+from loggers.movement_displacement_logger import MovementDisplacementLogger
+from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from Loggers.vaccine_level_logger import VaccineLevelLogger
-from MovePopulationPlugin import MovePopulationPlugin
-from NewInfectionPlugin import NewInfectionPlugin
-from NodeDensityPlugin import NodeDensityPlugin
-from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from ReturnToPrevious import ReturnToPreviousPlugin
-from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
-from SendPopulationBackPlugin import SendPopulationBackPlugin
-from VaccineLocalPlugin import VaccinePlugin
-
-from Routines.OffCycleRoutinePlugin import OffCycleRoutinePlugin
+from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from loggers.vaccine_level_logger import VaccineLevelLogger
+from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
+from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
+from time_actions.gather_population_plugin import GatherPopulationPlugin
+from time_actions.levy_walk_plugin import LevyWalkPlugin
+from time_actions.move_population_plugin import MovePopulationPlugin
+from time_actions.new_infection_plugin import NewInfectionPlugin
+from time_actions.node_density_plugin import NodeDensityPlugin
+from time_actions.return_population_home_plugin import ReturnPopulationHomePlugin
+from time_actions.return_to_previous_plugin import ReturnToPreviousPlugin
+from time_actions.reverse_social_isolation_plugin import \
+    ReverseSocialIsolationPlugin
+from time_actions.send_population_back_plugin import SendPopulationBackPlugin
+from time_actions.vaccine_local_plugin import VaccinePlugin
 
 import environment
 import population
@@ -117,9 +118,9 @@ if 'levy_walk_plugin' in env_graph.experiment_config:
 '''
 Routine Plugins
 '''
-
-off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
-env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
+if 'off_cycle_routine_plugin' in env_graph.experiment_config:
+    off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
+    env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
 
 '''
 Logging
@@ -173,6 +174,10 @@ od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_pr
 # Movement Displacement Logger
 displacement_logger = MovementDisplacementLogger(f'{env_graph.experiment_name}')
 
+# Levy Sample Logger
+levy_sample_logger = None
+if levy_walk is not None:
+    levy_sample_logger = LevyWalkSampleLogger(f'{env_graph.experiment_name}')
 # Vaccine Logger
 #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
 
@@ -186,6 +191,7 @@ env_graph.LoadLoggerPlugin(blob_count_logger)
 # env_graph.LoadLoggerPlugin(traceable_logger)
 # env_graph.LoadLoggerPlugin(vacc_logger)
 env_graph.LoadLoggerPlugin(displacement_logger)
+if levy_sample_logger is not None: env_graph.LoadLoggerPlugin(levy_sample_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
 env_graph.start_logging()
@@ -205,30 +211,6 @@ for i in range(simulation_steps):
     # These are defined in the input environment descriptor
     env_graph.update_time_step(i % cycle_length, i)
 
-    # if i == 19 and len(env_graph.region_list) == 94:
-    #     new_action_values = {}
-    #     new_action_type = 'gather_population'
-    #     new_action_values['region'] = "Farrapos"
-    #     new_action_values['node'] = "stadium"
-    #     new_action_values['quantity'] = 300000
-    #     new_action_values['weighting_mode'] = 2
-    #     pop_template = PopTemplate()
-    #     new_action = environment.TimeAction(action_type = new_action_type,
-    #                                         pop_template=pop_template, 
-    #                                         values = new_action_values)
-    #     env_graph.direct_action_invoke(new_action, i % cycle_length, i)
-    # elif i == 19 and len(env_graph.region_list) == 13:
-    #     new_action_values = {}
-    #     new_action_type = 'gather_population'
-    #     new_action_values['region'] = "Praia de Belas"
-    #     new_action_values['node'] = "stadium"
-    #     new_action_values['quantity'] = 100000
-    #     new_action_values['weighting_mode'] = 2
-    #     pop_template = PopTemplate()
-    #     new_action = environment.TimeAction(action_type = new_action_type,
-    #                                         pop_template=pop_template, 
-    #                                         values = new_action_values)
-    #     env_graph.direct_action_invoke(new_action, i % cycle_length, i)
     # Log current simulation step
     env_graph.log_simulation_step()
     
