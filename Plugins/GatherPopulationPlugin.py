@@ -53,7 +53,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         self.graph = env_graph
         self.set_pair('gather_population', self.gather_population)
 
-        if "gather_population" not in self.graph.experiment_config:
+        if "gather_population_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'gather_population' key. Using an empty entry (default plugin values)")
 
         # Loads experiment configuration, if any

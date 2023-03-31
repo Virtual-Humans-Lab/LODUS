@@ -2,36 +2,36 @@
 import sys
 
 sys.path.append('./Plugins/')
-from Loggers.characteristic_change_logger import CharacteristicChangeLogger
-from Loggers.od_matrix_logger import ODMovementRecordKey, ODMatrixLogger
-from Loggers.vaccine_level_logger import VaccineLevelLogger
-from Loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
-from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from Loggers.movement_displacement_logger import MovementDisplacementLogger
-
 import argparse
-import environment
-from util import *
-from data_parse_util import *
-import population
-
-from random_inst import FixedRandom
-
-from MovePopulationPlugin import MovePopulationPlugin
-from GatherPopulationPlugin import GatherPopulationPlugin
-from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
-from SendPopulationBackPlugin import SendPopulationBackPlugin
-from ReturnToPrevious import ReturnToPreviousPlugin
-from LevyWalkPlugin import LevyWalkPlugin
-from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
-from VaccineLocalPlugin import VaccinePlugin
-from NewInfectionPlugin import NewInfectionPlugin
-from NodeDensityPlugin import NodeDensityPlugin
-from CustomTimeActionPlugin import CustomTimeActionPlugin
-
+import time
 from pathlib import Path
 
-import time
+from CustomTimeActionPlugin import CustomTimeActionPlugin
+from GatherPopulationPlugin import GatherPopulationPlugin
+from LevyWalkPlugin import LevyWalkPlugin
+from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from Loggers.characteristic_change_logger import CharacteristicChangeLogger
+from Loggers.movement_displacement_logger import MovementDisplacementLogger
+from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from Loggers.population_count_logger import (PopulationCountLogger,
+                                             PopulationCountRecordKey)
+from Loggers.vaccine_level_logger import VaccineLevelLogger
+from MovePopulationPlugin import MovePopulationPlugin
+from NewInfectionPlugin import NewInfectionPlugin
+from NodeDensityPlugin import NodeDensityPlugin
+from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
+from ReturnToPrevious import ReturnToPreviousPlugin
+from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
+from SendPopulationBackPlugin import SendPopulationBackPlugin
+from VaccineLocalPlugin import VaccinePlugin
+
+from Routines.OffCycleRoutinePlugin import OffCycleRoutinePlugin
+
+import environment
+import population
+from data_parse_util import *
+from random_inst import FixedRandom
+from util import *
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
@@ -65,25 +65,26 @@ simulation_steps = cycles * cycle_length
 env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
 print("Creating experiment:", env_graph.experiment_name)
 print("EnvNode Count", len(env_graph.node_list))
+
 '''
-Load Plugins Examples
+TimeAction Plugins
 '''
 
 move_population_plugin = MovePopulationPlugin(env_graph)
 env_graph.LoadPlugin(move_population_plugin)
 
 gather_pop = None
-if 'gather_population' in env_graph.experiment_config:
+if 'gather_population_plugin' in env_graph.experiment_config:
     gather_pop = GatherPopulationPlugin(env_graph)
     env_graph.LoadPlugin(gather_pop)
 
 return_pop_home = None
-if 'return_population_home' in env_graph.experiment_config:
+if 'return_population_home_plugin' in env_graph.experiment_config:
     return_pop_home = ReturnPopulationHomePlugin(env_graph)
     env_graph.LoadPlugin(return_pop_home)
 
 send_pop_back = None
-if 'send_population_back' in env_graph.experiment_config:
+if 'send_population_back_plugin' in env_graph.experiment_config:
     send_pop_back = SendPopulationBackPlugin(env_graph)
     env_graph.LoadPlugin(send_pop_back)
 
@@ -112,6 +113,13 @@ if 'levy_walk_plugin' in env_graph.experiment_config:
 
 #infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
 #env_graph.LoadPlugin(infection_plugin)
+
+'''
+Routine Plugins
+'''
+
+off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
+env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
 
 '''
 Logging

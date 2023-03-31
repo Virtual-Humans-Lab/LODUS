@@ -1,4 +1,3 @@
-# LODUS core
 import sys
 sys.path.append("/../../")
 from environment import EnvironmentGraph, EnvNode, EnvRegion

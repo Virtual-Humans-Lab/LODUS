@@ -519,7 +519,7 @@ class EnvironmentGraph():
         
         self.loaded_plugins: list[TimeActionPlugin] = []
         self.loaded_logger_plugins: list[logger_plugin.LoggerPlugin] = []
-
+        self.loaded_routine_plugins: list[RoutinePlugin] = []
         self.global_actions = set()
 
         # repeating actions are a tuple of (cycle_length or frame_list, time_action)
@@ -838,6 +838,9 @@ class EnvironmentGraph():
             if isinstance(p,_type): return p
         return None
 
+    def LoadRoutinePlugin(self, plugin:RoutinePlugin):
+        self.loaded_routine_plugins.append(plugin)
+
     ## ----------- Logging Functions ----------- ##
 
     def LoadLoggerPlugin(self, plugin:LoggerPlugin):
@@ -935,8 +938,6 @@ class EnvironmentGraph():
             i+=1
 
     ## time action functions
-
-    
         
     def set_spawning_nodes(self):
         for node in self.node_list:
@@ -1047,6 +1048,21 @@ class TimeActionPlugin():
     def stop_logger(self,logger):    
         raise NotImplementedError("SubClass should implement the \"stop_logger\"  method")
 
+class RoutinePlugin():
+    """
+    """
+    def __init__(self) -> None:
+        pass
+
+    def process_start_of_step_actions(self, cycle_step, simulation_step):
+        raise NotImplementedError("SubClass should implement the \"process_start_of_step_actions\"  method" + str(type(self)))
+    
+    def process_end_of_step_actions(self, cycle_step, simulation_step):
+        raise NotImplementedError("SubClass should implement the \"process_end_of_step_actions\"  method" + str(type(self)))
+
+    def update_time_step(self, cycle_step, simulation_step):
+        raise NotImplementedError("SubClass should implement the \"update_time_step\"  method" + str(type(self)))
+    
 
 class Routine():
     """Describes a mapping of time slot -> TimeAction.

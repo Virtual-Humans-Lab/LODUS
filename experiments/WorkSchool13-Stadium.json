@@ -3,7 +3,7 @@
         "__comment1__": "Files will be loaded from the 'data_input' folder",
         "environment_file": "Environment-PortoAlegre13RegionsDefault.json",
         "population_file": "Population-PortoAlegre13RegionsDefault.json",
-        "routine_file": "Routine-Poa13-LevyWalk-Workers.json"
+        "routine_file": "Routine-Poa13-LevyWalk-WorkSchool.json"
     },
     "levy_walk_plugin": {
         "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",
@@ -18,5 +18,9 @@
     },
     "send_population_back_plugin": {},
     "gather_population_plugin": {},
-    "return_population_home_plugin": {}
+    "off_cycle_routine_plugin": {
+        "__comment1__": "Files will be loaded from the 'data_input' folder",
+        "start_of_step_routine_files": ["OffCycleRoutine-Stadium13.json"],
+        "end_of_step_routine_files": []
+    }
 }
