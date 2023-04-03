@@ -577,7 +577,7 @@ class EnvironmentGraph():
 
         # Checks if the distance was calculated previously
         if unique_name in self.node_distances[dist_type]:
-            self.node_distances[dist_type][unique_name]
+            return self.node_distances[dist_type][unique_name]
         
         node_dist = EnvNodeDistances(unique_name)
         node_pos = target_node.long_lat

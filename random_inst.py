@@ -1,11 +1,14 @@
 import random
 
+import numpy as np
+
 
 class FixedRandom():
-    instance = None
+    instance:random.Random = None # type: ignore
 
-    def __init__(self, _seed = None):
+    def __init__(self, seed = None, numpy_seed: int = 0):
         FixedRandom.instance = random.Random()
-        if _seed is not None:
-            FixedRandom.instance.seed(_seed)
+        if seed is not None:
+            FixedRandom.instance.seed(seed)
+        np.random.seed(seed=numpy_seed)
 

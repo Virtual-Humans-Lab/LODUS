@@ -46,8 +46,8 @@ arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\V
 arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
-FixedRandom()
-np.random.seed(seed=0)
+FixedRandom(seed=0, numpy_seed=0)
+
 '''
 Data Loading
 '''
@@ -192,8 +192,8 @@ Simulation
 env_graph.LoadLoggerPlugin(pop_count_logger)
 env_graph.LoadLoggerPlugin(od_logger)
 env_graph.LoadLoggerPlugin(blob_count_logger)
-# env_graph.LoadLoggerPlugin(traceable_logger)
-# env_graph.LoadLoggerPlugin(vacc_logger)
+# # env_graph.LoadLoggerPlugin(traceable_logger)
+# # env_graph.LoadLoggerPlugin(vacc_logger)
 env_graph.LoadLoggerPlugin(displacement_logger)
 if levy_sample_logger is not None: env_graph.LoadLoggerPlugin(levy_sample_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))

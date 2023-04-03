@@ -2,6 +2,8 @@ import copy
 import sys
 from typing import Optional
 
+from random_inst import FixedRandom
+
 sys.path.append('../')
 
 import random
@@ -87,6 +89,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.sublist_count = []
 
         self.sampled_distances = []
+        self.random = FixedRandom.instance
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -138,9 +141,10 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         for i in range(packets):
             
             # Reduces the chance for a levy walk to occur bor each packet
-            if _mov_probability < random.random():
+            _random_number = self.random.random()
+            if _mov_probability < _random_number:
                 continue
-            
+
             sampled_dist = self.levy_sample(location=_dist_location, scale=_dist_scale)
             self.sampled_distances.append(sampled_dist)
             
@@ -158,7 +162,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.graph.get_region_by_name(target_region)
             target_node = target_region.get_node_by_name(target_node)
-
+            
             # Creates a Move Population action from the Acting Nodo to the Target Node
             new_action_type = 'move_population'
             new_action_values = {'origin_region': acting_region.name,
@@ -257,7 +261,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             return None
 
         # Gets a random valid entry in the target bucket and returns it
-        random_index = random.randint(0, len(target_bucket)-1)
+        random_index = self.random.randint(0, len(target_bucket)-1)
         return target_bucket[random_index]
     
     def binary_search(self, distances_dict:list[tuple[float, str]], distance: float) -> int:

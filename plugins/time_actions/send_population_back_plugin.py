@@ -32,6 +32,9 @@ class SendPopulationBackPlugin(environment.TimeActionPlugin):
         if "send_population_back_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'send_population_back' key.")
 
+        # Performance log for quantity of sub-actions
+        self.sublist_count = []
+
     def update_time_step(self, cycle_step:int, simulation_step:int):
         return #super().update_time_step(cycle_step, simulation_step)
     
@@ -77,4 +80,11 @@ class SendPopulationBackPlugin(environment.TimeActionPlugin):
             sub_list.append(new_action)
         
         self.add_execution_time(time.perf_counter() - start_time)
+        self.sublist_count.append(len(sub_list))
         return sub_list
+    
+    def print_execution_time_data(self):
+        super().print_execution_time_data()
+        print("---Total subactions count:", sum(self.sublist_count))
+        if len(self.sublist_count) > 0:
+            print("---Average subaction count:", sum(self.sublist_count)/len(self.sublist_count))
