@@ -175,14 +175,14 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         random.shuffle(weight_list)
 
         # Searches the remaining EnvNodes. 
-        # The indexes searched are incremented based on self.percentage_per_search
+        # The indexes searched are incremented based on _percentage_per_search
         # Search stops if the population_available is grater then requested in values
         # Or if the last node is reached (not enough population)
         weight_and_available:list[tuple[environment.EnvNode, float, int]] = []
         population_available = 0
         _start_index = 0
         _max_index = len(weight_list)
-        _index_increment = math.ceil(_max_index * self.percentage_per_search)
+        _index_increment = math.ceil(_max_index * _percentage_per_search)
 
         while population_available < quantity:
             # Searches a segment of the EnvNodes

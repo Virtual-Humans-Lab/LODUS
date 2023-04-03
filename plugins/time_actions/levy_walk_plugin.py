@@ -79,7 +79,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         else:
             self.bucket_size:float = self.config.get("distance_bucket_size", 500)
             self.distribution_scale:float = self.config.get("distribution_scale", 200.0)
-        
+
         # Distaces buckets from one EnvNode to others
         self.dist_buckets:dict[int, list[tuple[float,str]]] = {}
 
@@ -114,7 +114,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         _mov_probability:float = values.get("movement_probability", self.movement_probability)
         _dist_location:float = values.get("distribution_location", self.distribution_location)
         _dist_scale:float = values.get("distribution_scale", self.distribution_scale)
-        
+    
         if _use_buckets:
             distances = self.get_node_distance_bucket(acting_node, self.graph)
         else:
@@ -140,10 +140,10 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             # Reduces the chance for a levy walk to occur bor each packet
             if _mov_probability < random.random():
                 continue
-        
+            
             sampled_dist = self.levy_sample(location=_dist_location, scale=_dist_scale)
             self.sampled_distances.append(sampled_dist)
-
+            
             if _use_buckets:
                 selected = self.bucket_search(distances, sampled_dist)
                 if selected == None:
@@ -181,12 +181,13 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
     def get_node_distance_bucket(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
         '''Gets distances in buckets (based on overall distance)'''
         unique_name = target_node.get_unique_name()
+        
         # Checks if the distance was calculated previously
         if unique_name in self.dist_buckets:
             return self.dist_buckets[unique_name].copy()
         
         # Gets distances in buckets (based on overall distance)
-        distance_list = self.graph.get_node_distances(target_node).get_distance_tuples()
+        distance_list = self.graph.get_node_distances(target_node, self.distance_type).get_distance_tuples()
         max_bucket = int(distance_list[-1][1] // self.bucket_size)
         self.dist_buckets[unique_name] = {}
         for i in range(max_bucket+1):

@@ -12,17 +12,16 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 
-def movement_displacement_histogram(experiment_name:str, bin_size:float = 0.005, y_limit:int | None = None):
+def movement_displacement_histogram(experiment_name:str, bin_size:float = 500, 
+                                    x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Experiment Movement Displacement:"
     dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
-    output_path = dir_path / "movement_displacement"
+    output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
     output_path.mkdir(parents=True, exist_ok=True)
 
     # Load dataframs from CSVs
     df_movement = pd.read_csv(dir_path / "movement_counter.csv", sep=';')
-    # df_movement = df_movement.set_axis(["distance", "frequency"], axis=1)
     df_group_movement = pd.read_csv(dir_path / "group_movement_counter.csv", sep=';')
-    # df_group_movement = df_group_movement.set_axis(["distance", "frequency"], axis=1)
 
     # Creates lists using the data (column_0 = distance; column_1 = frequency)
     movement_list = []
@@ -38,7 +37,9 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 0.005,
     bins = np.arange(0.0, max_distance, bin_size)
     s = sns.histplot(data=movement_data, bins=bins) # type: ignore
     fig_path = output_path / f"movement_distribution_{bin_size}.png"
-    print(__header, "Saving movement displacement histogram at:", output_path / f"movement_distribution_{bin_size}.png")
+    print(__header, "Saving movement displacement histogram at:\n\t", output_path / f"movement_distribution_{bin_size}.png")
+    if x_limit is not None: plt.xlim(0, x_limit)
+    if y_limit is not None: plt.xlim(0, y_limit)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -48,14 +49,17 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 0.005,
     bins = np.arange(0.0, max_distance, bin_size)
     s = sns.histplot(data=group_movement_data, bins=bins) # type: ignore
     fig_path = output_path / f"group_movement_distribution_{bin_size}.png"
-    print(__header, "Saving group movement displacement histogram at:", output_path / f"group_movement_distribution_{bin_size}.png")
+    print(__header, "Saving group movement displacement histogram at:\n\t", output_path / f"group_movement_distribution_{bin_size}.png")
+    if x_limit is not None: plt.xlim(0, x_limit)
+    if y_limit is not None: plt.xlim(0, y_limit)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
-def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005, y_limit:int | None = None):
+def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005, 
+                                    x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Experiment Movement Displacement:"
     dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
-    output_path = dir_path / "movement_displacement"
+    output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
     dir_path.mkdir(parents=True, exist_ok=True)
 
     xaxis = dict(tickmode = 'linear',
@@ -81,9 +85,10 @@ def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005,
     # Creates and save html
     fig = px.bar(df, y = 0, title=f'Movement displacement data - {experiment_name}')
     fig.update_layout(xaxis = xaxis, hovermode="x")
-    # fig.show()
+    if x_limit is not None: fig.update_xaxes(range = [0, x_limit])
+    if y_limit is not None: fig.update_xaxes(range = [0, y_limit])
     fig.write_html(output_path / f"movement_distance_bar_chart_{bin_size}.html")
-    print(__header, "Saving movement displacement linechart at:", output_path / f"group_movement_distribution_{bin_size}.png")
+    print(__header, "Saving movement displacement linechart at:\n\t", output_path / f"movement_distance_bar_chart_{bin_size}.png")
     
     # Repeats process for the group movement data
     df_group_movement = pd.read_csv(dir_path / "group_movement_counter.csv", sep=';')
@@ -98,16 +103,18 @@ def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005,
     df = pd.DataFrame.from_dict(data, orient='index')
     fig = px.bar(df, title=f'Group movement displacement data - {experiment_name}')
     fig.update_layout(xaxis = xaxis, hovermode="x")
-    # fig.show()
+    if x_limit is not None: fig.update_xaxes(range = [0, x_limit])
+    if y_limit is not None: fig.update_xaxes(range = [0, y_limit])
     fig.write_html(output_path / f"group_movement_distance_bar_chart_{bin_size}.html")
-    print(__header, "Saving group movement displacement linechart at:", output_path / f"group_movement_distribution_{bin_size}.png")
+    print(__header, "Saving group movement displacement linechart at:\n\t", output_path / f"group_movement_distance_bar_chart_{bin_size}.png")
     
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Create Node Distante Distribution Figure.")
     arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Name (same as experiment configuration file)')
-    arg_parser.add_argument('--b', metavar="B", type=float, default = 0.005, help='Bin Size')
+    arg_parser.add_argument('--b', metavar="B", type=float, default = 500, help='Bin Size')
+    arg_parser.add_argument('--x', metavar="X", type=float, default = None, help='X-Limit')
     arg_parser.add_argument('--y', metavar="Y", type=float, default = None, help='Y-Limit')
     args = vars(arg_parser.parse_args())
-    movement_displacement_histogram(experiment_name=args['e'], bin_size=args['b'], y_limit=args['y'])
-    movement_displacement_linechart(experiment_name=args['e'], bin_size=args['b'], y_limit=args['y'])
+    movement_displacement_histogram(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
+    movement_displacement_linechart(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])

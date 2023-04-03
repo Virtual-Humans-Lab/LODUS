@@ -33,6 +33,7 @@ import population
 from data_parse_util import *
 from random_inst import FixedRandom
 from util import *
+import numpy as np
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
@@ -46,6 +47,7 @@ arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\S
 args = vars(arg_parser.parse_args())
 
 FixedRandom()
+np.random.seed(seed=0)
 '''
 Data Loading
 '''
@@ -89,8 +91,10 @@ if 'send_population_back_plugin' in env_graph.experiment_config:
     send_pop_back = SendPopulationBackPlugin(env_graph)
     env_graph.LoadPlugin(send_pop_back)
 
-return_to_prev = ReturnToPreviousPlugin(env_graph)
-env_graph.LoadPlugin(return_to_prev)
+return_to_previous = None
+if 'return_to_previous' in env_graph.experiment_config:
+    return_to_previous = ReturnToPreviousPlugin(env_graph)
+    env_graph.LoadPlugin(return_to_previous)
 
 levy_walk = None
 if 'levy_walk_plugin' in env_graph.experiment_config:
@@ -232,7 +236,7 @@ if levy_walk is not None: levy_walk.print_execution_time_data()
 if gather_pop is not None: gather_pop.print_execution_time_data()
 if return_pop_home is not None: return_pop_home.print_execution_time_data()
 if send_pop_back is not None: send_pop_back.print_execution_time_data()
-if return_to_prev is not None: return_to_prev.print_execution_time_data()
+if return_to_previous is not None: return_to_previous.print_execution_time_data()
 if move_population_plugin is not None: move_population_plugin.print_execution_time_data()
 
 print("Total Simulation time")

@@ -540,6 +540,7 @@ class EnvironmentGraph():
 
         # Distances:
         # self.node_distances:dict[str,list[tuple[float,str]]] = {}
+        self.default_distance_type: util.DistanceType = DistType.METRES_PYPROJ
         self.node_distances:dict[util.DistanceType, dict[str, EnvNodeDistances]] = {t:{} for t in util.DistanceType}
 
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
@@ -584,8 +585,6 @@ class EnvironmentGraph():
             if unique_name == other.get_unique_name():
                 continue
             node_dist.distance_to_others[other.get_unique_name()] = self.__get_distance(node_pos, other.long_lat, dist_type)
-            #node_dist.distance_to_others.append((self.__get_distance(node_pos, other.long_lat, dist_type), other.get_unique_name()))
-        #node_dist.distance_to_others = sorted(node_dist.distance_to_others)
 
         self.node_distances[dist_type][unique_name] = node_dist
         return self.node_distances[dist_type][unique_name]

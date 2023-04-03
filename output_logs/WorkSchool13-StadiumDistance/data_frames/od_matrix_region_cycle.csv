@@ -1,170 +1,170 @@
 ﻿;Cycle;Origin;Destination;Total;age: [children];age: [adults];age: [elders];occupation: [student];occupation: [worker]
-0;0;Azenha;Azenha;5121;1100;1491;479;3100;2021
-1;0;Azenha;Bom Fim;1001;150;281;131;450;551
-2;0;Azenha;Centro Histórico;6345;0;3275;1505;250;6095
-3;0;Azenha;Cidade Baixa;2205;50;960;422;500;1705
-4;0;Azenha;Farroupilha;650;100;269;130;150;500
-5;0;Azenha;Floresta;578;50;282;113;100;478
-6;0;Azenha;Independência;776;100;231;114;400;376
-7;0;Azenha;Menino Deus;7810;1200;2745;1284;3300;4510
-8;0;Azenha;Moinhos de Vento;425;50;172;88;100;325
-9;0;Azenha;Praia de Belas;8478;2309;3538;1660;1557;3647
-10;0;Azenha;Rio Branco;1054;150;337;184;400;654
-11;0;Azenha;Santa Cecília;776;100;286;144;250;526
-12;0;Azenha;Santana;6259;1100;1596;806;3400;2859
-13;0;Bom Fim;Azenha;967;150;267;122;450;517
-14;0;Bom Fim;Bom Fim;1508;0;625;346;400;1108
-15;0;Bom Fim;Centro Histórico;1728;150;527;236;850;878
-16;0;Bom Fim;Cidade Baixa;1166;50;514;206;350;816
-17;0;Bom Fim;Farroupilha;2750;100;1211;712;200;2550
-18;0;Bom Fim;Floresta;2362;350;591;223;1500;862
-19;0;Bom Fim;Independência;2704;250;876;447;950;1754
-20;0;Bom Fim;Menino Deus;1240;100;407;205;500;740
-21;0;Bom Fim;Moinhos de Vento;1104;100;392;251;300;804
-22;0;Bom Fim;Praia de Belas;450;200;68;48;300;150
-23;0;Bom Fim;Rio Branco;5716;300;2816;1398;650;5066
-24;0;Bom Fim;Santa Cecília;1354;200;329;162;700;654
-25;0;Bom Fim;Santana;1251;100;486;285;300;951
-26;0;Centro Histórico;Azenha;5417;0;2780;1258;250;5167
-27;0;Centro Histórico;Bom Fim;1599;148;473;213;819;780
-28;0;Centro Histórico;Centro Histórico;17960;3762;1873;444;16065;1895
-29;0;Centro Histórico;Cidade Baixa;6830;1100;1097;419;5140;1690
-30;0;Centro Histórico;Farroupilha;2120;100;869;430;400;1720
-31;0;Centro Histórico;Floresta;1712;200;648;331;438;1274
-32;0;Centro Histórico;Independência;1625;50;772;369;250;1375
-33;0;Centro Histórico;Menino Deus;2192;98;833;339;747;1445
-34;0;Centro Histórico;Moinhos de Vento;1268;100;494;226;300;968
-35;0;Centro Histórico;Praia de Belas;27020;4271;12377;5951;4309;13696
-36;0;Centro Histórico;Rio Branco;1431;200;614;202;541;890
-37;0;Centro Histórico;Santa Cecília;1534;150;526;246;500;1034
-38;0;Centro Histórico;Santana;1210;98;418;222;428;782
-39;0;Cidade Baixa;Azenha;2138;50;946;399;484;1654
-40;0;Cidade Baixa;Bom Fim;1161;50;518;206;338;823
-41;0;Cidade Baixa;Centro Histórico;6875;1070;1259;537;4795;2080
-42;0;Cidade Baixa;Cidade Baixa;9746;1884;1792;625;6897;2849
-43;0;Cidade Baixa;Farroupilha;1900;0;880;359;300;1600
-44;0;Cidade Baixa;Floresta;822;148;288;153;236;586
-45;0;Cidade Baixa;Independência;1512;100;544;273;450;1062
-46;0;Cidade Baixa;Menino Deus;4115;544;1417;656;1745;2370
-47;0;Cidade Baixa;Moinhos de Vento;609;48;241;111;148;461
-48;0;Cidade Baixa;Praia de Belas;9687;1723;3848;1732;2877;3163
-49;0;Cidade Baixa;Rio Branco;696;50;224;96;348;348
-50;0;Cidade Baixa;Santa Cecília;800;0;361;167;138;662
-51;0;Cidade Baixa;Santana;1003;98;413;221;198;805
-52;0;Farroupilha;Azenha;421;99;145;77;141;280
-53;0;Farroupilha;Bom Fim;1242;100;479;303;192;1050
-54;0;Farroupilha;Centro Histórico;1286;100;445;233;388;898
-55;0;Farroupilha;Cidade Baixa;1038;0;430;177;276;762
-56;0;Farroupilha;Farroupilha;75;0;34;20;0;75
-57;0;Farroupilha;Floresta;382;249;69;35;249;133
-58;0;Farroupilha;Independência;546;0;169;92;283;263
-59;0;Farroupilha;Menino Deus;1653;148;640;320;473;1180
-60;0;Farroupilha;Moinhos de Vento;444;149;56;37;328;116
-61;0;Farroupilha;Praia de Belas;6973;20;3546;1811;216;6757
-62;0;Farroupilha;Rio Branco;1010;246;130;74;761;249
-63;0;Farroupilha;Santa Cecília;443;50;168;91;193;250
-64;0;Farroupilha;Santana;1137;339;111;34;1000;137
-65;0;Floresta;Azenha;537;50;253;100;100;437
-66;0;Floresta;Bom Fim;2365;350;592;223;1500;865
-67;0;Floresta;Centro Histórico;2153;200;877;446;450;1703
-68;0;Floresta;Cidade Baixa;832;150;285;153;250;582
-69;0;Floresta;Farroupilha;450;250;105;43;250;200
-70;0;Floresta;Floresta;8224;2100;2158;1002;4400;3824
-71;0;Floresta;Independência;2458;500;537;308;1450;1008
-72;0;Floresta;Menino Deus;830;0;365;145;250;580
-73;0;Floresta;Moinhos de Vento;2507;300;1096;536;700;1807
-74;0;Floresta;Praia de Belas;6494;1889;2649;1335;1415;2329
-75;0;Floresta;Rio Branco;1682;250;426;194;950;732
-76;0;Floresta;Santa Cecília;758;200;225;85;450;308
-77;0;Floresta;Santana;1504;350;333;171;850;654
-78;0;Independência;Azenha;784;100;238;113;400;384
-79;0;Independência;Bom Fim;2715;250;883;447;950;1765
-80;0;Independência;Centro Histórico;2458;50;1190;633;250;2208
-81;0;Independência;Cidade Baixa;1532;100;555;277;450;1082
-82;0;Independência;Farroupilha;800;0;308;166;300;500
-83;0;Independência;Floresta;2474;500;544;313;1450;1024
-84;0;Independência;Independência;4308;600;1407;814;1700;2608
-85;0;Independência;Menino Deus;1580;150;687;350;400;1180
-86;0;Independência;Moinhos de Vento;557;100;102;79;350;207
-87;0;Independência;Praia de Belas;450;150;119;77;200;250
-88;0;Independência;Rio Branco;1632;300;408;192;950;682
-89;0;Independência;Santa Cecília;508;100;216;80;200;308
-90;0;Independência;Santana;802;50;285;156;250;552
-91;0;Menino Deus;Azenha;7716;1200;2708;1247;3300;4416
-92;0;Menino Deus;Bom Fim;1273;100;411;214;500;773
-93;0;Menino Deus;Centro Histórico;3106;100;1312;585;750;2356
-94;0;Menino Deus;Cidade Baixa;4250;550;1424;655;1850;2400
-95;0;Menino Deus;Farroupilha;3100;150;1407;750;500;2600
-96;0;Menino Deus;Floresta;861;0;373;163;250;611
-97;0;Menino Deus;Independência;1537;150;650;345;400;1137
-98;0;Menino Deus;Menino Deus;14870;3800;4093;1892;8500;6370
-99;0;Menino Deus;Moinhos de Vento;1787;250;522;324;800;987
-100;0;Menino Deus;Praia de Belas;20580;4515;8696;4839;4584;8490
-101;0;Menino Deus;Rio Branco;1698;50;805;380;300;1398
-102;0;Menino Deus;Santa Cecília;1537;100;726;392;150;1387
-103;0;Menino Deus;Santana;1315;200;503;231;400;915
-104;0;Moinhos de Vento;Azenha;418;50;170;87;100;318
-105;0;Moinhos de Vento;Bom Fim;1099;100;396;251;291;808
-106;0;Moinhos de Vento;Centro Histórico;1508;100;624;303;282;1226
-107;0;Moinhos de Vento;Cidade Baixa;617;50;249;109;150;467
-108;0;Moinhos de Vento;Farroupilha;550;150;89;71;350;200
-109;0;Moinhos de Vento;Floresta;2482;300;1088;537;670;1812
-110;0;Moinhos de Vento;Independência;542;98;103;76;338;204
-111;0;Moinhos de Vento;Menino Deus;1750;248;529;322;760;990
-112;0;Moinhos de Vento;Moinhos de Vento;11533;1580;4100;3336;2729;8804
-113;0;Moinhos de Vento;Praia de Belas;649;33;157;113;349;300
-114;0;Moinhos de Vento;Rio Branco;2559;593;697;483;1143;1416
-115;0;Moinhos de Vento;Santa Cecília;742;98;188;118;438;304
-116;0;Moinhos de Vento;Santana;501;50;176;93;150;351
-117;0;Praia de Belas;Azenha;10239;2324;4365;2111;1732;5233
-118;0;Praia de Belas;Bom Fim;2090;205;839;466;394;1696
-119;0;Praia de Belas;Centro Histórico;24090;4300;10698;4977;4623;10452
-120;0;Praia de Belas;Cidade Baixa;10460;1681;4478;2028;2429;4384
-121;0;Praia de Belas;Farroupilha;956;0;521;255;1;955
-122;0;Praia de Belas;Floresta;7348;1893;3074;1514;1521;3077
-123;0;Praia de Belas;Independência;1758;153;808;451;244;1514
-124;0;Praia de Belas;Menino Deus;23607;4531;10172;5647;4781;11320
-125;0;Praia de Belas;Moinhos de Vento;1294;25;532;381;211;1083
-126;0;Praia de Belas;Praia de Belas;6324;29;3300;1648;197;6127
-127;0;Praia de Belas;Rio Branco;11104;2523;4768;2539;2543;4403
-128;0;Praia de Belas;Santa Cecília;4158;903;1824;906;1012;1778
-129;0;Praia de Belas;Santana;1372;72;524;257;375;997
-130;0;Rio Branco;Azenha;799;150;199;119;388;411
-131;0;Rio Branco;Bom Fim;5654;299;2784;1394;649;5005
-132;0;Rio Branco;Centro Histórico;1069;195;434;122;541;528
-133;0;Rio Branco;Cidade Baixa;538;50;158;72;314;224
-134;0;Rio Branco;Farroupilha;1399;250;320;175;799;600
-135;0;Rio Branco;Floresta;1290;249;212;93;931;359
-136;0;Rio Branco;Independência;1521;299;346;168;935;586
-137;0;Rio Branco;Menino Deus;1075;50;478;197;300;775
-138;0;Rio Branco;Moinhos de Vento;2161;598;491;317;1186;975
-139;0;Rio Branco;Praia de Belas;13350;2521;5951;3167;2542;6650
-140;0;Rio Branco;Rio Branco;1576;197;521;230;763;813
-141;0;Rio Branco;Santa Cecília;1436;300;448;229;650;786
-142;0;Rio Branco;Santana;930;100;251;133;439;491
-143;0;Santa Cecília;Azenha;805;100;307;144;250;555
-144;0;Santa Cecília;Bom Fim;1374;200;343;162;700;674
-145;0;Santa Cecília;Centro Histórico;1827;150;682;334;500;1327
-146;0;Santa Cecília;Cidade Baixa;848;0;377;171;150;698
-147;0;Santa Cecília;Farroupilha;600;50;240;126;200;400
-148;0;Santa Cecília;Floresta;786;200;239;95;450;336
-149;0;Santa Cecília;Independência;512;100;214;84;200;312
-150;0;Santa Cecília;Menino Deus;1620;100;764;427;150;1470
-151;0;Santa Cecília;Moinhos de Vento;762;100;191;121;450;312
-152;0;Santa Cecília;Praia de Belas;3359;901;1427;686;981;1010
-153;0;Santa Cecília;Rio Branco;1548;300;511;268;650;898
-154;0;Santa Cecília;Santa Cecília;4112;100;2056;1048;300;3812
-155;0;Santa Cecília;Santana;2556;300;770;431;1050;1506
-156;0;Santana;Azenha;6116;1086;1594;804;3262;2854
-157;0;Santana;Bom Fim;1219;98;485;285;267;952
-158;0;Santana;Centro Histórico;1513;100;578;295;443;1070
-159;0;Santana;Cidade Baixa;1002;100;412;221;198;804
-160;0;Santana;Farroupilha;1300;350;169;67;1050;250
-161;0;Santana;Floresta;1473;350;335;169;820;653
-162;0;Santana;Independência;801;50;285;156;250;551
-163;0;Santana;Menino Deus;1288;196;500;233;378;910
-164;0;Santana;Moinhos de Vento;499;50;177;92;148;351
-165;0;Santana;Praia de Belas;986;78;227;113;536;450
-166;0;Santana;Rio Branco;1092;99;336;176;438;654
-167;0;Santana;Santa Cecília;2551;300;768;429;1050;1501
-168;0;Santana;Santana;17510;1193;7983;3958;2710;14800
+0;0;Azenha;Azenha;3478;400;1353;637;1000;2478
+1;0;Azenha;Bom Fim;1204;100;502;238;300;904
+2;0;Azenha;Centro Histórico;3294;100;1478;695;450;2844
+3;0;Azenha;Cidade Baixa;2604;50;1241;545;300;2304
+4;0;Azenha;Farroupilha;700;0;342;176;50;650
+5;0;Azenha;Floresta;404;100;139;69;150;254
+6;0;Azenha;Independência;486;50;185;116;100;386
+7;0;Azenha;Menino Deus;3646;550;1282;632;1350;2296
+8;0;Azenha;Moinhos de Vento;536;0;222;121;100;436
+9;0;Azenha;Praia de Belas;9722;2562;3497;1656;3117;3331
+10;0;Azenha;Rio Branco;1176;150;401;170;450;726
+11;0;Azenha;Santa Cecília;718;0;333;165;100;618
+12;0;Azenha;Santana;4104;500;1361;623;1800;2304
+13;0;Bom Fim;Azenha;877;100;334;158;300;577
+14;0;Bom Fim;Bom Fim;2322;100;691;394;800;1522
+15;0;Bom Fim;Centro Histórico;1249;100;372;175;500;749
+16;0;Bom Fim;Cidade Baixa;877;50;382;154;300;577
+17;0;Bom Fim;Farroupilha;1077;50;449;212;250;827
+18;0;Bom Fim;Floresta;683;50;204;107;250;433
+19;0;Bom Fim;Independência;2042;50;807;497;250;1792
+20;0;Bom Fim;Menino Deus;908;50;304;171;300;608
+21;0;Bom Fim;Moinhos de Vento;1059;200;215;146;600;459
+22;0;Bom Fim;Praia de Belas;12180;1254;5406;3030;1780;7791
+23;0;Bom Fim;Rio Branco;2469;100;1011;479;650;1819
+24;0;Bom Fim;Santa Cecília;1113;50;449;236;200;913
+25;0;Bom Fim;Santana;1230;250;318;141;750;480
+26;0;Centro Histórico;Azenha;2827;100;1232;576;450;2377
+27;0;Centro Histórico;Bom Fim;1738;100;644;287;463;1275
+28;0;Centro Histórico;Centro Histórico;10655;1963;1174;419;8881;1774
+29;0;Centro Histórico;Cidade Baixa;3822;698;719;319;2537;1285
+30;0;Centro Histórico;Farroupilha;1350;200;403;202;550;800
+31;0;Centro Histórico;Floresta;4002;600;995;428;2227;1775
+32;0;Centro Histórico;Independência;2363;200;933;417;638;1725
+33;0;Centro Histórico;Menino Deus;2309;198;870;455;585;1724
+34;0;Centro Histórico;Moinhos de Vento;1330;200;502;237;399;931
+35;0;Centro Histórico;Praia de Belas;13698;1346;6371;2966;2032;8927
+36;0;Centro Histórico;Rio Branco;971;198;334;138;447;524
+37;0;Centro Histórico;Santa Cecília;1766;150;676;301;578;1188
+38;0;Centro Histórico;Santana;1426;244;449;181;731;695
+39;0;Cidade Baixa;Azenha;2298;50;1079;466;300;1998
+40;0;Cidade Baixa;Bom Fim;867;50;384;157;298;569
+41;0;Cidade Baixa;Centro Histórico;3300;670;528;250;2340;960
+42;0;Cidade Baixa;Cidade Baixa;5506;790;1526;568;2919;2587
+43;0;Cidade Baixa;Farroupilha;3188;299;764;326;1788;1400
+44;0;Cidade Baixa;Floresta;961;146;410;138;343;618
+45;0;Cidade Baixa;Independência;1383;148;345;201;645;738
+46;0;Cidade Baixa;Menino Deus;2866;395;1097;500;800;2066
+47;0;Cidade Baixa;Moinhos de Vento;753;148;273;129;287;466
+48;0;Cidade Baixa;Praia de Belas;5818;106;2589;1326;955;4863
+49;0;Cidade Baixa;Rio Branco;1187;99;514;262;187;1000
+50;0;Cidade Baixa;Santa Cecília;816;99;333;172;149;667
+51;0;Cidade Baixa;Santana;757;50;316;162;139;618
+52;0;Farroupilha;Azenha;392;0;179;93;50;342
+53;0;Farroupilha;Bom Fim;653;50;245;111;250;403
+54;0;Farroupilha;Centro Histórico;1167;200;306;151;550;617
+55;0;Farroupilha;Cidade Baixa;2495;300;415;150;1800;695
+56;0;Farroupilha;Farroupilha;168;0;40;19;98;70
+57;0;Farroupilha;Floresta;398;150;93;46;200;198
+58;0;Farroupilha;Independência;315;50;124;92;50;265
+59;0;Farroupilha;Menino Deus;2264;200;971;551;400;1864
+60;0;Farroupilha;Moinhos de Vento;344;100;71;55;200;144
+61;0;Farroupilha;Praia de Belas;5652;50;2947;1464;50;5602
+62;0;Farroupilha;Rio Branco;1184;400;265;121;800;384
+63;0;Farroupilha;Santa Cecília;331;100;54;21;250;81
+64;0;Farroupilha;Santana;1035;450;72;37;900;135
+65;0;Floresta;Azenha;208;95;42;17;145;63
+66;0;Floresta;Bom Fim;672;50;205;121;236;436
+67;0;Floresta;Centro Histórico;3166;591;611;272;2119;1047
+68;0;Floresta;Cidade Baixa;707;150;271;88;338;369
+69;0;Floresta;Farroupilha;500;150;161;79;200;300
+70;0;Floresta;Floresta;3020;693;959;427;1279;1741
+71;0;Floresta;Independência;1433;298;417;150;870;563
+72;0;Floresta;Menino Deus;792;100;315;163;185;607
+73;0;Floresta;Moinhos de Vento;2264;350;794;446;724;1540
+74;0;Floresta;Praia de Belas;8822;1205;3861;1889;1482;5713
+75;0;Floresta;Rio Branco;1510;346;336;114;1058;452
+76;0;Floresta;Santa Cecília;231;0;114;63;0;231
+77;0;Floresta;Santana;1461;345;408;150;877;584
+78;0;Independência;Azenha;500;48;185;121;98;402
+79;0;Independência;Bom Fim;2255;50;917;575;219;2036
+80;0;Independência;Centro Histórico;2825;199;1132;557;629;2196
+81;0;Independência;Cidade Baixa;1814;148;527;341;628;1186
+82;0;Independência;Farroupilha;400;50;163;113;50;350
+83;0;Independência;Floresta;1599;299;490;205;863;736
+84;0;Independência;Independência;3318;200;1273;913;494;2824
+85;0;Independência;Menino Deus;945;100;444;220;198;747
+86;0;Independência;Moinhos de Vento;1082;50;410;294;258;824
+87;0;Independência;Praia de Belas;5207;872;2071;1272;1507;1776
+88;0;Independência;Rio Branco;2627;196;1084;575;577;2050
+89;0;Independência;Santa Cecília;662;150;166;89;350;312
+90;0;Independência;Santana;1582;98;663;369;246;1336
+91;0;Menino Deus;Azenha;3191;544;1043;523;1299;1892
+92;0;Menino Deus;Bom Fim;1201;49;444;262;296;905
+93;0;Menino Deus;Centro Histórico;2272;197;862;424;579;1693
+94;0;Menino Deus;Cidade Baixa;3198;398;1261;620;847;2351
+95;0;Menino Deus;Farroupilha;3848;200;1807;972;398;3450
+96;0;Menino Deus;Floresta;978;98;403;210;198;780
+97;0;Menino Deus;Independência;775;97;363;169;196;579
+98;0;Menino Deus;Menino Deus;12070;1677;4027;2123;4491;7579
+99;0;Menino Deus;Moinhos de Vento;1426;448;352;190;784;642
+100;0;Menino Deus;Praia de Belas;21352;3681;9212;4866;4749;11137
+101;0;Menino Deus;Rio Branco;1811;100;777;451;286;1525
+102;0;Menino Deus;Santa Cecília;2038;0;1069;576;0;2038
+103;0;Menino Deus;Santana;1598;444;374;178;924;674
+104;0;Moinhos de Vento;Azenha;336;0;120;73;100;236
+105;0;Moinhos de Vento;Bom Fim;1210;200;286;209;600;610
+106;0;Moinhos de Vento;Centro Histórico;1228;200;446;233;400;828
+107;0;Moinhos de Vento;Cidade Baixa;840;150;312;177;300;540
+108;0;Moinhos de Vento;Farroupilha;400;100;97;75;200;200
+109;0;Moinhos de Vento;Floresta;1702;350;474;295;750;952
+110;0;Moinhos de Vento;Independência;1007;50;372;260;300;707
+111;0;Moinhos de Vento;Menino Deus;1460;450;352;202;800;660
+112;0;Moinhos de Vento;Moinhos de Vento;4582;200;1788;1397;900;3682
+113;0;Moinhos de Vento;Praia de Belas;4427;100;2167;1363;100;4327
+114;0;Moinhos de Vento;Rio Branco;2033;400;483;271;1200;833
+115;0;Moinhos de Vento;Santa Cecília;559;100;146;122;250;309
+116;0;Moinhos de Vento;Santana;616;250;52;41;500;116
+117;0;Praia de Belas;Azenha;12852;2577;5150;2420;3227;6351
+118;0;Praia de Belas;Bom Fim;9129;1255;3753;2108;1873;4647
+119;0;Praia de Belas;Centro Histórico;15252;1379;7059;3223;2318;10195
+120;0;Praia de Belas;Cidade Baixa;5125;66;2373;1090;685;4440
+121;0;Praia de Belas;Farroupilha;2055;52;1079;504;65;1990
+122;0;Praia de Belas;Floresta;7428;1189;3266;1618;1286;4515
+123;0;Praia de Belas;Independência;7056;870;2879;1855;1421;3711
+124;0;Praia de Belas;Menino Deus;23909;3669;10570;5589;4718;13725
+125;0;Praia de Belas;Moinhos de Vento;3611;107;1651;1224;217;3394
+126;0;Praia de Belas;Praia de Belas;11504;1075;5489;2767;706;9716
+127;0;Praia de Belas;Rio Branco;9684;1393;4424;2288;1666;5780
+128;0;Praia de Belas;Santa Cecília;2565;103;1327;632;210;2355
+129;0;Praia de Belas;Santana;5506;99;2619;1391;532;4974
+130;0;Rio Branco;Azenha;1118;150;369;156;450;668
+131;0;Rio Branco;Bom Fim;4162;100;1900;962;650;3512
+132;0;Rio Branco;Centro Histórico;1132;200;422;183;450;682
+133;0;Rio Branco;Cidade Baixa;1312;100;568;294;200;1112
+134;0;Rio Branco;Farroupilha;1350;400;357;165;800;550
+135;0;Rio Branco;Floresta;1712;350;422;157;1100;612
+136;0;Rio Branco;Independência;2608;200;1067;563;600;2008
+137;0;Rio Branco;Menino Deus;1965;100;854;484;300;1665
+138;0;Rio Branco;Moinhos de Vento;2408;400;683;378;1200;1208
+139;0;Rio Branco;Praia de Belas;6044;1376;2568;1298;1528;2278
+140;0;Rio Branco;Rio Branco;2717;300;1020;434;1100;1617
+141;0;Rio Branco;Santa Cecília;1754;200;673;366;500;1254
+142;0;Rio Branco;Santana;1462;100;636;288;350;1112
+143;0;Santa Cecília;Azenha;561;0;236;133;98;463
+144;0;Santa Cecília;Bom Fim;1553;50;702;348;196;1357
+145;0;Santa Cecília;Centro Histórico;1325;148;468;185;580;745
+146;0;Santa Cecília;Cidade Baixa;685;100;280;152;146;539
+147;0;Santa Cecília;Farroupilha;263;100;8;5;250;13
+148;0;Santa Cecília;Floresta;170;0;83;47;0;170
+149;0;Santa Cecília;Independência;583;147;147;79;315;268
+150;0;Santa Cecília;Menino Deus;1082;0;564;299;0;1082
+151;0;Santa Cecília;Moinhos de Vento;379;97;64;53;245;134
+152;0;Santa Cecília;Praia de Belas;5304;127;2628;1349;365;4939
+153;0;Santa Cecília;Rio Branco;1094;194;338;185;475;619
+154;0;Santa Cecília;Santa Cecília;2165;100;848;420;565;1600
+155;0;Santa Cecília;Santana;1636;387;397;190;915;721
+156;0;Santana;Azenha;3434;498;1014;470;1750;1684
+157;0;Santana;Bom Fim;1120;250;269;128;749;371
+158;0;Santana;Centro Histórico;1392;250;444;159;722;670
+159;0;Santana;Cidade Baixa;715;50;283;159;150;565
+160;0;Santana;Farroupilha;1099;449;112;63;899;200
+161;0;Santana;Floresta;1729;348;556;232;867;862
+162;0;Santana;Independência;1447;100;613;332;238;1209
+163;0;Santana;Menino Deus;1542;444;344;175;920;622
+164;0;Santana;Moinhos de Vento;626;250;70;48;486;140
+165;0;Santana;Praia de Belas;5946;80;2833;1463;553;5393
+166;0;Santana;Rio Branco;1281;100;552;240;332;949
+167;0;Santana;Santa Cecília;2082;398;575;282;998;1084
+168;0;Santana;Santana;9887;1183;3479;1631;3836;6051

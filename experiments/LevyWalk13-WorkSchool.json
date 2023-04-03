@@ -7,14 +7,14 @@
     },
     "levy_walk_plugin": {
         "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",
-        "distance_type": 1,
+        "distance_type": 3,
         "population_group_size": 50,
         "movement_probability": 0.05,
         "distribution_location": 0.0,
-        "distribution_scale": 0.0075,
+        "distribution_scale": 1000,
         "use_buckets": true,
         "__comment2__": "'distance_bucket_size' only used in 'use_buckets' is true",
-        "distance_bucket_size": 0.0075
+        "distance_bucket_size": 500
     },
     "send_population_back_plugin": {},
     "gather_population_plugin": {}

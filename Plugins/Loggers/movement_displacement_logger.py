@@ -1,4 +1,6 @@
 import sys
+
+from util import DistanceType
 sys.path.append("/../../")
 from environment import EnvironmentGraph, EnvNode, EnvRegion
 from logger_plugin import LoggerPlugin
@@ -60,7 +62,7 @@ class MovementDisplacementLogger(LoggerPlugin):
     def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
         total = sum([b.get_population_size() for b in _blobs])
-        node_distances = self.graph.get_node_distances(_ori)
+        node_distances = self.graph.get_node_distances(target_node=_ori, dist_type=self.graph.default_distance_type)
         distance = node_distances.distance_to_others[_dest.get_unique_name()]
         
         self.movement_counter[distance] = self.movement_counter.get(distance,0) + total
@@ -68,6 +70,8 @@ class MovementDisplacementLogger(LoggerPlugin):
 
     
     def stop_logger(self):
+        if len(self.movement_counter.items()) == 0:
+            return
         self.movement_counter = dict(sorted(self.movement_counter.items()))
         movement_df = pd.DataFrame.from_dict(self.movement_counter, orient='index')
         movement_df.index.name = "distance"
