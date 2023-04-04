@@ -30,34 +30,38 @@ def create_node_distante_distribution_figure(experiment_configuration_file:str,
     ----------
     None.
     '''
-    # Load an EnvironmentGraph using the experiment configuration
-    env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
-    distance_type = DistanceType(distance_type)
-
+    # Setup
+    __header:str = "Node Distances:"
+    _dist_type:DistanceType = DistanceType(distance_type)
+    print(__header, f'Experiment Config: {experiment_configuration_file}, Distance Type: {_dist_type},',
+          f'Bucket Size: {bucket_size}, Y-Limit: {y_limit}')
+    
     # Creates the directory if necessary
     dir_path = Path(__file__).parent / "node_distances" / experiment_configuration_file
     dir_path.mkdir(parents=True, exist_ok=True)
-        
-    env_graph.calculate_all_distances()
 
+    # Load an EnvironmentGraph using the experiment configuration
+    env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
+        
     # Calculates distances between nodes
     distances = []
     for node in env_graph.node_list:
-        # print(len(env_graph.get_node_distances(node).distance_to_other))
-        distances.extend([x[0] for x in env_graph.get_node_distances(node, distance_type).distance_to_others])
+        distances.extend([x[1] for x in env_graph.get_node_distances(node, _dist_type).distance_to_others.items()])
     max_distante = max(distances) * 1.05
 
     # Creates a histogram of distance between notes
     bins = np.arange(0, max_distante, bucket_size)
     s = sns.histplot(distances, bins=bins) # type: ignore
-    fig_path = dir_path / f"node_distances_{experiment_configuration_file}_{distance_type.name}_{bucket_size}.png"
+    fig_path = dir_path / f"node_distances_{experiment_configuration_file}_{_dist_type.name}_{bucket_size}.png"
     plt.ylim(0, y_limit)
+    print(__header, f'Saving node distance figure to:\n\t', fig_path)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
     # Creates a second histogram with the cumulative values
     s = sns.histplot(distances, bins=bins, cumulative=True) # type: ignore
-    fig_path = dir_path / f"node_distances_{experiment_configuration_file}_{distance_type.name}_{bucket_size}_cumulative.png"
+    fig_path = dir_path / f"node_distances_{experiment_configuration_file}_{_dist_type.name}_{bucket_size}_cumulative.png"
+    print(__header, f'Saving comulative node distance figure to:\n\t', fig_path)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
