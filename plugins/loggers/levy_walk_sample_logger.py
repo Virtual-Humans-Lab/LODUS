@@ -45,6 +45,6 @@ class LevyWalkSampleLogger(LoggerPlugin):
         df.to_csv(self.data_frames_path + "levy_samples.csv", 
                            sep=";", 
                            encoding="utf-8-sig",
-                           header=["sample"],
+                           header=["samples"],
                            index = False)
     

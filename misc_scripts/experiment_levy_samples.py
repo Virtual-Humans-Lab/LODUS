@@ -53,7 +53,7 @@ def create_experiment_levy_sample_figure(experiment_name:str,
     # Creates a second histogram with the cumulative values of frequencies
     dist = df.to_numpy()
     bins = np.arange(bin_start, bin_stop/2.0, bin_step)
-    s = sns.histplot(dist, bins=bins, cumulative=True) # type: ignore
+    s = sns.histplot(df, bins=bins, cumulative=True) # type: ignore
     fig_path = output_path / f"levy-samples-Step{bin_step}-Q{dist.size}cumulative.png"
     plt.savefig(fig_path, dpi=400)
     plt.clf()

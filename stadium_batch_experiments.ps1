@@ -10,5 +10,4 @@ python .\TOMACS_simulation.py --e WorkSchool13-StadiumPopulation
 python .\TOMACS_simulation.py --e WorkSchool94-StadiumDistance
 python .\TOMACS_simulation.py --e WorkSchool94-StadiumPopulation
 
-Write-Host -NoNewLine 'Press any key to continue...';
-$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+Read-Host -Prompt "Press Enter to continue"

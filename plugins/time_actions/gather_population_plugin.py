@@ -77,6 +77,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
         # Performance log for quantity of sub-actions
         self.sublist_count = []
+        self.random = FixedRandom.instance
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -138,7 +139,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         return self.dist_weights_map[unique_name].copy()
     
     ## Complex time action. Will be broken up into smaller actions
-    def gather_population(self, pop_template, values, cycle_step, sim_step):
+    def gather_population(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         start_time = time.perf_counter()
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
@@ -152,15 +153,15 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             return sub_list
 
         # Loads optional action parameters, otherwise, use default values
-        _isolation_mode:IsolationMode = IsolationMode(self.config.get("isolation_mode", 
+        _isolation_mode:IsolationMode = IsolationMode(values.get("isolation_mode", 
                                                                       self.isolation_mode))
-        _weighting_mode:WeightingMode = WeightingMode(self.config.get("weighting_mode",
+        _weighting_mode:WeightingMode = WeightingMode(values.get("weighting_mode",
                                                                       self.weighting_mode))
-        _isolation_rate = self.config.get("isolation_rate", self.isolation_rate)
-        _to_total_ratio_correction = self.config.get("to_total_ratio_correction", 
+        _isolation_rate = values.get("isolation_rate", self.isolation_rate)
+        _to_total_ratio_correction = values.get("to_total_ratio_correction", 
                                                      self.to_total_ratio_correction)
-        _locals_only = self.config.get("locals_only", self.locals_only)
-        _percentage_per_search = self.config.get("percentage_per_search", self.percentage_per_search)
+        _locals_only = values.get("locals_only", self.locals_only)
+        _percentage_per_search = values.get("percentage_per_search", self.percentage_per_search)
 
         # Get node weights
         weight_list = self.compute_node_weights(action_node, _weighting_mode)
@@ -172,7 +173,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != action_node.name)]
         
         # Shuffles the remaining EnvNodes
-        random.shuffle(weight_list)
+        self.random.shuffle(weight_list)
 
         # Searches the remaining EnvNodes. 
         # The indexes searched are incremented based on _percentage_per_search
@@ -217,6 +218,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
                         weight_and_available[i][1] / total_weight,
                         int_weights[i]) 
                         for i in range(len(int_weights)) if int_weights[i] > 0]
+        # print(_weighting_mode)
         # print([a for (n,w,a) in weight_and_available]) # Available population
         # print([w for (n,w,a) in weight_and_available]) # EnvNode weights
         # print([b for (a,b,c) in node_targets]) # Weight proportion

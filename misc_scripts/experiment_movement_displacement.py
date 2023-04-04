@@ -36,10 +36,10 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 500,
     max_distance = np.amax(movement_data) * 1.05
     bins = np.arange(0.0, max_distance, bin_size)
     s = sns.histplot(data=movement_data, bins=bins) # type: ignore
-    fig_path = output_path / f"movement_distribution_{bin_size}.png"
-    print(__header, "Saving movement displacement histogram at:\n\t", output_path / f"movement_distribution_{bin_size}.png")
+    fig_path = output_path / f"movement_distribution_size{movement_data.size}_bin{bin_size}.png"
+    print(__header, "Saving movement displacement histogram at:\n\t", fig_path)
     if x_limit is not None: plt.xlim(0, x_limit)
-    if y_limit is not None: plt.xlim(0, y_limit)
+    if y_limit is not None: plt.ylim(0, y_limit)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -48,10 +48,10 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 500,
     max_distance = np.amax(group_movement_data) * 1.05
     bins = np.arange(0.0, max_distance, bin_size)
     s = sns.histplot(data=group_movement_data, bins=bins) # type: ignore
-    fig_path = output_path / f"group_movement_distribution_{bin_size}.png"
-    print(__header, "Saving group movement displacement histogram at:\n\t", output_path / f"group_movement_distribution_{bin_size}.png")
-    if x_limit is not None: plt.xlim(0, x_limit)
-    if y_limit is not None: plt.xlim(0, y_limit)
+    fig_path = output_path / f"group_movement_distribution_size{group_movement_data.size}_bin{bin_size}.png"
+    print(__header, "Saving group movement displacement histogram at:\n\t", fig_path)
+    # if x_limit is not None: plt.xlim(0, x_limit)
+    # if y_limit is not None: plt.ylim(0, y_limit)
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -86,9 +86,10 @@ def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005,
     fig = px.bar(df, y = 0, title=f'Movement displacement data - {experiment_name}')
     fig.update_layout(xaxis = xaxis, hovermode="x")
     if x_limit is not None: fig.update_xaxes(range = [0, x_limit])
-    if y_limit is not None: fig.update_xaxes(range = [0, y_limit])
-    fig.write_html(output_path / f"movement_distance_bar_chart_{bin_size}.html")
-    print(__header, "Saving movement displacement linechart at:\n\t", output_path / f"movement_distance_bar_chart_{bin_size}.png")
+    if y_limit is not None: fig.update_yaxes(range = [0, y_limit])
+    fig_path = output_path / f"movement_distance_bar_chart_size{len(df.index)}_bin{bin_size}.html"
+    fig.write_html(fig_path)
+    print(__header, "Saving movement displacement linechart at:\n\t", fig_path)
     
     # Repeats process for the group movement data
     df_group_movement = pd.read_csv(dir_path / "group_movement_counter.csv", sep=';')
@@ -103,10 +104,11 @@ def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005,
     df = pd.DataFrame.from_dict(data, orient='index')
     fig = px.bar(df, title=f'Group movement displacement data - {experiment_name}')
     fig.update_layout(xaxis = xaxis, hovermode="x")
-    if x_limit is not None: fig.update_xaxes(range = [0, x_limit])
-    if y_limit is not None: fig.update_xaxes(range = [0, y_limit])
-    fig.write_html(output_path / f"group_movement_distance_bar_chart_{bin_size}.html")
-    print(__header, "Saving group movement displacement linechart at:\n\t", output_path / f"group_movement_distance_bar_chart_{bin_size}.png")
+    # if x_limit is not None: fig.update_xaxes(range = [0, x_limit])
+    # if y_limit is not None: fig.update_yaxes(range = [0, y_limit])
+    fig_path = output_path / f"group_movement_distance_bar_chart_size{len(df.index)}_bin{bin_size}.html"
+    fig.write_html(fig_path)
+    print(__header, "Saving group movement displacement linechart at:\n\t", fig_path)
     
 
 if __name__ == '__main__':
