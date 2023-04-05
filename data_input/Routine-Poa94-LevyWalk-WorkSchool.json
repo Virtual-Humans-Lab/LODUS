@@ -45,6 +45,9 @@
           "target_node_type": [
             "work"
           ],
+          "node_type": [
+            "home"
+          ],
           "movement_probability": 0.15
         }
       }
@@ -78,6 +81,9 @@
           ],
           "target_node_type": [
             "work"
+          ],
+          "node_type": [
+            "home"
           ],
           "movement_probability": 0.35
         }

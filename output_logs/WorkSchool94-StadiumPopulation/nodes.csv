@@ -11960,31 +11960,31 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 19;19;0;São José//pharmacy;0;0;0;0;0;0
 19;19;0;São José//gas_station;0;0;0;0;0;0
 20;20;0;Aberta dos Morros//home;2448;2448;0;-250;-250;0
-20;20;0;Aberta dos Morros//work;3580;168;3412;1250;0;1250
+20;20;0;Aberta dos Morros//work;2830;168;2662;500;0;500
 20;20;0;Aberta dos Morros//school;1111;0;1111;0;0;0
 20;20;0;Aberta dos Morros//marketplace;0;0;0;0;0;0
 20;20;0;Aberta dos Morros//pharmacy;0;0;0;0;0;0
 20;20;0;Aberta dos Morros//gas_station;0;0;0;0;0;0
 20;20;0;Agronomia//home;771;771;0;0;0;0
-20;20;0;Agronomia//work;4113;0;4113;750;0;750
+20;20;0;Agronomia//work;3613;0;3613;250;0;250
 20;20;0;Agronomia//school;1223;0;1223;0;0;0
 20;20;0;Agronomia//marketplace;0;0;0;0;0;0
 20;20;0;Agronomia//pharmacy;0;0;0;0;0;0
 20;20;0;Agronomia//gas_station;0;0;0;0;0;0
 20;20;0;Anchieta//home;723;723;0;0;0;0
-20;20;0;Anchieta//work;2094;0;2094;1250;0;1250
+20;20;0;Anchieta//work;1344;0;1344;500;0;500
 20;20;0;Anchieta//school;1469;0;1469;0;0;0
 20;20;0;Anchieta//marketplace;0;0;0;0;0;0
 20;20;0;Anchieta//pharmacy;0;0;0;0;0;0
 20;20;0;Anchieta//gas_station;0;0;0;0;0;0
 20;20;0;Arquipélago//home;3082;3082;0;-250;-250;0
-20;20;0;Arquipélago//work;1225;2;1223;500;2;498
+20;20;0;Arquipélago//work;725;0;725;0;0;0
 20;20;0;Arquipélago//school;307;0;307;0;0;0
 20;20;0;Arquipélago//marketplace;0;0;0;0;0;0
 20;20;0;Arquipélago//pharmacy;0;0;0;0;0;0
 20;20;0;Arquipélago//gas_station;0;0;0;0;0;0
 20;20;0;Auxiliadora//home;3082;3082;0;0;0;0
-20;20;0;Auxiliadora//work;4485;192;4293;500;1;499
+20;20;0;Auxiliadora//work;4235;191;4044;250;0;250
 20;20;0;Auxiliadora//school;493;5;488;0;0;0
 20;20;0;Auxiliadora//marketplace;0;0;0;0;0;0
 20;20;0;Auxiliadora//pharmacy;0;0;0;0;0;0
@@ -11998,43 +11998,43 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Azenha//hospital;0;0;0;0;0;0
 20;20;0;Azenha//shopping_mall;0;0;0;0;0;0
 20;20;0;Bela Vista//home;2721;2721;0;0;0;0
-20;20;0;Bela Vista//work;3803;241;3562;250;2;248
+20;20;0;Bela Vista//work;3803;239;3564;250;0;250
 20;20;0;Bela Vista//school;1607;532;1075;0;0;0
 20;20;0;Bela Vista//marketplace;0;0;0;0;0;0
 20;20;0;Bela Vista//pharmacy;0;0;0;0;0;0
 20;20;0;Bela Vista//gas_station;0;0;0;0;0;0
 20;20;0;Belém Novo//home;4232;4232;0;0;0;0
-20;20;0;Belém Novo//work;2413;847;1566;250;1;249
+20;20;0;Belém Novo//work;2163;846;1317;0;0;0
 20;20;0;Belém Novo//school;446;31;415;0;0;0
 20;20;0;Belém Novo//marketplace;0;0;0;0;0;0
 20;20;0;Belém Novo//pharmacy;0;0;0;0;0;0
 20;20;0;Belém Novo//gas_station;0;0;0;0;0;0
 20;20;0;Belém Velho//home;4069;4069;0;-250;-250;0
-20;20;0;Belém Velho//work;4643;3;4640;1250;3;1247
+20;20;0;Belém Velho//work;3393;0;3393;0;0;0
 20;20;0;Belém Velho//school;602;66;536;0;0;0
 20;20;0;Belém Velho//marketplace;0;0;0;0;0;0
 20;20;0;Belém Velho//pharmacy;0;0;0;0;0;0
 20;20;0;Belém Velho//gas_station;0;0;0;0;0;0
 20;20;0;Boa Vista//home;3160;3160;0;0;0;0
-20;20;0;Boa Vista//work;6116;951;5165;250;0;250
+20;20;0;Boa Vista//work;5866;951;4915;0;0;0
 20;20;0;Boa Vista//school;1176;36;1140;0;0;0
 20;20;0;Boa Vista//marketplace;0;0;0;0;0;0
 20;20;0;Boa Vista//pharmacy;0;0;0;0;0;0
 20;20;0;Boa Vista//gas_station;0;0;0;0;0;0
 20;20;0;Boa Vista do Sul//home;1164;1164;0;0;0;0
-20;20;0;Boa Vista do Sul//work;807;0;807;0;0;0
+20;20;0;Boa Vista do Sul//work;1057;0;1057;250;0;250
 20;20;0;Boa Vista do Sul//school;73;0;73;0;0;0
 20;20;0;Boa Vista do Sul//marketplace;0;0;0;0;0;0
 20;20;0;Boa Vista do Sul//pharmacy;0;0;0;0;0;0
 20;20;0;Boa Vista do Sul//gas_station;0;0;0;0;0;0
 20;20;0;Bom Fim//home;3454;3454;0;-250;-250;0
-20;20;0;Bom Fim//work;4161;548;3613;750;1;749
+20;20;0;Bom Fim//work;3411;547;2864;0;0;0
 20;20;0;Bom Fim//school;963;78;885;0;0;0
 20;20;0;Bom Fim//marketplace;0;0;0;0;0;0
 20;20;0;Bom Fim//pharmacy;0;0;0;0;0;0
 20;20;0;Bom Fim//gas_station;0;0;0;0;0;0
 20;20;0;Bom Jesus//home;9075;9075;0;-750;-750;0
-20;20;0;Bom Jesus//work;5075;1462;3613;250;4;246
+20;20;0;Bom Jesus//work;5075;1458;3617;250;0;250
 20;20;0;Bom Jesus//school;861;185;676;0;0;0
 20;20;0;Bom Jesus//marketplace;0;0;0;0;0;0
 20;20;0;Bom Jesus//pharmacy;0;0;0;0;0;0
@@ -12058,7 +12058,7 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Cascata//pharmacy;0;0;0;0;0;0
 20;20;0;Cascata//gas_station;0;0;0;0;0;0
 20;20;0;Cavalhada//home;7778;7778;0;-1000;-1000;0
-20;20;0;Cavalhada//work;4838;358;4480;750;250;500
+20;20;0;Cavalhada//work;5088;358;4730;1000;250;750
 20;20;0;Cavalhada//school;1442;852;590;0;0;0
 20;20;0;Cavalhada//marketplace;0;0;0;0;0;0
 20;20;0;Cavalhada//pharmacy;0;0;0;0;0;0
@@ -12073,43 +12073,43 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Centro Histórico//hospital;0;0;0;0;0;0
 20;20;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
 20;20;0;Chácara das Pedras//home;2252;2252;0;0;0;0
-20;20;0;Chácara das Pedras//work;3434;629;2805;250;1;249
+20;20;0;Chácara das Pedras//work;3434;628;2806;250;0;250
 20;20;0;Chácara das Pedras//school;425;0;425;0;0;0
 20;20;0;Chácara das Pedras//marketplace;0;0;0;0;0;0
 20;20;0;Chácara das Pedras//pharmacy;0;0;0;0;0;0
 20;20;0;Chácara das Pedras//gas_station;0;0;0;0;0;0
 20;20;0;Chapéu do Sol//home;1193;1193;0;0;0;0
-20;20;0;Chapéu do Sol//work;2958;162;2796;250;0;250
+20;20;0;Chapéu do Sol//work;2708;162;2546;0;0;0
 20;20;0;Chapéu do Sol//school;1068;0;1068;0;0;0
 20;20;0;Chapéu do Sol//marketplace;0;0;0;0;0;0
 20;20;0;Chapéu do Sol//pharmacy;0;0;0;0;0;0
 20;20;0;Chapéu do Sol//gas_station;0;0;0;0;0;0
 20;20;0;Cidade Baixa//home;3285;3285;0;-250;-250;0
-20;20;0;Cidade Baixa//work;7604;1388;6216;1750;252;1498
+20;20;0;Cidade Baixa//work;6354;1386;4968;500;250;250
 20;20;0;Cidade Baixa//school;569;58;511;0;0;0
 20;20;0;Cidade Baixa//marketplace;0;0;0;0;0;0
 20;20;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
 20;20;0;Cidade Baixa//gas_station;0;0;0;0;0;0
 20;20;0;Cel. Aparício Borges//home;5973;5973;0;-250;-250;0
-20;20;0;Cel. Aparício Borges//work;8390;1920;6470;1750;256;1494
+20;20;0;Cel. Aparício Borges//work;7890;1914;5976;1250;250;1000
 20;20;0;Cel. Aparício Borges//school;619;103;516;0;0;0
 20;20;0;Cel. Aparício Borges//marketplace;0;0;0;0;0;0
 20;20;0;Cel. Aparício Borges//pharmacy;0;0;0;0;0;0
 20;20;0;Cel. Aparício Borges//gas_station;0;0;0;0;0;0
 20;20;0;Costa e Silva//home;5341;5341;0;-750;-750;0
-20;20;0;Costa e Silva//work;3506;336;3170;750;253;497
+20;20;0;Costa e Silva//work;3256;333;2923;500;250;250
 20;20;0;Costa e Silva//school;1774;304;1470;0;0;0
 20;20;0;Costa e Silva//marketplace;0;0;0;0;0;0
 20;20;0;Costa e Silva//pharmacy;0;0;0;0;0;0
 20;20;0;Costa e Silva//gas_station;0;0;0;0;0;0
 20;20;0;Cristal//home;9723;9723;0;-250;-250;0
-20;20;0;Cristal//work;4166;1152;3014;0;0;0
+20;20;0;Cristal//work;4666;1152;3514;500;0;500
 20;20;0;Cristal//school;1237;407;830;0;0;0
 20;20;0;Cristal//marketplace;0;0;0;0;0;0
 20;20;0;Cristal//pharmacy;0;0;0;0;0;0
 20;20;0;Cristal//gas_station;0;0;0;0;0;0
 20;20;0;Cristo Redentor//home;4765;4765;0;0;0;0
-20;20;0;Cristo Redentor//work;2579;286;2293;500;5;495
+20;20;0;Cristo Redentor//work;2079;281;1798;0;0;0
 20;20;0;Cristo Redentor//school;1125;0;1125;0;0;0
 20;20;0;Cristo Redentor//marketplace;0;0;0;0;0;0
 20;20;0;Cristo Redentor//pharmacy;0;0;0;0;0;0
@@ -12117,38 +12117,38 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Cristo Redentor//hospital;0;0;0;0;0;0
 20;20;0;Cristo Redentor//shopping_mall;0;0;0;0;0;0
 20;20;0;Espírito Santo//home;1767;1767;0;0;0;0
-20;20;0;Espírito Santo//work;3761;500;3261;250;1;249
+20;20;0;Espírito Santo//work;3511;499;3012;0;0;0
 20;20;0;Espírito Santo//school;850;36;814;0;0;0
 20;20;0;Espírito Santo//marketplace;0;0;0;0;0;0
 20;20;0;Espírito Santo//pharmacy;0;0;0;0;0;0
 20;20;0;Espírito Santo//gas_station;0;0;0;0;0;0
 20;20;0;Extrema//home;738;738;0;0;0;0
-20;20;0;Extrema//work;1727;0;1727;500;0;500
+20;20;0;Extrema//work;1227;0;1227;0;0;0
 20;20;0;Extrema//school;57;0;57;0;0;0
 20;20;0;Extrema//marketplace;0;0;0;0;0;0
 20;20;0;Extrema//pharmacy;0;0;0;0;0;0
 20;20;0;Extrema//gas_station;0;0;0;0;0;0
 20;20;0;Farrapos//home;5541;5541;0;-500;-500;0
-20;20;0;Farrapos//work;19017;1912;17105;15750;189;15561
+20;20;0;Farrapos//work;3267;1723;1544;0;0;0
 20;20;0;Farrapos//school;363;107;256;0;0;0
 20;20;0;Farrapos//marketplace;0;0;0;0;0;0
 20;20;0;Farrapos//pharmacy;0;0;0;0;0;0
 20;20;0;Farrapos//gas_station;0;0;0;0;0;0
-20;20;0;Farrapos//stadium;450750;6003;444747;-49250;-591;-48659
+20;20;0;Farrapos//stadium;500000;6594;493406;0;0;0
 20;20;0;Farroupilha//home;455;455;0;0;0;0
-20;20;0;Farroupilha//work;7969;0;7969;750;0;750
+20;20;0;Farroupilha//work;7719;0;7719;500;0;500
 20;20;0;Farroupilha//school;2116;0;2116;0;0;0
 20;20;0;Farroupilha//marketplace;0;0;0;0;0;0
 20;20;0;Farroupilha//pharmacy;0;0;0;0;0;0
 20;20;0;Farroupilha//gas_station;0;0;0;0;0;0
 20;20;0;Farroupilha//hospital;0;0;0;0;0;0
 20;20;0;Floresta//home;4151;4151;0;0;0;0
-20;20;0;Floresta//work;4305;528;3777;500;2;498
+20;20;0;Floresta//work;4305;526;3779;500;0;500
 20;20;0;Floresta//school;1326;0;1326;0;0;0
 20;20;0;Floresta//marketplace;0;0;0;0;0;0
 20;20;0;Floresta//pharmacy;0;0;0;0;0;0
 20;20;0;Floresta//gas_station;0;0;0;0;0;0
-20;20;0;Glória//home;4918;4918;0;-750;-750;0
+20;20;0;Glória//home;5668;5668;0;0;0;0
 20;20;0;Glória//work;5255;300;4955;250;0;250
 20;20;0;Glória//school;1214;62;1152;0;0;0
 20;20;0;Glória//marketplace;0;0;0;0;0;0
@@ -12161,26 +12161,26 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Guarujá//marketplace;0;0;0;0;0;0
 20;20;0;Guarujá//pharmacy;0;0;0;0;0;0
 20;20;0;Guarujá//gas_station;0;0;0;0;0;0
-20;20;0;Higienópolis//home;3638;3638;0;0;0;0
-20;20;0;Higienópolis//work;3767;661;3106;1000;6;994
+20;20;0;Higienópolis//home;3388;3388;0;-250;-250;0
+20;20;0;Higienópolis//work;2767;655;2112;0;0;0
 20;20;0;Higienópolis//school;781;32;749;0;0;0
 20;20;0;Higienópolis//marketplace;0;0;0;0;0;0
 20;20;0;Higienópolis//pharmacy;0;0;0;0;0;0
 20;20;0;Higienópolis//gas_station;0;0;0;0;0;0
-20;20;0;Hípica//home;6575;6575;0;-250;-250;0
-20;20;0;Hípica//work;3325;745;2580;250;0;250
+20;20;0;Hípica//home;6075;6075;0;-750;-750;0
+20;20;0;Hípica//work;3325;995;2330;250;250;0
 20;20;0;Hípica//school;755;347;408;0;0;0
 20;20;0;Hípica//marketplace;0;0;0;0;0;0
 20;20;0;Hípica//pharmacy;0;0;0;0;0;0
 20;20;0;Hípica//gas_station;0;0;0;0;0;0
-20;20;0;Humaitá//home;3733;3733;0;-250;-250;0
-20;20;0;Humaitá//work;11099;320;10779;9750;78;9672
+20;20;0;Humaitá//home;3233;3233;0;-750;-750;0
+20;20;0;Humaitá//work;1599;492;1107;250;250;0
 20;20;0;Humaitá//school;773;109;664;0;0;0
 20;20;0;Humaitá//marketplace;0;0;0;0;0;0
 20;20;0;Humaitá//pharmacy;0;0;0;0;0;0
 20;20;0;Humaitá//gas_station;0;0;0;0;0;0
 20;20;0;Independência//home;1268;1268;0;0;0;0
-20;20;0;Independência//work;4777;418;4359;250;0;250
+20;20;0;Independência//work;4527;418;4109;0;0;0
 20;20;0;Independência//school;447;0;447;0;0;0
 20;20;0;Independência//marketplace;0;0;0;0;0;0
 20;20;0;Independência//pharmacy;0;0;0;0;0;0
@@ -12188,12 +12188,12 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Independência//hospital;0;0;0;0;0;0
 20;20;0;Independência//shopping_mall;0;0;0;0;0;0
 20;20;0;Ipanema//home;4330;4330;0;-250;-250;0
-20;20;0;Ipanema//work;4097;263;3834;750;4;746
+20;20;0;Ipanema//work;3597;259;3338;250;0;250
 20;20;0;Ipanema//school;746;78;668;0;0;0
 20;20;0;Ipanema//marketplace;0;0;0;0;0;0
 20;20;0;Ipanema//pharmacy;0;0;0;0;0;0
 20;20;0;Ipanema//gas_station;0;0;0;0;0;0
-20;20;0;Jardim Botânico//home;4050;4050;0;0;0;0
+20;20;0;Jardim Botânico//home;3800;3800;0;-250;-250;0
 20;20;0;Jardim Botânico//work;4033;1040;2993;0;0;0
 20;20;0;Jardim Botânico//school;1492;6;1486;0;0;0
 20;20;0;Jardim Botânico//marketplace;0;0;0;0;0;0
@@ -12201,27 +12201,27 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Jardim Botânico//gas_station;0;0;0;0;0;0
 20;20;0;Jardim Botânico//hospital;0;0;0;0;0;0
 20;20;0;Jardim Botânico//shopping_mall;0;0;0;0;0;0
-20;20;0;Jardim Carvalho//home;8286;8286;0;-500;-500;0
+20;20;0;Jardim Carvalho//home;8536;8536;0;-250;-250;0
 20;20;0;Jardim Carvalho//work;3914;1599;2315;0;0;0
 20;20;0;Jardim Carvalho//school;918;105;813;0;0;0
 20;20;0;Jardim Carvalho//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Carvalho//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Carvalho//gas_station;0;0;0;0;0;0
 20;20;0;Jardim Carvalho//hospital;0;0;0;0;0;0
-20;20;0;Jardim do Salso//home;1236;1236;0;-250;-250;0
-20;20;0;Jardim do Salso//work;5759;480;5279;750;0;750
+20;20;0;Jardim do Salso//home;1486;1486;0;0;0;0
+20;20;0;Jardim do Salso//work;5259;480;4779;250;0;250
 20;20;0;Jardim do Salso//school;665;10;655;0;0;0
 20;20;0;Jardim do Salso//marketplace;0;0;0;0;0;0
 20;20;0;Jardim do Salso//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim do Salso//gas_station;0;0;0;0;0;0
-20;20;0;Jardim Leopoldina//home;5617;5617;0;-500;-500;0
-20;20;0;Jardim Leopoldina//work;6244;1429;4815;250;0;250
+20;20;0;Jardim Leopoldina//home;5867;5867;0;-250;-250;0
+20;20;0;Jardim Leopoldina//work;6494;1429;5065;500;0;500
 20;20;0;Jardim Leopoldina//school;1078;302;776;0;0;0
 20;20;0;Jardim Leopoldina//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Leopoldina//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Leopoldina//gas_station;0;0;0;0;0;0
 20;20;0;Jardim Europa//home;895;895;0;0;0;0
-20;20;0;Jardim Europa//work;3943;170;3773;500;0;500
+20;20;0;Jardim Europa//work;4193;170;4023;750;0;750
 20;20;0;Jardim Europa//school;1086;0;1086;0;0;0
 20;20;0;Jardim Europa//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Europa//pharmacy;0;0;0;0;0;0
@@ -12233,33 +12233,33 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Jardim Floresta//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Floresta//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Floresta//gas_station;0;0;0;0;0;0
-20;20;0;Jardim Isabel//home;509;509;0;-250;-250;0
+20;20;0;Jardim Isabel//home;759;759;0;0;0;0
 20;20;0;Jardim Isabel//work;3962;265;3697;500;0;500
 20;20;0;Jardim Isabel//school;659;0;659;0;0;0
 20;20;0;Jardim Isabel//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Isabel//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Isabel//gas_station;0;0;0;0;0;0
-20;20;0;Jardim Itú//home;4976;4976;0;0;0;0
-20;20;0;Jardim Itú//work;3943;358;3585;250;0;250
+20;20;0;Jardim Itú//home;4726;4726;0;-250;-250;0
+20;20;0;Jardim Itú//work;4193;608;3585;500;250;250
 20;20;0;Jardim Itú//school;1717;475;1242;0;0;0
 20;20;0;Jardim Itú//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Itú//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Itú//gas_station;0;0;0;0;0;0
 20;20;0;Jardim Lindóia//home;1960;1960;0;0;0;0
-20;20;0;Jardim Lindóia//work;3695;1;3694;500;1;499
+20;20;0;Jardim Lindóia//work;3445;0;3445;250;0;250
 20;20;0;Jardim Lindóia//school;827;237;590;0;0;0
 20;20;0;Jardim Lindóia//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Lindóia//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Lindóia//gas_station;0;0;0;0;0;0
 20;20;0;Jardim Lindóia//shopping_mall;0;0;0;0;0;0
 20;20;0;Jardim Sabará//home;4892;4892;0;0;0;0
-20;20;0;Jardim Sabará//work;4376;464;3912;500;0;500
+20;20;0;Jardim Sabará//work;3876;464;3412;0;0;0
 20;20;0;Jardim Sabará//school;1157;231;926;0;0;0
 20;20;0;Jardim Sabará//marketplace;0;0;0;0;0;0
 20;20;0;Jardim Sabará//pharmacy;0;0;0;0;0;0
 20;20;0;Jardim Sabará//gas_station;0;0;0;0;0;0
 20;20;0;Jardim São Pedro//home;716;716;0;0;0;0
-20;20;0;Jardim São Pedro//work;3021;0;3021;750;0;750
+20;20;0;Jardim São Pedro//work;2271;0;2271;0;0;0
 20;20;0;Jardim São Pedro//school;1697;241;1456;0;0;0
 20;20;0;Jardim São Pedro//marketplace;0;0;0;0;0;0
 20;20;0;Jardim São Pedro//pharmacy;0;0;0;0;0;0
@@ -12271,211 +12271,211 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Lageado//pharmacy;0;0;0;0;0;0
 20;20;0;Lageado//gas_station;0;0;0;0;0;0
 20;20;0;Lami//home;1398;1398;0;0;0;0
-20;20;0;Lami//work;1889;739;1150;0;0;0
+20;20;0;Lami//work;2139;739;1400;250;0;250
 20;20;0;Lami//school;569;233;336;0;0;0
 20;20;0;Lami//marketplace;0;0;0;0;0;0
 20;20;0;Lami//pharmacy;0;0;0;0;0;0
 20;20;0;Lami//gas_station;0;0;0;0;0;0
-20;20;0;Lomba do Pinheiro//home;22602;22602;0;-1500;-1500;0
-20;20;0;Lomba do Pinheiro//work;3647;2028;1619;0;0;0
+20;20;0;Lomba do Pinheiro//home;22352;22352;0;-1750;-1750;0
+20;20;0;Lomba do Pinheiro//work;3897;2028;1869;250;0;250
 20;20;0;Lomba do Pinheiro//school;721;287;434;0;0;0
 20;20;0;Lomba do Pinheiro//marketplace;0;0;0;0;0;0
 20;20;0;Lomba do Pinheiro//pharmacy;0;0;0;0;0;0
 20;20;0;Lomba do Pinheiro//gas_station;0;0;0;0;0;0
-20;20;0;Mário Quintana//home;15135;15135;0;-750;-750;0
-20;20;0;Mário Quintana//work;5186;3309;1877;0;0;0
+20;20;0;Mário Quintana//home;14885;14885;0;-1000;-1000;0
+20;20;0;Mário Quintana//work;5936;3809;2127;750;500;250
 20;20;0;Mário Quintana//school;750;365;385;0;0;0
 20;20;0;Mário Quintana//marketplace;0;0;0;0;0;0
 20;20;0;Mário Quintana//pharmacy;0;0;0;0;0;0
 20;20;0;Mário Quintana//gas_station;0;0;0;0;0;0
-20;20;0;Medianeira//home;3444;3444;0;-250;-250;0
-20;20;0;Medianeira//work;5075;745;4330;500;2;498
+20;20;0;Medianeira//home;3194;3194;0;-500;-500;0
+20;20;0;Medianeira//work;5075;993;4082;500;250;250
 20;20;0;Medianeira//school;1738;48;1690;0;0;0
 20;20;0;Medianeira//marketplace;0;0;0;0;0;0
 20;20;0;Medianeira//pharmacy;0;0;0;0;0;0
 20;20;0;Medianeira//gas_station;0;0;0;0;0;0
 20;20;0;Menino Deus//home;7994;7994;0;-500;-500;0
-20;20;0;Menino Deus//work;4228;796;3432;500;10;490
+20;20;0;Menino Deus//work;4478;1036;3442;750;250;500
 20;20;0;Menino Deus//school;2277;580;1697;0;0;0
 20;20;0;Menino Deus//marketplace;0;0;0;0;0;0
 20;20;0;Menino Deus//pharmacy;0;0;0;0;0;0
 20;20;0;Menino Deus//gas_station;0;0;0;0;0;0
 20;20;0;Menino Deus//hospital;0;0;0;0;0;0
-20;20;0;Moinhos de Vento//home;3981;3981;0;-250;-250;0
-20;20;0;Moinhos de Vento//work;6220;777;5443;1500;256;1244
+20;20;0;Moinhos de Vento//home;4231;4231;0;0;0;0
+20;20;0;Moinhos de Vento//work;4970;521;4449;250;0;250
 20;20;0;Moinhos de Vento//school;338;6;332;0;0;0
 20;20;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
 20;20;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
 20;20;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
 20;20;0;Moinhos de Vento//hospital;0;0;0;0;0;0
 20;20;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
-20;20;0;Mont'Serrat//home;3469;3469;0;0;0;0
-20;20;0;Mont'Serrat//work;4225;818;3407;250;2;248
+20;20;0;Mont'Serrat//home;2719;2719;0;-750;-750;0
+20;20;0;Mont'Serrat//work;4725;1316;3409;750;500;250
 20;20;0;Mont'Serrat//school;1312;258;1054;0;0;0
 20;20;0;Mont'Serrat//marketplace;0;0;0;0;0;0
 20;20;0;Mont'Serrat//pharmacy;0;0;0;0;0;0
 20;20;0;Mont'Serrat//gas_station;0;0;0;0;0;0
-20;20;0;Morro Santana//home;7752;7752;0;0;0;0
-20;20;0;Morro Santana//work;5475;1711;3764;1250;3;1247
+20;20;0;Morro Santana//home;7502;7502;0;-250;-250;0
+20;20;0;Morro Santana//work;4975;1708;3267;750;0;750
 20;20;0;Morro Santana//school;496;272;224;0;0;0
 20;20;0;Morro Santana//marketplace;0;0;0;0;0;0
 20;20;0;Morro Santana//pharmacy;0;0;0;0;0;0
 20;20;0;Morro Santana//gas_station;0;0;0;0;0;0
 20;20;0;Navegantes//home;1735;1735;0;0;0;0
-20;20;0;Navegantes//work;7288;213;7075;4000;0;4000
+20;20;0;Navegantes//work;3288;213;3075;0;0;0
 20;20;0;Navegantes//school;706;43;663;0;0;0
 20;20;0;Navegantes//marketplace;0;0;0;0;0;0
 20;20;0;Navegantes//pharmacy;0;0;0;0;0;0
 20;20;0;Navegantes//gas_station;0;0;0;0;0;0
 20;20;0;Navegantes//shopping_mall;0;0;0;0;0;0
 20;20;0;Nonoai//home;7891;7891;0;-500;-500;0
-20;20;0;Nonoai//work;6474;572;5902;250;0;250
+20;20;0;Nonoai//work;6724;572;6152;500;0;500
 20;20;0;Nonoai//school;1562;537;1025;0;0;0
 20;20;0;Nonoai//marketplace;0;0;0;0;0;0
 20;20;0;Nonoai//pharmacy;0;0;0;0;0;0
 20;20;0;Nonoai//gas_station;0;0;0;0;0;0
 20;20;0;Parque Santa Fé//home;2541;2541;0;0;0;0
-20;20;0;Parque Santa Fé//work;5708;84;5624;0;0;0
+20;20;0;Parque Santa Fé//work;5958;84;5874;250;0;250
 20;20;0;Parque Santa Fé//school;1286;44;1242;0;0;0
 20;20;0;Parque Santa Fé//marketplace;0;0;0;0;0;0
 20;20;0;Parque Santa Fé//pharmacy;0;0;0;0;0;0
 20;20;0;Parque Santa Fé//gas_station;0;0;0;0;0;0
 20;20;0;Partenon//home;16662;16662;0;-1750;-1750;0
-20;20;0;Partenon//work;7207;1008;6199;1750;274;1476
+20;20;0;Partenon//work;5957;734;5223;500;0;500
 20;20;0;Partenon//school;1353;6;1347;0;0;0
 20;20;0;Partenon//marketplace;0;0;0;0;0;0
 20;20;0;Partenon//pharmacy;0;0;0;0;0;0
 20;20;0;Partenon//gas_station;0;0;0;0;0;0
-20;20;0;Passo D'Areia//home;7417;7417;0;-250;-250;0
-20;20;0;Passo D'Areia//work;3732;621;3111;0;0;0
+20;20;0;Passo D'Areia//home;7167;7167;0;-500;-500;0
+20;20;0;Passo D'Areia//work;3982;621;3361;250;0;250
 20;20;0;Passo D'Areia//school;881;236;645;0;0;0
 20;20;0;Passo D'Areia//marketplace;0;0;0;0;0;0
 20;20;0;Passo D'Areia//pharmacy;0;0;0;0;0;0
 20;20;0;Passo D'Areia//gas_station;0;0;0;0;0;0
-20;20;0;Passo das Pedras//home;4646;4646;0;0;0;0
-20;20;0;Passo das Pedras//work;5143;1368;3775;1000;2;998
+20;20;0;Passo das Pedras//home;4396;4396;0;-250;-250;0
+20;20;0;Passo das Pedras//work;4643;1616;3027;500;250;250
 20;20;0;Passo das Pedras//school;786;253;533;0;0;0
 20;20;0;Passo das Pedras//marketplace;0;0;0;0;0;0
 20;20;0;Passo das Pedras//pharmacy;0;0;0;0;0;0
 20;20;0;Passo das Pedras//gas_station;0;0;0;0;0;0
 20;20;0;Pedra Redonda//home;177;177;0;0;0;0
-20;20;0;Pedra Redonda//work;1921;0;1921;0;0;0
+20;20;0;Pedra Redonda//work;2171;0;2171;250;0;250
 20;20;0;Pedra Redonda//school;840;0;840;0;0;0
 20;20;0;Pedra Redonda//marketplace;0;0;0;0;0;0
 20;20;0;Pedra Redonda//pharmacy;0;0;0;0;0;0
 20;20;0;Pedra Redonda//gas_station;0;0;0;0;0;0
 20;20;0;Petrópolis//home;11087;11087;0;-500;-500;0
-20;20;0;Petrópolis//work;3890;98;3792;750;12;738
+20;20;0;Petrópolis//work;3140;86;3054;0;0;0
 20;20;0;Petrópolis//school;1638;884;754;0;0;0
 20;20;0;Petrópolis//marketplace;0;0;0;0;0;0
 20;20;0;Petrópolis//pharmacy;0;0;0;0;0;0
 20;20;0;Petrópolis//gas_station;0;0;0;0;0;0
 20;20;0;Pitinga//home;2006;2006;0;0;0;0
-20;20;0;Pitinga//work;3546;300;3246;500;0;500
+20;20;0;Pitinga//work;3296;300;2996;250;0;250
 20;20;0;Pitinga//school;892;6;886;0;0;0
 20;20;0;Pitinga//marketplace;0;0;0;0;0;0
 20;20;0;Pitinga//pharmacy;0;0;0;0;0;0
 20;20;0;Pitinga//gas_station;0;0;0;0;0;0
-20;20;0;Ponta Grossa//home;3091;3091;0;-500;-500;0
-20;20;0;Ponta Grossa//work;3270;824;2446;500;250;250
+20;20;0;Ponta Grossa//home;3591;3591;0;0;0;0
+20;20;0;Ponta Grossa//work;3270;574;2696;500;0;500
 20;20;0;Ponta Grossa//school;135;25;110;0;0;0
 20;20;0;Ponta Grossa//marketplace;0;0;0;0;0;0
 20;20;0;Ponta Grossa//pharmacy;0;0;0;0;0;0
 20;20;0;Ponta Grossa//gas_station;0;0;0;0;0;0
 20;20;0;Praia de Belas//home;986;986;0;0;0;0
-20;20;0;Praia de Belas//work;3900;0;3900;250;0;250
+20;20;0;Praia de Belas//work;3650;0;3650;0;0;0
 20;20;0;Praia de Belas//school;753;0;753;0;0;0
 20;20;0;Praia de Belas//marketplace;0;0;0;0;0;0
 20;20;0;Praia de Belas//pharmacy;0;0;0;0;0;0
 20;20;0;Praia de Belas//gas_station;0;0;0;0;0;0
 20;20;0;Praia de Belas//stadium;0;0;0;0;0;0
 20;20;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
-20;20;0;Restinga//home;21656;21656;0;-750;-750;0
-20;20;0;Restinga//work;5079;3558;1521;500;250;250
+20;20;0;Restinga//home;22156;22156;0;-250;-250;0
+20;20;0;Restinga//work;5079;3308;1771;500;0;500
 20;20;0;Restinga//school;319;35;284;0;0;0
 20;20;0;Restinga//marketplace;0;0;0;0;0;0
 20;20;0;Restinga//pharmacy;0;0;0;0;0;0
 20;20;0;Restinga//gas_station;0;0;0;0;0;0
 20;20;0;Restinga//hospital;0;0;0;0;0;0
-20;20;0;Rio Branco//home;4703;4703;0;-500;-500;0
-20;20;0;Rio Branco//work;5125;0;5125;750;0;750
+20;20;0;Rio Branco//home;4953;4953;0;-250;-250;0
+20;20;0;Rio Branco//work;4875;0;4875;500;0;500
 20;20;0;Rio Branco//school;1219;11;1208;0;0;0
 20;20;0;Rio Branco//marketplace;0;0;0;0;0;0
 20;20;0;Rio Branco//pharmacy;0;0;0;0;0;0
 20;20;0;Rio Branco//gas_station;0;0;0;0;0;0
 20;20;0;Rio Branco//hospital;0;0;0;0;0;0
-20;20;0;Rubem Berta//home;11307;11307;0;-250;-250;0
-20;20;0;Rubem Berta//work;4870;2303;2567;750;5;745
+20;20;0;Rubem Berta//home;10557;10557;0;-1000;-1000;0
+20;20;0;Rubem Berta//work;4120;2298;1822;0;0;0
 20;20;0;Rubem Berta//school;1359;109;1250;0;0;0
 20;20;0;Rubem Berta//marketplace;0;0;0;0;0;0
 20;20;0;Rubem Berta//pharmacy;0;0;0;0;0;0
 20;20;0;Rubem Berta//gas_station;0;0;0;0;0;0
-20;20;0;Santa Cecília//home;1761;1761;0;-250;-250;0
-20;20;0;Santa Cecília//work;3980;84;3896;500;1;499
+20;20;0;Santa Cecília//home;2011;2011;0;0;0;0
+20;20;0;Santa Cecília//work;3730;83;3647;250;0;250
 20;20;0;Santa Cecília//school;1875;136;1739;0;0;0
 20;20;0;Santa Cecília//marketplace;0;0;0;0;0;0
 20;20;0;Santa Cecília//pharmacy;0;0;0;0;0;0
 20;20;0;Santa Cecília//gas_station;0;0;0;0;0;0
 20;20;0;Santa Cecília//hospital;0;0;0;0;0;0
 20;20;0;Santa Maria Goretti//home;1115;1115;0;0;0;0
-20;20;0;Santa Maria Goretti//work;4521;0;4521;500;0;500
+20;20;0;Santa Maria Goretti//work;4271;0;4271;250;0;250
 20;20;0;Santa Maria Goretti//school;1436;6;1430;0;0;0
 20;20;0;Santa Maria Goretti//marketplace;0;0;0;0;0;0
 20;20;0;Santa Maria Goretti//pharmacy;0;0;0;0;0;0
 20;20;0;Santa Maria Goretti//gas_station;0;0;0;0;0;0
-20;20;0;Santa Rosa de Lima//home;10246;10246;0;-500;-500;0
-20;20;0;Santa Rosa de Lima//work;5710;1988;3722;1250;500;750
+20;20;0;Santa Rosa de Lima//home;9996;9996;0;-750;-750;0
+20;20;0;Santa Rosa de Lima//work;4960;1738;3222;500;250;250
 20;20;0;Santa Rosa de Lima//school;891;6;885;0;0;0
 20;20;0;Santa Rosa de Lima//marketplace;0;0;0;0;0;0
 20;20;0;Santa Rosa de Lima//pharmacy;0;0;0;0;0;0
 20;20;0;Santa Rosa de Lima//gas_station;0;0;0;0;0;0
 20;20;0;Santa Tereza//home;13878;13878;0;-750;-750;0
-20;20;0;Santa Tereza//work;7173;2385;4788;1000;264;736
+20;20;0;Santa Tereza//work;6923;2371;4552;750;250;500
 20;20;0;Santa Tereza//school;1207;0;1207;0;0;0
 20;20;0;Santa Tereza//marketplace;0;0;0;0;0;0
 20;20;0;Santa Tereza//pharmacy;0;0;0;0;0;0
 20;20;0;Santa Tereza//gas_station;0;0;0;0;0;0
-20;20;0;Santana//home;5592;5592;0;-1000;-1000;0
-20;20;0;Santana//work;3101;274;2827;500;3;497
+20;20;0;Santana//home;6092;6092;0;-500;-500;0
+20;20;0;Santana//work;3101;271;2830;500;0;500
 20;20;0;Santana//school;1359;0;1359;0;0;0
 20;20;0;Santana//marketplace;0;0;0;0;0;0
 20;20;0;Santana//pharmacy;0;0;0;0;0;0
 20;20;0;Santana//gas_station;0;0;0;0;0;0
 20;20;0;Santana//hospital;0;0;0;0;0;0
 20;20;0;Santo Antônio//home;3808;3808;0;-250;-250;0
-20;20;0;Santo Antônio//work;2382;293;2089;0;0;0
+20;20;0;Santo Antônio//work;2882;293;2589;500;0;500
 20;20;0;Santo Antônio//school;1480;275;1205;0;0;0
 20;20;0;Santo Antônio//marketplace;0;0;0;0;0;0
 20;20;0;Santo Antônio//pharmacy;0;0;0;0;0;0
 20;20;0;Santo Antônio//gas_station;0;0;0;0;0;0
 20;20;0;São Caetano//home;406;406;0;0;0;0
-20;20;0;São Caetano//work;1425;83;1342;250;0;250
+20;20;0;São Caetano//work;1175;83;1092;0;0;0
 20;20;0;São Caetano//school;303;0;303;0;0;0
 20;20;0;São Caetano//marketplace;0;0;0;0;0;0
 20;20;0;São Caetano//pharmacy;0;0;0;0;0;0
 20;20;0;São Caetano//gas_station;0;0;0;0;0;0
 20;20;0;São Geraldo//home;2839;2839;0;-250;-250;0
-20;20;0;São Geraldo//work;3347;920;2427;500;2;498
+20;20;0;São Geraldo//work;2847;918;1929;0;0;0
 20;20;0;São Geraldo//school;1192;298;894;0;0;0
 20;20;0;São Geraldo//marketplace;0;0;0;0;0;0
 20;20;0;São Geraldo//pharmacy;0;0;0;0;0;0
 20;20;0;São Geraldo//gas_station;0;0;0;0;0;0
-20;20;0;São João//home;3285;3285;0;-750;-750;0
-20;20;0;São João//work;5030;456;4574;1000;256;744
+20;20;0;São João//home;3785;3785;0;-250;-250;0
+20;20;0;São João//work;4030;200;3830;0;0;0
 20;20;0;São João//school;609;261;348;0;0;0
 20;20;0;São João//marketplace;0;0;0;0;0;0
 20;20;0;São João//pharmacy;0;0;0;0;0;0
 20;20;0;São João//gas_station;0;0;0;0;0;0
 20;20;0;São João//shopping_mall;0;0;0;0;0;0
-20;20;0;São Sebastião//home;1989;1989;0;-250;-250;0
-20;20;0;São Sebastião//work;3176;616;2560;500;2;498
+20;20;0;São Sebastião//home;2239;2239;0;0;0;0
+20;20;0;São Sebastião//work;2926;614;2312;250;0;250
 20;20;0;São Sebastião//school;767;271;496;0;0;0
 20;20;0;São Sebastião//marketplace;0;0;0;0;0;0
 20;20;0;São Sebastião//pharmacy;0;0;0;0;0;0
 20;20;0;São Sebastião//gas_station;0;0;0;0;0;0
 20;20;0;São Sebastião//shopping_mall;0;0;0;0;0;0
-20;20;0;Sarandi//home;25648;25648;0;-1750;-1750;0
-20;20;0;Sarandi//work;2107;331;1776;250;0;250
+20;20;0;Sarandi//home;26648;26648;0;-750;-750;0
+20;20;0;Sarandi//work;2357;331;2026;500;0;500
 20;20;0;Sarandi//school;1354;273;1081;0;0;0
 20;20;0;Sarandi//marketplace;0;0;0;0;0;0
 20;20;0;Sarandi//pharmacy;0;0;0;0;0;0
@@ -12488,26 +12488,26 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Serraria//pharmacy;0;0;0;0;0;0
 20;20;0;Serraria//gas_station;0;0;0;0;0;0
 20;20;0;Sétimo Céu//home;519;519;0;0;0;0
-20;20;0;Sétimo Céu//work;2966;0;2966;0;0;0
+20;20;0;Sétimo Céu//work;3216;0;3216;250;0;250
 20;20;0;Sétimo Céu//school;767;0;767;0;0;0
 20;20;0;Sétimo Céu//marketplace;0;0;0;0;0;0
 20;20;0;Sétimo Céu//pharmacy;0;0;0;0;0;0
 20;20;0;Sétimo Céu//gas_station;0;0;0;0;0;0
-20;20;0;Teresópolis//home;4539;4539;0;-250;-250;0
-20;20;0;Teresópolis//work;3359;445;2914;250;0;250
+20;20;0;Teresópolis//home;4039;4039;0;-750;-750;0
+20;20;0;Teresópolis//work;3859;445;3414;750;0;750
 20;20;0;Teresópolis//school;1023;39;984;0;0;0
 20;20;0;Teresópolis//marketplace;0;0;0;0;0;0
 20;20;0;Teresópolis//pharmacy;0;0;0;0;0;0
 20;20;0;Teresópolis//gas_station;0;0;0;0;0;0
 20;20;0;Teresópolis//hospital;0;0;0;0;0;0
 20;20;0;Três Figueiras//home;1146;1146;0;0;0;0
-20;20;0;Três Figueiras//work;4720;165;4555;500;0;500
+20;20;0;Três Figueiras//work;4470;165;4305;250;0;250
 20;20;0;Três Figueiras//school;795;0;795;0;0;0
 20;20;0;Três Figueiras//marketplace;0;0;0;0;0;0
 20;20;0;Três Figueiras//pharmacy;0;0;0;0;0;0
 20;20;0;Três Figueiras//gas_station;0;0;0;0;0;0
 20;20;0;Três Figueiras//shopping_mall;0;0;0;0;0;0
-20;20;0;Tristeza//home;5683;5683;0;0;0;0
+20;20;0;Tristeza//home;4933;4933;0;-750;-750;0
 20;20;0;Tristeza//work;2946;300;2646;0;0;0
 20;20;0;Tristeza//school;101;4;97;0;0;0
 20;20;0;Tristeza//marketplace;0;0;0;0;0;0
@@ -12521,74 +12521,74 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 20;20;0;Vila Assunção//gas_station;0;0;0;0;0;0
 20;20;0;Vila Assunção//hospital;0;0;0;0;0;0
 20;20;0;Vila Conceição//home;710;710;0;0;0;0
-20;20;0;Vila Conceição//work;2713;0;2713;500;0;500
+20;20;0;Vila Conceição//work;2213;0;2213;0;0;0
 20;20;0;Vila Conceição//school;347;0;347;0;0;0
 20;20;0;Vila Conceição//marketplace;0;0;0;0;0;0
 20;20;0;Vila Conceição//pharmacy;0;0;0;0;0;0
 20;20;0;Vila Conceição//gas_station;0;0;0;0;0;0
-20;20;0;Vila Ipiranga//home;5933;5933;0;0;0;0
-20;20;0;Vila Ipiranga//work;4402;766;3636;500;3;497
+20;20;0;Vila Ipiranga//home;5683;5683;0;-250;-250;0
+20;20;0;Vila Ipiranga//work;4152;763;3389;250;0;250
 20;20;0;Vila Ipiranga//school;528;97;431;0;0;0
 20;20;0;Vila Ipiranga//marketplace;0;0;0;0;0;0
 20;20;0;Vila Ipiranga//pharmacy;0;0;0;0;0;0
 20;20;0;Vila Ipiranga//gas_station;0;0;0;0;0;0
-20;20;0;Vila Jardim//home;3587;3587;0;-250;-250;0
-20;20;0;Vila Jardim//work;5068;1011;4057;750;254;496
+20;20;0;Vila Jardim//home;3837;3837;0;0;0;0
+20;20;0;Vila Jardim//work;4568;757;3811;250;0;250
 20;20;0;Vila Jardim//school;146;0;146;0;0;0
 20;20;0;Vila Jardim//marketplace;0;0;0;0;0;0
 20;20;0;Vila Jardim//pharmacy;0;0;0;0;0;0
 20;20;0;Vila Jardim//gas_station;0;0;0;0;0;0
-20;20;0;Vila João Pessoa//home;4372;4372;0;-250;-250;0
-20;20;0;Vila João Pessoa//work;6879;796;6083;2000;8;1992
+20;20;0;Vila João Pessoa//home;4622;4622;0;0;0;0
+20;20;0;Vila João Pessoa//work;5379;788;4591;500;0;500
 20;20;0;Vila João Pessoa//school;815;67;748;0;0;0
 20;20;0;Vila João Pessoa//marketplace;0;0;0;0;0;0
 20;20;0;Vila João Pessoa//pharmacy;0;0;0;0;0;0
 20;20;0;Vila João Pessoa//gas_station;0;0;0;0;0;0
-20;20;0;Vila Nova//home;12322;12322;0;-750;-750;0
-20;20;0;Vila Nova//work;4156;498;3658;500;5;495
+20;20;0;Vila Nova//home;11822;11822;0;-1250;-1250;0
+20;20;0;Vila Nova//work;4156;743;3413;500;250;250
 20;20;0;Vila Nova//school;1209;594;615;0;0;0
 20;20;0;Vila Nova//marketplace;0;0;0;0;0;0
 20;20;0;Vila Nova//pharmacy;0;0;0;0;0;0
 20;20;0;Vila Nova//gas_station;0;0;0;0;0;0
 20;20;0;Vila Nova//hospital;0;0;0;0;0;0
-20;20;0;São José//home;9089;9089;0;-250;-250;0
-20;20;0;São José//work;5378;1898;3480;1000;254;746
+20;20;0;São José//home;9339;9339;0;0;0;0
+20;20;0;São José//work;4628;1644;2984;250;0;250
 20;20;0;São José//school;630;223;407;0;0;0
 20;20;0;São José//marketplace;0;0;0;0;0;0
 20;20;0;São José//pharmacy;0;0;0;0;0;0
 20;20;0;São José//gas_station;0;0;0;0;0;0
 21;21;0;Aberta dos Morros//home;2448;2448;0;0;0;0
-21;21;0;Aberta dos Morros//work;3580;168;3412;0;0;0
+21;21;0;Aberta dos Morros//work;2830;168;2662;0;0;0
 21;21;0;Aberta dos Morros//school;1111;0;1111;0;0;0
 21;21;0;Aberta dos Morros//marketplace;0;0;0;0;0;0
 21;21;0;Aberta dos Morros//pharmacy;0;0;0;0;0;0
 21;21;0;Aberta dos Morros//gas_station;0;0;0;0;0;0
 21;21;0;Agronomia//home;771;771;0;0;0;0
-21;21;0;Agronomia//work;4113;0;4113;0;0;0
+21;21;0;Agronomia//work;3613;0;3613;0;0;0
 21;21;0;Agronomia//school;1223;0;1223;0;0;0
 21;21;0;Agronomia//marketplace;0;0;0;0;0;0
 21;21;0;Agronomia//pharmacy;0;0;0;0;0;0
 21;21;0;Agronomia//gas_station;0;0;0;0;0;0
 21;21;0;Anchieta//home;723;723;0;0;0;0
-21;21;0;Anchieta//work;2344;0;2344;250;0;250
+21;21;0;Anchieta//work;1344;0;1344;0;0;0
 21;21;0;Anchieta//school;1469;0;1469;0;0;0
 21;21;0;Anchieta//marketplace;0;0;0;0;0;0
 21;21;0;Anchieta//pharmacy;0;0;0;0;0;0
 21;21;0;Anchieta//gas_station;0;0;0;0;0;0
 21;21;0;Arquipélago//home;3082;3082;0;0;0;0
-21;21;0;Arquipélago//work;1225;2;1223;0;0;0
+21;21;0;Arquipélago//work;725;0;725;0;0;0
 21;21;0;Arquipélago//school;307;0;307;0;0;0
 21;21;0;Arquipélago//marketplace;0;0;0;0;0;0
 21;21;0;Arquipélago//pharmacy;0;0;0;0;0;0
 21;21;0;Arquipélago//gas_station;0;0;0;0;0;0
 21;21;0;Auxiliadora//home;3082;3082;0;0;0;0
-21;21;0;Auxiliadora//work;4485;192;4293;0;0;0
+21;21;0;Auxiliadora//work;4485;191;4294;250;0;250
 21;21;0;Auxiliadora//school;493;5;488;0;0;0
 21;21;0;Auxiliadora//marketplace;0;0;0;0;0;0
 21;21;0;Auxiliadora//pharmacy;0;0;0;0;0;0
 21;21;0;Auxiliadora//gas_station;0;0;0;0;0;0
-21;21;0;Azenha//home;4478;4478;0;-500;-500;0
-21;21;0;Azenha//work;3124;412;2712;250;250;0
+21;21;0;Azenha//home;4978;4978;0;0;0;0
+21;21;0;Azenha//work;3124;162;2962;250;0;250
 21;21;0;Azenha//school;1092;0;1092;0;0;0
 21;21;0;Azenha//marketplace;0;0;0;0;0;0
 21;21;0;Azenha//pharmacy;0;0;0;0;0;0
@@ -12596,43 +12596,43 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Azenha//hospital;0;0;0;0;0;0
 21;21;0;Azenha//shopping_mall;0;0;0;0;0;0
 21;21;0;Bela Vista//home;2721;2721;0;0;0;0
-21;21;0;Bela Vista//work;4053;243;3810;250;2;248
+21;21;0;Bela Vista//work;3803;239;3564;0;0;0
 21;21;0;Bela Vista//school;1607;532;1075;0;0;0
 21;21;0;Bela Vista//marketplace;0;0;0;0;0;0
 21;21;0;Bela Vista//pharmacy;0;0;0;0;0;0
 21;21;0;Bela Vista//gas_station;0;0;0;0;0;0
-21;21;0;Belém Novo//home;3982;3982;0;-250;-250;0
-21;21;0;Belém Novo//work;2663;1097;1566;250;250;0
+21;21;0;Belém Novo//home;4232;4232;0;0;0;0
+21;21;0;Belém Novo//work;2163;846;1317;0;0;0
 21;21;0;Belém Novo//school;446;31;415;0;0;0
 21;21;0;Belém Novo//marketplace;0;0;0;0;0;0
 21;21;0;Belém Novo//pharmacy;0;0;0;0;0;0
 21;21;0;Belém Novo//gas_station;0;0;0;0;0;0
-21;21;0;Belém Velho//home;4069;4069;0;0;0;0
-21;21;0;Belém Velho//work;4643;3;4640;0;0;0
+21;21;0;Belém Velho//home;3819;3819;0;-250;-250;0
+21;21;0;Belém Velho//work;3393;0;3393;0;0;0
 21;21;0;Belém Velho//school;602;66;536;0;0;0
 21;21;0;Belém Velho//marketplace;0;0;0;0;0;0
 21;21;0;Belém Velho//pharmacy;0;0;0;0;0;0
 21;21;0;Belém Velho//gas_station;0;0;0;0;0;0
-21;21;0;Boa Vista//home;3160;3160;0;0;0;0
-21;21;0;Boa Vista//work;6116;951;5165;0;0;0
+21;21;0;Boa Vista//home;2910;2910;0;-250;-250;0
+21;21;0;Boa Vista//work;5866;951;4915;0;0;0
 21;21;0;Boa Vista//school;1176;36;1140;0;0;0
 21;21;0;Boa Vista//marketplace;0;0;0;0;0;0
 21;21;0;Boa Vista//pharmacy;0;0;0;0;0;0
 21;21;0;Boa Vista//gas_station;0;0;0;0;0;0
 21;21;0;Boa Vista do Sul//home;1164;1164;0;0;0;0
-21;21;0;Boa Vista do Sul//work;1057;0;1057;250;0;250
+21;21;0;Boa Vista do Sul//work;1057;0;1057;0;0;0
 21;21;0;Boa Vista do Sul//school;73;0;73;0;0;0
 21;21;0;Boa Vista do Sul//marketplace;0;0;0;0;0;0
 21;21;0;Boa Vista do Sul//pharmacy;0;0;0;0;0;0
 21;21;0;Boa Vista do Sul//gas_station;0;0;0;0;0;0
 21;21;0;Bom Fim//home;3454;3454;0;0;0;0
-21;21;0;Bom Fim//work;4411;550;3861;250;2;248
+21;21;0;Bom Fim//work;3411;547;2864;0;0;0
 21;21;0;Bom Fim//school;963;78;885;0;0;0
 21;21;0;Bom Fim//marketplace;0;0;0;0;0;0
 21;21;0;Bom Fim//pharmacy;0;0;0;0;0;0
 21;21;0;Bom Fim//gas_station;0;0;0;0;0;0
 21;21;0;Bom Jesus//home;9075;9075;0;0;0;0
-21;21;0;Bom Jesus//work;5075;1462;3613;0;0;0
+21;21;0;Bom Jesus//work;5075;1458;3617;0;0;0
 21;21;0;Bom Jesus//school;861;185;676;0;0;0
 21;21;0;Bom Jesus//marketplace;0;0;0;0;0;0
 21;21;0;Bom Jesus//pharmacy;0;0;0;0;0;0
@@ -12655,15 +12655,15 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Cascata//marketplace;0;0;0;0;0;0
 21;21;0;Cascata//pharmacy;0;0;0;0;0;0
 21;21;0;Cascata//gas_station;0;0;0;0;0;0
-21;21;0;Cavalhada//home;7778;7778;0;0;0;0
-21;21;0;Cavalhada//work;5088;363;4725;250;5;245
+21;21;0;Cavalhada//home;7278;7278;0;-500;-500;0
+21;21;0;Cavalhada//work;5088;358;4730;0;0;0
 21;21;0;Cavalhada//school;1442;852;590;0;0;0
 21;21;0;Cavalhada//marketplace;0;0;0;0;0;0
 21;21;0;Cavalhada//pharmacy;0;0;0;0;0;0
 21;21;0;Cavalhada//gas_station;0;0;0;0;0;0
 21;21;0;Cavalhada//shopping_mall;0;0;0;0;0;0
 21;21;0;Centro Histórico//home;8790;8790;0;-250;-250;0
-21;21;0;Centro Histórico//work;2455;933;1522;0;0;0
+21;21;0;Centro Histórico//work;2705;933;1772;250;0;250
 21;21;0;Centro Histórico//school;1007;72;935;0;0;0
 21;21;0;Centro Histórico//marketplace;0;0;0;0;0;0
 21;21;0;Centro Histórico//pharmacy;0;0;0;0;0;0
@@ -12671,83 +12671,83 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Centro Histórico//hospital;0;0;0;0;0;0
 21;21;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
 21;21;0;Chácara das Pedras//home;2252;2252;0;0;0;0
-21;21;0;Chácara das Pedras//work;3434;629;2805;0;0;0
+21;21;0;Chácara das Pedras//work;3684;628;3056;250;0;250
 21;21;0;Chácara das Pedras//school;425;0;425;0;0;0
 21;21;0;Chácara das Pedras//marketplace;0;0;0;0;0;0
 21;21;0;Chácara das Pedras//pharmacy;0;0;0;0;0;0
 21;21;0;Chácara das Pedras//gas_station;0;0;0;0;0;0
 21;21;0;Chapéu do Sol//home;1193;1193;0;0;0;0
-21;21;0;Chapéu do Sol//work;3208;162;3046;250;0;250
+21;21;0;Chapéu do Sol//work;2708;162;2546;0;0;0
 21;21;0;Chapéu do Sol//school;1068;0;1068;0;0;0
 21;21;0;Chapéu do Sol//marketplace;0;0;0;0;0;0
 21;21;0;Chapéu do Sol//pharmacy;0;0;0;0;0;0
 21;21;0;Chapéu do Sol//gas_station;0;0;0;0;0;0
-21;21;0;Cidade Baixa//home;3285;3285;0;0;0;0
-21;21;0;Cidade Baixa//work;7604;1388;6216;0;0;0
+21;21;0;Cidade Baixa//home;3035;3035;0;-250;-250;0
+21;21;0;Cidade Baixa//work;6854;1636;5218;500;250;250
 21;21;0;Cidade Baixa//school;569;58;511;0;0;0
 21;21;0;Cidade Baixa//marketplace;0;0;0;0;0;0
 21;21;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
 21;21;0;Cidade Baixa//gas_station;0;0;0;0;0;0
-21;21;0;Cel. Aparício Borges//home;5973;5973;0;0;0;0
-21;21;0;Cel. Aparício Borges//work;8390;1920;6470;0;0;0
+21;21;0;Cel. Aparício Borges//home;5723;5723;0;-250;-250;0
+21;21;0;Cel. Aparício Borges//work;7890;1914;5976;0;0;0
 21;21;0;Cel. Aparício Borges//school;619;103;516;0;0;0
 21;21;0;Cel. Aparício Borges//marketplace;0;0;0;0;0;0
 21;21;0;Cel. Aparício Borges//pharmacy;0;0;0;0;0;0
 21;21;0;Cel. Aparício Borges//gas_station;0;0;0;0;0;0
-21;21;0;Costa e Silva//home;5341;5341;0;0;0;0
-21;21;0;Costa e Silva//work;3506;336;3170;0;0;0
+21;21;0;Costa e Silva//home;5091;5091;0;-250;-250;0
+21;21;0;Costa e Silva//work;3256;333;2923;0;0;0
 21;21;0;Costa e Silva//school;1774;304;1470;0;0;0
 21;21;0;Costa e Silva//marketplace;0;0;0;0;0;0
 21;21;0;Costa e Silva//pharmacy;0;0;0;0;0;0
 21;21;0;Costa e Silva//gas_station;0;0;0;0;0;0
-21;21;0;Cristal//home;9223;9223;0;-500;-500;0
-21;21;0;Cristal//work;4416;1402;3014;250;250;0
+21;21;0;Cristal//home;9473;9473;0;-250;-250;0
+21;21;0;Cristal//work;4666;1152;3514;0;0;0
 21;21;0;Cristal//school;1237;407;830;0;0;0
 21;21;0;Cristal//marketplace;0;0;0;0;0;0
 21;21;0;Cristal//pharmacy;0;0;0;0;0;0
 21;21;0;Cristal//gas_station;0;0;0;0;0;0
 21;21;0;Cristo Redentor//home;4765;4765;0;0;0;0
-21;21;0;Cristo Redentor//work;3079;292;2787;500;6;494
+21;21;0;Cristo Redentor//work;2079;281;1798;0;0;0
 21;21;0;Cristo Redentor//school;1125;0;1125;0;0;0
 21;21;0;Cristo Redentor//marketplace;0;0;0;0;0;0
 21;21;0;Cristo Redentor//pharmacy;0;0;0;0;0;0
 21;21;0;Cristo Redentor//gas_station;0;0;0;0;0;0
 21;21;0;Cristo Redentor//hospital;0;0;0;0;0;0
 21;21;0;Cristo Redentor//shopping_mall;0;0;0;0;0;0
-21;21;0;Espírito Santo//home;1517;1517;0;-250;-250;0
-21;21;0;Espírito Santo//work;4011;750;3261;250;250;0
+21;21;0;Espírito Santo//home;1767;1767;0;0;0;0
+21;21;0;Espírito Santo//work;4011;499;3512;500;0;500
 21;21;0;Espírito Santo//school;850;36;814;0;0;0
 21;21;0;Espírito Santo//marketplace;0;0;0;0;0;0
 21;21;0;Espírito Santo//pharmacy;0;0;0;0;0;0
 21;21;0;Espírito Santo//gas_station;0;0;0;0;0;0
 21;21;0;Extrema//home;738;738;0;0;0;0
-21;21;0;Extrema//work;1977;0;1977;250;0;250
+21;21;0;Extrema//work;1227;0;1227;0;0;0
 21;21;0;Extrema//school;57;0;57;0;0;0
 21;21;0;Extrema//marketplace;0;0;0;0;0;0
 21;21;0;Extrema//pharmacy;0;0;0;0;0;0
 21;21;0;Extrema//gas_station;0;0;0;0;0;0
 21;21;0;Farrapos//home;5291;5291;0;-250;-250;0
-21;21;0;Farrapos//work;24017;1972;22045;5000;60;4940
+21;21;0;Farrapos//work;3267;1723;1544;0;0;0
 21;21;0;Farrapos//school;363;107;256;0;0;0
 21;21;0;Farrapos//marketplace;0;0;0;0;0;0
 21;21;0;Farrapos//pharmacy;0;0;0;0;0;0
 21;21;0;Farrapos//gas_station;0;0;0;0;0;0
-21;21;0;Farrapos//stadium;435750;5823;429927;-15000;-180;-14820
+21;21;0;Farrapos//stadium;500000;6594;493406;0;0;0
 21;21;0;Farroupilha//home;455;455;0;0;0;0
-21;21;0;Farroupilha//work;8219;0;8219;250;0;250
+21;21;0;Farroupilha//work;7719;0;7719;0;0;0
 21;21;0;Farroupilha//school;2116;0;2116;0;0;0
 21;21;0;Farroupilha//marketplace;0;0;0;0;0;0
 21;21;0;Farroupilha//pharmacy;0;0;0;0;0;0
 21;21;0;Farroupilha//gas_station;0;0;0;0;0;0
 21;21;0;Farroupilha//hospital;0;0;0;0;0;0
 21;21;0;Floresta//home;3901;3901;0;-250;-250;0
-21;21;0;Floresta//work;4305;528;3777;0;0;0
+21;21;0;Floresta//work;4555;776;3779;250;250;0
 21;21;0;Floresta//school;1326;0;1326;0;0;0
 21;21;0;Floresta//marketplace;0;0;0;0;0;0
 21;21;0;Floresta//pharmacy;0;0;0;0;0;0
 21;21;0;Floresta//gas_station;0;0;0;0;0;0
-21;21;0;Glória//home;4918;4918;0;0;0;0
-21;21;0;Glória//work;5505;300;5205;250;0;250
+21;21;0;Glória//home;5668;5668;0;0;0;0
+21;21;0;Glória//work;5255;300;4955;0;0;0
 21;21;0;Glória//school;1214;62;1152;0;0;0
 21;21;0;Glória//marketplace;0;0;0;0;0;0
 21;21;0;Glória//pharmacy;0;0;0;0;0;0
@@ -12759,39 +12759,39 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Guarujá//marketplace;0;0;0;0;0;0
 21;21;0;Guarujá//pharmacy;0;0;0;0;0;0
 21;21;0;Guarujá//gas_station;0;0;0;0;0;0
-21;21;0;Higienópolis//home;3638;3638;0;0;0;0
-21;21;0;Higienópolis//work;3767;661;3106;0;0;0
+21;21;0;Higienópolis//home;3388;3388;0;0;0;0
+21;21;0;Higienópolis//work;3267;655;2612;500;0;500
 21;21;0;Higienópolis//school;781;32;749;0;0;0
 21;21;0;Higienópolis//marketplace;0;0;0;0;0;0
 21;21;0;Higienópolis//pharmacy;0;0;0;0;0;0
 21;21;0;Higienópolis//gas_station;0;0;0;0;0;0
-21;21;0;Hípica//home;6575;6575;0;0;0;0
-21;21;0;Hípica//work;3575;745;2830;250;0;250
+21;21;0;Hípica//home;6075;6075;0;0;0;0
+21;21;0;Hípica//work;3325;995;2330;0;0;0
 21;21;0;Hípica//school;755;347;408;0;0;0
 21;21;0;Hípica//marketplace;0;0;0;0;0;0
 21;21;0;Hípica//pharmacy;0;0;0;0;0;0
 21;21;0;Hípica//gas_station;0;0;0;0;0;0
-21;21;0;Humaitá//home;3733;3733;0;0;0;0
-21;21;0;Humaitá//work;13349;338;13011;2250;18;2232
+21;21;0;Humaitá//home;3233;3233;0;0;0;0
+21;21;0;Humaitá//work;1599;492;1107;0;0;0
 21;21;0;Humaitá//school;773;109;664;0;0;0
 21;21;0;Humaitá//marketplace;0;0;0;0;0;0
 21;21;0;Humaitá//pharmacy;0;0;0;0;0;0
 21;21;0;Humaitá//gas_station;0;0;0;0;0;0
 21;21;0;Independência//home;1268;1268;0;0;0;0
-21;21;0;Independência//work;5027;419;4608;250;1;249
+21;21;0;Independência//work;4527;418;4109;0;0;0
 21;21;0;Independência//school;447;0;447;0;0;0
 21;21;0;Independência//marketplace;0;0;0;0;0;0
 21;21;0;Independência//pharmacy;0;0;0;0;0;0
 21;21;0;Independência//gas_station;0;0;0;0;0;0
 21;21;0;Independência//hospital;0;0;0;0;0;0
 21;21;0;Independência//shopping_mall;0;0;0;0;0;0
-21;21;0;Ipanema//home;4330;4330;0;0;0;0
-21;21;0;Ipanema//work;4347;265;4082;250;2;248
+21;21;0;Ipanema//home;4080;4080;0;-250;-250;0
+21;21;0;Ipanema//work;3597;259;3338;0;0;0
 21;21;0;Ipanema//school;746;78;668;0;0;0
 21;21;0;Ipanema//marketplace;0;0;0;0;0;0
 21;21;0;Ipanema//pharmacy;0;0;0;0;0;0
 21;21;0;Ipanema//gas_station;0;0;0;0;0;0
-21;21;0;Jardim Botânico//home;4050;4050;0;0;0;0
+21;21;0;Jardim Botânico//home;3800;3800;0;0;0;0
 21;21;0;Jardim Botânico//work;4033;1040;2993;0;0;0
 21;21;0;Jardim Botânico//school;1492;6;1486;0;0;0
 21;21;0;Jardim Botânico//marketplace;0;0;0;0;0;0
@@ -12799,65 +12799,65 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Jardim Botânico//gas_station;0;0;0;0;0;0
 21;21;0;Jardim Botânico//hospital;0;0;0;0;0;0
 21;21;0;Jardim Botânico//shopping_mall;0;0;0;0;0;0
-21;21;0;Jardim Carvalho//home;8286;8286;0;0;0;0
-21;21;0;Jardim Carvalho//work;4164;1603;2561;250;4;246
+21;21;0;Jardim Carvalho//home;8286;8286;0;-250;-250;0
+21;21;0;Jardim Carvalho//work;3914;1599;2315;0;0;0
 21;21;0;Jardim Carvalho//school;918;105;813;0;0;0
 21;21;0;Jardim Carvalho//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Carvalho//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Carvalho//gas_station;0;0;0;0;0;0
 21;21;0;Jardim Carvalho//hospital;0;0;0;0;0;0
-21;21;0;Jardim do Salso//home;1236;1236;0;0;0;0
-21;21;0;Jardim do Salso//work;5759;480;5279;0;0;0
+21;21;0;Jardim do Salso//home;1486;1486;0;0;0;0
+21;21;0;Jardim do Salso//work;5759;480;5279;500;0;500
 21;21;0;Jardim do Salso//school;665;10;655;0;0;0
 21;21;0;Jardim do Salso//marketplace;0;0;0;0;0;0
 21;21;0;Jardim do Salso//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim do Salso//gas_station;0;0;0;0;0;0
-21;21;0;Jardim Leopoldina//home;5617;5617;0;0;0;0
-21;21;0;Jardim Leopoldina//work;6494;1432;5062;250;3;247
+21;21;0;Jardim Leopoldina//home;5867;5867;0;0;0;0
+21;21;0;Jardim Leopoldina//work;6994;1429;5565;500;0;500
 21;21;0;Jardim Leopoldina//school;1078;302;776;0;0;0
 21;21;0;Jardim Leopoldina//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Leopoldina//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Leopoldina//gas_station;0;0;0;0;0;0
 21;21;0;Jardim Europa//home;895;895;0;0;0;0
-21;21;0;Jardim Europa//work;3943;170;3773;0;0;0
+21;21;0;Jardim Europa//work;4193;170;4023;0;0;0
 21;21;0;Jardim Europa//school;1086;0;1086;0;0;0
 21;21;0;Jardim Europa//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Europa//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Europa//gas_station;0;0;0;0;0;0
 21;21;0;Jardim Europa//shopping_mall;0;0;0;0;0;0
 21;21;0;Jardim Floresta//home;1455;1455;0;0;0;0
-21;21;0;Jardim Floresta//work;3343;212;3131;500;0;500
+21;21;0;Jardim Floresta//work;2843;212;2631;0;0;0
 21;21;0;Jardim Floresta//school;428;0;428;0;0;0
 21;21;0;Jardim Floresta//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Floresta//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Floresta//gas_station;0;0;0;0;0;0
-21;21;0;Jardim Isabel//home;509;509;0;0;0;0
-21;21;0;Jardim Isabel//work;4212;265;3947;250;0;250
+21;21;0;Jardim Isabel//home;759;759;0;0;0;0
+21;21;0;Jardim Isabel//work;3962;265;3697;0;0;0
 21;21;0;Jardim Isabel//school;659;0;659;0;0;0
 21;21;0;Jardim Isabel//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Isabel//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Isabel//gas_station;0;0;0;0;0;0
-21;21;0;Jardim Itú//home;4976;4976;0;0;0;0
-21;21;0;Jardim Itú//work;4443;361;4082;500;3;497
+21;21;0;Jardim Itú//home;4476;4476;0;-250;-250;0
+21;21;0;Jardim Itú//work;4193;608;3585;0;0;0
 21;21;0;Jardim Itú//school;1717;475;1242;0;0;0
 21;21;0;Jardim Itú//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Itú//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Itú//gas_station;0;0;0;0;0;0
 21;21;0;Jardim Lindóia//home;1960;1960;0;0;0;0
-21;21;0;Jardim Lindóia//work;3695;1;3694;0;0;0
+21;21;0;Jardim Lindóia//work;3445;0;3445;0;0;0
 21;21;0;Jardim Lindóia//school;827;237;590;0;0;0
 21;21;0;Jardim Lindóia//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Lindóia//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Lindóia//gas_station;0;0;0;0;0;0
 21;21;0;Jardim Lindóia//shopping_mall;0;0;0;0;0;0
-21;21;0;Jardim Sabará//home;4892;4892;0;0;0;0
-21;21;0;Jardim Sabará//work;4376;464;3912;0;0;0
+21;21;0;Jardim Sabará//home;4642;4642;0;-250;-250;0
+21;21;0;Jardim Sabará//work;4376;464;3912;500;0;500
 21;21;0;Jardim Sabará//school;1157;231;926;0;0;0
 21;21;0;Jardim Sabará//marketplace;0;0;0;0;0;0
 21;21;0;Jardim Sabará//pharmacy;0;0;0;0;0;0
 21;21;0;Jardim Sabará//gas_station;0;0;0;0;0;0
 21;21;0;Jardim São Pedro//home;716;716;0;0;0;0
-21;21;0;Jardim São Pedro//work;3521;0;3521;500;0;500
+21;21;0;Jardim São Pedro//work;2521;0;2521;250;0;250
 21;21;0;Jardim São Pedro//school;1697;241;1456;0;0;0
 21;21;0;Jardim São Pedro//marketplace;0;0;0;0;0;0
 21;21;0;Jardim São Pedro//pharmacy;0;0;0;0;0;0
@@ -12868,212 +12868,212 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Lageado//marketplace;0;0;0;0;0;0
 21;21;0;Lageado//pharmacy;0;0;0;0;0;0
 21;21;0;Lageado//gas_station;0;0;0;0;0;0
-21;21;0;Lami//home;1148;1148;0;-250;-250;0
-21;21;0;Lami//work;1889;739;1150;0;0;0
+21;21;0;Lami//home;1398;1398;0;0;0;0
+21;21;0;Lami//work;2389;739;1650;250;0;250
 21;21;0;Lami//school;569;233;336;0;0;0
 21;21;0;Lami//marketplace;0;0;0;0;0;0
 21;21;0;Lami//pharmacy;0;0;0;0;0;0
 21;21;0;Lami//gas_station;0;0;0;0;0;0
-21;21;0;Lomba do Pinheiro//home;22352;22352;0;-250;-250;0
-21;21;0;Lomba do Pinheiro//work;3647;2028;1619;0;0;0
+21;21;0;Lomba do Pinheiro//home;22102;22102;0;-250;-250;0
+21;21;0;Lomba do Pinheiro//work;3897;2028;1869;0;0;0
 21;21;0;Lomba do Pinheiro//school;721;287;434;0;0;0
 21;21;0;Lomba do Pinheiro//marketplace;0;0;0;0;0;0
 21;21;0;Lomba do Pinheiro//pharmacy;0;0;0;0;0;0
 21;21;0;Lomba do Pinheiro//gas_station;0;0;0;0;0;0
-21;21;0;Mário Quintana//home;14885;14885;0;-250;-250;0
-21;21;0;Mário Quintana//work;5686;3559;2127;500;250;250
+21;21;0;Mário Quintana//home;14135;14135;0;-750;-750;0
+21;21;0;Mário Quintana//work;6186;4059;2127;250;250;0
 21;21;0;Mário Quintana//school;750;365;385;0;0;0
 21;21;0;Mário Quintana//marketplace;0;0;0;0;0;0
 21;21;0;Mário Quintana//pharmacy;0;0;0;0;0;0
 21;21;0;Mário Quintana//gas_station;0;0;0;0;0;0
-21;21;0;Medianeira//home;3444;3444;0;0;0;0
-21;21;0;Medianeira//work;5575;747;4828;500;2;498
+21;21;0;Medianeira//home;2944;2944;0;-250;-250;0
+21;21;0;Medianeira//work;5325;1243;4082;250;250;0
 21;21;0;Medianeira//school;1738;48;1690;0;0;0
 21;21;0;Medianeira//marketplace;0;0;0;0;0;0
 21;21;0;Medianeira//pharmacy;0;0;0;0;0;0
 21;21;0;Medianeira//gas_station;0;0;0;0;0;0
 21;21;0;Menino Deus//home;7994;7994;0;0;0;0
-21;21;0;Menino Deus//work;4228;796;3432;0;0;0
+21;21;0;Menino Deus//work;4478;1036;3442;0;0;0
 21;21;0;Menino Deus//school;2277;580;1697;0;0;0
 21;21;0;Menino Deus//marketplace;0;0;0;0;0;0
 21;21;0;Menino Deus//pharmacy;0;0;0;0;0;0
 21;21;0;Menino Deus//gas_station;0;0;0;0;0;0
 21;21;0;Menino Deus//hospital;0;0;0;0;0;0
-21;21;0;Moinhos de Vento//home;3981;3981;0;0;0;0
-21;21;0;Moinhos de Vento//work;6220;777;5443;0;0;0
+21;21;0;Moinhos de Vento//home;4231;4231;0;0;0;0
+21;21;0;Moinhos de Vento//work;4970;521;4449;0;0;0
 21;21;0;Moinhos de Vento//school;338;6;332;0;0;0
 21;21;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
 21;21;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
 21;21;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
 21;21;0;Moinhos de Vento//hospital;0;0;0;0;0;0
 21;21;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
-21;21;0;Mont'Serrat//home;3469;3469;0;0;0;0
-21;21;0;Mont'Serrat//work;4725;820;3905;500;2;498
+21;21;0;Mont'Serrat//home;2469;2469;0;-250;-250;0
+21;21;0;Mont'Serrat//work;4725;1316;3409;0;0;0
 21;21;0;Mont'Serrat//school;1312;258;1054;0;0;0
 21;21;0;Mont'Serrat//marketplace;0;0;0;0;0;0
 21;21;0;Mont'Serrat//pharmacy;0;0;0;0;0;0
 21;21;0;Mont'Serrat//gas_station;0;0;0;0;0;0
-21;21;0;Morro Santana//home;7502;7502;0;-250;-250;0
-21;21;0;Morro Santana//work;5475;1711;3764;0;0;0
+21;21;0;Morro Santana//home;7252;7252;0;-250;-250;0
+21;21;0;Morro Santana//work;4975;1708;3267;0;0;0
 21;21;0;Morro Santana//school;496;272;224;0;0;0
 21;21;0;Morro Santana//marketplace;0;0;0;0;0;0
 21;21;0;Morro Santana//pharmacy;0;0;0;0;0;0
 21;21;0;Morro Santana//gas_station;0;0;0;0;0;0
-21;21;0;Navegantes//home;1485;1485;0;-250;-250;0
-21;21;0;Navegantes//work;8288;463;7825;1000;250;750
+21;21;0;Navegantes//home;1735;1735;0;0;0;0
+21;21;0;Navegantes//work;3288;213;3075;0;0;0
 21;21;0;Navegantes//school;706;43;663;0;0;0
 21;21;0;Navegantes//marketplace;0;0;0;0;0;0
 21;21;0;Navegantes//pharmacy;0;0;0;0;0;0
 21;21;0;Navegantes//gas_station;0;0;0;0;0;0
 21;21;0;Navegantes//shopping_mall;0;0;0;0;0;0
 21;21;0;Nonoai//home;7641;7641;0;-250;-250;0
-21;21;0;Nonoai//work;6724;576;6148;250;4;246
+21;21;0;Nonoai//work;6724;572;6152;0;0;0
 21;21;0;Nonoai//school;1562;537;1025;0;0;0
 21;21;0;Nonoai//marketplace;0;0;0;0;0;0
 21;21;0;Nonoai//pharmacy;0;0;0;0;0;0
 21;21;0;Nonoai//gas_station;0;0;0;0;0;0
 21;21;0;Parque Santa Fé//home;2541;2541;0;0;0;0
-21;21;0;Parque Santa Fé//work;5708;84;5624;0;0;0
+21;21;0;Parque Santa Fé//work;5958;84;5874;0;0;0
 21;21;0;Parque Santa Fé//school;1286;44;1242;0;0;0
 21;21;0;Parque Santa Fé//marketplace;0;0;0;0;0;0
 21;21;0;Parque Santa Fé//pharmacy;0;0;0;0;0;0
 21;21;0;Parque Santa Fé//gas_station;0;0;0;0;0;0
-21;21;0;Partenon//home;16412;16412;0;-250;-250;0
-21;21;0;Partenon//work;7207;1008;6199;0;0;0
+21;21;0;Partenon//home;15912;15912;0;-750;-750;0
+21;21;0;Partenon//work;6207;984;5223;250;250;0
 21;21;0;Partenon//school;1353;6;1347;0;0;0
 21;21;0;Partenon//marketplace;0;0;0;0;0;0
 21;21;0;Partenon//pharmacy;0;0;0;0;0;0
 21;21;0;Partenon//gas_station;0;0;0;0;0;0
-21;21;0;Passo D'Areia//home;7167;7167;0;-250;-250;0
-21;21;0;Passo D'Areia//work;3732;621;3111;0;0;0
+21;21;0;Passo D'Areia//home;6917;6917;0;-250;-250;0
+21;21;0;Passo D'Areia//work;4232;621;3611;250;0;250
 21;21;0;Passo D'Areia//school;881;236;645;0;0;0
 21;21;0;Passo D'Areia//marketplace;0;0;0;0;0;0
 21;21;0;Passo D'Areia//pharmacy;0;0;0;0;0;0
 21;21;0;Passo D'Areia//gas_station;0;0;0;0;0;0
-21;21;0;Passo das Pedras//home;4646;4646;0;0;0;0
-21;21;0;Passo das Pedras//work;5143;1368;3775;0;0;0
+21;21;0;Passo das Pedras//home;4396;4396;0;0;0;0
+21;21;0;Passo das Pedras//work;4643;1616;3027;0;0;0
 21;21;0;Passo das Pedras//school;786;253;533;0;0;0
 21;21;0;Passo das Pedras//marketplace;0;0;0;0;0;0
 21;21;0;Passo das Pedras//pharmacy;0;0;0;0;0;0
 21;21;0;Passo das Pedras//gas_station;0;0;0;0;0;0
 21;21;0;Pedra Redonda//home;177;177;0;0;0;0
-21;21;0;Pedra Redonda//work;1921;0;1921;0;0;0
+21;21;0;Pedra Redonda//work;2171;0;2171;0;0;0
 21;21;0;Pedra Redonda//school;840;0;840;0;0;0
 21;21;0;Pedra Redonda//marketplace;0;0;0;0;0;0
 21;21;0;Pedra Redonda//pharmacy;0;0;0;0;0;0
 21;21;0;Pedra Redonda//gas_station;0;0;0;0;0;0
 21;21;0;Petrópolis//home;11087;11087;0;0;0;0
-21;21;0;Petrópolis//work;4390;98;4292;500;0;500
+21;21;0;Petrópolis//work;3140;86;3054;0;0;0
 21;21;0;Petrópolis//school;1638;884;754;0;0;0
 21;21;0;Petrópolis//marketplace;0;0;0;0;0;0
 21;21;0;Petrópolis//pharmacy;0;0;0;0;0;0
 21;21;0;Petrópolis//gas_station;0;0;0;0;0;0
 21;21;0;Pitinga//home;2006;2006;0;0;0;0
-21;21;0;Pitinga//work;3546;300;3246;0;0;0
+21;21;0;Pitinga//work;3546;300;3246;250;0;250
 21;21;0;Pitinga//school;892;6;886;0;0;0
 21;21;0;Pitinga//marketplace;0;0;0;0;0;0
 21;21;0;Pitinga//pharmacy;0;0;0;0;0;0
 21;21;0;Pitinga//gas_station;0;0;0;0;0;0
-21;21;0;Ponta Grossa//home;3091;3091;0;0;0;0
-21;21;0;Ponta Grossa//work;3520;825;2695;250;1;249
+21;21;0;Ponta Grossa//home;3341;3341;0;-250;-250;0
+21;21;0;Ponta Grossa//work;3270;574;2696;0;0;0
 21;21;0;Ponta Grossa//school;135;25;110;0;0;0
 21;21;0;Ponta Grossa//marketplace;0;0;0;0;0;0
 21;21;0;Ponta Grossa//pharmacy;0;0;0;0;0;0
 21;21;0;Ponta Grossa//gas_station;0;0;0;0;0;0
 21;21;0;Praia de Belas//home;986;986;0;0;0;0
-21;21;0;Praia de Belas//work;3900;0;3900;0;0;0
+21;21;0;Praia de Belas//work;3650;0;3650;0;0;0
 21;21;0;Praia de Belas//school;753;0;753;0;0;0
 21;21;0;Praia de Belas//marketplace;0;0;0;0;0;0
 21;21;0;Praia de Belas//pharmacy;0;0;0;0;0;0
 21;21;0;Praia de Belas//gas_station;0;0;0;0;0;0
 21;21;0;Praia de Belas//stadium;0;0;0;0;0;0
 21;21;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
-21;21;0;Restinga//home;21656;21656;0;0;0;0
-21;21;0;Restinga//work;5079;3558;1521;0;0;0
+21;21;0;Restinga//home;21906;21906;0;-250;-250;0
+21;21;0;Restinga//work;5079;3308;1771;0;0;0
 21;21;0;Restinga//school;319;35;284;0;0;0
 21;21;0;Restinga//marketplace;0;0;0;0;0;0
 21;21;0;Restinga//pharmacy;0;0;0;0;0;0
 21;21;0;Restinga//gas_station;0;0;0;0;0;0
 21;21;0;Restinga//hospital;0;0;0;0;0;0
-21;21;0;Rio Branco//home;4703;4703;0;0;0;0
-21;21;0;Rio Branco//work;5125;0;5125;0;0;0
+21;21;0;Rio Branco//home;4953;4953;0;0;0;0
+21;21;0;Rio Branco//work;5625;0;5625;750;0;750
 21;21;0;Rio Branco//school;1219;11;1208;0;0;0
 21;21;0;Rio Branco//marketplace;0;0;0;0;0;0
 21;21;0;Rio Branco//pharmacy;0;0;0;0;0;0
 21;21;0;Rio Branco//gas_station;0;0;0;0;0;0
 21;21;0;Rio Branco//hospital;0;0;0;0;0;0
-21;21;0;Rubem Berta//home;11307;11307;0;0;0;0
-21;21;0;Rubem Berta//work;5370;2309;3061;500;6;494
+21;21;0;Rubem Berta//home;10057;10057;0;-500;-500;0
+21;21;0;Rubem Berta//work;4120;2298;1822;0;0;0
 21;21;0;Rubem Berta//school;1359;109;1250;0;0;0
 21;21;0;Rubem Berta//marketplace;0;0;0;0;0;0
 21;21;0;Rubem Berta//pharmacy;0;0;0;0;0;0
 21;21;0;Rubem Berta//gas_station;0;0;0;0;0;0
-21;21;0;Santa Cecília//home;1761;1761;0;0;0;0
-21;21;0;Santa Cecília//work;3980;84;3896;0;0;0
+21;21;0;Santa Cecília//home;2011;2011;0;0;0;0
+21;21;0;Santa Cecília//work;3730;83;3647;0;0;0
 21;21;0;Santa Cecília//school;1875;136;1739;0;0;0
 21;21;0;Santa Cecília//marketplace;0;0;0;0;0;0
 21;21;0;Santa Cecília//pharmacy;0;0;0;0;0;0
 21;21;0;Santa Cecília//gas_station;0;0;0;0;0;0
 21;21;0;Santa Cecília//hospital;0;0;0;0;0;0
 21;21;0;Santa Maria Goretti//home;1115;1115;0;0;0;0
-21;21;0;Santa Maria Goretti//work;4521;0;4521;0;0;0
+21;21;0;Santa Maria Goretti//work;4271;0;4271;0;0;0
 21;21;0;Santa Maria Goretti//school;1436;6;1430;0;0;0
 21;21;0;Santa Maria Goretti//marketplace;0;0;0;0;0;0
 21;21;0;Santa Maria Goretti//pharmacy;0;0;0;0;0;0
 21;21;0;Santa Maria Goretti//gas_station;0;0;0;0;0;0
-21;21;0;Santa Rosa de Lima//home;9996;9996;0;-250;-250;0
-21;21;0;Santa Rosa de Lima//work;5960;1988;3972;250;0;250
+21;21;0;Santa Rosa de Lima//home;9996;9996;0;0;0;0
+21;21;0;Santa Rosa de Lima//work;4960;1738;3222;0;0;0
 21;21;0;Santa Rosa de Lima//school;891;6;885;0;0;0
 21;21;0;Santa Rosa de Lima//marketplace;0;0;0;0;0;0
 21;21;0;Santa Rosa de Lima//pharmacy;0;0;0;0;0;0
 21;21;0;Santa Rosa de Lima//gas_station;0;0;0;0;0;0
-21;21;0;Santa Tereza//home;13628;13628;0;-250;-250;0
-21;21;0;Santa Tereza//work;7673;2385;5288;500;0;500
+21;21;0;Santa Tereza//home;13378;13378;0;-500;-500;0
+21;21;0;Santa Tereza//work;6923;2371;4552;0;0;0
 21;21;0;Santa Tereza//school;1207;0;1207;0;0;0
 21;21;0;Santa Tereza//marketplace;0;0;0;0;0;0
 21;21;0;Santa Tereza//pharmacy;0;0;0;0;0;0
 21;21;0;Santa Tereza//gas_station;0;0;0;0;0;0
-21;21;0;Santana//home;5592;5592;0;0;0;0
-21;21;0;Santana//work;3601;280;3321;500;6;494
+21;21;0;Santana//home;5842;5842;0;-250;-250;0
+21;21;0;Santana//work;3351;271;3080;250;0;250
 21;21;0;Santana//school;1359;0;1359;0;0;0
 21;21;0;Santana//marketplace;0;0;0;0;0;0
 21;21;0;Santana//pharmacy;0;0;0;0;0;0
 21;21;0;Santana//gas_station;0;0;0;0;0;0
 21;21;0;Santana//hospital;0;0;0;0;0;0
 21;21;0;Santo Antônio//home;3808;3808;0;0;0;0
-21;21;0;Santo Antônio//work;2632;295;2337;250;2;248
+21;21;0;Santo Antônio//work;3132;293;2839;250;0;250
 21;21;0;Santo Antônio//school;1480;275;1205;0;0;0
 21;21;0;Santo Antônio//marketplace;0;0;0;0;0;0
 21;21;0;Santo Antônio//pharmacy;0;0;0;0;0;0
 21;21;0;Santo Antônio//gas_station;0;0;0;0;0;0
 21;21;0;São Caetano//home;406;406;0;0;0;0
-21;21;0;São Caetano//work;1675;83;1592;250;0;250
+21;21;0;São Caetano//work;1175;83;1092;0;0;0
 21;21;0;São Caetano//school;303;0;303;0;0;0
 21;21;0;São Caetano//marketplace;0;0;0;0;0;0
 21;21;0;São Caetano//pharmacy;0;0;0;0;0;0
 21;21;0;São Caetano//gas_station;0;0;0;0;0;0
 21;21;0;São Geraldo//home;2839;2839;0;0;0;0
-21;21;0;São Geraldo//work;3347;920;2427;0;0;0
+21;21;0;São Geraldo//work;2847;918;1929;0;0;0
 21;21;0;São Geraldo//school;1192;298;894;0;0;0
 21;21;0;São Geraldo//marketplace;0;0;0;0;0;0
 21;21;0;São Geraldo//pharmacy;0;0;0;0;0;0
 21;21;0;São Geraldo//gas_station;0;0;0;0;0;0
-21;21;0;São João//home;3285;3285;0;0;0;0
-21;21;0;São João//work;5030;456;4574;0;0;0
+21;21;0;São João//home;3785;3785;0;0;0;0
+21;21;0;São João//work;4280;200;4080;250;0;250
 21;21;0;São João//school;609;261;348;0;0;0
 21;21;0;São João//marketplace;0;0;0;0;0;0
 21;21;0;São João//pharmacy;0;0;0;0;0;0
 21;21;0;São João//gas_station;0;0;0;0;0;0
 21;21;0;São João//shopping_mall;0;0;0;0;0;0
-21;21;0;São Sebastião//home;1989;1989;0;0;0;0
-21;21;0;São Sebastião//work;3426;617;2809;250;1;249
+21;21;0;São Sebastião//home;2239;2239;0;0;0;0
+21;21;0;São Sebastião//work;3176;614;2562;250;0;250
 21;21;0;São Sebastião//school;767;271;496;0;0;0
 21;21;0;São Sebastião//marketplace;0;0;0;0;0;0
 21;21;0;São Sebastião//pharmacy;0;0;0;0;0;0
 21;21;0;São Sebastião//gas_station;0;0;0;0;0;0
 21;21;0;São Sebastião//shopping_mall;0;0;0;0;0;0
-21;21;0;Sarandi//home;25398;25398;0;-250;-250;0
-21;21;0;Sarandi//work;2107;331;1776;0;0;0
+21;21;0;Sarandi//home;26648;26648;0;0;0;0
+21;21;0;Sarandi//work;2357;331;2026;0;0;0
 21;21;0;Sarandi//school;1354;273;1081;0;0;0
 21;21;0;Sarandi//marketplace;0;0;0;0;0;0
 21;21;0;Sarandi//pharmacy;0;0;0;0;0;0
@@ -13086,27 +13086,27 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Serraria//pharmacy;0;0;0;0;0;0
 21;21;0;Serraria//gas_station;0;0;0;0;0;0
 21;21;0;Sétimo Céu//home;519;519;0;0;0;0
-21;21;0;Sétimo Céu//work;2966;0;2966;0;0;0
+21;21;0;Sétimo Céu//work;3466;0;3466;250;0;250
 21;21;0;Sétimo Céu//school;767;0;767;0;0;0
 21;21;0;Sétimo Céu//marketplace;0;0;0;0;0;0
 21;21;0;Sétimo Céu//pharmacy;0;0;0;0;0;0
 21;21;0;Sétimo Céu//gas_station;0;0;0;0;0;0
-21;21;0;Teresópolis//home;4539;4539;0;0;0;0
-21;21;0;Teresópolis//work;3359;445;2914;0;0;0
+21;21;0;Teresópolis//home;4039;4039;0;0;0;0
+21;21;0;Teresópolis//work;4109;445;3664;250;0;250
 21;21;0;Teresópolis//school;1023;39;984;0;0;0
 21;21;0;Teresópolis//marketplace;0;0;0;0;0;0
 21;21;0;Teresópolis//pharmacy;0;0;0;0;0;0
 21;21;0;Teresópolis//gas_station;0;0;0;0;0;0
 21;21;0;Teresópolis//hospital;0;0;0;0;0;0
 21;21;0;Três Figueiras//home;1146;1146;0;0;0;0
-21;21;0;Três Figueiras//work;4720;165;4555;0;0;0
+21;21;0;Três Figueiras//work;4470;165;4305;0;0;0
 21;21;0;Três Figueiras//school;795;0;795;0;0;0
 21;21;0;Três Figueiras//marketplace;0;0;0;0;0;0
 21;21;0;Três Figueiras//pharmacy;0;0;0;0;0;0
 21;21;0;Três Figueiras//gas_station;0;0;0;0;0;0
 21;21;0;Três Figueiras//shopping_mall;0;0;0;0;0;0
-21;21;0;Tristeza//home;5683;5683;0;0;0;0
-21;21;0;Tristeza//work;2946;300;2646;0;0;0
+21;21;0;Tristeza//home;4933;4933;0;0;0;0
+21;21;0;Tristeza//work;3196;300;2896;250;0;250
 21;21;0;Tristeza//school;101;4;97;0;0;0
 21;21;0;Tristeza//marketplace;0;0;0;0;0;0
 21;21;0;Tristeza//pharmacy;0;0;0;0;0;0
@@ -13119,74 +13119,74 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 21;21;0;Vila Assunção//gas_station;0;0;0;0;0;0
 21;21;0;Vila Assunção//hospital;0;0;0;0;0;0
 21;21;0;Vila Conceição//home;710;710;0;0;0;0
-21;21;0;Vila Conceição//work;2713;0;2713;0;0;0
+21;21;0;Vila Conceição//work;2213;0;2213;0;0;0
 21;21;0;Vila Conceição//school;347;0;347;0;0;0
 21;21;0;Vila Conceição//marketplace;0;0;0;0;0;0
 21;21;0;Vila Conceição//pharmacy;0;0;0;0;0;0
 21;21;0;Vila Conceição//gas_station;0;0;0;0;0;0
-21;21;0;Vila Ipiranga//home;5683;5683;0;-250;-250;0
-21;21;0;Vila Ipiranga//work;4652;1016;3636;250;250;0
+21;21;0;Vila Ipiranga//home;5433;5433;0;-250;-250;0
+21;21;0;Vila Ipiranga//work;4402;763;3639;250;0;250
 21;21;0;Vila Ipiranga//school;528;97;431;0;0;0
 21;21;0;Vila Ipiranga//marketplace;0;0;0;0;0;0
 21;21;0;Vila Ipiranga//pharmacy;0;0;0;0;0;0
 21;21;0;Vila Ipiranga//gas_station;0;0;0;0;0;0
-21;21;0;Vila Jardim//home;3587;3587;0;0;0;0
-21;21;0;Vila Jardim//work;5318;1011;4307;250;0;250
+21;21;0;Vila Jardim//home;3837;3837;0;0;0;0
+21;21;0;Vila Jardim//work;4568;757;3811;0;0;0
 21;21;0;Vila Jardim//school;146;0;146;0;0;0
 21;21;0;Vila Jardim//marketplace;0;0;0;0;0;0
 21;21;0;Vila Jardim//pharmacy;0;0;0;0;0;0
 21;21;0;Vila Jardim//gas_station;0;0;0;0;0;0
-21;21;0;Vila João Pessoa//home;4122;4122;0;-250;-250;0
-21;21;0;Vila João Pessoa//work;7129;1046;6083;250;250;0
+21;21;0;Vila João Pessoa//home;4622;4622;0;0;0;0
+21;21;0;Vila João Pessoa//work;5379;788;4591;0;0;0
 21;21;0;Vila João Pessoa//school;815;67;748;0;0;0
 21;21;0;Vila João Pessoa//marketplace;0;0;0;0;0;0
 21;21;0;Vila João Pessoa//pharmacy;0;0;0;0;0;0
 21;21;0;Vila João Pessoa//gas_station;0;0;0;0;0;0
-21;21;0;Vila Nova//home;12072;12072;0;-250;-250;0
-21;21;0;Vila Nova//work;4156;498;3658;0;0;0
+21;21;0;Vila Nova//home;11822;11822;0;0;0;0
+21;21;0;Vila Nova//work;4156;743;3413;0;0;0
 21;21;0;Vila Nova//school;1209;594;615;0;0;0
 21;21;0;Vila Nova//marketplace;0;0;0;0;0;0
 21;21;0;Vila Nova//pharmacy;0;0;0;0;0;0
 21;21;0;Vila Nova//gas_station;0;0;0;0;0;0
 21;21;0;Vila Nova//hospital;0;0;0;0;0;0
-21;21;0;São José//home;9089;9089;0;0;0;0
-21;21;0;São José//work;5628;1902;3726;250;4;246
+21;21;0;São José//home;9089;9089;0;-250;-250;0
+21;21;0;São José//work;5128;1894;3234;500;250;250
 21;21;0;São José//school;630;223;407;0;0;0
 21;21;0;São José//marketplace;0;0;0;0;0;0
 21;21;0;São José//pharmacy;0;0;0;0;0;0
 21;21;0;São José//gas_station;0;0;0;0;0;0
 22;22;0;Aberta dos Morros//home;2801;2801;0;353;353;0
-22;22;0;Aberta dos Morros//work;3580;168;3412;0;0;0
+22;22;0;Aberta dos Morros//work;2830;168;2662;0;0;0
 22;22;0;Aberta dos Morros//school;0;0;0;-1111;0;-1111
 22;22;0;Aberta dos Morros//marketplace;0;0;0;0;0;0
 22;22;0;Aberta dos Morros//pharmacy;0;0;0;0;0;0
 22;22;0;Aberta dos Morros//gas_station;0;0;0;0;0;0
 22;22;0;Agronomia//home;1068;1068;0;297;297;0
-22;22;0;Agronomia//work;4613;0;4613;500;0;500
+22;22;0;Agronomia//work;3613;0;3613;0;0;0
 22;22;0;Agronomia//school;0;0;0;-1223;0;-1223
 22;22;0;Agronomia//marketplace;0;0;0;0;0;0
 22;22;0;Agronomia//pharmacy;0;0;0;0;0;0
 22;22;0;Agronomia//gas_station;0;0;0;0;0;0
 22;22;0;Anchieta//home;756;756;0;33;33;0
-22;22;0;Anchieta//work;2844;0;2844;500;0;500
+22;22;0;Anchieta//work;1844;0;1844;500;0;500
 22;22;0;Anchieta//school;0;0;0;-1469;0;-1469
 22;22;0;Anchieta//marketplace;0;0;0;0;0;0
 22;22;0;Anchieta//pharmacy;0;0;0;0;0;0
 22;22;0;Anchieta//gas_station;0;0;0;0;0;0
-22;22;0;Arquipélago//home;3398;3398;0;316;316;0
-22;22;0;Arquipélago//work;1225;2;1223;0;0;0
+22;22;0;Arquipélago//home;3148;3148;0;66;66;0
+22;22;0;Arquipélago//work;975;0;975;250;0;250
 22;22;0;Arquipélago//school;0;0;0;-307;0;-307
 22;22;0;Arquipélago//marketplace;0;0;0;0;0;0
 22;22;0;Arquipélago//pharmacy;0;0;0;0;0;0
 22;22;0;Arquipélago//gas_station;0;0;0;0;0;0
-22;22;0;Auxiliadora//home;3227;3227;0;145;145;0
-22;22;0;Auxiliadora//work;4735;192;4543;250;0;250
+22;22;0;Auxiliadora//home;3477;3477;0;395;395;0
+22;22;0;Auxiliadora//work;4485;191;4294;0;0;0
 22;22;0;Auxiliadora//school;0;0;0;-493;-5;-488
 22;22;0;Auxiliadora//marketplace;0;0;0;0;0;0
 22;22;0;Auxiliadora//pharmacy;0;0;0;0;0;0
 22;22;0;Auxiliadora//gas_station;0;0;0;0;0;0
-22;22;0;Azenha//home;5177;5177;0;699;699;0
-22;22;0;Azenha//work;3124;412;2712;0;0;0
+22;22;0;Azenha//home;5677;5677;0;699;699;0
+22;22;0;Azenha//work;3124;162;2962;0;0;0
 22;22;0;Azenha//school;0;0;0;-1092;0;-1092
 22;22;0;Azenha//marketplace;0;0;0;0;0;0
 22;22;0;Azenha//pharmacy;0;0;0;0;0;0
@@ -13194,25 +13194,25 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 22;22;0;Azenha//hospital;0;0;0;0;0;0
 22;22;0;Azenha//shopping_mall;0;0;0;0;0;0
 22;22;0;Bela Vista//home;3387;3387;0;666;666;0
-22;22;0;Bela Vista//work;4053;243;3810;0;0;0
+22;22;0;Bela Vista//work;4053;239;3814;250;0;250
 22;22;0;Bela Vista//school;0;0;0;-1607;-532;-1075
 22;22;0;Bela Vista//marketplace;0;0;0;0;0;0
 22;22;0;Bela Vista//pharmacy;0;0;0;0;0;0
 22;22;0;Bela Vista//gas_station;0;0;0;0;0;0
-22;22;0;Belém Novo//home;4318;4318;0;336;336;0
-22;22;0;Belém Novo//work;2913;1099;1814;250;2;248
+22;22;0;Belém Novo//home;4568;4568;0;336;336;0
+22;22;0;Belém Novo//work;2163;846;1317;0;0;0
 22;22;0;Belém Novo//school;0;0;0;-446;-31;-415
 22;22;0;Belém Novo//marketplace;0;0;0;0;0;0
 22;22;0;Belém Novo//pharmacy;0;0;0;0;0;0
 22;22;0;Belém Novo//gas_station;0;0;0;0;0;0
-22;22;0;Belém Velho//home;4185;4185;0;116;116;0
-22;22;0;Belém Velho//work;4643;3;4640;0;0;0
+22;22;0;Belém Velho//home;4185;4185;0;366;366;0
+22;22;0;Belém Velho//work;3393;0;3393;0;0;0
 22;22;0;Belém Velho//school;0;0;0;-602;-66;-536
 22;22;0;Belém Velho//marketplace;0;0;0;0;0;0
 22;22;0;Belém Velho//pharmacy;0;0;0;0;0;0
 22;22;0;Belém Velho//gas_station;0;0;0;0;0;0
-22;22;0;Boa Vista//home;3534;3534;0;374;374;0
-22;22;0;Boa Vista//work;6616;951;5665;500;0;500
+22;22;0;Boa Vista//home;3284;3284;0;374;374;0
+22;22;0;Boa Vista//work;5866;951;4915;0;0;0
 22;22;0;Boa Vista//school;0;0;0;-1176;-36;-1140
 22;22;0;Boa Vista//marketplace;0;0;0;0;0;0
 22;22;0;Boa Vista//pharmacy;0;0;0;0;0;0
@@ -13224,44 +13224,44 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 22;22;0;Boa Vista do Sul//pharmacy;0;0;0;0;0;0
 22;22;0;Boa Vista do Sul//gas_station;0;0;0;0;0;0
 22;22;0;Bom Fim//home;4025;4025;0;571;571;0
-22;22;0;Bom Fim//work;4661;552;4109;250;2;248
+22;22;0;Bom Fim//work;3411;547;2864;0;0;0
 22;22;0;Bom Fim//school;0;0;0;-963;-78;-885
 22;22;0;Bom Fim//marketplace;0;0;0;0;0;0
 22;22;0;Bom Fim//pharmacy;0;0;0;0;0;0
 22;22;0;Bom Fim//gas_station;0;0;0;0;0;0
 22;22;0;Bom Jesus//home;10168;10168;0;1093;1093;0
-22;22;0;Bom Jesus//work;5325;1462;3863;250;0;250
+22;22;0;Bom Jesus//work;5075;1458;3617;0;0;0
 22;22;0;Bom Jesus//school;0;0;0;-861;-185;-676
 22;22;0;Bom Jesus//marketplace;0;0;0;0;0;0
 22;22;0;Bom Jesus//pharmacy;0;0;0;0;0;0
 22;22;0;Bom Jesus//gas_station;0;0;0;0;0;0
-22;22;0;Camaquã//home;6272;6272;0;1052;1052;0
-22;22;0;Camaquã//work;4397;1507;2890;0;0;0
+22;22;0;Camaquã//home;6022;6022;0;802;802;0
+22;22;0;Camaquã//work;4897;1757;3140;500;250;250
 22;22;0;Camaquã//school;0;0;0;-811;-99;-712
 22;22;0;Camaquã//marketplace;0;0;0;0;0;0
 22;22;0;Camaquã//pharmacy;0;0;0;0;0;0
 22;22;0;Camaquã//gas_station;0;0;0;0;0;0
-22;22;0;Campo Novo//home;3471;3471;0;78;78;0
-22;22;0;Campo Novo//work;4558;507;4051;500;251;249
+22;22;0;Campo Novo//home;3721;3721;0;328;328;0
+22;22;0;Campo Novo//work;4058;256;3802;0;0;0
 22;22;0;Campo Novo//school;0;0;0;-611;-6;-605
 22;22;0;Campo Novo//marketplace;0;0;0;0;0;0
 22;22;0;Campo Novo//pharmacy;0;0;0;0;0;0
 22;22;0;Campo Novo//gas_station;0;0;0;0;0;0
 22;22;0;Cascata//home;4366;4366;0;440;440;0
-22;22;0;Cascata//work;4666;174;4492;500;0;500
+22;22;0;Cascata//work;4416;174;4242;250;0;250
 22;22;0;Cascata//school;0;0;0;-485;0;-485
 22;22;0;Cascata//marketplace;0;0;0;0;0;0
 22;22;0;Cascata//pharmacy;0;0;0;0;0;0
 22;22;0;Cascata//gas_station;0;0;0;0;0;0
-22;22;0;Cavalhada//home;10465;10465;0;2687;2687;0
-22;22;0;Cavalhada//work;5088;363;4725;0;0;0
+22;22;0;Cavalhada//home;9965;9965;0;2687;2687;0
+22;22;0;Cavalhada//work;5088;358;4730;0;0;0
 22;22;0;Cavalhada//school;0;0;0;-1442;-852;-590
 22;22;0;Cavalhada//marketplace;0;0;0;0;0;0
 22;22;0;Cavalhada//pharmacy;0;0;0;0;0;0
 22;22;0;Cavalhada//gas_station;0;0;0;0;0;0
 22;22;0;Cavalhada//shopping_mall;0;0;0;0;0;0
-22;22;0;Centro Histórico//home;12255;12255;0;3465;3465;0
-22;22;0;Centro Histórico//work;2455;933;1522;0;0;0
+22;22;0;Centro Histórico//home;12005;12005;0;3215;3215;0
+22;22;0;Centro Histórico//work;2705;933;1772;0;0;0
 22;22;0;Centro Histórico//school;0;0;0;-1007;-72;-935
 22;22;0;Centro Histórico//marketplace;0;0;0;0;0;0
 22;22;0;Centro Histórico//pharmacy;0;0;0;0;0;0
@@ -13269,127 +13269,127 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 22;22;0;Centro Histórico//hospital;0;0;0;0;0;0
 22;22;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
 22;22;0;Chácara das Pedras//home;2608;2608;0;356;356;0
-22;22;0;Chácara das Pedras//work;3434;629;2805;0;0;0
+22;22;0;Chácara das Pedras//work;3934;628;3306;250;0;250
 22;22;0;Chácara das Pedras//school;0;0;0;-425;0;-425
 22;22;0;Chácara das Pedras//marketplace;0;0;0;0;0;0
 22;22;0;Chácara das Pedras//pharmacy;0;0;0;0;0;0
 22;22;0;Chácara das Pedras//gas_station;0;0;0;0;0;0
-22;22;0;Chapéu do Sol//home;1237;1237;0;44;44;0
-22;22;0;Chapéu do Sol//work;3208;162;3046;0;0;0
+22;22;0;Chapéu do Sol//home;987;987;0;-206;-206;0
+22;22;0;Chapéu do Sol//work;2958;412;2546;250;250;0
 22;22;0;Chapéu do Sol//school;0;0;0;-1068;0;-1068
 22;22;0;Chapéu do Sol//marketplace;0;0;0;0;0;0
 22;22;0;Chapéu do Sol//pharmacy;0;0;0;0;0;0
 22;22;0;Chapéu do Sol//gas_station;0;0;0;0;0;0
-22;22;0;Cidade Baixa//home;4838;4838;0;1553;1553;0
-22;22;0;Cidade Baixa//work;7854;1391;6463;250;3;247
+22;22;0;Cidade Baixa//home;4588;4588;0;1553;1553;0
+22;22;0;Cidade Baixa//work;6854;1636;5218;0;0;0
 22;22;0;Cidade Baixa//school;0;0;0;-569;-58;-511
 22;22;0;Cidade Baixa//marketplace;0;0;0;0;0;0
 22;22;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
 22;22;0;Cidade Baixa//gas_station;0;0;0;0;0;0
-22;22;0;Cel. Aparício Borges//home;6938;6938;0;965;965;0
-22;22;0;Cel. Aparício Borges//work;8640;1920;6720;250;0;250
+22;22;0;Cel. Aparício Borges//home;6688;6688;0;965;965;0
+22;22;0;Cel. Aparício Borges//work;8140;1914;6226;250;0;250
 22;22;0;Cel. Aparício Borges//school;0;0;0;-619;-103;-516
 22;22;0;Cel. Aparício Borges//marketplace;0;0;0;0;0;0
 22;22;0;Cel. Aparício Borges//pharmacy;0;0;0;0;0;0
 22;22;0;Cel. Aparício Borges//gas_station;0;0;0;0;0;0
-22;22;0;Costa e Silva//home;6550;6550;0;1209;1209;0
-22;22;0;Costa e Silva//work;3506;336;3170;0;0;0
+22;22;0;Costa e Silva//home;6050;6050;0;959;959;0
+22;22;0;Costa e Silva//work;3256;333;2923;0;0;0
 22;22;0;Costa e Silva//school;0;0;0;-1774;-304;-1470
 22;22;0;Costa e Silva//marketplace;0;0;0;0;0;0
 22;22;0;Costa e Silva//pharmacy;0;0;0;0;0;0
 22;22;0;Costa e Silva//gas_station;0;0;0;0;0;0
-22;22;0;Cristal//home;11589;11589;0;2366;2366;0
-22;22;0;Cristal//work;4416;1402;3014;0;0;0
+22;22;0;Cristal//home;12089;12089;0;2616;2616;0
+22;22;0;Cristal//work;4666;1152;3514;0;0;0
 22;22;0;Cristal//school;0;0;0;-1237;-407;-830
 22;22;0;Cristal//marketplace;0;0;0;0;0;0
 22;22;0;Cristal//pharmacy;0;0;0;0;0;0
 22;22;0;Cristal//gas_station;0;0;0;0;0;0
 22;22;0;Cristo Redentor//home;5985;5985;0;1220;1220;0
-22;22;0;Cristo Redentor//work;3329;292;3037;250;0;250
+22;22;0;Cristo Redentor//work;2079;281;1798;0;0;0
 22;22;0;Cristo Redentor//school;0;0;0;-1125;0;-1125
 22;22;0;Cristo Redentor//marketplace;0;0;0;0;0;0
 22;22;0;Cristo Redentor//pharmacy;0;0;0;0;0;0
 22;22;0;Cristo Redentor//gas_station;0;0;0;0;0;0
 22;22;0;Cristo Redentor//hospital;0;0;0;0;0;0
 22;22;0;Cristo Redentor//shopping_mall;0;0;0;0;0;0
-22;22;0;Espírito Santo//home;1769;1769;0;252;252;0
-22;22;0;Espírito Santo//work;4511;1000;3511;500;250;250
+22;22;0;Espírito Santo//home;2269;2269;0;502;502;0
+22;22;0;Espírito Santo//work;4261;499;3762;250;0;250
 22;22;0;Espírito Santo//school;0;0;0;-850;-36;-814
 22;22;0;Espírito Santo//marketplace;0;0;0;0;0;0
 22;22;0;Espírito Santo//pharmacy;0;0;0;0;0;0
 22;22;0;Espírito Santo//gas_station;0;0;0;0;0;0
 22;22;0;Extrema//home;738;738;0;0;0;0
-22;22;0;Extrema//work;1977;0;1977;0;0;0
+22;22;0;Extrema//work;1477;0;1477;250;0;250
 22;22;0;Extrema//school;0;0;0;-57;0;-57
 22;22;0;Extrema//marketplace;0;0;0;0;0;0
 22;22;0;Extrema//pharmacy;0;0;0;0;0;0
 22;22;0;Extrema//gas_station;0;0;0;0;0;0
 22;22;0;Farrapos//home;6885;6885;0;1594;1594;0
-22;22;0;Farrapos//work;28267;2023;26244;4250;51;4199
+22;22;0;Farrapos//work;3517;1973;1544;250;250;0
 22;22;0;Farrapos//school;0;0;0;-363;-107;-256
 22;22;0;Farrapos//marketplace;0;0;0;0;0;0
 22;22;0;Farrapos//pharmacy;0;0;0;0;0;0
 22;22;0;Farrapos//gas_station;0;0;0;0;0;0
-22;22;0;Farrapos//stadium;419000;5622;413378;-16750;-201;-16549
+22;22;0;Farrapos//stadium;500000;6594;493406;0;0;0
 22;22;0;Farroupilha//home;455;455;0;0;0;0
-22;22;0;Farroupilha//work;8469;0;8469;250;0;250
+22;22;0;Farroupilha//work;7719;0;7719;0;0;0
 22;22;0;Farroupilha//school;0;0;0;-2116;0;-2116
 22;22;0;Farroupilha//marketplace;0;0;0;0;0;0
 22;22;0;Farroupilha//pharmacy;0;0;0;0;0;0
 22;22;0;Farroupilha//gas_station;0;0;0;0;0;0
 22;22;0;Farroupilha//hospital;0;0;0;0;0;0
 22;22;0;Floresta//home;4356;4356;0;455;455;0
-22;22;0;Floresta//work;4305;528;3777;0;0;0
+22;22;0;Floresta//work;4555;776;3779;0;0;0
 22;22;0;Floresta//school;0;0;0;-1326;0;-1326
 22;22;0;Floresta//marketplace;0;0;0;0;0;0
 22;22;0;Floresta//pharmacy;0;0;0;0;0;0
 22;22;0;Floresta//gas_station;0;0;0;0;0;0
-22;22;0;Glória//home;5607;5607;0;689;689;0
-22;22;0;Glória//work;5505;300;5205;0;0;0
+22;22;0;Glória//home;6607;6607;0;939;939;0
+22;22;0;Glória//work;5255;300;4955;0;0;0
 22;22;0;Glória//school;0;0;0;-1214;-62;-1152
 22;22;0;Glória//marketplace;0;0;0;0;0;0
 22;22;0;Glória//pharmacy;0;0;0;0;0;0
 22;22;0;Glória//gas_station;0;0;0;0;0;0
 22;22;0;Glória//hospital;0;0;0;0;0;0
 22;22;0;Guarujá//home;1838;1838;0;333;333;0
-22;22;0;Guarujá//work;2950;83;2867;250;0;250
+22;22;0;Guarujá//work;2700;83;2617;0;0;0
 22;22;0;Guarujá//school;0;0;0;-113;-4;-109
 22;22;0;Guarujá//marketplace;0;0;0;0;0;0
 22;22;0;Guarujá//pharmacy;0;0;0;0;0;0
 22;22;0;Guarujá//gas_station;0;0;0;0;0;0
-22;22;0;Higienópolis//home;4005;4005;0;367;367;0
-22;22;0;Higienópolis//work;3767;661;3106;0;0;0
+22;22;0;Higienópolis//home;4005;4005;0;617;617;0
+22;22;0;Higienópolis//work;3267;655;2612;0;0;0
 22;22;0;Higienópolis//school;0;0;0;-781;-32;-749
 22;22;0;Higienópolis//marketplace;0;0;0;0;0;0
 22;22;0;Higienópolis//pharmacy;0;0;0;0;0;0
 22;22;0;Higienópolis//gas_station;0;0;0;0;0;0
-22;22;0;Hípica//home;8235;8235;0;1660;1660;0
-22;22;0;Hípica//work;3575;745;2830;0;0;0
+22;22;0;Hípica//home;7735;7735;0;1660;1660;0
+22;22;0;Hípica//work;3575;995;2580;250;0;250
 22;22;0;Hípica//school;0;0;0;-755;-347;-408
 22;22;0;Hípica//marketplace;0;0;0;0;0;0
 22;22;0;Hípica//pharmacy;0;0;0;0;0;0
 22;22;0;Hípica//gas_station;0;0;0;0;0;0
-22;22;0;Humaitá//home;4643;4643;0;910;910;0
-22;22;0;Humaitá//work;16599;360;16239;3250;22;3228
+22;22;0;Humaitá//home;4143;4143;0;910;910;0
+22;22;0;Humaitá//work;1599;492;1107;0;0;0
 22;22;0;Humaitá//school;0;0;0;-773;-109;-664
 22;22;0;Humaitá//marketplace;0;0;0;0;0;0
 22;22;0;Humaitá//pharmacy;0;0;0;0;0;0
 22;22;0;Humaitá//gas_station;0;0;0;0;0;0
 22;22;0;Independência//home;2260;2260;0;992;992;0
-22;22;0;Independência//work;5027;419;4608;0;0;0
+22;22;0;Independência//work;4527;418;4109;0;0;0
 22;22;0;Independência//school;0;0;0;-447;0;-447
 22;22;0;Independência//marketplace;0;0;0;0;0;0
 22;22;0;Independência//pharmacy;0;0;0;0;0;0
 22;22;0;Independência//gas_station;0;0;0;0;0;0
 22;22;0;Independência//hospital;0;0;0;0;0;0
 22;22;0;Independência//shopping_mall;0;0;0;0;0;0
-22;22;0;Ipanema//home;5163;5163;0;833;833;0
-22;22;0;Ipanema//work;4597;267;4330;250;2;248
+22;22;0;Ipanema//home;4913;4913;0;833;833;0
+22;22;0;Ipanema//work;3597;259;3338;0;0;0
 22;22;0;Ipanema//school;0;0;0;-746;-78;-668
 22;22;0;Ipanema//marketplace;0;0;0;0;0;0
 22;22;0;Ipanema//pharmacy;0;0;0;0;0;0
 22;22;0;Ipanema//gas_station;0;0;0;0;0;0
-22;22;0;Jardim Botânico//home;4672;4672;0;622;622;0
+22;22;0;Jardim Botânico//home;4422;4422;0;622;622;0
 22;22;0;Jardim Botânico//work;4033;1040;2993;0;0;0
 22;22;0;Jardim Botânico//school;0;0;0;-1492;-6;-1486
 22;22;0;Jardim Botânico//marketplace;0;0;0;0;0;0
@@ -13398,64 +13398,64 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 22;22;0;Jardim Botânico//hospital;0;0;0;0;0;0
 22;22;0;Jardim Botânico//shopping_mall;0;0;0;0;0;0
 22;22;0;Jardim Carvalho//home;9599;9599;0;1313;1313;0
-22;22;0;Jardim Carvalho//work;4414;1853;2561;250;250;0
+22;22;0;Jardim Carvalho//work;3914;1599;2315;0;0;0
 22;22;0;Jardim Carvalho//school;0;0;0;-918;-105;-813
 22;22;0;Jardim Carvalho//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Carvalho//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Carvalho//gas_station;0;0;0;0;0;0
 22;22;0;Jardim Carvalho//hospital;0;0;0;0;0;0
-22;22;0;Jardim do Salso//home;1325;1325;0;89;89;0
-22;22;0;Jardim do Salso//work;5759;480;5279;0;0;0
+22;22;0;Jardim do Salso//home;1575;1575;0;89;89;0
+22;22;0;Jardim do Salso//work;6009;730;5279;250;250;0
 22;22;0;Jardim do Salso//school;0;0;0;-665;-10;-655
 22;22;0;Jardim do Salso//marketplace;0;0;0;0;0;0
 22;22;0;Jardim do Salso//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim do Salso//gas_station;0;0;0;0;0;0
-22;22;0;Jardim Leopoldina//home;6892;6892;0;1275;1275;0
-22;22;0;Jardim Leopoldina//work;6494;1432;5062;0;0;0
+22;22;0;Jardim Leopoldina//home;6892;6892;0;1025;1025;0
+22;22;0;Jardim Leopoldina//work;6994;1429;5565;0;0;0
 22;22;0;Jardim Leopoldina//school;0;0;0;-1078;-302;-776
 22;22;0;Jardim Leopoldina//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Leopoldina//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Leopoldina//gas_station;0;0;0;0;0;0
 22;22;0;Jardim Europa//home;895;895;0;0;0;0
-22;22;0;Jardim Europa//work;3943;170;3773;0;0;0
+22;22;0;Jardim Europa//work;4193;170;4023;0;0;0
 22;22;0;Jardim Europa//school;0;0;0;-1086;0;-1086
 22;22;0;Jardim Europa//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Europa//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Europa//gas_station;0;0;0;0;0;0
 22;22;0;Jardim Europa//shopping_mall;0;0;0;0;0;0
 22;22;0;Jardim Floresta//home;1553;1553;0;98;98;0
-22;22;0;Jardim Floresta//work;3593;212;3381;250;0;250
+22;22;0;Jardim Floresta//work;2843;212;2631;0;0;0
 22;22;0;Jardim Floresta//school;0;0;0;-428;0;-428
 22;22;0;Jardim Floresta//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Floresta//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Floresta//gas_station;0;0;0;0;0;0
-22;22;0;Jardim Isabel//home;799;799;0;290;290;0
-22;22;0;Jardim Isabel//work;4212;265;3947;0;0;0
+22;22;0;Jardim Isabel//home;1049;1049;0;290;290;0
+22;22;0;Jardim Isabel//work;4212;265;3947;250;0;250
 22;22;0;Jardim Isabel//school;0;0;0;-659;0;-659
 22;22;0;Jardim Isabel//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Isabel//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Isabel//gas_station;0;0;0;0;0;0
-22;22;0;Jardim Itú//home;6622;6622;0;1646;1646;0
-22;22;0;Jardim Itú//work;4443;361;4082;0;0;0
+22;22;0;Jardim Itú//home;5872;5872;0;1396;1396;0
+22;22;0;Jardim Itú//work;4443;608;3835;250;0;250
 22;22;0;Jardim Itú//school;0;0;0;-1717;-475;-1242
 22;22;0;Jardim Itú//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Itú//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Itú//gas_station;0;0;0;0;0;0
 22;22;0;Jardim Lindóia//home;2594;2594;0;634;634;0
-22;22;0;Jardim Lindóia//work;3695;1;3694;0;0;0
+22;22;0;Jardim Lindóia//work;3445;0;3445;0;0;0
 22;22;0;Jardim Lindóia//school;0;0;0;-827;-237;-590
 22;22;0;Jardim Lindóia//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Lindóia//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Lindóia//gas_station;0;0;0;0;0;0
 22;22;0;Jardim Lindóia//shopping_mall;0;0;0;0;0;0
-22;22;0;Jardim Sabará//home;5304;5304;0;412;412;0
+22;22;0;Jardim Sabará//home;5304;5304;0;662;662;0
 22;22;0;Jardim Sabará//work;4376;464;3912;0;0;0
 22;22;0;Jardim Sabará//school;0;0;0;-1157;-231;-926
 22;22;0;Jardim Sabará//marketplace;0;0;0;0;0;0
 22;22;0;Jardim Sabará//pharmacy;0;0;0;0;0;0
 22;22;0;Jardim Sabará//gas_station;0;0;0;0;0;0
 22;22;0;Jardim São Pedro//home;1299;1299;0;583;583;0
-22;22;0;Jardim São Pedro//work;4021;1;4020;500;1;499
+22;22;0;Jardim São Pedro//work;2521;0;2521;0;0;0
 22;22;0;Jardim São Pedro//school;0;0;0;-1697;-241;-1456
 22;22;0;Jardim São Pedro//marketplace;0;0;0;0;0;0
 22;22;0;Jardim São Pedro//pharmacy;0;0;0;0;0;0
@@ -13466,102 +13466,102 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 22;22;0;Lageado//marketplace;0;0;0;0;0;0
 22;22;0;Lageado//pharmacy;0;0;0;0;0;0
 22;22;0;Lageado//gas_station;0;0;0;0;0;0
-22;22;0;Lami//home;1412;1412;0;264;264;0
-22;22;0;Lami//work;2139;740;1399;250;1;249
+22;22;0;Lami//home;1662;1662;0;264;264;0
+22;22;0;Lami//work;2389;739;1650;0;0;0
 22;22;0;Lami//school;0;0;0;-569;-233;-336
 22;22;0;Lami//marketplace;0;0;0;0;0;0
 22;22;0;Lami//pharmacy;0;0;0;0;0;0
 22;22;0;Lami//gas_station;0;0;0;0;0;0
-22;22;0;Lomba do Pinheiro//home;24958;24958;0;2606;2606;0
-22;22;0;Lomba do Pinheiro//work;3647;2028;1619;0;0;0
+22;22;0;Lomba do Pinheiro//home;24458;24458;0;2356;2356;0
+22;22;0;Lomba do Pinheiro//work;4147;2278;1869;250;250;0
 22;22;0;Lomba do Pinheiro//school;0;0;0;-721;-287;-434
 22;22;0;Lomba do Pinheiro//marketplace;0;0;0;0;0;0
 22;22;0;Lomba do Pinheiro//pharmacy;0;0;0;0;0;0
 22;22;0;Lomba do Pinheiro//gas_station;0;0;0;0;0;0
-22;22;0;Mário Quintana//home;15692;15692;0;807;807;0
-22;22;0;Mário Quintana//work;5936;3809;2127;250;250;0
+22;22;0;Mário Quintana//home;15442;15442;0;1307;1307;0
+22;22;0;Mário Quintana//work;6436;4059;2377;250;0;250
 22;22;0;Mário Quintana//school;0;0;0;-750;-365;-385
 22;22;0;Mário Quintana//marketplace;0;0;0;0;0;0
 22;22;0;Mário Quintana//pharmacy;0;0;0;0;0;0
 22;22;0;Mário Quintana//gas_station;0;0;0;0;0;0
-22;22;0;Medianeira//home;3928;3928;0;484;484;0
-22;22;0;Medianeira//work;5575;747;4828;0;0;0
+22;22;0;Medianeira//home;3678;3678;0;734;734;0
+22;22;0;Medianeira//work;5575;1243;4332;250;0;250
 22;22;0;Medianeira//school;0;0;0;-1738;-48;-1690
 22;22;0;Medianeira//marketplace;0;0;0;0;0;0
 22;22;0;Medianeira//pharmacy;0;0;0;0;0;0
 22;22;0;Medianeira//gas_station;0;0;0;0;0;0
 22;22;0;Menino Deus//home;10687;10687;0;2693;2693;0
-22;22;0;Menino Deus//work;4228;796;3432;0;0;0
+22;22;0;Menino Deus//work;4478;1036;3442;0;0;0
 22;22;0;Menino Deus//school;0;0;0;-2277;-580;-1697
 22;22;0;Menino Deus//marketplace;0;0;0;0;0;0
 22;22;0;Menino Deus//pharmacy;0;0;0;0;0;0
 22;22;0;Menino Deus//gas_station;0;0;0;0;0;0
 22;22;0;Menino Deus//hospital;0;0;0;0;0;0
-22;22;0;Moinhos de Vento//home;4207;4207;0;226;226;0
-22;22;0;Moinhos de Vento//work;6220;777;5443;0;0;0
+22;22;0;Moinhos de Vento//home;4457;4457;0;226;226;0
+22;22;0;Moinhos de Vento//work;5220;521;4699;250;0;250
 22;22;0;Moinhos de Vento//school;0;0;0;-338;-6;-332
 22;22;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
 22;22;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
 22;22;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
 22;22;0;Moinhos de Vento//hospital;0;0;0;0;0;0
 22;22;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
-22;22;0;Mont'Serrat//home;4376;4376;0;907;907;0
-22;22;0;Mont'Serrat//work;5225;824;4401;500;4;496
+22;22;0;Mont'Serrat//home;3376;3376;0;907;907;0
+22;22;0;Mont'Serrat//work;4725;1316;3409;0;0;0
 22;22;0;Mont'Serrat//school;0;0;0;-1312;-258;-1054
 22;22;0;Mont'Serrat//marketplace;0;0;0;0;0;0
 22;22;0;Mont'Serrat//pharmacy;0;0;0;0;0;0
 22;22;0;Mont'Serrat//gas_station;0;0;0;0;0;0
-22;22;0;Morro Santana//home;7821;7821;0;319;319;0
-22;22;0;Morro Santana//work;5975;1961;4014;500;250;250
+22;22;0;Morro Santana//home;8071;8071;0;819;819;0
+22;22;0;Morro Santana//work;4975;1708;3267;0;0;0
 22;22;0;Morro Santana//school;0;0;0;-496;-272;-224
 22;22;0;Morro Santana//marketplace;0;0;0;0;0;0
 22;22;0;Morro Santana//pharmacy;0;0;0;0;0;0
 22;22;0;Morro Santana//gas_station;0;0;0;0;0;0
-22;22;0;Navegantes//home;1596;1596;0;111;111;0
-22;22;0;Navegantes//work;10538;465;10073;2250;2;2248
+22;22;0;Navegantes//home;1596;1596;0;-139;-139;0
+22;22;0;Navegantes//work;3538;213;3325;250;0;250
 22;22;0;Navegantes//school;0;0;0;-706;-43;-663
 22;22;0;Navegantes//marketplace;0;0;0;0;0;0
 22;22;0;Navegantes//pharmacy;0;0;0;0;0;0
 22;22;0;Navegantes//gas_station;0;0;0;0;0;0
 22;22;0;Navegantes//shopping_mall;0;0;0;0;0;0
 22;22;0;Nonoai//home;8831;8831;0;1190;1190;0
-22;22;0;Nonoai//work;6724;576;6148;0;0;0
+22;22;0;Nonoai//work;6724;572;6152;0;0;0
 22;22;0;Nonoai//school;0;0;0;-1562;-537;-1025
 22;22;0;Nonoai//marketplace;0;0;0;0;0;0
 22;22;0;Nonoai//pharmacy;0;0;0;0;0;0
 22;22;0;Nonoai//gas_station;0;0;0;0;0;0
 22;22;0;Parque Santa Fé//home;3138;3138;0;597;597;0
-22;22;0;Parque Santa Fé//work;5708;84;5624;0;0;0
+22;22;0;Parque Santa Fé//work;6208;84;6124;250;0;250
 22;22;0;Parque Santa Fé//school;0;0;0;-1286;-44;-1242
 22;22;0;Parque Santa Fé//marketplace;0;0;0;0;0;0
 22;22;0;Parque Santa Fé//pharmacy;0;0;0;0;0;0
 22;22;0;Parque Santa Fé//gas_station;0;0;0;0;0;0
-22;22;0;Partenon//home;19279;19279;0;2867;2867;0
-22;22;0;Partenon//work;7207;1008;6199;0;0;0
+22;22;0;Partenon//home;18779;18779;0;2867;2867;0
+22;22;0;Partenon//work;6207;984;5223;0;0;0
 22;22;0;Partenon//school;0;0;0;-1353;-6;-1347
 22;22;0;Partenon//marketplace;0;0;0;0;0;0
 22;22;0;Partenon//pharmacy;0;0;0;0;0;0
 22;22;0;Partenon//gas_station;0;0;0;0;0;0
-22;22;0;Passo D'Areia//home;7634;7634;0;467;467;0
-22;22;0;Passo D'Areia//work;3732;621;3111;0;0;0
+22;22;0;Passo D'Areia//home;7884;7884;0;967;967;0
+22;22;0;Passo D'Areia//work;4232;621;3611;0;0;0
 22;22;0;Passo D'Areia//school;0;0;0;-881;-236;-645
 22;22;0;Passo D'Areia//marketplace;0;0;0;0;0;0
 22;22;0;Passo D'Areia//pharmacy;0;0;0;0;0;0
 22;22;0;Passo D'Areia//gas_station;0;0;0;0;0;0
-22;22;0;Passo das Pedras//home;5972;5972;0;1326;1326;0
-22;22;0;Passo das Pedras//work;5143;1368;3775;0;0;0
+22;22;0;Passo das Pedras//home;5722;5722;0;1326;1326;0
+22;22;0;Passo das Pedras//work;4643;1616;3027;0;0;0
 22;22;0;Passo das Pedras//school;0;0;0;-786;-253;-533
 22;22;0;Passo das Pedras//marketplace;0;0;0;0;0;0
 22;22;0;Passo das Pedras//pharmacy;0;0;0;0;0;0
 22;22;0;Passo das Pedras//gas_station;0;0;0;0;0;0
 22;22;0;Pedra Redonda//home;177;177;0;0;0;0
-22;22;0;Pedra Redonda//work;2421;0;2421;500;0;500
+22;22;0;Pedra Redonda//work;2171;0;2171;0;0;0
 22;22;0;Pedra Redonda//school;0;0;0;-840;0;-840
 22;22;0;Pedra Redonda//marketplace;0;0;0;0;0;0
 22;22;0;Pedra Redonda//pharmacy;0;0;0;0;0;0
 22;22;0;Pedra Redonda//gas_station;0;0;0;0;0;0
 22;22;0;Petrópolis//home;14728;14728;0;3641;3641;0
-22;22;0;Petrópolis//work;4890;120;4770;500;22;478
+22;22;0;Petrópolis//work;3140;86;3054;0;0;0
 22;22;0;Petrópolis//school;0;0;0;-1638;-884;-754
 22;22;0;Petrópolis//marketplace;0;0;0;0;0;0
 22;22;0;Petrópolis//pharmacy;0;0;0;0;0;0
@@ -13572,422 +13572,422 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 22;22;0;Pitinga//marketplace;0;0;0;0;0;0
 22;22;0;Pitinga//pharmacy;0;0;0;0;0;0
 22;22;0;Pitinga//gas_station;0;0;0;0;0;0
-22;22;0;Ponta Grossa//home;3221;3221;0;130;130;0
-22;22;0;Ponta Grossa//work;3770;826;2944;250;1;249
+22;22;0;Ponta Grossa//home;3471;3471;0;130;130;0
+22;22;0;Ponta Grossa//work;3270;574;2696;0;0;0
 22;22;0;Ponta Grossa//school;0;0;0;-135;-25;-110
 22;22;0;Ponta Grossa//marketplace;0;0;0;0;0;0
 22;22;0;Ponta Grossa//pharmacy;0;0;0;0;0;0
 22;22;0;Ponta Grossa//gas_station;0;0;0;0;0;0
 22;22;0;Praia de Belas//home;1196;1196;0;210;210;0
-22;22;0;Praia de Belas//work;3900;0;3900;0;0;0
+22;22;0;Praia de Belas//work;3900;0;3900;250;0;250
 22;22;0;Praia de Belas//school;0;0;0;-753;0;-753
 22;22;0;Praia de Belas//marketplace;0;0;0;0;0;0
 22;22;0;Praia de Belas//pharmacy;0;0;0;0;0;0
 22;22;0;Praia de Belas//gas_station;0;0;0;0;0;0
 22;22;0;Praia de Belas//stadium;0;0;0;0;0;0
 22;22;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
-22;22;0;Restinga//home;23079;23079;0;1423;1423;0
-22;22;0;Restinga//work;5079;3558;1521;0;0;0
+22;22;0;Restinga//home;23079;23079;0;1173;1173;0
+22;22;0;Restinga//work;5329;3558;1771;250;250;0
 22;22;0;Restinga//school;0;0;0;-319;-35;-284
 22;22;0;Restinga//marketplace;0;0;0;0;0;0
 22;22;0;Restinga//pharmacy;0;0;0;0;0;0
 22;22;0;Restinga//gas_station;0;0;0;0;0;0
 22;22;0;Restinga//hospital;0;0;0;0;0;0
-22;22;0;Rio Branco//home;5669;5669;0;966;966;0
-22;22;0;Rio Branco//work;5125;0;5125;0;0;0
+22;22;0;Rio Branco//home;6169;6169;0;1216;1216;0
+22;22;0;Rio Branco//work;5625;0;5625;0;0;0
 22;22;0;Rio Branco//school;0;0;0;-1219;-11;-1208
 22;22;0;Rio Branco//marketplace;0;0;0;0;0;0
 22;22;0;Rio Branco//pharmacy;0;0;0;0;0;0
 22;22;0;Rio Branco//gas_station;0;0;0;0;0;0
 22;22;0;Rio Branco//hospital;0;0;0;0;0;0
-22;22;0;Rubem Berta//home;12177;12177;0;870;870;0
-22;22;0;Rubem Berta//work;5870;2559;3311;500;250;250
+22;22;0;Rubem Berta//home;11427;11427;0;1370;1370;0
+22;22;0;Rubem Berta//work;4370;2298;2072;250;0;250
 22;22;0;Rubem Berta//school;0;0;0;-1359;-109;-1250
 22;22;0;Rubem Berta//marketplace;0;0;0;0;0;0
 22;22;0;Rubem Berta//pharmacy;0;0;0;0;0;0
 22;22;0;Rubem Berta//gas_station;0;0;0;0;0;0
-22;22;0;Santa Cecília//home;2134;2134;0;373;373;0
-22;22;0;Santa Cecília//work;4480;86;4394;500;2;498
+22;22;0;Santa Cecília//home;2384;2384;0;373;373;0
+22;22;0;Santa Cecília//work;3730;83;3647;0;0;0
 22;22;0;Santa Cecília//school;0;0;0;-1875;-136;-1739
 22;22;0;Santa Cecília//marketplace;0;0;0;0;0;0
 22;22;0;Santa Cecília//pharmacy;0;0;0;0;0;0
 22;22;0;Santa Cecília//gas_station;0;0;0;0;0;0
 22;22;0;Santa Cecília//hospital;0;0;0;0;0;0
-22;22;0;Santa Maria Goretti//home;1396;1396;0;281;281;0
-22;22;0;Santa Maria Goretti//work;4771;0;4771;250;0;250
+22;22;0;Santa Maria Goretti//home;1146;1146;0;31;31;0
+22;22;0;Santa Maria Goretti//work;4521;250;4271;250;250;0
 22;22;0;Santa Maria Goretti//school;0;0;0;-1436;-6;-1430
 22;22;0;Santa Maria Goretti//marketplace;0;0;0;0;0;0
 22;22;0;Santa Maria Goretti//pharmacy;0;0;0;0;0;0
 22;22;0;Santa Maria Goretti//gas_station;0;0;0;0;0;0
 22;22;0;Santa Rosa de Lima//home;12769;12769;0;2773;2773;0
-22;22;0;Santa Rosa de Lima//work;5960;1988;3972;0;0;0
+22;22;0;Santa Rosa de Lima//work;4960;1738;3222;0;0;0
 22;22;0;Santa Rosa de Lima//school;0;0;0;-891;-6;-885
 22;22;0;Santa Rosa de Lima//marketplace;0;0;0;0;0;0
 22;22;0;Santa Rosa de Lima//pharmacy;0;0;0;0;0;0
 22;22;0;Santa Rosa de Lima//gas_station;0;0;0;0;0;0
-22;22;0;Santa Tereza//home;15206;15206;0;1578;1578;0
-22;22;0;Santa Tereza//work;7673;2385;5288;0;0;0
+22;22;0;Santa Tereza//home;15206;15206;0;1828;1828;0
+22;22;0;Santa Tereza//work;6923;2371;4552;0;0;0
 22;22;0;Santa Tereza//school;0;0;0;-1207;0;-1207
 22;22;0;Santa Tereza//marketplace;0;0;0;0;0;0
 22;22;0;Santa Tereza//pharmacy;0;0;0;0;0;0
 22;22;0;Santa Tereza//gas_station;0;0;0;0;0;0
-22;22;0;Santana//home;7770;7770;0;2178;2178;0
-22;22;0;Santana//work;3851;280;3571;250;0;250
+22;22;0;Santana//home;8020;8020;0;2178;2178;0
+22;22;0;Santana//work;3351;271;3080;0;0;0
 22;22;0;Santana//school;0;0;0;-1359;0;-1359
 22;22;0;Santana//marketplace;0;0;0;0;0;0
 22;22;0;Santana//pharmacy;0;0;0;0;0;0
 22;22;0;Santana//gas_station;0;0;0;0;0;0
 22;22;0;Santana//hospital;0;0;0;0;0;0
-22;22;0;Santo Antônio//home;5021;5021;0;1213;1213;0
-22;22;0;Santo Antônio//work;2882;297;2585;250;2;248
+22;22;0;Santo Antônio//home;4771;4771;0;963;963;0
+22;22;0;Santo Antônio//work;3132;293;2839;0;0;0
 22;22;0;Santo Antônio//school;0;0;0;-1480;-275;-1205
 22;22;0;Santo Antônio//marketplace;0;0;0;0;0;0
 22;22;0;Santo Antônio//pharmacy;0;0;0;0;0;0
 22;22;0;Santo Antônio//gas_station;0;0;0;0;0;0
 22;22;0;São Caetano//home;406;406;0;0;0;0
-22;22;0;São Caetano//work;1675;83;1592;0;0;0
+22;22;0;São Caetano//work;1175;83;1092;0;0;0
 22;22;0;São Caetano//school;0;0;0;-303;0;-303
 22;22;0;São Caetano//marketplace;0;0;0;0;0;0
 22;22;0;São Caetano//pharmacy;0;0;0;0;0;0
 22;22;0;São Caetano//gas_station;0;0;0;0;0;0
 22;22;0;São Geraldo//home;3212;3212;0;373;373;0
-22;22;0;São Geraldo//work;3597;921;2676;250;1;249
+22;22;0;São Geraldo//work;2847;918;1929;0;0;0
 22;22;0;São Geraldo//school;0;0;0;-1192;-298;-894
 22;22;0;São Geraldo//marketplace;0;0;0;0;0;0
 22;22;0;São Geraldo//pharmacy;0;0;0;0;0;0
 22;22;0;São Geraldo//gas_station;0;0;0;0;0;0
-22;22;0;São João//home;4055;4055;0;770;770;0
-22;22;0;São João//work;5780;462;5318;750;6;744
+22;22;0;São João//home;4555;4555;0;770;770;0
+22;22;0;São João//work;4280;200;4080;0;0;0
 22;22;0;São João//school;0;0;0;-609;-261;-348
 22;22;0;São João//marketplace;0;0;0;0;0;0
 22;22;0;São João//pharmacy;0;0;0;0;0;0
 22;22;0;São João//gas_station;0;0;0;0;0;0
 22;22;0;São João//shopping_mall;0;0;0;0;0;0
-22;22;0;São Sebastião//home;2386;2386;0;397;397;0
-22;22;0;São Sebastião//work;3426;617;2809;0;0;0
+22;22;0;São Sebastião//home;2636;2636;0;397;397;0
+22;22;0;São Sebastião//work;3176;614;2562;0;0;0
 22;22;0;São Sebastião//school;0;0;0;-767;-271;-496
 22;22;0;São Sebastião//marketplace;0;0;0;0;0;0
 22;22;0;São Sebastião//pharmacy;0;0;0;0;0;0
 22;22;0;São Sebastião//gas_station;0;0;0;0;0;0
 22;22;0;São Sebastião//shopping_mall;0;0;0;0;0;0
-22;22;0;Sarandi//home;27270;27270;0;1872;1872;0
-22;22;0;Sarandi//work;2107;331;1776;0;0;0
+22;22;0;Sarandi//home;27770;27770;0;1122;1122;0
+22;22;0;Sarandi//work;2607;331;2276;250;0;250
 22;22;0;Sarandi//school;0;0;0;-1354;-273;-1081
 22;22;0;Sarandi//marketplace;0;0;0;0;0;0
 22;22;0;Sarandi//pharmacy;0;0;0;0;0;0
 22;22;0;Sarandi//gas_station;0;0;0;0;0;0
 22;22;0;Sarandi//shopping_mall;0;0;0;0;0;0
-22;22;0;Serraria//home;2042;2042;0;121;121;0
+22;22;0;Serraria//home;2292;2292;0;371;371;0
 22;22;0;Serraria//work;1927;0;1927;0;0;0
 22;22;0;Serraria//school;0;0;0;-717;-322;-395
 22;22;0;Serraria//marketplace;0;0;0;0;0;0
 22;22;0;Serraria//pharmacy;0;0;0;0;0;0
 22;22;0;Serraria//gas_station;0;0;0;0;0;0
 22;22;0;Sétimo Céu//home;552;552;0;33;33;0
-22;22;0;Sétimo Céu//work;3216;0;3216;250;0;250
+22;22;0;Sétimo Céu//work;3466;0;3466;0;0;0
 22;22;0;Sétimo Céu//school;0;0;0;-767;0;-767
 22;22;0;Sétimo Céu//marketplace;0;0;0;0;0;0
 22;22;0;Sétimo Céu//pharmacy;0;0;0;0;0;0
 22;22;0;Sétimo Céu//gas_station;0;0;0;0;0;0
-22;22;0;Teresópolis//home;4994;4994;0;455;455;0
-22;22;0;Teresópolis//work;3609;447;3162;250;2;248
+22;22;0;Teresópolis//home;4494;4494;0;455;455;0
+22;22;0;Teresópolis//work;4109;445;3664;0;0;0
 22;22;0;Teresópolis//school;0;0;0;-1023;-39;-984
 22;22;0;Teresópolis//marketplace;0;0;0;0;0;0
 22;22;0;Teresópolis//pharmacy;0;0;0;0;0;0
 22;22;0;Teresópolis//gas_station;0;0;0;0;0;0
 22;22;0;Teresópolis//hospital;0;0;0;0;0;0
 22;22;0;Três Figueiras//home;1462;1462;0;316;316;0
-22;22;0;Três Figueiras//work;5220;165;5055;500;0;500
+22;22;0;Três Figueiras//work;4470;165;4305;0;0;0
 22;22;0;Três Figueiras//school;0;0;0;-795;0;-795
 22;22;0;Três Figueiras//marketplace;0;0;0;0;0;0
 22;22;0;Três Figueiras//pharmacy;0;0;0;0;0;0
 22;22;0;Três Figueiras//gas_station;0;0;0;0;0;0
 22;22;0;Três Figueiras//shopping_mall;0;0;0;0;0;0
-22;22;0;Tristeza//home;6614;6614;0;931;931;0
-22;22;0;Tristeza//work;3446;306;3140;500;6;494
+22;22;0;Tristeza//home;6114;6114;0;1181;1181;0
+22;22;0;Tristeza//work;3196;300;2896;0;0;0
 22;22;0;Tristeza//school;0;0;0;-101;-4;-97
 22;22;0;Tristeza//marketplace;0;0;0;0;0;0
 22;22;0;Tristeza//pharmacy;0;0;0;0;0;0
 22;22;0;Tristeza//gas_station;0;0;0;0;0;0
 22;22;0;Vila Assunção//home;1534;1534;0;216;216;0
-22;22;0;Vila Assunção//work;2003;207;1796;0;0;0
+22;22;0;Vila Assunção//work;2253;207;2046;250;0;250
 22;22;0;Vila Assunção//school;0;0;0;-364;-33;-331
 22;22;0;Vila Assunção//marketplace;0;0;0;0;0;0
 22;22;0;Vila Assunção//pharmacy;0;0;0;0;0;0
 22;22;0;Vila Assunção//gas_station;0;0;0;0;0;0
 22;22;0;Vila Assunção//hospital;0;0;0;0;0;0
 22;22;0;Vila Conceição//home;710;710;0;0;0;0
-22;22;0;Vila Conceição//work;3213;0;3213;500;0;500
+22;22;0;Vila Conceição//work;2213;0;2213;0;0;0
 22;22;0;Vila Conceição//school;0;0;0;-347;0;-347
 22;22;0;Vila Conceição//marketplace;0;0;0;0;0;0
 22;22;0;Vila Conceição//pharmacy;0;0;0;0;0;0
 22;22;0;Vila Conceição//gas_station;0;0;0;0;0;0
-22;22;0;Vila Ipiranga//home;7386;7386;0;1703;1703;0
-22;22;0;Vila Ipiranga//work;5152;1019;4133;500;3;497
+22;22;0;Vila Ipiranga//home;7136;7136;0;1703;1703;0
+22;22;0;Vila Ipiranga//work;4402;763;3639;0;0;0
 22;22;0;Vila Ipiranga//school;0;0;0;-528;-97;-431
 22;22;0;Vila Ipiranga//marketplace;0;0;0;0;0;0
 22;22;0;Vila Ipiranga//pharmacy;0;0;0;0;0;0
 22;22;0;Vila Ipiranga//gas_station;0;0;0;0;0;0
-22;22;0;Vila Jardim//home;4408;4408;0;821;821;0
-22;22;0;Vila Jardim//work;5318;1011;4307;0;0;0
+22;22;0;Vila Jardim//home;4658;4658;0;821;821;0
+22;22;0;Vila Jardim//work;4568;757;3811;0;0;0
 22;22;0;Vila Jardim//school;0;0;0;-146;0;-146
 22;22;0;Vila Jardim//marketplace;0;0;0;0;0;0
 22;22;0;Vila Jardim//pharmacy;0;0;0;0;0;0
 22;22;0;Vila Jardim//gas_station;0;0;0;0;0;0
-22;22;0;Vila João Pessoa//home;4867;4867;0;745;745;0
-22;22;0;Vila João Pessoa//work;7379;1046;6333;250;0;250
+22;22;0;Vila João Pessoa//home;4867;4867;0;245;245;0
+22;22;0;Vila João Pessoa//work;5629;1038;4591;250;250;0
 22;22;0;Vila João Pessoa//school;0;0;0;-815;-67;-748
 22;22;0;Vila João Pessoa//marketplace;0;0;0;0;0;0
 22;22;0;Vila João Pessoa//pharmacy;0;0;0;0;0;0
 22;22;0;Vila João Pessoa//gas_station;0;0;0;0;0;0
-22;22;0;Vila Nova//home;13648;13648;0;1576;1576;0
-22;22;0;Vila Nova//work;5156;510;4646;1000;12;988
+22;22;0;Vila Nova//home;13148;13148;0;1326;1326;0
+22;22;0;Vila Nova//work;4406;743;3663;250;0;250
 22;22;0;Vila Nova//school;0;0;0;-1209;-594;-615
 22;22;0;Vila Nova//marketplace;0;0;0;0;0;0
 22;22;0;Vila Nova//pharmacy;0;0;0;0;0;0
 22;22;0;Vila Nova//gas_station;0;0;0;0;0;0
 22;22;0;Vila Nova//hospital;0;0;0;0;0;0
-22;22;0;São José//home;9762;9762;0;673;673;0
-22;22;0;São José//work;5628;1902;3726;0;0;0
+22;22;0;São José//home;10012;10012;0;923;923;0
+22;22;0;São José//work;5128;1894;3234;0;0;0
 22;22;0;São José//school;0;0;0;-630;-223;-407
 22;22;0;São José//marketplace;0;0;0;0;0;0
 22;22;0;São José//pharmacy;0;0;0;0;0;0
 22;22;0;São José//gas_station;0;0;0;0;0;0
-23;23;0;Aberta dos Morros//home;7146;7146;0;4345;4345;0
-23;23;0;Aberta dos Morros//work;0;0;0;-3580;-168;-3412
+23;23;0;Aberta dos Morros//home;7149;7149;0;4348;4348;0
+23;23;0;Aberta dos Morros//work;0;0;0;-2830;-168;-2662
 23;23;0;Aberta dos Morros//school;0;0;0;0;0;0
 23;23;0;Aberta dos Morros//marketplace;0;0;0;0;0;0
 23;23;0;Aberta dos Morros//pharmacy;0;0;0;0;0;0
 23;23;0;Aberta dos Morros//gas_station;0;0;0;0;0;0
 23;23;0;Agronomia//home;2331;2331;0;1263;1263;0
-23;23;0;Agronomia//work;0;0;0;-4613;0;-4613
+23;23;0;Agronomia//work;0;0;0;-3613;0;-3613
 23;23;0;Agronomia//school;0;0;0;0;0;0
 23;23;0;Agronomia//marketplace;0;0;0;0;0;0
 23;23;0;Agronomia//pharmacy;0;0;0;0;0;0
 23;23;0;Agronomia//gas_station;0;0;0;0;0;0
 23;23;0;Anchieta//home;2024;2024;0;1268;1268;0
-23;23;0;Anchieta//work;0;0;0;-2844;0;-2844
+23;23;0;Anchieta//work;0;0;0;-1844;0;-1844
 23;23;0;Anchieta//school;0;0;0;0;0;0
 23;23;0;Anchieta//marketplace;0;0;0;0;0;0
 23;23;0;Anchieta//pharmacy;0;0;0;0;0;0
 23;23;0;Anchieta//gas_station;0;0;0;0;0;0
-23;23;0;Arquipélago//home;8326;8326;0;4928;4928;0
-23;23;0;Arquipélago//work;8;0;8;-1217;-2;-1215
+23;23;0;Arquipélago//home;8330;8330;0;5182;5182;0
+23;23;0;Arquipélago//work;0;0;0;-975;0;-975
 23;23;0;Arquipélago//school;0;0;0;0;0;0
 23;23;0;Arquipélago//marketplace;0;0;0;0;0;0
 23;23;0;Arquipélago//pharmacy;0;0;0;0;0;0
 23;23;0;Arquipélago//gas_station;0;0;0;0;0;0
-23;23;0;Auxiliadora//home;9680;9680;0;6453;6453;0
-23;23;0;Auxiliadora//work;10;0;10;-4725;-192;-4533
+23;23;0;Auxiliadora//home;9683;9683;0;6206;6206;0
+23;23;0;Auxiliadora//work;0;0;0;-4485;-191;-4294
 23;23;0;Auxiliadora//school;0;0;0;0;0;0
 23;23;0;Auxiliadora//marketplace;0;0;0;0;0;0
 23;23;0;Auxiliadora//pharmacy;0;0;0;0;0;0
 23;23;0;Auxiliadora//gas_station;0;0;0;0;0;0
-23;23;0;Azenha//home;13796;13796;0;8619;8619;0
-23;23;0;Azenha//work;175;0;175;-2949;-412;-2537
+23;23;0;Azenha//home;13804;13804;0;8127;8127;0
+23;23;0;Azenha//work;0;0;0;-3124;-162;-2962
 23;23;0;Azenha//school;0;0;0;0;0;0
 23;23;0;Azenha//marketplace;0;0;0;0;0;0
 23;23;0;Azenha//pharmacy;0;0;0;0;0;0
 23;23;0;Azenha//gas_station;0;0;0;0;0;0
 23;23;0;Azenha//hospital;0;0;0;0;0;0
 23;23;0;Azenha//shopping_mall;0;0;0;0;0;0
-23;23;0;Bela Vista//home;11779;11779;0;8392;8392;0
-23;23;0;Bela Vista//work;8;0;8;-4045;-243;-3802
+23;23;0;Bela Vista//home;11787;11787;0;8400;8400;0
+23;23;0;Bela Vista//work;0;0;0;-4053;-239;-3814
 23;23;0;Bela Vista//school;0;0;0;0;0;0
 23;23;0;Bela Vista//marketplace;0;0;0;0;0;0
 23;23;0;Bela Vista//pharmacy;0;0;0;0;0;0
 23;23;0;Bela Vista//gas_station;0;0;0;0;0;0
-23;23;0;Belém Novo//home;9840;9840;0;5522;5522;0
-23;23;0;Belém Novo//work;0;0;0;-2913;-1099;-1814
+23;23;0;Belém Novo//home;10100;10100;0;5532;5532;0
+23;23;0;Belém Novo//work;0;0;0;-2163;-846;-1317
 23;23;0;Belém Novo//school;0;0;0;0;0;0
 23;23;0;Belém Novo//marketplace;0;0;0;0;0;0
 23;23;0;Belém Novo//pharmacy;0;0;0;0;0;0
 23;23;0;Belém Novo//gas_station;0;0;0;0;0;0
-23;23;0;Belém Velho//home;10825;10825;0;6640;6640;0
-23;23;0;Belém Velho//work;0;0;0;-4643;-3;-4640
+23;23;0;Belém Velho//home;10835;10835;0;6650;6650;0
+23;23;0;Belém Velho//work;0;0;0;-3393;0;-3393
 23;23;0;Belém Velho//school;0;0;0;0;0;0
 23;23;0;Belém Velho//marketplace;0;0;0;0;0;0
 23;23;0;Belém Velho//pharmacy;0;0;0;0;0;0
 23;23;0;Belém Velho//gas_station;0;0;0;0;0;0
-23;23;0;Boa Vista//home;10047;10047;0;6513;6513;0
-23;23;0;Boa Vista//work;172;0;172;-6444;-951;-5493
+23;23;0;Boa Vista//home;9803;9803;0;6519;6519;0
+23;23;0;Boa Vista//work;0;0;0;-5866;-951;-4915
 23;23;0;Boa Vista//school;0;0;0;0;0;0
 23;23;0;Boa Vista//marketplace;0;0;0;0;0;0
 23;23;0;Boa Vista//pharmacy;0;0;0;0;0;0
 23;23;0;Boa Vista//gas_station;0;0;0;0;0;0
 23;23;0;Boa Vista do Sul//home;2309;2309;0;1145;1145;0
-23;23;0;Boa Vista do Sul//work;4;0;4;-1053;0;-1053
+23;23;0;Boa Vista do Sul//work;0;0;0;-1057;0;-1057
 23;23;0;Boa Vista do Sul//school;0;0;0;0;0;0
 23;23;0;Boa Vista do Sul//marketplace;0;0;0;0;0;0
 23;23;0;Boa Vista do Sul//pharmacy;0;0;0;0;0;0
 23;23;0;Boa Vista do Sul//gas_station;0;0;0;0;0;0
-23;23;0;Bom Fim//home;11333;11333;0;7308;7308;0
-23;23;0;Bom Fim//work;0;0;0;-4661;-552;-4109
+23;23;0;Bom Fim//home;11593;11593;0;7568;7568;0
+23;23;0;Bom Fim//work;0;0;0;-3411;-547;-2864
 23;23;0;Bom Fim//school;0;0;0;0;0;0
 23;23;0;Bom Fim//marketplace;0;0;0;0;0;0
 23;23;0;Bom Fim//pharmacy;0;0;0;0;0;0
 23;23;0;Bom Fim//gas_station;0;0;0;0;0;0
-23;23;0;Bom Jesus//home;28655;28655;0;18487;18487;0
-23;23;0;Bom Jesus//work;0;0;0;-5325;-1462;-3863
+23;23;0;Bom Jesus//home;28675;28675;0;18507;18507;0
+23;23;0;Bom Jesus//work;250;0;250;-4825;-1458;-3367
 23;23;0;Bom Jesus//school;0;0;0;0;0;0
 23;23;0;Bom Jesus//marketplace;0;0;0;0;0;0
 23;23;0;Bom Jesus//pharmacy;0;0;0;0;0;0
 23;23;0;Bom Jesus//gas_station;0;0;0;0;0;0
-23;23;0;Camaquã//home;17923;17923;0;11651;11651;0
-23;23;0;Camaquã//work;0;0;0;-4397;-1507;-2890
+23;23;0;Camaquã//home;17938;17938;0;11916;11916;0
+23;23;0;Camaquã//work;0;0;0;-4897;-1757;-3140
 23;23;0;Camaquã//school;0;0;0;0;0;0
 23;23;0;Camaquã//marketplace;0;0;0;0;0;0
 23;23;0;Camaquã//pharmacy;0;0;0;0;0;0
 23;23;0;Camaquã//gas_station;0;0;0;0;0;0
-23;23;0;Campo Novo//home;8761;8761;0;5290;5290;0
-23;23;0;Campo Novo//work;0;0;0;-4558;-507;-4051
+23;23;0;Campo Novo//home;8766;8766;0;5045;5045;0
+23;23;0;Campo Novo//work;0;0;0;-4058;-256;-3802
 23;23;0;Campo Novo//school;0;0;0;0;0;0
 23;23;0;Campo Novo//marketplace;0;0;0;0;0;0
 23;23;0;Campo Novo//pharmacy;0;0;0;0;0;0
 23;23;0;Campo Novo//gas_station;0;0;0;0;0;0
-23;23;0;Cascata//home;13003;13003;0;8637;8637;0
-23;23;0;Cascata//work;0;0;0;-4666;-174;-4492
+23;23;0;Cascata//home;13013;13013;0;8647;8647;0
+23;23;0;Cascata//work;0;0;0;-4416;-174;-4242
 23;23;0;Cascata//school;0;0;0;0;0;0
 23;23;0;Cascata//marketplace;0;0;0;0;0;0
 23;23;0;Cascata//pharmacy;0;0;0;0;0;0
 23;23;0;Cascata//gas_station;0;0;0;0;0;0
-23;23;0;Cavalhada//home;29284;29284;0;18819;18819;0
-23;23;0;Cavalhada//work;0;0;0;-5088;-363;-4725
+23;23;0;Cavalhada//home;29299;29299;0;19334;19334;0
+23;23;0;Cavalhada//work;0;0;0;-5088;-358;-4730
 23;23;0;Cavalhada//school;0;0;0;0;0;0
 23;23;0;Cavalhada//marketplace;0;0;0;0;0;0
 23;23;0;Cavalhada//pharmacy;0;0;0;0;0;0
 23;23;0;Cavalhada//gas_station;0;0;0;0;0;0
 23;23;0;Cavalhada//shopping_mall;0;0;0;0;0;0
-23;23;0;Centro Histórico//home;39135;39135;0;26880;26880;0
-23;23;0;Centro Histórico//work;0;0;0;-2455;-933;-1522
+23;23;0;Centro Histórico//home;39154;39154;0;27149;27149;0
+23;23;0;Centro Histórico//work;0;0;0;-2705;-933;-1772
 23;23;0;Centro Histórico//school;0;0;0;0;0;0
 23;23;0;Centro Histórico//marketplace;0;0;0;0;0;0
 23;23;0;Centro Histórico//pharmacy;0;0;0;0;0;0
 23;23;0;Centro Histórico//gas_station;0;0;0;0;0;0
 23;23;0;Centro Histórico//hospital;0;0;0;0;0;0
 23;23;0;Centro Histórico//shopping_mall;0;0;0;0;0;0
-23;23;0;Chácara das Pedras//home;6414;6414;0;3806;3806;0
-23;23;0;Chácara das Pedras//work;0;0;0;-3434;-629;-2805
+23;23;0;Chácara das Pedras//home;6668;6668;0;4060;4060;0
+23;23;0;Chácara das Pedras//work;0;0;0;-3934;-628;-3306
 23;23;0;Chácara das Pedras//school;0;0;0;0;0;0
 23;23;0;Chácara das Pedras//marketplace;0;0;0;0;0;0
 23;23;0;Chácara das Pedras//pharmacy;0;0;0;0;0;0
 23;23;0;Chácara das Pedras//gas_station;0;0;0;0;0;0
-23;23;0;Chapéu do Sol//home;2913;2913;0;1676;1676;0
-23;23;0;Chapéu do Sol//work;0;0;0;-3208;-162;-3046
+23;23;0;Chapéu do Sol//home;2913;2913;0;1926;1926;0
+23;23;0;Chapéu do Sol//work;0;0;0;-2958;-412;-2546
 23;23;0;Chapéu do Sol//school;0;0;0;0;0;0
 23;23;0;Chapéu do Sol//marketplace;0;0;0;0;0;0
 23;23;0;Chapéu do Sol//pharmacy;0;0;0;0;0;0
 23;23;0;Chapéu do Sol//gas_station;0;0;0;0;0;0
-23;23;0;Cidade Baixa//home;15370;15370;0;10532;10532;0
-23;23;0;Cidade Baixa//work;0;0;0;-7854;-1391;-6463
+23;23;0;Cidade Baixa//home;15379;15379;0;10791;10791;0
+23;23;0;Cidade Baixa//work;0;0;0;-6854;-1636;-5218
 23;23;0;Cidade Baixa//school;0;0;0;0;0;0
 23;23;0;Cidade Baixa//marketplace;0;0;0;0;0;0
 23;23;0;Cidade Baixa//pharmacy;0;0;0;0;0;0
 23;23;0;Cidade Baixa//gas_station;0;0;0;0;0;0
-23;23;0;Cel. Aparício Borges//home;19288;19288;0;12350;12350;0
-23;23;0;Cel. Aparício Borges//work;0;0;0;-8640;-1920;-6720
+23;23;0;Cel. Aparício Borges//home;19303;19303;0;12615;12615;0
+23;23;0;Cel. Aparício Borges//work;0;0;0;-8140;-1914;-6226
 23;23;0;Cel. Aparício Borges//school;0;0;0;0;0;0
 23;23;0;Cel. Aparício Borges//marketplace;0;0;0;0;0;0
 23;23;0;Cel. Aparício Borges//pharmacy;0;0;0;0;0;0
 23;23;0;Cel. Aparício Borges//gas_station;0;0;0;0;0;0
-23;23;0;Costa e Silva//home;15827;15827;0;9277;9277;0
-23;23;0;Costa e Silva//work;6;0;6;-3500;-336;-3164
+23;23;0;Costa e Silva//home;15842;15842;0;9792;9792;0
+23;23;0;Costa e Silva//work;0;0;0;-3256;-333;-2923
 23;23;0;Costa e Silva//school;0;0;0;0;0;0
 23;23;0;Costa e Silva//marketplace;0;0;0;0;0;0
 23;23;0;Costa e Silva//pharmacy;0;0;0;0;0;0
 23;23;0;Costa e Silva//gas_station;0;0;0;0;0;0
-23;23;0;Cristal//home;31922;31922;0;20333;20333;0
-23;23;0;Cristal//work;0;0;0;-4416;-1402;-3014
+23;23;0;Cristal//home;31946;31946;0;19857;19857;0
+23;23;0;Cristal//work;0;0;0;-4666;-1152;-3514
 23;23;0;Cristal//school;0;0;0;0;0;0
 23;23;0;Cristal//marketplace;0;0;0;0;0;0
 23;23;0;Cristal//pharmacy;0;0;0;0;0;0
 23;23;0;Cristal//gas_station;0;0;0;0;0;0
-23;23;0;Cristo Redentor//home;16446;16446;0;10461;10461;0
-23;23;0;Cristo Redentor//work;7;0;7;-3322;-292;-3030
+23;23;0;Cristo Redentor//home;16455;16455;0;10470;10470;0
+23;23;0;Cristo Redentor//work;0;0;0;-2079;-281;-1798
 23;23;0;Cristo Redentor//school;0;0;0;0;0;0
 23;23;0;Cristo Redentor//marketplace;0;0;0;0;0;0
 23;23;0;Cristo Redentor//pharmacy;0;0;0;0;0;0
 23;23;0;Cristo Redentor//gas_station;0;0;0;0;0;0
 23;23;0;Cristo Redentor//hospital;0;0;0;0;0;0
 23;23;0;Cristo Redentor//shopping_mall;0;0;0;0;0;0
-23;23;0;Espírito Santo//home;5602;5602;0;3833;3833;0
-23;23;0;Espírito Santo//work;0;0;0;-4511;-1000;-3511
+23;23;0;Espírito Santo//home;5606;5606;0;3337;3337;0
+23;23;0;Espírito Santo//work;0;0;0;-4261;-499;-3762
 23;23;0;Espírito Santo//school;0;0;0;0;0;0
 23;23;0;Espírito Santo//marketplace;0;0;0;0;0;0
 23;23;0;Espírito Santo//pharmacy;0;0;0;0;0;0
 23;23;0;Espírito Santo//gas_station;0;0;0;0;0;0
 23;23;0;Extrema//home;1981;1981;0;1243;1243;0
-23;23;0;Extrema//work;0;0;0;-1977;0;-1977
+23;23;0;Extrema//work;0;0;0;-1477;0;-1477
 23;23;0;Extrema//school;0;0;0;0;0;0
 23;23;0;Extrema//marketplace;0;0;0;0;0;0
 23;23;0;Extrema//pharmacy;0;0;0;0;0;0
 23;23;0;Extrema//gas_station;0;0;0;0;0;0
-23;23;0;Farrapos//home;18980;18980;0;12095;12095;0
-23;23;0;Farrapos//work;250;0;250;-28017;-2023;-25994
+23;23;0;Farrapos//home;18986;18986;0;12101;12101;0
+23;23;0;Farrapos//work;0;0;0;-3517;-1973;-1544
 23;23;0;Farrapos//school;0;0;0;0;0;0
 23;23;0;Farrapos//marketplace;0;0;0;0;0;0
 23;23;0;Farrapos//pharmacy;0;0;0;0;0;0
 23;23;0;Farrapos//gas_station;0;0;0;0;0;0
-23;23;0;Farrapos//stadium;0;0;0;-419000;-5622;-413378
+23;23;0;Farrapos//stadium;0;0;0;-500000;-6594;-493406
 23;23;0;Farroupilha//home;961;961;0;506;506;0
-23;23;0;Farroupilha//work;5;0;5;-8464;0;-8464
+23;23;0;Farroupilha//work;0;0;0;-7719;0;-7719
 23;23;0;Farroupilha//school;0;0;0;0;0;0
 23;23;0;Farroupilha//marketplace;0;0;0;0;0;0
 23;23;0;Farroupilha//pharmacy;0;0;0;0;0;0
 23;23;0;Farroupilha//gas_station;0;0;0;0;0;0
 23;23;0;Farroupilha//hospital;0;0;0;0;0;0
-23;23;0;Floresta//home;11588;11588;0;7232;7232;0
-23;23;0;Floresta//work;0;0;0;-4305;-528;-3777
+23;23;0;Floresta//home;11596;11596;0;7240;7240;0
+23;23;0;Floresta//work;0;0;0;-4555;-776;-3779
 23;23;0;Floresta//school;0;0;0;0;0;0
 23;23;0;Floresta//marketplace;0;0;0;0;0;0
 23;23;0;Floresta//pharmacy;0;0;0;0;0;0
 23;23;0;Floresta//gas_station;0;0;0;0;0;0
-23;23;0;Glória//home;17055;17055;0;11448;11448;0
-23;23;0;Glória//work;0;0;0;-5505;-300;-5205
+23;23;0;Glória//home;17067;17067;0;10460;10460;0
+23;23;0;Glória//work;0;0;0;-5255;-300;-4955
 23;23;0;Glória//school;0;0;0;0;0;0
 23;23;0;Glória//marketplace;0;0;0;0;0;0
 23;23;0;Glória//pharmacy;0;0;0;0;0;0
 23;23;0;Glória//gas_station;0;0;0;0;0;0
 23;23;0;Glória//hospital;0;0;0;0;0;0
-23;23;0;Guarujá//home;4804;4804;0;2966;2966;0
-23;23;0;Guarujá//work;680;0;680;-2270;-83;-2187
+23;23;0;Guarujá//home;4811;4811;0;2973;2973;0
+23;23;0;Guarujá//work;0;0;0;-2700;-83;-2617
 23;23;0;Guarujá//school;0;0;0;0;0;0
 23;23;0;Guarujá//marketplace;0;0;0;0;0;0
 23;23;0;Guarujá//pharmacy;0;0;0;0;0;0
 23;23;0;Guarujá//gas_station;0;0;0;0;0;0
-23;23;0;Higienópolis//home;10716;10716;0;6711;6711;0
-23;23;0;Higienópolis//work;7;0;7;-3760;-661;-3099
+23;23;0;Higienópolis//home;10724;10724;0;6719;6719;0
+23;23;0;Higienópolis//work;0;0;0;-3267;-655;-2612
 23;23;0;Higienópolis//school;0;0;0;0;0;0
 23;23;0;Higienópolis//marketplace;0;0;0;0;0;0
 23;23;0;Higienópolis//pharmacy;0;0;0;0;0;0
 23;23;0;Higienópolis//gas_station;0;0;0;0;0;0
-23;23;0;Hípica//home;18630;18630;0;10395;10395;0
-23;23;0;Hípica//work;0;0;0;-3575;-745;-2830
+23;23;0;Hípica//home;18395;18395;0;10660;10660;0
+23;23;0;Hípica//work;0;0;0;-3575;-995;-2580
 23;23;0;Hípica//school;0;0;0;0;0;0
 23;23;0;Hípica//marketplace;0;0;0;0;0;0
 23;23;0;Hípica//pharmacy;0;0;0;0;0;0
 23;23;0;Hípica//gas_station;0;0;0;0;0;0
-23;23;0;Humaitá//home;11496;11496;0;6853;6853;0
-23;23;0;Humaitá//work;14;0;14;-16585;-360;-16225
+23;23;0;Humaitá//home;11502;11502;0;7359;7359;0
+23;23;0;Humaitá//work;0;0;0;-1599;-492;-1107
 23;23;0;Humaitá//school;0;0;0;0;0;0
 23;23;0;Humaitá//marketplace;0;0;0;0;0;0
 23;23;0;Humaitá//pharmacy;0;0;0;0;0;0
 23;23;0;Humaitá//gas_station;0;0;0;0;0;0
-23;23;0;Independência//home;8108;8108;0;5848;5848;0
-23;23;0;Independência//work;0;0;0;-5027;-419;-4608
+23;23;0;Independência//home;8112;8112;0;5852;5852;0
+23;23;0;Independência//work;0;0;0;-4527;-418;-4109
 23;23;0;Independência//school;0;0;0;0;0;0
 23;23;0;Independência//marketplace;0;0;0;0;0;0
 23;23;0;Independência//pharmacy;0;0;0;0;0;0
 23;23;0;Independência//gas_station;0;0;0;0;0;0
 23;23;0;Independência//hospital;0;0;0;0;0;0
 23;23;0;Independência//shopping_mall;0;0;0;0;0;0
-23;23;0;Ipanema//home;13718;13718;0;8555;8555;0
-23;23;0;Ipanema//work;0;0;0;-4597;-267;-4330
+23;23;0;Ipanema//home;13728;13728;0;8815;8815;0
+23;23;0;Ipanema//work;0;0;0;-3597;-259;-3338
 23;23;0;Ipanema//school;0;0;0;0;0;0
 23;23;0;Ipanema//marketplace;0;0;0;0;0;0
 23;23;0;Ipanema//pharmacy;0;0;0;0;0;0
 23;23;0;Ipanema//gas_station;0;0;0;0;0;0
-23;23;0;Jardim Botânico//home;12513;12513;0;7841;7841;0
+23;23;0;Jardim Botânico//home;12521;12521;0;8099;8099;0
 23;23;0;Jardim Botânico//work;0;0;0;-4033;-1040;-2993
 23;23;0;Jardim Botânico//school;0;0;0;0;0;0
 23;23;0;Jardim Botânico//marketplace;0;0;0;0;0;0
@@ -13995,188 +13995,188 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 23;23;0;Jardim Botânico//gas_station;0;0;0;0;0;0
 23;23;0;Jardim Botânico//hospital;0;0;0;0;0;0
 23;23;0;Jardim Botânico//shopping_mall;0;0;0;0;0;0
-23;23;0;Jardim Carvalho//home;25366;25366;0;15767;15767;0
-23;23;0;Jardim Carvalho//work;0;0;0;-4414;-1853;-2561
+23;23;0;Jardim Carvalho//home;25386;25386;0;15787;15787;0
+23;23;0;Jardim Carvalho//work;0;0;0;-3914;-1599;-2315
 23;23;0;Jardim Carvalho//school;0;0;0;0;0;0
 23;23;0;Jardim Carvalho//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Carvalho//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Carvalho//gas_station;0;0;0;0;0;0
 23;23;0;Jardim Carvalho//hospital;0;0;0;0;0;0
-23;23;0;Jardim do Salso//home;4390;4390;0;3065;3065;0
-23;23;0;Jardim do Salso//work;0;0;0;-5759;-480;-5279
+23;23;0;Jardim do Salso//home;4405;4405;0;2830;2830;0
+23;23;0;Jardim do Salso//work;0;0;0;-6009;-730;-5279
 23;23;0;Jardim do Salso//school;0;0;0;0;0;0
 23;23;0;Jardim do Salso//marketplace;0;0;0;0;0;0
 23;23;0;Jardim do Salso//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim do Salso//gas_station;0;0;0;0;0;0
-23;23;0;Jardim Leopoldina//home;18004;18004;0;11112;11112;0
-23;23;0;Jardim Leopoldina//work;0;0;0;-6494;-1432;-5062
+23;23;0;Jardim Leopoldina//home;18016;18016;0;11124;11124;0
+23;23;0;Jardim Leopoldina//work;0;0;0;-6994;-1429;-5565
 23;23;0;Jardim Leopoldina//school;0;0;0;0;0;0
 23;23;0;Jardim Leopoldina//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Leopoldina//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Leopoldina//gas_station;0;0;0;0;0;0
 23;23;0;Jardim Europa//home;2299;2299;0;1404;1404;0
-23;23;0;Jardim Europa//work;0;0;0;-3943;-170;-3773
+23;23;0;Jardim Europa//work;0;0;0;-4193;-170;-4023
 23;23;0;Jardim Europa//school;0;0;0;0;0;0
 23;23;0;Jardim Europa//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Europa//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Europa//gas_station;0;0;0;0;0;0
 23;23;0;Jardim Europa//shopping_mall;0;0;0;0;0;0
 23;23;0;Jardim Floresta//home;3307;3307;0;1754;1754;0
-23;23;0;Jardim Floresta//work;7;0;7;-3586;-212;-3374
+23;23;0;Jardim Floresta//work;0;0;0;-2843;-212;-2631
 23;23;0;Jardim Floresta//school;0;0;0;0;0;0
 23;23;0;Jardim Floresta//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Floresta//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Floresta//gas_station;0;0;0;0;0;0
-23;23;0;Jardim Isabel//home;2835;2835;0;2036;2036;0
+23;23;0;Jardim Isabel//home;2835;2835;0;1786;1786;0
 23;23;0;Jardim Isabel//work;0;0;0;-4212;-265;-3947
 23;23;0;Jardim Isabel//school;0;0;0;0;0;0
 23;23;0;Jardim Isabel//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Isabel//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Isabel//gas_station;0;0;0;0;0;0
-23;23;0;Jardim Itú//home;17844;17844;0;11222;11222;0
-23;23;0;Jardim Itú//work;0;0;0;-4443;-361;-4082
+23;23;0;Jardim Itú//home;17853;17853;0;11981;11981;0
+23;23;0;Jardim Itú//work;0;0;0;-4443;-608;-3835
 23;23;0;Jardim Itú//school;0;0;0;0;0;0
 23;23;0;Jardim Itú//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Itú//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Itú//gas_station;0;0;0;0;0;0
-23;23;0;Jardim Lindóia//home;7413;7413;0;4819;4819;0
-23;23;0;Jardim Lindóia//work;0;0;0;-3695;-1;-3694
+23;23;0;Jardim Lindóia//home;7417;7417;0;4823;4823;0
+23;23;0;Jardim Lindóia//work;0;0;0;-3445;0;-3445
 23;23;0;Jardim Lindóia//school;0;0;0;0;0;0
 23;23;0;Jardim Lindóia//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Lindóia//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Lindóia//gas_station;0;0;0;0;0;0
 23;23;0;Jardim Lindóia//shopping_mall;0;0;0;0;0;0
-23;23;0;Jardim Sabará//home;13520;13520;0;8216;8216;0
+23;23;0;Jardim Sabará//home;13530;13530;0;8226;8226;0
 23;23;0;Jardim Sabará//work;0;0;0;-4376;-464;-3912
 23;23;0;Jardim Sabará//school;0;0;0;0;0;0
 23;23;0;Jardim Sabará//marketplace;0;0;0;0;0;0
 23;23;0;Jardim Sabará//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim Sabará//gas_station;0;0;0;0;0;0
-23;23;0;Jardim São Pedro//home;3951;3951;0;2652;2652;0
-23;23;0;Jardim São Pedro//work;0;0;0;-4021;-1;-4020
+23;23;0;Jardim São Pedro//home;3967;3967;0;2668;2668;0
+23;23;0;Jardim São Pedro//work;0;0;0;-2521;0;-2521
 23;23;0;Jardim São Pedro//school;0;0;0;0;0;0
 23;23;0;Jardim São Pedro//marketplace;0;0;0;0;0;0
 23;23;0;Jardim São Pedro//pharmacy;0;0;0;0;0;0
 23;23;0;Jardim São Pedro//gas_station;0;0;0;0;0;0
-23;23;0;Lageado//home;4468;4468;0;2554;2554;0
+23;23;0;Lageado//home;4481;4481;0;2567;2567;0
 23;23;0;Lageado//work;0;0;0;-2327;0;-2327
 23;23;0;Lageado//school;0;0;0;0;0;0
 23;23;0;Lageado//marketplace;0;0;0;0;0;0
 23;23;0;Lageado//pharmacy;0;0;0;0;0;0
 23;23;0;Lageado//gas_station;0;0;0;0;0;0
-23;23;0;Lami//home;4274;4274;0;2862;2862;0
-23;23;0;Lami//work;2;0;2;-2137;-740;-1397
+23;23;0;Lami//home;4289;4289;0;2627;2627;0
+23;23;0;Lami//work;0;0;0;-2389;-739;-1650
 23;23;0;Lami//school;0;0;0;0;0;0
 23;23;0;Lami//marketplace;0;0;0;0;0;0
 23;23;0;Lami//pharmacy;0;0;0;0;0;0
 23;23;0;Lami//gas_station;0;0;0;0;0;0
-23;23;0;Lomba do Pinheiro//home;58066;58066;0;33108;33108;0
-23;23;0;Lomba do Pinheiro//work;0;0;0;-3647;-2028;-1619
+23;23;0;Lomba do Pinheiro//home;58106;58106;0;33648;33648;0
+23;23;0;Lomba do Pinheiro//work;250;0;250;-3897;-2278;-1619
 23;23;0;Lomba do Pinheiro//school;0;0;0;0;0;0
 23;23;0;Lomba do Pinheiro//marketplace;0;0;0;0;0;0
 23;23;0;Lomba do Pinheiro//pharmacy;0;0;0;0;0;0
 23;23;0;Lomba do Pinheiro//gas_station;0;0;0;0;0;0
-23;23;0;Mário Quintana//home;38077;38077;0;22385;22385;0
-23;23;0;Mário Quintana//work;0;0;0;-5936;-3809;-2127
+23;23;0;Mário Quintana//home;38116;38116;0;22674;22674;0
+23;23;0;Mário Quintana//work;0;0;0;-6436;-4059;-2377
 23;23;0;Mário Quintana//school;0;0;0;0;0;0
 23;23;0;Mário Quintana//marketplace;0;0;0;0;0;0
 23;23;0;Mário Quintana//pharmacy;0;0;0;0;0;0
 23;23;0;Mário Quintana//gas_station;0;0;0;0;0;0
-23;23;0;Medianeira//home;11215;11215;0;7287;7287;0
-23;23;0;Medianeira//work;0;0;0;-5575;-747;-4828
+23;23;0;Medianeira//home;11223;11223;0;7545;7545;0
+23;23;0;Medianeira//work;0;0;0;-5575;-1243;-4332
 23;23;0;Medianeira//school;0;0;0;0;0;0
 23;23;0;Medianeira//marketplace;0;0;0;0;0;0
 23;23;0;Medianeira//pharmacy;0;0;0;0;0;0
 23;23;0;Medianeira//gas_station;0;0;0;0;0;0
-23;23;0;Menino Deus//home;31634;31634;0;20947;20947;0
-23;23;0;Menino Deus//work;0;0;0;-4228;-796;-3432
+23;23;0;Menino Deus//home;31650;31650;0;20963;20963;0
+23;23;0;Menino Deus//work;0;0;0;-4478;-1036;-3442
 23;23;0;Menino Deus//school;0;0;0;0;0;0
 23;23;0;Menino Deus//marketplace;0;0;0;0;0;0
 23;23;0;Menino Deus//pharmacy;0;0;0;0;0;0
 23;23;0;Menino Deus//gas_station;0;0;0;0;0;0
 23;23;0;Menino Deus//hospital;0;0;0;0;0;0
-23;23;0;Moinhos de Vento//home;11929;11929;0;7722;7722;0
-23;23;0;Moinhos de Vento//work;0;0;0;-6220;-777;-5443
+23;23;0;Moinhos de Vento//home;11937;11937;0;7480;7480;0
+23;23;0;Moinhos de Vento//work;0;0;0;-5220;-521;-4699
 23;23;0;Moinhos de Vento//school;0;0;0;0;0;0
 23;23;0;Moinhos de Vento//marketplace;0;0;0;0;0;0
 23;23;0;Moinhos de Vento//pharmacy;0;0;0;0;0;0
 23;23;0;Moinhos de Vento//gas_station;0;0;0;0;0;0
 23;23;0;Moinhos de Vento//hospital;0;0;0;0;0;0
 23;23;0;Moinhos de Vento//shopping_mall;0;0;0;0;0;0
-23;23;0;Mont'Serrat//home;11226;11226;0;6850;6850;0
-23;23;0;Mont'Serrat//work;0;0;0;-5225;-824;-4401
+23;23;0;Mont'Serrat//home;11236;11236;0;7860;7860;0
+23;23;0;Mont'Serrat//work;0;0;0;-4725;-1316;-3409
 23;23;0;Mont'Serrat//school;0;0;0;0;0;0
 23;23;0;Mont'Serrat//marketplace;0;0;0;0;0;0
 23;23;0;Mont'Serrat//pharmacy;0;0;0;0;0;0
 23;23;0;Mont'Serrat//gas_station;0;0;0;0;0;0
-23;23;0;Morro Santana//home;19373;19373;0;11552;11552;0
-23;23;0;Morro Santana//work;0;0;0;-5975;-1961;-4014
+23;23;0;Morro Santana//home;19388;19388;0;11317;11317;0
+23;23;0;Morro Santana//work;0;0;0;-4975;-1708;-3267
 23;23;0;Morro Santana//school;0;0;0;0;0;0
 23;23;0;Morro Santana//marketplace;0;0;0;0;0;0
 23;23;0;Morro Santana//pharmacy;0;0;0;0;0;0
 23;23;0;Morro Santana//gas_station;0;0;0;0;0;0
-23;23;0;Navegantes//home;4307;4307;0;2711;2711;0
-23;23;0;Navegantes//work;4;0;4;-10534;-465;-10069
+23;23;0;Navegantes//home;4327;4327;0;2731;2731;0
+23;23;0;Navegantes//work;0;0;0;-3538;-213;-3325
 23;23;0;Navegantes//school;0;0;0;0;0;0
 23;23;0;Navegantes//marketplace;0;0;0;0;0;0
 23;23;0;Navegantes//pharmacy;0;0;0;0;0;0
 23;23;0;Navegantes//gas_station;0;0;0;0;0;0
 23;23;0;Navegantes//shopping_mall;0;0;0;0;0;0
-23;23;0;Nonoai//home;25156;25156;0;16325;16325;0
-23;23;0;Nonoai//work;0;0;0;-6724;-576;-6148
+23;23;0;Nonoai//home;25160;25160;0;16329;16329;0
+23;23;0;Nonoai//work;0;0;0;-6724;-572;-6152
 23;23;0;Nonoai//school;0;0;0;0;0;0
 23;23;0;Nonoai//marketplace;0;0;0;0;0;0
 23;23;0;Nonoai//pharmacy;0;0;0;0;0;0
 23;23;0;Nonoai//gas_station;0;0;0;0;0;0
-23;23;0;Parque Santa Fé//home;6373;6373;0;3235;3235;0
-23;23;0;Parque Santa Fé//work;0;0;0;-5708;-84;-5624
+23;23;0;Parque Santa Fé//home;6376;6376;0;3238;3238;0
+23;23;0;Parque Santa Fé//work;0;0;0;-6208;-84;-6124
 23;23;0;Parque Santa Fé//school;0;0;0;0;0;0
 23;23;0;Parque Santa Fé//marketplace;0;0;0;0;0;0
 23;23;0;Parque Santa Fé//pharmacy;0;0;0;0;0;0
 23;23;0;Parque Santa Fé//gas_station;0;0;0;0;0;0
-23;23;0;Partenon//home;48141;48141;0;28862;28862;0
-23;23;0;Partenon//work;0;0;0;-7207;-1008;-6199
+23;23;0;Partenon//home;48160;48160;0;29381;29381;0
+23;23;0;Partenon//work;0;0;0;-6207;-984;-5223
 23;23;0;Partenon//school;0;0;0;0;0;0
 23;23;0;Partenon//marketplace;0;0;0;0;0;0
 23;23;0;Partenon//pharmacy;0;0;0;0;0;0
 23;23;0;Partenon//gas_station;0;0;0;0;0;0
-23;23;0;Passo D'Areia//home;21960;21960;0;14326;14326;0
-23;23;0;Passo D'Areia//work;186;0;186;-3546;-621;-2925
+23;23;0;Passo D'Areia//home;21718;21718;0;13834;13834;0
+23;23;0;Passo D'Areia//work;0;0;0;-4232;-621;-3611
 23;23;0;Passo D'Areia//school;0;0;0;0;0;0
 23;23;0;Passo D'Areia//marketplace;0;0;0;0;0;0
 23;23;0;Passo D'Areia//pharmacy;0;0;0;0;0;0
 23;23;0;Passo D'Areia//gas_station;0;0;0;0;0;0
-23;23;0;Passo das Pedras//home;15887;15887;0;9915;9915;0
-23;23;0;Passo das Pedras//work;0;0;0;-5143;-1368;-3775
+23;23;0;Passo das Pedras//home;15902;15902;0;10180;10180;0
+23;23;0;Passo das Pedras//work;0;0;0;-4643;-1616;-3027
 23;23;0;Passo das Pedras//school;0;0;0;0;0;0
 23;23;0;Passo das Pedras//marketplace;0;0;0;0;0;0
 23;23;0;Passo das Pedras//pharmacy;0;0;0;0;0;0
 23;23;0;Passo das Pedras//gas_station;0;0;0;0;0;0
 23;23;0;Pedra Redonda//home;274;274;0;97;97;0
-23;23;0;Pedra Redonda//work;0;0;0;-2421;0;-2421
+23;23;0;Pedra Redonda//work;0;0;0;-2171;0;-2171
 23;23;0;Pedra Redonda//school;0;0;0;0;0;0
 23;23;0;Pedra Redonda//marketplace;0;0;0;0;0;0
 23;23;0;Pedra Redonda//pharmacy;0;0;0;0;0;0
 23;23;0;Pedra Redonda//gas_station;0;0;0;0;0;0
-23;23;0;Petrópolis//home;37455;37455;0;22727;22727;0
-23;23;0;Petrópolis//work;2;0;2;-4888;-120;-4768
+23;23;0;Petrópolis//home;37496;37496;0;22768;22768;0
+23;23;0;Petrópolis//work;0;0;0;-3140;-86;-3054
 23;23;0;Petrópolis//school;0;0;0;0;0;0
 23;23;0;Petrópolis//marketplace;0;0;0;0;0;0
 23;23;0;Petrópolis//pharmacy;0;0;0;0;0;0
 23;23;0;Petrópolis//gas_station;0;0;0;0;0;0
-23;23;0;Pitinga//home;4334;4334;0;2322;2322;0
+23;23;0;Pitinga//home;4352;4352;0;2340;2340;0
 23;23;0;Pitinga//work;0;0;0;-3546;-300;-3246
 23;23;0;Pitinga//school;0;0;0;0;0;0
 23;23;0;Pitinga//marketplace;0;0;0;0;0;0
 23;23;0;Pitinga//pharmacy;0;0;0;0;0;0
 23;23;0;Pitinga//gas_station;0;0;0;0;0;0
-23;23;0;Ponta Grossa//home;8717;8717;0;5496;5496;0
-23;23;0;Ponta Grossa//work;0;0;0;-3770;-826;-2944
+23;23;0;Ponta Grossa//home;8472;8472;0;5001;5001;0
+23;23;0;Ponta Grossa//work;0;0;0;-3270;-574;-2696
 23;23;0;Ponta Grossa//school;0;0;0;0;0;0
 23;23;0;Ponta Grossa//marketplace;0;0;0;0;0;0
 23;23;0;Ponta Grossa//pharmacy;0;0;0;0;0;0
 23;23;0;Ponta Grossa//gas_station;0;0;0;0;0;0
-23;23;0;Praia de Belas//home;2031;2031;0;835;835;0
+23;23;0;Praia de Belas//home;2281;2281;0;1085;1085;0
 23;23;0;Praia de Belas//work;0;0;0;-3900;0;-3900
 23;23;0;Praia de Belas//school;0;0;0;0;0;0
 23;23;0;Praia de Belas//marketplace;0;0;0;0;0;0
@@ -14184,169 +14184,169 @@ Frame;Hour;Day;Node;Total;Locals;Outsiders;dTotals;dLocals;dOutsiders
 23;23;0;Praia de Belas//gas_station;0;0;0;0;0;0
 23;23;0;Praia de Belas//stadium;0;0;0;0;0;0
 23;23;0;Praia de Belas//shopping_mall;0;0;0;0;0;0
-23;23;0;Restinga//home;53468;53468;0;30389;30389;0
-23;23;0;Restinga//work;250;0;250;-4829;-3558;-1271
+23;23;0;Restinga//home;53508;53508;0;30429;30429;0
+23;23;0;Restinga//work;0;0;0;-5329;-3558;-1771
 23;23;0;Restinga//school;0;0;0;0;0;0
 23;23;0;Restinga//marketplace;0;0;0;0;0;0
 23;23;0;Restinga//pharmacy;0;0;0;0;0;0
 23;23;0;Restinga//gas_station;0;0;0;0;0;0
 23;23;0;Restinga//hospital;0;0;0;0;0;0
-23;23;0;Rio Branco//home;17525;17525;0;11856;11856;0
-23;23;0;Rio Branco//work;0;0;0;-5125;0;-5125
+23;23;0;Rio Branco//home;17281;17281;0;11112;11112;0
+23;23;0;Rio Branco//work;0;0;0;-5625;0;-5625
 23;23;0;Rio Branco//school;0;0;0;0;0;0
 23;23;0;Rio Branco//marketplace;0;0;0;0;0;0
 23;23;0;Rio Branco//pharmacy;0;0;0;0;0;0
 23;23;0;Rio Branco//gas_station;0;0;0;0;0;0
 23;23;0;Rio Branco//hospital;0;0;0;0;0;0
-23;23;0;Rubem Berta//home;33150;33150;0;20973;20973;0
-23;23;0;Rubem Berta//work;0;0;0;-5870;-2559;-3311
+23;23;0;Rubem Berta//home;33168;33168;0;21741;21741;0
+23;23;0;Rubem Berta//work;0;0;0;-4370;-2298;-2072
 23;23;0;Rubem Berta//school;0;0;0;0;0;0
 23;23;0;Rubem Berta//marketplace;0;0;0;0;0;0
 23;23;0;Rubem Berta//pharmacy;0;0;0;0;0;0
 23;23;0;Rubem Berta//gas_station;0;0;0;0;0;0
-23;23;0;Santa Cecília//home;5763;5763;0;3629;3629;0
-23;23;0;Santa Cecília//work;0;0;0;-4480;-86;-4394
+23;23;0;Santa Cecília//home;5768;5768;0;3384;3384;0
+23;23;0;Santa Cecília//work;250;0;250;-3480;-83;-3397
 23;23;0;Santa Cecília//school;0;0;0;0;0;0
 23;23;0;Santa Cecília//marketplace;0;0;0;0;0;0
 23;23;0;Santa Cecília//pharmacy;0;0;0;0;0;0
 23;23;0;Santa Cecília//gas_station;0;0;0;0;0;0
 23;23;0;Santa Cecília//hospital;0;0;0;0;0;0
-23;23;0;Santa Maria Goretti//home;3509;3509;0;2113;2113;0
-23;23;0;Santa Maria Goretti//work;12;0;12;-4759;0;-4759
+23;23;0;Santa Maria Goretti//home;3509;3509;0;2363;2363;0
+23;23;0;Santa Maria Goretti//work;0;0;0;-4521;-250;-4271
 23;23;0;Santa Maria Goretti//school;0;0;0;0;0;0
 23;23;0;Santa Maria Goretti//marketplace;0;0;0;0;0;0
 23;23;0;Santa Maria Goretti//pharmacy;0;0;0;0;0;0
 23;23;0;Santa Maria Goretti//gas_station;0;0;0;0;0;0
-23;23;0;Santa Rosa de Lima//home;35301;35301;0;22532;22532;0
-23;23;0;Santa Rosa de Lima//work;183;0;183;-5777;-1988;-3789
+23;23;0;Santa Rosa de Lima//home;35333;35333;0;22564;22564;0
+23;23;0;Santa Rosa de Lima//work;0;0;0;-4960;-1738;-3222
 23;23;0;Santa Rosa de Lima//school;0;0;0;0;0;0
 23;23;0;Santa Rosa de Lima//marketplace;0;0;0;0;0;0
 23;23;0;Santa Rosa de Lima//pharmacy;0;0;0;0;0;0
 23;23;0;Santa Rosa de Lima//gas_station;0;0;0;0;0;0
-23;23;0;Santa Tereza//home;39547;39547;0;24341;24341;0
-23;23;0;Santa Tereza//work;0;0;0;-7673;-2385;-5288
+23;23;0;Santa Tereza//home;39577;39577;0;24371;24371;0
+23;23;0;Santa Tereza//work;0;0;0;-6923;-2371;-4552
 23;23;0;Santa Tereza//school;0;0;0;0;0;0
 23;23;0;Santa Tereza//marketplace;0;0;0;0;0;0
 23;23;0;Santa Tereza//pharmacy;0;0;0;0;0;0
 23;23;0;Santa Tereza//gas_station;0;0;0;0;0;0
-23;23;0;Santana//home;20707;20707;0;12937;12937;0
-23;23;0;Santana//work;0;0;0;-3851;-280;-3571
+23;23;0;Santana//home;20723;20723;0;12703;12703;0
+23;23;0;Santana//work;0;0;0;-3351;-271;-3080
 23;23;0;Santana//school;0;0;0;0;0;0
 23;23;0;Santana//marketplace;0;0;0;0;0;0
 23;23;0;Santana//pharmacy;0;0;0;0;0;0
 23;23;0;Santana//gas_station;0;0;0;0;0;0
 23;23;0;Santana//hospital;0;0;0;0;0;0
-23;23;0;Santo Antônio//home;13155;13155;0;8134;8134;0
-23;23;0;Santo Antônio//work;0;0;0;-2882;-297;-2585
+23;23;0;Santo Antônio//home;13161;13161;0;8390;8390;0
+23;23;0;Santo Antônio//work;0;0;0;-3132;-293;-2839
 23;23;0;Santo Antônio//school;0;0;0;0;0;0
 23;23;0;Santo Antônio//marketplace;0;0;0;0;0;0
 23;23;0;Santo Antônio//pharmacy;0;0;0;0;0;0
 23;23;0;Santo Antônio//gas_station;0;0;0;0;0;0
 23;23;0;São Caetano//home;757;757;0;351;351;0
-23;23;0;São Caetano//work;0;0;0;-1675;-83;-1592
+23;23;0;São Caetano//work;250;0;250;-925;-83;-842
 23;23;0;São Caetano//school;0;0;0;0;0;0
 23;23;0;São Caetano//marketplace;0;0;0;0;0;0
 23;23;0;São Caetano//pharmacy;0;0;0;0;0;0
 23;23;0;São Caetano//gas_station;0;0;0;0;0;0
-23;23;0;São Geraldo//home;8676;8676;0;5464;5464;0
-23;23;0;São Geraldo//work;0;0;0;-3597;-921;-2676
+23;23;0;São Geraldo//home;8681;8681;0;5469;5469;0
+23;23;0;São Geraldo//work;0;0;0;-2847;-918;-1929
 23;23;0;São Geraldo//school;0;0;0;0;0;0
 23;23;0;São Geraldo//marketplace;0;0;0;0;0;0
 23;23;0;São Geraldo//pharmacy;0;0;0;0;0;0
 23;23;0;São Geraldo//gas_station;0;0;0;0;0;0
-23;23;0;São João//home;12218;12218;0;8163;8163;0
-23;23;0;São João//work;0;0;0;-5780;-462;-5318
+23;23;0;São João//home;12226;12226;0;7671;7671;0
+23;23;0;São João//work;0;0;0;-4280;-200;-4080
 23;23;0;São João//school;0;0;0;0;0;0
 23;23;0;São João//marketplace;0;0;0;0;0;0
 23;23;0;São João//pharmacy;0;0;0;0;0;0
 23;23;0;São João//gas_station;0;0;0;0;0;0
 23;23;0;São João//shopping_mall;0;0;0;0;0;0
-23;23;0;São Sebastião//home;7014;7014;0;4628;4628;0
-23;23;0;São Sebastião//work;0;0;0;-3426;-617;-2809
+23;23;0;São Sebastião//home;7019;7019;0;4383;4383;0
+23;23;0;São Sebastião//work;0;0;0;-3176;-614;-2562
 23;23;0;São Sebastião//school;0;0;0;0;0;0
 23;23;0;São Sebastião//marketplace;0;0;0;0;0;0
 23;23;0;São Sebastião//pharmacy;0;0;0;0;0;0
 23;23;0;São Sebastião//gas_station;0;0;0;0;0;0
 23;23;0;São Sebastião//shopping_mall;0;0;0;0;0;0
-23;23;0;Sarandi//home;59511;59511;0;32241;32241;0
-23;23;0;Sarandi//work;0;0;0;-2107;-331;-1776
+23;23;0;Sarandi//home;59521;59521;0;31751;31751;0
+23;23;0;Sarandi//work;250;0;250;-2357;-331;-2026
 23;23;0;Sarandi//school;0;0;0;0;0;0
 23;23;0;Sarandi//marketplace;0;0;0;0;0;0
 23;23;0;Sarandi//pharmacy;0;0;0;0;0;0
 23;23;0;Sarandi//gas_station;0;0;0;0;0;0
 23;23;0;Sarandi//shopping_mall;0;0;0;0;0;0
-23;23;0;Serraria//home;6235;6235;0;4193;4193;0
+23;23;0;Serraria//home;6239;6239;0;3947;3947;0
 23;23;0;Serraria//work;0;0;0;-1927;0;-1927
 23;23;0;Serraria//school;0;0;0;0;0;0
 23;23;0;Serraria//marketplace;0;0;0;0;0;0
 23;23;0;Serraria//pharmacy;0;0;0;0;0;0
 23;23;0;Serraria//gas_station;0;0;0;0;0;0
 23;23;0;Sétimo Céu//home;1329;1329;0;777;777;0
-23;23;0;Sétimo Céu//work;0;0;0;-3216;0;-3216
+23;23;0;Sétimo Céu//work;0;0;0;-3466;0;-3466
 23;23;0;Sétimo Céu//school;0;0;0;0;0;0
 23;23;0;Sétimo Céu//marketplace;0;0;0;0;0;0
 23;23;0;Sétimo Céu//pharmacy;0;0;0;0;0;0
 23;23;0;Sétimo Céu//gas_station;0;0;0;0;0;0
-23;23;0;Teresópolis//home;14697;14697;0;9703;9703;0
-23;23;0;Teresópolis//work;2;0;2;-3607;-447;-3160
+23;23;0;Teresópolis//home;14707;14707;0;10213;10213;0
+23;23;0;Teresópolis//work;0;0;0;-4109;-445;-3664
 23;23;0;Teresópolis//school;0;0;0;0;0;0
 23;23;0;Teresópolis//marketplace;0;0;0;0;0;0
 23;23;0;Teresópolis//pharmacy;0;0;0;0;0;0
 23;23;0;Teresópolis//gas_station;0;0;0;0;0;0
 23;23;0;Teresópolis//hospital;0;0;0;0;0;0
-23;23;0;Três Figueiras//home;4038;4038;0;2576;2576;0
-23;23;0;Três Figueiras//work;0;0;0;-5220;-165;-5055
+23;23;0;Três Figueiras//home;4070;4070;0;2608;2608;0
+23;23;0;Três Figueiras//work;250;0;250;-4220;-165;-4055
 23;23;0;Três Figueiras//school;0;0;0;0;0;0
 23;23;0;Três Figueiras//marketplace;0;0;0;0;0;0
 23;23;0;Três Figueiras//pharmacy;0;0;0;0;0;0
 23;23;0;Três Figueiras//gas_station;0;0;0;0;0;0
 23;23;0;Três Figueiras//shopping_mall;0;0;0;0;0;0
-23;23;0;Tristeza//home;16677;16677;0;10063;10063;0
-23;23;0;Tristeza//work;0;0;0;-3446;-306;-3140
+23;23;0;Tristeza//home;16692;16692;0;10578;10578;0
+23;23;0;Tristeza//work;0;0;0;-3196;-300;-2896
 23;23;0;Tristeza//school;0;0;0;0;0;0
 23;23;0;Tristeza//marketplace;0;0;0;0;0;0
 23;23;0;Tristeza//pharmacy;0;0;0;0;0;0
 23;23;0;Tristeza//gas_station;0;0;0;0;0;0
-23;23;0;Vila Assunção//home;4407;4407;0;2873;2873;0
-23;23;0;Vila Assunção//work;250;0;250;-1753;-207;-1546
+23;23;0;Vila Assunção//home;4418;4418;0;2884;2884;0
+23;23;0;Vila Assunção//work;0;0;0;-2253;-207;-2046
 23;23;0;Vila Assunção//school;0;0;0;0;0;0
 23;23;0;Vila Assunção//marketplace;0;0;0;0;0;0
 23;23;0;Vila Assunção//pharmacy;0;0;0;0;0;0
 23;23;0;Vila Assunção//gas_station;0;0;0;0;0;0
 23;23;0;Vila Assunção//hospital;0;0;0;0;0;0
 23;23;0;Vila Conceição//home;1349;1349;0;639;639;0
-23;23;0;Vila Conceição//work;0;0;0;-3213;0;-3213
+23;23;0;Vila Conceição//work;0;0;0;-2213;0;-2213
 23;23;0;Vila Conceição//school;0;0;0;0;0;0
 23;23;0;Vila Conceição//marketplace;0;0;0;0;0;0
 23;23;0;Vila Conceição//pharmacy;0;0;0;0;0;0
 23;23;0;Vila Conceição//gas_station;0;0;0;0;0;0
-23;23;0;Vila Ipiranga//home;18647;18647;0;11261;11261;0
-23;23;0;Vila Ipiranga//work;0;0;0;-5152;-1019;-4133
+23;23;0;Vila Ipiranga//home;18659;18659;0;11523;11523;0
+23;23;0;Vila Ipiranga//work;0;0;0;-4402;-763;-3639
 23;23;0;Vila Ipiranga//school;0;0;0;0;0;0
 23;23;0;Vila Ipiranga//marketplace;0;0;0;0;0;0
 23;23;0;Vila Ipiranga//pharmacy;0;0;0;0;0;0
 23;23;0;Vila Ipiranga//gas_station;0;0;0;0;0;0
-23;23;0;Vila Jardim//home;13183;13183;0;8775;8775;0
-23;23;0;Vila Jardim//work;9;0;9;-5309;-1011;-4298
+23;23;0;Vila Jardim//home;13189;13189;0;8531;8531;0
+23;23;0;Vila Jardim//work;0;0;0;-4568;-757;-3811
 23;23;0;Vila Jardim//school;0;0;0;0;0;0
 23;23;0;Vila Jardim//marketplace;0;0;0;0;0;0
 23;23;0;Vila Jardim//pharmacy;0;0;0;0;0;0
 23;23;0;Vila Jardim//gas_station;0;0;0;0;0;0
-23;23;0;Vila João Pessoa//home;13031;13031;0;8164;8164;0
-23;23;0;Vila João Pessoa//work;0;0;0;-7379;-1046;-6333
+23;23;0;Vila João Pessoa//home;13041;13041;0;8174;8174;0
+23;23;0;Vila João Pessoa//work;0;0;0;-5629;-1038;-4591
 23;23;0;Vila João Pessoa//school;0;0;0;0;0;0
 23;23;0;Vila João Pessoa//marketplace;0;0;0;0;0;0
 23;23;0;Vila João Pessoa//pharmacy;0;0;0;0;0;0
 23;23;0;Vila João Pessoa//gas_station;0;0;0;0;0;0
-23;23;0;Vila Nova//home;32457;32457;0;18809;18809;0
-23;23;0;Vila Nova//work;3;0;3;-5153;-510;-4643
+23;23;0;Vila Nova//home;32469;32469;0;19321;19321;0
+23;23;0;Vila Nova//work;0;0;0;-4406;-743;-3663
 23;23;0;Vila Nova//school;0;0;0;0;0;0
 23;23;0;Vila Nova//marketplace;0;0;0;0;0;0
 23;23;0;Vila Nova//pharmacy;0;0;0;0;0;0
 23;23;0;Vila Nova//gas_station;0;0;0;0;0;0
 23;23;0;Vila Nova//hospital;0;0;0;0;0;0
-23;23;0;São José//home;26502;26502;0;16740;16740;0
-23;23;0;São José//work;0;0;0;-5628;-1902;-3726
+23;23;0;São José//home;26522;26522;0;16510;16510;0
+23;23;0;São José//work;0;0;0;-5128;-1894;-3234
 23;23;0;São José//school;0;0;0;0;0;0
 23;23;0;São José//marketplace;0;0;0;0;0;0
 23;23;0;São José//pharmacy;0;0;0;0;0;0

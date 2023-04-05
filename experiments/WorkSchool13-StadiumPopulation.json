@@ -11,10 +11,10 @@
         "population_group_size": 50,
         "movement_probability": 0.05,
         "distribution_location": 0.0,
-        "distribution_scale": 1000,
+        "distribution_scale": 500,
         "use_buckets": true,
         "__comment2__": "'distance_bucket_size' only used in 'use_buckets' is true",
-        "distance_bucket_size": 500
+        "distance_bucket_size": 250
     },
     "send_population_back_plugin": {},
     "gather_population_plugin": {},

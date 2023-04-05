@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import IntEnum
 import sys
 sys.path.append('../')
 
@@ -11,11 +11,11 @@ import math
 import util
 import time
 
-class WeightingMode(Enum):
+class WeightingMode(IntEnum):
     DISTANCE = 1,
     POPULATION = 2
 
-class IsolationMode(Enum):
+class IsolationMode(IntEnum):
     REGULAR = 1,
     QUANTITY_CORRECTION = 2
 
