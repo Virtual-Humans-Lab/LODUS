@@ -60,7 +60,7 @@ def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005,
     __header:str = "Experiment Movement Displacement:"
     dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
     output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
-    dir_path.mkdir(parents=True, exist_ok=True)
+    output_path.mkdir(parents=True, exist_ok=True)
 
     xaxis = dict(tickmode = 'linear',
                  tick0 = 0.0,
