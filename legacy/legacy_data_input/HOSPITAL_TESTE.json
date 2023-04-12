@@ -1,0 +1,178 @@
+{
+  "population_template": {
+    "traceable_properties": {},
+    "sampled_properties": {
+      "age": ["adults", "elders", "young", "children"],
+      "occupation": ["idle", "student", "worker"],
+      "social_profile": ["low", "mid", "high"]
+    }
+  },
+  "repeating_global_actions": [
+    {
+      "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      "type": "patient_call",
+      "values": {
+        "node_name": "hospital",
+        "population_template": {}
+      }
+    },
+    {
+      "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      "type": "generate_patient_data",
+      "values": {
+        "node_name": "hospital",
+        "population_template": {}
+      }
+    }
+  ],
+  "regions": [
+    {
+      "name": "Independência",
+      "image_position": [992.0, 1387.0],
+      "long_lat_position": [-51.2114165227445, -30.0283138642156],
+      "world_position": [671.55325024109334, 1338.5547946770675],
+      "neighbors": [
+        "Floresta",
+        "Moinhos de Vento",
+        "Rio Branco",
+        "Bom Fim",
+        "Centro"
+      ],
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [1009.72113, 1390.072],
+            "long_lat_position": [-51.209426628695127, -30.028013704038827],
+            "world_position": [893.06724255066365, 1376.9545444329269]
+          },
+          "population_groups": [
+            {
+              "size": 8112,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 4057,
+                  "elders": 1622,
+                  "young": 1622,
+                  "children": 811
+                },
+                "occupation": {
+                  "idle": 2433,
+                  "student": 1622,
+                  "worker": 4057
+                }
+              }
+            }
+          ],
+          "time_actions": {}
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [957.843262, 1395.99548],
+            "long_lat_position": [-51.21525196357365, -30.027434918255064],
+            "world_position": [244.59393017273396, 1450.9988025506027]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        }
+      }
+    },
+    {
+      "name": "Santana",
+      "image_position": [1064.0, 1604.0],
+      "long_lat_position": [-51.2055865687131, -30.046728905517],
+      "world_position": [1320.5407643644139, -1017.5228219665587],
+      "neighbors": [
+        "Bom Fim",
+        "Santa Cecília",
+        "Azenha",
+        "Cidade Baixa",
+        "Farroupilha",
+        "Rio Branco"
+      ],
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [1043.07251, 1570.79883],
+            "long_lat_position": [-51.207936504803371, -30.049972295767645],
+            "world_position": [1058.9470753995702, -1432.5380807556212]
+          },
+          "population_groups": [
+            {
+              "size": 20723,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 10363,
+                  "elders": 4144,
+                  "young": 4144,
+                  "children": 2072
+                },
+                "occupation": {
+                  "idle": 6216,
+                  "student": 4144,
+                  "worker": 10363
+                }
+              }
+            }
+          ],
+          "time_actions": {}
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [1048.62158, 1617.40735],
+            "long_lat_position": [-51.207313405628263, -30.045419126491872],
+            "world_position": [1128.3101582853124, -849.93102509155869]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        }
+      }
+    },
+    {
+      "name": "Jardim Botânico",
+      "image_position": [1355.0, 1693.0],
+      "long_lat_position": [-51.1866150813593, -30.0541730304667],
+      "world_position": [3432.437076180242, -1970.0728642339818],
+      "neighbors": ["Petrópolis", "Jardim do Salso", "Partenon"],
+      "nodes": {
+        "home": {
+          "characteristics": {
+            "image_position": [1397.65, 1705.6167],
+            "long_lat_position": [-51.181825938000841, -30.052940584951649],
+            "world_position": [3965.562076180242, -1812.3641850347631]
+          },
+          "population_groups": [
+            {
+              "size": 12521,
+              "traceable_properties": {},
+              "description": {
+                "age": {
+                  "adults": 6261,
+                  "elders": 2504,
+                  "young": 2504,
+                  "children": 1252
+                },
+                "occupation": {
+                  "idle": 3756,
+                  "student": 2504,
+                  "worker": 6261
+                }
+              }
+            }
+          ],
+          "time_actions": {}
+        },
+        "hospital": {
+          "characteristics": {
+            "image_position": [1330.22192, 1739.64258],
+            "long_lat_position": [-51.189397395555623, -30.049616728660798],
+            "world_position": [3122.7112766196951, -1387.0400273199193]
+          },
+          "population_groups": [],
+          "time_actions": {}
+        }
+      }
+    }
+  ]
+}
