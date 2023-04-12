@@ -45,9 +45,11 @@ def create_levy_distribution_figure(location: float, scale: float, sample_size: 
     print(f'\tMean {dist.mean()}, Max {dist.max()}')
     # Creates a histogram of frequencies
     bins = np.arange(bin_start, bin_stop, bin_step)
+    sns.set_theme()
     s = sns.histplot(dist, bins=bins) # type: ignore
     fig_path = dir_path / f"levy-distribution-L{location}-S{scale}-Step{bin_step}-Q{sample_size}.png"
     print(__header, f'Saving levy distribution figure to:\n\t', fig_path)
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -57,6 +59,7 @@ def create_levy_distribution_figure(location: float, scale: float, sample_size: 
     fig_path = dir_path / f"levy-distribution-L{location}-S{scale}-Step{bin_step}-Q{sample_size}-cumulative.png"
     print(__header, f'Saving cumulative levy distribution figure to:\n\t', fig_path)
     plt.ylim(0, sample_size)
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 

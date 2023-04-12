@@ -35,11 +35,13 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 500,
     movement_data = np.array(movement_list)
     max_distance = np.amax(movement_data) * 1.05
     bins = np.arange(0.0, max_distance, bin_size)
+    sns.set_theme()
     s = sns.histplot(data=movement_data, bins=bins) # type: ignore
     fig_path = output_path / f"movement_distribution_size{movement_data.size}_bin{bin_size}.png"
     print(__header, "Saving movement displacement histogram at:\n\t", fig_path)
     if x_limit is not None: plt.xlim(0, x_limit)
     if y_limit is not None: plt.ylim(0, y_limit)
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -52,10 +54,11 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 500,
     print(__header, "Saving group movement displacement histogram at:\n\t", fig_path)
     # if x_limit is not None: plt.xlim(0, x_limit)
     # if y_limit is not None: plt.ylim(0, y_limit)
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
-def movement_displacement_linechart(experiment_name:str, bin_size:float = 0.005, 
+def movement_displacement_barchart(experiment_name:str, bin_size:float = 0.005, 
                                     x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Experiment Movement Displacement:"
     dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
@@ -119,4 +122,4 @@ if __name__ == '__main__':
     arg_parser.add_argument('--y', metavar="Y", type=float, default = None, help='Y-Limit')
     args = vars(arg_parser.parse_args())
     movement_displacement_histogram(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
-    movement_displacement_linechart(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
+    movement_displacement_barchart(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])

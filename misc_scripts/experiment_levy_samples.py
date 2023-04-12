@@ -44,9 +44,11 @@ def create_experiment_levy_sample_figure(experiment_name:str,
     # Creates a histogram of frequencies
     dist = df.to_numpy()
     bins = np.arange(bin_start, bin_stop, bin_step)
+    sns.set_theme()
     s = sns.histplot(df, bins=bins) # type: ignore
     fig_path = output_path / f"levy-samples-Step{bin_step}-Q{dist.size}.png"
     print(__header, f'Creating Levy Sample Figure: Quant{dist.size}, Mean {dist.mean()}, Max {dist.max()}')
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
@@ -55,6 +57,7 @@ def create_experiment_levy_sample_figure(experiment_name:str,
     bins = np.arange(bin_start, bin_stop/2.0, bin_step)
     s = sns.histplot(df, bins=bins, cumulative=True) # type: ignore
     fig_path = output_path / f"levy-samples-Step{bin_step}-Q{dist.size}cumulative.png"
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 

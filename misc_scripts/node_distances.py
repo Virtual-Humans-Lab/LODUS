@@ -53,10 +53,12 @@ def create_node_distante_distribution_figure(experiment_configuration_file:str,
 
     # Creates a histogram of distance between notes
     bins = np.arange(0, max_distance, bucket_size)
+    sns.set_theme()
     s = sns.histplot(distances, bins=bins) # type: ignore
     fig_path = dir_path / f"node_distances_{experiment_configuration_file}_{_dist_type.name}_{bucket_size}.png"
     plt.ylim(0, y_limit)
     print(__header, f'Saving node distance figure to:\n\t', fig_path)
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
