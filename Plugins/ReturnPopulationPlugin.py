@@ -75,7 +75,8 @@ class ReturnPopulationPlugin(environment.TimeActionPlugin):
                     new_action_values['population_template'] = pop_template
 
                     new_action = environment.TimeAction(_type = new_action_type, _values = new_action_values)
-                    sub_list.append(new_action)
+                    self.graph.consume_time_action(new_action, hour, time)
+                    # sub_list.append(new_action)
                     
         return sub_list
     

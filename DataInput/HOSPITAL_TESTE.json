@@ -10,6 +10,15 @@
   "repeating_global_actions": [
     {
       "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      "type": "return_population_home",
+      "values": {
+        "quantity": -1,
+        "node_name": "home",
+        "population_template": {}
+      }
+    },
+    {
+      "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
       "type": "patient_call",
       "values": {
         "node_name": "hospital",

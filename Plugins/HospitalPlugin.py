@@ -70,17 +70,22 @@ class HospitalPlugin(environment.TimeActionPlugin):
         # Gets the target region and node
         region = self.graph.get_region_by_name(values['region'])
         node = region.get_node_by_name(values['node'])
-
+        
         get_action_values = {}
         get_action_type = 'gather_population'
         get_action_values['region'] = region.name
         get_action_values['node'] = node.name
         get_action_values['different_node_name'] = True
+
+        pop_template = PopTemplate()
+        pop_template.set_traceable_property('patient_id', 0)
+        get_action_values['population_template'] = pop_template
         
         num_cases_by_region = self.df.loc[(self.df['REGIAO_HOSPITAL'] == region.name) & (self.df['MES_INTER'] == time+1)]
         # num_cases_by_region = self.region_count[values['region']]]
         # num_cases_by_region = int(self.region_count[values['region']])
         quantity_by_frame = num_cases_by_region['QUANTIDADE'].sum()
+        # print(time, region.name, quantity_by_frame)
         # # get_action_values['quantity'] = quantity_by_frame
         get_action_values['quantity'] = quantity_by_frame
         get_action = environment.TimeAction(_type = get_action_type, _values = get_action_values)
