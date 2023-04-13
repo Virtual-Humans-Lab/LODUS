@@ -1,0 +1,25 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Farrapos//stadium": [
+      {
+        "cycle_step": 19,
+        "action": {
+          "name": "gather_population_to_stadium",
+          "type": "gather_population",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Farrapos",
+            "node": "stadium",
+            "quantity": 1000000,
+            "percentage_per_search": 1.0,
+            "weighting_mode": 2
+          }
+        }
+      }
+    ]
+  }
+}

@@ -153,29 +153,29 @@ pop_count_logger.pop_template = pop_temp
 # logger.set_pluggin_to_record(infection_plugin)
 # logger.set_pluggin_to_record(vaccine_plugin)
 
-pop_count_logger.add_custom_line_plot('Total Population - Hospital Nodes', 
-                                    file = 'nodes.csv',
-                                    x_label="Frame", y_label="Population",
-                                    columns= ['Total'],
-                                    level="Node", filter=['hospital'])
+# pop_count_logger.add_custom_line_plot('Total Population - Hospital Nodes', 
+#                                     file = 'nodes.csv',
+#                                     x_label="Frame", y_label="Population",
+#                                     columns= ['Total'],
+#                                     level="Node", filter=['hospital'])
 
-pop_count_logger.add_custom_line_plot('Total Population - School Nodes', 
-                                    file = 'nodes.csv',
-                                    x_label="Frame", y_label="Population",
-                                    columns= ['Total'],
-                                    level="Node", filter=['school'])
+# pop_count_logger.add_custom_line_plot('Total Population - School Nodes', 
+#                                     file = 'nodes.csv',
+#                                     x_label="Frame", y_label="Population",
+#                                     columns= ['Total'],
+#                                     level="Node", filter=['school'])
 
-pop_count_logger.add_custom_line_plot('Total Population - Work Nodes', 
-                                    file = 'nodes.csv',
-                                    x_label="Frame", y_label="Population",
-                                    columns= ['Total'],
-                                    level="Node", filter=['work'])
+# pop_count_logger.add_custom_line_plot('Total Population - Work Nodes', 
+#                                     file = 'nodes.csv',
+#                                     x_label="Frame", y_label="Population",
+#                                     columns= ['Total'],
+#                                     level="Node", filter=['work'])
 
-pop_count_logger.add_custom_line_plot('Total Population - Stadium Nodes', 
-                                    file = 'nodes.csv',
-                                    x_label="Frame", y_label="Population",
-                                    columns= ['Total'],
-                                    level="Node", filter=['stadium'])
+# pop_count_logger.add_custom_line_plot('Total Population - Stadium Nodes', 
+#                                     file = 'nodes.csv',
+#                                     x_label="Frame", y_label="Population",
+#                                     columns= ['Total'],
+#                                     level="Node", filter=['stadium'])
 
 # CharacteristicChange logger
 traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
