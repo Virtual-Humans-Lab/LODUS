@@ -20,7 +20,7 @@
     "gather_population_plugin": {},
     "off_cycle_routine_plugin": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "start_of_step_routine_files": ["OffCycleRoutine-Stadium13-DistanceWeight.json"],
+        "start_of_step_routine_files": ["OffCycleRoutine-Stadium94-DistanceWeight.json"],
         "end_of_step_routine_files": []
     }
 }

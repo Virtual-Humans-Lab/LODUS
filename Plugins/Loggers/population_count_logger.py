@@ -544,7 +544,6 @@ class PopulationCountLogger(LoggerPlugin):
 
         return self.complete_od_matrix(decomposed_od_matrix)
 
-
     def normalize_od_matrix(self, od_matrix):
         mean_pop_od_matrix = {}
 

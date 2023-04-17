@@ -12,11 +12,12 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 
-def movement_displacement_histogram(experiment_name:str, bin_size:float = 500, 
+def movement_displacement_histogram(experiment_name:str, additional_exp_path:str = '', 
+                                    bin_size:float = 500, 
                                     x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Experiment Movement Displacement:"
-    dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
-    output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
+    dir_path = Path(__file__).parent.parent / "output_logs" / additional_exp_path / experiment_name / "data_frames"
+    output_path = Path(__file__).parent.parent / "output_logs" / additional_exp_path / experiment_name / "results"
     output_path.mkdir(parents=True, exist_ok=True)
 
     # Load dataframs from CSVs
@@ -58,11 +59,12 @@ def movement_displacement_histogram(experiment_name:str, bin_size:float = 500,
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
-def movement_displacement_barchart(experiment_name:str, bin_size:float = 0.005, 
-                                    x_limit:int | None = None, y_limit:int | None = None):
+def movement_displacement_barchart(experiment_name:str, additional_exp_path:str = '',
+                                   bin_size:float = 0.005, 
+                                   x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Experiment Movement Displacement:"
-    dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
-    output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
+    dir_path = Path(__file__).parent.parent / "output_logs" / additional_exp_path / experiment_name / "data_frames"
+    output_path = Path(__file__).parent.parent / "output_logs" / additional_exp_path / experiment_name / "results"
     output_path.mkdir(parents=True, exist_ok=True)
 
     xaxis = dict(tickmode = 'linear',
@@ -117,9 +119,18 @@ def movement_displacement_barchart(experiment_name:str, bin_size:float = 0.005,
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Create Node Distante Distribution Figure.")
     arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Name (same as experiment configuration file)')
+    arg_parser.add_argument('--p', metavar="P", type=str, default = '', help='Additional experiment path')
     arg_parser.add_argument('--b', metavar="B", type=float, default = 500, help='Bin Size')
     arg_parser.add_argument('--x', metavar="X", type=float, default = None, help='X-Limit')
     arg_parser.add_argument('--y', metavar="Y", type=float, default = None, help='Y-Limit')
     args = vars(arg_parser.parse_args())
-    movement_displacement_histogram(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
-    movement_displacement_barchart(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
+    movement_displacement_histogram(experiment_name=args['e'], 
+                                    additional_exp_path=args['p'], 
+                                    bin_size=args['b'], 
+                                    x_limit=args['x'], 
+                                    y_limit=args['y'])
+    movement_displacement_barchart(experiment_name=args['e'], 
+                                   additional_exp_path=args['p'], 
+                                   bin_size=args['b'], 
+                                   x_limit=args['x'], 
+                                   y_limit=args['y'])

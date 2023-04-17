@@ -14,7 +14,7 @@ import plotly.express as px
 
 def displacement_histogram_comparison(experiment_names:list[str], additional_exp_path:str = '', 
                                       bin_size:float = 500, 
-                                    x_limit:int | None = None, y_limit:int | None = None):
+                                      x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Displacement Histogram Comparison:"
 
     # Setup
