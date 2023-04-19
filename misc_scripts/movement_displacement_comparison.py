@@ -12,13 +12,14 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 
-def displacement_histogram_comparison(experiment_names:list[str], additional_exp_path:str = '', 
+def displacement_histogram_comparison(experiment_names:list[str], 
+                                      additional_exp_path:str = '', 
                                       bin_size:float = 500, 
                                       x_limit:int | None = None, y_limit:int | None = None):
     __header:str = "Displacement Histogram Comparison:"
 
     # Setup
-    # Creates the directory if necessary
+    # Creates the output directory if necessary
     dir_path = Path() / "movement_displacement_comparison" / additional_exp_path
     dir_path.mkdir(parents=True, exist_ok=True)
     data_list:list[tuple[str,np.ndarray]] = []
@@ -108,12 +109,15 @@ def combined_movement_displacement_barchart(experiment_name:str, bin_size:float 
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Create Node Distante Distribution Figure.")
-    arg_parser.add_argument('--e', metavar="E", nargs='+', type=str, default = [], help='Experiment Name Lisr (same as experiment configuration file)')
+    arg_parser.add_argument('--e', metavar="E", nargs='+', type=str, default = [], help='Experiment Name List (same as experiment configuration file)')
     arg_parser.add_argument('--p', metavar="P", type=str, default = '', help='Additional experiment path')
     arg_parser.add_argument('--b', metavar="B", type=float, default = 500, help='Bin Size')
     arg_parser.add_argument('--x', metavar="X", type=float, default = None, help='X-Limit')
     arg_parser.add_argument('--y', metavar="Y", type=float, default = None, help='Y-Limit')
     args = vars(arg_parser.parse_args())
-    displacement_histogram_comparison(experiment_names=args['e'], additional_exp_path=args['p'],
-                                      bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
+    displacement_histogram_comparison(experiment_names=args['e'], 
+                                      additional_exp_path=args['p'],
+                                      bin_size=args['b'], 
+                                      x_limit=args['x'], 
+                                      y_limit=args['y'])
     # movement_displacement_linechart(experiment_name=args['e'], bin_size=args['b'], x_limit=args['x'], y_limit=args['y'])
