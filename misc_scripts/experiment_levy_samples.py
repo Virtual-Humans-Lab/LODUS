@@ -3,17 +3,16 @@ import sys
 sys.path.append('../')
 
 import argparse
-
 from pathlib import Path
-
-import pandas as pd
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import seaborn as sns
-from scipy.stats import levy as scipy_levy
 
-def create_experiment_levy_sample_figure(experiment_name:str,
+
+def create_experiment_levy_sample_figure(experiment_name:str, 
+                                         additional_exp_path:str,
                                          bin_start:float, 
                                          bin_stop: float, 
                                          bin_step:float) -> None:
@@ -35,8 +34,9 @@ def create_experiment_levy_sample_figure(experiment_name:str,
     '''
     # Creates the directory if necessary
     __header:str = "Experiment Levy Samples:"
-    dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
-    output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
+    base_path = Path(__file__).parent.parent / "output_logs" / additional_exp_path / experiment_name
+    dir_path = base_path / "data_frames"
+    output_path = base_path / "results"
     output_path.mkdir(parents=True, exist_ok=True)
 
     df = pd.read_csv(dir_path / "levy_samples.csv", sep=';')
@@ -64,9 +64,10 @@ def create_experiment_levy_sample_figure(experiment_name:str,
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Create Node Distante Distribution Figure.")
     arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Name (same as experiment configuration file)')
+    arg_parser.add_argument('--p', metavar="P", type=str, default = '', help='Additional experiment path')
     arg_parser.add_argument('--b', metavar="B", type=float, default = 0.0, help='Histogram Bins Begin/Start.')
     arg_parser.add_argument('--s', metavar="E", type=float, default = 40000, help='Histogram Bins End/Stop.')
     arg_parser.add_argument('--w', metavar="T", type=float, default = 500, help='Histogram Bins Width/Step/Size.')
     args = vars(arg_parser.parse_args())
-    create_experiment_levy_sample_figure(experiment_name=args['e'],
+    create_experiment_levy_sample_figure(experiment_name=args['e'], additional_exp_path=args['p'],
                                     bin_start=args['b'], bin_stop=args['s'], bin_step=args['w'])

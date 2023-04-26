@@ -214,7 +214,7 @@ Simulation
 '''
 
 env_graph.LoadLoggerPlugin(pop_count_logger)
-env_graph.LoadLoggerPlugin(od_logger)
+# env_graph.LoadLoggerPlugin(od_logger)
 env_graph.LoadLoggerPlugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)

@@ -134,7 +134,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         # Divides the population amount in packets to be sent to other nodes
         packets = node_population // _pop_group_size
 
-        #if values['region'] == "Azenha" and values['node'] == "home":
+        # if values['region'] == "Azenha" and values['node'] == "home":
         #    print("LEVY WALKING", cycle_step, packets, _mov_probability)
 
         # Generates sub-actions for each packet
@@ -145,20 +145,11 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             if _mov_probability < _random_number:
                 continue
 
-            sampled_dist = self.levy_sample(location=_dist_location, scale=_dist_scale)
-            self.sampled_distances.append(sampled_dist)
+            target_node_u_name = self.select_valid_target(location=_dist_location, 
+                                                          scale=_dist_scale,
+                                                          use_buckets=_use_buckets,
+                                                          distances=distances)
             
-            if _use_buckets:
-                selected = self.bucket_search(distances, sampled_dist)
-                if selected == None:
-                    continue
-                target_node_u_name:str = selected[0]
-            else:
-                ix = self.binary_search(distances, sampled_dist)
-                if ix == -1:
-                    continue
-                target_node_u_name:str =  distances[ix][0]
-
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.graph.get_region_by_name(target_region)
             target_node = target_region.get_node_by_name(target_node)
@@ -181,6 +172,29 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list
+    
+    def select_valid_target(self, location:float, scale:float, use_buckets:bool, distances) -> str:
+        target_unique_name = ''
+        count = 0
+        sampled_dist = 0.0
+        while target_unique_name == '':
+            sampled_dist = self.levy_sample(location=location, scale=scale)
+            count += 1
+            if count > 100:
+                print("Levy Walk Plugin: could not find valid target in 100 tries")
+                exit()
+            if use_buckets:
+                selected = self.bucket_search(distances, sampled_dist)
+                if selected == None:
+                    continue
+                target_unique_name =  selected[0]
+            else:
+                ix = self.binary_search(distances, sampled_dist)
+                if ix == -1:
+                    continue
+                target_unique_name = distances[ix][0]
+        self.sampled_distances.append(sampled_dist)
+        return target_unique_name
     
     def get_node_distance_bucket(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
         '''Gets distances in buckets (based on overall distance)'''
@@ -208,13 +222,11 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         Raises an exception if the plugin shouldn't be using buckets
         '''
         __filtered = {}
-        if self.use_buckets:
-            for bucket in buckets_dict:
-                __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
-                                     str(dist[0]).split("//")[1] in target_nodes]
-                
-        else: 
+        if not self.use_buckets:
             raise Exception("Error in filter_target_node_types - Levy Walk Plugin")
+        for bucket in buckets_dict:
+            __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
+                                    str(dist[0]).split("//")[1] in target_nodes]
         return __filtered
 
     def levy_sample(self, location:Optional[float] = None,
