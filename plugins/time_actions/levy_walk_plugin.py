@@ -136,7 +136,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         # if values['region'] == "Azenha" and values['node'] == "home":
         #    print("LEVY WALKING", cycle_step, packets, _mov_probability)
-
+        
         # Generates sub-actions for each packet
         for i in range(packets):
             
@@ -160,7 +160,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
                                  'origin_node': acting_node.name,
                                  'destination_region': target_region.name,
                                  'destination_node': target_node.name,
-                                 'quantity': self.population_group_size}
+                                 'quantity': _pop_group_size}
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
 
