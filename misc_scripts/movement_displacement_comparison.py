@@ -35,7 +35,8 @@ def displacement_histogram_comparison(experiment_names:list[str],
     # Find max displacement to create bins
     max_displacement = 0
     for (exp, _data) in data_list:
-        max_displacement = max(max_displacement, np.amax(_data) * 1.05)
+        if _data.size > 0:
+            max_displacement = max(max_displacement, np.amax(_data) * 1.05)
     bins = np.arange(0.0, max_displacement, bin_size)
 
     # Plot multiple histograms

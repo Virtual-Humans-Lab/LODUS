@@ -514,6 +514,7 @@ class EnvironmentGraph():
         self.routine_cycle_length:int = 24
         self.time_action_map:dict[str, callable] = { }
         self.base_actions = set()
+        self.data_action_map:dict[str, callable] = { }
         # self.time_action_map:dict[str, callable] = { 'move_population' : self.move_population }
         # self.base_actions = {'move_population'}
         

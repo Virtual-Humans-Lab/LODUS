@@ -71,6 +71,14 @@ class MovementDisplacementLogger(LoggerPlugin):
     
     def stop_logger(self):
         if len(self.movement_counter.items()) == 0:
+            empty_df = pd.DataFrame()
+            #pd.DataFrame().to_csv
+            pd.DataFrame().to_csv(self.data_frames_path + "movement_counter.csv", 
+                           sep=";", 
+                           encoding="utf-8-sig")
+            pd.DataFrame().to_csv(self.data_frames_path + "group_movement_counter.csv", 
+                                 sep=";", 
+                                 encoding="utf-8-sig")
             return
         self.movement_counter = dict(sorted(self.movement_counter.items()))
         movement_df = pd.DataFrame.from_dict(self.movement_counter, orient='index')

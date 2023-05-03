@@ -27,6 +27,7 @@ from time_actions.reverse_social_isolation_plugin import \
     ReverseSocialIsolationPlugin
 from time_actions.send_population_back_plugin import SendPopulationBackPlugin
 from time_actions.vaccine_local_plugin import VaccinePlugin
+from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
 
 import environment
 import population
@@ -68,6 +69,15 @@ simulation_steps = cycles * cycle_length
 env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
 print("Creating experiment:", env_graph.experiment_name)
 print("EnvNode Count", len(env_graph.node_list))
+
+'''
+Data Plugins
+'''
+
+isolation_data = None
+if 'global_isolation_data_plugin' in env_graph.experiment_config:
+    isolation_data = GlobalIsolationDataPlugin(env_graph)
+    env_graph.LoadPlugin(isolation_data)
 
 '''
 TimeAction Plugins
@@ -134,6 +144,9 @@ pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_gra
 pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
                                     PopulationCountRecordKey.POPULATION_COUNT_REGION,
                                     PopulationCountRecordKey.POPULATION_COUNT_NODE}
+
+pop_count_logger.node_custom_templates["Students"] = PopTemplate(sampled_properties={"occupation": "student"})
+pop_count_logger.node_custom_templates["Workers"] = PopTemplate(sampled_properties={"occupation": "worker"})
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
@@ -209,6 +222,15 @@ if levy_walk is not None:
 # Vaccine Logger
 #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
 
+print("Population per Age:")
+print("Children:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "children"})))
+print("Youngs:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "youngs"})))
+print("Adults:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "adults"})))
+print("Elders:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "elders"})))
+print("Population per Occupation:")
+print("Worker:", env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "worker"})))
+print("Student:", env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "student"})))
+print("Other:", env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "other"})))
 '''
 Simulation
 '''

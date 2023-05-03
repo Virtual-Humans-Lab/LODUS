@@ -34,7 +34,7 @@ def movement_displacement_histogram(experiment_name:str, additional_exp_path:str
 
     # Creates a histogram of frequencies for the movement data
     movement_data = np.array(movement_list)
-    max_distance = np.amax(movement_data) * 1.05
+    max_distance = np.amax(movement_data) * 1.05 if movement_data.size > 0 else 0
     bins = np.arange(0.0, max_distance, bin_size)
     sns.set_theme()
     s = sns.histplot(data=movement_data, bins=bins) # type: ignore
@@ -48,7 +48,7 @@ def movement_displacement_histogram(experiment_name:str, additional_exp_path:str
 
     # Creates a histogram of frequencies for the group movement data
     group_movement_data = np.array(group_movement_list)
-    max_distance = np.amax(group_movement_data) * 1.05
+    max_distance = np.amax(group_movement_data) * 1.05 if group_movement_data.size > 0 else 0
     bins = np.arange(0.0, max_distance, bin_size)
     s = sns.histplot(data=group_movement_data, bins=bins) # type: ignore
     fig_path = output_path / f"group_movement_distribution_size{group_movement_data.size}_bin{bin_size}.png"
@@ -75,7 +75,7 @@ def movement_displacement_barchart(experiment_name:str, additional_exp_path:str 
     df_movement = pd.read_csv(dir_path / "movement_counter.csv", sep=';')
     
     # Gets max distance traveled and organizes bins
-    max_distance = float(df_movement.max().loc['distance'])
+    max_distance = float(df_movement.max().loc['distance']) if df_movement.size > 0 else 0
     bins_limits = np.arange(0.0, max_distance, bin_size).tolist()
     data = {b:0 for b in bins_limits}
 
@@ -88,7 +88,7 @@ def movement_displacement_barchart(experiment_name:str, additional_exp_path:str 
     df = pd.DataFrame.from_dict(data, orient='index')
 
     # Creates and save html
-    fig = px.bar(df, y = 0, title=f'Movement displacement data - {experiment_name}')
+    fig = px.bar(df, title=f'Movement displacement data - {experiment_name}')
     fig.update_layout(xaxis = xaxis, hovermode="x")
     if x_limit is not None: fig.update_xaxes(range = [0, x_limit])
     if y_limit is not None: fig.update_yaxes(range = [0, y_limit])
@@ -98,7 +98,7 @@ def movement_displacement_barchart(experiment_name:str, additional_exp_path:str 
     
     # Repeats process for the group movement data
     df_group_movement = pd.read_csv(dir_path / "group_movement_counter.csv", sep=';')
-    max_distance = df_group_movement.max().loc['distance']
+    max_distance = df_group_movement.max().loc['distance'] if df_group_movement.size > 0 else 0
     bins_limits = np.arange(0.0, max_distance, bin_size).tolist()#[1:]
     data = {b:0 for b in bins_limits}
 

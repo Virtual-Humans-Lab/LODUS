@@ -24,7 +24,7 @@ class LevyWalkSampleLogger(LoggerPlugin):
         self.graph: EnvironmentGraph = env
         self.levy_walk_plugin = self.graph.get_first_plugin(LevyWalkPlugin)
         if self.levy_walk_plugin is None:
-            exit("PLUIGIN NOT LOADEWD")
+            exit("LEVY PLUGIN NOT LOADED")
             
 
     def start_logger(self):
@@ -45,6 +45,6 @@ class LevyWalkSampleLogger(LoggerPlugin):
         df.to_csv(self.data_frames_path + "levy_samples.csv", 
                            sep=";", 
                            encoding="utf-8-sig",
-                           header=["samples"],
+                           header=["samples"] if len(self.distance_samples) > 0 else [],
                            index = False)
     

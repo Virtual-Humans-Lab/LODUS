@@ -1,6 +1,7 @@
 import copy
 import sys
 from typing import Optional
+from population import PopTemplate
 
 from random_inst import FixedRandom
 
@@ -65,6 +66,9 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if "levy_walk_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry (default plugin values)")
 
+        # Loads isolation data, if available
+        self.isolation_data_action = self.graph.data_action_map.get("isolation", None)
+
         # Loads experiment configuration, if any
         self.config:dict = self.graph.experiment_config.get("levy_walk_plugin", {})
         
@@ -90,6 +94,58 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
         self.sampled_distances = []
         self.random = FixedRandom.instance
+        self.original_node_populations = {}
+
+        self.original_templates = [ {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs",
+              "adults",
+              "elders"
+            ],
+            "occupation": [
+              "worker"
+            ]
+          }
+        }, {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "children"
+            ],
+            "occupation": [
+              "student"
+            ]
+          }
+        }, {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs"
+            ],
+            "occupation": [
+              "student"
+            ]
+          }
+        }, {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "adults"
+            ],
+            "occupation": [
+              "student"
+            ]
+          }
+        }]
+        for node in self.graph.node_list:
+            self.original_node_populations[node.get_unique_name()] = {}
+            for t in self.original_templates:
+                temp = PopTemplate(sampled_properties=t["sampled_characteristics"], 
+                                   traceable_properties=t["traceable_characteristics"])
+                self.original_node_populations[node.get_unique_name()][str(temp)] = node.get_population_size(temp)
+        
 
     def update_time_step(self, cycle_step, simulation_step):
         return
@@ -107,8 +163,18 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
             return sub_list
 
+        # node_og_pop:dict = self.original_node_populations.setdefault(acting_node.get_unique_name(), {})
+        _original_pop = self.original_node_populations[acting_node.get_unique_name()][str(pop_template)]
+        # _original_pop = node_og_pop.setdefault(pop_template, acting_node.get_population_size(pop_template))
+        # print(values)
+        print("Original pop", _original_pop, acting_node.get_unique_name())
+        #exit()
+        
+
         node_population = acting_node.get_population_size(pop_template)
         if node_population == 0:
+            return sub_list
+        if _original_pop == 0:
             return sub_list
         
         # Loads optional action parameters, otherwise, use default values
@@ -132,12 +198,23 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         #     exit()
 
         # Divides the population amount in packets to be sent to other nodes
-        packets = node_population // _pop_group_size
+        packets = _original_pop // _pop_group_size
+
+        # Use isolation to reduce population being moved
+        if self.isolation_data_action:
+            _iso = self.isolation_data_action(acting_region, acting_node)
+            # _mov_probability = _mov_probability*(1-_iso)
+            _pop_group_size = int(_pop_group_size*(1-_iso))
 
         # if values['region'] == "Azenha" and values['node'] == "home":
         #    print("LEVY WALKING", cycle_step, packets, _mov_probability)
         
         # Generates sub-actions for each packet
+        if acting_region.name == "Sarandi":
+            print(f"Action on Sarandi {acting_node.name} at step {cycle_step}. Current pop {acting_node.get_population_size()}, Av Pop {acting_node.get_population_size(pop_template)}")
+            print(f"\tTarget Pop {pop_template}")
+            print(f"\tPackets {packets}. Est. pop moved {int(packets * _mov_probability * _pop_group_size)}")
+        
         for i in range(packets):
             
             # Reduces the chance for a levy walk to occur bor each packet
@@ -171,6 +248,9 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             sub_list.append(new_action)
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
+        if acting_region.name == "Sarandi":
+            print(f"\tTrying to move: {int(len(sub_list) * _pop_group_size)}")
+            print(values)
         return sub_list
     
     def select_valid_target(self, location:float, scale:float, use_buckets:bool, distances) -> str:

@@ -38,13 +38,20 @@
           "node_type": [
             "home"
           ],
-          "movement_probability": 0.015
+          "movement_probability": 0.025
         }
       }
     },
     {
       "cycle_step": [
-        6, 10, 11, 12, 13, 14, 15, 17, 18, 19
+        6,
+        11,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19
       ],
       "action": {
         "name": "levy_walk_workers_global_routine",
@@ -72,13 +79,13 @@
           "node_type": [
             "home"
           ],
-          "movement_probability": 0.0375
+          "movement_probability": 0.1
         }
       }
     },
     {
       "cycle_step": [
-        7, 9, 16, 20
+        7
       ],
       "action": {
         "name": "levy_walk_workers_global_routine",
@@ -106,13 +113,13 @@
           "node_type": [
             "home"
           ],
-          "movement_probability": 0.075
+          "movement_probability": 0.25
         }
       }
     },
     {
       "cycle_step": [
-        8
+        20
       ],
       "action": {
         "name": "levy_walk_workers_global_routine",
@@ -140,7 +147,78 @@
           "node_type": [
             "home"
           ],
-          "movement_probability": 0.19
+          "movement_probability": 0.2
+        }
+      }
+    },
+    {
+      "cycle_step": [
+        8,
+        9,
+        10
+      ],
+      "action": {
+        "name": "levy_walk_workers_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs",
+              "adults",
+              "elders"
+            ],
+            "occupation": [
+              "worker"
+            ]
+          }
+        },
+        "values": {
+          "ignore_acting_node_type": [
+            "work"
+          ],
+          "target_node_type": [
+            "work"
+          ],
+          "node_type": [
+            "home"
+          ],
+          "movement_probability": 0.4
+        }
+      }
+    },
+    {
+      "cycle_step": [
+        12,
+        16
+      ],
+      "action": {
+        "name": "levy_walk_workers_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs",
+              "adults",
+              "elders"
+            ],
+            "occupation": [
+              "worker"
+            ]
+          }
+        },
+        "values": {
+          "ignore_acting_node_type": [
+            "work"
+          ],
+          "target_node_type": [
+            "work"
+          ],
+          "node_type": [
+            "home"
+          ],
+          "movement_probability": 0.35
         }
       }
     },
