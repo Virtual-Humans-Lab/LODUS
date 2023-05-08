@@ -150,7 +150,7 @@
         13
       ],
       "action": {
-        "name": "levy_walk_workers_global_routine",
+        "name": "levy_walk_children_student_global_routine",
         "type": "levy_walk",
         "population_template": {
           "traceable_characteristics": {},
@@ -173,18 +173,17 @@
           "node_type": [
             "home"
           ],
-          "movement_probability": 0.75
+          "movement_probability": 0.5
         }
       }
     },
     {
       "cycle_step": [
         8,
-        13,
-        19
+        13
       ],
       "action": {
-        "name": "levy_walk_workers_global_routine",
+        "name": "levy_walk_youngs_student_global_routine",
         "type": "levy_walk",
         "population_template": {
           "traceable_characteristics": {},
@@ -207,7 +206,37 @@
           "node_type": [
             "home"
           ],
-          "movement_probability": 0.85
+          "movement_probability": 0.45
+        }
+      }
+    },
+    {
+      "cycle_step": [ 19 ],
+      "action": {
+        "name": "levy_walk_youngs_student_night_global_routine",
+        "type": "levy_walk",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {
+            "age": [
+              "youngs"
+            ],
+            "occupation": [
+              "student"
+            ]
+          }
+        },
+        "values": {
+          "ignore_acting_node_type": [
+            "school"
+          ],
+          "target_node_type": [
+            "school"
+          ],
+          "node_type": [
+            "home"
+          ],
+          "movement_probability": 0.10
         }
       }
     },

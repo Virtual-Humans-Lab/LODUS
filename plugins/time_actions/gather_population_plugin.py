@@ -104,9 +104,12 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             return self.population_weighting(target_node=target_node)
     
     def population_weighting(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
+        unique_name = target_node.get_unique_name()
         pop_list = []
         # Gets distances to other EnvNodes
         for other in self.graph.node_list:
+            if other.get_unique_name() == unique_name:
+                continue
             pop_list.append((other,other.get_population_size()))
         total_pop = sum([ d for (n, d) in pop_list])
         pop_list = [(n,  ( d / total_pop)) for (n, d) in pop_list]
@@ -123,11 +126,9 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
 
         # Gets distances to other EnvNodes
         for other in self.graph.node_list:
-            distance_to_other = self.distance_to_self
-            
-            if other.get_unique_name() != unique_name:
-                distance_to_other = self.get_nodes_distance(target_node, other)
-
+            if other.get_unique_name() == unique_name:
+                continue
+            distance_to_other = self.get_nodes_distance(target_node, other)
             distance_list.append((other,distance_to_other))
 
         # Weights are according to the inverse of the distance

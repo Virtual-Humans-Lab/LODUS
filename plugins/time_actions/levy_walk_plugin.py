@@ -167,7 +167,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         _original_pop = self.original_node_populations[acting_node.get_unique_name()][str(pop_template)]
         # _original_pop = node_og_pop.setdefault(pop_template, acting_node.get_population_size(pop_template))
         # print(values)
-        print("Original pop", _original_pop, acting_node.get_unique_name())
+        # print("Original pop", _original_pop, acting_node.get_unique_name())
         #exit()
         
 
@@ -210,10 +210,10 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         #    print("LEVY WALKING", cycle_step, packets, _mov_probability)
         
         # Generates sub-actions for each packet
-        if acting_region.name == "Sarandi":
-            print(f"Action on Sarandi {acting_node.name} at step {cycle_step}. Current pop {acting_node.get_population_size()}, Av Pop {acting_node.get_population_size(pop_template)}")
-            print(f"\tTarget Pop {pop_template}")
-            print(f"\tPackets {packets}. Est. pop moved {int(packets * _mov_probability * _pop_group_size)}")
+        # if acting_region.name == "Sarandi":
+        #     print(f"Action on Sarandi {acting_node.name} at step {cycle_step}. Current pop {acting_node.get_population_size()}, Av Pop {acting_node.get_population_size(pop_template)}")
+        #     print(f"\tTarget Pop {pop_template}")
+        #     print(f"\tPackets {packets}. Est. pop moved {int(packets * _mov_probability * _pop_group_size)}")
         
         for i in range(packets):
             
@@ -248,9 +248,9 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             sub_list.append(new_action)
         self.add_execution_time(time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
-        if acting_region.name == "Sarandi":
-            print(f"\tTrying to move: {int(len(sub_list) * _pop_group_size)}")
-            print(values)
+        # if acting_region.name == "Sarandi":
+        #     print(f"\tTrying to move: {int(len(sub_list) * _pop_group_size)}")
+        #     print(values)
         return sub_list
     
     def select_valid_target(self, location:float, scale:float, use_buckets:bool, distances) -> str:
