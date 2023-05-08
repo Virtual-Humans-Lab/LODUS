@@ -966,13 +966,6 @@ class EnvironmentGraph():
                     node.original_node_population = prop_block
                 else:
                     node.original_node_population.add_block(prop_block)
-            #     print(blob.blob_factory.block_template)
-            #     print(blob.profiles)
-            #     print(type(blob.profiles))
-            #     print(blob.__dict__)
-            # print (f"original population of {node.get_unique_name()}, {type(node.original_node_population)}{node.original_node_population}")
-            # if (node.get_population_size() > 0):
-            #     exit()
 
     def set_spawning_nodes(self):
         for node in self.node_list:
