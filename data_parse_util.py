@@ -123,6 +123,7 @@ def Generate_EnvironmentGraph(env_input):
         env.add_region(reg_dict['lng_lat'], region_template, reg_dict['name'])
         env.region_list[-1].long_lat = reg_dict['lng_lat']
     env.set_spawning_nodes()
+    env.set_original_populations()
     return env
 
 def parse_routines(data:dict):

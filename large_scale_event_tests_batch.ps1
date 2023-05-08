@@ -49,4 +49,7 @@ python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e B
 python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+DiffStep_ACP_Dist Baseline+DiffStep_ABCP_Dist
 python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+DiffStep_ACP_Pop Baseline+DiffStep_ABCP_Pop
 
+python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+ABCP_Dist Baseline+DiffStep_ABCP_Dist
+python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+ABCP_Pop Baseline+DiffStep_ABCP_Pop
+
 Read-Host -Prompt "Press Enter to continue"

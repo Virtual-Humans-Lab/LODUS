@@ -57,6 +57,7 @@ class EnvNode():
         self.long_lat:tuple[float, float] = [0.0, 0.0]
         self.id = util.IDGen('nodes').get_id()
         self.containing_region_name = None
+        self.original_node_population:population.PropertyBlock = None
 
     def get_characteristic(self, key):
         return self.characteristics[key]
@@ -956,7 +957,23 @@ class EnvironmentGraph():
             i+=1
 
     ## time action functions
-        
+    def set_original_populations(self):
+        for node in self.node_list:
+            for blob in node.contained_blobs:
+                prop_block = population.PropertyBlock(_population = blob.get_population_size())
+                prop_block.initialize_buckets_profile(blob.blob_factory.block_template, blob.profiles)
+                if node.original_node_population == None:
+                    node.original_node_population = prop_block
+                else:
+                    node.original_node_population.add_block(prop_block)
+            #     print(blob.blob_factory.block_template)
+            #     print(blob.profiles)
+            #     print(type(blob.profiles))
+            #     print(blob.__dict__)
+            # print (f"original population of {node.get_unique_name()}, {type(node.original_node_population)}{node.original_node_population}")
+            # if (node.get_population_size() > 0):
+            #     exit()
+
     def set_spawning_nodes(self):
         for node in self.node_list:
             for blob in node.contained_blobs:
