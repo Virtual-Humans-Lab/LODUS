@@ -58,23 +58,23 @@ Load Plugins Examples
 plug = ExamplePlugin(env_graph)
 plug.example_parameter = 'bar'
 
-env_graph.LoadPlugin(plug)
+env_graph.load_time_action_plugin(plug)
 
 
 
 walk = LevyWalkLegacyPlugin(env_graph)
 walk.distribution_scale = int(args['s'])
 walk.levy_probability = float(args['l'])
-env_graph.LoadPlugin(walk)
+env_graph.load_time_action_plugin(walk)
 
 social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 social_distance.day_cycle = day_duration
 social_distance.iso_mode = 'regular'
-env_graph.LoadPlugin(social_distance)
+env_graph.load_time_action_plugin(social_distance)
 
 
 return_plugin = ReturnPopulationHomePlugin(env_graph)
-env_graph.LoadPlugin(return_plugin)
+env_graph.load_time_action_plugin(return_plugin)
 
 
 

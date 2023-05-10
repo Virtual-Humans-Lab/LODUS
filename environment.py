@@ -841,7 +841,7 @@ class EnvironmentGraph():
         if is_base:
             self.base_actions.add(action_type)
 
-    def LoadPlugin(self, plugin:TimeActionPlugin):
+    def load_time_action_plugin(self, plugin:TimeActionPlugin):
         self.loaded_plugins.append(plugin)
         for k, v in plugin.get_pairs().items():
             self.time_action_map[k] = v

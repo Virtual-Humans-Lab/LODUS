@@ -43,7 +43,7 @@ Load Plugins Examples
 plug = ExamplePlugin(env_graph)
 plug.example_parameter = 'bar'
 
-env_graph.LoadPlugin(plug)
+env_graph.load_time_action_plugin(plug)
 
 '''
 Simulation

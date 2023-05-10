@@ -69,18 +69,18 @@ Load Plugins
 if args['s'] == 0:
     gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.8)
     gather_pop.isolation_mode = 'quantity_correction'
-    env_graph.LoadPlugin(gather_pop)
+    env_graph.load_time_action_plugin(gather_pop)
 elif args['s'] == 1:
     social_distance = SocialIsolationPlugin(env_graph, social_table_path)
     social_distance.day_cycle = day_duration
     social_distance.iso_mode = 'quantity_correction'
-    env_graph.LoadPlugin(social_distance)
+    env_graph.load_time_action_plugin(social_distance)
 elif args['s'] == 2:
     social_distance = ReverseSocialIsolationPlugin(env_graph, social_table_path, isolation_rate = 0.2)
     social_distance.day_cycle = day_duration
     social_distance.iso_mode = 'random_nudge'
     #social_distance.iso_mode = 2
-    env_graph.LoadPlugin(social_distance)
+    env_graph.load_time_action_plugin(social_distance)
 
 '''
 Logging

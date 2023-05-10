@@ -204,7 +204,7 @@ if args['i'] != 2:
 	inf_plugin.home_density = 1.0
 	inf_plugin.bus_density = 1.0
 	inf_plugin.gamma = config.gamma
-	env_graph.LoadPlugin(inf_plugin)
+	env_graph.load_time_action_plugin(inf_plugin)
 	vaccine_values = {'node': 'healthcare',
 					  'region_list' : env_graph.region_list,
 					  'nu': config.nu,
@@ -218,24 +218,24 @@ if args['i'] != 2:
 if args['s'] == 0:
 	gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.8)
 	gather_pop.isolation_mode = 'quantity_correction'
-	env_graph.LoadPlugin(gather_pop)
+	env_graph.load_time_action_plugin(gather_pop)
 elif args['s'] == 1:
 	social_distance = SocialIsolationPlugin(env_graph, config.social_table_path)
 	social_distance.day_cycle = config.day_duration
 	social_distance.iso_mode = 'quantity_correction'
-	env_graph.LoadPlugin(social_distance)
+	env_graph.load_time_action_plugin(social_distance)
 elif args['s'] == 2:
 	social_distance = ReverseSocialIsolationPlugin(env_graph, config.social_table_path, isolation_rate=config.isolation_rate)
 	social_distance.day_cycle = config.day_duration
 	social_distance.iso_mode = 'regular'
-	env_graph.LoadPlugin(social_distance)
+	env_graph.load_time_action_plugin(social_distance)
 
 '''
 		SOCCER GAME
 '''
 soccer = PlaySoccerPlugin(env_graph, isolation_rate = 0.0)
 soccer.iso_mode = 'regular'
-env_graph.LoadPlugin(soccer)
+env_graph.load_time_action_plugin(soccer)
 
 jogar_futebol = TimeAction('play_soccer', config.soccer_values)
 
@@ -433,7 +433,7 @@ for i in range(config.simulation_steps):
 			inf_plugin.gamma = bestBeta / config.Rx
 		else:
 			inf_plugin.gamma = bestGamma
-		env_graph.LoadPlugin(inf_plugin)
+		env_graph.load_time_action_plugin(inf_plugin)
 
 		betaHistoryWriter.write("%d; %f; %f; %f; %d; %d; %d; %d; %d\n" % (day, bestBeta, inf_plugin.gamma, minError, matchSeed, expTotalInf, simTotalInf, env_graph.total_infected, env_graph.total_vaccinated))
 
@@ -455,7 +455,7 @@ for i in range(config.simulation_steps):
 		#input("pressione uma tecla!")
 		env_graph.consume_time_action(jogar_futebol, hour, i)
 		inf_plugin.beta = old_beta
-		env_graph.LoadPlugin(inf_plugin)
+		env_graph.load_time_action_plugin(inf_plugin)
 		new_random.new_random.set_random_instance(envRandom, "envRandom")
 
 	# Simulate with last estimated beta

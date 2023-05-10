@@ -74,8 +74,8 @@ class EnvironmentTests(unittest.TestCase):
         pA1 = GatherPopulationPlugin(self.envA)
         pA2 = ReturnPopulationHomePlugin(self.envA)
 
-        self.envA.LoadPlugin(pA1)
-        self.envA.LoadPlugin(pA2)
+        self.envA.load_time_action_plugin(pA1)
+        self.envA.load_time_action_plugin(pA2)
         
         environment_path = '../DataInput/Tests/environment_tests_dummy_input_B.json'
         self.envB = generate_EnvironmentGraph(environment_path)
@@ -83,8 +83,8 @@ class EnvironmentTests(unittest.TestCase):
         pB1 = GatherPopulationPlugin(self.envB)
         pB2 = ReturnPopulationHomePlugin(self.envB)
 
-        self.envB.LoadPlugin(pB1)
-        self.envB.LoadPlugin(pB2)
+        self.envB.load_time_action_plugin(pB1)
+        self.envB.load_time_action_plugin(pB2)
 
     def tearDown(self):
         #Resets the test environment

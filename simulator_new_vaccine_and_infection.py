@@ -62,13 +62,13 @@ Load Plugins Examples
 
 gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
-env_graph.LoadPlugin(gather_pop)
+env_graph.load_time_action_plugin(gather_pop)
 
 return_plugin = ReturnPopulationHomePlugin(env_graph)
-env_graph.LoadPlugin(return_plugin)
+env_graph.load_time_action_plugin(return_plugin)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)
-env_graph.LoadPlugin(return_to_prev)
+env_graph.load_time_action_plugin(return_to_prev)
 
 #social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 #social_distance.day_cycle = day_duration
@@ -77,16 +77,16 @@ env_graph.LoadPlugin(return_to_prev)
 
 
 density_plugin = NodeDensityPlugin(env_graph, args['d'])
-env_graph.LoadPlugin(density_plugin)
+env_graph.load_time_action_plugin(density_plugin)
 
 #custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
 #env_graph.LoadPlugin(custom_action_plugin)
 
 vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
-env_graph.LoadPlugin(vaccine_plugin)
+env_graph.load_time_action_plugin(vaccine_plugin)
 
 infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
-env_graph.LoadPlugin(infection_plugin)
+env_graph.load_time_action_plugin(infection_plugin)
 
 '''
 Logging

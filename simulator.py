@@ -72,45 +72,45 @@ if args['i'] != 0:
     inf_plugin = InfectionPlugin(env_graph, infect_mode=args['i'] , use_infect_move_pop=False)
     inf_plugin.day_length = day_duration
     inf_plugin.home_density, inf_plugin.bus_density, inf_plugin.home_density, inf_plugin.bus_density  = 1, 1, 1.0, 1.0
-    env_graph.LoadPlugin(inf_plugin)
+    env_graph.load_time_action_plugin(inf_plugin)
 
 
 if args['m'] == 0:
     gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.8)
     gather_pop.isolation_mode = 'quantity_correction'
-    env_graph.LoadPlugin(gather_pop)
+    env_graph.load_time_action_plugin(gather_pop)
 elif args['m'] == 1:
     social_distance = SocialIsolationPlugin(env_graph, social_table_path)
     social_distance.day_cycle = day_duration
     social_distance.iso_mode = 'quantity_correction'
-    env_graph.LoadPlugin(social_distance)
+    env_graph.load_time_action_plugin(social_distance)
 elif args['m'] == 2:
     social_distance = ReverseSocialIsolationPlugin(env_graph, social_table_path, isolation_rate = 0.2)
     social_distance.day_cycle = day_duration
     social_distance.iso_mode = 'regular'
-    env_graph.LoadPlugin(social_distance)
+    env_graph.load_time_action_plugin(social_distance)
 elif args['m'] == 3:
     walk = LevyWalkLegacyPlugin(env_graph)
     walk.distribution_scale = 100
     walk.distribution_location = 0
     walk.mobility_scale = 100
-    env_graph.LoadPlugin(walk)
+    env_graph.load_time_action_plugin(walk)
 elif args['m'] == 4:
     walk = LevyWalkLegacyPlugin(env_graph)
     walk.distribution_scale = 50
     walk.distribution_location = 0
     walk.mobility_scale = 10
     walk.levy_probability = 0.2
-    env_graph.LoadPlugin(walk)
+    env_graph.load_time_action_plugin(walk)
 
     social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = 0.3)
     social_distance.day_cycle = day_duration
     social_distance.iso_mode = 'regular'
-    env_graph.LoadPlugin(social_distance)
+    env_graph.load_time_action_plugin(social_distance)
 
 
 return_plugin = ReturnPopulationHomePlugin(env_graph)
-env_graph.LoadPlugin(return_plugin)
+env_graph.load_time_action_plugin(return_plugin)
 
 
 '''

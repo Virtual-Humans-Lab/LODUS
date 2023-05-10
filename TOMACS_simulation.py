@@ -1,6 +1,8 @@
 #encoding: utf-8
 import sys
 
+from plugins.time_actions.infection_plugin import InfectionPlugin
+
 sys.path.append('./plugins/')
 import argparse
 import time
@@ -28,6 +30,7 @@ from time_actions.reverse_social_isolation_plugin import \
 from time_actions.send_population_back_plugin import SendPopulationBackPlugin
 from time_actions.vaccine_local_plugin import VaccinePlugin
 from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
+from data.global_infection_data_plugin import GlobalInfectionDataPlugin
 
 import environment
 import population
@@ -77,39 +80,43 @@ Data Plugins
 isolation_data = None
 if 'global_isolation_data_plugin' in env_graph.experiment_config:
     isolation_data = GlobalIsolationDataPlugin(env_graph)
-    env_graph.LoadPlugin(isolation_data)
+    env_graph.load_time_action_plugin(isolation_data)
 
+infection_data = None
+if 'global_infection_data_plugin' in env_graph.experiment_config:
+    isolation_data = GlobalInfectionDataPlugin(env_graph)
+    env_graph.load_time_action_plugin(isolation_data)
 '''
 TimeAction Plugins
 '''
 
 move_population_plugin = MovePopulationPlugin(env_graph)
-env_graph.LoadPlugin(move_population_plugin)
+env_graph.load_time_action_plugin(move_population_plugin)
 
 gather_pop = None
 if 'gather_population_plugin' in env_graph.experiment_config:
     gather_pop = GatherPopulationPlugin(env_graph)
-    env_graph.LoadPlugin(gather_pop)
+    env_graph.load_time_action_plugin(gather_pop)
 
 return_pop_home = None
 if 'return_population_home_plugin' in env_graph.experiment_config:
     return_pop_home = ReturnPopulationHomePlugin(env_graph)
-    env_graph.LoadPlugin(return_pop_home)
+    env_graph.load_time_action_plugin(return_pop_home)
 
 send_pop_back = None
 if 'send_population_back_plugin' in env_graph.experiment_config:
     send_pop_back = SendPopulationBackPlugin(env_graph)
-    env_graph.LoadPlugin(send_pop_back)
+    env_graph.load_time_action_plugin(send_pop_back)
 
 return_to_previous = None
 if 'return_to_previous' in env_graph.experiment_config:
     return_to_previous = ReturnToPreviousPlugin(env_graph)
-    env_graph.LoadPlugin(return_to_previous)
+    env_graph.load_time_action_plugin(return_to_previous)
 
 levy_walk = None
 if 'levy_walk_plugin' in env_graph.experiment_config:
     levy_walk = LevyWalkPlugin(env_graph)
-    env_graph.LoadPlugin(levy_walk)
+    env_graph.load_time_action_plugin(levy_walk)
 
 #social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 #social_distance.day_cycle = day_duration
@@ -126,6 +133,11 @@ if 'levy_walk_plugin' in env_graph.experiment_config:
 #vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
 #env_graph.LoadPlugin(vaccine_plugin)
 
+infection = None
+if 'infection_plugin' in env_graph.experiment_config:
+    infection = InfectionPlugin(env_graph)
+    env_graph.load_time_action_plugin(infection)
+    
 #infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
 #env_graph.LoadPlugin(infection_plugin)
 

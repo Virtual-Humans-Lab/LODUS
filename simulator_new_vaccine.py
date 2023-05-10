@@ -57,17 +57,17 @@ Load Plugins Examples
 '''
 plug = ExamplePlugin(env_graph)
 plug.example_parameter = 'bar'
-env_graph.LoadPlugin(plug)
+env_graph.load_time_action_plugin(plug)
 
 gather_pop = GatherPopulationNewPlugin(env_graph, isolation_rate = 0.0)
 gather_pop.iso_mode = 'regular'
-env_graph.LoadPlugin(gather_pop)
+env_graph.load_time_action_plugin(gather_pop)
 
 return_plugin = ReturnPopulationHomePlugin(env_graph)
-env_graph.LoadPlugin(return_plugin)
+env_graph.load_time_action_plugin(return_plugin)
 
 return_to_prev = ReturnToPreviousPlugin(env_graph)
-env_graph.LoadPlugin(return_to_prev)
+env_graph.load_time_action_plugin(return_to_prev)
 
 #social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
 #social_distance.day_cycle = day_duration
@@ -77,7 +77,7 @@ env_graph.LoadPlugin(return_to_prev)
 
 
 vaccine_plugin = VaccinePlugin(env_graph, args['v'], day_duration)
-env_graph.LoadPlugin(vaccine_plugin)
+env_graph.load_time_action_plugin(vaccine_plugin)
 
 
 '''
