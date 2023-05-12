@@ -22,7 +22,14 @@
         "default_beta": 0.25,
         "default_gamma": 0.08,
         "infection_multiplier": 1.0,
-        "removal_multiplier": 1.0
+        "removal_multiplier": 1.0,
+        "use_infect_move_pop": false,
+        "initial_infected_default": 50,
+        "initial_infected_custom": [
+          [ "Azenha//home", 0.1 ],
+          [ "Centro", 100 ],
+          [ "pharmacy", 0]
+        ]
     },
     "global_isolation_data_plugin": {
         "global_isolation": 0.0

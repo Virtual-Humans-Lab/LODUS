@@ -55,7 +55,14 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.default_gamma:float = self.config.get("default_gamma", 0.08)
         self.infection_multiplier = self.config.get("infection_multiplier", 1.0)
         self.removal_multiplier = self.config.get("removal_multiplier", 1.0)
-        
+
+        _initial_infected_template_dict = self.config.get("initial_infected_template", {
+                                                            "traceable_characteristics": {},"sampled_characteristics": {}})
+        self.initial_infected_template = PopTemplate(sampled_properties = _initial_infected_template_dict["sampled_characteristics"],
+                                                     traceable_properties= _initial_infected_template_dict["traceable_characteristics"])
+        self.initial_infected_default = self.config.get("initial_infected_default", 100)
+        self.inicial_infected_custom = self.config.get("custom_initial_infected", [])
+
         # self.home_density = 1
         # self.bus_density = 1
         self.count = 0
@@ -69,9 +76,9 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.graph.base_actions.add('infect')
         self.set_pair('infect_population', self.infect_population)
         self.graph.base_actions.add('infect_population')
-        # if self.config["use_infect_move_pop"]:
-        #     self.graph.remove_action('move_population')
-        #     self.set_pair('move_population', self.move_with_infection)
+        if self.config["use_infect_move_pop"]:
+            self.graph.remove_action('move_population')
+            self.set_pair('move_population', self.move_with_infection)
 
 
         # Sets a traceable properties for all blobs in the simulation
@@ -84,16 +91,16 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.dI_remainder_per_node = {n: 0.0 for n in self.graph.node_dict}
         
         # Sets a number of infected people in the start of the simulation
-        _custom_inf_values = {t[0]:t[1] for t in self.config['custom_infection_values']}
+        _custom_inf_values = {t[0]:t[1] for t in self.config.get('initial_infected_custom', ())}
         for _name, _node in self.graph.node_dict.items():
-            if _name in _custom_inf_values:
+            if _name in _custom_inf_values: # unique_name in list
                 _quant = _custom_inf_values[_name]
-            elif _node.containing_region_name in _custom_inf_values:
+            elif _node.containing_region_name in _custom_inf_values: # region name in list
                 _quant = _custom_inf_values[_node.containing_region_name]
-            elif _node.name in _custom_inf_values:
+            elif _node.name in _custom_inf_values: # noty type in list
                 _quant = _custom_inf_values[_node.name]
-            else:
-                _quant = self.config["default_infection_value"]
+            else: # default
+                _quant = self.initial_infected_default
             if isinstance(_quant,float): _quant = math.floor(_node.get_population_size() * _quant)
             _node.change_blobs_traceable_property('sir_status', 'infected', _quant)
                 
@@ -130,9 +137,9 @@ class InfectionPlugin(environment.TimeActionPlugin):
 
     def infect(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         
-        assert ('region' in values and isinstance(values['region'], str), "No 'region' value defined")
-        assert ('node' in values and isinstance(values['node'], str), "No 'node' value defined")
-        assert ('frames' in values or 'cycle_length' in values)
+        assert 'region' in values and isinstance(values['region'], str), "No 'region' value defined"
+        assert 'node' in values and isinstance(values['node'], str), "No 'node' value defined"
+        assert 'frames' in values or 'cycle_length' in values, "No 'frames' or 'cycle_length value defined"
      
 
     def infect_population(self, pop_template, values:dict, cycle_step:int, sim_step:int):
