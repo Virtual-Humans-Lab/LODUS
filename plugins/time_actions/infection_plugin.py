@@ -47,6 +47,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
         # Loads isolation data, if available
         self.infection_beta_data_action = self.graph.data_action_map.get("infection_beta", None)
         self.infection_gamma_data_action = self.graph.data_action_map.get("infection_gamma", None)
+        self.vaccine_efficiency_data_action = self.graph.data_action_map.get("vaccine_efficiency", None)
         # assert not self.infection_beta_data_action or not self.infection_gamma_data_action, "Infection data actions weren't defined. Check if the correct plugins were loaded"
             
         # Loads experiment configuration, if any
@@ -57,7 +58,8 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.removal_multiplier = self.config.get("removal_multiplier", 1.0)
 
         _initial_infected_template_dict = self.config.get("initial_infected_template", {
-                                                            "traceable_characteristics": {},"sampled_characteristics": {}})
+                                                            "traceable_characteristics": {},
+                                                            "sampled_characteristics": {}})
         self.initial_infected_template = PopTemplate(sampled_properties = _initial_infected_template_dict["sampled_characteristics"],
                                                      traceable_properties= _initial_infected_template_dict["traceable_characteristics"])
         self.initial_infected_default = self.config.get("initial_infected_default", 100)
@@ -70,7 +72,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.infected = 0
         self.removed = 0
 
-        # Sets the 'infect' action
+        # Sets the 'infect' actions
         self.graph = env_graph
         self.set_pair('infect', self.infect)
         self.graph.base_actions.add('infect')
@@ -141,6 +143,86 @@ class InfectionPlugin(environment.TimeActionPlugin):
         assert 'node' in values and isinstance(values['node'], str), "No 'node' value defined"
         assert 'frames' in values or 'cycle_length' in values, "No 'frames' or 'cycle_length value defined"
      
+        if 'frames' in values: 
+            infections_per_day = len(values['frames'])
+        else:
+            infections_per_day = self.cycle_length // values['cycle_length']
+
+        # Gets the target region and node
+        acting_region = self.graph.get_region_by_name(values['region'])
+        acting_node = acting_region.get_node_by_name(values['node'])
+        if acting_node.get_population_size() == 0: return
+
+        # Load beta and gamma from data actions (if available)
+        if self.infection_beta_data_action:
+            _beta = self.infection_beta_data_action(acting_region, acting_node)
+        else:
+            _beta = self.default_beta
+        if self.infection_gamma_data_action:
+            _gamma = self.infection_gamma_data_action(acting_region, acting_node)
+        else:
+            _gamma = self.default_gamma
+        # Loads optional action parameters, otherwise, use default values
+        _beta = values.get("infection_beta", _beta)
+        _gamma = values.get("infection_gamma", _gamma)
+
+        # Sets some PopTemplates for this operation
+        pt_sus:PopTemplate = copy.deepcopy(pop_template)
+        pt_sus.set_traceable_property('sir_status','susceptible')
+        pt_inf:PopTemplate = copy.deepcopy(pop_template)
+        pt_inf.set_traceable_property('sir_status','infected')
+        pt_rem:PopTemplate = copy.deepcopy(pop_template)
+        pt_rem.set_traceable_property('sir_status','removed')
+
+        # Gets population sizes before infection
+        prev_counts = [acting_node.get_population_size(pt_sus),
+                       acting_node.get_population_size(pt_inf),
+                       acting_node.get_population_size(pt_rem)]
+        prev_total = sum(prev_counts)
+
+        # print(cycle_step, "infections per day", infections_per_day, values)
+        # exit()
+
+        # Infection operation
+        # print("beta", _beta, "gamma", _gamma)
+        abc = self.solve_infection_remainder(prev_counts, 
+                                             acting_node, 
+                                             _beta / infections_per_day,
+                                             _gamma / infections_per_day)
+        #abc = self.solve_infection(prev_counts)
+            
+        # if node.get_unique_name() == 'Azenha//home':
+        #    print(abc)
+        new_counts = abc[1]
+        new_total = sum(new_counts)
+
+        if new_total != prev_total:
+            raise("Error - population size changed during infection.")
+        
+        # Populations to be changed
+        to_inf = abs(new_counts[0] - prev_counts[0])
+        to_rem = new_counts[2] - prev_counts[2]
+        
+        if to_inf <= 0 and to_rem <= 0:
+            return
+        
+        if self.vaccine_efficiency_data_action is not None:
+            if to_rem > 0:
+                acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+            if to_inf > 0:
+                i_grabbed = acting_node.grab_population(to_inf, pt_sus)
+                acting_node.add_blobs(i_grabbed)
+                for b in i_grabbed:
+                    _eff = self.vaccine_efficiency_data_action(b)
+                    _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
+                    acting_node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
+                      
+        else:
+            acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+            acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
+
+
+
 
     def infect_population(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         print("infect population")
@@ -148,4 +230,48 @@ class InfectionPlugin(environment.TimeActionPlugin):
         infect_values['beta'] = values['beta']
         infect_values['gamma'] = values['gamma']
 
+    def solve_infection_remainder(self, 
+                                  _counts: list[int], 
+                                  _node: environment.EnvNode, 
+                                  _beta:float, 
+                                  _gamma:float):
+        
+        if 'density' in _node.characteristics: 
+            _density = _node.get_characteristic('density')
+        else:
+            _density = 1.0
+        
+        _node_name = _node.get_unique_name()
+        _total = sum(_counts)
+        _sus, _inf, _rem = _counts
+        
+        # Shared equations
+        _sus_to_inf = _beta * _sus * _inf * self.infection_multiplier * _density / _total
+        _inf_to_rem = _gamma * _inf * self.removal_multiplier
+        
+        # Calculates deltas based on SIR model - with multipliers
+        dS = -_sus_to_inf
+        dI = _sus_to_inf - _inf_to_rem
+        dR = _inf_to_rem
+        # print(_node_name, _counts,_beta,_gamma,dI,dR)
+        
+        # Adds remainders of previous operations in EnvNode
+        dS = dS + self.dS_remainder_per_node[_node_name]
+        dI = dI + self.dI_remainder_per_node[_node_name]
+                
+        # Gets integers from deltas
+        dS_int, dI_int = math.ceil(dS), math.floor(dI)
+        dR_int = - dS_int - dI_int 
+        assert (dS_int + dI_int + dR_int) == 0, "Infection deltas sum not matching"
+        
+        # Sets remainders for future operations
+        self.dS_remainder_per_node[_node_name] = dS % -1.0
+        self.dI_remainder_per_node[_node_name] = dI % 1.0
+        
+        # New totals
+        newS = _sus + dS_int
+        newI = _inf + dI_int
+        newR = _total - newS - newI
+        return ([dS_int, dI_int, dR_int],[newS, newI, newR])
+    
      

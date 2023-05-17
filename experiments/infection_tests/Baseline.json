@@ -3,7 +3,7 @@
         "__comment1__": "Files will be loaded from the 'data_input' folder",
         "environment_file": "Environment-PortoAlegre94RegionsDefault.json",
         "population_file": "Population-PortoAlegre94RegionsDefault.json",
-        "routine_file": "Routine-Poa94-LevyWalk-WorkSchool.json"
+        "routine_file": "Routine-Poa94-LevyWalk-WorkSchool-Infection.json"
     },
     "levy_walk_plugin": {
         "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",

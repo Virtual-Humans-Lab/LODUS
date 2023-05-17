@@ -1,7 +1,8 @@
 #encoding: utf-8
 import sys
 
-from plugins.time_actions.infection_plugin import InfectionPlugin
+
+
 
 sys.path.append('./plugins/')
 import argparse
@@ -19,6 +20,7 @@ from loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
+from time_actions.infection_plugin import InfectionPlugin
 from time_actions.levy_walk_plugin import LevyWalkPlugin
 from time_actions.move_population_plugin import MovePopulationPlugin
 from time_actions.new_infection_plugin import NewInfectionPlugin
@@ -64,7 +66,7 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 1
+cycles:int = 200
 cycle_length:int = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -138,8 +140,6 @@ if 'infection_plugin' in env_graph.experiment_config:
     infection = InfectionPlugin(env_graph)
     env_graph.load_time_action_plugin(infection)
     
-#infection_plugin = NewInfectionPlugin(env_graph, args['i'], cycle_length)
-#env_graph.LoadPlugin(infection_plugin)
 
 '''
 Routine Plugins
@@ -156,9 +156,20 @@ pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_gra
 pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
                                     PopulationCountRecordKey.POPULATION_COUNT_REGION,
                                     PopulationCountRecordKey.POPULATION_COUNT_NODE}
+pop_count_logger.global_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+pop_count_logger.global_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+pop_count_logger.global_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+
+
+pop_count_logger.region_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+pop_count_logger.region_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+pop_count_logger.region_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
 
 pop_count_logger.node_custom_templates["Students"] = PopTemplate(sampled_properties={"occupation": "student"})
 pop_count_logger.node_custom_templates["Workers"] = PopTemplate(sampled_properties={"occupation": "worker"})
+pop_count_logger.node_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+pop_count_logger.node_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+pop_count_logger.node_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')

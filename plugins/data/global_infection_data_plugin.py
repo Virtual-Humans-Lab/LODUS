@@ -11,7 +11,7 @@ class GlobalInfectionDataPlugin(environment.TimeActionPlugin):
         self.config:dict = self.graph.experiment_config.get("global_infection_data_plugin", {})
         
         self.global_beta:float = self.config.get("global_beta", 0.0)
-        self.global_gamma:float = self.config.get("global_beta", 0.0)
+        self.global_gamma:float = self.config.get("global_gamma", 0.0)
         self.graph.data_action_map["infection_beta"] = self.get_infection_beta
         self.graph.data_action_map["infection_gamma"] = self.get_infection_gamma
         
