@@ -119,6 +119,9 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.total_infected = self.graph.get_population_size(pop_template_inf)
         print(self.__header, "initial infected:", self.total_infected)
 
+        # self.sum_susceptible = self.graph.s
+        self.sum_infected = self.graph.get_population_size(self.pt_inf)
+        # self.sum_removed = self.graph.get_population_size(self.pt_rem)
 
         print(f"{self.__header} Default Infection Data:", 
               f"\n\tBeta {self.default_beta}; Gamma {self.default_gamma}", 
@@ -216,11 +219,13 @@ class InfectionPlugin(environment.TimeActionPlugin):
                     _eff = self.vaccine_efficiency_data_action(b)
                     _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
                     acting_node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
+                    self.sum_infected += _quant_after_eff
                       
         else:
             acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
             acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
-
+            self.sum_infected += to_inf
+        print(self.sum_infected)
 
 
 
