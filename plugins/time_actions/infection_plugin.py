@@ -225,7 +225,6 @@ class InfectionPlugin(environment.TimeActionPlugin):
             acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
             acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
             self.sum_infected += to_inf
-        print(self.sum_infected)
 
 
 
@@ -245,7 +244,6 @@ class InfectionPlugin(environment.TimeActionPlugin):
             _density = _node.get_characteristic('density')
         else:
             _density = 1.0
-        
         _node_name = _node.get_unique_name()
         _total = sum(_counts)
         _sus, _inf, _rem = _counts

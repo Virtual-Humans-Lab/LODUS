@@ -10,7 +10,7 @@ import csv
 import util
 import json
 
-class NodeDensityPlugin(environment.TimeActionPlugin):
+class NodeDensityDataPlugin(environment.TimeActionPlugin):
     
     def __init__(self, env_graph: environment.EnvironmentGraph, config_file_path):
 
