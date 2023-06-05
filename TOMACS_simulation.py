@@ -69,7 +69,7 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 20
+cycles:int = 5
 cycle_length:int = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -91,6 +91,11 @@ infection_data = None
 if 'global_infection_data_plugin' in env_graph.experiment_config:
     isolation_data = GlobalInfectionDataPlugin(env_graph)
     env_graph.load_time_action_plugin(isolation_data)
+
+node_density_data = None
+if 'node_density_data_plugin' in env_graph.experiment_config:
+    node_density_data = NodeDensityDataPlugin(env_graph)
+    env_graph.load_time_action_plugin(node_density_data)
 '''
 TimeAction Plugins
 '''
@@ -129,8 +134,7 @@ if 'levy_walk_plugin' in env_graph.experiment_config:
 #env_graph.LoadPlugin(social_distance)
 
 
-# density_plugin = NodeDensityPlugin(env_graph, args['d'])
-# env_graph.LoadPlugin(density_plugin)
+
 
 #custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
 #env_graph.LoadPlugin(custom_action_plugin)

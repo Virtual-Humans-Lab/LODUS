@@ -65,6 +65,10 @@ class InfectionPlugin(environment.TimeActionPlugin):
         self.initial_infected_default = self.config.get("initial_infected_default", 100)
         self.inicial_infected_custom = self.config.get("custom_initial_infected", [])
 
+        # Loads density data, if available
+        self.node_density_data_action = self.graph.data_action_map.get("node_density", None)
+
+
         # self.home_density = 1
         # self.bus_density = 1
         self.count = 0
@@ -188,10 +192,11 @@ class InfectionPlugin(environment.TimeActionPlugin):
 
         # Infection operation
         # print("beta", _beta, "gamma", _gamma)
-        abc = self.solve_infection_remainder(prev_counts, 
-                                             acting_node, 
-                                             _beta / infections_per_day,
-                                             _gamma / infections_per_day)
+        abc = self.solve_infection_remainder(_counts = prev_counts,
+                                             _region = acting_region, 
+                                             _node = acting_node, 
+                                             _beta =_beta / infections_per_day,
+                                             _gamma = _gamma / infections_per_day)
         #abc = self.solve_infection(prev_counts)
             
         # if node.get_unique_name() == 'Azenha//home':
@@ -236,14 +241,16 @@ class InfectionPlugin(environment.TimeActionPlugin):
 
     def solve_infection_remainder(self, 
                                   _counts: list[int], 
+                                  _region: environment.EnvRegion,
                                   _node: environment.EnvNode, 
                                   _beta:float, 
                                   _gamma:float):
         
-        if 'density' in _node.characteristics: 
-            _density = _node.get_characteristic('density')
+        if self.node_density_data_action:
+            _density = self.node_density_data_action(_region, _node)
         else:
             _density = 1.0
+        print(_density, _node.get_unique_name())
         _node_name = _node.get_unique_name()
         _total = sum(_counts)
         _sus, _inf, _rem = _counts
