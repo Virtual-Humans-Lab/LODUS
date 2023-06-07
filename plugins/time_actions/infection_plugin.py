@@ -1,4 +1,6 @@
 from itertools import count
+from pathlib import Path
+import time
 from types import NoneType
 # from time_actions.vaccine_local_plugin import VaccinePlugin
 import environment
@@ -52,11 +54,22 @@ class InfectionPlugin(environment.TimeActionPlugin):
             
         # Loads experiment configuration, if any
         self.config:dict = self.graph.experiment_config.get("infection_plugin", {})
+
+        # Loads a config file, if defined
+        if "configuration_file" in self.config:
+            _path =  Path(__file__).parent.parent.parent / "data_input"
+            _content = open(_path / self.config["configuration_file"], 'r', encoding='utf8')
+            _json = json.load(_content)
+            # Override values
+            for key, value in self.config.items():
+                _json[key] = value
+            self.config = _json
+            
         self.default_beta:float = self.config.get("default_beta", 0.25)
         self.default_gamma:float = self.config.get("default_gamma", 0.08)
         self.infection_multiplier = self.config.get("infection_multiplier", 1.0)
         self.removal_multiplier = self.config.get("removal_multiplier", 1.0)
-
+        
         _initial_infected_template_dict = self.config.get("initial_infected_template", {
                                                             "traceable_characteristics": {},
                                                             "sampled_characteristics": {}})
@@ -126,7 +139,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
         # self.sum_susceptible = self.graph.s
         self.sum_infected = self.graph.get_population_size(self.pt_inf)
         # self.sum_removed = self.graph.get_population_size(self.pt_rem)
-
+        
         print(f"{self.__header} Default Infection Data:", 
               f"\n\tBeta {self.default_beta}; Gamma {self.default_gamma}", 
               f"\n\tInfection Mult {self.infection_multiplier}; Removal Mult {self.removal_multiplier}")
@@ -145,7 +158,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
         # Add custom beta/gamma here here
 
     def infect(self, pop_template, values:dict, cycle_step:int, sim_step:int):
-        
+        start_time = time.perf_counter()
         assert 'region' in values and isinstance(values['region'], str), "No 'region' value defined"
         assert 'node' in values and isinstance(values['node'], str), "No 'node' value defined"
         assert 'frames' in values or 'cycle_length' in values, "No 'frames' or 'cycle_length value defined"
@@ -154,7 +167,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
             infections_per_day = len(values['frames'])
         else:
             infections_per_day = self.cycle_length // values['cycle_length']
-
+            
         # Gets the target region and node
         acting_region = self.graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_node_by_name(values['node'])
@@ -231,6 +244,8 @@ class InfectionPlugin(environment.TimeActionPlugin):
             acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
             self.sum_infected += to_inf
 
+        self.add_execution_time(time.perf_counter() - start_time)
+        
 
 
     def infect_population(self, pop_template, values:dict, cycle_step:int, sim_step:int):
@@ -250,7 +265,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
             _density = self.node_density_data_action(_region, _node)
         else:
             _density = 1.0
-        print(_density, _node.get_unique_name())
+
         _node_name = _node.get_unique_name()
         _total = sum(_counts)
         _sus, _inf, _rem = _counts

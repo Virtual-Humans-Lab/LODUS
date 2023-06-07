@@ -19,17 +19,12 @@
     "send_population_back_plugin": {},
     "gather_population_plugin": {},
     "infection_plugin": {
-        "default_beta": 0.25,
-        "default_gamma": 0.08,
-        "infection_multiplier": 1.0,
-        "removal_multiplier": 1.0,
-        "use_infect_move_pop": false,
-        "initial_infected_default": 50,
-        "initial_infected_custom": [
-          [ "Azenha//home", 0.1 ],
-          [ "Centro", 100 ],
-          [ "pharmacy", 0]
-        ]
+        "__comment1__": "Files will be loaded from the 'data_input' folder",
+        "configuration_file": "infection/beta75_gamma0714.json"
+    },
+    "node_density_data_plugin": {
+        "__comment1__": "Files will be loaded from the 'data_input' folder",
+        "configuration_file": "node_densities/low_home_high_stadium.json"
     },
     "global_isolation_data_plugin": {
         "global_isolation": 0.75

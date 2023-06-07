@@ -636,6 +636,8 @@ class EnvironmentGraph():
                         action = copy.deepcopy(rga[1])
                         if type(rga[0]) is list:
                             action.values['frames'] = rga[0]
+                        else:
+                            action.values['cycle_length'] = rga[0]
                         action.values['region'] = region.name
                         action.values['node'] = node.name
                         action.values['node_id'] = node.id
@@ -887,6 +889,7 @@ class EnvironmentGraph():
     
     def stop_logging(self):    
         for l in self.loaded_logger_plugins:
+            print("Stopping Logger:", l.__class__)
             l.stop_logger()
 
 

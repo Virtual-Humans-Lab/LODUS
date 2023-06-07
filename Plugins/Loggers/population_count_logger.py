@@ -179,9 +179,9 @@ class PopulationCountLogger(LoggerPlugin):
                 
         # if not (show_figures or export_figures or export_html): return
         
-        layout_update = {"font_size":24, "legend_font_size":18, "width": 1920, "height": 1080, "autosize":False}
-        self.process_env_population_line_plots(show_figures, export_html, export_figures, layout_update)
-        self.process_custom_line_plots(show_figures, export_html, export_figures, layout_update)
+        #layout_update = {"font_size":24, "legend_font_size":18, "width": 1920, "height": 1080, "autosize":False}
+        #self.process_env_population_line_plots(show_figures, export_html, export_figures, layout_update)
+        #self.process_custom_line_plots(show_figures, export_html, export_figures, layout_update)
     
     def global_frame(self, graph: environment.EnvironmentGraph, frame:int):
         

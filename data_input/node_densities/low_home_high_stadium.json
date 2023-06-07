@@ -1,7 +1,7 @@
 {
   "default_density": 1.0,
   "custom_density_values": [
-    [ "home", 0.1 ],
+    [ "home", 0.3 ],
     [ "stadium", 5.0]
   ]
 }

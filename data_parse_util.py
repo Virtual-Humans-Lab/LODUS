@@ -60,14 +60,20 @@ def Generate_EnvironmentGraph(env_input):
         repeating_global_actions = rot_json['global_routine']
 
         for rga in repeating_global_actions:
+            pt = population.PopTemplate(sampled_properties=rga["action"]['population_template']["sampled_characteristics"],
+                                        traceable_properties=rga["action"]['population_template']["traceable_characteristics"])
+                
             if 'cycle_length' in rga:
-                env.set_repeating_action(int(rga['cycle_length']), TimeAction(rga['type'], rga['values']))
+                env.set_repeating_action(int(rga['cycle_length']), 
+                                         TimeAction(action_type=rga['action']['type'], 
+                                                    pop_template=pt,
+                                                    values=rga['action']['values']))
             elif 'frames' in rga:
                 env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
             elif 'cycle_step' in rga:
-                pt = population.PopTemplate(
-                        sampled_properties=rga["action"]['population_template']["sampled_characteristics"],
-                        traceable_properties=rga["action"]['population_template']["traceable_characteristics"])
+                # pt = population.PopTemplate(
+                #         sampled_properties=rga["action"]['population_template']["sampled_characteristics"],
+                #         traceable_properties=rga["action"]['population_template']["traceable_characteristics"])
                 if isinstance(rga['cycle_step'], list):
                     env.set_repeating_action(rga['cycle_step'], 
                                             TimeAction(action_type=rga['action']['type'], 

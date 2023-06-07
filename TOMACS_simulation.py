@@ -1,11 +1,7 @@
 #encoding: utf-8
 import sys
-
-
-
-
-
 sys.path.append('./plugins/')
+
 import argparse
 import time
 from pathlib import Path
@@ -69,7 +65,7 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 5
+cycles:int = 200
 cycle_length:int = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -314,6 +310,7 @@ env_graph.stop_logging()
 
 #print("TimeAction Plugins execution times")
 if levy_walk is not None: levy_walk.print_execution_time_data()
+if infection is not None: infection.print_execution_time_data()
 if gather_pop is not None: gather_pop.print_execution_time_data()
 if return_pop_home is not None: return_pop_home.print_execution_time_data()
 if send_pop_back is not None: send_pop_back.print_execution_time_data()
@@ -326,3 +323,4 @@ print("Average Cycle time")
 print((end_time - start_time)/cycles)
 
 print("Loaded TimeAction keys:", env_graph.time_action_map.keys())
+exit(0)
