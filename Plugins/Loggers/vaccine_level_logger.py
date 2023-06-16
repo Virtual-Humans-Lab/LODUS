@@ -2,7 +2,7 @@
 import sys
 sys.path.append('/../../')
 from environment import EnvironmentGraph, EnvNode, EnvRegion
-from time_actions.vaccine_local_plugin import VaccinePlugin
+from time_actions.vaccine_plugin import VaccinePlugin
 #import VaccineLocalPlugin
 #from VaccineLocalPlugin import VaccinePlugin 
 from logger_plugin import LoggerPlugin
@@ -26,9 +26,9 @@ class VaccineLevelLogger(LoggerPlugin):
     def __init__(self, base_filename:str, graph:EnvironmentGraph, cycle_length: int=24) -> None:
         # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = graph
-        if not graph.has_plugin(VaccinePlugin):
+        if not graph.has_plugin(VaccineLocalPlugin):
             exit("No VaccinePlugin found in the EnviromentGraph")
-        self.vacc_plugin:VaccinePlugin = graph.get_first_plugin(VaccinePlugin)
+        self.vacc_plugin:VaccineLocalPlugin = graph.get_first_plugin(VaccineLocalPlugin)
         self.DEBUG_VACC_DATA = True
         self.DEBUG_ALL_REGIONS = False
         self.DEBUG_REGIONS = []

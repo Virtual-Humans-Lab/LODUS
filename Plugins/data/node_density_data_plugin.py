@@ -28,7 +28,7 @@ class NodeDensityDataPlugin(environment.TimeActionPlugin):
 
         # Sets the density of each EnvNode at the start of the simulation
         self.default_density = self.config['default_density']
-        self.custom_density = {t[0]:t[1] for t in self.config['custom_density_values']}
+        self.custom_density = {t[0]:t[1] for t in self.config.get('custom_density_values', {})}
         
 
     def update_time_step(self, cycle_step, simulation_step):

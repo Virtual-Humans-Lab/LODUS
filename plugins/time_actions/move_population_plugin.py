@@ -65,7 +65,8 @@ class MovePopulationPlugin(environment.TimeActionPlugin):
         
         # available_total = origin_node.get_population_size()
         # available = origin_node.get_population_size(pop_template)
-        
+        # print(destination_node)
+            
         grabbed_population = origin_node.grab_population(quantity, pop_template)     
         for grab_pop in grabbed_population:
             #if grab_pop.previous_node != origin_node.id:

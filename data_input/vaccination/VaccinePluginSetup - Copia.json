@@ -1,0 +1,9 @@
+{
+  "number_of_vaccine_levels": 4,
+  "efficiency_per_level": [ 0.0, 0.5, 0.75, 1.0 ],
+  "dosage_starting_day_offsets": [ 0, 20, 40 ],
+  "against_vaccine":  0.02,
+
+  "number_of_vaccines_multiplier": 1.0,
+  "vaccinations_per_day_data": "DataInput/vaccine_data.csv"
+}

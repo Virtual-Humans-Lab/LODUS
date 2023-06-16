@@ -1,6 +1,5 @@
 from itertools import count
 from types import NoneType
-from time_actions.vaccine_local_plugin import VaccinePlugin
 import environment
 from population import PopTemplate
 import copy
@@ -48,7 +47,7 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
         
         # JSON file containing the configuration of the Infection Plugin
         self.config = json.loads(open(config_file_path ,'r').read())
-        self.vacc_plugin:VaccinePlugin = None
+        self.vacc_plugin:VaccineLocalPlugin = None
         
         # Data from config file
         self.default_beta = self.config["default_beta"]
@@ -119,7 +118,7 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
         self.hour = hour
         self.time = time
         self.day = (time // self.day_duration) 
-        self.vacc_plugin = self.graph.get_first_plugin(VaccinePlugin)
+        self.vacc_plugin = self.graph.get_first_plugin(VaccineLocalPlugin)
         # if hour == 0:
         #     self.dS_remainder_per_node = {n: 0.0 for n in self.graph.node_dict}
         #     self.dI_remainder_per_node = {n: 0.0 for n in self.graph.node_dict}

@@ -1,6 +1,5 @@
 from itertools import count
 from types import NoneType
-from time_actions.vaccine_local_plugin import VaccinePlugin
 import environment
 from population import PopTemplate
 import copy

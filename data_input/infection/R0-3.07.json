@@ -1,0 +1,11 @@
+{
+  "default_beta": 0.204,
+  "default_gamma": 0.0666,
+  "infection_multiplier": 1.0,
+  "removal_multiplier": 1.0,
+  "use_infect_move_pop": false,
+  "initial_infected_default": 0,
+  "initial_infected_custom": [
+    [ "home", 50 ]
+  ]
+}

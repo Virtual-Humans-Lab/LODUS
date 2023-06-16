@@ -697,9 +697,8 @@ class Blob():
         
         for k,v in self.get_traceable_properties().items():
             new_blob._traceable_properties[k] = v
-        
         # new_blob.spawning_node = self.spawning_node
-        new_blob.previous_node = self.previous_node
+        # new_blob.previous_node = self.previous_node
         new_blob.frame_origin_node = self.frame_origin_node
         return new_blob
     

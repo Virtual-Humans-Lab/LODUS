@@ -163,6 +163,7 @@ class EnvNode():
         for _blob in _grabbed:
             _blob.set_traceable_property(key, value)
             _blob.previous_node = self.id
+            
             #if _blob.spawning_node is None:
             #    _blob.spawning_node = self.id
             _blob.frame_origin_node = self.id

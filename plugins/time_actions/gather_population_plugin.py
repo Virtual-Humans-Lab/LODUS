@@ -146,13 +146,13 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
         
         acting_region = self.graph.get_region_by_name(values['region'])
-        action_node = acting_region.get_node_by_name(values['node'])
+        acting_node = acting_region.get_node_by_name(values['node'])
         sub_list = [] 
-
+        
         quantity = int(values['quantity'])
         if quantity == 0: 
             return sub_list
-
+        
         # Loads optional action parameters, otherwise, use default values
         _isolation_mode:IsolationMode = IsolationMode(values.get("isolation_mode", 
                                                                       self.isolation_mode))
@@ -165,13 +165,13 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         _percentage_per_search = values.get("percentage_per_search", self.percentage_per_search)
 
         # Get node weights
-        weight_list = self.compute_node_weights(action_node, _weighting_mode)
+        weight_list = self.compute_node_weights(acting_node, _weighting_mode)
 
         # Filters undesired EnvNodes
         if _locals_only:
-            weight_list = [(node, weight) for (node,weight) in weight_list if (node.containing_region_name == action_node.containing_region_name)]
+            weight_list = [(node, weight) for (node,weight) in weight_list if (node.containing_region_name == acting_node.containing_region_name)]
         if 'different_node_name' in values and bool(values['different_node_name']):
-            weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != action_node.name)]
+            weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != acting_node.name)]
         
         # Shuffles the remaining EnvNodes
         self.random.shuffle(weight_list)
@@ -237,7 +237,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             new_action_values:dict = { 'origin_region': origin_region.name,
                                 'origin_node': node_aux.name,
                                 'destination_region': acting_region.name,
-                                'destination_node': action_node.name,
+                                'destination_node': acting_node.name,
                                 'quantity': quantity}
            
             if _isolation_mode == IsolationMode.REGULAR:
@@ -267,7 +267,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
                                                 pop_template = temp,
                                                 values = new_action_values)
             sub_list.append(new_action)
-            #self.graph.direct_action_invoke(new_action, hour, time)
+            #self.graph.direct_action_invoke(new_action, cycle_step, sim_step)
             #list_count +=1 
 
         self.add_execution_time(time.perf_counter() - start_time)
