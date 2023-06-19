@@ -65,6 +65,9 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
 
             grabbed = target_blob.grab_population(target_blob.get_population_size(pop_template), pop_template)
             
+            if grabbed is None: 
+                return []
+            
             grabbed.previous_node = from_node.id
             grabbed.frame_origin_node = from_node.id
             

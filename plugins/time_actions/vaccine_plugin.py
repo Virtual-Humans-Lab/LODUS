@@ -88,7 +88,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         
         # Sets two traceable properties for all blobs in the simulation
         self.graph.add_blobs_traceable_property("vaccine_level", 0)
-        self.graph.add_blobs_traceable_property("days_since_last_vaccine", 0)
+        # self.graph.add_blobs_traceable_property("days_since_last_vaccine", 0)
         
         # Get the total population of the simulation, and sets a dict of population per region and vaccines to be dealt at each region at that day
         self.total_population = self.graph.get_population_size()
@@ -113,8 +113,8 @@ class VaccinePlugin(environment.TimeActionPlugin):
             return
 
         # Increases the days_since_last_vaccine for all blobs
-        if self.cycle > 0:
-            self.graph.lambda_blobs_traceable_property("days_since_last_vaccine", lambda b,v:v+1 if b.get_traceable_property("vaccine_level") < self.dosages else 0)
+        # if self.cycle > 0:
+        #     self.graph.lambda_blobs_traceable_property("days_since_last_vaccine", lambda b,v:v+1 if b.get_traceable_property("vaccine_level") < self.dosages else 0)
         
         # Checks vaccines available for each dosage
         for dose_index,starting_day in enumerate(self.dosage_cycle_offsets):
@@ -196,7 +196,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             # print(cycle_step, target_node.get_unique_name(), "Quant", to_vacc, self.prev_vac[_dose_index])
             pop_template = PopTemplate()
             pop_template.set_traceable_property('vaccine_level', lambda n: n == _dose_index)
-            pop_template.set_traceable_property('days_since_last_vaccine', lambda n: n >= _dose_offset)
+            # pop_template.set_traceable_property('days_since_last_vaccine', lambda n: n >= _dose_offset)
             
             new_action = environment.TimeAction(action_type = new_action_type, 
                                                 pop_template = pop_template,
@@ -239,16 +239,16 @@ class VaccinePlugin(environment.TimeActionPlugin):
         blob_ids = []
         
         for n in target_node.contained_blobs:
-            if n.get_traceable_property('vaccine_level') == current_level and n.get_traceable_property("days_since_last_vaccine") >= values["min_dose_offset"]:
-                
+            # if n.get_traceable_property('vaccine_level') == current_level and n.get_traceable_property("days_since_last_vaccine") >= values["min_dose_offset"]:
+            if n.get_traceable_property('vaccine_level') == current_level:    
                 #prev_val = n._traceable_properties['vaccine_level']
                 #print("before" + str(n._traceable_properties['vaccine_level']))
                 n.set_traceable_property('vaccine_level', n.get_traceable_property('vaccine_level') + 1)
-                n.set_traceable_property('days_since_last_vaccine', 0)
+                # n.set_traceable_property('days_since_last_vaccine', 0)
                 #n._traceable_properties['vaccine_level'] = current_level + 1
                 #print("after" + str(n._traceable_properties['vaccine_level']))
                 #self.graph.log_traceable_change('vaccine_level', prev_val, n._traceable_properties['vaccine_level'])
-                #n._traceable_properties['days_since_last_vaccine'] = 0
+                # not uncomment n._traceable_properties['days_since_last_vaccine'] = 0
                 #print("blob id",n.blob_id)
                 blob_ids.append(n.blob_id)
                 
