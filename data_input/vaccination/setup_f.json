@@ -1,0 +1,8 @@
+{
+  "vaccinations_per_cycle_data": "vaccination/vaccine_data.csv",
+  "number_of_vaccines_multiplier": 1.0,
+  "number_of_vaccine_levels": 2,
+  "efficiency_per_level": [ 0.0, 0.7 ],
+  "dosage_starting_cycle_offsets": [ 50 ],
+  "against_vaccine":  0.02
+}
