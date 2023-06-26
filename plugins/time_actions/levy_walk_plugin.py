@@ -329,11 +329,12 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
                 _lower = _middle
         return _lower
     
-    def print_execution_time_data(self):
-        super().print_execution_time_data()
-        print("---Total subactions count:", sum(self.sublist_count))
+    def print_execution_time_data(self) -> str:
+        out = super().print_execution_time_data()
+        out += "---Total subactions count:" + str(sum(self.sublist_count)) + "\n"
         if len(self.sublist_count) > 0:
-            print("---Average subaction count:", sum(self.sublist_count)/len(self.sublist_count))
+            out += "---Average subaction count:" + str(sum(self.sublist_count)/len(self.sublist_count)) + "\n"
+        return out
 
 if __name__ == "__main__":
     pass

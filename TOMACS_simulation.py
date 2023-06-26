@@ -53,6 +53,8 @@ args = vars(arg_parser.parse_args())
 
 FixedRandom(seed=0, numpy_seed=0)
 
+output_str = ""
+
 '''
 Data Loading
 '''
@@ -123,20 +125,6 @@ levy_walk = None
 if 'levy_walk_plugin' in env_graph.experiment_config:
     levy_walk = LevyWalkPlugin(env_graph)
     env_graph.load_time_action_plugin(levy_walk)
-
-#social_distance = ReverseSocialIsolationPlugin(env_graph, '', isolation_rate = float(args['r']))
-#social_distance.day_cycle = day_duration
-#social_distance.iso_mode = 'regular'
-#env_graph.LoadPlugin(social_distance)
-
-
-
-
-#custom_action_plugin = CustomTimeActionPlugin(env_graph, args['c'])
-#env_graph.LoadPlugin(custom_action_plugin)
-
-#vaccine_plugin = VaccinePlugin(env_graph, args['v'], cycle_length)
-#env_graph.LoadPlugin(vaccine_plugin)
 
 vaccine = None
 if 'vaccine_plugin' in env_graph.experiment_config:
@@ -269,15 +257,16 @@ if infection is not None:
 # Vaccine Logger
 #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
 
-print("Population per Age:")
-print("Children:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "children"})))
-print("Youngs:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "youngs"})))
-print("Adults:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "adults"})))
-print("Elders:", env_graph.get_population_size(PopTemplate(sampled_properties={"age": "elders"})))
-print("Population per Occupation:")
-print("Worker:", env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "worker"})))
-print("Student:", env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "student"})))
-print("Other:", env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "other"})))
+output_str += "Population per Age:\n"
+output_str += "Children:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "children"}))) + "\n"
+output_str += "Youngs:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "youngs"}))) + "\n"
+output_str += "Adults:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "adults"}))) + "\n"
+output_str += "Elders:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "elders"}))) + "\n"
+output_str += "Population per Occupation:\n"
+output_str += "Worker:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "worker"}))) + "\n"
+output_str += "Student:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "student"}))) + "\n"
+output_str += "Other:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "other"}))) + "\n"
+print(output_str)
 '''
 Simulation
 '''
@@ -326,19 +315,27 @@ env_graph.stop_logging()
 
 
 #print("TimeAction Plugins execution times")
-if levy_walk is not None: levy_walk.print_execution_time_data()
-if infection is not None: infection.print_execution_time_data()
-if vaccine is not None: vaccine.print_execution_time_data()
-if gather_pop is not None: gather_pop.print_execution_time_data()
-if return_pop_home is not None: return_pop_home.print_execution_time_data()
-if send_pop_back is not None: send_pop_back.print_execution_time_data()
-if return_to_previous is not None: return_to_previous.print_execution_time_data()
-if move_population_plugin is not None: move_population_plugin.print_execution_time_data()
+if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
+if infection is not None: output_str += infection.print_execution_time_data()
+if vaccine is not None: output_str += vaccine.print_execution_time_data()
+if gather_pop is not None: output_str += gather_pop.print_execution_time_data()
+if return_pop_home is not None: output_str += return_pop_home.print_execution_time_data()
+if send_pop_back is not None: output_str += send_pop_back.print_execution_time_data()
+if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
+if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
+
+output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
+output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
+output_str += "Loaded TimeAction Keys: " + str(env_graph.time_action_map.keys()) + "\n"
 
 print("Total Simulation time")
 print(end_time - start_time)
 print("Average Cycle time")
 print((end_time - start_time)/cycles)
 
-print("Loaded TimeAction keys:", env_graph.time_action_map.keys())
+print("Loaded TimeAction Keys: ", env_graph.time_action_map.keys())
+print("writing Output File")
+text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
+text_file.write(output_str)
+text_file.close()
 exit(0)

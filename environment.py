@@ -1055,12 +1055,15 @@ class TimeActionPlugin():
     def add_execution_time(self, time):
         self.execution_times.append(time)
 
-    def print_execution_time_data(self):
-        print("\n",self.__class__.__name__,"Execution Time Data")
-        print("---Number of executions:", len(self.execution_times))
-        print("---Total execution time:", sum(self.execution_times))
+    def print_execution_time_data(self) -> str:
+        out = "\n" + self.__class__.__name__ + " Execution Time Data:\n"
+        out += "---Number of executions: " + str(len(self.execution_times)) + "\n"
+        out += "---Total execution time:: " + str(sum(self.execution_times)) + "\n"
         if len(self.execution_times) > 0:
-            print("---Average execution time:", sum(self.execution_times)/len(self.execution_times))
+            out += "---Average execution time: " + str(sum(self.execution_times)/len(self.execution_times)) + "\n"
+        print(out)
+        return out
+
 
     def set_pair(self, action_type, action_function):
         self.type_action_pairs[action_type] = action_function

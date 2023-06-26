@@ -84,7 +84,8 @@ class SendPopulationBackPlugin(environment.TimeActionPlugin):
         return sub_list
     
     def print_execution_time_data(self):
-        super().print_execution_time_data()
-        print("---Total subactions count:", sum(self.sublist_count))
+        out = super().print_execution_time_data()
+        out += "---Total subactions count:" + str(sum(self.sublist_count)) + "\n"
         if len(self.sublist_count) > 0:
-            print("---Average subaction count:", sum(self.sublist_count)/len(self.sublist_count))
+            out += "---Average subaction count:" + str(sum(self.sublist_count)/len(self.sublist_count)) + "\n"
+        return out
