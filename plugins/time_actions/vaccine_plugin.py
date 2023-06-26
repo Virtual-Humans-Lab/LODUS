@@ -152,7 +152,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
 
         sub_list = []
         # For each vaccine_level (_dose_index)
-        for _dose_index in range(self.dosages):
+        for _dose_index in range(self.dosages)[::-1]:
             
             # if there is no vaccines of _dose_index to be given this day
             if self.to_vaccinate_per_dose[_dose_index] == 0:
@@ -243,19 +243,23 @@ class VaccinePlugin(environment.TimeActionPlugin):
             if n.get_traceable_property('vaccine_level') == current_level:    
                 #prev_val = n._traceable_properties['vaccine_level']
                 #print("before" + str(n._traceable_properties['vaccine_level']))
-                n.set_traceable_property('vaccine_level', n.get_traceable_property('vaccine_level') + 1)
+                #n.set_traceable_property('vaccine_level', n.get_traceable_property('vaccine_level') + 1)
+
+                _blob = n.change_blob_traceable_property('vaccine_level', current_level + 1, values['quantity'])
+                if _blob != n:
+                    target_node.add_blob(_blob)
                 # n.set_traceable_property('days_since_last_vaccine', 0)
                 #n._traceable_properties['vaccine_level'] = current_level + 1
                 #print("after" + str(n._traceable_properties['vaccine_level']))
                 #self.graph.log_traceable_change('vaccine_level', prev_val, n._traceable_properties['vaccine_level'])
                 # not uncomment n._traceable_properties['days_since_last_vaccine'] = 0
                 #print("blob id",n.blob_id)
-                blob_ids.append(n.blob_id)
-                
+                blob_ids.append(_blob.blob_id)
+                # print(n.blob_id)
                 new_action_type = 'return_to_previous'
                 new_action_values = {}
                 new_action_values['node_id'] = target_node.id
-                new_action_values['blob_id'] = n.blob_id
+                new_action_values['blob_id'] = _blob.blob_id
                 new_action_values['population_template'] = pt
                 new_action = environment.TimeAction(action_type = new_action_type, 
                                                     pop_template = pt,
