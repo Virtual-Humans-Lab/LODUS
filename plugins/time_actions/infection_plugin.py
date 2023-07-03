@@ -49,7 +49,18 @@ class InfectionPlugin(environment.TimeActionPlugin):
         # Loads isolation data, if available
         self.infection_beta_data_action = self.graph.data_action_map.get("infection_beta", None)
         self.infection_gamma_data_action = self.graph.data_action_map.get("infection_gamma", None)
-        self.vaccine_efficiency_data_action = self.graph.data_action_map.get("vaccine_efficiency", None)
+        self.vaccine_efficiency_blob_data_action = self.graph.data_action_map.get("vaccine_efficiency_blob", None)
+        self.vaccine_efficiency_level_data_action = self.graph.data_action_map.get("vaccine_efficiency_level", None)
+        self.vaccine_levels_data_action = self.graph.data_action_map.get("vaccine_levels", None)
+        self.vaccine_levels = None
+        self.vaccine_level_pop_templates = []
+        if self.vaccine_levels_data_action is not None:
+            self.vaccine_levels = self.vaccine_levels_data_action()
+            for i in range(self.vaccine_levels):
+                _pt = PopTemplate()
+                _pt.set_traceable_property("vaccine_level", i)
+                self.vaccine_level_pop_templates.append(_pt)
+
         # assert not self.infection_beta_data_action or not self.infection_gamma_data_action, "Infection data actions weren't defined. Check if the correct plugins were loaded"
             
         # Loads experiment configuration, if any
@@ -135,6 +146,8 @@ class InfectionPlugin(environment.TimeActionPlugin):
         pop_template_inf.set_traceable_property('sir_status', 'infected')
         self.total_infected = self.graph.get_population_size(pop_template_inf)
         print(self.__header, "initial infected:", self.total_infected)
+
+        
 
         # self.sum_susceptible = self.graph.s
         self.sum_infected = self.graph.get_population_size(self.pt_inf)
@@ -227,22 +240,26 @@ class InfectionPlugin(environment.TimeActionPlugin):
         if to_inf <= 0 and to_rem <= 0:
             return
         
-        if self.vaccine_efficiency_data_action is not None:
-            if to_rem > 0:
-                acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
-            if to_inf > 0:
-                i_grabbed = acting_node.grab_population(to_inf, pt_sus)
-                acting_node.add_blobs(i_grabbed)
-                for b in i_grabbed:
-                    _eff = self.vaccine_efficiency_data_action(b)
-                    _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
-                    acting_node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
-                    self.sum_infected += _quant_after_eff
+        acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+        acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
+        self.sum_infected += to_inf
+
+        # if self.vaccine_efficiency_blob_data_action is not None:
+        #     if to_rem > 0:
+        #         acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+        #     if to_inf > 0:
+        #         i_grabbed = acting_node.grab_population(to_inf, pt_sus)
+        #         acting_node.add_blobs(i_grabbed)
+        #         for b in i_grabbed:
+        #             _eff = self.vaccine_efficiency_blob_data_action(b)
+        #             _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
+        #             acting_node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
+        #             self.sum_infected += _quant_after_eff
                       
-        else:
-            acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
-            acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
-            self.sum_infected += to_inf
+        # else:
+        #     acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+        #     acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
+        #     self.sum_infected += to_inf
 
         self.add_execution_time(time.perf_counter() - start_time)
         
@@ -269,9 +286,23 @@ class InfectionPlugin(environment.TimeActionPlugin):
         _node_name = _node.get_unique_name()
         _total = sum(_counts)
         _sus, _inf, _rem = _counts
+        _eff = 1
         
+        if self.vaccine_levels is not None:
+            _eff = 0
+            for i in range(self.vaccine_levels):
+                _eff += (_node.get_population_size(self.vaccine_level_pop_templates[i]) 
+                    * (1 - self.vaccine_efficiency_level_data_action(i)) / _total)
+                #print("level", i, (_node.get_population_size(self.vaccine_level_pop_templates[i]) 
+                #    * self.vaccine_efficiency_level_data_action(i)))
+            #_eff /= _total
+            #for pop_t in self.vaccine_level_pop_templates:
+            #    _eff += _node.get_population_size(pop_t) * self.vaccine_efficiency_blob_data_action()
+            # print (_node.get_unique_name(), "beta", _beta, "density", _density, "eff", _eff)
+
+
         # Shared equations
-        _sus_to_inf = _beta * _sus * _inf * self.infection_multiplier * _density / _total
+        _sus_to_inf = _beta * _sus * _inf * self.infection_multiplier * _density * _eff/ _total
         _inf_to_rem = _gamma * _inf * self.removal_multiplier
         
         # Calculates deltas based on SIR model - with multipliers

@@ -13,6 +13,7 @@ import seaborn as sns
 import plotly.express as px
 
 def displacement_histogram_comparison(experiment_names:list[str], 
+                                      label_list:list[str],
                                       additional_exp_path:str = '', 
                                       bin_size:float = 500, 
                                       x_limit:int | None = None, y_limit:int | None = None):
@@ -32,6 +33,13 @@ def displacement_histogram_comparison(experiment_names:list[str],
         _exp_movement_data = np.array(_exp_movement_list)
         data_list.append((exp, _exp_movement_data))
 
+    if label_list: 
+        experiment_names = label_list
+        for i in range(len(data_list)):
+            __list = list(data_list[i])
+            __list[0]  = label_list[i]
+            data_list[i] = __list # type: ignore
+
     # Find max displacement to create bins
     max_displacement = 0
     for (exp, _data) in data_list:
@@ -41,10 +49,14 @@ def displacement_histogram_comparison(experiment_names:list[str],
 
     # Plot multiple histograms
     sns.set_theme()
+    plt.figure(figsize=(8,3))
     for (exp, _data) in data_list:
         s = sns.histplot(data=_data, bins=bins, element='poly', fill=False, label=exp) # type: ignore
     plt.legend(fancybox=True, shadow=True, fontsize = 'x-small')
+    plt.xlabel("Distance (m)")
+    plt.ylabel("Total Displacements")
     plt.tight_layout()
+    
     fig_path = dir_path / f"displacement_histogram_comparison_{experiment_names}.png"
     print(__header, "Saving displacement histogram comparison at:\n\t", fig_path)
     if x_limit is not None: plt.xlim(0, x_limit)
@@ -111,12 +123,14 @@ def combined_movement_displacement_barchart(experiment_name:str, bin_size:float 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Create Node Distante Distribution Figure.")
     arg_parser.add_argument('--e', metavar="E", nargs='+', type=str, default = [], help='Experiment Name List (same as experiment configuration file)')
+    arg_parser.add_argument('--l', metavar="L", nargs='+', type=str, default = [], help='Label List (to replace experiment name)')
     arg_parser.add_argument('--p', metavar="P", type=str, default = '', help='Additional experiment path')
     arg_parser.add_argument('--b', metavar="B", type=float, default = 500, help='Bin Size')
     arg_parser.add_argument('--x', metavar="X", type=float, default = None, help='X-Limit')
     arg_parser.add_argument('--y', metavar="Y", type=float, default = None, help='Y-Limit')
     args = vars(arg_parser.parse_args())
     displacement_histogram_comparison(experiment_names=args['e'], 
+                                      label_list=args['l'],
                                       additional_exp_path=args['p'],
                                       bin_size=args['b'], 
                                       x_limit=args['x'], 

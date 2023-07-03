@@ -67,7 +67,9 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.dosage_cycle_offsets:list[int] = self.config["dosage_starting_cycle_offsets"]
         self.efficiency_per_level:list[int] = self.config["efficiency_per_level"]
         self.vacc_multiplier:float = self.config["number_of_vaccines_multiplier"]
-        self.graph.data_action_map["vaccine_efficiency"] = self.get_blob_vacc_efficiency
+        self.graph.data_action_map["vaccine_efficiency_blob"] = self.get_blob_vacc_efficiency
+        self.graph.data_action_map["vaccine_efficiency_level"] = self.get_level_vacc_efficiency
+        self.graph.data_action_map["vaccine_levels"] = self.get_number_of_vacc_levels
         assert (self.vacc_levels == len(self.efficiency_per_level)), "\"vaccine_levels\" should be equal to length of \"efficiency_per_level\" in the configuration file."
         assert (self.dosages == len(self.dosage_cycle_offsets)), "\"vaccine_levels\" should be 1 higher than length of \"dosage_starting_cycle_offsets\" in the configuration file."
         print(f'\nVaccine plugin loaded. {self.dosages} dosages available ({self.vacc_levels} levels). Starting cycle offset is {self.dosage_cycle_offsets}.')
@@ -144,6 +146,12 @@ class VaccinePlugin(environment.TimeActionPlugin):
     
     def get_blob_vacc_efficiency(self, blob:Blob):
         return self.efficiency_per_level[blob.get_traceable_property('vaccine_level')]    
+    
+    def get_level_vacc_efficiency(self, level:int):
+        return self.efficiency_per_level[level]    
+
+    def get_number_of_vacc_levels(self):
+        return self.vacc_levels
 
     def vaccinate(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         start_time = time.perf_counter()
