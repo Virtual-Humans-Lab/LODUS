@@ -38,7 +38,8 @@ def global_population_linechart(experiment_name:str,
 
     fig = px.line(df2, y = data_to_track,
                   labels={'index': x_label, 'value': y_label, 'variable': 'Legend'}, 
-                  title=title, markers=bool(cycle_steps))
+                  width=800, height=450, 
+                  title=title)#, markers=bool(cycle_steps))
     # xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
     # fig.update_xaxes(xaxes_upt)
 
@@ -58,7 +59,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--s', metavar="S", nargs='+', type=int, default = [], help='Cycle Steps to be presented.')
     arg_parser.add_argument('--x', metavar="X", type=str, default = 'Time', help='X-Label')
     arg_parser.add_argument('--y', metavar="Y", type=str, default = 'Population', help='Y-Label')
-    arg_parser.add_argument('--t', metavar="T", type=str, default = 'Global Population', help='Figure Title')
+    arg_parser.add_argument('--t', metavar="T", type=str, default = 'SIR Population Status', help='Figure Title')
     arg_parser.add_argument('--f', metavar="F", type=bool, default = False, help='Show Figure')
     args = vars(arg_parser.parse_args())
     global_population_linechart(experiment_name=args['e'], 

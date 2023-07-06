@@ -55,12 +55,13 @@ def displacement_histogram_comparison(experiment_names:list[str],
     plt.legend(fancybox=True, shadow=True, fontsize = 'x-small')
     plt.xlabel("Distance (m)")
     plt.ylabel("Total Displacements")
-    plt.tight_layout()
     
     fig_path = dir_path / f"displacement_histogram_comparison_{experiment_names}.png"
     print(__header, "Saving displacement histogram comparison at:\n\t", fig_path)
     if x_limit is not None: plt.xlim(0, x_limit)
     if y_limit is not None: plt.ylim(0, y_limit)
+    
+    plt.tight_layout()
     plt.savefig(fig_path, dpi=400)
     plt.clf()
 
