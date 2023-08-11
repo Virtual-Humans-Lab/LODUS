@@ -2,9 +2,12 @@ python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_250-
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_250-S_500
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_250-S_750
 
+python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_500-S_250
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_500-S_500
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_500-S_1000
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_500-S_1500
+python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_500-S_2500
+python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_500-S_5000
 
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_1000-S_1000
 python .\TOMACS_simulation.py --e .\levy_parameter_tests_94\WorkSchool94-BW_1000-S_2000

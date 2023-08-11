@@ -39,7 +39,8 @@ def displacement_histogram_comparison(experiment_names:list[str],
             __list = list(data_list[i])
             __list[0]  = label_list[i]
             data_list[i] = __list # type: ignore
-
+    
+    print(f"displacement_histogram_comparison_{experiment_names}.png")
     # Find max displacement to create bins
     max_displacement = 0
     for (exp, _data) in data_list:
