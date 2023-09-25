@@ -1,0 +1,30 @@
+
+{
+    "envgraph_inputs_files": {
+        "__comment1__": "Files will be loaded from the 'data_input' folder",
+        "environment_file": "Environment-PortoAlegre94RegionsDefault.json",
+        "population_file": "Population-PortoAlegre94RegionsDefault.json",
+        "routine_file": "Routine-Poa94-LevyWalk-WorkSchool.json"
+    },
+    "levy_walk_plugin": {
+        "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",
+        "distance_type": 3,
+        "population_group_size": 250,
+        "movement_probability": 0.05,
+        "distribution_location": 0.0,
+        "distribution_scale": 1000,
+        "use_buckets": true,
+        "__comment2__": "'distance_bucket_size' only used in 'use_buckets' is true",
+        "distance_bucket_size": 500
+    },
+    "send_population_back_plugin": {},
+    "gather_population_plugin": {},
+    "off_cycle_routine_plugin": {
+        "__comment1__": "Files will be loaded from the 'data_input' folder",
+        "start_of_step_routine_files": [
+            "large_scale_event/BeiraRio500k-Step19-DistanceW.json",
+            "large_scale_event/Centro500k-Step19-DistanceW.json",
+            "large_scale_event/PUC500k-Step19-DistanceW.json"],
+        "end_of_step_routine_files": []
+    }
+}
