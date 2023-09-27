@@ -3,13 +3,35 @@ python .\TOMACS_simulation.py --e large_scale_event/Baseline+A_Dist
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+A_Pop
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+B_Dist
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+B_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+C_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+C_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+P_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+P_Pop
+
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+AB_Dist
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+AB_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AC_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AC_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BC_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BC_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+CP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+CP_Pop
+
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABC_Dist
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABC_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ACP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ACP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BCP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BCP_Pop
+
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABCP_Dist
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABCP_Pop
-
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ACP_Dist
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ACP_Pop
 python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ABCP_Dist

@@ -36,13 +36,17 @@ def global_population_linechart(experiment_name:str,
         df2[c] =  df.reset_index()[c]
         data_to_track.append(c)
 
+    print (df2)
+    
     fig = px.line(df2, y = data_to_track,
                   labels={'index': x_label, 'value': y_label, 'variable': 'Legend'}, 
-                  width=800, height=450, 
+                  width=800, height=450, hover_name="variable", #hover_data=['Susceptible', 'Infected', 'Removed'],
                   title=title)#, markers=bool(cycle_steps))
     # xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
     # fig.update_xaxes(xaxes_upt)
-
+    sir = True
+    if sir:
+        fig.update_layout(hovermode="x")
     if show_figures: fig.show()
 
     file_name = fig.layout.title.text.replace(" ","")
