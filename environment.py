@@ -824,6 +824,16 @@ class EnvironmentGraph():
         self.region_list.append(new_region)
         self.region_id_dict[new_region.id] = new_region
 
+    def add_node_to_region(self, region:EnvRegion, node_template:EnvNodeTemplate, node_unique_name:str) -> EnvNode: 
+        factory = EnvNodeFactory(node_template)
+        node = factory.Generate(region,node_unique_name)
+        region.add_node(node)
+        self.node_list.append(node)
+        self.node_dict[node.get_unique_name()] = node
+        self.node_id_dict[node.id] = node
+        return node
+
+
     def add_edge(self, region1, region2, _type):
         self.edge_table[region1][region2] = _type
     

@@ -1,0 +1,95 @@
+ID,RegionName,Affected,Comment
+1,Aberta dos Morros,FALSE,none
+2,Agronomia,FALSE,none
+3,Anchieta,TRUE,high
+4,Arquipélago,TRUE,high
+5,Auxiliadora,FALSE,none
+6,Azenha,FALSE,none
+7,Bela Vista,FALSE,none
+8,Belém Novo,TRUE,medium
+9,Belém Velho,FALSE,none
+10,Boa Vista,FALSE,none
+11,Boa Vista do Sul,TRUE,medium
+12,Bom Fim,FALSE,none
+13,Bom Jesus,FALSE,none
+14,Camaquã,FALSE,none
+15,Campo Novo,FALSE,none
+16,Cascata,FALSE,none
+17,Cavalhada,FALSE,none
+18,Centro Histórico,TRUE,medium
+19,Chácara das Pedras,FALSE,none
+20,Chapéu do Sol,FALSE,none
+21,Cidade Baixa,FALSE,none
+22,Cel. Aparício Borges,FALSE,none
+23,Costa e Silva,FALSE,none
+24,Cristal,TRUE,medium
+25,Cristo Redentor,FALSE,none
+26,Espírito Santo,TRUE,very low
+27,Extrema,FALSE,none
+28,Farrapos,TRUE,high
+29,Farroupilha,FALSE,none
+30,Floresta,TRUE,high
+31,Glória,FALSE,none
+32,Guarujá,TRUE,medium
+33,Higienópolis,FALSE,none
+34,Hípica,FALSE,none
+35,Humaitá,TRUE,high
+36,Independência,FALSE,none
+37,Ipanema,TRUE,very low
+38,Jardim Botânico,FALSE,none
+39,Jardim Carvalho,FALSE,none
+40,Jardim do Salso,FALSE,none
+41,Jardim Leopoldina,FALSE,none
+42,Jardim Europa,FALSE,none
+43,Jardim Floresta,TRUE,medium
+44,Jardim Isabel,FALSE,none
+45,Jardim Itú,FALSE,none
+46,Jardim Lindóia,FALSE,none
+47,Jardim Sabará,FALSE,none
+48,Jardim São Pedro,TRUE,low
+49,Lageado,FALSE,none
+50,Lami,TRUE,low
+51,Lomba do Pinheiro,FALSE,none
+52,Mário Quintana,FALSE,none
+53,Medianeira,FALSE,none
+54,Menino Deus,TRUE,low
+55,Moinhos de Vento,TRUE,very low
+56,Mont'Serrat,FALSE,none
+57,Morro Santana,FALSE,none
+58,Navegantes,TRUE,high
+59,Nonoai,FALSE,none
+60,Parque Santa Fé,FALSE,none
+61,Partenon,FALSE,none
+62,Passo D'Areia,FALSE,none
+63,Passo das Pedras,FALSE,none
+64,Pedra Redonda,TRUE,very low
+65,Petrópolis,FALSE,none
+66,Pitinga,FALSE,none
+67,Ponta Grossa,TRUE,medium
+68,Praia de Belas,TRUE,high
+69,Restinga,FALSE,none
+70,Rio Branco,FALSE,none
+71,Rubem Berta,FALSE,none
+72,Santa Cecília,FALSE,none
+73,Santa Maria Goretti,TRUE,medium
+74,Santa Rosa de Lima,TRUE,low
+75,Santa Tereza,TRUE,very low
+76,Santana,FALSE,none
+77,Santo Antônio,FALSE,none
+78,São Caetano,FALSE,none
+79,São Geraldo,TRUE,high
+80,São João,TRUE,medium
+81,São Sebastião,FALSE,none
+82,Sarandi,TRUE,high
+83,Serraria,TRUE,medium
+84,Sétimo Céu,FALSE,none
+85,Teresópolis,FALSE,none
+86,Três Figueiras,FALSE,none
+87,Tristeza,TRUE,very low
+88,Vila Assunção,TRUE,very low
+89,Vila Conceição,TRUE,very low
+90,Vila Ipiranga,FALSE,none
+91,Vila Jardim,FALSE,none
+92,Vila João Pessoa,FALSE,none
+93,Vila Nova,FALSE,none
+94,São José,FALSE,none

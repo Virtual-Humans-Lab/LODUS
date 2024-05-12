@@ -1,0 +1,114 @@
+order,id,Latitude,Longitude,name,region,address,abrigo,capacity,shelteredPeople
+65,e5c637ba-c46c-4a45-b325-32e17c08d2dc,-30.15356379999999,-51.1829887,Igreja Reviver,Aberta dos Morros,"Estrada Gedeon Leite, 780, Aberta dos Morros",Sim,125,80
+115,,-30.152894,-51.2007576,Igreja Pentecostal Deus é Amor,Aberta dos Morros,"Av Juca Batista, 3230, Aberta dos Morros",Sim,60,0
+1,d1397d8f-8301-4525-ac52-156e574f83e6,-30.023865,-51.1986232,Paróquia Nossa Senhora Auxiliadora,Auxiliadora,"Rua Vinte e Quatro de Outubro, 1001, Auxiliadora",Sim,77,40
+47,1a897e88-5092-4071-a4ae-94b887867191,-30.0231652,-51.1949675,Casa da Criança Nossa Senhora Auxiliadora,Auxiliadora,"R. Felipe Neri, 78 - Auxiliadora, Porto Alegre - Rs, 90440-150",Sim,20,
+2,e83fde72-4f7d-417d-9a77-1f769e7e95b5,-30.2107239,-51.182764,Igreja Belém Novo,Belém Novo,"Av. Heitor Vieira 474, Belém Novo",Sim,200,85
+6,6a40dba0-935b-47e3-a7e0-457c58c16d46,-30.027822353621872,-51.16829097504712,Nilo 2400,Boa Vista,"Av Dr Nilo Pecanha 2400 , Porto Alegre, Bairro Boa Vista",Sim,500.0,1.0
+4,be96408c-d616-47b2-8208-f89eabeeffec,-30.048848459906452,-51.163553426828635,Bom Jesus,Bom Jesus,Rua Dezessete Numero 80,Sim,,
+81,bef1fe53-bf7e-4f4f-89f7-d515074e028c,-30.034037062937372,-51.24108624621088,Usina do Gasômetro,Cais do Porto,"na praça em frente ao Gasômetro, astrás do parque Harmonia",Não,,
+44,3c38b84a-c7c3-4cf6-80ef-1d1fa1d5d78a,-30.107392559481465,-51.241598632964546,Paróquia São Vicente Mártir,Camaquã,"Rua Victor Silva, 186 - Camaquã",Sim,40.0,
+97,35e9c5ed-6b46-4997-b06a-2337690fbd59,-30.107627873377574,-51.24130887689567,Escola São Francisco,Camaquã,"Rua Victor Silva, 186 - Camaquã, Porto Alegre - RS, 91910-170",Sim,40.0,
+71,7648c991-9c53-4950-ac44-824ae0d8e1c7,-30.20234248830811,-51.1198591327115,Probicho,Campo Novo,Edgar Pires De Castro 10195,,,100.0
+31,3c25886c-39e0-482b-9b3e-cd1e7e59249c,-30.09492535944127,-51.1716044556517,Cozinha Solidária Mãos Que Acolhem,Cascata,"Rua Dos Canudos, 625- Cascata",,,
+77,68107c64-61eb-4c06-8c5f-00f6c3a54e0c,-30.096851910146498,-51.227016661552135,AFISVEC,Cavalhada,"Rua salvador calamussi, 56 - Cavalhada, Porto Alegre",Sim,200.0,
+54,f6f53aae-9c33-43e0-8656-c323d475cb00,-30.034936676128652,-51.16174530388275,Casa De Abrigo De Animais,Chácara Das Pedras,"R. Dr. Barbosa Gonçalves 61, Chácara Das Pedras - Porto Alegre",,,
+13,288e9bff-e466-4021-8f0f-223557ed5a72,-30.042259200323343,-51.22011880388241,Paróquia Sagrada Família,Cidade Baixa,"R. José Do Patrocínio, 954 - Cidade Baixa, Porto Alegre",Sim,120.0,
+15,38f311e3-793e-47c6-9523-d32ea13d7186,-30.041608609615945,-51.22089829799454,Opinião,Cidade Baixa,"R. José Do Patrocínio, 834 - Cidade Baixa",Sim,120,
+101,ed183f4a-3333-4a27-9795-e3f43cc7f422,-30.046379694358556,-51.215246361554264,Drop bar [EVACUADO],Cidade Baixa,"R. Gen. Lima e Silva, 1647 - Cidade Baixa, Porto Alegre - RS, 90050-102",,,
+61,74a090b4-3600-4d15-a0bc-6e6de6c47c72,-30.01240216588082,-51.1184800556748,Igreja Quadrangular - Costa e Silva,Costa e Silva,Avenida Dante Ângelo Pilla 285 / Costa E Silva,,30.0,15.0
+76,a19c567a-ebe1-4f5f-9389-f159c26d0b4a,-30.01246221113426,-51.123394632719815,Centro Humanista,Costa e Silva,"Av. baltazar de oliveira garcia, 2132 - Porto Alegre",Sim,700.0,
+28,c082783c-12d1-4174-9e59-276a5c647079,-30.097688758447287,-51.24164223271596,Escola Aramy Silva (emef),Cristal,"R. Chico Pedro, 390 - Camaquã, Porto Alegre",Sim,,
+69,66665836-5d56-4596-ae37-0dd7c86576f5,-30.079105462515077,-51.24736233271673,Shopping Pontal,Cristal,"Av. Padre Cacique, 2893 - Cristal, Porto Alegre - Rs, 90810-240",Não,,
+67,2f6e9600-8675-4f86-89d5-381a44ef5ab2,-30.013775062154863,-51.15459402108,Igreja Da Paz,Cristo Redentor,"Rua Dim Diogo De Souza 370/390, Cristo Redentor",,50.0,50.0
+68,d706b874-9f59-41cd-8cf9-4da0b1becccf,-30.002403121300492,-51.155579569169525,Abrigo Cristo Redentor,Cristo Redentor,"Rua Ouro Preto, 408a, Porto Alegre, Bairro Cristo Redentor",,,
+78,446e4dc9-c485-47bb-8f49-3107c097e735,-30.01432686313657,-51.149411046211675,Colégio Santa Doroteia,Cristo Redentor,"Rua mali, 405 - Cristo Redentor, Porto Alegre",Sim,390.0,
+80,98afa669-bade-40c8-b052-980e5025f58e,-30.0395265711671,-51.21338601922657,Volpe,Farropilha,"Av. Venâncio Aires, 711 - Santana, Porto Alegre - RS, 90040-193",,,
+3,b64dabab-63ca-4b9f-9705-3a45a658fa51,-30.08352738638549,-51.189341261552705,Abrigo Da Gruta,Glória,"Rua Da Gruta, 240 - Glória",,,
+55,754c8017-dcc5-4c8a-bcca-aadd2b3a4ade,-30.062749734900244,-51.20597824620959,Igreja Cristã Filadélfia,Glória,"Oscar Pereira, 1434",,,
+93,8e60ec23-4f86-4652-b012-930b6dae8df0,-30.070596778525353,-51.18700067504511,Ginásio Brigada,Glória,"R. Cel. Aparício Borges, 2001 - Glória, Porto Alegre - RS, 90680-570",Sim,495.0,
+105,59b57c26-312d-4cfc-aef8-722657679213,-30.075251187257894,-51.20270623271707,Colégio Marista Assunção,Glória,"R. Dom Bosco, 103 - Glória, Porto Alegre - RS, 91110-460",Sim,80.0,
+9,0ab17ee3-a169-43d1-a467-88f4222c891b,-30.16277736420997,-51.187285049582414,Sociedade Hipica,Hipica,"Nossa Senhora De Guadalupe, 249/339 - Hípica, Porto Alegre",,,
+103,d0b27e7f-9ef1-4fbe-a15a-36af6ad2eaa9,-30.029419357977428,-51.21848616155515,Colégio Rosário,Independência,"Praça Dom Sebastião, 2 - Independência, Porto Alegre - RS, 90035-080",Sim,180.0,
+48,0d3571e1-9647-4419-929e-2f0707fcc4a9,-30.124818100611186,-51.246243903878806,Enjoy Sushi,Ipanema,"Av. Cel. Marcos, 1085 - Ipanema, Porto Alegre - Rs, 91760-000",,,
+37,14280a63-eaea-4d1e-bdd3-49a48634d43f,-30.05780335452908,-51.15479893271776,Bnb Church,Jardim Botânico,"Av. Ipiranga, 8223 - Jardim Botânico, Porto Alegre",,,
+53,8476856d-1438-442e-8344-3f31db1d4e1b,-30.05610290985369,-51.18630993271785,35 Ctg,Jardim Botânico,"Av. Ipiranga, N° 5300 - Jardim Botânico Poa",Não,,
+96,125e8961-15bc-4e42-b4f4-6848a7b1b487,-30.050732067924596,-51.18251497504609,ESEFID,Jardim Botânico,"R. Felizardo, 750 - Jardim Botânico, Porto Alegre - RS, 90690-200",Sim,306.0,
+20,70084b0f-4b01-431e-a2bf-ee85df1da7cd,-30.044339603833123,-51.13626527504631,Igreja Rosa De Sarom,Jardim Carvalho,"Rua Beco Souza Costa, 174, Morro Santana",,,
+110,fe2d90fe-ce24-4b55-b910-5181a2860abc,-30.12278041880512,-51.200557129722206,CEEE Vila Nova,Jardim Carvalho,Av. Joaquim Porto Vila Nova,,,
+111,db3695c7-d50e-43e0-9047-550bb980532f,-30.052556085289428,-51.156670438274524,CEEE Ipiranga,Jardim Carvalho,"Av. Ipiranga, 8300",,,
+42,5207fb6b-af7d-4842-8a19-6ae75f13d3c6,-30.01458207352873,-51.137426875047666,Abrigo Na Walir Zottis 380 Jd. Itu Sabará,Jardim Itu,"Rua Walir Zottis, 380 - Jd. Itu Sabará",,,
+89,aca9f2ce-5d63-4a82-9831-56218267f324,-30.00291846938262,-51.152312561556236,Lindóia Tênis Clube,Jardim Lindóia,"Tv. Cmte. Gustavo Cramer, 90 - Jardim Lindóia, Porto Alegre - RS, 91050-190",Sim,150.0,
+46,de500277-1e1d-47dc-96a4-349b3d4051d2,-30.00454823674376,-51.16517354621208,Paróquia Divino Espírito Santo,Jardim São Pedro,"R. Bôrtolo Barbieri, 80 - Jardim São Pedroporto Alegre - Rs, 91040-160",,40.0,0.0
+50,94eb5d46-85cf-4915-a8f9-e10bf77e401d,-30.048498037081252,-51.13909193271825,Astti,Jardim Ypu,"Beco Souza Costa, 750 - Jardim Ypu, Porto Alegre - Rs, 91450-140",Sim,120.0,
+12,982ec984-0e94-4855-ad46-46403578216c,-30.108120043330256,-51.11287727359831,Paróquia Santa Clara,Lomba do Pinheiro,"Estrada João De Oliveira Remião, 4444 - Lomba Do Pinheiro",Sim,,
+60,74b0e3dc-6914-448e-b55d-4ee2d74f7a47,-30.099264243203557,-51.12244272489668,Igreja Quadrangular - Parada 07,Lomba do Pinheiro,Estrada João De Oliveira Remião Parada 07,,30.0,15.0
+25,4ade18c9-0975-4fb6-8be2-988dc3089afa,-30.035328212395548,-51.11646290388275,Espaço Comunitário Multiplicidade Poa,Mário Quintana,"Rua 6 De Novembro, 332 - Mário Quintana, Porto Alegre",,,
+66,95f16afe-05a4-4a7d-bf61-8d11c8de7376,-30.03403850997865,-51.118328846210794,Igreja Maanaim,Mário Quintana,Rua Manoel Marques 433 - Mário Quintana,,,
+95,c07ad79d-51ec-4b06-aeeb-2bc5492e5b7d,-30.060218159057857,-51.21335414620961,Estádio Olímpico Monumental,Medianeira,Bairro Medianeira; entrada pela Azenha,,,
+82,6a01e68e-80ac-4f18-bf95-5e8b64edf1ee,-30.045268259212232,-51.219568513669934,Tesourinha (Ginásio Municipal Osmar Fortes Barcellos),Menino Deus,"Av. Érico Veríssimo, s/n - Menino Deus, Porto Alegre - RS, 90160-180",Sim,,
+83,122e242b-3829-40fa-b6ff-78f351101064,-30.04725368275385,-51.218933303882274,Teatro Renascença [EVACUADO],Menino Deus,"Av. Érico Veríssimo, 307 - Menino Deus, Porto Alegre - RS, 90160-181",Sim,,
+109,b4d66a6f-7cd0-4864-801c-2170744bc72b,-30.05625903204533,-51.21967759426435,CETE Menino Deus,Menino Deus,"R. Gonçalves Dias, 700 - Menino Deus, Porto Alegre RS, 90130-060",Sim,356.0,
+92,0e42aab7-480b-451b-b4c0-b7b5956da45d,-30.02178574457519,-51.19803510388339,GNU - Grêmio Náutico União - Sede Moinhos de Vento,Moinhos de Vento,"R. Quintino Bocaiúva, 500 - Moinhos de Vento, Porto Alegre - RS, 90440-050",Sim,267.0,267.0
+14,627d9b43-a569-409f-be85-a5a0d606992e,-30.026277506471338,-51.18458369039114,Paróquia Nossa Senhora De Mont Serrat,Mont'serrat,"R Anita Garibaldi, 1121 - Mont'serrat, Porto Alegre",,,
+22,fd2d679b-4e9c-45e3-a8e2-4f4db15b7555,-30.04647313328514,-51.12959449039031,Igreja Assembleia De Deus,Morro Santana,"Rua Cinco, 60, Vila Das Laranjeiras",,,
+40,9b7e286c-3350-4067-8ed1-584168af5dca,-30.03961707130287,-51.12076827504659,Aspirantes De Cristo,Morro Santana,"R. Parlamento, 115 - Morro Santana, Porto Alegre",Sim,60.0,
+99,62a17be9-a744-42a6-a7dd-8ce2872c56c8,-30.039232431961555,-51.12308843271856,EEEM Alcides Cunha,Morro Santana,"R. Hélio Pimpão, 52 - Morro Santana, Porto Alegre - RS, 91450-330",Sim,30.0,
+41,77a0f4cc-a62d-44bb-bba2-058d1d006d0a,-30.092744299230244,-51.205827632716314,Apamecor,Nonoai,"R. Fernando Osório, 1156 - Teresópolis, Porto Alegre - Rs, 91720-330",Sim,200.0,
+11,64c872b6-3e46-43a8-a705-6db3289b3fae,-30.107986011310192,-51.11289473271556,Projeto Surfar,Partenon,"R. Borborema, 687 - E 691 - Vila Joao Pessoa, Porto Alegre",,,
+57,f0007b63-a031-4c5a-ad2c-d2a708feabb4,-30.06678830104769,-51.15025134620925,Pastor Rodrigo Tavares - Agronomia,Partenon,"Av. Bento Gonçalves, 6623 - Agronomia",Sim,110.0,60.0
+58,022fcaca-94ad-4917-9c59-5d95736a674b,-30.06860415978485,-51.143788446209285,Igreja Lugar De Adoração,Partenon,"Av. Bento Gonçalves, 7196 - Agronomia",,60.0,20.0
+72,7d5e29af-7d5f-41a9-afaf-8e2135dd69c4,-30.058329155515153,-51.15451366155386,Igreja Da Lagoinha,Partenon,"R. Prof. Guerreiro Lima, 476 - Partenon Porto Alegre - Rs, 91530-190",Sim,50.0,0.0
+87,1d116975-3072-47b5-85da-44eac0fb4b3b,-30.0553419911939,-51.17252146155398,PUCRS - Parque Esportivo,Partenon,"Av. Ipiranga, 6690 - Partenon, RS, 90619-900",Sim,250.0,
+102,de4d524d-fd58-45b9-96e6-7b6748b06119,-30.057556740100498,-51.1595093750458,CTG Sentinela dos Pampas,Partenon,"R. Ivo Janson, 31 - Partenon, Porto Alegre - RS, 91530-070",Sim,,
+113,cc8e231c-73fe-41bb-92ac-0af903f2da58,-30.057095825357337,-51.1863554615539,AMRIGS,Partenon,"Av. Ipiranga, 5311 - Partenon, Porto Alegre - RS, 90610-001",Sim,,
+7,54585c9d-843d-43fd-81b4-f43a8001bfe2,-30.007642869823126,-51.167620248064175,Cf Vikings,Passo d'Areia,"Rua Visconde De Pelotas, 473",,,
+70,792ef61b-0f2d-4b0f-9f10-41bbe3327bdf,-30.00996886488961,-51.169619832719846,Instituto São Francisco - Pallotti,Passo d'Areia,"R. Tupi, 212 - Passo D'areia, Porto Alegre - Rs, 90010-090",Sim,72.0,70.0
+100,f5205195-2cf2-4a39-8e30-7761bc63c40d,-30.01042931801456,-51.173909048063905,EEEF Gonçalves Dias - IAPI [EVACUADO],Passo DAreia,"R. Candiota, 145 - Passo d'Areia, Porto Alegre - RS, 91030-020",Sim,,
+8,91c428ab-68f5-4a49-9c78-cade2c4e5b98,-30.03291959622577,-51.121665732718945,Uniritter - Campus Fapa,Passo Das Pedras,"Av. Manoel Elias, 2001 - Passo Das Pedras, Porto Alegre",,,
+45,fbe32f25-fa62-422d-823d-f388000f47d4,-30.03291959622577,-51.12167646155497,Fapa,Passo das Pedras,"Av. Manoel Elias, 2001 - Passo Das Pedras, Porto Alegre - Rs, 91240-261",,,
+18,b81b4e5c-798f-413d-a7cd-7ce1cfd397ee,-30.128947667420714,-51.24303627504269,Morro Do Sabiá,Pedra Redonda,"Rua Ney Castilhos Ferreira, 301 - Pedra Redonda",Sim,142,142
+114,942565ba-f6ac-46f3-bea2-09cea520ca0a,-30.123686638732366,-51.245754588534815,AABB,Pedra Redonda,"Av. Cel. Marcos, 1000 - Pedra Redonda, Porto Alegre - RS, 91760-000",Sim,120.0,
+10,7f21ccc7-d1de-4a23-b710-260761213000,-30.04899718536861,-51.19550270388218,Simers,Petropólis,"Rua Coronel Corte Real, 975 - Petrópolis, Porto Alegre",Não,,
+85,98c04b11-66df-400c-bc31-cfc0c1ad52f3,-30.04134887389941,-51.149147661554586,SESCRS,Petrópolis,"Av. Protásio Alves, 6220 - Petrópolis, Porto Alegre - RS, 91310-001",Sim,175.0,
+88,573f4bb7-cf57-484b-a95a-d8829c1f406a,-30.040227096895517,-51.18353956155456,PetMedic Poa,Petrópolis,"R. Carazinho, 335 - Petrópolis, Porto Alegre",,,
+16,80386665-d935-4a8f-851d-b20d847c7ad3,-30.042843626481346,-51.22490108853842,Oab,Praia de Belas,Aureliano Figueredo Pinto 620,Sim,62.0,
+94,124c9a46-72b6-4c16-b46a-4fa3be7cdc31,-30.064463837793717,-51.23389454620953,Gigantinho,Praia de Belas,"Avenida Padre Cacique, 891 Ao lado do estádio Beira-Rio - Praia de Belas, Porto Alegre - RS, 90810-240",,,
+21,765a9b71-222f-425d-8eed-4ff5b8559d9f,-30.14605886634169,-51.14457024029331,Igreja Casa Church Rerstinga,Restinga,"Av. Ignês E Fagundes, 1248-1210 - Restinga, Porto Alegre",Sim,60,0
+75,eb98c8bb-aa91-4de1-af23-49d4e3a876ac,-30.152390940674852,-51.152096675041626,21 Bpm,Restinga,"R. Gov Peracchi Barcellos, 4600 - Restinga, Porto Alegre",Sim,,
+36,4f9d5e9b-43eb-4ba7-919b-4be27e988a79,-30.029045766746247,-51.19916063271899,Caixeiros Viajantes,Rio Banco,"Rua Dona Laura, 646 - Rio Branco, Porto Alegre",Sim,60.0,
+51,0cbf3209-453d-40c6-85ee-060b8a8ae9cb,-30.033771621215575,-51.19713677504685,Ipa - Centro Universitário Metodista,Rio Banco,"Rua Coronel Joaquim Pedro Salgado, 80 - Rio Branco, Porto Alegre - Rs, 90420-060",Sim,150.0,137.0
+26,98bcdaf6-7dc8-405e-a919-f4330bfd4e4b,-30.03549481018891,-51.11651448846388,Escola Victor Isler,Rubem Berta,"R. Dezenove De Fevereiro, 330 - Mário Quintana, Porto Alegre",,,
+98,988aa603-63dc-4fff-85d6-9671b4640a2b,-30.024178405180372,-51.103498813343506,Escola Grande Oriente,Rubem Berta,"R. Wolfram Metzler, 600",Sim,260.0,
+63,7dfb239b-1151-4d6c-8bbb-52e3306ff422,-29.993416602081876,-51.10878834621249,Igreja Impactando Gerações,Santa Rosa de Lima,"Bernardino Silveira Amorim, 1479",,,
+64,d036b8ca-85d1-449f-b032-922497874543,-29.990558213175365,-51.099576432720745,Mevam,Santa Rosa de Lima,"Ernardino Silveira Pastoriza, 880 – Santa Rosa De Lima",,30.0,
+29,a310934f-0b7c-44a2-9b2e-0b240eb6edee,-30.084448755052044,-51.22894193271674,Emef Martim Aranha,Santa Tereza,"R. Cônego Paulo Isidoro De Nadal, 1 - Santa Tereza, Porto Alegre",,,
+30,5daec969-8869-4121-bafc-1425731e6487,-30.04652414283923,-51.20432672682921,Cremers,Santana,"Rua Bernardo Pires, 415 - Santana, Porto Alegre",Sim,,
+34,bd446650-d778-439b-b343-fa7c62959584,-30.04570505472974,-51.20538280388235,Clinica Vet Hug,Santana,"R. São Luís, 316 - Santana, Porto Alegre",,,
+52,7f67759c-0aec-4f78-b2ed-a7b386ff87ed,-30.043979290533883,-51.21278426155442,Colégio Júlio De Castilhos,Santana,"Av. Piratini, 76 - Santana, Porto Alegre - Rs, 90040-160",Sim,100.0,
+86,c0ee062d-9de5-49b5-bc22-f274a52b039e,-30.041756362029307,-51.207768161554526,RUs UFRGS,Santana,"R. Ramiro Barcelos, 2500 - Santana, Porto Alegre - RS, 90035-003",,,
+5,b86e6275-e274-4091-b36a-346a2f6d25a7,-30.055020008127748,-51.201015590390114,Geraldo Santana,Santo Antônio,"Grêmio Geraldo Santana, Rua Luiz De Camões, 337",Sim,100.0,100.0
+33,9791431f-042e-43e4-8c8d-05c50bd2db01,-30.05812110632958,-51.20079354031784,Colégio Rainha Do Brasil,Santo Antônio,"R. Paulino Chaves, 262 - Santo Antônio, Porto Alegre",Sim,150.0,
+24,e57048e9-f927-4f68-b680-975504367292,-30.00621454870518,-51.184357403884,Estacionamento Bourbon Assis Brasil,São João,"Av. Assis Brasil, 164 - São João, Porto Alegre",,,
+84,cde9c9b1-81e4-403a-b4d9-6a7e9073aff2,-30.009550064105216,-51.18805626155594,Sogipa,São João,"R. Barão do Cotegipe, 415 - São João, Porto Alegre - RS, 90540-020",Sim,460.0,
+108,e8de6533-d059-4a9a-b2d4-e293a68a5325,-30.013261051426923,-51.18316193271975,Clínica Ametista,São João,"R. Portugal, 544 - São João, Porto Alegre - RS, 90520-310",Sim,,
+73,5577f295-484a-41bf-8b11-5848f060ee9e,-30.066753026831133,-51.16967319038948,Igreja Deus É Amor,São José,"Rua Padre Cornélio, 33 - Partenon Porto Alegre - Rs, 91520-624",Sim,114.0,150.0
+62,c0d8f35c-18cd-4707-9f2c-5f709d70ef6c,-30.015424165088984,-51.10966860388362,Aliança Cristã De Porto Alegre,São Sebastião,"Av. Baltazar De Oliveira Garcia, 3580",Sim,70.0,
+43,c2e7b07a-6424-4a5b-8289-35e148954deb,-30.006194557822145,-51.13849016155603,Abba Igreja,Sarandi,"R. Dona Alzira, 420 - Sarandi, Porto Alegre - Rs, 91110-010 - Jardim Itu",Sim,100.0,
+59,4a6bde72-e52a-4c92-9665-45a20133d1b5,-29.99109399086913,-51.10080353272074,Igreja Betel,Sarandi,"AV. Bernadino Silveira Pastoriza, 771 - Bairro Santa Rosa",,,
+74,cece28cb-c379-4eda-a3bd-16856a825b82,-29.99547722960944,-51.126996603884514,Colégio Kennedy,Sarandi,"Av. Alcídes São Severiano, 99 - Sarandi, Porto Alegre - Rs, 91130-500",Sim,180.0,100.0
+90,b818a598-5d62-46cf-867c-ece997cb5856,-29.993202001760533,-51.11881210388468,Igreja Batista do Passo da Areia,Sarandi,"Av. Francisco Silveira Bitencourt, 1135 - Sarandi, Porto Alegre - RS, 91150-010",Sim,110.0,110.0
+91,0e422650-b93e-45fb-a8e7-fcf705047ef5,-30.00752339538935,-51.137970890392,Igreja Batista Braza - ZN,Sarandi,"Rua Dona Alzira, 275",Sim,20.0,188.0
+106,d4b86f11-de90-46cd-b0d6-a8cf4c1e8bd7,-29.99589833035823,-51.12563943272054,Colégio Luterano da Paz,Sarandi,"Av. Alcídes São Severiano, 100 - Sarandi, Porto Alegre - RS, 91130-500",Sim,115.0,
+112,c275c8c9-514d-484d-aad2-e2e8b2f7c882,-29.985632097653117,-51.12987250388488,AMVEP [EVACUADO],Sarandi,"Av. 21 de Abril, 792 - Sarandi, Porto Alegre - RS, 91120-630",Sim,,
+27,c978c13d-2f77-48e6-bfb7-cbb560b89ae0,-30.164344878647068,-51.22811414620507,Escola Custódio,Serraria,"Rua Argemiro Ogando Corrêa, 220 - Serraria, Porto Alegre",Sim,40,40
+107,40d34be2-9c8a-41df-b86b-3c9909c0da47,-30.029352401197745,-51.175113275047025,Colégio Anchieta,Três Figueiras,"Av. Dr. Nilo Peçanha, 1521 - Três Figueiras, Porto Alegre - RS, 91330-000",,,
+49,429fc597-b5ed-4224-8401-54668f171d19,-30.111891998848165,-51.248415003879366,Colegio Mae De Deus,Tristeza,"R. Dr. Mário Totta, 1252 - Tristeza, Porto Alegre - Rs, 91920-130",Sim,110.0,
+39,8aa03a2f-97f9-46a8-9b4c-72dce395120e,-30.096923392553087,-51.252475384487134,Associação Biblioteca Bororó,Vila Assunção,"Rua Bororó, 21, Vila Assunção, Porto Alegre",,,
+79,95b97ec2-a9be-43d7-9377-5f6f44d61db3,-30.01979996244902,-51.15874080388333,Igreja Luterana Congregação São Paulo,Vila Ipiranga,"Rua Cipó, 450 - Vila Ipiranga, Porto Alegre",Sim,120.0,120.0
+104,c3557925-c02f-4d77-93f4-d0bf170dc9eb,-30.011555206744003,-51.153605626243554,Colégio Mesquita,Vila Ipiranga,"Av. do Forte, 171",Sim,120.0,
+56,905820e1-6281-4e21-8ec5-9f501a9bae42,-30.06255854101132,-51.17677022682482,Igreja Quadrangular - Partenon,Vila João Pessoa,"Rua Ângelo Barcelos, 35 - Partenon",,,
+17,f2884cd5-1f02-43b0-a7ed-77254b8a8c5f,-30.11429405720648,-51.21561232681023,Mulheres Em Rede / Consepro,Vila Nova,"João Salomoni, 1105 - Vila Nova",Sim,30,0
+19,27dc15cf-13a6-44bb-8707-0baef7dd99f1,-30.10323246677437,-51.21671550387981,Casa Marista Da Juventude Caju,Vila Nova,"Estrada Aracaju, 651 - Vila Nova, Porto Alegre",Sim,110,110
+23,f3985a52-5c14-4cbb-b0d3-1702e26c15c5,-30.1015220822948,-51.21670636155209,Ginásio Rede Calábria,Vila Nova,"Estrada Aracaju, 650, Vila Nova",Sim,,
+35,1c0b9c93-c4b1-4537-a9f3-9e7afb20ac61,-30.103241748537936,-51.21670477504379,Casa Da Juventude Marista,Vila Nova,"Estrada Aracaju, 651 - Vila Nova, Porto Alegre",Sim,110,110
