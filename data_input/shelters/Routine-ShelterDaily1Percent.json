@@ -1,0 +1,35 @@
+{
+  "global_routine": [{
+    "cycle_step": [
+      8
+    ],
+    "action": {
+      "name": "move_population_in_danger_to_shelters",
+      "type": "move_to_shelters",
+      "population_template": {
+        "traceable_characteristics": {},
+        "sampled_characteristics": {}
+      },
+      "values": {
+        "population_percentage_to_move": 0.01,
+        "__comment1__": "mode: 0 = initial in danger, 1 = current in danger",
+        "mode": 0
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      8
+    ],
+    "action": {
+      "name": "shelter_population_in_danger",
+      "type": "shelter_population",
+      "population_template": {
+        "traceable_characteristics": {},
+        "sampled_characteristics": {}
+      },
+      "values": {}
+    }
+  }],
+  "routines": {}
+}

@@ -17,6 +17,7 @@ from loggers.population_count_logger import (PopulationCountLogger,
 from time_actions.move_population_plugin import MovePopulationPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
 from time_actions.shelter_plugin import ShelterPlugin
+from time_actions.levy_walk_plugin import LevyWalkPlugin
 
 
 import environment
@@ -54,7 +55,7 @@ env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 1
+cycles:int = 3
 cycle_length:int = 24
 env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -76,10 +77,16 @@ if 'gather_population_plugin' in env_graph.experiment_config:
     gather_pop = GatherPopulationPlugin(env_graph)
     env_graph.load_time_action_plugin(gather_pop)
 
-shelter = None
+levy_walk = None
+if 'levy_walk_plugin' in env_graph.experiment_config:
+    levy_walk = LevyWalkPlugin(env_graph)
+    env_graph.load_time_action_plugin(levy_walk)
+
+shelter_plugin = None
 if 'shelter_plugin' in env_graph.experiment_config:
-    shelter = ShelterPlugin(env_graph)
-    env_graph.load_time_action_plugin(shelter)
+    shelter_plugin = ShelterPlugin(env_graph)
+    env_graph.load_time_action_plugin(shelter_plugin)
+
 '''
 Logging
 '''
@@ -191,7 +198,7 @@ end_time = time.perf_counter()
 env_graph.stop_logging()
 
 #print("TimeAction Plugins execution times")
-# if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
+if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
 # if infection is not None: output_str += infection.print_execution_time_data()
 # if vaccine is not None: output_str += vaccine.print_execution_time_data()
 # if gather_pop is not None: output_str += gather_pop.print_execution_time_data()
@@ -199,6 +206,7 @@ env_graph.stop_logging()
 # if send_pop_back is not None: output_str += send_pop_back.print_execution_time_data()
 # if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
 if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
+if shelter_plugin is not None: output_str += shelter_plugin.print_execution_time_data()
 
 output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
 output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"

@@ -129,6 +129,9 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             if other.get_unique_name() == unique_name:
                 continue
             distance_to_other = self.get_nodes_distance(target_node, other)
+            # 
+            if distance_to_other == 0.0: 
+                print(distance_to_other, unique_name, target_node.long_lat, other.get_unique_name(), other.long_lat)
             distance_list.append((other,distance_to_other))
 
         # Weights are according to the inverse of the distance
@@ -185,7 +188,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         _start_index = 0
         _max_index = len(weight_list)
         _index_increment = math.ceil(_max_index * _percentage_per_search)
-
+        
         while population_available < quantity:
             # Searches a segment of the EnvNodes
             for wl in range(_start_index, min(_start_index + _index_increment, _max_index)):
@@ -199,7 +202,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
             _start_index += _index_increment
             if _start_index >= _max_index:
                 break
-        
+
         # Gets total population available and adjusts quantity if necessary
         if population_available < quantity:
             quantity = population_available

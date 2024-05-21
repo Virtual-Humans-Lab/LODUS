@@ -1,4 +1,5 @@
 import copy
+import pprint
 import sys
 from typing import Optional
 from population import PopTemplate
@@ -62,6 +63,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.distribution_sampler = scipy_levy
         self.graph = env_graph
         self.set_pair('levy_walk', self.levy_walk)
+        self.set_pair('levy_walk_direct', self.levy_walk_direct)
         
         if "levy_walk_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry (default plugin values)")
@@ -98,6 +100,108 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
 
     def update_time_step(self, cycle_step, simulation_step):
         return
+
+    def levy_walk_direct(self, pop_template, values:dict, cycle_step:int, sim_step:int):
+        '''Function to consume a 'levy_walk' TimeAction type.'''
+        start_time = time.perf_counter()
+        assert 'region' in values, "region is not defined in Levy Walk TimeAction"
+        assert 'node' in values, "node is not defined in Levy Walk TimeAction"
+
+        acting_region = self.graph.get_region_by_name(values['region'])
+        acting_node = acting_region.get_node_by_name(values['node'])
+        sub_list = [] 
+
+        if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
+            return sub_list
+
+        
+        # Loads optional action parameters, otherwise, use default values
+        _use_buckets:bool = values.get("use_buckets", self.use_buckets)
+        _use_original_population:bool = values.get("use_original_population", self.use_original_population)
+        _pop_group_size:int = values.get("population_group_size", self.population_group_size)
+        _mov_probability:float = values.get("movement_probability", self.movement_probability)
+        _dist_location:float = values.get("distribution_location", self.distribution_location)
+        _dist_scale:float = values.get("distribution_scale", self.distribution_scale)
+        _quantity_defined = values.get("quantity", 0)
+        
+        # node_og_pop:dict = self.original_node_populations.setdefault(acting_node.get_unique_name(), {})
+        if _quantity_defined > 0:
+            _target_population = _quantity_defined
+        elif _use_original_population:
+            _target_population = acting_node.original_node_population.get_population_size(pop_template)
+        else:
+            _target_population = acting_node.get_population_size(pop_template)  
+
+        if _target_population == 0:
+            return sub_list
+
+        node_population = acting_node.get_population_size(pop_template)
+        if node_population == 0:
+            return sub_list
+        
+
+        if _use_buckets:
+            distances = self.get_node_distance_bucket(acting_node, self.graph)
+        else:
+            distances = self.get_node_distance(acting_node, self.graph)
+        
+        if "target_node_type" in values:
+            distances = self.filter_target_node_types(buckets_dict=distances,
+                                                      target_nodes=values["target_node_type"],
+                                                      target_node_contains=values.get("target_node_type_contains", False))
+        # print(len(distances))
+        # for dist in distances:
+        #    print(distances[dist])
+        # if 'node_type' in values and 'home' in values['node_type']:
+        #     print(distances)
+        #     exit()
+
+        # Divides the population amount in packets to be sent to other nodes
+        packets = _target_population // _pop_group_size
+
+        # Use isolation to reduce population being moved
+        if self.isolation_data_action:
+            _iso = self.isolation_data_action(acting_region, acting_node)
+            # _mov_probability = _mov_probability*(1-_iso)
+            _pop_group_size = int(_pop_group_size*(1-_iso))
+        
+        for i in range(packets):
+            
+            # Reduces the chance for a levy walk to occur bor each packet
+            _random_number = self.random.random()
+            if _mov_probability < _random_number:
+                continue
+
+            target_node_u_name = self.select_valid_target(location=_dist_location, 
+                                                          scale=_dist_scale,
+                                                          use_buckets=_use_buckets,
+                                                          distances=distances)
+            
+            target_region, target_node = target_node_u_name.split('//')
+            target_region = self.graph.get_region_by_name(target_region)
+            target_node = target_region.get_node_by_name(target_node)
+            
+            # Creates a Move Population action from the Acting Nodo to the Target Node
+            new_action_type = 'move_population'
+            new_action_values = {'origin_region': acting_region.name,
+                                 'origin_node': acting_node.name,
+                                 'destination_region': target_region.name,
+                                 'destination_node': target_node.name,
+                                 'quantity': _pop_group_size}
+            temp = copy.deepcopy(pop_template)
+            #temp.mother_blob_id = acting_region.id
+
+            new_action = environment.TimeAction(action_type = new_action_type,
+                                                pop_template = temp,
+                                                values = new_action_values)
+            # print(new_action)
+            sub_list.append(new_action)
+        self.add_execution_time(time.perf_counter() - start_time)
+        self.sublist_count.append(len(sub_list))
+        # if acting_region.name == "Sarandi":
+        #     print(f"\tTrying to move: {int(len(sub_list) * _pop_group_size)}")
+        #     print(values)
+        return sub_list
 
     def levy_walk(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         '''Function to consume a 'levy_walk' TimeAction type.'''
@@ -143,7 +247,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if "target_node_type" in values:
             distances = self.filter_target_node_types(buckets_dict=distances,
                                                       target_nodes=values["target_node_type"])
-
+            
         # if 'node_type' in values and 'home' in values['node_type']:
         #     print(distances)
         #     exit()
@@ -238,7 +342,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         
         return self.dist_buckets[unique_name].copy()
 
-    def filter_target_node_types(self, buckets_dict:dict, target_nodes:list[str]):
+    def filter_target_node_types(self, buckets_dict:dict, target_nodes:list[str], target_node_contains: bool = False):
         ''' 
         Filters a distance bucket dict to only include entries where the node type is is 'target_nodes'
         Raises an exception if the plugin shouldn't be using buckets
@@ -247,7 +351,11 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         if not self.use_buckets:
             raise Exception("Error in filter_target_node_types - Levy Walk Plugin")
         for bucket in buckets_dict:
-            __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
+            if target_node_contains:
+                __filtered[bucket] = [dist for dist in buckets_dict[bucket] if
+                                      any(s in (str(dist[0]).split("//")[1]) for s in target_nodes)]
+            else:
+                __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
                                     str(dist[0]).split("//")[1] in target_nodes]
         return __filtered
 

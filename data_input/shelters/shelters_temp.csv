@@ -1,4 +1,4 @@
-order,id,Latitude,Longitude,name,region,address,abrigo,capacity,shelteredPeople
+id,long-id,Latitude,Longitude,name,region,address,abrigo,capacity,shelteredPeople
 65,e5c637ba-c46c-4a45-b325-32e17c08d2dc,-30.15356379999999,-51.1829887,Igreja Reviver,Aberta dos Morros,"Estrada Gedeon Leite, 780, Aberta dos Morros",Sim,125,80
 115,,-30.152894,-51.2007576,Igreja Pentecostal Deus é Amor,Aberta dos Morros,"Av Juca Batista, 3230, Aberta dos Morros",Sim,60,0
 1,d1397d8f-8301-4525-ac52-156e574f83e6,-30.023865,-51.1986232,Paróquia Nossa Senhora Auxiliadora,Auxiliadora,"Rua Vinte e Quatro de Outubro, 1001, Auxiliadora",Sim,77,40
