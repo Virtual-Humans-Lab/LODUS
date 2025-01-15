@@ -3,7 +3,6 @@ import sys
 from numpy import character
 sys.path.append('../')
 from population import *
-import Plugins.Loggers.od_matrix_logger as od_matrix_logger
 import environment
 import unittest
 import util
@@ -69,17 +68,17 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Create a PropertyBucket with the 'characteristic_A', 3 different values, and population = 60 with random distribution
-        aux_bucket1 = PropertyBucket('characteristic_A')
+        aux_bucket1 = SampledCharacteristic('characteristic_A')
         aux_bucket1.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 60)
 
         # Create another PropertyBucket with the same characteristic and values, but population = 30
-        aux_bucket2 = PropertyBucket('characteristic_A')
+        aux_bucket2 = SampledCharacteristic('characteristic_A')
         aux_bucket2.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 30)
 
         # Test adding PropertyBuckets with the same characteristic 
         aux_bucket_size1 = aux_bucket1.get_population_size()
         aux_bucket_size2 = aux_bucket2.get_population_size()
-        aux_bucket1.add_bucket(aux_bucket2)
+        aux_bucket1.merge_values(aux_bucket2)
 
         # Should be the sum of population_size in both aux buckets
         merge_size_test_1 = aux_bucket1.get_population_size()
@@ -91,11 +90,11 @@ class PopulationTests(unittest.TestCase):
         # Case 2:
         # Create a PropertyBucket with different characteristic and values
         # The values("ids/keys/str"), their quantity, and the population are irrelevant in this test due to the characteristic being different
-        aux_bucket3 = PropertyBucket('characteristic_B')
+        aux_bucket3 = SampledCharacteristic('characteristic_B')
         aux_bucket3.set_values_rand(('char_B_value_1', 'char_B_value_2') , 60)
 
         # Test adding PropertyBuckets with a different characteristic 
-        aux_bucket1.add_bucket(aux_bucket3)
+        aux_bucket1.merge_values(aux_bucket3)
 
         # Should be the same value as 'merge_size_test_1'
         merge_size_test_2 = aux_bucket1.get_population_size()
@@ -128,7 +127,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket = SampledCharacteristic('characteristic_A')
         aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
         # Extracting 100 people
@@ -147,7 +146,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 2:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket = SampledCharacteristic('characteristic_A')
         aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
         # Extracting 180 people - the exact amount available (could use the original_bucket_size)
@@ -166,7 +165,7 @@ class PopulationTests(unittest.TestCase):
 
         # Case 3:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket = SampledCharacteristic('characteristic_A')
         aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
         # Extracting 300 people - more than available
@@ -207,13 +206,13 @@ class PopulationTests(unittest.TestCase):
 
         # Case 1:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket = SampledCharacteristic('characteristic_A')
         aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
         
         # Extracting 30 people from 'value_1'
         original_bucket_size = aux_bucket.get_population_size()
         original_value_count = aux_bucket.get_population_size(key='value_1')
-        extracted_bucket = aux_bucket.extract(30, key='value_1')
+        extracted_bucket = aux_bucket.extract(30, selected_keys='value_1')
         smaller_bucket_size = aux_bucket.get_population_size()
         smaller_value_count = aux_bucket.get_population_size(key='value_1')
         extracted_bucket_size = extracted_bucket.get_population_size()
@@ -236,13 +235,13 @@ class PopulationTests(unittest.TestCase):
                         'Case 1 original property count is not the correct size.')
         # Case 2:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket = SampledCharacteristic('characteristic_A')
         aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
         # Extracting 60 people from 'value_1' - the exact amount available
         original_bucket_size = aux_bucket.get_population_size()
         original_value_count = aux_bucket.get_population_size(key='value_1')
-        extracted_bucket = aux_bucket.extract(60, key='value_1')
+        extracted_bucket = aux_bucket.extract(60, selected_keys='value_1')
         smaller_bucket_size = aux_bucket.get_population_size()
         smaller_value_count = aux_bucket.get_population_size(key='value_1')
         extracted_bucket_size = extracted_bucket.get_population_size()
@@ -266,13 +265,13 @@ class PopulationTests(unittest.TestCase):
 
         # Case 3:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-        aux_bucket = PropertyBucket('characteristic_A')
+        aux_bucket = SampledCharacteristic('characteristic_A')
         aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
         # Extracting 120 people from 'value_1' - more than available
         original_bucket_size = aux_bucket.get_population_size()
         original_value_count = aux_bucket.get_population_size(key='value_1')
-        extracted_bucket = aux_bucket.extract(120, key='value_1')
+        extracted_bucket = aux_bucket.extract(120, selected_keys='value_1')
         smaller_bucket_size = aux_bucket.get_population_size()
         smaller_value_count = aux_bucket.get_population_size(key='value_1')
         extracted_bucket_size = extracted_bucket.get_population_size()
@@ -332,7 +331,7 @@ class PopulationTests(unittest.TestCase):
             
             # Case 1:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket = SampledCharacteristic('characteristic_A')
             aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
             
             # Extracting half of the available population (30 for each key)
@@ -362,7 +361,7 @@ class PopulationTests(unittest.TestCase):
             
             # Case 2:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket = SampledCharacteristic('characteristic_A')
             aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
             # Extracting the total available population (60 for each key)
@@ -392,7 +391,7 @@ class PopulationTests(unittest.TestCase):
 
             # Case 3:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket = SampledCharacteristic('characteristic_A')
             aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
             # Extracting more than the total available population (120 for each key)
@@ -455,7 +454,7 @@ class PopulationTests(unittest.TestCase):
             
             # Case 1:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket = SampledCharacteristic('characteristic_A')
             aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
             
             # Extracting half of the available population (30 for each key)
@@ -485,7 +484,7 @@ class PopulationTests(unittest.TestCase):
             
             # Case 2:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket = SampledCharacteristic('characteristic_A')
             aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
             # Extracting the total available population (60 for each key)
@@ -515,7 +514,7 @@ class PopulationTests(unittest.TestCase):
 
             # Case 3:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
-            aux_bucket = PropertyBucket('characteristic_A')
+            aux_bucket = SampledCharacteristic('characteristic_A')
             aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
 
             # Extracting more than the total available population (120 for each key)

@@ -51,7 +51,7 @@ arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\V
 arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
-FixedRandom(seed=0, numpy_seed=0)
+FixedRandom(random_seed=0, numpy_seed=0)
 
 output_str = ""
 

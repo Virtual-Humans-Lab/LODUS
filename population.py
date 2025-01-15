@@ -6,6 +6,8 @@ from util import *
 from random_inst import FixedRandom
 from events import Events
 
+from typing import Union, List, Dict, Optional
+
 class BlockTemplate():
     """Defines a template for a population PropertyBlock
     
@@ -54,76 +56,100 @@ class BlockTemplate():
         return block
     
 
-class PropertyBucket():
-    """"A property bucket models a single characteristic of a population.
+class SampledCharacteristic():
+    """A sampled characteristic models a single attribute of a population.
     
-        A characteristic is a histogram of population for each possible value (or range in case of continuous properties) of that characteristic.
-        The bucket stores a map of value -> population quantity for each possible value.
+    It represents a distribution of possible values (or ranges, in the case of continuous properties) and their respective population quantities. 
+    
+    The characteristic is stored as a dictionary that maps each possible value to the corresponding population count.
 
-        Each key for the stored dictionary represents a possible value for the tracked characteristic.
+    For example:
+        In a population of 100 people:
+        {'child': 20, 'adult': 60, 'elder': 20}
+        would be a mapping of the 'age' characteristic.
 
+    The mapping is defined during modelling time.
 
-        For example:
-            In  a population of 100 people:
-            {'child' : 20, 'adult':60, 'elder':20}
-            would be a mapping of the 'age' characteristic.
-
-        The mapping is defined during modelling time.
-
-        Attributes:
-            characteristic: The represented characteristic
-            values: The mapping for characteristic-value to population quantity
+    Attributes:
+        name (str): The name of the represented characteristic.
+        values (dict): A dictionary mapping each characteristic value to its population count.
     """
 
     def __init__(self, _characteristic: str):
-        self.characteristic:str = _characteristic
-        self.values: dict[str,int] = {}
+        self.name: str = _characteristic
+        self.values: dict[str, int] = {}
 
-    def get_population_size(self, key:str = None):
-        """Returns the population size in this bucket. If key is not None, returns the population size of the matching value.
-        
+    def get_population_size(self, key: Optional[Union[str, List[str], set]] = None) -> int:
+        """
+        Returns the population size in this bucket. 
+
         Args:
-            key: A possible value for the values map.
+            key (Union[str, List[str], set], optional): A specific key or list/set of keys. 
+                If None, returns the total population.
 
         Returns:
-            Total population size if key is not set. Otherwise, returns the matching population quantity.
+            int: Population size.
         """
-        if key is None:
+        if not key: # select all
             return sum(self.values.values())
-        if isinstance(key, str):
+        if isinstance(key, str): # select single value
             return self.values[key]
-        if isinstance(key, list):
-            if len(key) == 0: return sum(self.values.values())
-            else: return sum([self.values[k] for k in set(key)])
-        if isinstance(key, set):
-            if len(key) == 0: return sum(self.values.values())
-            else: return sum([self.values[k] for k in key])
-    
-    # bruteforcey
-    def set_values_rand(self, keys, population = 0):
-        """Initializes random values for a set of values and population quantity."""
-        qtd_keys = len(keys)
+        if isinstance(key, (list, set)): # select multiple values
+            return sum([self.values[k] for k in set(key)])
+        raise ValueError(f"Invalid key type: {type(key)}")
 
-        for key in keys:
-            self.values[key] = 0
+    def set_values_rand(self, keys: list[str], population: int = 0) -> None:
+        """
+        Initializes random values for a set of values and population quantity.
+        
+        Args:
+            keys (list[str]): A list of keys representing characteristic values.
+            population (int, optional): The total population to be distributed among the keys. Defaults to 0.
+        """
+        # Initialize all keys with a population of 0
+        self.values = {k: 0 for k in keys}
+        
+        # Distribute the total population randomly among the keys
+        values = distribute_randomly(total_sum=population, n_partitions=len(keys))
+        
+        # Update the values dictionary with the distributed population
+        self.values.update({k: values[index] for index, k in enumerate(keys)})
 
-        for i in range(population):
-            self.values[keys[FixedRandom.instance.randint(0, qtd_keys-1)]] += 1
+    def set_values(self, keys: list[str], populations: list[int]) -> None:
+        """
+        Sets the values for the given keys with the corresponding population counts.
+        
+        Note:
+            The lengths of `keys` and `populations` must be equal.
+        
+        Args:
+        """
+        if len(keys) != len(populations):
+            raise ValueError("The lengths of `keys` and `populations` must be equal.")
+        self.values = {key: population for key, population in zip(keys, populations)}
 
-    def set_values(self, keys, populations):
-        for i in range(len(keys)):
-            self.values[keys[i]] = populations[i]
+    def set_values_dict(self, data: Dict[str, int]) -> None:
+        """
+        Sets the values for the given keys with the corresponding population counts.
+        
+        Args:
+            data (Dict[str, int]): A dictionary where keys are the keys and values are the population counts.
+        """
+        self.values = {key: population for key, population in data.items()}
 
-    def add_bucket(self, bucket):
+    def merge_values(self, other: SampledCharacteristic) -> None:
         """Adds the values of another bucket to this one.
         
-        If characteristics are not equal, this method does not do anything.
-        """
-        if self.characteristic == bucket.characteristic:
-            for k in set(self.values):
-                self.values[k] = self.values[k] + bucket.values[k]
+        If characteristics are not named equally, this method does not do anything.
 
-    def extract(self, quantity, key = None):
+        This function is not responsible for removing/destroying 'other' after the merge.
+        """
+        if self.name != other.name:
+            return
+        for key in self.values:
+            self.values[key] = self.values[key] + other.values[key]
+
+    def extract(self, quantity: int, selected_keys = None) -> SampledCharacteristic:
         """Extracts a population quantity from this bucket and returns the extracted population in an auxiliary PropertyBucket.
         
         If key is set, quantity is removed exclusively from the key value.
@@ -141,70 +167,154 @@ class PropertyBucket():
         Returns:
             An auxiliary PropertyBucket containing the extracted population, with same characteristic and keys.
         """
-        # if key is a set, convert it to a list
-        if isinstance(key, set):
-            key = list(key)
-        # if key is a list with only one entry, convert it to a string
-        if isinstance(key, list) and len(key) == 1:
-            key = key[0]
-        # if key is a list with only no entry, set it to None
-        if isinstance(key, list) and len(key) == 0:
-            key = None
+        # if key is a set or a string, convert it to a list
+        if isinstance(selected_keys, set):
+            selected_keys = list(selected_keys)
+        if isinstance(selected_keys, str):
+            selected_keys = [selected_keys]
 
-        aux_bucket = PropertyBucket(self.characteristic)
+        
+        aux_characteristic = SampledCharacteristic(self.name)
+
         values = []
-        bucket_keys = list(self.values.keys())
-        qtd_keys = len(bucket_keys)
+        characteristic_keys = list(self.values.keys())
+        number_of_keys = len(characteristic_keys)
 
-        if quantity > self.get_population_size(key):
-            quantity = self.get_population_size(key)
+        quantity = min(quantity, self.get_population_size(selected_keys))
         
         if quantity == 0:
-            values = [0 for i in range(qtd_keys)]
-            aux_bucket.set_values(bucket_keys, values)
-            return aux_bucket
+            aux_characteristic.set_values_dict({key: 0 for key in characteristic_keys})
+            return aux_characteristic
 
-        if key is None:
+        if not selected_keys:
+            p = np.array([float(x) for x in self.values.values()])
+            p /= p.sum()
+            samples = np.random.choice([x for x in range(len(self.values))], size=quantity, p=p)
+            values = np.bincount(samples, minlength=number_of_keys).tolist()
+            # sample_array = np.repeat(np.arange(number_of_keys), [self.values[key] for key in characteristic_keys])
+            
+            # # Sample from the array
+            # samples = FixedRandom.instance.sample(sample_array.tolist(), quantity)
+
+            # # Count occurrences of each index in the sampled data
+            # values = np.bincount(samples, minlength=number_of_keys).tolist()
+
+        if not selected_keys:
             sample_list = []
-            values = [0 for i in range(qtd_keys)]
-            for i  in range(qtd_keys):
-                sample_list.extend([i] * self.values[bucket_keys[i]])
+            values = [0 for i in range(number_of_keys)]
+            for i  in range(number_of_keys):
+                sample_list.extend([i] * self.values[characteristic_keys[i]])
             samples = FixedRandom.instance.sample(sample_list, quantity)
-            for i  in range(qtd_keys):
+            for i  in range(number_of_keys):
                 values[i] = samples.count(i)
         # key is not None
         else:
-            if isinstance(key, str):
-                for k in bucket_keys:
-                    if k == key:
+            if isinstance(selected_keys, str):
+                print("WHEN??????")
+                for k in characteristic_keys:
+                    if k == selected_keys:
                         values.append(quantity)
                     else:
                         values.append(0)
-            elif isinstance(key, list):
+            elif isinstance(selected_keys, list):
                 # TODO test the ratio_to_int distribution in Util.py
-                values = [0 for i in range(qtd_keys)]
+                values = [0 for i in range(number_of_keys)]
                 sample_list = []
-                for i in range(qtd_keys):
-                    if bucket_keys[i] in key:
-                        sample_list.extend([i] * self.values[bucket_keys[i]])
+                for i in range(number_of_keys):
+                    if characteristic_keys[i] in selected_keys:
+                        sample_list.extend([i] * self.values[characteristic_keys[i]])
                 samples = FixedRandom.instance.sample(sample_list, quantity)
-                for i  in range(qtd_keys):
+                for i  in range(number_of_keys):
                     values[i] = samples.count(i)
             else:
                 sys.exit("Key \"{key}\" requested for a property bucket is not a str nor a list. {self}")
 
-        for i in range(qtd_keys):
-            self.values[bucket_keys[i]] -= values[i]
+        for i in range(number_of_keys):
+            self.values[characteristic_keys[i]] -= values[i]
 
-        aux_bucket.set_values(bucket_keys, values)
-        return aux_bucket
+        aux_characteristic.set_values(characteristic_keys, values)
+        return aux_characteristic
+    
+    # def extract(self, quantity: int, selected_keys = None) -> SampledCharacteristic:
+    #     """Extracts a population quantity from this bucket and returns the extracted population in an auxiliary PropertyBucket.
+        
+    #     If key is set, quantity is removed exclusively from the key value.
+    #     Otherwise, population is removed randomly.
+    #     Extracted peopulation is uniformly distributed according to the population size for each characteristic.
+
+        
+    #     If quantity for a given key is larger than available population,
+    #     the entire population for that key is returned.
+
+    #     Params:
+    #         quantity: the population quantity to be removed from this bucket.
+    #         key: The desired value to be extracted. If None, extracts population randomly.
+        
+    #     Returns:
+    #         An auxiliary PropertyBucket containing the extracted population, with same characteristic and keys.
+    #     """
+    #     # if key is a set, convert it to a list
+    #     if isinstance(selected_keys, set):
+    #         selected_keys = list(selected_keys)
+    #     if isinstance(selected_keys, str):
+    #         selected_keys = [selected_keys]
+
+        
+    #     aux_characteristic = SampledCharacteristic(self.name)
+
+    #     values = []
+    #     characteristic_keys = list(self.values.keys())
+    #     number_of_keys = len(characteristic_keys)
+
+    #     quantity = min(quantity, self.get_population_size(selected_keys))
+        
+    #     if quantity == 0:
+    #         aux_characteristic.set_values_dict({key: 0 for key in characteristic_keys})
+    #         return aux_characteristic
+
+
+
+    #     if not selected_keys:
+    #         sample_list = []
+    #         values = [0 for i in range(number_of_keys)]
+    #         for i  in range(number_of_keys):
+    #             sample_list.extend([i] * self.values[characteristic_keys[i]])
+    #         samples = FixedRandom.instance.sample(sample_list, quantity)
+    #         for i  in range(number_of_keys):
+    #             values[i] = samples.count(i)
+    #     # key is not None
+    #     else:
+    #         if isinstance(selected_keys, str):
+    #             print("WHEN??????")
+    #             for k in characteristic_keys:
+    #                 if k == selected_keys:
+    #                     values.append(quantity)
+    #                 else:
+    #                     values.append(0)
+    #         elif isinstance(selected_keys, list):
+    #             # TODO test the ratio_to_int distribution in Util.py
+    #             values = [0 for i in range(number_of_keys)]
+    #             sample_list = []
+    #             for i in range(number_of_keys):
+    #                 if characteristic_keys[i] in selected_keys:
+    #                     sample_list.extend([i] * self.values[characteristic_keys[i]])
+    #             samples = FixedRandom.instance.sample(sample_list, quantity)
+    #             for i  in range(number_of_keys):
+    #                 values[i] = samples.count(i)
+    #         else:
+    #             sys.exit("Key \"{key}\" requested for a property bucket is not a str nor a list. {self}")
+
+    #     for i in range(number_of_keys):
+    #         self.values[characteristic_keys[i]] -= values[i]
+
+    #     aux_characteristic.set_values(characteristic_keys, values)
+    #     return aux_characteristic
 
     def __str__(self):
-        s = '\"{0}\" : {1}'.format(self.characteristic, self.values)
-        return s
+        return f"\"{self.name}\" : {self.values}"
 
     def __repr__(self):
-        s = '\"{0}\" : {1}'.format(self.characteristic, self.values)
+        s = '\"{0}\" : {1}'.format(self.name, self.values)
         return s
         
 
@@ -224,7 +334,7 @@ class PropertyBlock():
     def __init__(self, _population):
         self.population: int = _population
         self.template: BlockTemplate = None
-        self.buckets: dict[str,PropertyBucket] = {}
+        self.buckets: dict[str,SampledCharacteristic] = {}
         
     def get_mapping_of_property_values(self):
         return [ list(v.values.values()) for v in self.buckets.values()]
@@ -235,7 +345,7 @@ class PropertyBlock():
         template_buckets = self.template.buckets
 
         for key in template_buckets:
-            bucket = PropertyBucket(key)
+            bucket = SampledCharacteristic(key)
             bucket.set_values_rand(template_buckets[key], self.population)
             self.buckets[key] = bucket
 
@@ -272,11 +382,11 @@ class PropertyBlock():
                 
         for key in template_buckets:
             if key not in profile:
-                bucket = PropertyBucket(key)
+                bucket = SampledCharacteristic(key)
                 bucket.set_values_rand(template_buckets[key], self.population)
                 self.buckets[key] = bucket
             else:
-                bucket = PropertyBucket(key)
+                bucket = SampledCharacteristic(key)
                 bucket_keys = block_template.buckets[key]
                 profile_values = profile[key].values()
                 profile_keys = profile[key].keys()
@@ -319,16 +429,16 @@ class PropertyBlock():
     def add_block(self, block):
         """Adds the values of another PropertyBlock to this one."""
         for k in self.buckets.keys():
-            self.buckets[k].add_bucket(block.buckets[k])
+            self.buckets[k].merge_values(block.buckets[k])
 
-    def add_bucket(self, bucket: PropertyBucket):
+    def add_bucket(self, bucket: SampledCharacteristic):
         """Adds the values a PropertyBucket to the appropriate local PropertyBucket.
         
         Population balance between buckets is responsability of the caller.
 
         Does not guarantee block validity.
         """
-        self.buckets[bucket.characteristic].add_bucket(bucket)
+        self.buckets[bucket.name].merge_values(bucket)
 
     def get_population_size(self, population_template:PopTemplate = None):
         """Gets the population size matching a PopTemplate.
@@ -846,7 +956,7 @@ if __name__ == "__main__":
     print("************")
     
     print(dummyBlob.sampled_properties, type(dummyBlob.sampled_properties.buckets['age']))
-    print(dummyBlob.sampled_properties.buckets['age'].characteristic, type(dummyBlob.sampled_properties.buckets['age'].characteristic))
+    print(dummyBlob.sampled_properties.buckets['age'].name, type(dummyBlob.sampled_properties.buckets['age'].name))
     print("\nSPLIT BLOB 1 INTO BLOB 2 - MATCHING TREACEABLE_PROP")
     # sets a population template
     dummyPopTemplate = PopTemplate()
@@ -893,36 +1003,5 @@ if __name__ == "__main__":
     print("------------")
     print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
     print("------------")
-    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
-    # print("------------")
     print("Dummy3", dummyBlob3)
     print("************")
-    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
-    # print("************")
-    
-    # print("\nCONSUMING BLOB 2 - IS A MATCH - SHOULD DELETE BLOB 2 AFTER")
-    # dummyBlob.consume_blob(dummyBlob2)
-    # print("DummyPopTemplate", dummyPopTemplate)
-    # print("------------")
-    # print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
-    # print("------------")
-    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
-    # print("------------")
-    # print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3.verbose_str())
-    # print("************")
-    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
-    # print("************")
-
-    # print("\nBLOB 1 CONSUMING BLOB 4 AFTER CHANGE - IS A MATCH")
-    # dummyBlob4.set_traceable_property('vaccine_level', 0)
-    # dummyBlob.consume_blob(dummyBlob4)
-    # print("DummyPopTemplate", dummyPopTemplate)
-    # print("------------")
-    # print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())
-    # print("------------")
-    # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2.verbose_str())
-    # print("------------")
-    # print("Dummy3", dummyBlob3.get_population_size(), dummyBlob3.verbose_str())
-    # print("************")
-    # print("Dummy4", dummyBlob4.get_population_size(), dummyBlob4.verbose_str())
-    # print("************")

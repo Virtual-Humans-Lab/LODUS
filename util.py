@@ -1,11 +1,13 @@
 from enum import Enum
 import math
 import json
-import typing
-import numpy
+from typing import List
+import numpy as np
 from geopy import distance
 from pyproj import Proj
 from pyproj import Geod
+
+from random_inst import FixedRandom
 
 class DistanceType(Enum):
     LONG_LAT = 1
@@ -22,6 +24,32 @@ def geopy_distance_metre(p1, p2):
 def pyproj_distance_metre(p1, p2):
     return Geod(ellps='WGS84').inv(p1[0], p1[1], p2[0],p2[1])[2]
 
+def distribute_randomly(total_sum: int, n_partitions: int) -> List[int]:
+    """
+    Distribute a total sum into random values across a specified number of partitions.
+
+    Args:
+        total_sum (int): The total sum to be partitioned.
+        n_partitions (int): The number of partitions.
+
+    Returns:
+        list[int]: A list of partitioned values summing up to `total_sum`.
+    """
+    if n_partitions <= 0:
+        raise ValueError("Number of partitions must be greater than 0.")
+    if n_partitions == 1:
+        return [total_sum]
+    if total_sum == 0:
+        return [0] * n_partitions
+
+    # Generate random values and sort them
+    random_values = np.sort(np.random.randint(0, total_sum, size=n_partitions - 1)).tolist()
+
+    # Add boundary values to define intervals
+    boundaries = [0] + random_values + [total_sum]
+
+    # Compute differences between consecutive boundaries to get partition values
+    return [boundaries[i + 1] - boundaries[i] for i in range(len(boundaries) - 1)]
 
 def weighted_int_distribution(available, quantity):
     total_population = sum(available)
@@ -72,7 +100,7 @@ def weighted_distribution_with_weights(available, quantity, weight_list):
 def distribute_ints_from_weights(quantity, weight_list:list[float]):
     
     if quantity == 0:
-        return numpy.zeros(len(weight_list), dtype=int)
+        return np.zeros(len(weight_list), dtype=int)
     
     weights_sum = sum(weight_list)
     adjusted_weights = [w/weights_sum for w in weight_list]
@@ -99,7 +127,7 @@ def distribute_ints_from_weights(quantity, weight_list:list[float]):
 def distribute_ints_from_weights_with_limit(quantity, weight_list:list[float], limits:list[int]):
     
     if quantity == 0:
-        return numpy.zeros(len(weight_list), dtype=int)
+        return np.zeros(len(weight_list), dtype=int)
     if quantity > sum(limits):
         print("QUANTITY REQUESTED IS BIGGER THAN LIMIT SUM")
         quantity = sum(limits)
