@@ -8,7 +8,7 @@ import unittest
 import util
 
 
-def verify_block_validity(block:PropertyBlock):
+def verify_block_validity(block:SampledCharacteristicsCollection):
     """Verifies if every bucket in a block has the same population size.
     
         A Valid PropertyBlock has the same PropertyBucket.get_population_size
@@ -17,11 +17,11 @@ def verify_block_validity(block:PropertyBlock):
         Every bucket contains only 0 or greater values.
     """
     bucket_sizes = set()
-    for bucket in block.buckets.values():
+    for bucket in block.characteristics.values():
         bucket_sizes.add(bucket.get_population_size())
     
-    for bucket in block.buckets.values():
-        for val in bucket.values.values():
+    for bucket in block.characteristics.values():
+        for val in bucket.categories.values():
             if val < 0:
                 return False
     
@@ -578,7 +578,7 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(block1_size, 300,
                         'Case 1 Target block size is not the correct amount.')
-        self.assertEqual(len(block1.buckets.keys()), 3,
+        self.assertEqual(len(block1.characteristics.keys()), 3,
                         'Case 1 Target block bucket count is not the correct amount.')
         self.assertTrue(verify_block_validity(block1),
                         'Case 1 Target block is not valid.')
@@ -592,9 +592,9 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(block2_size, 50,
                         'Case 2 Target block population size is not the correct amount.')
-        self.assertEqual(len(block2.buckets.keys()), 4,
+        self.assertEqual(len(block2.characteristics.keys()), 4,
                         'Case 2 Target block bucket count is not the correct amount.')
-        self.assertEqual(len(block1.buckets.keys()), 3,
+        self.assertEqual(len(block1.characteristics.keys()), 3,
                         'Case 2 Previous block was affected by pop_template changes')
         self.assertTrue(verify_block_validity(block2),
                         'Case 2 Target block is not valid.')
@@ -631,7 +631,7 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(block1_size, 0,
                         'Case 1 Target block size is not the correct amount.')
-        self.assertEqual(len(block1.buckets.keys()), 3,
+        self.assertEqual(len(block1.characteristics.keys()), 3,
                         'Case 1 Target block bucket count is not the correct amount.')
         self.assertTrue(verify_block_validity(block1),
                         'Case 1 Target block is not valid.')
@@ -703,7 +703,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 1 Target block is not valid.')
         self.assertEqual(block1_size, 100,
                         'Case 1 Target block size is not the correct amount.')
-        self.assertEqual(len(block1.buckets.keys()), 6,
+        self.assertEqual(len(block1.characteristics.keys()), 6,
                         'Case 1 Target block bucket count is not the correct amount.')
         
         # Verify that the population was properly distributed when all values are defined and equal the requested amount
@@ -738,7 +738,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 2 Target block is not valid.')
         self.assertEqual(block2_size, 200,
                         'Case 2 Target block size is not the corrected amount.')
-        self.assertEqual(len(block2.buckets.keys()), 6,
+        self.assertEqual(len(block2.characteristics.keys()), 6,
                         'Case 2 Target block bucket count is not the correct amount.')
         
         # Verify that the population was properly distributed when all values are defined
@@ -786,7 +786,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 3 Target block is not valid.')
         self.assertEqual(block3_size, 20,
                         'Case 3 Target block size is not the corrected amount.')
-        self.assertEqual(len(block3.buckets.keys()), 6,
+        self.assertEqual(len(block3.characteristics.keys()), 6,
                         'Case 3 Target block bucket count is not the correct amount.')
         
         # Verify that the population was properly distributed when all values are defined
@@ -878,7 +878,7 @@ class PopulationTests(unittest.TestCase):
         add_size = add_block.get_population_size()
 
         # Add aux block to the target block
-        target_block.add_block(add_block)
+        target_block.merge_characteristic_collection(add_block)
         
         final_size = target_block.get_population_size()
         
@@ -996,7 +996,7 @@ class PopulationTests(unittest.TestCase):
         self.assertEqual(available_original_size, available_final_size + extracted_block_size,
                         'Case 2: Target block does not represent population template change.')
         self.assertTrue(verify_block_validity(target_block),
-                        'Case 2: Target block is not valid.')
+                        'Case 2: Target block is not valid.',)
         self.assertTrue(verify_block_validity(extracted_block),
                         'Case 2: Extracted block is not valid.')               
 
@@ -1521,7 +1521,7 @@ class PopulationTests(unittest.TestCase):
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob1_size, 300,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 3,
+        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
@@ -1537,11 +1537,11 @@ class PopulationTests(unittest.TestCase):
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob2_size, 50,
                         'Case 2 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob2.sampled_properties.buckets.keys()), 4,
+        self.assertEqual(len(blob2.sampled_properties.characteristics.keys()), 4,
                         'Case 2 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob2.get_traceable_properties().keys()), 1,
                         'Case 2 Target Blob traceable properties count is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 3,
+        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
                         'Case 2 Original Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
                         'Case 2 Original Blob traceable properties count is not the correct amount.')
@@ -1557,11 +1557,11 @@ class PopulationTests(unittest.TestCase):
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob3_size, 20,
                         'Case 3 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob3.sampled_properties.buckets.keys()), 4,
+        self.assertEqual(len(blob3.sampled_properties.characteristics.keys()), 4,
                         'Case 3 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob3.get_traceable_properties().keys()), 2,
                         'Case 3 Target Blob traceable properties count is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 3,
+        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
                         'Case 3 Original Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
                         'Case 3 Original Blob traceable properties count is not the correct amount.')
@@ -1578,11 +1578,11 @@ class PopulationTests(unittest.TestCase):
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob4_size, 500,
                         'Case 4 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob4.sampled_properties.buckets.keys()), 5,
+        self.assertEqual(len(blob4.sampled_properties.characteristics.keys()), 5,
                         'Case 4 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob4.get_traceable_properties().keys()), 3,
                         'Case 4 Target Blob traceable properties count is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 3,
+        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
                         'Case 4 Original Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
                         'Case 4 Original Blob traceable properties count is not the correct amount.')
@@ -1622,7 +1622,7 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(blob_1_size, 0,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob_1.sampled_properties.buckets.keys()), 3,
+        self.assertEqual(len(blob_1.sampled_properties.characteristics.keys()), 3,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertTrue(verify_blob_validity(blob_1),
                         'Case 1 Target Blob is not valid.')
@@ -1700,7 +1700,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 1 Target Blob is not valid.')
         self.assertEqual(blob1_size, 100,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.buckets.keys()), 7,
+        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 7,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
@@ -1740,7 +1740,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 2 Target Blob is not valid.')
         self.assertEqual(blob2_size, 200,
                         'Case 2 Target Blob size is not the corrected amount.')
-        self.assertEqual(len(blob2.sampled_properties.buckets.keys()), 7,
+        self.assertEqual(len(blob2.sampled_properties.characteristics.keys()), 7,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob2.get_traceable_properties().keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
@@ -1794,7 +1794,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 3 Target Blob is not valid.')
         self.assertEqual(blob3_size, 20,
                         'Case 3 Target Blob size is not the corrected amount.')
-        self.assertEqual(len(blob3.sampled_properties.buckets.keys()), 7,
+        self.assertEqual(len(blob3.sampled_properties.characteristics.keys()), 7,
                         'Case 3 Target Blob sampled properties count is not the correct amount.')
         self.assertEqual(len(blob3.get_traceable_properties().keys()), 1,
                         'Case 3 Target Blob traceable properties count is not the correct amount.')
@@ -1858,7 +1858,7 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(block1_size, 300,
                         'Case 1 Target block size is not the correct amount.')
-        self.assertEqual(len(block1.buckets.keys()), 3,
+        self.assertEqual(len(block1.characteristics.keys()), 3,
                         'Case 1 Target block bucket count is not the correct amount.')
         self.assertTrue(verify_block_validity(block1),
                         'Case 1 Target block is not valid.')
@@ -1872,9 +1872,9 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(block2_size, 50,
                         'Case 2 Target block population size is not the correct amount.')
-        self.assertEqual(len(block2.buckets.keys()), 4,
+        self.assertEqual(len(block2.characteristics.keys()), 4,
                         'Case 2 Target block bucket count is not the correct amount.')
-        self.assertEqual(len(block1.buckets.keys()), 3,
+        self.assertEqual(len(block1.characteristics.keys()), 3,
                         'Case 2 Previous block was affected by pop_template changes')
         self.assertTrue(verify_block_validity(block2),
                         'Case 2 Target block is not valid.')
