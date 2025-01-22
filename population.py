@@ -2,6 +2,7 @@
 from __future__ import annotations
 import copy
 import sys
+from types import NoneType
 from util import *
 from random_inst import FixedRandom
 from events import Events
@@ -117,16 +118,26 @@ class SampledCharacteristic():
 
     def set_values(self, keys: list[str], populations: list[int]) -> None:
         """
-        Sets the values for the given keys with the corresponding population counts.
-        
-        Note:
-            The lengths of `keys` and `populations` must be equal.
-        
+        Assigns population counts to the given keys.
+
         Args:
+            keys (list[str]): A list of keys representing characteristic values.
+            populations (list[int]): A list of population counts corresponding to each key.
+
+        Raises:
+            ValueError: If the lengths of 'keys' and 'populations' do not match.
+            ValueError: If 'keys' is empty.
+            ValueError: If the total population (sum of 'populations') is zero or negative.
         """
+        if not keys:
+            raise ValueError("The 'keys' list must not be empty.")
         if len(keys) != len(populations):
-            raise ValueError("The lengths of `keys` and `populations` must be equal.")
-        self.categories = {key: population for key, population in zip(keys, populations)}
+            raise ValueError("The lengths of 'keys' and 'populations' must match.")
+        if sum(populations) <= 0:
+            raise ValueError("The total population (sum of 'populations') must be greater than zero.")
+
+        # Create the mapping of keys to populations
+        self.categories = dict(zip(keys, populations))
 
     def set_values_dict(self, data: Dict[str, int]) -> None:
         """
@@ -135,6 +146,10 @@ class SampledCharacteristic():
         Args:
             data (Dict[str, int]): A dictionary where keys are the keys and values are the population counts.
         """
+        if not data:
+            raise ValueError("The 'data' dictionary must not be empty.")
+        if sum(data.values()) < 0:
+            raise ValueError("The total population (sum of 'data' values) must be zero or greater.")
         self.categories = {key: population for key, population in data.items()}
 
     def merge_values(self, other: SampledCharacteristic) -> None:
@@ -166,6 +181,10 @@ class SampledCharacteristic():
         Returns:
             An auxiliary SampledCharacteristic containing the extracted population, with same characteristic name and keys.
         """
+        # Check if selected_keys is a valid type (str, list, set). None will pass this check
+        if not isinstance(selected_keys, (str, list, set, NoneType)):
+            raise TypeError(f"Selected keys {selected_keys} requested for a sampled characteristic are not a list {type(selected_keys)}. {self}")
+        
         # if key is a set or a string, convert it to a list
         if isinstance(selected_keys, set):
             selected_keys = list(selected_keys)
@@ -191,9 +210,7 @@ class SampledCharacteristic():
         # If specific keys are selected, sample only from those keys
         elif isinstance(selected_keys, list):
             sample_list = [i for i in range(number_of_keys) if characteristic_keys[i] in selected_keys for _ in range(self.categories[characteristic_keys[i]])]
-        else:
-            raise TypeError(f"Selected keys {selected_keys} requested for a sampled characteristic are not a list {type(selected_keys)}. {self}")
-        
+             
         samples = FixedRandom.instance.sample(sample_list, quantity)
         values = [samples.count(i) for i in range(number_of_keys)]
 
