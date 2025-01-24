@@ -2,7 +2,7 @@ import copy
 import pprint
 import sys
 from typing import Optional
-from population import PopTemplate
+from population import PopulationTemplate
 
 from random_inst import FixedRandom
 

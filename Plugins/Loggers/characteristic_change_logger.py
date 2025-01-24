@@ -3,7 +3,7 @@ import sys
 sys.path.append("/../../")
 from environment import EnvironmentGraph, EnvNode, EnvRegion
 from logger_plugin import LoggerPlugin
-from population import Blob, PopTemplate
+from population import Blob, PopulationTemplate
 
 # Graphic and data libraries
 import plotly.graph_objects as go

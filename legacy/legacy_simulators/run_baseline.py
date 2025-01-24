@@ -164,7 +164,7 @@ else:
 logger.set_data_to_record('global')
 logger.set_data_to_record('neighbourhood')
 
-pop_temp = PopTemplate()
+pop_temp = PopulationTemplate()
 logger.pop_template = pop_temp
 
 '''

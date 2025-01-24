@@ -288,10 +288,10 @@ if args['i'] != 0:
                       'region_list' : env_graph.region_list,
                       'nu': 1,
                       'quantity': 0,
-                      'population_template': PopTemplate()}
+                      'population_template': PopulationTemplate()}
     vaccinate = TimeAction('vaccinate', vaccine_values)
     infect_values = { 'region_list' : env_graph.region_list,
-                      'population_template': PopTemplate()}
+                      'population_template': PopulationTemplate()}
     infect_city = TimeAction('infect_population', infect_values)
 
 
@@ -347,7 +347,7 @@ logger.set_data_to_record('global')
 logger.set_data_to_record('neighbourhood')
 logger.set_data_to_record('nodes_sir')
 
-pop_temp = PopTemplate()
+pop_temp = PopulationTemplate()
 logger.pop_template = pop_temp
 
 try:
@@ -362,13 +362,13 @@ except Exception:
 '''
 Simulation
 '''
-pop_template_suc = PopTemplate()
+pop_template_suc = PopulationTemplate()
 pop_template_suc.add_block('susceptible')
-pop_template_inf = PopTemplate()
+pop_template_inf = PopulationTemplate()
 pop_template_inf.add_block('infected')
-pop_template_rem = PopTemplate()
+pop_template_rem = PopulationTemplate()
 pop_template_rem.add_block('removed')
-pop_template_vac = PopTemplate()
+pop_template_vac = PopulationTemplate()
 pop_template_vac.add_block('vaccinated')
 
 t = time.time()

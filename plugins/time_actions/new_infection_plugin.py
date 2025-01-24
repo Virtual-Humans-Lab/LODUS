@@ -1,7 +1,7 @@
 from itertools import count
 from types import NoneType
 import environment
-from population import PopTemplate
+from population import PopulationTemplate
 import copy
 from random_inst import FixedRandom
 import math
@@ -102,13 +102,13 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
         print("final Pop", self.graph.get_population_size())
         
         # Sets PopTemplates to be used later
-        self.pt_sus = PopTemplate()
+        self.pt_sus = PopulationTemplate()
         self.pt_sus.set_traceable_property("sir_status", 'susceptible')
-        self.pt_inf = PopTemplate()
+        self.pt_inf = PopulationTemplate()
         self.pt_inf.set_traceable_property("sir_status", 'infected')
-        self.pt_rem = PopTemplate()
+        self.pt_rem = PopulationTemplate()
         self.pt_rem.set_traceable_property("sir_status", 'removed')
-        pop_template_inf = PopTemplate()
+        pop_template_inf = PopulationTemplate()
         pop_template_inf.set_traceable_property('sir_status', 'infected')
         self.total_infected = self.graph.get_population_size(pop_template_inf)
         print("initial infected:", self.total_infected)
@@ -238,7 +238,7 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
         if node.get_population_size() == 0: return
 
         # Sets some PopTemplates
-        pop_template:PopTemplate = values['population_template']
+        pop_template:PopulationTemplate = values['population_template']
         pt_sus = copy.deepcopy(pop_template)
         pt_sus.set_traceable_property('sir_status','susceptible')
         pt_inf = copy.deepcopy(pop_template)

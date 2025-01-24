@@ -114,45 +114,45 @@ class EnvironmentTests(unittest.TestCase):
         node_sizes.append(target_node.get_population_size())
         
         # Gets the population size for multiple PopTemplates
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', 'adults')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', 'elders')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', 'worker')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', ['idle', 'worker'])
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', [])
         pop_template.set_sampled_property('occupation', [])
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', [])
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', [])
         pop_template.set_sampled_property('social_profile', 'mid')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', 'elders')
         pop_template.set_sampled_property('occupation', [])
         pop_template.set_sampled_property('social_profile', 'mid')
@@ -193,48 +193,48 @@ class EnvironmentTests(unittest.TestCase):
         node_sizes.append(target_node.get_population_size())
         
         # Gets the population size for multiple PopTemplates
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', 'adults')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', ['idle', 'worker'])
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', 'elders')
         pop_template.set_sampled_property('occupation', [])
         pop_template.set_sampled_property('social_profile', 'mid')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', 'default')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', 'default')
         pop_template.set_traceable_property('traceable_B', 0)
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', ['default', 'other_value'])
         pop_template.set_traceable_property('traceable_B', [0, 1])
         node_sizes.append(target_node.get_population_size(pop_template))
                 
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', 'default')
         pop_template.set_traceable_property('traceable_B', 0)
         pop_template.set_sampled_property('age', 'adults')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', ['default', 'other_value'])
         pop_template.set_traceable_property('traceable_B', 0)
         pop_template.set_sampled_property('age', 'adults')
         node_sizes.append(target_node.get_population_size(pop_template))
         
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', ['default', 'other_value'])
         pop_template.set_traceable_property('traceable_B', 0)
         pop_template.set_sampled_property('age', 'adults')
@@ -771,7 +771,7 @@ class EnvironmentTests(unittest.TestCase):
                     Blob size equals extracted quantity.
         """
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', ['idle', 'worker'])
                 
@@ -906,7 +906,7 @@ class EnvironmentTests(unittest.TestCase):
                     Total population size unchanged.
         """
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', ['idle', 'worker'])
 
@@ -1071,7 +1071,7 @@ class EnvironmentTests(unittest.TestCase):
                     Total population size unchanged.
         """
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', ['idle', 'worker'])
         
@@ -1241,12 +1241,12 @@ class EnvironmentTests(unittest.TestCase):
         """
         
         # Sets two complementing PopTemplates
-        pop_template_A = PopTemplate() 
+        pop_template_A = PopulationTemplate() 
         pop_template_A.set_sampled_property('age', ['adults', 'elders'])
         pop_template_A.set_sampled_property('occupation', ['idle', 'worker'])
         pop_template_A.set_sampled_property('social_profile', ['mid', 'high'])
         
-        pop_template_B = PopTemplate() 
+        pop_template_B = PopulationTemplate() 
         pop_template_B.set_sampled_property('age', ['young', 'children'])
         pop_template_B.set_sampled_property('occupation', 'student')
         pop_template_B.set_sampled_property('social_profile', 'low')
@@ -1348,7 +1348,7 @@ class EnvironmentTests(unittest.TestCase):
                     Blob size equals extracted quantity.
         """
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', 'default')
                 
         # Case 1:
@@ -1472,7 +1472,7 @@ class EnvironmentTests(unittest.TestCase):
                     Blob size equals extracted quantity.
         """
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', ['default', 'other_value'])
                 
         # Case 1:
@@ -1687,7 +1687,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Gets the population size for multiple PopTemplates
         ## ---------- Expected: 100
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         region_sizes.append(target_region.get_population_size())
         ## ---------- Expected: 40
         pop_template.set_sampled_property('age', 'adults')
@@ -1759,7 +1759,7 @@ class EnvironmentTests(unittest.TestCase):
         target_region = self.envB.get_region_by_name("Petropolis")
         # Gets the population size for multiple PopTemplates
         ## ---------- Expected: 400
-        pop_template = PopTemplate()
+        pop_template = PopulationTemplate()
         regions_sizes.append(target_region.get_population_size())
         ## ---------- Expected: 160
         pop_template.set_sampled_property('age', 'adults')
@@ -1774,7 +1774,7 @@ class EnvironmentTests(unittest.TestCase):
         pop_template.set_sampled_property('social_profile', 'mid')
         regions_sizes.append(target_region.get_population_size(pop_template))
         ## ---------- Expected: 200
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', 'default')
         regions_sizes.append(target_region.get_population_size(pop_template))
         ## ---------- Expected: 100
@@ -2194,7 +2194,7 @@ class EnvironmentTests(unittest.TestCase):
         _envs = [copy.deepcopy(self.envA) for x in range(0,5)]
         
         # Sets a PopTemplate
-        pop_template  = PopTemplate()
+        pop_template  = PopulationTemplate()
         
         # Case 1:
         # Gets the EnvNodes used in the operation
@@ -2465,7 +2465,7 @@ class EnvironmentTests(unittest.TestCase):
         _envs = [copy.deepcopy(self.envA) for x in range(0,5)]
         
         # Sets a PopTemplate
-        pop_template  = PopTemplate()
+        pop_template  = PopulationTemplate()
         pop_template.set_sampled_property('age', ['adults', 'elders'])
         pop_template.set_sampled_property('occupation', ['idle', 'worker'])
         
@@ -2757,12 +2757,12 @@ class EnvironmentTests(unittest.TestCase):
                     Destination Node contains the original population
         """
         # Sets two complementing PopTemplates
-        pop_template_A = PopTemplate() 
+        pop_template_A = PopulationTemplate() 
         pop_template_A.set_sampled_property('age', ['adults', 'elders'])
         pop_template_A.set_sampled_property('occupation', ['idle', 'worker'])
         pop_template_A.set_sampled_property('social_profile', ['mid', 'high'])
         
-        pop_template_B = PopTemplate() 
+        pop_template_B = PopulationTemplate() 
         pop_template_B.set_sampled_property('age', ['young', 'children'])
         pop_template_B.set_sampled_property('occupation', 'student')
         pop_template_B.set_sampled_property('social_profile', 'low')
@@ -2932,7 +2932,7 @@ class EnvironmentTests(unittest.TestCase):
         _envs = [copy.deepcopy(self.envB) for x in range(0,5)]
         
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', 'default')
         
         # Gets the EnvNodes used in the operation
@@ -3235,7 +3235,7 @@ class EnvironmentTests(unittest.TestCase):
         _envs = [copy.deepcopy(self.envB) for x in range(0,5)]
         
         # Sets a PopTemplate
-        pop_template = PopTemplate() 
+        pop_template = PopulationTemplate() 
         pop_template.set_traceable_property('traceable_A', ['default', 'other_value'])
                 
         # Case 1:
@@ -3508,7 +3508,7 @@ class EnvironmentTests(unittest.TestCase):
                     
 
         """
-        pop_template  = PopTemplate()
+        pop_template  = PopulationTemplate()
 
         values = {'destination_region': 'Petropolis', 'destination_node': 'work', 'quantity':50, 'population_template':pop_template}
 
@@ -3566,7 +3566,7 @@ class EnvironmentTests(unittest.TestCase):
 
 
         # test function
-        pop_template  = PopTemplate()
+        pop_template  = PopulationTemplate()
         pop_template.mother_blob_id = desired_region.id
 
         values = {'region': 'Petropolis', 'node':'home', 'quantity':-1, 'population_template':pop_template}

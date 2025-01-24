@@ -2,7 +2,7 @@ from itertools import count
 from pathlib import Path
 from types import NoneType
 import environment
-from population import PopTemplate
+from population import PopulationTemplate
 import copy
 from random_inst import FixedRandom
 import math

@@ -4,7 +4,7 @@ import time
 from types import NoneType
 # from time_actions.vaccine_local_plugin import VaccinePlugin
 import environment
-from population import PopTemplate
+from population import PopulationTemplate
 import copy
 from random_inst import FixedRandom
 import math
@@ -57,7 +57,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
         if self.vaccine_levels_data_action is not None:
             self.vaccine_levels = self.vaccine_levels_data_action()
             for i in range(self.vaccine_levels):
-                _pt = PopTemplate()
+                _pt = PopulationTemplate()
                 _pt.set_traceable_property("vaccine_level", i)
                 self.vaccine_level_pop_templates.append(_pt)
 
@@ -84,7 +84,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
         _initial_infected_template_dict = self.config.get("initial_infected_template", {
                                                             "traceable_characteristics": {},
                                                             "sampled_characteristics": {}})
-        self.initial_infected_template = PopTemplate(sampled_characteristics = _initial_infected_template_dict["sampled_characteristics"],
+        self.initial_infected_template = PopulationTemplate(sampled_characteristics = _initial_infected_template_dict["sampled_characteristics"],
                                                      traceable_characteristics= _initial_infected_template_dict["traceable_characteristics"])
         self.initial_infected_default = self.config.get("initial_infected_default", 100)
         self.inicial_infected_custom = self.config.get("custom_initial_infected", [])
@@ -136,13 +136,13 @@ class InfectionPlugin(environment.TimeActionPlugin):
                 
          
         # Sets PopTemplates to be used later
-        self.pt_sus = PopTemplate()
+        self.pt_sus = PopulationTemplate()
         self.pt_sus.set_traceable_property("sir_status", 'susceptible')
-        self.pt_inf = PopTemplate()
+        self.pt_inf = PopulationTemplate()
         self.pt_inf.set_traceable_property("sir_status", 'infected')
-        self.pt_rem = PopTemplate()
+        self.pt_rem = PopulationTemplate()
         self.pt_rem.set_traceable_property("sir_status", 'removed')
-        pop_template_inf = PopTemplate()
+        pop_template_inf = PopulationTemplate()
         pop_template_inf.set_traceable_property('sir_status', 'infected')
         self.total_infected = self.graph.get_population_size(pop_template_inf)
         print(self.__header, "initial infected:", self.total_infected)
@@ -200,11 +200,11 @@ class InfectionPlugin(environment.TimeActionPlugin):
         _gamma = values.get("infection_gamma", _gamma)
 
         # Sets some PopTemplates for this operation
-        pt_sus:PopTemplate = copy.deepcopy(pop_template)
+        pt_sus:PopulationTemplate = copy.deepcopy(pop_template)
         pt_sus.set_traceable_property('sir_status','susceptible')
-        pt_inf:PopTemplate = copy.deepcopy(pop_template)
+        pt_inf:PopulationTemplate = copy.deepcopy(pop_template)
         pt_inf.set_traceable_property('sir_status','infected')
-        pt_rem:PopTemplate = copy.deepcopy(pop_template)
+        pt_rem:PopulationTemplate = copy.deepcopy(pop_template)
         pt_rem.set_traceable_property('sir_status','removed')
 
         # Gets population sizes before infection

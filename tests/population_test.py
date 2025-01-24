@@ -2,7 +2,7 @@ from typing import List, Set
 from random_inst import FixedRandom
 
 import pytest
-from population import CharacteristicsFactory, PopTemplate, SampledCharacteristic, SampledCharacteristicCollection
+from population import CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
@@ -568,15 +568,15 @@ class TestSampledCharacteristicsCollection():
         return profile
 
     @pytest.fixture
-    def default_pop_template_single_key(self) -> PopTemplate:
-        pop_template = PopTemplate()
+    def default_pop_template_single_key(self) -> PopulationTemplate:
+        pop_template = PopulationTemplate()
         pop_template.set_sampled_property('age', ['adult'])
         pop_template.set_sampled_property('economic_profile', ['worker'])
         return pop_template
 
     @pytest.fixture
-    def default_pop_template_key_list(self) -> PopTemplate:
-        pop_template = PopTemplate()
+    def default_pop_template_key_list(self) -> PopulationTemplate:
+        pop_template = PopulationTemplate()
         pop_template.set_sampled_property('age', ['adult', 'ancient'])	
         pop_template.set_sampled_property('economic_profile', ['unemployed', 'worker'])
         pop_template.set_sampled_property('empty_characteritic', [])
@@ -652,7 +652,7 @@ class TestSampledCharacteristicsCollection():
         assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
         assert default_collection.is_valid() == True, "Remaining collection should be valid."
 
-    def test_extract_with_template_single_key_less_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopTemplate):
+    def test_extract_with_template_single_key_less_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopulationTemplate):
         extracted_collection = default_collection_with_profile.extract(30, default_pop_template_single_key)
         assert extracted_collection
         assert extracted_collection.get_population_size() == 30, "Extracted population should be 30."
@@ -664,7 +664,7 @@ class TestSampledCharacteristicsCollection():
         assert default_collection_with_profile.characteristics['age'].categories['adult'] == 20, "Remaining 'age' population should be 20."
         assert extracted_collection.characteristics['age'].categories['adult'] == 30, "Extracted 'age' population should be 30."
 
-    def test_extract_with_template_single_key_equal_population_as_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopTemplate):
+    def test_extract_with_template_single_key_equal_population_as_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopulationTemplate):
         extracted_collection = default_collection_with_profile.extract(50, default_pop_template_single_key)
         assert extracted_collection
         assert extracted_collection.get_population_size() == 50, "Extracted population should be 50."
@@ -678,7 +678,7 @@ class TestSampledCharacteristicsCollection():
         assert extracted_collection.characteristics['age'].categories['adult'] == 50, "Extracted 'age' population should be 50."
         assert extracted_collection.characteristics['economic_profile'].categories['worker'] == 50, "Extracted 'economic_profile' population should be 50."
 
-    def test_extract_with_template_single_key_more_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopTemplate):
+    def test_extract_with_template_single_key_more_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopulationTemplate):
         extracted_collection = default_collection_with_profile.extract(500, default_pop_template_single_key)
         assert extracted_collection
         assert extracted_collection.get_population_size() == 50, "Extracted population should be 50."
@@ -692,7 +692,7 @@ class TestSampledCharacteristicsCollection():
         assert extracted_collection.characteristics['age'].categories['adult'] == 50, "Extracted 'age' population should be 50."
         assert extracted_collection.characteristics['economic_profile'].categories['worker'] == 50, "Extracted 'economic_profile' population should be 50."
 
-    def test_extract_with_template_key_list_less_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopTemplate):
+    def test_extract_with_template_key_list_less_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopulationTemplate):
         extracted_collection = default_collection_with_profile.extract(30, default_pop_template_key_list)
         assert extracted_collection
         assert extracted_collection.get_population_size() == 30, "Extracted population should be 30."
@@ -706,7 +706,7 @@ class TestSampledCharacteristicsCollection():
         assert default_collection_with_profile.characteristics['age'].categories['adult'] + default_collection_with_profile.characteristics['age'].categories['ancient'] == 40, "Remaining 'age' population should be 40."
         assert default_collection_with_profile.characteristics['age'].categories['child'] == 30, "Remaining 'age' population should be 30."
 
-    def test_extract_with_template_key_list_equal_population_as_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopTemplate):
+    def test_extract_with_template_key_list_equal_population_as_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopulationTemplate):
         extracted_collection = default_collection_with_profile.extract(70, default_pop_template_key_list)
         assert extracted_collection
         assert extracted_collection.get_population_size() == 70, "Extracted population should be 70."
@@ -720,7 +720,7 @@ class TestSampledCharacteristicsCollection():
         assert default_collection_with_profile.characteristics['age'].categories['adult'] + default_collection_with_profile.characteristics['age'].categories['ancient'] == 0, "Remaining 'age' population should be 0."
         assert default_collection_with_profile.characteristics['age'].categories['child'] == 30, "Remaining 'age' population should be 30."
 
-    def test_extract_with_template_key_list_more_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopTemplate):
+    def test_extract_with_template_key_list_more_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopulationTemplate):
         extracted_collection = default_collection_with_profile.extract(300, default_pop_template_key_list)
         assert extracted_collection
         assert extracted_collection.get_population_size() == 70, "Extracted population should be 70."
@@ -737,11 +737,11 @@ class TestSampledCharacteristicsCollection():
 class TestPopTemplate:
 
     @pytest.fixture
-    def default_template(self) -> PopTemplate:
+    def default_template(self) -> PopulationTemplate:
         """Fixture to provide a default PopTemplate instance."""
-        return PopTemplate()
+        return PopulationTemplate()
     
-    def test_default_initialization(self, default_template: PopTemplate):
+    def test_default_initialization(self, default_template: PopulationTemplate):
         assert default_template.blob_id is None, "Blob ID should be None."
         assert default_template.mother_blob_id is None, "Mother Blob ID should be None."
         assert default_template.sampled_characteristics == {}, "Sampled characteristics should be an empty dictionary."
@@ -751,83 +751,83 @@ class TestPopTemplate:
     def test_initialization_with_characteristics(self):
         sampled = {'age': ['child', 'adult']}
         traceable = {'location': 'city'}
-        template = PopTemplate(sampled, traceable)
+        template = PopulationTemplate(sampled, traceable)
         assert template.sampled_characteristics == sampled, "Sampled characteristics should be set correctly."
         assert template.traceable_characteristics == traceable, "Traceable characteristics should be set correctly."
         assert template.empty is False, "Template should not be empty."
 
-    def test_set_mother_blob_id_valid(self, default_template: PopTemplate):
+    def test_set_mother_blob_id_valid(self, default_template: PopulationTemplate):
         default_template.set_mother_blob_id(123)
         assert default_template.mother_blob_id == 123, "Mother Blob ID should be set correctly."
 
-    def test_set_mother_blob_id_invalid(self, default_template: PopTemplate):
+    def test_set_mother_blob_id_invalid(self, default_template: PopulationTemplate):
         with pytest.raises(ValueError, match=f"Mother blob id must be a positive integer, is {type("invalid")}"):
             default_template.set_mother_blob_id("invalid") # type: ignore
 
-    def test_set_sampled_property_valid(self, default_template: PopTemplate):
+    def test_set_sampled_property_valid(self, default_template: PopulationTemplate):
         default_template.set_sampled_property('age', ['child', 'adult'])
         assert default_template.sampled_characteristics == {'age': ['child', 'adult']}
         assert default_template.empty is False
 
-    def test_set_sampled_property_invalid_key(self, default_template: PopTemplate):
+    def test_set_sampled_property_invalid_key(self, default_template: PopulationTemplate):
         with pytest.raises(ValueError):
             default_template.set_sampled_property(123, ['child', 'adult']) # type: ignore
 
-    def test_set_sampled_property_invalid_value(self, default_template: PopTemplate):
+    def test_set_sampled_property_invalid_value(self, default_template: PopulationTemplate):
         with pytest.raises(ValueError):
             default_template.set_sampled_property('age', 'invalid') # type: ignore
 
-    def test_set_traceable_property_valid(self, default_template: PopTemplate):
+    def test_set_traceable_property_valid(self, default_template: PopulationTemplate):
         default_template.set_traceable_property('location', 'city')
         assert default_template.traceable_characteristics == {'location': 'city'}
         assert default_template.empty is False
 
-    def test_set_traceable_property_invalid_key(self, default_template: PopTemplate):
+    def test_set_traceable_property_invalid_key(self, default_template: PopulationTemplate):
         with pytest.raises(ValueError):
             default_template.set_traceable_property(123, 'city') # type: ignore
 
-    def test_set_sampled_properties(self, default_template: PopTemplate):
+    def test_set_sampled_properties(self, default_template: PopulationTemplate):
         properties = {'age': ['child', 'adult'], 'gender': ['male', 'female']}
         default_template.set_sampled_properties(properties)
         assert default_template.sampled_characteristics == properties
         assert default_template.empty is False
 
-    def test_set_traceable_properties(self, default_template: PopTemplate):
+    def test_set_traceable_properties(self, default_template: PopulationTemplate):
         properties = {'location': 'city', 'status': 'active'}
         default_template.set_traceable_properties(properties)
         assert default_template.traceable_characteristics == properties
         assert default_template.empty is False
 
-    def test_is_empty(self, default_template: PopTemplate):
+    def test_is_empty(self, default_template: PopulationTemplate):
         assert default_template.is_empty() is True
         default_template.set_sampled_property('age', ['child'])
         assert default_template.is_empty() is False
 
-    def test_has_traceable_properties(self, default_template: PopTemplate):
+    def test_has_traceable_properties(self, default_template: PopulationTemplate):
         assert default_template.has_traceable_properties() is False
         default_template.set_traceable_property('location', 'city')
         assert default_template.has_traceable_properties() is True
 
-    def test_has_sampled_properties(self, default_template: PopTemplate):
+    def test_has_sampled_properties(self, default_template: PopulationTemplate):
         assert default_template.has_sampled_properties() is False
         default_template.set_sampled_property('age', ['child'])
         assert default_template.has_sampled_properties() is True
 
     def test_compare(self):
-        template1 = PopTemplate({'age': ['child']}, {'location': 'city'})
-        template2 = PopTemplate({'age': ['child']}, {'location': 'city'})
-        template3 = PopTemplate({'age': ['adult']}, {'location': 'village'})
+        template1 = PopulationTemplate({'age': ['child']}, {'location': 'city'})
+        template2 = PopulationTemplate({'age': ['child']}, {'location': 'city'})
+        template3 = PopulationTemplate({'age': ['adult']}, {'location': 'village'})
         assert template1.compare(template2) is True, "Templates with the same characteristics should be equal."
         assert template1.compare(template3) is False, "Templates with different characteristics should not be equal."
         assert template2.compare(template3) is False, "Templates with different characteristics should not be equal."
 
     def test_str(self):
-        template = PopTemplate({'age': ['child']}, {'location': 'city'})
+        template = PopulationTemplate({'age': ['child']}, {'location': 'city'})
         expected_str = '{"blob_id" : "", "mother_blob_id" : "", "pairs"  : {\'age\': [\'child\']}, "traceable_prop"  : {\'location\': \'city\'}}'
         assert str(template) == expected_str, "String representation should match expected."
 
     def test_repr(self):
-        template = PopTemplate({'age': ['child']}, {'location': 'city'})
+        template = PopulationTemplate({'age': ['child']}, {'location': 'city'})
         expected_repr = '{"blob_id" : "", "mother_blob_id" : "", "pairs"  : {\'age\': [\'child\']}, "traceable_prop"  : {\'location\': \'city\'}}'
         assert repr(template) == expected_repr, "Repr representation should match expected."
 

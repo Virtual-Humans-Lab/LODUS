@@ -2,7 +2,7 @@ import sys
 sys.path.append('../')
 
 import environment 
-from population import PopTemplate
+from population import PopulationTemplate
 
 class ExamplePlugin(environment.TimeActionPlugin):
 

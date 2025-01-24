@@ -92,7 +92,7 @@ logger.set_data_to_record('metrics')
 #logger.set_to_record('nodes')
 #logger.set_to_record('positions')
 
-pop_temp = PopTemplate()
+pop_temp = PopulationTemplate()
 #pop_temp.set_property('age', 'adults')
 logger.pop_template = pop_temp
 # logger.foreign_only = True

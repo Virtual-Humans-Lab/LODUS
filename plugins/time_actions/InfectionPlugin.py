@@ -3,7 +3,7 @@ sys.path.append('../')
 sys.path.append('../EpidemicContagionPython/EpidemicContagionPython/')
 
 import environment
-from population import PopTemplate
+from population import PopulationTemplate
 from  EpidemicPopulation import EpidemicPopulation
 import copy
 #import random

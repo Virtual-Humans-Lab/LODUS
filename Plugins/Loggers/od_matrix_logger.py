@@ -3,7 +3,7 @@ import sys
 sys.path.append("/../../")
 from environment import EnvironmentGraph, EnvNode, EnvRegion
 from logger_plugin import LoggerPlugin
-from population import Blob, PopTemplate
+from population import Blob, PopulationTemplate
 
 # Graphic and data libraries
 import plotly.graph_objects as go
@@ -31,8 +31,8 @@ class ODMatrixLogger(LoggerPlugin):
         self.node_od_matrix:dict[str,dict[str,dict[str,dict[str,int]]]] = {}
 
         # Custom PopTemplates
-        self.region_custom_templates: dict[str,PopTemplate] = {}
-        self.node_custom_templates: dict[str,PopTemplate] = {}
+        self.region_custom_templates: dict[str,PopulationTemplate] = {}
+        self.node_custom_templates: dict[str,PopulationTemplate] = {}
 
         # Paths for folders
         self.base_path = "output_logs/" + base_filename + "/"

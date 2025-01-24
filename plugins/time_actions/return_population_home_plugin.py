@@ -3,7 +3,7 @@ import time
 sys.path.append('../')
 
 import environment 
-from population import PopTemplate
+from population import PopulationTemplate
 
 class ReturnPopulationHomePlugin(environment.TimeActionPlugin):
 

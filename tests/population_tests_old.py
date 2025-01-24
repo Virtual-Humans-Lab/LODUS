@@ -942,7 +942,7 @@ class PopulationTests(unittest.TestCase):
         initial_block_size = 300
         
         # Creates a PopTemplate
-        pop_template = PopTemplate()
+        pop_template = PopulationTemplate()
 
         # Case 1
         target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
@@ -1081,7 +1081,7 @@ class PopulationTests(unittest.TestCase):
         initial_block_size = 300
         
         # Creates a PopTemplate
-        pop_template = PopTemplate()
+        pop_template = PopulationTemplate()
         pop_template.set_sampled_property('characteristic_A', ['value_A1'])
         pop_template.set_sampled_property('characteristic_B', ['value_B1'])
 
@@ -1228,7 +1228,7 @@ class PopulationTests(unittest.TestCase):
         initial_block_size = 300
         
         # Creates a PopTemplate
-        pop_template = PopTemplate()
+        pop_template = PopulationTemplate()
         pop_template.set_sampled_property('characteristic_A', ['value_A1', 'value_A2'])
         pop_template.set_sampled_property('characteristic_B', ['value_B1', 'value_B2'])
         pop_template.set_sampled_property('characteristic_C', [])
@@ -1964,7 +1964,7 @@ class PopulationTests(unittest.TestCase):
 
         pop_profile = {'characteristic_A' : {'value_A1' : 100, 'value_A2' : 100}}
         blob_factory = BlobFactory(block_template)
-        pop_template = PopTemplate()
+        pop_template = PopulationTemplate()
 
         # Case 1:
         blob_1 = blob_factory.GenerateProfile(0, 0, 100, pop_profile)
@@ -2185,7 +2185,7 @@ class PopulationTests(unittest.TestCase):
         blob_factory = BlobFactory(block_template)
 
         #Set a PopTemplate
-        pop_template = PopTemplate()
+        pop_template = PopulationTemplate()
         pop_template.set_sampled_property('characteristic_A', ['value_A1', 'value_A2'])
         pop_template.set_traceable_property('traceable_A', {0, 1})
 

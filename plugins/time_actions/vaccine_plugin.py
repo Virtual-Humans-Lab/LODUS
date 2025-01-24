@@ -1,7 +1,7 @@
 from pathlib import Path
 import time
 import environment
-from population import Blob, PopTemplate
+from population import Blob, PopulationTemplate
 import copy
 from random_inst import FixedRandom
 import math
@@ -202,7 +202,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             new_action_values['quantity'] = to_vacc
             new_action_values['different_node_name'] = "true"
             # print(cycle_step, target_node.get_unique_name(), "Quant", to_vacc, self.prev_vac[_dose_index])
-            pop_template = PopTemplate()
+            pop_template = PopulationTemplate()
             pop_template.set_traceable_property('vaccine_level', lambda n: n == _dose_index)
             # pop_template.set_traceable_property('days_since_last_vaccine', lambda n: n >= _dose_offset)
             
@@ -221,7 +221,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             new_action_values['min_dose_offset'] = _dose_offset
             new_action_values['quantity'] = to_vacc
             new_action = environment.TimeAction(action_type = new_action_type, 
-                                                pop_template = PopTemplate(),
+                                                pop_template = PopulationTemplate(),
                                                 values = new_action_values)
             #self.graph.queue_next_frame_action(new_action)
             #self.graph.direct_action_invoke(new_action, cycle_step, sim_step)
@@ -239,7 +239,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         # print(values)
         current_level = values['current_level']
         
-        pt = PopTemplate()
+        pt = PopulationTemplate()
         pt.set_traceable_property('vaccine_level', current_level + 1)
         
         sub_list = []

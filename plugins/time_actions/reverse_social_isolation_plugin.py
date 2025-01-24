@@ -2,7 +2,7 @@ import sys
 sys.path.append('../')
 
 import environment 
-from population import PopTemplate
+from population import PopulationTemplate
 import copy
 import random
 from random_inst import FixedRandom

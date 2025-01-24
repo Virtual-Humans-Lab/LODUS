@@ -1,5 +1,5 @@
 import environment
-from population import Blob, PopTemplate
+from population import Blob, PopulationTemplate
 import copy
 from random_inst import FixedRandom
 import math
@@ -172,7 +172,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
             new_action_values['quantity'] = to_vacc
             new_action_values['different_node_name'] = "true"
             
-            pop_template = PopTemplate()
+            pop_template = PopulationTemplate()
             pop_template.set_traceable_property('vaccine_level', lambda n: n == _dose_index)
             pop_template.set_traceable_property('days_since_last_vaccine', lambda n: n >= _dose_offset)
             new_action_values['population_template'] = pop_template
@@ -205,7 +205,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         # print(values)
         current_level = values['current_level']
         
-        pt = PopTemplate()
+        pt = PopulationTemplate()
         pt.set_traceable_property('vaccine_level', current_level + 1)
         
         sub_list = []

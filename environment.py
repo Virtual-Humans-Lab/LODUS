@@ -111,7 +111,7 @@ class EnvNode():
             count += blob.get_population_size(population_template)
         return count
 
-    def grab_population(self, quantity: int, template : population.PopTemplate = None) -> list[population.Blob]:
+    def grab_population(self, quantity: int, template : population.PopulationTemplate = None) -> list[population.Blob]:
         """Gets and removes a population matching a template from this EnvNode.
         
         The population removed is returned as a list of blobs, each with a unique mother_blob_id.
@@ -156,7 +156,7 @@ class EnvNode():
         self.remove_blobs(new_blobs)
         return new_blobs
 
-    def change_blobs_traceable_property(self, key, value, quantity:int, template:population.PopTemplate = None):
+    def change_blobs_traceable_property(self, key, value, quantity:int, template:population.PopulationTemplate = None):
         _grabbed = self.grab_population(quantity, template)
         self.add_blobs(_grabbed)
 
@@ -168,7 +168,7 @@ class EnvNode():
             #    _blob.spawning_node = self.id
             _blob.frame_origin_node = self.id
 
-    def change_blob_traceable_property(self, blob:population.Blob, key, value, quantity:int, template:population.PopTemplate = None) -> population.Blob:
+    def change_blob_traceable_property(self, blob:population.Blob, key, value, quantity:int, template:population.PopulationTemplate = None) -> population.Blob:
         
         if quantity == 0:
             return
@@ -1014,12 +1014,12 @@ class TimeAction():
         With a graph operator, for base actions; or
         A base TimeAction decomposition, for composite actions.
     """
-    def __init__(self, action_type:str, pop_template:population.PopTemplate, values:dict):
-        if type(pop_template) != population.PopTemplate:
+    def __init__(self, action_type:str, pop_template:population.PopulationTemplate, values:dict):
+        if type(pop_template) != population.PopulationTemplate:
             print("FUCK")
 
         self.action_type:str = action_type
-        self.pop_template:population.PopTemplate = pop_template
+        self.pop_template:population.PopulationTemplate = pop_template
         self.values:dict = values
         if "population_template" in self.values:
             self.values.pop("population_template")

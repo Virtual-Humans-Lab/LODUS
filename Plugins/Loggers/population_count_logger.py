@@ -1,7 +1,7 @@
 
 from time import sleep
 import environment
-from population import PopTemplate
+from population import PopulationTemplate
 from logger_plugin import LoggerPlugin
 import os 
 import util
@@ -59,12 +59,12 @@ class PopulationCountLogger(LoggerPlugin):
         self.region_time_outside = {}
 
 
-        self.pop_template:PopTemplate = None
+        self.pop_template:PopulationTemplate = None
                 
         # Custom Logging
-        self.global_custom_templates: dict[str, PopTemplate] = {}
-        self.region_custom_templates: dict[str, PopTemplate] = {}
-        self.node_custom_templates: dict[str, PopTemplate] = {}
+        self.global_custom_templates: dict[str, PopulationTemplate] = {}
+        self.region_custom_templates: dict[str, PopulationTemplate] = {}
+        self.node_custom_templates: dict[str, PopulationTemplate] = {}
         self.custom_line_plots: dict = {}
         self.global_custom_line_plots: dict = {}
         self.region_custom_line_plots: dict = {}
@@ -207,7 +207,7 @@ class PopulationCountLogger(LoggerPlugin):
         for _name, _rg in graph.region_dict.items():
             # Gets populations from this frame
             total_pop = _rg.get_population_size()
-            pop_template = PopTemplate()
+            pop_template = PopulationTemplate()
             pop_template.mother_blob_id = _rg.id
             local_pop = _rg.get_population_size(pop_template)
             outside_pop = total_pop - local_pop
@@ -239,7 +239,7 @@ class PopulationCountLogger(LoggerPlugin):
         for _name, _nd in graph.node_dict.items():
             # Gets populations from this frame
             total_pop = _nd.get_population_size()
-            pop_template = PopTemplate()
+            pop_template = PopulationTemplate()
             pop_template.mother_blob_id = graph.get_region_by_name(_nd.containing_region_name).id
             local_pop = _nd.get_population_size(pop_template)
             outside_pop = total_pop - local_pop
@@ -308,7 +308,7 @@ class PopulationCountLogger(LoggerPlugin):
 
             totals = region.get_population_size()
 
-            tmp = PopTemplate()
+            tmp = PopulationTemplate()
 
             tmp.mother_blob_id = region.id
             local_people = region.get_population_size(tmp)
@@ -331,16 +331,16 @@ class PopulationCountLogger(LoggerPlugin):
         
         #susc_tmp, inft_tmp, remv_tmp, vacc_tmp = PopTemplate()
 
-        susc_tmp = PopTemplate()
+        susc_tmp = PopulationTemplate()
         susc_tmp.add_block('susceptible')
 
-        inft_tmp = PopTemplate()
+        inft_tmp = PopulationTemplate()
         inft_tmp.add_block('infected')
 
-        remv_tmp = PopTemplate()
+        remv_tmp = PopulationTemplate()
         remv_tmp.add_block('removed')
 
-        vacc_tmp = PopTemplate()
+        vacc_tmp = PopulationTemplate()
         vacc_tmp.add_block('vaccinated')
 
         

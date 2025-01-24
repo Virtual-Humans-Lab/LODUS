@@ -106,7 +106,7 @@ blob_count_logger.data_to_record = [BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                     BlobCountRecordKey.BLOB_COUNT_NODE]
 
 
-pop_temp = PopTemplate()
+pop_temp = PopulationTemplate()
 #pop_temp.set_property('age', 'adults')
 pop_count_logger.pop_template = pop_temp
 # logger.foreign_only = True
@@ -124,16 +124,16 @@ od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
                             ODMovementRecordKey.NODE_TO_NODE]
 
 # Age tracking
-od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_characteristics={"age": "children"})
-od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_characteristics={"age": "youngs"})
-od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_characteristics={"age": "adults"})
-od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_characteristics={"age": "elders"})
+od_logger.region_custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": "children"})
+od_logger.region_custom_templates["age: [youngs]"] = PopulationTemplate(sampled_characteristics={"age": "youngs"})
+od_logger.region_custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": "adults"})
+od_logger.region_custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": "elders"})
 
 # Occupation tracking
-od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_characteristics={"occupation": "other"})
-od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_characteristics={"occupation": "student"})
-od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_characteristics={"occupation": "worker"})
-od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_characteristics={"occupation": "worker"})
+od_logger.region_custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": "other"})
+od_logger.region_custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": "student"})
+od_logger.region_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": "worker"})
+od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": "worker"})
 #----------------------------
 
 # Vaccine Logger

@@ -3,7 +3,7 @@ import time
 sys.path.append('../')
 
 import environment
-from population import PopTemplate
+from population import PopulationTemplate
 
 class ReturnToPreviousPlugin(environment.TimeActionPlugin):
     '''return_to_previous
@@ -36,7 +36,7 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
     def update_time_step(self, cycle_step, simulation_step):
         return #super().update_time_step(cycle_step, simulation_step)
 
-    def return_to_previous(self, pop_template:PopTemplate, values, cycle_step, simulation_step):
+    def return_to_previous(self, pop_template:PopulationTemplate, values, cycle_step, simulation_step):
         start_time = time.perf_counter()
         assert 'node_id' in values or ('region' in values and 'node' in values, 
                "No node_id or region/node pair defined in Return To Previous TimeAction")

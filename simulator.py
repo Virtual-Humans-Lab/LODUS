@@ -132,7 +132,7 @@ logger.set_data_to_record('metrics')
 logger.set_data_to_record('nodes')
 logger.set_data_to_record('positions')
 
-pop_temp = PopTemplate()
+pop_temp = PopulationTemplate()
 #pop_temp.set_property('age', 'adults')
 logger.pop_template = pop_temp
 # logger.foreign_only = True
@@ -147,7 +147,7 @@ Simulation
 t = time.time()
 
 
-worker_temp = PopTemplate()
+worker_temp = PopulationTemplate()
 worker_temp.set_sampled_property('occupation', 'worker') 
 worker_temp.mother_blob_id = env_graph.get_region_by_name("Centro").id
 for i in range(simulation_steps):

@@ -371,7 +371,7 @@ class SampledCharacteristicCollection():
         """
         self.characteristics[other.name].merge_values(other)
 
-    def get_population_size(self, population_template: Optional[PopTemplate] = None) -> int:
+    def get_population_size(self, population_template: Optional[PopulationTemplate] = None) -> int:
         """Gets the population size matching a PopTemplate, or the total population size if no template is provided."""
         # No template defined - returns entire population
         if population_template is None or not population_template.has_sampled_properties():
@@ -387,7 +387,7 @@ class SampledCharacteristicCollection():
 
         return min_population
 
-    def extract(self, quantity: int, population_template: Optional[PopTemplate] = None) -> Optional[SampledCharacteristicCollection]:
+    def extract(self, quantity: int, population_template: Optional[PopulationTemplate] = None) -> Optional[SampledCharacteristicCollection]:
         """Extracts a population quantity from this SampledCharacteristicsCollection.
         
         For keys not in the PopulationTemplate, values and quantities are selected randomly.
@@ -400,7 +400,7 @@ class SampledCharacteristicCollection():
         
         """
         if not population_template:
-            population_template = PopTemplate()
+            population_template = PopulationTemplate()
 
         quantity = min(quantity, self.get_population_size(population_template))
         if quantity <= 0:
@@ -429,7 +429,7 @@ class SampledCharacteristicCollection():
 
 
 
-class PopTemplate():
+class PopulationTemplate():
     """
     Represents a set of characteristics a population can have. 
     This is used to filter population operations (extract, merge, change traceable characteristics, etc).
@@ -503,7 +503,7 @@ class PopTemplate():
     def has_sampled_properties(self):
         return not self.empty and bool(self.sampled_characteristics)
 
-    def compare(self, other:PopTemplate) -> bool:
+    def compare(self, other:PopulationTemplate) -> bool:
         return (self.blob_id == other.blob_id and
                 self.mother_blob_id == other.mother_blob_id and
                 self.sampled_characteristics.items() == other.sampled_characteristics.items() and
@@ -698,7 +698,7 @@ class Blob():
     #     extracted = self.blocks[origin_block].extract(quantity, pop_template)
     #     self.blocks[target_block].add_block(extracted)
         
-    def split_blob(self, quantity, pop_template: PopTemplate = None):
+    def split_blob(self, quantity, pop_template: PopulationTemplate = None):
         """Separates a blob into another blob. This is filtered by both PopTemplate and PropertyBlocks.
         
         Params:
@@ -730,7 +730,7 @@ class Blob():
         new_blob.frame_origin_node = self.frame_origin_node
         return new_blob
     
-    def change_blob_traceable_property(self, key, value, quantity: int, template : PopTemplate = None) -> Blob:
+    def change_blob_traceable_property(self, key, value, quantity: int, template : PopulationTemplate = None) -> Blob:
         
         _blob = self.grab_population(quantity, template)
         if not isinstance(_blob, Blob):
@@ -761,7 +761,7 @@ class Blob():
         else:
             return self.split_blob(quantity, population_template)
 
-    def get_population_size(self, population_template:PopTemplate = None)->int:
+    def get_population_size(self, population_template:PopulationTemplate = None)->int:
         """Gets the population size matching a PopTemplate.
 
         If population_template is None, gets total population size.
@@ -790,7 +790,7 @@ class Blob():
         # If the traceable properties do not match - returns 0
         return 0
 
-    def compare_traceable_properties_to_template(self, population_template:PopTemplate):
+    def compare_traceable_properties_to_template(self, population_template:PopulationTemplate):
         
         # If PopTemplate does not have traceable properties defined
         if not population_template.has_traceable_properties():
@@ -877,7 +877,7 @@ if __name__ == "__main__":
     print(dummyBlob.sampled_properties.characteristics['age'].name, type(dummyBlob.sampled_properties.characteristics['age'].name))
     print("\nSPLIT BLOB 1 INTO BLOB 2 - MATCHING TREACEABLE_PROP")
     # sets a population template
-    dummyPopTemplate = PopTemplate()
+    dummyPopTemplate = PopulationTemplate()
     dummyPopTemplate.set_sampled_property('age', ['child', 'adult', 'ancient'])
     # dummyPopTemplate.set_property('economic_profile', 'worker')
     # dummyPopTemplate.set_property('risk', 'high')

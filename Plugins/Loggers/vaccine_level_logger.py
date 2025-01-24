@@ -6,7 +6,7 @@ from time_actions.vaccine_plugin import VaccinePlugin
 #import VaccineLocalPlugin
 #from VaccineLocalPlugin import VaccinePlugin 
 from logger_plugin import LoggerPlugin
-from population import Blob, PopTemplate
+from population import Blob, PopulationTemplate
 
 # Graphic and data libraries
 import plotly.graph_objects as go
@@ -55,7 +55,7 @@ class VaccineLevelLogger(LoggerPlugin):
         self.data_frames_path = self.base_path + "/data_frames/"
 
         self.vacc_levels:int = self.vacc_plugin.vacc_levels
-        self.profiles_to_record:list[PopTemplate] = []
+        self.profiles_to_record:list[PopulationTemplate] = []
 
 
     #### Logging Functions
@@ -75,7 +75,7 @@ class VaccineLevelLogger(LoggerPlugin):
         self.last_frame = [0] * self.vacc_levels
         
         for lvl in range(self.vacc_levels):
-            pop_template = PopTemplate()
+            pop_template = PopulationTemplate()
             pop_template.set_traceable_property("vaccine_level", lvl)
             logger.global_custom_templates['VaccLvl_' + str(lvl)] = pop_template
             logger.region_custom_templates['VaccLvl_' + str(lvl)] = pop_template
@@ -122,7 +122,7 @@ class VaccineLevelLogger(LoggerPlugin):
         _frame:int = kwargs.get('frame')
         
         _current_frame_counts = [0] * self.vacc_levels
-        _pop_template = PopTemplate()
+        _pop_template = PopulationTemplate()
         
         # Gets number of vaccinated ler level
         for lvl in range(self.vacc_levels):

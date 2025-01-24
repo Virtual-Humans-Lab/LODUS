@@ -209,10 +209,10 @@ if args['i'] != 2:
 					  'region_list' : env_graph.region_list,
 					  'nu': config.nu,
 					  'quantity': config.vaccination_amount,
-					  'population_template': PopTemplate()}
+					  'population_template': PopulationTemplate()}
 	vaccinate = TimeAction('vaccinate', vaccine_values)
 	infect_values = { 'region_list' : env_graph.region_list,
-					  'population_template': PopTemplate()}
+					  'population_template': PopulationTemplate()}
 	infect_city = TimeAction('infect_population', infect_values)
 
 if args['s'] == 0:
@@ -262,11 +262,11 @@ betaHistoryWriter.write("day; bestBeta; gamma; sqrError; matchSeed; expTotalInf;
 '''
 Simulation
 '''
-pop_template_suc = PopTemplate()
+pop_template_suc = PopulationTemplate()
 pop_template_suc.add_block('susceptible')
-pop_template_inf = PopTemplate()
+pop_template_inf = PopulationTemplate()
 pop_template_inf.add_block('infected')
-pop_template_rem = PopTemplate()
+pop_template_rem = PopulationTemplate()
 pop_template_rem.add_block('removed')
 
 S = env_graph.get_population_size(pop_template_suc)
@@ -472,7 +472,7 @@ for i in range(config.simulation_steps):
 		old_beta = inf_plugin.beta
 		inf_plugin.beta = 1.0
 		#input("pressione uma tecla!")
-		inf_stadium_values = {'region': config.match_region, 'node': 'stadium', 'beta' : 1.0, 'gamma' : inf_plugin.gamma, 'mu' : 0.0, 'nu' : 0.0, 'population_template': PopTemplate()}
+		inf_stadium_values = {'region': config.match_region, 'node': 'stadium', 'beta' : 1.0, 'gamma' : inf_plugin.gamma, 'mu' : 0.0, 'nu' : 0.0, 'population_template': PopulationTemplate()}
 		infectar_no_estadio = TimeAction('infect', inf_stadium_values)
 		env_graph.consume_time_action(infectar_no_estadio, hour, i)
 		inf_plugin.beta = old_beta
@@ -489,7 +489,7 @@ for i in range(config.simulation_steps):
 		inf_plugin.beta = 1.0
 		#input("pressione uma tecla!")
 		for region in env_graph.region_list:
-			return_values = {'region': region.name, 'node':'home', 'population_template':PopTemplate()}
+			return_values = {'region': region.name, 'node':'home', 'population_template':PopulationTemplate()}
 			return_action = TimeAction('return_population_home', return_values)
 			env_graph.consume_time_action(return_action, config.match_end_time, config.day_duration*config.match_day + config.match_end_time)
 

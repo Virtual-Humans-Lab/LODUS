@@ -2,7 +2,7 @@ from pathlib import Path
 from pprint import pprint
 import time
 import environment
-from population import Blob, PopTemplate
+from population import Blob, PopulationTemplate
 import copy
 from random_inst import FixedRandom
 import math
@@ -27,9 +27,9 @@ class ShelterPlugin(environment.TimeActionPlugin):
         self.cycle_step = 0
         self.sim_step = 0
 
-        self.safe_template = PopTemplate(traceable_characteristics={"flooding_status": "safe"})
-        self.in_danger_template = PopTemplate(traceable_characteristics={"flooding_status": "in_danger"})
-        self.sheltered_template = PopTemplate(traceable_characteristics={"flooding_status": "sheltered"})
+        self.safe_template = PopulationTemplate(traceable_characteristics={"flooding_status": "safe"})
+        self.in_danger_template = PopulationTemplate(traceable_characteristics={"flooding_status": "in_danger"})
+        self.sheltered_template = PopulationTemplate(traceable_characteristics={"flooding_status": "sheltered"})
         self.last_reallocation = -1
          # Loads experiment configuration, if any
         self.config:dict = self.graph.experiment_config.get("shelter_plugin", {})
@@ -175,7 +175,7 @@ class ShelterPlugin(environment.TimeActionPlugin):
         new_action_values['target_node_type_contains'] = True
         new_action_values['different_node_name'] = True
         # new_action_values['percentage_per_search'] = 1.00
-        pop_template = PopTemplate(traceable_characteristics={"flooding_status": "in_danger"})
+        pop_template = PopulationTemplate(traceable_characteristics={"flooding_status": "in_danger"})
         new_action = environment.TimeAction(action_type = new_action_type, 
                                                 pop_template = pop_template,
                                                 values = new_action_values)
@@ -196,7 +196,7 @@ class ShelterPlugin(environment.TimeActionPlugin):
             new_action_values['different_node_name'] = "true"
             new_action_values['percentage_per_search'] = 1.00
             # print(cycle_step, target_node.get_unique_name(), "Quant", to_vacc, self.prev_vac[_dose_index])
-            pop_template = PopTemplate(traceable_characteristics={"flooding_status": "in_danger"})
+            pop_template = PopulationTemplate(traceable_characteristics={"flooding_status": "in_danger"})
             # pop_template.set_traceable_property('days_since_last_vaccine', lambda n: n >= _dose_offset)
             
             new_action = environment.TimeAction(action_type = new_action_type, 
