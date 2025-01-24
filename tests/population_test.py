@@ -2,7 +2,7 @@ from typing import List, Set
 from random_inst import FixedRandom
 
 import pytest
-from population import SampledCharacteristic
+from population import CharacteristicsFactory, PopTemplate, SampledCharacteristic, SampledCharacteristicCollection
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
@@ -12,7 +12,7 @@ def start_fixedrandom():
 
 class TestSampledCharacteristic():
 
-     # Tests different combinations of keys as lists
+    # Tests different combinations of keys as lists
     # Also tests combinations with repeated key entries. Multiple entries should not change behavior
     keys_as_list_scenarios = [
         [],
@@ -543,3 +543,372 @@ class TestSampledCharacteristic():
         assert original_category_count == smaller_category_count + extracted_category_count, 'Characteristic values do not add up.'
         assert available_population == extracted_category_count, 'Extracted population is not the correct size.'
         assert smaller_category_count == original_category_count - extracted_category_count, 'Original category count is not the correct size.'
+
+
+class TestSampledCharacteristicsCollection():
+
+    @pytest.fixture
+    def default_factory(self) -> CharacteristicsFactory:
+        template = CharacteristicsFactory()
+        template.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
+        template.add_sampled_characteristic('economic_profile', ['unemployed', 'worker'])
+        return template
+
+    @pytest.fixture
+    def default_collection(self, default_factory: CharacteristicsFactory) -> SampledCharacteristicCollection:
+        collection = default_factory.generate_characteristic_collection_rand(100)
+        return collection
+    
+    @pytest.fixture
+    def default_profile(self) -> dict:
+        profile = {
+            'age': {'child': 30, 'adult': 50, 'ancient': 20} , 
+            'economic_profile': {'unemployed': 30, 'worker': 70}
+        }
+        return profile
+
+    @pytest.fixture
+    def default_pop_template_single_key(self) -> PopTemplate:
+        pop_template = PopTemplate()
+        pop_template.set_sampled_property('age', ['adult'])
+        pop_template.set_sampled_property('economic_profile', ['worker'])
+        return pop_template
+
+    @pytest.fixture
+    def default_pop_template_key_list(self) -> PopTemplate:
+        pop_template = PopTemplate()
+        pop_template.set_sampled_property('age', ['adult', 'ancient'])	
+        pop_template.set_sampled_property('economic_profile', ['unemployed', 'worker'])
+        pop_template.set_sampled_property('empty_characteritic', [])
+        return pop_template
+
+    @pytest.fixture
+    def default_collection_with_profile(self, default_factory: CharacteristicsFactory, default_profile:dict) -> SampledCharacteristicCollection:
+        collection = default_factory.generate_characteristic_collection_with_profile(100, default_profile)
+        return collection
+
+    def test_get_mapping_of_property_values(self, default_collection: SampledCharacteristicCollection):
+        mapping = default_collection.get_mapping_of_property_values()
+        assert len(mapping) == len(default_collection.characteristics), "Mapping length should match number of characteristics."
+        assert all(isinstance(values, list) for values in mapping), "Each mapping entry should be a list of values."
+
+    def test_is_valid(self, default_collection: SampledCharacteristicCollection):
+        assert default_collection.is_valid() == True, "Collection should be valid."
+        default_collection.characteristics['age'].categories['child'] = -10
+        assert default_collection.is_valid() == False, "Collection should be invalid due to negative category value."
+
+    def test_set_values_rand(self, default_factory: CharacteristicsFactory):
+        collection = default_factory.generate_characteristic_collection_rand(100)
+        assert collection.factory == default_factory, "CharacteristicsFactory should be set correctly."
+        assert 'age' in collection.characteristics, "Characteristic 'age' should be initialized."
+        assert 'economic_profile' in collection.characteristics, "Characteristic 'economic_profile' should be initialized."
+        assert collection.characteristics['age'].get_population_size() == 100, "Population for 'age' should be 100."
+        assert collection.characteristics['economic_profile'].get_population_size() == 100, "Population for 'economic_profile' should be 100."
+        assert collection.is_valid() == True, "Collection should be valid."
+        assert collection.get_population_size() == 100, "Population should be set correctly."
+
+    def test_set_values_profile(self, default_factory: CharacteristicsFactory):
+        profile = {'age': {'child': 30, 'adult': 50}}
+        collection = default_factory.generate_characteristic_collection_with_profile(100, profile)
+        assert collection.factory == default_factory, "CharacteristicsFactory should be set correctly."
+        assert 'age' in collection.characteristics, "Characteristic 'age' should be initialized."
+        assert 'economic_profile' in collection.characteristics, "Characteristic 'economic_profile' should be initialized."
+        assert collection.characteristics['age'].categories == {'child': 30, 'adult': 50, 'ancient': 20}, "Profiled values should be set correctly."
+        assert collection.is_valid() == True, "Collection should be valid."
+        assert collection.get_population_size() == 100, "Population should be set correctly."
+
+    def test_merge_characteristic_collection(self, default_collection: SampledCharacteristicCollection, default_factory: CharacteristicsFactory):
+        other_collection = default_factory.generate_characteristic_collection_rand(50)
+        initial_population = default_collection.get_population_size()
+        other_population = other_collection.get_population_size()
+        default_collection.merge_characteristic_collection(other_collection)
+        assert default_collection.get_population_size() == initial_population + other_population, "Merged population size should be correct."
+        assert default_collection.is_valid() == True, "Merged collection should be valid."
+        assert default_collection.characteristics['age'].get_population_size() == 150, "Merged 'age' population should be correct."
+        assert default_collection.characteristics['economic_profile'].get_population_size() == 150, "Merged 'economic_profile' population should be correct."
+        assert other_collection.get_population_size() == 50, "Other collection should maintain the same population. Removal of the other collection is responsability of the caller."
+
+    def test_extract_without_template_single_key_less_population_than_available(self, default_collection: SampledCharacteristicCollection):
+        extracted_collection = default_collection.extract(50)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 50, "Extracted population should be 50."
+        assert default_collection.get_population_size() == 50, "Remaining population should be 50."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection.is_valid() == True, "Remaining collection should be valid."
+
+    def test_extract_without_template_equal_population_as_available(self, default_collection: SampledCharacteristicCollection):
+        extracted_collection = default_collection.extract(100)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 100, "Extracted population should be 100."
+        assert default_collection.get_population_size() == 0, "Remaining population should be 0. Removal of the other collection is responsability of the caller."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection.is_valid() == True, "Remaining collection should be valid."
+    
+    def test_extract_without_template_more_population_than_available(self, default_collection: SampledCharacteristicCollection):
+        extracted_collection = default_collection.extract(300)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 100, "Extracted population should be 100."
+        assert default_collection.get_population_size() == 0, "Remaining population should be 0. Removal of the other collection is responsability of the caller."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection.is_valid() == True, "Remaining collection should be valid."
+
+    def test_extract_with_template_single_key_less_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopTemplate):
+        extracted_collection = default_collection_with_profile.extract(30, default_pop_template_single_key)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 30, "Extracted population should be 30."
+        assert default_collection_with_profile.get_population_size() == 70, "Remaining population should be \0."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection_with_profile.is_valid() == True, "Remaining collection should be valid."
+        assert extracted_collection.characteristics['age'].get_population_size() == 30, "Extracted 'age' population should be 30."
+        assert extracted_collection.characteristics['economic_profile'].get_population_size() == 30, "Extracted 'economic_profile' population should be 30."
+        assert default_collection_with_profile.characteristics['age'].categories['adult'] == 20, "Remaining 'age' population should be 20."
+        assert extracted_collection.characteristics['age'].categories['adult'] == 30, "Extracted 'age' population should be 30."
+
+    def test_extract_with_template_single_key_equal_population_as_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopTemplate):
+        extracted_collection = default_collection_with_profile.extract(50, default_pop_template_single_key)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 50, "Extracted population should be 50."
+        assert default_collection_with_profile.get_population_size() == 50, "Remaining population should be 50."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection_with_profile.is_valid() == True, "Remaining collection should be valid."
+        assert extracted_collection.characteristics['age'].get_population_size() == 50, "Extracted 'age' population should be 30."
+        assert extracted_collection.characteristics['economic_profile'].get_population_size() == 50, "Extracted 'economic_profile' population should be 30."
+        assert default_collection_with_profile.characteristics['age'].categories['adult'] == 0, "Remaining 'age' population should be 20."
+        assert default_collection_with_profile.characteristics['economic_profile'].categories['worker'] == 20, "Remaining 'economic_profile' population should be 20."
+        assert extracted_collection.characteristics['age'].categories['adult'] == 50, "Extracted 'age' population should be 50."
+        assert extracted_collection.characteristics['economic_profile'].categories['worker'] == 50, "Extracted 'economic_profile' population should be 50."
+
+    def test_extract_with_template_single_key_more_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_single_key: PopTemplate):
+        extracted_collection = default_collection_with_profile.extract(500, default_pop_template_single_key)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 50, "Extracted population should be 50."
+        assert default_collection_with_profile.get_population_size() == 50, "Remaining population should be 50."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection_with_profile.is_valid() == True, "Remaining collection should be valid."
+        assert extracted_collection.characteristics['age'].get_population_size() == 50, "Extracted 'age' population should be 30."
+        assert extracted_collection.characteristics['economic_profile'].get_population_size() == 50, "Extracted 'economic_profile' population should be 30."
+        assert default_collection_with_profile.characteristics['age'].categories['adult'] == 0, "Remaining 'age' population should be 20."
+        assert default_collection_with_profile.characteristics['economic_profile'].categories['worker'] == 20, "Remaining 'economic_profile' population should be 20."
+        assert extracted_collection.characteristics['age'].categories['adult'] == 50, "Extracted 'age' population should be 50."
+        assert extracted_collection.characteristics['economic_profile'].categories['worker'] == 50, "Extracted 'economic_profile' population should be 50."
+
+    def test_extract_with_template_key_list_less_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopTemplate):
+        extracted_collection = default_collection_with_profile.extract(30, default_pop_template_key_list)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 30, "Extracted population should be 30."
+        assert default_collection_with_profile.get_population_size() == 70, "Remaining population should be 70."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection_with_profile.is_valid() == True, "Remaining collection should be valid."
+        assert extracted_collection.characteristics['age'].get_population_size() == 30, "Extracted 'age' population should be 30."
+        assert extracted_collection.characteristics['economic_profile'].get_population_size() == 30, "Extracted 'economic_profile' population should be 30."
+        assert extracted_collection.characteristics['age'].categories['adult'] + extracted_collection.characteristics['age'].categories['ancient'] == 30, "Extracted 'age' population should be 30."
+        assert extracted_collection.characteristics['age'].categories['child'] == 0, "Extracted 'age' population should be 0."
+        assert default_collection_with_profile.characteristics['age'].categories['adult'] + default_collection_with_profile.characteristics['age'].categories['ancient'] == 40, "Remaining 'age' population should be 40."
+        assert default_collection_with_profile.characteristics['age'].categories['child'] == 30, "Remaining 'age' population should be 30."
+
+    def test_extract_with_template_key_list_equal_population_as_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopTemplate):
+        extracted_collection = default_collection_with_profile.extract(70, default_pop_template_key_list)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 70, "Extracted population should be 70."
+        assert default_collection_with_profile.get_population_size() == 30, "Remaining population should be 30."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection_with_profile.is_valid() == True, "Remaining collection should be valid."
+        assert extracted_collection.characteristics['age'].get_population_size() == 70, "Extracted 'age' population should be 70."
+        assert extracted_collection.characteristics['economic_profile'].get_population_size() == 70, "Extracted 'economic_profile' population should be 70."
+        assert extracted_collection.characteristics['age'].categories['adult'] + extracted_collection.characteristics['age'].categories['ancient'] == 70, "Extracted 'age' population should be 70."
+        assert extracted_collection.characteristics['age'].categories['child'] == 0, "Extracted 'age' population should be 0."
+        assert default_collection_with_profile.characteristics['age'].categories['adult'] + default_collection_with_profile.characteristics['age'].categories['ancient'] == 0, "Remaining 'age' population should be 0."
+        assert default_collection_with_profile.characteristics['age'].categories['child'] == 30, "Remaining 'age' population should be 30."
+
+    def test_extract_with_template_key_list_more_population_than_available(self, default_collection_with_profile: SampledCharacteristicCollection, default_pop_template_key_list: PopTemplate):
+        extracted_collection = default_collection_with_profile.extract(300, default_pop_template_key_list)
+        assert extracted_collection
+        assert extracted_collection.get_population_size() == 70, "Extracted population should be 70."
+        assert default_collection_with_profile.get_population_size() == 30, "Remaining population should be 30."
+        assert extracted_collection.is_valid() == True, "Extracted collection should be valid."
+        assert default_collection_with_profile.is_valid() == True, "Remaining collection should be valid."
+        assert extracted_collection.characteristics['age'].get_population_size() == 70, "Extracted 'age' population should be 70."
+        assert extracted_collection.characteristics['economic_profile'].get_population_size() == 70, "Extracted 'economic_profile' population should be 70."
+        assert extracted_collection.characteristics['age'].categories['adult'] + extracted_collection.characteristics['age'].categories['ancient'] == 70, "Extracted 'age' population should be 70."
+        assert extracted_collection.characteristics['age'].categories['child'] == 0, "Extracted 'age' population should be 0."
+        assert default_collection_with_profile.characteristics['age'].categories['adult'] + default_collection_with_profile.characteristics['age'].categories['ancient'] == 0, "Remaining 'age' population should be 0."
+        assert default_collection_with_profile.characteristics['age'].categories['child'] == 30, "Remaining 'age' population should be 30."
+
+class TestPopTemplate:
+
+    @pytest.fixture
+    def default_template(self) -> PopTemplate:
+        """Fixture to provide a default PopTemplate instance."""
+        return PopTemplate()
+    
+    def test_default_initialization(self, default_template: PopTemplate):
+        assert default_template.blob_id is None, "Blob ID should be None."
+        assert default_template.mother_blob_id is None, "Mother Blob ID should be None."
+        assert default_template.sampled_characteristics == {}, "Sampled characteristics should be an empty dictionary."
+        assert default_template.traceable_characteristics == {}, "Traceable characteristics should be an empty dictionary."
+        assert default_template.empty is True, "Template should be empty."
+
+    def test_initialization_with_characteristics(self):
+        sampled = {'age': ['child', 'adult']}
+        traceable = {'location': 'city'}
+        template = PopTemplate(sampled, traceable)
+        assert template.sampled_characteristics == sampled, "Sampled characteristics should be set correctly."
+        assert template.traceable_characteristics == traceable, "Traceable characteristics should be set correctly."
+        assert template.empty is False, "Template should not be empty."
+
+    def test_set_mother_blob_id_valid(self, default_template: PopTemplate):
+        default_template.set_mother_blob_id(123)
+        assert default_template.mother_blob_id == 123, "Mother Blob ID should be set correctly."
+
+    def test_set_mother_blob_id_invalid(self, default_template: PopTemplate):
+        with pytest.raises(ValueError, match=f"Mother blob id must be a positive integer, is {type("invalid")}"):
+            default_template.set_mother_blob_id("invalid") # type: ignore
+
+    def test_set_sampled_property_valid(self, default_template: PopTemplate):
+        default_template.set_sampled_property('age', ['child', 'adult'])
+        assert default_template.sampled_characteristics == {'age': ['child', 'adult']}
+        assert default_template.empty is False
+
+    def test_set_sampled_property_invalid_key(self, default_template: PopTemplate):
+        with pytest.raises(ValueError):
+            default_template.set_sampled_property(123, ['child', 'adult']) # type: ignore
+
+    def test_set_sampled_property_invalid_value(self, default_template: PopTemplate):
+        with pytest.raises(ValueError):
+            default_template.set_sampled_property('age', 'invalid') # type: ignore
+
+    def test_set_traceable_property_valid(self, default_template: PopTemplate):
+        default_template.set_traceable_property('location', 'city')
+        assert default_template.traceable_characteristics == {'location': 'city'}
+        assert default_template.empty is False
+
+    def test_set_traceable_property_invalid_key(self, default_template: PopTemplate):
+        with pytest.raises(ValueError):
+            default_template.set_traceable_property(123, 'city') # type: ignore
+
+    def test_set_sampled_properties(self, default_template: PopTemplate):
+        properties = {'age': ['child', 'adult'], 'gender': ['male', 'female']}
+        default_template.set_sampled_properties(properties)
+        assert default_template.sampled_characteristics == properties
+        assert default_template.empty is False
+
+    def test_set_traceable_properties(self, default_template: PopTemplate):
+        properties = {'location': 'city', 'status': 'active'}
+        default_template.set_traceable_properties(properties)
+        assert default_template.traceable_characteristics == properties
+        assert default_template.empty is False
+
+    def test_is_empty(self, default_template: PopTemplate):
+        assert default_template.is_empty() is True
+        default_template.set_sampled_property('age', ['child'])
+        assert default_template.is_empty() is False
+
+    def test_has_traceable_properties(self, default_template: PopTemplate):
+        assert default_template.has_traceable_properties() is False
+        default_template.set_traceable_property('location', 'city')
+        assert default_template.has_traceable_properties() is True
+
+    def test_has_sampled_properties(self, default_template: PopTemplate):
+        assert default_template.has_sampled_properties() is False
+        default_template.set_sampled_property('age', ['child'])
+        assert default_template.has_sampled_properties() is True
+
+    def test_compare(self):
+        template1 = PopTemplate({'age': ['child']}, {'location': 'city'})
+        template2 = PopTemplate({'age': ['child']}, {'location': 'city'})
+        template3 = PopTemplate({'age': ['adult']}, {'location': 'village'})
+        assert template1.compare(template2) is True, "Templates with the same characteristics should be equal."
+        assert template1.compare(template3) is False, "Templates with different characteristics should not be equal."
+        assert template2.compare(template3) is False, "Templates with different characteristics should not be equal."
+
+    def test_str(self):
+        template = PopTemplate({'age': ['child']}, {'location': 'city'})
+        expected_str = '{"blob_id" : "", "mother_blob_id" : "", "pairs"  : {\'age\': [\'child\']}, "traceable_prop"  : {\'location\': \'city\'}}'
+        assert str(template) == expected_str, "String representation should match expected."
+
+    def test_repr(self):
+        template = PopTemplate({'age': ['child']}, {'location': 'city'})
+        expected_repr = '{"blob_id" : "", "mother_blob_id" : "", "pairs"  : {\'age\': [\'child\']}, "traceable_prop"  : {\'location\': \'city\'}}'
+        assert repr(template) == expected_repr, "Repr representation should match expected."
+
+class TestCharacteristicsFactory():
+
+    @pytest.fixture
+    def default_characteristic_template(self) -> CharacteristicsFactory:
+        char_template = CharacteristicsFactory()
+        char_template.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
+        return char_template
+
+    def test_initialization(self):
+        """Test that the template initializes with empty characteristics."""
+        template = CharacteristicsFactory()
+        assert template.sampled_characteristics == {}, "Sampled characteristics should be initialized as an empty dictionary."
+        assert template.traceable_characteristics == {}, "Traceable characteristics should be initialized as an empty dictionary."
+
+    def test_add_sampled_characteristic(self):
+        """Test adding sampled characteristics and removing duplicates."""
+        template = CharacteristicsFactory()
+        template.add_sampled_characteristic('age', ['child', 'adult', 'ancient', 'adult'])
+        assert template.sampled_characteristics == {'age': ['child', 'adult', 'ancient']}, "Sampled characteristics should be added and duplicates removed."
+
+    def test_add_traceable_characteristic(self):
+        """Test adding traceable characteristics."""
+        template = CharacteristicsFactory()
+        template.add_traceable_characteristic('vaccine_level', 0)
+        assert template.traceable_characteristics == {'vaccine_level': 0}, "Traceable characteristics should be added correctly."
+
+    def test_validate_population(self, default_characteristic_template: CharacteristicsFactory):
+        """Test population validation based on characteristics and population size."""
+        assert default_characteristic_template._validate_population(100) == True, "Population should be valid when characteristics are defined and population is greater than 0."
+        assert default_characteristic_template._validate_population(0) == False, "Population should be invalid when population is 0."
+        template = CharacteristicsFactory()
+        assert template._validate_population(100) == False, "Population should be invalid when no characteristics are defined."
+
+    def test_create_characteristic_collection(self, default_characteristic_template: CharacteristicsFactory):
+        """Test creating a characteristic collection with a valid population."""
+        generated_collection = default_characteristic_template._create_characteristic_collection(100)
+        assert isinstance(generated_collection, SampledCharacteristicCollection), "Should create a SampledCharacteristicCollection instance."
+        assert generated_collection.population == 100, "Population should be set correctly in the collection."
+        assert generated_collection.is_valid() == True, "Generated SampledCharacteristicCollection should be valid."
+
+    def test_generate_characteristic_collection_rand_valid_population(self, default_characteristic_template: CharacteristicsFactory):
+        """Test generating a characteristic collection with a valid population."""
+        generated_collection = default_characteristic_template.generate_characteristic_collection_rand(100)
+        assert isinstance(generated_collection, SampledCharacteristicCollection), "Should generate a SampledCharacteristicCollection instance."
+        assert generated_collection.population == 100, "Population should be set correctly in the collection."
+
+    def test_generate_characteristic_collection_rand_invalid_population(self, default_characteristic_template: CharacteristicsFactory):
+        """Test generating a characteristic collection with an invalid population."""
+        with pytest.raises(ValueError):
+            default_characteristic_template.generate_characteristic_collection_rand(0)
+        empty_template = CharacteristicsFactory()
+        with pytest.raises(ValueError):
+            empty_template.generate_characteristic_collection_rand(100)
+
+    def test_generate_characteristic_collection_empty_valid(self, default_characteristic_template: CharacteristicsFactory):
+        """Test generating an empty characteristic collection with valid characteristics."""
+        generated_collection = default_characteristic_template.generate_characteristic_collection_empty()
+        assert isinstance(generated_collection, SampledCharacteristicCollection), "Should generate an empty SampledCharacteristicCollection instance."
+        assert generated_collection.population == 0, "Population should be set to 0 in the collection."
+        template = CharacteristicsFactory()
+        with pytest.raises(ValueError, match="No sampled characteristics defined."):
+            template.generate_characteristic_collection_empty()
+
+    def test_generate_characteristic_collection_empty_invalid(self):
+        """Test generating an empty characteristic collection with no characteristics defined."""
+        template = CharacteristicsFactory()
+        with pytest.raises(ValueError, match="No sampled characteristics defined."):
+            template.generate_characteristic_collection_empty()
+
+    def test_generate_characteristic_collection_with_profile_valid(self, default_characteristic_template: CharacteristicsFactory):
+        """Test generating a characteristic collection with a valid profile."""
+        profile = {'age': {'child': 30, 'adult': 50}}
+        generated_collection = default_characteristic_template.generate_characteristic_collection_with_profile(100, profile)
+        assert isinstance(generated_collection, SampledCharacteristicCollection), "Should generate a SampledCharacteristicCollection instance with profile."
+        assert generated_collection.population == 100, "Population should be set correctly in the collection."
+
+    def test_generate_characteristic_collection_with_profile_invalid(self, default_characteristic_template: CharacteristicsFactory):
+        """Test generating a characteristic collection with an invalid profile."""
+        profile = {'age': {'child': 30, 'adult': 50}}
+        with pytest.raises(ValueError):
+            default_characteristic_template.generate_characteristic_collection_with_profile(0, profile)

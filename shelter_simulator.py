@@ -95,15 +95,15 @@ pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLO
                                    PopulationCountRecordKey.POPULATION_COUNT_REGION,
                                    PopulationCountRecordKey.POPULATION_COUNT_NODE}
 
-pop_count_logger.global_custom_templates["Safe"] = PopTemplate(traceable_properties={"flooding_status": "safe"})
-pop_count_logger.global_custom_templates["In Danger"] = PopTemplate(traceable_properties={"flooding_status": "in_danger"})
-pop_count_logger.global_custom_templates["Sheltered"] = PopTemplate(traceable_properties={"flooding_status": "sheltered"})
-pop_count_logger.region_custom_templates["Safe"] = PopTemplate(traceable_properties={"flooding_status": "safe"})
-pop_count_logger.region_custom_templates["In Danger"] = PopTemplate(traceable_properties={"flooding_status": "in_danger"})
-pop_count_logger.region_custom_templates["Sheltered"] = PopTemplate(traceable_properties={"flooding_status": "sheltered"})
-pop_count_logger.node_custom_templates["Safe"] = PopTemplate(traceable_properties={"flooding_status": "safe"})
-pop_count_logger.node_custom_templates["In Danger"] = PopTemplate(traceable_properties={"flooding_status": "in_danger"})
-pop_count_logger.node_custom_templates["Sheltered"] = PopTemplate(traceable_properties={"flooding_status": "sheltered"})
+pop_count_logger.global_custom_templates["Safe"] = PopTemplate(traceable_characteristics={"flooding_status": "safe"})
+pop_count_logger.global_custom_templates["In Danger"] = PopTemplate(traceable_characteristics={"flooding_status": "in_danger"})
+pop_count_logger.global_custom_templates["Sheltered"] = PopTemplate(traceable_characteristics={"flooding_status": "sheltered"})
+pop_count_logger.region_custom_templates["Safe"] = PopTemplate(traceable_characteristics={"flooding_status": "safe"})
+pop_count_logger.region_custom_templates["In Danger"] = PopTemplate(traceable_characteristics={"flooding_status": "in_danger"})
+pop_count_logger.region_custom_templates["Sheltered"] = PopTemplate(traceable_characteristics={"flooding_status": "sheltered"})
+pop_count_logger.node_custom_templates["Safe"] = PopTemplate(traceable_characteristics={"flooding_status": "safe"})
+pop_count_logger.node_custom_templates["In Danger"] = PopTemplate(traceable_characteristics={"flooding_status": "in_danger"})
+pop_count_logger.node_custom_templates["Sheltered"] = PopTemplate(traceable_characteristics={"flooding_status": "sheltered"})
 
 
 blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
@@ -125,16 +125,16 @@ od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
 #                             ODMovementRecordKey.NODE_TO_NODE]
 
 # Age tracking
-od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
+od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_characteristics={"age": "children"})
 #od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
-od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
-od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
+od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_characteristics={"age": "adults"})
+od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_characteristics={"age": "elders"})
 
 # Occupation tracking
 #od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
-od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
-od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
-od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
+od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_characteristics={"occupation": "student"})
+od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_characteristics={"occupation": "worker"})
+od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_characteristics={"occupation": "worker"})
 #----------------------------
 
 # Movement Displacement Logger
@@ -142,14 +142,14 @@ displacement_logger = MovementDisplacementLogger(f'{env_graph.experiment_name}')
 
 
 output_str += "Population per Age:\n"
-output_str += "Children:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "children"}))) + "\n"
-output_str += "Youngs:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "youngs"}))) + "\n"
-output_str += "Adults:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "adults"}))) + "\n"
-output_str += "Elders:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "elders"}))) + "\n"
+output_str += "Children:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"age": "children"}))) + "\n"
+output_str += "Youngs:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"age": "youngs"}))) + "\n"
+output_str += "Adults:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"age": "adults"}))) + "\n"
+output_str += "Elders:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"age": "elders"}))) + "\n"
 output_str += "Population per Occupation:\n"
-output_str += "Worker:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "worker"}))) + "\n"
-output_str += "Student:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "student"}))) + "\n"
-output_str += "Other:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "other"}))) + "\n"
+output_str += "Worker:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"occupation": "worker"}))) + "\n"
+output_str += "Student:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"occupation": "student"}))) + "\n"
+output_str += "Other:" + str(env_graph.get_population_size(PopTemplate(sampled_characteristics={"occupation": "other"}))) + "\n"
 print(output_str)
 '''
 Simulation

@@ -124,16 +124,16 @@ od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
                             ODMovementRecordKey.NODE_TO_NODE]
 
 # Age tracking
-od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
-od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
-od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
-od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
+od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_characteristics={"age": "children"})
+od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_characteristics={"age": "youngs"})
+od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_characteristics={"age": "adults"})
+od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_characteristics={"age": "elders"})
 
 # Occupation tracking
-od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
-od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
-od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
-od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
+od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_characteristics={"occupation": "other"})
+od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_characteristics={"occupation": "student"})
+od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_characteristics={"occupation": "worker"})
+od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_characteristics={"occupation": "worker"})
 #----------------------------
 
 # Vaccine Logger

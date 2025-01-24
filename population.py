@@ -7,54 +7,73 @@ from util import *
 from random_inst import FixedRandom
 from events import Events
 
-from typing import Union, List, Dict, Optional
+from typing import Any, Union, List, Dict, Optional
 
-class BlockTemplate():
-    """Defines a template for a population PropertyBlock
-    
+class CharacteristicsFactory():
+    """
+    A factory for generating population characteristics.
+
+    This class allows for the addition of sampled and traceable characteristics,
+    and provides methods to generate collections of sampled characteristics for a given population.
+
+    Attributes:
+        sampled_characteristics (dict[str, list[str]]): A dictionary to store sampled characteristics.
+        traceable_characteristics (dict[str, Any]): A dictionary to store traceable characteristics.
+
+    Methods:
+        add_sampled_characteristic(name: str, categories: list[str]):
+            Adds a sampled characteristic with the given name and categories.
+        add_traceable_characteristic(name: str, value):
+            Adds a traceable characteristic with the given name and value.
+        generate_characteristic_collection(population: int) -> SampledCharacteristicCollection:
+            Generates a characteristic collection for the given population.
+        generate_characteristic_collection_empty() -> SampledCharacteristicCollection:
+            Generates an empty characteristic collection.
+        generate_characteristic_collection_with_profile(population: int, pop_profile: dict):
+            Generates a characteristic collection for the given population with a profile.
+
     Use case:
-        dummy = BlockTemplate()
-        dummy.add_bucket('age', ('child', 'adult', 'ancient'))
-        dummy.add_bucket('economic_profile', ('unemployed', 'worker'))
-        dummy.add_bucket('social_profile', ('low', 'mid', 'high'))
-        dummy.add_bucket('risk', ('low', 'mid', 'high'))
-    
+        dummy = PopulationCharacteristicsTemplate()
+        dummy.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
+        dummy.add_sampled_characteristic('economic_profile', ['unemployed', 'worker'])
+        dummy.add_sampled_characteristic('social_profile', ['low', 'mid', 'high'])
+        dummy.add_sampled_characteristic('risk', ['low', 'mid', 'high'])
     """
     
     def __init__(self):
-        self.buckets:dict = {}
-        self.default_traceable_properties:dict = {}
+        self.sampled_characteristics: dict[str, list[str]] = {}
+        self.traceable_characteristics: dict[str, Any] = {}
 
-    def add_bucket(self, property: str, values: list):
-        self.buckets[property] = values
+    def add_sampled_characteristic(self, name: str, categories: list[str]):
+        self.sampled_characteristics[name] = list(dict.fromkeys(categories))
         
-    def add_traceable_property(self, key: str, value):
-        self.default_traceable_properties[key] = value
+    def add_traceable_characteristic(self, name: str, value):
+        self.traceable_characteristics[name] = value
 
-    def Generate(self, population: int):
-        if not bool(self.buckets):
-            return None
-        if population <= 0:
-            return None
-        block = SampledCharacteristicsCollection(population)
-        block.initialize_buckets(self)
-        return block
+    def _validate_population(self, population: int) -> bool:
+        return bool(self.sampled_characteristics) and population > 0
+
+    def _create_characteristic_collection(self, population: int) -> SampledCharacteristicCollection:
+        characteristic_collection = SampledCharacteristicCollection(population, self)
+        characteristic_collection.set_values_rand(self)
+        return characteristic_collection
+         
+    def generate_characteristic_collection_rand(self, population: int) -> SampledCharacteristicCollection:
+        if not self._validate_population(population):
+            raise ValueError(f"Invalid population. Size must be greater than 0, is {population}. Characteristics should be valid, and are {bool(self.sampled_characteristics)}.")
+        return self._create_characteristic_collection(population)
     
-    def GenerateEmpty(self) -> SampledCharacteristicsCollection:
-        if not bool(self.buckets):
-            return None
-        block = SampledCharacteristicsCollection(0)
-        block.initialize_buckets(self)
-        return block
-
-    def GenerateProfile(self, population: int, pop_profile: dict):
-        if not bool(self.buckets):
-            return None
-        if population <= 0:
-            return None
-        block = SampledCharacteristicsCollection(population)
-        block.initialize_buckets_profile(self, pop_profile)
-        return block
+    def generate_characteristic_collection_empty(self) -> SampledCharacteristicCollection:
+        if not self.sampled_characteristics:
+            raise ValueError("No sampled characteristics defined before using generate.")
+        return self._create_characteristic_collection(0) 
+  
+    def generate_characteristic_collection_with_profile(self, population: int, pop_profile: dict):
+        if not self._validate_population(population):
+            raise ValueError(f"Invalid population. Size must be greater than 0, is {population}. Characteristics should be valid, and are {bool(self.sampled_characteristics)}.")
+        characteristic_collection = SampledCharacteristicCollection(population, self)
+        characteristic_collection.set_values_profile(self, pop_profile)
+        return characteristic_collection
     
 
 class SampledCharacteristic():
@@ -227,62 +246,68 @@ class SampledCharacteristic():
         s = '\"{0}\" : {1}'.format(self.name, self.categories)
         return s
         
-
-# describes a block of blob parameters
-class SampledCharacteristicsCollection():
-    """A collection of SampledCharacteristics, representing a population with multiple attributes.
+class SampledCharacteristicCollection():
+    """A collection of SampledCharacteristics, representing a population with multiple attributes at the same time.
 
     Attributes:
-        population: Initial population for the collection.
+        population: initial population for the collection.
         template: BlockTemplate this collection uses.
         characteristics: The SampledCharacteristics this collection uses, mapped as characteristic_name -> SampledCharacteristic.
     """
-    def __init__(self, _population):
+    def __init__(self, _population: int, _factory: CharacteristicsFactory):
         self.population: int = _population
-        self.template: BlockTemplate = None
+        self.factory: CharacteristicsFactory = _factory
         self.characteristics: dict[str,SampledCharacteristic] = {}
         
     def get_mapping_of_property_values(self):
         """Returns a list of lists containing property values for each characteristic."""
         return [list(v.categories.values()) for v in self.characteristics.values()]
     
-    def initialize_buckets(self, block_template: BlockTemplate):
-        """Initializes SampledCharacteristics according to a BlockTemplate."""
-        self.template = block_template
-        for key, bucket_values in block_template.buckets.items():
-            bucket = SampledCharacteristic(key)
-            bucket.set_values_rand(bucket_values, self.population)
-            self.characteristics[key] = bucket
+    def is_valid(self) -> bool:
+        """
+        Check if the population characteristics are valid.
 
-    def initialize_buckets_profile(self, block_template: BlockTemplate, profile: dict):
-        """Initializes buckets according to a BlockTemplate and population description.
+        Validation Criteria:
+            - All population sizes must be consistent across characteristics.
+            - No category value should be negative.
+            - Population size should be non-negative.
+
+        Returns:
+            bool: True if the characteristics are valid, False otherwise.
+        """
+        population_sizes = {pop_size.get_population_size() for pop_size in self.characteristics.values()}
+        
+        # Ensure all categories have non-negative values
+        if any(val < 0 for pop_size in self.characteristics.values() for val in pop_size.categories.values()):
+            return False
+        
+        # Validate population size consistency
+        return len(population_sizes) == 1 and next(iter(population_sizes)) >= 0
+
+    def set_values_rand(self, characteristics_factory: CharacteristicsFactory):
+        """Initializes SampledCharacteristics according to a CharacteristicsFactory."""
+        self.factory = characteristics_factory
+        for name, categories in characteristics_factory.sampled_characteristics.items():
+            sampled_char = SampledCharacteristic(name)
+            sampled_char.set_values_rand(categories, self.population)
+            self.characteristics[name] = sampled_char
+
+    def set_values_profile(self, factory: CharacteristicsFactory, profile: dict):
+        """Initializes SampledCharacteristics according to a CharacteristicsFactory and population description.
         
         Profile is a dictionary with any number of bucket characteristics as keys, and
-        each value is a dictionary (property -> population quantity) pairs.
+        each value is a dictionary (SampledCharacteristic name -> population quantity) pairs.
 
         If a characteristic is in the profile, the respective buckets are initialized
         according to:
-            if property is associated with a quantity, that quantity is used.
-            if property is not associated with a quantity, its initialized randomly.
+            if characteristic is associated with a quantity, that quantity is used.
+            if characteristic is not associated with a quantity, its initialized randomly.
         
-        The generated buckets respect the self.population value.
-
-        Use case:
-            block_temp = BlockTemplate()
-            block_temp.add_bucket('bucket_1', ('prop_1_1', 'prop_1_2', 'prop_1_3'))
-            block_temp.add_bucket('bucket_2', ('prop_2_1', 'prop_2_2'))
-            block_temp.add_bucket('bucket_3', ('prop_3_1', 'prop_3_2', 'prop_3_3'))
-            block_temp.add_bucket('bucket_4', ('prop_4_1', 'prop_4_2'))
-
-            pop_profile = {'bucket_1' : {'prop_1_1' : 30, 'prop_1_2' : 50},
-                           'bucket_3' : {'prop_3_1' : 30}}
-
-            block = block_template.initialize_buckets_profile(block_template, pop_profile)
-       
+        The generated collection respect the self.population value.
         """
-        self.template = block_template
+        self.factory = factory
 
-        for char_name, categories in self.template.buckets.items():
+        for char_name, categories in self.factory.sampled_characteristics.items():
             caracteristic = SampledCharacteristic(char_name)
             if char_name in profile:
                 self._initialize_profiled_characteristic(caracteristic, categories, profile[char_name])
@@ -290,7 +315,7 @@ class SampledCharacteristicsCollection():
                 caracteristic.set_values_rand(categories, self.population)
             self.characteristics[char_name] = caracteristic
         
-    def _initialize_profiled_characteristic(self, target:SampledCharacteristic, categories:tuple[str], char_profile:dict[str,int]):
+    def _initialize_profiled_characteristic(self, target:SampledCharacteristic, categories:list[str], char_profile:dict[str,int]):
         profile_categories = char_profile.keys()
         total_profiled_population = sum(char_profile.values())
         non_profiled_categories = list(set(categories) - set(profile_categories))
@@ -317,7 +342,7 @@ class SampledCharacteristicsCollection():
             if k not in bucket_keys:
                 sys.exit(f"Error: The key '{k}' defined in a population profile is not a possible value for this SampledCharacteristic. Available keys: {bucket_keys}.")
 
-    def _distribute_remaining_population(self, cat_to_qnt: dict[str, int], categories : tuple[str], non_profiled_categories: list[str], total_profiled_population: int):
+    def _distribute_remaining_population(self, cat_to_qnt: dict[str, int], categories : list[str], non_profiled_categories: list[str], total_profiled_population: int):
         remaining_population = self.population - total_profiled_population
         # If there are non-profiled categories, distribute the remaining population randomly among them
         if non_profiled_categories:
@@ -331,13 +356,13 @@ class SampledCharacteristicsCollection():
                 cat_to_qnt[rand_key] += 1
              
 
-    def merge_characteristic_collection(self, other: SampledCharacteristicsCollection):
+    def merge_characteristic_collection(self, other: SampledCharacteristicCollection):
         """Adds the values of another SampledCharacteristicsCollection to this one."""
         for key in self.characteristics:
-            self.merge_characteristic(other.characteristics[key])
+            self._merge_characteristic(other.characteristics[key])
             # self.characteristics[key].merge_values(other.characteristics[key])
 
-    def merge_characteristic(self, other: SampledCharacteristic):
+    def _merge_characteristic(self, other: SampledCharacteristic):
         """Adds the values of other SampledCharacteristic to the appropriate local SampledCharacteristic.
         
         Population balance between characteristics is responsability of the caller.
@@ -354,7 +379,7 @@ class SampledCharacteristicsCollection():
         
         min_population = sys.maxsize
         
-        for key, template_value in population_template.sampled_properties.items():
+        for key, template_value in population_template.sampled_characteristics.items():
             if key in self.characteristics:
                 min_population = min(
                     min_population, self.characteristics[key].get_population_size(template_value)
@@ -362,7 +387,7 @@ class SampledCharacteristicsCollection():
 
         return min_population
 
-    def extract(self, quantity: int, population_template: Optional[PopTemplate] = None) -> SampledCharacteristicsCollection|None:
+    def extract(self, quantity: int, population_template: Optional[PopTemplate] = None) -> Optional[SampledCharacteristicCollection]:
         """Extracts a population quantity from this SampledCharacteristicsCollection.
         
         For keys not in the PopulationTemplate, values and quantities are selected randomly.
@@ -383,16 +408,16 @@ class SampledCharacteristicsCollection():
         
         extracted_characteristics: dict[str, SampledCharacteristic] = {}
         for name in self.characteristics:
-            if name in population_template.sampled_properties:
+            if name in population_template.sampled_characteristics:
                 extracted_characteristics[name] = self.characteristics[name].extract(
-                    quantity, population_template.sampled_properties[name]
+                    quantity, population_template.sampled_characteristics[name]
                 )
             else:
                 extracted_characteristics[name] = self.characteristics[name].extract(quantity)
 
-        extracted_collection = self.template.GenerateEmpty()
+        extracted_collection = self.factory.generate_characteristic_collection_empty()
         for name, sampled_char in extracted_characteristics.items():
-            extracted_collection.merge_characteristic(sampled_char)
+            extracted_collection._merge_characteristic(sampled_char)
 
         return extracted_collection
 
@@ -405,94 +430,100 @@ class SampledCharacteristicsCollection():
 
 
 class PopTemplate():
-    """Represents a set of characteristics a population can have. This is used to filter population operations.
-    
-    This filter sets a key for each possible blob property value. For selected properties, Blob operations operate only of the population matching the filter.
+    """
+    Represents a set of characteristics a population can have. 
+    This is used to filter population operations (extract, merge, change traceable characteristics, etc).
 
-    For properties left open, blob operations select population uniformly.
-
-    TODO FIX DICT INSTANTIATION FOR POP TEMPLATES
+    The filter sets a key for each possible blob property value. For selected properties, blob operations 
+    operate only on the population matching the filter. For properties left open, blob operations select 
+    population uniformly.
 
     Attributes:
-        blob_id: a specific blob_id to match. TODO Currently not implemented.
-        mother_blob_id: a specific mother_blob_id to match. TODO Currently not implemented.
-        pairs: A dict of the the filtered property characteristics. TODO change to property_key -> [values] Currently property_key -> value
-        blocks: The filtered property characteristics.
+        blob_id (int): A specific blob_id to match.
+        mother_blob_id (int): A specific mother_blob_id to match.
+        sampled_properties (dict): Filtered sampled property characteristics (key -> [values]).
+        traceable_properties (dict): Filtered traceable property characteristics.
+        empty (bool): Whether the template is empty (i.e., has no filters).
+
     """
 
-    def __init__(self,  sampled_properties:dict = None, traceable_properties:dict= None):
-        self.blob_id = None
-        self.mother_blob_id = None
-        self.sampled_properties:dict = {}
-        self.traceable_properties:dict = {}
-        self.empty = True
-        #if sampled_properties is not None:
-        if sampled_properties:
-            for k,v in sampled_properties.items():
-                self.set_sampled_property(k, v)
-        if traceable_properties:
-            for k,v in traceable_properties.items():
-                self.set_traceable_property(k, v)
+    def __init__(self,  sampled_characteristics:dict[str,list[str]] = {}, traceable_characteristics:dict[str, Any]= {}):
+        self.blob_id: int = None # type: ignore
+        self.mother_blob_id: int = None # type: ignore
+        self.sampled_characteristics: dict[str,list[str]] = {}
+        self.traceable_characteristics: dict[str, Any] = {}
+        self.empty: bool = True
 
-    def set_mother_blob_id(self, value):
-        self.mother_blob_id = int(value)
-        
-    def set_sampled_property(self, key, value):
-        self.sampled_properties[key] = value
-        self.empty = False
-        
-    def set_traceable_property(self, key, value):
-        self.traceable_properties[key] = value
+        if sampled_characteristics:
+            self.set_sampled_properties(sampled_characteristics)
+        if traceable_characteristics:
+            self.set_traceable_properties(traceable_characteristics)
+
+
+    def set_mother_blob_id(self, value: int) -> None:
+        """Set the mother_blob_id."""
+        try:
+            self.mother_blob_id = int(value)
+        except ValueError:
+            raise ValueError(f"Mother blob id must be a positive integer, is {type(value)}")
+
+    def set_sampled_property(self, key: str, value: list[str]) -> None:
+        """Set a single sampled property."""
+        if not isinstance(key, str):
+            raise ValueError(f"Key must be a string, is {type(key)}")
+        if not isinstance(value, list):
+            raise ValueError(f"Value must be a list, is {type(value)}")
+        self.sampled_characteristics[key] = value
         self.empty = False
 
-    def set_sampled_properties(self, pairs):
-        for (key, value) in pairs:
+    def set_traceable_property(self, key: str, value: Any) -> None:
+        """Set a single traceable property."""
+        if not isinstance(key, str):
+            raise ValueError(f"Key must be a string, is {type(key)}")
+        self.traceable_characteristics[key] = value
+        self.empty = False
+
+    def set_sampled_properties(self, properties: dict[str,list[str]]) -> None:
+        """Set multiple sampled properties."""
+        for key, value in properties.items():
             self.set_sampled_property(key, value)
 
-    def is_empty(self):
+    def set_traceable_properties(self, properties: dict[str, Any]) -> None:
+        """Set multiple traceable properties."""
+        for key, value in properties.items():
+            self.set_traceable_property(key, value)
+
+    def is_empty(self) -> bool:
+        """Check if the template is empty."""
         return self.empty and self.mother_blob_id is None
 
     def has_traceable_properties(self):
-        if self.empty:
-            return False
-        if self.traceable_properties is None:
-            return False
-        return bool(self.traceable_properties)
+        return not self.empty and bool(self.traceable_characteristics)
     
     def has_sampled_properties(self):
-        if self.empty:
-            return False
-        if self.sampled_properties is None:
-            return False
-        return bool(self.sampled_properties)
+        return not self.empty and bool(self.sampled_characteristics)
 
-    def compare(self, other):
-        if self.blob_id != other.blob_id:
-            return False
-        if self.mother_blob_id != other.mother_blob_id:
-            return False
-        if self.sampled_properties.items() != other.pairs.items():
-            return False
-        if self.traceable_properties.items() != other.traceable_properties.items():
-            return False
+    def compare(self, other:PopTemplate) -> bool:
+        return (self.blob_id == other.blob_id and
+                self.mother_blob_id == other.mother_blob_id and
+                self.sampled_characteristics.items() == other.sampled_characteristics.items() and
+                self.traceable_characteristics.items() == other.traceable_characteristics.items())
 
-        return True
 
     def __str__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
-        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable_prop\"  : {3}}}'.format(blob_id,
-                                                                                             mother_blob_id,
-                                                                                             self.sampled_properties, self.traceable_properties)
+        return '{{"blob_id" : {0}, "mother_blob_id" : {1}, "pairs"  : {2}, "traceable_prop"  : {3}}}'.format(
+            blob_id, mother_blob_id, self.sampled_characteristics, self.traceable_characteristics)
 
+   
     def __repr__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id
         mother_blob_id = "\"\"" if self.mother_blob_id is None else self.mother_blob_id
-        return '{{\"blob_id\" : {0}, \"mother_blob_id\" : {1}, \"pairs\"  : {2}, \"traceable_prop\"  : {3}}}'.format(blob_id,
-                                                                                             mother_blob_id,
-                                                                                             self.sampled_properties, self.traceable_properties)
-
-
+        return '{{"blob_id" : {0}, "mother_blob_id" : {1}, "pairs"  : {2}, "traceable_prop"  : {3}}}'.format(
+            blob_id, mother_blob_id, self.sampled_characteristics, self.traceable_characteristics)
+    
+   
 
 class BlobFactory():
     """A Blob factory. Used to create Blobs according to a pre-defined template.
@@ -513,8 +544,8 @@ class BlobFactory():
     Attributes:
         block_template: The BlockTemplate used by this factory.
     """
-    def __init__(self, block_template:BlockTemplate):
-        self.block_template:BlockTemplate = block_template
+    def __init__(self, block_template:CharacteristicsFactory):
+        self.block_template:CharacteristicsFactory = block_template
     
     def Generate(self, _mother_blob_id: int, _node_of_origin, _population: int, traceable_prop_override:dict = {}):
         """Generates a new Blob based on a pre-defined template.
@@ -526,7 +557,7 @@ class BlobFactory():
         Returns:
             A new Blob with characteristics matching the template in block_template.
         """
-        if not bool(self.block_template.buckets):
+        if not bool(self.block_template.sampled_characteristics):
             return None
         if _population <= 0:
             return None
@@ -545,7 +576,7 @@ class BlobFactory():
         Returns:
             A new Blob with characteristics matching the template in block_template and population 0.
         """
-        if not bool(self.block_template.buckets):
+        if not bool(self.block_template.sampled_characteristics):
             return None
         blob = Blob(_mother_blob_id, _node_of_origin, 0, self)
         blob.initialize_blocks_empty(self.block_template)
@@ -570,7 +601,7 @@ class BlobFactory():
             A new Blob with characteristics matching the template in block_template.
             The new blob contains the desired number of people for profiled characteristics.
         """
-        if not bool(self.block_template.buckets):
+        if not bool(self.block_template.sampled_characteristics):
             return None
         if _population <= 0:
             return None
@@ -615,23 +646,23 @@ class Blob():
         self.mother_blob_id = _mother_blob_id
         self.node_of_origin: int = _node_of_origin
         self._traceable_properties:dict = {}
-        self.sampled_properties:SampledCharacteristicsCollection = None
+        self.sampled_properties:SampledCharacteristicCollection = None
         self.frame_origin_node = None
         self.previous_node = _node_of_origin
         
               
-    def initialize_blocks(self, block_template:BlockTemplate, population):
-        self.sampled_properties = block_template.Generate(population)
-        self._traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+    def initialize_blocks(self, block_template:CharacteristicsFactory, population):
+        self.sampled_properties = block_template.generate_characteristic_collection_rand(population)
+        self._traceable_properties = copy.deepcopy(block_template.traceable_characteristics)
 
-    def initialize_blocks_empty(self, block_template:BlockTemplate):
-        self.sampled_properties = block_template.GenerateEmpty()
-        self._traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+    def initialize_blocks_empty(self, block_template:CharacteristicsFactory):
+        self.sampled_properties = block_template.generate_characteristic_collection_empty()
+        self._traceable_properties = copy.deepcopy(block_template.traceable_characteristics)
 
-    def initialize_blocks_profile(self, block_template:BlockTemplate, population, profiles):
+    def initialize_blocks_profile(self, block_template:CharacteristicsFactory, population, profiles):
         self.profiles = profiles
-        self.sampled_properties = block_template.GenerateProfile(population, profiles)
-        self._traceable_properties = copy.deepcopy(block_template.default_traceable_properties)
+        self.sampled_properties = block_template.generate_characteristic_collection_with_profile(population, profiles)
+        self._traceable_properties = copy.deepcopy(block_template.traceable_characteristics)
         
     def set_traceable_property(self, key, value):
         prev_val = None
@@ -767,7 +798,7 @@ class Blob():
     
         # Compares traceable properties set in the PopTemplate
         # The PopTemplate may have fewer properties than the Blob
-        for k,v in population_template.traceable_properties.items():
+        for k,v in population_template.traceable_characteristics.items():
             if k not in self.get_traceable_properties().keys():
                 sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
             if callable(v):
@@ -827,14 +858,14 @@ if __name__ == "__main__":
 
     FixedRandom()
 
-    dummyBlockTemplate = BlockTemplate()
-    dummyBlockTemplate.add_bucket('age', ('child', 'adult', 'ancient'))
-    dummyBlockTemplate.add_bucket('economic_profile', ('unemployed', 'worker'))
-    dummyBlockTemplate.add_bucket('social_profile', ('low', 'mid', 'high'))
+    dummyBlockTemplate = CharacteristicsFactory()
+    dummyBlockTemplate.add_sampled_characteristic('age', ('child', 'adult', 'ancient'))
+    dummyBlockTemplate.add_sampled_characteristic('economic_profile', ('unemployed', 'worker'))
+    dummyBlockTemplate.add_sampled_characteristic('social_profile', ('low', 'mid', 'high'))
     #dummyBlockTemplate.add_bucket('risk', ('low', 'mid', 'high'))
     #dummyBlockTemplate.add_bucket('height', ('short', 'average', 'tall'))
-    dummyBlockTemplate.add_traceable_property('vaccine_level', 0)
-    dummyBlockTemplate.add_traceable_property('sir_state', 'susceptible')
+    dummyBlockTemplate.add_traceable_characteristic('vaccine_level', 0)
+    dummyBlockTemplate.add_traceable_characteristic('sir_state', 'susceptible')
     dummyBlobFactory = BlobFactory(dummyBlockTemplate)
         
     print("\nCREATING BLOB 1")

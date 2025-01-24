@@ -84,8 +84,8 @@ class InfectionPlugin(environment.TimeActionPlugin):
         _initial_infected_template_dict = self.config.get("initial_infected_template", {
                                                             "traceable_characteristics": {},
                                                             "sampled_characteristics": {}})
-        self.initial_infected_template = PopTemplate(sampled_properties = _initial_infected_template_dict["sampled_characteristics"],
-                                                     traceable_properties= _initial_infected_template_dict["traceable_characteristics"])
+        self.initial_infected_template = PopTemplate(sampled_characteristics = _initial_infected_template_dict["sampled_characteristics"],
+                                                     traceable_characteristics= _initial_infected_template_dict["traceable_characteristics"])
         self.initial_infected_default = self.config.get("initial_infected_default", 100)
         self.inicial_infected_custom = self.config.get("custom_initial_infected", [])
 
