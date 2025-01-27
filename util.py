@@ -200,14 +200,11 @@ def weighted_int_distribution_with_weights(available, quantity, weight_list):
 class IDGen:
     stacks = {}
     
-    def __init__(self, attribute, current_id = 0):
+    def __init__(self, attribute, current_id=0):
         self.attribute = attribute
-        if attribute not in IDGen.stacks:
-            IDGen.stacks[attribute] = current_id
+        IDGen.stacks.setdefault(attribute, current_id)
 
     def get_id(self) -> int:
         current_id = IDGen.stacks[self.attribute]
         IDGen.stacks[self.attribute] += 1
         return current_id
-
-

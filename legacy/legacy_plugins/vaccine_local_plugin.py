@@ -128,7 +128,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
         self.remainder_per_region = {r: [0.0] * self.dosages for r in self.graph.region_dict}
     
     def get_blob_vacc_efficiency(self, blob:Blob):
-        return self.efficiency_per_level[blob.get_traceable_property('vaccine_level')]    
+        return self.efficiency_per_level[blob.get_traceable_characteristic('vaccine_level')]    
 
     def vaccinate(self, values, hour, time):
         assert "node_id" in values, "node_id not defined in Vaccinate action."
@@ -213,12 +213,12 @@ class VaccinePlugin(environment.TimeActionPlugin):
         blob_ids = []
         
         for n in target_node.contained_blobs:
-            if n.get_traceable_property('vaccine_level') == current_level and n.get_traceable_property("days_since_last_vaccine") >= values["min_dose_offset"]:
+            if n.get_traceable_characteristic('vaccine_level') == current_level and n.get_traceable_characteristic("days_since_last_vaccine") >= values["min_dose_offset"]:
                 
                 #prev_val = n._traceable_properties['vaccine_level']
                 #print("before" + str(n._traceable_properties['vaccine_level']))
-                n.set_traceable_property('vaccine_level', n.get_traceable_property('vaccine_level') + 1)
-                n.set_traceable_property('days_since_last_vaccine', 0)
+                n.set_traceable_characteristic('vaccine_level', n.get_traceable_characteristic('vaccine_level') + 1)
+                n.set_traceable_characteristic('days_since_last_vaccine', 0)
                 #n._traceable_properties['vaccine_level'] = current_level + 1
                 #print("after" + str(n._traceable_properties['vaccine_level']))
                 #self.graph.log_traceable_change('vaccine_level', prev_val, n._traceable_properties['vaccine_level'])

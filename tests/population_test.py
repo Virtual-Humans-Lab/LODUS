@@ -2,7 +2,7 @@ from typing import List, Set
 from random_inst import FixedRandom
 
 import pytest
-from population import BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
+from population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
@@ -66,7 +66,7 @@ class TestSampledCharacteristic():
         population_values = default_char_a.get_population_size(['value_1', 'value_3'])
         assert population_values == 50, "Population size for 'value_1' and 'value_3' should be 50."
 
-    def test_get_population_size_invalid_key(self, default_char_a: SampledCharacteristic):
+    def test_get_population_size_invalid_key_type(self, default_char_a: SampledCharacteristic):
         """
         Test get_population_size with an invalid key.
         """
@@ -74,6 +74,15 @@ class TestSampledCharacteristic():
             default_char_a.get_population_size(123) # type: ignore
         except ValueError as e:
             assert str(e) == "Invalid key type: <class 'int'>", "Exception message should match for invalid key type."
+
+    def test_get_population_size_invalid_key_value(self, default_char_a: SampledCharacteristic):
+        """
+        Test get_population_size with an invalid key.
+        """
+        try:
+            default_char_a.get_population_size('value_4') # type: ignore
+        except ValueError as e:
+            assert str(e) == f"Key 'value_4' not found in {default_char_a.name}.", "Exception message should match for invalid key value."
 
     def test_get_population_size_set_key(self, default_char_a: SampledCharacteristic):
         """
@@ -761,7 +770,7 @@ class TestPopTemplate:
         assert default_template.mother_blob_id == 123, "Mother Blob ID should be set correctly."
 
     def test_set_mother_blob_id_invalid(self, default_template: PopulationTemplate):
-        with pytest.raises(ValueError, match=f"Mother blob id must be a positive integer, is {type("invalid")}"):
+        with pytest.raises(ValueError, match=f"Mother blob id must be a positive integer, is {type('invalid')}"):
             default_template.set_mother_blob_id("invalid") # type: ignore
 
     def test_set_sampled_property_valid(self, default_template: PopulationTemplate):
@@ -804,14 +813,14 @@ class TestPopTemplate:
         assert default_template.is_empty() is False
 
     def test_has_traceable_properties(self, default_template: PopulationTemplate):
-        assert default_template.has_traceable_properties() is False
+        assert default_template.has_traceable_characteristics() is False
         default_template.set_traceable_property('location', 'city')
-        assert default_template.has_traceable_properties() is True
+        assert default_template.has_traceable_characteristics() is True
 
     def test_has_sampled_properties(self, default_template: PopulationTemplate):
-        assert default_template.has_sampled_properties() is False
+        assert default_template.has_sampled_characteristics() is False
         default_template.set_sampled_property('age', ['child'])
-        assert default_template.has_sampled_properties() is True
+        assert default_template.has_sampled_characteristics() is True
 
     def test_compare(self):
         template1 = PopulationTemplate({'age': ['child']}, {'location': 'city'})
@@ -954,8 +963,8 @@ class TestBlobFactory:
     def test_generate_blob_rand(self, blob_factory: BlobFactory):
         blob = blob_factory.generate_blob_rand(1, 1, 100)
         assert blob.get_population_size() == 100, "Blob population size should be 100."
-        assert blob.get_traceable_property('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
-        assert blob.get_traceable_property('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
+        assert blob.get_traceable_characteristic('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
+        assert blob.get_traceable_characteristic('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
         assert blob.mother_blob_id == 1, "Mother blob ID should be set correctly."
         assert blob.node_of_origin == 1, "Node of origin should be set correctly."
 
@@ -963,13 +972,76 @@ class TestBlobFactory:
         with pytest.raises(ValueError, match="Invalid population size."):
             blob_factory.generate_blob_rand(1, 1, 0)
 
+    def test_generate_blob_rand_factory_change(self, blob_factory: BlobFactory):
+        blob1 = blob_factory.generate_blob_rand(1, 1, 100)
+        assert blob1.sampled_characteristics.is_valid() == True, "Blob should have valid sampled characteristics."
+        assert blob1.get_population_size() == 100, "Blob population size should be 100."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        blob_factory.characteristics_factory.add_sampled_characteristic('favorite_color', ['red', 'blue'])
+        blob2 = blob_factory.generate_blob_rand(1, 1, 200)
+        assert blob2.get_population_size() == 200, "Blob population size should be 200."
+        assert len(blob2.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        blob_factory.characteristics_factory.add_traceable_characteristic('mode_of_transport', 'walking')
+        blob3 = blob_factory.generate_blob_rand(1, 1, 300)
+        assert blob3.get_population_size() == 300, "Blob population size should be 300."
+        assert len(blob3.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob3.traceable_characteristics) == 3, "Blob should have 3 traceable characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        blob_factory.characteristics_factory.add_sampled_characteristic('income', ['low', 'medium', 'high'])
+        blob_factory.characteristics_factory.add_traceable_characteristic('favorite_food', 'pizza')
+        blob4 = blob_factory.generate_blob_rand(1, 1, 400)
+        assert blob4.get_population_size() == 400, "Blob population size should be 400."
+        assert len(blob4.sampled_characteristics.characteristics) == 4, "Blob should have 4 sampled characteristics."
+        assert len(blob4.traceable_characteristics) == 4, "Blob should have 4 traceable characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob2.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob3.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob3.traceable_characteristics) == 3, "Blob should have 3 traceable characteristics."
+        with pytest.raises(ValueError, match="Invalid population size."):
+            blob_factory.generate_blob_rand(1, 1, 0)
+
     def test_generate_blob_empty(self, blob_factory: BlobFactory):
         blob = blob_factory.generate_blob_empty(1, 1)
         assert blob.get_population_size() == 0, "Blob population size should be 0."
-        assert blob.get_traceable_property('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
-        assert blob.get_traceable_property('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
+        assert blob.get_traceable_characteristic('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
+        assert blob.get_traceable_characteristic('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
         assert blob.mother_blob_id == 1, "Mother blob ID should be set correctly."
         assert blob.node_of_origin == 1, "Node of origin should be set correctly."
+
+    def test_generate_blob_empty_factory_change(self, blob_factory: BlobFactory):
+        blob1 = blob_factory.generate_blob_empty(1, 1)
+        assert blob1.sampled_characteristics.is_valid() == True, "Blob should have valid sampled characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        blob_factory.characteristics_factory.add_sampled_characteristic('favorite_color', ['red', 'blue'])
+        blob2 = blob_factory.generate_blob_empty(1, 1)
+        assert len(blob2.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        blob_factory.characteristics_factory.add_traceable_characteristic('mode_of_transport', 'walking')
+        blob3 = blob_factory.generate_blob_empty(1, 1)
+        assert len(blob3.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob3.traceable_characteristics) == 3, "Blob should have 3 traceable characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        blob_factory.characteristics_factory.add_sampled_characteristic('income', ['low', 'medium', 'high'])
+        blob_factory.characteristics_factory.add_traceable_characteristic('favorite_food', 'pizza')
+        blob4 = blob_factory.generate_blob_empty(1, 1)
+        assert len(blob4.sampled_characteristics.characteristics) == 4, "Blob should have 4 sampled characteristics."
+        assert len(blob4.traceable_characteristics) == 4, "Blob should have 4 traceable characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob2.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob3.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob3.traceable_characteristics) == 3, "Blob should have 3 traceable characteristics."
+ 
 
     def test_generate_blob_with_profile_complete(self, blob_factory: BlobFactory):
         profile = {
@@ -978,12 +1050,12 @@ class TestBlobFactory:
         }
         blob = blob_factory.generate_blob_with_profile(1, 1, 100, profile)
         assert blob.get_population_size() == 100, "Blob population size should be 100."
-        assert blob.get_traceable_property('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
-        assert blob.get_traceable_property('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
+        assert blob.get_traceable_characteristic('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
+        assert blob.get_traceable_characteristic('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
         assert blob.mother_blob_id == 1, "Mother blob ID should be set correctly."
         assert blob.node_of_origin == 1, "Node of origin should be set correctly."
-        assert blob.sampled_properties.characteristics['age'].categories == {'child': 30, 'adult': 50, 'ancient': 20}, "Profiled 'age' categories should be set correctly."
-        assert blob.sampled_properties.characteristics['economic_profile'].categories == {'unemployed': 30, 'worker': 70}, "Profiled 'economic_profile' categories should be set correctly."
+        assert blob.sampled_characteristics.characteristics['age'].categories == {'child': 30, 'adult': 50, 'ancient': 20}, "Profiled 'age' categories should be set correctly."
+        assert blob.sampled_characteristics.characteristics['economic_profile'].categories == {'unemployed': 30, 'worker': 70}, "Profiled 'economic_profile' categories should be set correctly."
 
     def test_generate_blob_with_profile_incomplete(self, blob_factory: BlobFactory):
         profile = {
@@ -992,12 +1064,12 @@ class TestBlobFactory:
         }
         blob = blob_factory.generate_blob_with_profile(1, 1, 100, profile)
         assert blob.get_population_size() == 100, "Blob population size should be 100."
-        assert blob.get_traceable_property('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
-        assert blob.get_traceable_property('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
+        assert blob.get_traceable_characteristic('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
+        assert blob.get_traceable_characteristic('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
         assert blob.mother_blob_id == 1, "Mother blob ID should be set correctly."
         assert blob.node_of_origin == 1, "Node of origin should be set correctly."
-        assert blob.sampled_properties.characteristics['age'].categories == {'child': 30, 'adult': 50, 'ancient': 20}, "Profiled 'age' categories should be set correctly."
-        assert blob.sampled_properties.characteristics['economic_profile'].categories == {'unemployed': 30, 'worker': 70}, "Profiled 'economic_profile' categories should be set correctly."
+        assert blob.sampled_characteristics.characteristics['age'].categories == {'child': 30, 'adult': 50, 'ancient': 20}, "Profiled 'age' categories should be set correctly."
+        assert blob.sampled_characteristics.characteristics['economic_profile'].categories == {'unemployed': 30, 'worker': 70}, "Profiled 'economic_profile' categories should be set correctly."
 
     def test_generate_blob_with_profile_overprofiled(self, blob_factory: BlobFactory):
         profile = {
@@ -1006,16 +1078,291 @@ class TestBlobFactory:
         }
         blob = blob_factory.generate_blob_with_profile(1, 1, 100, profile)
         assert blob.get_population_size() == 100, "Blob population size should be 100."
-        assert blob.get_traceable_property('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
-        assert blob.get_traceable_property('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
+        assert blob.get_traceable_characteristic('vaccine_level') == 0, "Traceable property 'vaccine_level' should be 0."
+        assert blob.get_traceable_characteristic('sir_state') == 'susceptible', "Traceable property 'sir_state' should be 'susceptible'."
         assert blob.mother_blob_id == 1, "Mother blob ID should be set correctly."
         assert blob.node_of_origin == 1, "Node of origin should be set correctly."
 
 
-    def test_generate_blob_with_profile_invalid_population(self, blob_factory):
+    def test_generate_blob_with_profile_invalid_population(self, blob_factory: BlobFactory):
         profile = {
             'age': {'child': 30, 'adult': 50, 'ancient': 20},
             'economic_profile': {'unemployed': 30, 'worker': 70}
         }
         with pytest.raises(ValueError, match="Invalid population size."):
             blob_factory.generate_blob_with_profile(1, 1, 0, profile)
+
+    def test_generate_blob_with_profile_factory_change(self, blob_factory: BlobFactory):
+        profile = {
+            'age': {'child': 80, 'adult': 100, 'ancient': 70},
+            'economic_profile': {'unemployed': 130, 'worker': 170}
+        }
+        blob1 = blob_factory.generate_blob_with_profile(1, 1, 100, profile)
+        assert blob1.sampled_characteristics.is_valid() == True, "Blob should have valid sampled characteristics."
+        assert blob1.get_population_size() == 100, "Blob population size should be 100."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        blob_factory.characteristics_factory.add_sampled_characteristic('favorite_color', ['red', 'blue'])
+        blob2 = blob_factory.generate_blob_with_profile(1, 1, 200, profile)
+        assert blob2.get_population_size() == 200, "Blob population size should be 200."
+        assert len(blob2.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        blob_factory.characteristics_factory.add_traceable_characteristic('mode_of_transport', 'walking')
+        blob3 = blob_factory.generate_blob_with_profile(1, 1, 300, profile)
+        assert blob3.get_population_size() == 300, "Blob population size should be 300."
+        assert len(blob3.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob3.traceable_characteristics) == 3, "Blob should have 3 traceable characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        blob_factory.characteristics_factory.add_sampled_characteristic('income', ['low', 'medium', 'high'])
+        blob_factory.characteristics_factory.add_traceable_characteristic('favorite_food', 'pizza')
+        blob4 = blob_factory.generate_blob_with_profile(1, 1, 400, profile)
+        assert blob4.get_population_size() == 400, "Blob population size should be 400."
+        assert len(blob4.sampled_characteristics.characteristics) == 4, "Blob should have 4 sampled characteristics."
+        assert len(blob4.traceable_characteristics) == 4, "Blob should have 4 traceable characteristics."
+        assert len(blob1.sampled_characteristics.characteristics) == 2, "Blob should have 2 sampled characteristics."
+        assert len(blob1.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob2.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob2.traceable_characteristics) == 2, "Blob should have 2 traceable characteristics."
+        assert len(blob3.sampled_characteristics.characteristics) == 3, "Blob should have 3 sampled characteristics."
+        assert len(blob3.traceable_characteristics) == 3, "Blob should have 3 traceable characteristics."
+        with pytest.raises(ValueError, match="Invalid population size."):
+            blob_factory.generate_blob_with_profile(1, 1, 0, profile)
+
+class TestBlob:
+
+    @pytest.fixture
+    def blob_factory(self) -> BlobFactory:
+        characteristics_factory = CharacteristicsFactory()
+        characteristics_factory.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
+        characteristics_factory.add_sampled_characteristic('economic_profile', ['unemployed', 'worker'])
+        characteristics_factory.add_traceable_characteristic('vaccine_level', 0)
+        characteristics_factory.add_traceable_characteristic('sir_state', 'susceptible')
+        return BlobFactory(characteristics_factory)
+
+    @pytest.fixture
+    def default_blob(self, blob_factory: BlobFactory) -> Blob:
+        return blob_factory.generate_blob_rand(0, 0, 100)
+
+    def test_set_traceable_characteristic(self, default_blob: Blob):
+        default_blob.set_traceable_characteristic('vaccine_level', 1)
+        assert default_blob.get_traceable_characteristic('vaccine_level') == 1
+
+    def test_get_traceable_characteristic(self, default_blob: Blob):
+        assert default_blob.get_traceable_characteristic('vaccine_level') == 0
+
+    def test_get_traceable_characteristics(self, default_blob: Blob):
+        assert default_blob.get_traceable_characteristics() == {'vaccine_level': 0, 'sir_state': 'susceptible'}
+
+    def test_get_population_size_no_template(self, default_blob: Blob):
+        assert default_blob.get_population_size() == 100
+
+    def test_get_population_size_with_template_matching_all_sampled_characteristics(self, default_blob: Blob):
+        template = PopulationTemplate(sampled_characteristics={'age': ['child', 'adult', 'ancient']})
+        assert default_blob.get_population_size(template) == 100
+
+    def test_get_population_size_with_template_matching_separated_sampled_characteristics(self, default_blob: Blob):
+        template1 = PopulationTemplate(sampled_characteristics={'age': ['child']})
+        template2 = PopulationTemplate(sampled_characteristics={'age': ['adult']})
+        template3 = PopulationTemplate(sampled_characteristics={'age': ['ancient']})
+        population1 = default_blob.get_population_size(template1)
+        population2 = default_blob.get_population_size(template2)
+        population3 = default_blob.get_population_size(template3)
+        assert population1 >= 0 <= 100
+        assert population2 >= 0 <= 100
+        assert population3 >= 0 <= 100
+        assert population1 + population2 + population3 == 100
+
+    def test_get_population_size_with_template_matching_traceable_characteristics(self, default_blob: Blob):
+        template = PopulationTemplate(traceable_characteristics={'vaccine_level': 0})
+        assert default_blob.get_population_size(template) == 100
+
+    def test_get_population_size_with_template_not_matching_traceable_characteristics(self, default_blob: Blob):
+        template = PopulationTemplate(traceable_characteristics={'vaccine_level': 1})
+        assert default_blob.get_population_size(template) == 0
+
+    def test_compare_traceable_characteristics_no_traceable(self, default_blob: Blob):
+        template = PopulationTemplate()
+        assert default_blob._compare_traceable_characteristics_to_population_template(template)
+
+    def test_compare_traceable_characteristics_to_population_template_matching(self, default_blob: Blob):
+        template = PopulationTemplate(traceable_characteristics={'vaccine_level': 0})
+        assert default_blob._compare_traceable_characteristics_to_population_template(template) is True
+
+    def test_compare_traceable_characteristics_to_population_template_non_matching(self, default_blob: Blob):
+        template = PopulationTemplate(traceable_characteristics={'vaccine_level': 1})
+        assert default_blob._compare_traceable_characteristics_to_population_template(template) is False
+
+    def test_merge_blob_matching_traceable(self, default_blob: Blob, blob_factory: BlobFactory):
+        other_blob = blob_factory.generate_blob_rand(0, 0, 50)
+        default_blob.merge_blob(other_blob)
+        assert default_blob.get_population_size() == 150, "Merged blob should have a population size of 150."
+        assert other_blob.get_population_size() == 50, "Merged blob should not be modified."
+        assert default_blob.sampled_characteristics.is_valid() == True, "Merged blob should have valid sampled characteristics."
+        assert other_blob.sampled_characteristics.is_valid() == True, "Other blob should be valid."
+
+    def test_merge_blob_non_matching_traceable(self, default_blob: Blob, blob_factory: BlobFactory):
+        other_blob = blob_factory.generate_blob_rand(0, 0, 50)
+        other_blob.set_traceable_characteristic('vaccine_level', 1)
+        default_blob.merge_blob(other_blob)
+        assert default_blob.get_population_size() == 100, "Merged blob should have a population size of 100."
+        assert other_blob.get_population_size() == 50, "Other blob should not be modified."
+        assert default_blob.sampled_characteristics.is_valid() == True, "Merged blob should have valid sampled characteristics."
+        assert other_blob.sampled_characteristics.is_valid() == True, "Other blob should be valid."
+
+    def test_split_blob_no_template(self, default_blob: Blob):
+        new_blob = default_blob._split_blob(50)
+        assert new_blob
+        assert new_blob.sampled_characteristics.is_valid() == True
+        assert new_blob.get_population_size() == 50
+        assert default_blob.get_population_size() == 50
+        assert default_blob.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert new_blob.sampled_characteristics.is_valid() == True, "New blob should be valid."
+
+    def test_split_blob_matching_template(self, default_blob: Blob):
+        template = PopulationTemplate({'age': ['child', 'adult', 'ancient']})
+        new_blob = default_blob._split_blob(50, template)
+        assert new_blob
+        assert new_blob.sampled_characteristics.is_valid() == True
+        assert new_blob.get_population_size() == 50
+        assert default_blob.get_population_size() == 50
+        assert default_blob.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert new_blob.sampled_characteristics.is_valid() == True, "New blob should be valid."
+
+    def test_split_blob_non_matching_template(self, default_blob: Blob):
+        template = PopulationTemplate({'age': ['nonexistent']})
+        try:
+           default_blob._split_blob(50, template)
+        except ValueError as e:
+            assert str(e) == f"Key '['nonexistent']' not found in age.", "Exception message should match for invalid key value."
+
+    def test_split_and_change_blob_traceable_characteristic(self, default_blob: Blob):
+        new_blob = default_blob.split_and_change_blob_traceable_characteristic('vaccine_level', 1, 50)
+        assert new_blob
+        assert new_blob.get_traceable_characteristic('vaccine_level') == 1
+        assert new_blob.get_population_size() == 50
+        assert default_blob.get_population_size() == 50
+        assert default_blob.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert new_blob.sampled_characteristics.is_valid() == True, "New blob should be valid."
+
+    def test_grab_population_no_template_less_population_than_available(self, default_blob: Blob):
+        new_blob = default_blob.grab_population(50)
+        assert new_blob
+        assert new_blob.get_population_size() == 50
+        assert default_blob.get_population_size() == 50
+        assert default_blob.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert new_blob.sampled_characteristics.is_valid() == True, "New blob should be valid."
+
+    def test_grab_population_no_template_equal_population_as_available(self, default_blob: Blob):
+        new_blob = default_blob.grab_population(100)
+        assert new_blob 
+        assert default_blob == new_blob
+        assert default_blob.__dict__ == new_blob.__dict__, "Original and new blob should be the same."
+        assert default_blob.get_population_size() == 100
+        assert default_blob.sampled_characteristics.is_valid() == True, "Both blobs should be valid."
+
+    def test_grab_population_no_template_more_population_than_available(self, default_blob: Blob):
+        new_blob = default_blob.grab_population(200)
+        assert new_blob 
+        assert default_blob == new_blob
+        assert default_blob.__dict__ == new_blob.__dict__, "Original and new blob should be the same."
+        assert default_blob.get_population_size() == 100
+        assert default_blob.sampled_characteristics.is_valid() == True, "Both blobs should be valid."
+
+    def test_grab_population_matching_template(self, default_blob: Blob):
+        template = PopulationTemplate({'age': ['child', 'adult', 'ancient']})
+        new_blob = default_blob.grab_population(50, template)
+        assert new_blob
+        assert new_blob.get_population_size() == 50
+        assert default_blob.get_population_size() == 50
+        assert default_blob.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert new_blob.sampled_characteristics.is_valid() == True, "New blob should be valid."
+
+    def test_grab_population_not_matching_sampled_characteristic(self, default_blob: Blob):
+        template = PopulationTemplate({'age': ['nonexistent']})
+        try:
+           default_blob.grab_population(50, template)
+        except ValueError as e:
+            assert str(e) == f"Key '['nonexistent']' not found in age.", "Exception message should match for invalid key value."
+
+    def test_grab_population_not_matching_traceable_characteristic(self, default_blob: Blob):
+        template = PopulationTemplate(traceable_characteristics={'vaccine_level': 1})
+        new_blob = default_blob.grab_population(50, template)
+        assert new_blob is None
+        assert default_blob.get_population_size() == 100
+        assert default_blob.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+
+    def test_grab_population_unbalanced_less_population_than_available(self, blob_factory: BlobFactory):
+        profile = {'age': {'child': 100}}
+        population_template = PopulationTemplate({'age': ['child']})
+        blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, profile)
+        blob2 = blob1.grab_population(50)
+        assert blob2
+        assert blob1.get_population_size() == 50
+        assert blob2.get_population_size() == 50
+        assert blob1.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert blob2.sampled_characteristics.is_valid() == True, "New blob should be valid."
+        assert blob1.get_population_size(population_template) == 50, "Original blob should have 50 children."
+        assert blob2.get_population_size(population_template) == 50, "New blob should have 50 children."
+
+    def test_grab_population_unbalanced_equal_population_as_available(self, blob_factory: BlobFactory):
+        profile = {'age': {'child': 100}}
+        population_template = PopulationTemplate({'age': ['child']})
+        blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, profile)
+        blob2 = blob1.grab_population(100)
+        assert blob2
+        assert blob1 == blob2
+        assert blob1.__dict__ == blob2.__dict__, "Original and new blob should be the same."
+        assert blob1.get_population_size() == 100
+        assert blob1.sampled_characteristics.is_valid() == True, "Both blobs should be valid."
+        assert blob1.get_population_size(population_template) == 100, "Both blobs should have 100 children."
+
+    def test_grab_population_unbalanced_more_population_than_available(self, blob_factory: BlobFactory):
+        profile = {'age': {'child': 100}}
+        population_template = PopulationTemplate({'age': ['child']})
+        blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, profile)
+        blob2 = blob1.grab_population(200)
+        assert blob2
+        assert blob1 == blob2
+        assert blob1.__dict__ == blob2.__dict__, "Original and new blob should be the same."
+        assert blob1.get_population_size() == 100
+        assert blob1.sampled_characteristics.is_valid() == True, "Both blobs should be valid."
+        assert blob1.get_population_size(population_template) == 100, "Both blobs should have 100 children."
+
+    def test_grab_population_balanced_less_population_than_available(self, blob_factory: BlobFactory):
+        profile = {'age': {'child': 50, 'adult': 50}}
+        population_template = PopulationTemplate({'age': ['child', 'adult']})
+        blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, profile)
+        blob2 = blob1.grab_population(50)
+        assert blob2
+        assert blob1.get_population_size() == 50
+        assert blob2.get_population_size() == 50
+        assert blob1.sampled_characteristics.is_valid() == True, "Original blob should have valid sampled characteristics."
+        assert blob2.sampled_characteristics.is_valid() == True, "New blob should be valid."
+        assert blob1.get_population_size(population_template) == 50, "Original blob should have 50 children and adults."
+        assert blob2.get_population_size(population_template) == 50, "New blob should have 50 children and adults."
+
+    def test_grab_population_balanced_equal_population_as_available(self, blob_factory: BlobFactory):
+        profile = {'age': {'child': 50, 'adult': 50}}
+        population_template = PopulationTemplate({'age': ['child', 'adult']})
+        blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, profile)
+        blob2 = blob1.grab_population(100)
+        assert blob2
+        assert blob1 == blob2
+        assert blob1.__dict__ == blob2.__dict__, "Original and new blob should be the same."
+        assert blob1.get_population_size() == 100
+        assert blob1.sampled_characteristics.is_valid() == True, "Both blobs should be valid."
+        assert blob1.get_population_size(population_template) == 100, "Both blobs should have 100 children and adults."
+
+    def test_grab_population_balanced_more_population_than_available(self, blob_factory: BlobFactory):
+        profile = {'age': {'child': 50, 'adult': 50}}
+        population_template = PopulationTemplate({'age': ['child', 'adult']})
+        blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, profile)
+        blob2 = blob1.grab_population(100)
+        assert blob2
+        assert blob1 == blob2
+        assert blob1.__dict__ == blob2.__dict__, "Original and new blob should be the same."
+        assert blob1.get_population_size() == 100
+        assert blob1.sampled_characteristics.is_valid() == True, "Both blobs should be valid."
+        assert blob1.get_population_size(population_template) == 100, "Both blobs should have 100 children and adults."

@@ -113,8 +113,12 @@ class SampledCharacteristic():
         if not key: # select all
             return sum(self.categories.values())
         if isinstance(key, str): # select single value
+            if key not in self.categories:
+                raise ValueError(f"Key '{key}' not found in {self.name}.")
             return self.categories[key]
         if isinstance(key, (list, set)): # select multiple values
+            if not all(e in self.categories for e in key):
+                raise ValueError(f"Key '{key}' not found in {self.name}.")
             return sum([self.categories[k] for k in set(key)])
         raise ValueError(f"Invalid key type: {type(key)}")
 
@@ -374,7 +378,7 @@ class SampledCharacteristicCollection():
     def get_population_size(self, population_template: Optional[PopulationTemplate] = None) -> int:
         """Gets the population size matching a PopTemplate, or the total population size if no template is provided."""
         # No template defined - returns entire population
-        if population_template is None or not population_template.has_sampled_properties():
+        if population_template is None or not population_template.has_sampled_characteristics():
             return next(iter(self.characteristics.values())).get_population_size()
         
         min_population = sys.maxsize
@@ -497,10 +501,10 @@ class PopulationTemplate():
         """Check if the template is empty."""
         return self.empty and self.mother_blob_id is None
 
-    def has_traceable_properties(self):
+    def has_traceable_characteristics(self):
         return not self.empty and bool(self.traceable_characteristics)
     
-    def has_sampled_properties(self):
+    def has_sampled_characteristics(self):
         return not self.empty and bool(self.sampled_characteristics)
 
     def compare(self, other:PopulationTemplate) -> bool:
@@ -573,99 +577,152 @@ class BlobFactory():
 class Blob():
     """Blobs represent a part of a population.
     
-    Blobs are described by histograms of distribution for each characteristic.
-    
-    Each histogram is guaranteed to total the entire population in the blob. That is,
-    each 'person' in the blob has a value for each characteristic.
+    Blobs are described by two sets of characteristics. 
+    - Sampled charactistics (SampledCharacteristicsCollection) represent different attributes, 
+        each with its own categories and quantity of peopel in each category
+    - Traceable characteristics (dict) represent properties that are trackable over time and affect the entire blob.
 
     The characteristic values are not tied to each individual person, however. Being just a 
     statistical descriptor of the modeled population.
-
-    Blobs also have properties which is trackable over time, defined by treaceable properties.
 
     Blobs contain a mother_blob_id which describes their population's original blob id, as well as origin region.
 
 
     Attributes:
-        blob_template: The BlobTemplate used to generate this blob.
+        blob_factory: The BlobFactory used to generate this blob.
         original_population: Original population size.
         blob_id: Unique blob identifier.
         mother_blob_id: Original blob identifier, also denotes region of origin.
-        sampled_properties: The PropertyBlock for this blob. Each key denotes a sampled characteristic.
+        sampled_characteristics: The PropertyBlock for this blob. Each key denotes a sampled characteristic.
         spawning_node: The node were this blob was created.
         frame_origin_node: The node where this blob started the frame.
     """
     events = Events()
     
-    def __init__(self, _mother_blob_id, _node_of_origin, _population, _blob_factory:BlobFactory):
-        self.blob_factory:BlobFactory = _blob_factory
+    def __init__(self, _mother_blob_id: int, node_of_origin: int, population: int, blob_factory:BlobFactory):
+        self.blob_factory:BlobFactory = blob_factory
         self.profiles = None
-        self.original_population = _population
+        self.original_population = population
         self.blob_id = IDGen('blobs').get_id()
         self.mother_blob_id = _mother_blob_id
-        self.node_of_origin: int = _node_of_origin
-        self._traceable_properties:dict = {}
-        self.sampled_properties:SampledCharacteristicCollection = None
-        self.frame_origin_node = None
-        self.previous_node = _node_of_origin
+        self.node_of_origin: int = node_of_origin
+        self.sampled_characteristics:SampledCharacteristicCollection = None # type: ignore
+        self.traceable_characteristics:dict[str, Any] = {}
+        self.frame_origin_node:int = None # type: ignore
+        self.previous_node:int = node_of_origin
         
     def initialize_characteristics(self, sampled_characteristics:SampledCharacteristicCollection, traceable_characteristics:dict):
-        self.sampled_properties = sampled_characteristics
-        self._traceable_properties = traceable_characteristics
+        self.sampled_characteristics = sampled_characteristics
+        self.traceable_characteristics = traceable_characteristics
               
-    def initialize_blocks(self, block_template:CharacteristicsFactory, population):
-        self.sampled_properties = block_template.generate_characteristic_collection_rand(population)
-        self._traceable_properties = copy.deepcopy(block_template.traceable_characteristics)
+    # def initialize_blocks(self, block_template:CharacteristicsFactory, population):
+    #     self.sampled_characteristics = block_template.generate_characteristic_collection_rand(population)
+    #     self.traceable_characteristics = copy.deepcopy(block_template.traceable_characteristics)
 
-    def initialize_blocks_empty(self, block_template:CharacteristicsFactory):
-        self.sampled_properties = block_template.generate_characteristic_collection_empty()
-        self._traceable_properties = copy.deepcopy(block_template.traceable_characteristics)
+    # def initialize_blocks_empty(self, block_template:CharacteristicsFactory):
+    #     self.sampled_characteristics = block_template.generate_characteristic_collection_empty()
+    #     self.traceable_characteristics = copy.deepcopy(block_template.traceable_characteristics)
 
-    def initialize_blocks_profile(self, block_template:CharacteristicsFactory, population, profiles):
-        self.profiles = profiles
-        self.sampled_properties = block_template.generate_characteristic_collection_with_profile(population, profiles)
-        self._traceable_properties = copy.deepcopy(block_template.traceable_characteristics)
+    # def initialize_blocks_profile(self, block_template:CharacteristicsFactory, population, profiles):
+    #     self.profiles = profiles
+    #     self.sampled_characteristics = block_template.generate_characteristic_collection_with_profile(population, profiles)
+    #     self.traceable_characteristics = copy.deepcopy(block_template.traceable_characteristics)
         
-    def set_traceable_property(self, key, value):
-        prev_val = None
-        if prev_val in self._traceable_properties:
-            prev_val = self._traceable_properties[key]
-            
+    def set_traceable_characteristic(self, key:str, value: Any) -> None:
+        prev_val = self.traceable_characteristics.get(key, None)
         if prev_val == value:
             return
-        self._traceable_properties[key] = value
+        self.traceable_characteristics[key] = value
         Blob.events.on_traceable_property_changed(self, key, prev_val, value)
 
-    def get_traceable_property(self, key):
-        return self._traceable_properties[key]
+    def get_traceable_characteristic(self, key:str) -> Any:
+        return self.traceable_characteristics.get(key)
 
-    def get_traceable_properties(self):
-        return self._traceable_properties
-        
-    # used for infection for example
-    # def move_profile(self, quantity, pop_template, origin_block, target_block):
-    #     """Moves population from one PropertyBlock to another.
-        
-    #     This handles situations like infection (or another characteristic) tracking.
+    def get_traceable_characteristics(self) -> dict[str, Any]:
+        return self.traceable_characteristics
+    
+    def get_population_size(self, population_template:Optional[PopulationTemplate] = None)->int:
+        """Gets the population size matching a PopTemplate.
 
-    #     For example, moving 1 population from 'healthy' to 'infected' blocks models infection of one population,
-    #     and stores the profile of characteristics of infected population. 
+        If population_template is None or empty, gets total population size.
+        """
 
-    #     Params:
-    #         quantity: Population quantity to be moved.
-    #         pop_template: The PopTemplate filter to be matched.
-    #         origin_block: origin block key.
-    #         target_block: target block key.
-    #     """
-    #     extracted = self.blocks[origin_block].extract(quantity, pop_template)
-    #     self.blocks[target_block].add_block(extracted)
+        # No template defined - returns entire population
+        if population_template is None or population_template.is_empty():
+            return self.sampled_characteristics.get_population_size()
         
-    def split_blob(self, quantity, pop_template: PopulationTemplate = None):
-        """Separates a blob into another blob. This is filtered by both PopTemplate and PropertyBlocks.
+        # Template defined with a mother_blob_id different than this blob - returns 0
+        if population_template.mother_blob_id and population_template.mother_blob_id != self.mother_blob_id:
+            return 0
+
+        # Compares the traceable properties defined in the Template to the ones in the Blob
+        # Returns the population available according to the sampled properties
+        if self._compare_traceable_characteristics_to_population_template(population_template):
+            return self.sampled_characteristics.get_population_size(population_template)
+
+        # If the traceable properties do not match - returns 0
+        return 0
+        
+    def _compare_traceable_characteristics_to_population_template(self, population_template:PopulationTemplate) -> bool:
+        """
+        Compare this Blob's traceable characteristics to those defined in a PopulationTemplate.
+
+        Raises:
+            ValueError: If a required traceable property in the template is missing from this Blob.
+        """
+        if not population_template.has_traceable_characteristics():
+            return True
+        
+        for k, v in population_template.traceable_characteristics.items():
+            if not k in self.get_traceable_characteristics().keys():
+                raise ValueError(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
+            if not self._is_characteristic_value_matching(k, v):
+                return False
+        return True
+    
+    def _is_characteristic_value_matching(self, characteristic_name, expected_value) -> bool:
+        """Check if the value of a characteristic matches the expected value."""
+        actual_value = self.get_traceable_characteristic(characteristic_name)
+        if callable(expected_value):
+            return expected_value(actual_value) # type: ignore
+        elif isinstance(expected_value, (list, set)):
+            return actual_value in expected_value
+        else:
+            return actual_value == expected_value
+    
+    def compare_traceable_characteristics_to_other(self, other_blob: Blob, check_missing_keys=True):
+        """Compares the traceable characteristics of this Blob to another Blob."""
+        if check_missing_keys:
+            self._check_missing_keys_in_blob(self, other_blob, "other Blob")
+            self._check_missing_keys_in_blob(other_blob, self, "this Blob")
+        return self.get_traceable_characteristics() == other_blob.get_traceable_characteristics()
+    
+    def _check_missing_keys_in_blob(self, blob1: Blob, blob2: Blob, blob2_name:str):
+        """Check if there are missing keys in the traceable characteristics of a Blob."""
+        missing_keys = [key for key in blob1.get_traceable_characteristics().keys() if key not in blob2.get_traceable_characteristics().keys()]
+        if missing_keys:
+            raise ValueError(f"The traceable characteristics \"{missing_keys}\" were not defined in {blob2_name}. {blob2.verbose_str()}")
+
+    def merge_blob(self, blob: Blob) -> None:
+        """Merge population from other Blob into self.
+        
+        IMPORTANT: The exclusion of the consumed blob from the simulation is responsability of the caller of this function.
+
+        Params:
+            blob: Another blob to be consumed.
+        """
+        if not isinstance(blob, Blob):
+            return
+        if self.compare_traceable_characteristics_to_other(blob):
+            self.sampled_characteristics.merge_characteristic_collection(blob.sampled_characteristics)   
+
+    def _split_blob(self, quantity, pop_template: Optional[PopulationTemplate] = None) -> Blob | None:
+        """Separates a blob into another blob. This is filtered by a PopulationTemplate.
+        Internal use. For external use, call grab_population()
         
         Params:
             quantity: Population quantity to be separated into a new Blob.
-            pop_template: The PopTemplate filter to be matched.
+            pop_template: The PopulationTemplate filter to be matched.
 
         Returns:
             A new blob containing the extracted population
@@ -676,133 +733,59 @@ class Blob():
             return None
 
         new_blob = self.blob_factory.generate_blob_empty(self.mother_blob_id, self.node_of_origin)
-        
-        if pop_template is not None:
-            if pop_template.mother_blob_id is not None and pop_template.mother_blob_id != self.mother_blob_id:
-                return new_blob
+    
+        # If the template is defined and the mother_blob_id is different, return an empty blob
+        if pop_template and pop_template.mother_blob_id and pop_template.mother_blob_id != self.mother_blob_id:
+            return new_blob
 
-        
-        removed_block = self.sampled_properties.extract(current_quantity, pop_template)
-        new_blob.sampled_properties = removed_block
-        
-        for k,v in self.get_traceable_properties().items():
-            new_blob._traceable_properties[k] = v
+        removed_collection:SampledCharacteristicCollection = self.sampled_characteristics.extract(current_quantity, pop_template) # type: ignore
+        new_blob.initialize_characteristics(removed_collection, self.traceable_characteristics.copy())
         # new_blob.spawning_node = self.spawning_node
         # new_blob.previous_node = self.previous_node
         new_blob.frame_origin_node = self.frame_origin_node
         return new_blob
     
-    def change_blob_traceable_property(self, key, value, quantity: int, template : PopulationTemplate = None) -> Blob:
+    def split_and_change_blob_traceable_characteristic(self, key, value, quantity: int, template : Optional[PopulationTemplate] = None) -> Blob | None:
+        """
+        Splits a blob into another blob, and changes a traceable characteristic in the new blob.
+        """
+        blob = self.grab_population(quantity, template)
+
+        if not isinstance(blob, Blob):
+            return blob
         
-        _blob = self.grab_population(quantity, template)
-        if not isinstance(_blob, Blob):
-            return
-        _blob.set_traceable_property(key, value)
+        blob.set_traceable_characteristic(key, value)
+        if blob is not self:
+            blob.previous_node = self.previous_node
+            blob.frame_origin_node = self.frame_origin_node
         
-        if _blob is not self:
-            _blob.previous_node = self.previous_node
-            _blob.frame_origin_node = self.frame_origin_node
-        return _blob
+        return blob
     
-    def grab_population(self, quantity, population_template = None)->Blob:
+    def grab_population(self, quantity: int, population_template: Optional[PopulationTemplate] = None)-> Blob | None:
         """Grabs a population from this Blob.
         
         Returns either a new Blob, or the own blob, if it matches the entire population.
 
         Params:
             quantity: The population quantity to be grabbed.
-            population_template: the population template to be matched.
+            population_template: the PopulationTemplate to be matched.
 
         Returns:
             This Blob, if the population_template matches the entire population.    
             Otherwise, returns a new Blob, with a matched population inside.
         """
-        matching_template_total_population = self.get_population_size(population_template) ==  self.get_population_size()
-        if quantity >= self.get_population_size(population_template) and matching_template_total_population:
+        total_population = self.get_population_size()
+        template_population = self.get_population_size(population_template)
+        matching_template_total_population = template_population == total_population
+
+        if quantity == 0 or total_population == 0:
+            return None
+        elif quantity >= template_population and matching_template_total_population:
             return self
-        else:
-            return self.split_blob(quantity, population_template)
-
-    def get_population_size(self, population_template:PopulationTemplate = None)->int:
-        """Gets the population size matching a PopTemplate.
-
-        If population_template is None, gets total population size.
-        """
-
-        # No template defined - returns entire population
-        if population_template is None:
-            return self.sampled_properties.get_population_size()
-
-        # A template was defined, but without any traceable or sampled properties - returns entire population
-        if population_template.is_empty():
-            return self.sampled_properties.get_population_size()
-        
-        # Template defined with a mother_blob_id different than this blob - returns 0
-        if population_template is not None and population_template.mother_blob_id is not None:
-            #print("testing mother blob", population_template.mother_blob_id , self.mother_blob_id)
-            if population_template.mother_blob_id != self.mother_blob_id:
-                #print("Different")
-                return 0
-        
-        # Compares the traceable properties defined in the Template to the ones in the Blob
-        # Returns the population available according to the sampled properties
-        if self.compare_traceable_properties_to_template(population_template):
-            return self.sampled_properties.get_population_size(population_template)
-
-        # If the traceable properties do not match - returns 0
-        return 0
-
-    def compare_traceable_properties_to_template(self, population_template:PopulationTemplate):
-        
-        # If PopTemplate does not have traceable properties defined
-        if not population_template.has_traceable_properties():
-            return True
-    
-        # Compares traceable properties set in the PopTemplate
-        # The PopTemplate may have fewer properties than the Blob
-        for k,v in population_template.traceable_characteristics.items():
-            if k not in self.get_traceable_properties().keys():
-                sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. Set a default value using the \"EnviromentGraph.add_blobs_traceable_property()\" function, or setting it in a BlockTemplate of a BlockFactory. {self.verbose_str()}")
-            if callable(v):
-                if not v(self.get_traceable_property(k)):
-                    return False
-            elif isinstance(v,(list,set)):
-                if self.get_traceable_property(k) not in v:
-                    return False
-            elif self.get_traceable_property(k) != v:
-                return False
-            
-        # All defined properties matched
-        return True
-
-    def compare_traceable_properties_to_other(self, other_blob: Blob, check_missing_keys = True):
-        if check_missing_keys:
-            for k in self.get_traceable_properties().keys():
-                if k not in other_blob.get_traceable_properties().keys():
-                    sys.exit(f"The traceable property \"{k}\" was not defined in other Blob. {other_blob.verbose_str()}")
-            for k in other_blob.get_traceable_properties().keys():
-                if k not in self.get_traceable_properties().keys():
-                    sys.exit(f"The traceable property \"{k}\" was not defined in this Blob. {self.verbose_str()}")
-
-        return self.get_traceable_properties() == other_blob.get_traceable_properties()
-
-    # merges a child blob into a mother blob
-    # Outside code is responsible for deleting consumed blob
-    def consume_blob(self, blob: Blob):
-        """Consumes the population of another blob.
-        
-        IMPORTANT: The exclusion of the consumed blob from the simulation is responsability of the caller of this function.
-
-        Params:
-            blob: Another blob to be consumed.
-        """
-        if not isinstance(blob, Blob):
-            return
-        if self.compare_traceable_properties_to_other(blob):
-            self.sampled_properties.merge_characteristic_collection(blob.sampled_properties)
+        return self._split_blob(quantity, population_template)
             
     def verbose_str(self):
-        return "{0} {1} {2}".format(self, self.get_traceable_properties(), self.sampled_properties)
+        return "{0} {1} {2}".format(self, self.get_traceable_characteristics(), self.sampled_characteristics)
 
     def __str__(self):
         template_string = '{{\"id\" : {0}, \"mother_id\" : {1}, \"population\" :  {2}, \"previous_node\" : {3}, \"frame_origin_node\" : {4}}}'
@@ -821,9 +804,9 @@ if __name__ == "__main__":
     FixedRandom()
 
     dummyBlockTemplate = CharacteristicsFactory()
-    dummyBlockTemplate.add_sampled_characteristic('age', ('child', 'adult', 'ancient'))
-    dummyBlockTemplate.add_sampled_characteristic('economic_profile', ('unemployed', 'worker'))
-    dummyBlockTemplate.add_sampled_characteristic('social_profile', ('low', 'mid', 'high'))
+    dummyBlockTemplate.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
+    dummyBlockTemplate.add_sampled_characteristic('economic_profile', ['unemployed', 'worker'])
+    dummyBlockTemplate.add_sampled_characteristic('social_profile', ['low', 'mid', 'high'])
     #dummyBlockTemplate.add_bucket('risk', ('low', 'mid', 'high'))
     #dummyBlockTemplate.add_bucket('height', ('short', 'average', 'tall'))
     dummyBlockTemplate.add_traceable_characteristic('vaccine_level', 0)
@@ -832,11 +815,11 @@ if __name__ == "__main__":
         
     print("\nCREATING BLOB 1")
     dummyBlob = dummyBlobFactory.generate_blob_rand(0, 0, 400)
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.get_traceable_properties(), dummyBlob.sampled_properties)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.get_traceable_characteristics(), dummyBlob.sampled_characteristics)
     print("************")
     
-    print(dummyBlob.sampled_properties, type(dummyBlob.sampled_properties.characteristics['age']))
-    print(dummyBlob.sampled_properties.characteristics['age'].name, type(dummyBlob.sampled_properties.characteristics['age'].name))
+    print(dummyBlob.sampled_characteristics, type(dummyBlob.sampled_characteristics.characteristics['age']))
+    print(dummyBlob.sampled_characteristics.characteristics['age'].name, type(dummyBlob.sampled_characteristics.characteristics['age'].name))
     print("\nSPLIT BLOB 1 INTO BLOB 2 - MATCHING TREACEABLE_PROP")
     # sets a population template
     dummyPopTemplate = PopulationTemplate()
@@ -855,10 +838,10 @@ if __name__ == "__main__":
     
     print("\nSPLIT BLOB 1 INTO BLOB 3 - NOT MATCHING TREACEABLE_PROP")
     dummyPopTemplate.set_traceable_property('vaccine_level', 1)
-    dummyBlob3 = dummyBlob.split_blob(20, dummyPopTemplate)
+    dummyBlob3: Blob = dummyBlob._split_blob(20, dummyPopTemplate) # type: ignore
     print("DummyPopTemplate", dummyPopTemplate)
     print("------------")
-    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.get_traceable_properties(), dummyBlob.sampled_properties)
+    print("Dummy1", dummyBlob.get_population_size(), dummyBlob, dummyBlob.get_traceable_characteristics(), dummyBlob.sampled_characteristics)
     print("------------")
     # print("Dummy2", dummyBlob2.get_population_size(), dummyBlob2, dummyBlob2.traceable_properties, dummyBlob2.sampled_properties)
     # print("------------")
@@ -878,7 +861,7 @@ if __name__ == "__main__":
     # print("************")
     
     print("\nBLOB 1 CONSUMING BLOB 3 - NOT A MATCH")
-    dummyBlob.consume_blob(dummyBlob3)
+    dummyBlob.merge_blob(dummyBlob3)
     print("DummyPopTemplate", dummyPopTemplate)
     print("------------")
     print("Dummy1", dummyBlob.get_population_size(), dummyBlob.verbose_str())

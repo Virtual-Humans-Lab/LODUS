@@ -137,7 +137,7 @@ class ShelterPlugin(environment.TimeActionPlugin):
 
         _blobs = target_node.grab_population(_to_shelter, self.in_danger_template)
         for _b in _blobs:
-            _b.set_traceable_property("flooding_status", "sheltered")
+            _b.set_traceable_characteristic("flooding_status", "sheltered")
             if _b not in  target_node.contained_blobs:
                 target_node.add_blob(_b)
 
@@ -206,9 +206,9 @@ class ShelterPlugin(environment.TimeActionPlugin):
             self.graph.direct_action_invoke(new_action, self.cycle_step, self.sim_step)
 
             for _blob in _node.contained_blobs:
-                if _blob.get_traceable_property("flooding_status") == "in_danger":
+                if _blob.get_traceable_characteristic("flooding_status") == "in_danger":
                     _pop = _blob.get_population_size()
-                    _changed_blob = _blob.change_blob_traceable_property("flooding_status", "sheltered", _pop)
+                    _changed_blob = _blob.split_and_change_blob_traceable_characteristic("flooding_status", "sheltered", _pop)
                     if _blob != _changed_blob:
                         _node.add_blob(_changed_blob)
 

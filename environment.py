@@ -161,7 +161,7 @@ class EnvNode():
         self.add_blobs(_grabbed)
 
         for _blob in _grabbed:
-            _blob.set_traceable_property(key, value)
+            _blob.set_traceable_characteristic(key, value)
             _blob.previous_node = self.id
             
             #if _blob.spawning_node is None:
@@ -182,7 +182,7 @@ class EnvNode():
         if blob is not _grabbed:
             self.add_blob(_grabbed)
         
-        _grabbed.set_traceable_property(key, value)
+        _grabbed.set_traceable_characteristic(key, value)
         _grabbed.previous_node = blob.previous_node
         #if _blob.spawning_node is None:
         #    _blob.spawning_node = self.id
@@ -930,14 +930,14 @@ class EnvironmentGraph():
                     #if current_blob.mother_blob_id == other_blob.mother_blob_id:
                     #    current_blob.consume_blob(other_blob)
                     if current_blob.node_of_origin == other_blob.node_of_origin:
-                        current_blob.consume_blob(other_blob)
+                        current_blob.merge_blob(other_blob)
 
                 i+=1
                 
     def add_blobs_traceable_property(self, key, value):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.set_traceable_property(key, value)
+                blob.set_traceable_characteristic(key, value)
                 
     # def lambda_blobs_traceable_property(self, key, lambda_funtion):
     #     for node in self.node_list:
@@ -948,7 +948,7 @@ class EnvironmentGraph():
     def lambda_blobs_traceable_property(self, key, lambda_funtion):
         for node in self.node_list:
             for blob in node.contained_blobs:
-                blob.set_traceable_property(key, lambda_funtion(blob, blob.get_traceable_property(key)))
+                blob.set_traceable_characteristic(key, lambda_funtion(blob, blob.get_traceable_characteristic(key)))
 
     
 
@@ -963,8 +963,8 @@ class EnvironmentGraph():
             while j < len(blob_list):   
                 other_blob: population.Blob = blob_list[j]
                 
-                if current_blob.mother_blob_id == other_blob.mother_blob_id and current_blob.compare_traceable_properties_to_other(other_blob):
-                    current_blob.consume_blob(other_blob)
+                if current_blob.mother_blob_id == other_blob.mother_blob_id and current_blob.compare_traceable_characteristics_to_other(other_blob):
+                    current_blob.merge_blob(other_blob)
                     node.remove_blob(other_blob)
                 else:
                     j+=1

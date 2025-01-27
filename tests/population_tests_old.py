@@ -33,7 +33,7 @@ def verify_blob_validity(blob: Blob):
     
     A Blob is Valid if all of its PropertyBlock is Valid.
     """
-    return verify_block_validity(blob.sampled_properties)
+    return verify_block_validity(blob.sampled_characteristics)
 
 
 def verify_blobs_validity(blobs):
@@ -69,11 +69,11 @@ class PopulationTests(unittest.TestCase):
         # Case 1:
         # Create a PropertyBucket with the 'characteristic_A', 3 different values, and population = 60 with random distribution
         aux_bucket1 = SampledCharacteristic('characteristic_A')
-        aux_bucket1.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 60)
+        aux_bucket1.set_values_rand(['char_A_value_1', 'char_A_value_2', 'char_A_value_3'], 60)
 
         # Create another PropertyBucket with the same characteristic and values, but population = 30
         aux_bucket2 = SampledCharacteristic('characteristic_A')
-        aux_bucket2.set_values_rand(('char_A_value_1', 'char_A_value_2', 'char_A_value_3') , 30)
+        aux_bucket2.set_values_rand(['char_A_value_1', 'char_A_value_2', 'char_A_value_3'], 30)
 
         # Test adding PropertyBuckets with the same characteristic 
         aux_bucket_size1 = aux_bucket1.get_population_size()
@@ -91,7 +91,7 @@ class PopulationTests(unittest.TestCase):
         # Create a PropertyBucket with different characteristic and values
         # The values("ids/keys/str"), their quantity, and the population are irrelevant in this test due to the characteristic being different
         aux_bucket3 = SampledCharacteristic('characteristic_B')
-        aux_bucket3.set_values_rand(('char_B_value_1', 'char_B_value_2') , 60)
+        aux_bucket3.set_values_rand(['char_B_value_1', 'char_B_value_2'] , 60)
 
         # Test adding PropertyBuckets with a different characteristic 
         aux_bucket1.merge_values(aux_bucket3)
@@ -128,7 +128,7 @@ class PopulationTests(unittest.TestCase):
         # Case 1:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
         aux_bucket = SampledCharacteristic('characteristic_A')
-        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+        aux_bucket.set_values(['value_1', 'value_2', 'value_3'], [60, 60, 60])
 
         # Extracting 100 people
         original_bucket_size = aux_bucket.get_population_size()
@@ -147,7 +147,7 @@ class PopulationTests(unittest.TestCase):
         # Case 2:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
         aux_bucket = SampledCharacteristic('characteristic_A')
-        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+        aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
         # Extracting 180 people - the exact amount available (could use the original_bucket_size)
         original_bucket_size = aux_bucket.get_population_size()
@@ -166,7 +166,7 @@ class PopulationTests(unittest.TestCase):
         # Case 3:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
         aux_bucket = SampledCharacteristic('characteristic_A')
-        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+        aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
         # Extracting 300 people - more than available
         original_bucket_size = aux_bucket.get_population_size()
@@ -207,7 +207,7 @@ class PopulationTests(unittest.TestCase):
         # Case 1:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
         aux_bucket = SampledCharacteristic('characteristic_A')
-        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+        aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
         
         # Extracting 30 people from 'value_1'
         original_bucket_size = aux_bucket.get_population_size()
@@ -236,7 +236,7 @@ class PopulationTests(unittest.TestCase):
         # Case 2:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
         aux_bucket = SampledCharacteristic('characteristic_A')
-        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+        aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
         # Extracting 60 people from 'value_1' - the exact amount available
         original_bucket_size = aux_bucket.get_population_size()
@@ -266,7 +266,7 @@ class PopulationTests(unittest.TestCase):
         # Case 3:
         # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
         aux_bucket = SampledCharacteristic('characteristic_A')
-        aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+        aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
         # Extracting 120 people from 'value_1' - more than available
         original_bucket_size = aux_bucket.get_population_size()
@@ -332,7 +332,7 @@ class PopulationTests(unittest.TestCase):
             # Case 1:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
             aux_bucket = SampledCharacteristic('characteristic_A')
-            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
             
             # Extracting half of the available population (30 for each key)
             original_bucket_size = aux_bucket.get_population_size()
@@ -362,7 +362,7 @@ class PopulationTests(unittest.TestCase):
             # Case 2:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
             aux_bucket = SampledCharacteristic('characteristic_A')
-            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
             # Extracting the total available population (60 for each key)
             original_bucket_size = aux_bucket.get_population_size()
@@ -392,7 +392,7 @@ class PopulationTests(unittest.TestCase):
             # Case 3:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
             aux_bucket = SampledCharacteristic('characteristic_A')
-            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
             # Extracting more than the total available population (120 for each key)
             original_bucket_size = aux_bucket.get_population_size()
@@ -455,7 +455,7 @@ class PopulationTests(unittest.TestCase):
             # Case 1:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
             aux_bucket = SampledCharacteristic('characteristic_A')
-            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
             
             # Extracting half of the available population (30 for each key)
             original_bucket_size = aux_bucket.get_population_size()
@@ -485,7 +485,7 @@ class PopulationTests(unittest.TestCase):
             # Case 2:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
             aux_bucket = SampledCharacteristic('characteristic_A')
-            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
             # Extracting the total available population (60 for each key)
             original_bucket_size = aux_bucket.get_population_size()
@@ -515,7 +515,7 @@ class PopulationTests(unittest.TestCase):
             # Case 3:
             # Create a PropertyBucket with 3 different values, each with 60 people (180 total)
             aux_bucket = SampledCharacteristic('characteristic_A')
-            aux_bucket.set_values(('value_1', 'value_2', 'value_3') , (60,60,60))
+            aux_bucket.set_values(['value_1', 'value_2', 'value_3'] , [60,60,60])
 
             # Extracting more than the total available population (120 for each key)
             original_bucket_size = aux_bucket.get_population_size()
@@ -544,7 +544,7 @@ class PopulationTests(unittest.TestCase):
 
     ### BlockTemplate tests
     ## BlockTemplate.Generate
-    def test_block_template_generate(self):
+    def test_factory_generate(self):
         """ Tests BlockTemplate.Generate
 
             Generate returns a valid PropertyBlock with the defined population quantity
@@ -565,14 +565,14 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
-        block_template.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2',])
-        block_template.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2',])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
 
         # Case 1:
         # Create a PropertyBlock using the BlockTemplate
-        block1 = block_template.generate_characteristic_collection_rand(300)
+        block1 = factory.generate_characteristic_collection_rand(300)
         block1_size = block1.get_population_size()
         
         # Compare size, PropertyBuckets count and verify block validity
@@ -585,8 +585,8 @@ class PopulationTests(unittest.TestCase):
                        
         # Case 2:
         # Adds a new bucket to the BlockTemplate and creates a new PropertyBlock
-        block_template.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2'])
-        block2 = block_template.generate_characteristic_collection_rand(50)
+        factory.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2'])
+        block2 = factory.generate_characteristic_collection_rand(50)
         block2_size = block2.get_population_size()
         
         # Compare size, PropertyBuckets count and verify block validity
@@ -602,14 +602,14 @@ class PopulationTests(unittest.TestCase):
         # Case 3:
         # Creates a PropertyBlock with 0 population - Should be None
         with self.assertRaises(ValueError):
-            block3 = block_template.generate_characteristic_collection_rand(0)
-        # block3 = block_template.generate_characteristic_collection(0)
+            block3 = factory.generate_characteristic_collection_rand(0)
+        # block3 = factory.generate_characteristic_collection(0)
 
         # # Verify block validity
         # self.assertEqual(block3, None, 'Case 3 Target block should be None.')
     
     ## BlockTemplate.GenerateEmpty    
-    def test_block_template_generate_empty(self):
+    def test_factory_generate_empty(self):
         """ Tests BlockTemplate.GenerateEmpty
 
             Generate returns a valid PropertyBlock with population 0
@@ -620,14 +620,14 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
 
         # Case 1:
         # Create a PropertyBlock using the BlockTemplate
-        block1 = block_template.generate_characteristic_collection_empty()
+        block1 = factory.generate_characteristic_collection_empty()
         block1_size = block1.get_population_size()
         
         # Compare size, PropertyBuckets count and verify block validity
@@ -639,7 +639,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 1 Target block is not valid.')
         
     ## BlockTemplate.GenerateProfile
-    def test_block_template_generate_profile(self):
+    def test_factory_generate_profile(self):
         """ Tests BlockTemplate.GenerateProfile
 
             GenerateProfile returns a valid PropertyBlock with the defined population quantity and characteristic->[values]
@@ -673,13 +673,13 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 6 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
-        block_template.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2', 'value_B3'])
-        block_template.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
-        block_template.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2', 'value_D3'])
-        block_template.add_sampled_characteristic('characteristic_E', ['value_E1', 'value_E2'])
-        block_template.add_sampled_characteristic('characteristic_F', ['value_F1', 'value_F2'])
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2', 'value_B3'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2', 'value_D3'])
+        factory.add_sampled_characteristic('characteristic_E', ['value_E1', 'value_E2'])
+        factory.add_sampled_characteristic('characteristic_F', ['value_F1', 'value_F2'])
         # Case 1:
         # Creates a pop_profile dict with the following goals per characteristic:
         # A: Total population distributed through all values
@@ -695,7 +695,7 @@ class PopulationTests(unittest.TestCase):
                         'characteristic_E' : {}}
         
         # Create a PropertyBlock using the template. 100 is the highest sum defined in a single characteristic (A, B and C) 
-        block1 = block_template.generate_characteristic_collection_with_profile(100, pop_profile)
+        block1 = factory.generate_characteristic_collection_with_profile(100, pop_profile)
         block1_size = block1.get_population_size()
         values = block1.get_mapping_of_property_values()
         
@@ -730,7 +730,7 @@ class PopulationTests(unittest.TestCase):
                         'characteristic_E' : {}}
         
         # Create a PropertyBlock using the template. 200 is the more than the highest sum defined in a single characteristic (A, B and C)
-        block2 = block_template.generate_characteristic_collection_with_profile(200, pop_profile)
+        block2 = factory.generate_characteristic_collection_with_profile(200, pop_profile)
         block2_size = block2.get_population_size()
         values = block2.get_mapping_of_property_values()
         
@@ -778,7 +778,7 @@ class PopulationTests(unittest.TestCase):
                         'characteristic_E' : {}}
         
         # Create a PropertyBlock using the template. 20 is the lower then the minimum defined in a single characteristic (D)
-        block3 = block_template.generate_characteristic_collection_with_profile(20, pop_profile)
+        block3 = factory.generate_characteristic_collection_with_profile(20, pop_profile)
         block3_size = block3.get_population_size()
         values = block3.get_mapping_of_property_values()
         
@@ -806,10 +806,10 @@ class PopulationTests(unittest.TestCase):
         # Case 4:
         # Requested 0 population:
         with self.assertRaises(ValueError):
-            block4 = block_template.generate_characteristic_collection_with_profile(0, pop_profile)
+            block4 = factory.generate_characteristic_collection_with_profile(0, pop_profile)
 
     ## BlockTemplate.Generate - without buckets    
-    def test_block_template_without_buckets(self):
+    def test_factory_without_buckets(self):
         """ Tests BlockTemplate Generate functions without defining buckets
 
             All Generate functions return a invalid PropertyBlock (None)
@@ -829,25 +829,25 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 0 characteristics
-        block_template = CharacteristicsFactory()
+        factory = CharacteristicsFactory()
 
         # Case 1:
         # Create a PropertyBlock using BlockTemplate.Generate
         with self.assertRaises(ValueError):
-            block1 = block_template.generate_characteristic_collection_rand(100)
+            block1 = factory.generate_characteristic_collection_rand(100)
             # self.assertEqual(block1, None, 'Case 1 Target block should be None.')
         
         # Case 2:
         # Create a PropertyBlock using BlockTemplate.Generate
         with self.assertRaises(ValueError):
-            block2 = block_template.generate_characteristic_collection_empty()
+            block2 = factory.generate_characteristic_collection_empty()
             # self.assertEqual(block2, None, 'Case 2 Target block should be None.')
         
         # Case 3:
         # Create a PropertyBlock using BlockTemplate.Generate
         with self.assertRaises(ValueError):
             pop_profile = {}
-            block3 = block_template.generate_characteristic_collection_with_profile(100, pop_profile)
+            block3 = factory.generate_characteristic_collection_with_profile(100, pop_profile)
             # self.assertEqual(block3, None, 'Case 3 Target block should be None.')
           
     
@@ -865,15 +865,15 @@ class PopulationTests(unittest.TestCase):
 
         """
         # Create a BlockTemplate with 4 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
-        block_template.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
-        block_template.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
-        block_template.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2'])
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2'])
 
         # Create two PropertyBlocks using the same template
-        target_block = block_template.generate_characteristic_collection_rand(300)
-        add_block = block_template.generate_characteristic_collection_rand(50)
+        target_block = factory.generate_characteristic_collection_rand(300)
+        add_block = factory.generate_characteristic_collection_rand(50)
 
         # Get PropertyBlocks sizes
         original_size = target_block.get_population_size()
@@ -930,10 +930,10 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
         
         pop_profile = {'characteristic_A' : {'value_A1' : 30, 'value_A2' : 50},
                        'characteristic_B' : {'value_B1' : 50, 'value_B2' : 250}}
@@ -945,14 +945,14 @@ class PopulationTests(unittest.TestCase):
         pop_template = PopulationTemplate()
 
         # Case 1
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
         
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts less people than available
-        extracted_block:SampledCharacteristicCollection = target_block.extract(20, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(20, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -974,7 +974,7 @@ class PopulationTests(unittest.TestCase):
 
 
         # Case 2
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
 
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
@@ -982,7 +982,7 @@ class PopulationTests(unittest.TestCase):
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts equal people to available
-        extracted_block = target_block.extract(matching_pop_size, pop_template)
+        extracted_block = target_block.extract(matching_pop_size, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1003,7 +1003,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 2: Extracted block is not valid.')               
 
         # Case 3
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
 
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
@@ -1011,7 +1011,7 @@ class PopulationTests(unittest.TestCase):
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts more people than available
-        extracted_block = target_block.extract(matching_pop_size + 20, pop_template)
+        extracted_block = target_block.extract(matching_pop_size + 20, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1069,10 +1069,10 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
         
         pop_profile = {'characteristic_A' : {'value_A1' : 30, 'value_A2' : 50},
                        'characteristic_B' : {'value_B1' : 50, 'value_B2' : 250}}
@@ -1086,14 +1086,14 @@ class PopulationTests(unittest.TestCase):
         pop_template.set_sampled_property('characteristic_B', ['value_B1'])
 
         # Case 1
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
         
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts less people than available
-        extracted_block = target_block.extract(20, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(20, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1117,7 +1117,7 @@ class PopulationTests(unittest.TestCase):
 
 
         # Case 2
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
 
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
@@ -1125,7 +1125,7 @@ class PopulationTests(unittest.TestCase):
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts equal people to available
-        extracted_block = target_block.extract(matching_pop_size, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(matching_pop_size, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1148,7 +1148,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 2: Extracted block is not valid.')               
 
         # Case 3
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
 
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
@@ -1156,7 +1156,7 @@ class PopulationTests(unittest.TestCase):
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts more people than available
-        extracted_block = target_block.extract(matching_pop_size + 20, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(matching_pop_size + 20, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1216,10 +1216,10 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
         
         pop_profile = {'characteristic_A' : {'value_A1' : 30, 'value_A2' : 50},
                        'characteristic_B' : {'value_B1' : 50, 'value_B2' : 250}}
@@ -1235,14 +1235,14 @@ class PopulationTests(unittest.TestCase):
 
 
         # Case 1
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
         
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts less people than available
-        extracted_block = target_block.extract(20, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(20, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1266,7 +1266,7 @@ class PopulationTests(unittest.TestCase):
 
 
         # Case 2
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
 
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
@@ -1274,7 +1274,7 @@ class PopulationTests(unittest.TestCase):
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts equal people to available
-        extracted_block = target_block.extract(matching_pop_size, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(matching_pop_size, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1297,7 +1297,7 @@ class PopulationTests(unittest.TestCase):
                         'Case 2: Extracted block is not valid.')               
 
         # Case 3
-        target_block = block_template.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
+        target_block = factory.generate_characteristic_collection_with_profile(initial_block_size, pop_profile)
 
         # Gets original sizes
         target_block_original_size = target_block.get_population_size()
@@ -1305,7 +1305,7 @@ class PopulationTests(unittest.TestCase):
         available_original_size = target_block.get_population_size(pop_template)
         
         # Extracts more people than available
-        extracted_block = target_block.extract(matching_pop_size + 20, pop_template)
+        extracted_block:SampledCharacteristicCollection = target_block.extract(matching_pop_size + 20, pop_template) # type: ignore
         
         # Gets final sizes
         extracted_block_size = extracted_block.get_population_size()
@@ -1362,12 +1362,12 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        block_template.add_traceable_characteristic('traceable_A', 0)
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_traceable_characteristic('traceable_A', 0)
+        blob_factory = BlobFactory(factory)
         
         # Case 1:
         # Create a Blob using the BlobFactory
@@ -1377,29 +1377,29 @@ class PopulationTests(unittest.TestCase):
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob1_size, 300,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
+        self.assertEqual(len(blob1.sampled_characteristics.characteristics.keys()), 3,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob1.get_traceable_characteristics().keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
         self.assertTrue(verify_blob_validity(blob1),
                         'Case 1 Target Blob is not valid.')
                        
         # Case 2:
         # Adds a new sampled property/bucket to the BlobFactory.BlockTemplate and creates a new Blob
-        blob_factory.characteristics_factory.add_sampled_characteristic('characteristic_D', ('value_D1', 'value_D2'))
+        blob_factory.characteristics_factory.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2'])
         blob2 = blob_factory.generate_blob_rand(0, 0, 50)
         blob2_size = blob2.get_population_size()
         
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob2_size, 50,
                         'Case 2 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob2.sampled_properties.characteristics.keys()), 4,
+        self.assertEqual(len(blob2.sampled_characteristics.characteristics.keys()), 4,
                         'Case 2 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob2.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob2.get_traceable_characteristics().keys()), 1,
                         'Case 2 Target Blob traceable properties count is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
+        self.assertEqual(len(blob1.sampled_characteristics.characteristics.keys()), 3,
                         'Case 2 Original Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob1.get_traceable_characteristics().keys()), 1,
                         'Case 2 Original Blob traceable properties count is not the correct amount.')
         self.assertTrue(verify_blob_validity(blob2),
                         'Case 2 Target Blob is not valid.')
@@ -1413,34 +1413,34 @@ class PopulationTests(unittest.TestCase):
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob3_size, 20,
                         'Case 3 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob3.sampled_properties.characteristics.keys()), 4,
+        self.assertEqual(len(blob3.sampled_characteristics.characteristics.keys()), 4,
                         'Case 3 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob3.get_traceable_properties().keys()), 2,
+        self.assertEqual(len(blob3.get_traceable_characteristics().keys()), 2,
                         'Case 3 Target Blob traceable properties count is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
+        self.assertEqual(len(blob1.sampled_characteristics.characteristics.keys()), 3,
                         'Case 3 Original Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob1.get_traceable_characteristics().keys()), 1,
                         'Case 3 Original Blob traceable properties count is not the correct amount.')
         self.assertTrue(verify_blob_validity(blob3),
                         'Case 3 Target Blob is not valid.')
         
         # Case 4:
         # Adds a new sampled property/bucket and a traceable property directly to the BlockTemplate and creates a new Blob
-        block_template.add_sampled_characteristic('characteristic_E', ('value_E1', 'value_E2'))
-        block_template.add_traceable_characteristic('traceable_c', { 0, 1, 2})
+        factory.add_sampled_characteristic('characteristic_E', ['value_E1', 'value_E2'])
+        factory.add_traceable_characteristic('traceable_c', { 0, 1, 2})
         blob4 = blob_factory.generate_blob_rand(0, 0, 500)
         blob4_size = blob4.get_population_size()
         
         # Compare size, sampled properties count and verify block validity
         self.assertEqual(blob4_size, 500,
                         'Case 4 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob4.sampled_properties.characteristics.keys()), 5,
+        self.assertEqual(len(blob4.sampled_characteristics.characteristics.keys()), 5,
                         'Case 4 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob4.get_traceable_properties().keys()), 3,
+        self.assertEqual(len(blob4.get_traceable_characteristics().keys()), 3,
                         'Case 4 Target Blob traceable properties count is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 3,
+        self.assertEqual(len(blob1.sampled_characteristics.characteristics.keys()), 3,
                         'Case 4 Original Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob1.get_traceable_characteristics().keys()), 1,
                         'Case 4 Original Blob traceable properties count is not the correct amount.')
         self.assertTrue(verify_blob_validity(blob4),
                         'Case 4 Target Blob is not valid.')
@@ -1462,11 +1462,11 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        blob_factory = BlobFactory(factory)
 
         # Case 1:
         # Create a PropertyBlock using the BlockTemplate
@@ -1476,7 +1476,7 @@ class PopulationTests(unittest.TestCase):
         # Compare size, PropertyBuckets count and verify block validity
         self.assertEqual(blob_1_size, 0,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob_1.sampled_properties.characteristics.keys()), 3,
+        self.assertEqual(len(blob_1.sampled_characteristics.characteristics.keys()), 3,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
         self.assertTrue(verify_blob_validity(blob_1),
                         'Case 1 Target Blob is not valid.')
@@ -1516,16 +1516,16 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 6 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2', 'value_B3'))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        block_template.add_sampled_characteristic('characteristic_D', ('value_D1', 'value_D2', 'value_D3'))
-        block_template.add_sampled_characteristic('characteristic_E', ('value_E1', 'value_E2'))
-        block_template.add_sampled_characteristic('characteristic_F', ('value_F1', 'value_F2'))
-        block_template.add_sampled_characteristic('characteristic_G', ('value_G1', 'value_G2'))
-        block_template.add_traceable_characteristic('traceable_A', 0)
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2', 'value_B3'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2', 'value_D3'])
+        factory.add_sampled_characteristic('characteristic_E', ['value_E1', 'value_E2'])
+        factory.add_sampled_characteristic('characteristic_F', ['value_F1', 'value_F2'])
+        factory.add_sampled_characteristic('characteristic_G', ['value_G1', 'value_G2'])
+        factory.add_traceable_characteristic('traceable_A', 0)
+        blob_factory = BlobFactory(factory)
         
         # Case 1:
         # Creates a pop_profile dict with the following goals per characteristic:
@@ -1547,16 +1547,16 @@ class PopulationTests(unittest.TestCase):
         # Create a Blob using the BlobFactory. 100 is the highest sum defined in a single characteristic (A, B and C) 
         blob1 = blob_factory.generate_blob_with_profile(0, 0, 100, pop_profile)
         blob1_size = blob1.get_population_size()
-        values = blob1.sampled_properties.get_mapping_of_property_values()
+        values = blob1.sampled_characteristics.get_mapping_of_property_values()
         
         # Compare size, PropertyBuckets count and verify block validity
         self.assertTrue(verify_blob_validity(blob1),
                         'Case 1 Target Blob is not valid.')
         self.assertEqual(blob1_size, 100,
                         'Case 1 Target Blob size is not the correct amount.')
-        self.assertEqual(len(blob1.sampled_properties.characteristics.keys()), 7,
+        self.assertEqual(len(blob1.sampled_characteristics.characteristics.keys()), 7,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob1.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob1.get_traceable_characteristics().keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
         
         # Verify that the population was properly distributed when all values are defined and equal the requested amount
@@ -1587,16 +1587,16 @@ class PopulationTests(unittest.TestCase):
         # Create a Blob using the template. 200 is the more than the highest sum defined in a single characteristic (A, B and C)
         blob2 = blob_factory.generate_blob_with_profile(0, 0, 200, pop_profile)
         blob2_size = blob2.get_population_size()
-        values = blob2.sampled_properties.get_mapping_of_property_values()
+        values = blob2.sampled_characteristics.get_mapping_of_property_values()
         
         # Compare size, PropertyBuckets count and verify block validity
         self.assertTrue(verify_blob_validity(blob2),
                         'Case 2 Target Blob is not valid.')
         self.assertEqual(blob2_size, 200,
                         'Case 2 Target Blob size is not the corrected amount.')
-        self.assertEqual(len(blob2.sampled_properties.characteristics.keys()), 7,
+        self.assertEqual(len(blob2.sampled_characteristics.characteristics.keys()), 7,
                         'Case 1 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob2.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob2.get_traceable_characteristics().keys()), 1,
                         'Case 1 Target Blob traceable properties count is not the correct amount.')
         
         # Verify that the population was properly distributed when all values are defined
@@ -1641,16 +1641,16 @@ class PopulationTests(unittest.TestCase):
         # Create a PropertyBlock using the template. 20 is the lower then the minimum defined in a single characteristic (D)
         blob3 = blob_factory.generate_blob_with_profile(0, 0, 20, pop_profile)
         blob3_size = blob3.get_population_size()
-        values = blob3.sampled_properties.get_mapping_of_property_values()
+        values = blob3.sampled_characteristics.get_mapping_of_property_values()
         
         # Compare size, PropertyBuckets count and verify block validity
         self.assertTrue(verify_blob_validity(blob3),
                         'Case 3 Target Blob is not valid.')
         self.assertEqual(blob3_size, 20,
                         'Case 3 Target Blob size is not the corrected amount.')
-        self.assertEqual(len(blob3.sampled_properties.characteristics.keys()), 7,
+        self.assertEqual(len(blob3.sampled_characteristics.characteristics.keys()), 7,
                         'Case 3 Target Blob sampled properties count is not the correct amount.')
-        self.assertEqual(len(blob3.get_traceable_properties().keys()), 1,
+        self.assertEqual(len(blob3.get_traceable_characteristics().keys()), 1,
                         'Case 3 Target Blob traceable properties count is not the correct amount.')
         
         # Verify that the population was properly distributed when all values are defined
@@ -1675,7 +1675,7 @@ class PopulationTests(unittest.TestCase):
 
     
     
-    def test_block_template_add_traceable_property(self):
+    def test_factory_add_traceable_property(self):
         """ Tests BlockTemplate.Generate
 
             Generate returns a valid PropertyBlock with the defined population quantity
@@ -1696,16 +1696,16 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Create a BlockTemplate with 3 characteristics
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        block_template.add_traceable_characteristic('traceable_A', 0)
-        block_template.add_traceable_characteristic('sir_state', 'susceptible')
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_traceable_characteristic('traceable_A', 0)
+        factory.add_traceable_characteristic('sir_state', 'susceptible')
         
         # Case 1:
         # Create a PropertyBlock using the BlockTemplate
-        block1 = block_template.generate_characteristic_collection_rand(300)
+        block1 = factory.generate_characteristic_collection_rand(300)
         block1_size = block1.get_population_size()
         
         # Compare size, PropertyBuckets count and verify block validity
@@ -1718,8 +1718,8 @@ class PopulationTests(unittest.TestCase):
                        
         # Case 2:
         # Adds a new bucket to the BlockTemplate and creates a new PropertyBlock
-        block_template.add_sampled_characteristic('characteristic_D', ('value_D1', 'value_D2'))
-        block2 = block_template.generate_characteristic_collection_rand(50)
+        factory.add_sampled_characteristic('characteristic_D', ['value_D1', 'value_D2'])
+        block2 = factory.generate_characteristic_collection_rand(50)
         block2_size = block2.get_population_size()
         
         # Compare size, PropertyBuckets count and verify block validity
@@ -1734,7 +1734,7 @@ class PopulationTests(unittest.TestCase):
         
         # Case 3:
         # Creates a PropertyBlock with 0 population - Should be None
-        block3 = block_template.generate_characteristic_collection_rand(0)
+        block3 = factory.generate_characteristic_collection_rand(0)
 
         # Verify block validity
         self.assertEqual(block3, None, 'Case 3 Target block should be None.')
@@ -1758,12 +1758,12 @@ class PopulationTests(unittest.TestCase):
         """
 
         # Set blob factory
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        block_template.add_traceable_characteristic('traceable_A', 0)
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_traceable_characteristic('traceable_A', 0)
+        blob_factory = BlobFactory(factory)
 
         # Case 1:
         # Creates 2 Blobs with the same traceable properties
@@ -1775,7 +1775,7 @@ class PopulationTests(unittest.TestCase):
         blob_2_original_size = blob_2.get_population_size()
 
         # Blob 1 try to consume Blob 2 - it should succeed
-        blob_1.consume_blob(blob_2)
+        blob_1.merge_blob(blob_2)
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -1784,7 +1784,7 @@ class PopulationTests(unittest.TestCase):
         # assets that Blobs are valid and the consume_blob succeeded
         self.assertTrue(verify_blob_validity(blob_1), 'Case 1 Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2), 'Case 1 Blob 2 is not valid.')
-        self.assertTrue(blob_1.compare_traceable_properties_to_other(blob_2), 
+        self.assertTrue(blob_1.compare_traceable_characteristics_to_other(blob_2), 
                         'Case 1 Traceable Properties do not match')
         self.assertEqual(blob_1_final_size, blob_1_original_size + blob_2_original_size, 
                          'Case 1 Blob 1 final size is not the total population.')
@@ -1794,7 +1794,7 @@ class PopulationTests(unittest.TestCase):
         # Case 2:
         # Creates 2 Blobs with differente traceable properties
         blob_1 = blob_factory.generate_blob_rand(0, 0, 100)
-        block_template.add_traceable_characteristic('traceable_A', 1)
+        factory.add_traceable_characteristic('traceable_A', 1)
         blob_2 = blob_factory.generate_blob_rand(0, 0, 50)
         
         # Get original Blob sizes
@@ -1802,7 +1802,7 @@ class PopulationTests(unittest.TestCase):
         blob_2_original_size = blob_2.get_population_size()
 
         # Blob 1 try to consume Blob 2 - it should fail
-        blob_1.consume_blob(blob_2)
+        blob_1.merge_blob(blob_2)
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -1811,7 +1811,7 @@ class PopulationTests(unittest.TestCase):
         # assets that Blobs are valid and the consume_blob failed
         self.assertTrue(verify_blob_validity(blob_1), 'Case 2 Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2), 'Case 2 Blob 2 is not valid.')
-        self.assertTrue(not blob_1.compare_traceable_properties_to_other(blob_2), 
+        self.assertTrue(not blob_1.compare_traceable_characteristics_to_other(blob_2), 
                         'Case 2 Traceable Properties match when they should not')
         self.assertEqual(blob_1_final_size, blob_1_original_size, 
                          'Case 2 Blob 1 final size was altered.')
@@ -1847,10 +1847,10 @@ class PopulationTests(unittest.TestCase):
                      Origin blob size should be 0.
         """
         # get blob factory
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2', 'value_B3'))
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2', 'value_B3'])
+        blob_factory = BlobFactory(factory)
 
         pop_profile = {'characteristic_A' : {'value_A1' : 100}}
 
@@ -1860,7 +1860,7 @@ class PopulationTests(unittest.TestCase):
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(50)
+        blob_2:Blob = blob_1._split_blob(50) # type: ignore
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -1881,7 +1881,7 @@ class PopulationTests(unittest.TestCase):
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(100)
+        blob_2: Blob = blob_1._split_blob(100) # type: ignore
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -1907,7 +1907,7 @@ class PopulationTests(unittest.TestCase):
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(300)
+        blob_2:Blob = blob_1._split_blob(300) # type: ignore
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -1954,13 +1954,13 @@ class PopulationTests(unittest.TestCase):
                      Origin blob size should be 0.
         """
         # get blob factory
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2', 'value_B3'))
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2', 'value_B3'])
+        blob_factory = BlobFactory(factory)
 
         pop_profile = {'characteristic_A' : {'value_A1' : 100, 'value_A2' : 100}}
-        blob_factory = BlobFactory(block_template)
+        blob_factory = BlobFactory(factory)
         pop_template = PopulationTemplate()
 
         # Case 1:
@@ -1969,7 +1969,7 @@ class PopulationTests(unittest.TestCase):
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(50, pop_template)
+        blob_2:Blob = blob_1._split_blob(50, pop_template) # type: ignore
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -1990,7 +1990,7 @@ class PopulationTests(unittest.TestCase):
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(200, pop_template)
+        blob_2:Blob = blob_1._split_blob(200, pop_template) # type: ignore
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2016,7 +2016,7 @@ class PopulationTests(unittest.TestCase):
         # get orginal size
         old_blob_1_size = blob_1.get_population_size()
         # split blob
-        blob_2 = blob_1.split_blob(300, pop_template)
+        blob_2:Blob = blob_1._split_blob(300, pop_template) # type: ignore
         # compare original size with blob + blob2 sizes
         new_blob_1_size = blob_1.get_population_size()
         new_blob_2_size = blob_2.get_population_size()
@@ -2062,12 +2062,12 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Set a BlobFactory
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        block_template.add_traceable_characteristic('traceable_A', 0)
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_traceable_characteristic('traceable_A', 0)
+        blob_factory = BlobFactory(factory)
 
         # Case 1:
         # Create a Blob using the BlobFactory
@@ -2174,12 +2174,12 @@ class PopulationTests(unittest.TestCase):
         """
         
         # Set a BlobFactory
-        block_template = CharacteristicsFactory()
-        block_template.add_sampled_characteristic('characteristic_A', ('value_A1', 'value_A2', 'value_A3'))
-        block_template.add_sampled_characteristic('characteristic_B', ('value_B1', 'value_B2',))
-        block_template.add_sampled_characteristic('characteristic_C', ('value_C1', 'value_C2', 'value_C3'))
-        block_template.add_traceable_characteristic('traceable_A', 0)
-        blob_factory = BlobFactory(block_template)
+        factory = CharacteristicsFactory()
+        factory.add_sampled_characteristic('characteristic_A', ['value_A1', 'value_A2', 'value_A3'])
+        factory.add_sampled_characteristic('characteristic_B', ['value_B1', 'value_B2'])
+        factory.add_sampled_characteristic('characteristic_C', ['value_C1', 'value_C2', 'value_C3'])
+        factory.add_traceable_characteristic('traceable_A', 0)
+        blob_factory = BlobFactory(factory)
 
         #Set a PopTemplate
         pop_template = PopulationTemplate()
@@ -2205,8 +2205,8 @@ class PopulationTests(unittest.TestCase):
         'Case 1: Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2),
         'Case 1: Blob 2 is not valid.')
-        self.assertTrue(blob_1.compare_traceable_properties_to_template(pop_template), 'Case 1: Blob does not match with Template')
-        self.assertTrue(blob_2.compare_traceable_properties_to_template(pop_template), 'Case 1: Blob does not match with Template')
+        self.assertTrue(blob_1._compare_traceable_characteristics_to_population_template(pop_template), 'Case 1: Blob does not match with Template')
+        self.assertTrue(blob_2._compare_traceable_characteristics_to_population_template(pop_template), 'Case 1: Blob does not match with Template')
         self.assertEqual(blob_1_original_size, blob_1_final_size + blob_2_final_size,
         'Case 1: Old blob 1 size is not the sum of new blob 1 size and blob 2 size.')
         self.assertEqual(blob_1_available_size//2, blob_2_final_size,
@@ -2234,8 +2234,8 @@ class PopulationTests(unittest.TestCase):
         'Case 2: Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2),
         'Case 2: Blob 2 is not valid.')
-        self.assertTrue(blob_1.compare_traceable_properties_to_template(pop_template), 'Case 2: Blob does not match with Template')
-        self.assertTrue(blob_2.compare_traceable_properties_to_template(pop_template), 'Case 2: Blob does not match with Template')
+        self.assertTrue(blob_1._compare_traceable_characteristics_to_population_template(pop_template), 'Case 2: Blob does not match with Template')
+        self.assertTrue(blob_2._compare_traceable_characteristics_to_population_template(pop_template), 'Case 2: Blob does not match with Template')
         self.assertEqual(blob_1_available_size, blob_2_final_size,
         'Case 2: Grabbed quantity does not match blob 2 size.')
         self.assertEqual(blob_1_final_size, blob_1_original_size - blob_1_available_size,
@@ -2263,8 +2263,8 @@ class PopulationTests(unittest.TestCase):
         'Case 3: Blob 1 is not valid.')
         self.assertTrue(verify_blob_validity(blob_2),
         'Case 3: Blob 2 is not valid.')
-        self.assertTrue(blob_1.compare_traceable_properties_to_template(pop_template), 'Case 3: Blob does not match with Template')
-        self.assertTrue(blob_2.compare_traceable_properties_to_template(pop_template), 'Case 3: Blob does not match with Template')
+        self.assertTrue(blob_1._compare_traceable_characteristics_to_population_template(pop_template), 'Case 3: Blob does not match with Template')
+        self.assertTrue(blob_2._compare_traceable_characteristics_to_population_template(pop_template), 'Case 3: Blob does not match with Template')
         self.assertEqual(blob_1_available_size, blob_2_final_size,
         'Case 3: Grabbed quantity does not match blob 2 size.')
         self.assertEqual(blob_1_final_size, blob_1_original_size - blob_1_available_size,
@@ -2290,7 +2290,7 @@ class PopulationTests(unittest.TestCase):
         # Verify Blob validity and sizes
         self.assertTrue(verify_blob_validity(blob_1), 'Case 4: Blob 1 is not valid.')
         self.assertTrue(blob_2 == None, 'Case 4: Blob 2 is not None.')
-        self.assertTrue(not blob_1.compare_traceable_properties_to_template(pop_template), 'Case 4: Blob matches with Template')
+        self.assertTrue(not blob_1._compare_traceable_characteristics_to_population_template(pop_template), 'Case 4: Blob matches with Template')
         self.assertEqual(0, blob_1_final_available_size,
         'Case 4: There is population available after changing the template.')
         self.assertEqual(blob_1_final_size, blob_1_original_size,
@@ -2309,10 +2309,10 @@ def suite():
     suite.addTest(PopulationTests('test_property_bucket_extract_with_key_set'))
 
     # BlockTemplate tests
-    suite.addTest(PopulationTests('test_block_template_generate'))
-    suite.addTest(PopulationTests('test_block_template_generate_empty'))
-    suite.addTest(PopulationTests('test_block_template_generate_profile'))
-    suite.addTest(PopulationTests('test_block_template_without_buckets'))
+    suite.addTest(PopulationTests('test_factory_generate'))
+    suite.addTest(PopulationTests('test_factory_generate_empty'))
+    suite.addTest(PopulationTests('test_factory_generate_profile'))
+    suite.addTest(PopulationTests('test_factory_without_buckets'))
     
     # PropertyBlock tests
     suite.addTest(PopulationTests('test_property_block_add_block'))
@@ -2324,7 +2324,7 @@ def suite():
     suite.addTest(PopulationTests('test_blob_factory_generate'))
     suite.addTest(PopulationTests('test_blob_factory_generate_empty'))
     suite.addTest(PopulationTests('test_blob_factory_generate_profile'))
-    suite.addTest(PopulationTests('test_block_template_generate_empty'))
+    suite.addTest(PopulationTests('test_factory_generate_empty'))
     
     # Blob tests
     suite.addTest(PopulationTests('test_blob_consume_blob'))
