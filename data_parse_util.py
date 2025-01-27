@@ -257,11 +257,11 @@ def populate_EnvRegion(region, blob_factory: BlobFactory, population, profiles):
     for node in  region.node_list:
         if node.name == 'home':
             home_node = node
-    blob = blob_factory.GenerateProfile(region.id, population, profiles)
+    blob = blob_factory.generate_blob_with_profile(region.id, population, profiles)
     home_node.add_blob(blob)
 
 def populate_EnvNode(region: EnvRegionTemplate, node_template: EnvNodeTemplate, blob_factory: BlobFactory, population, profiles):
-    blob = blob_factory.GenerateProfile(region.id, population, profiles)
+    blob = blob_factory.generate_blob_with_profile(region.id, population, profiles)
     node_template.blobs.append(blob)
 
 

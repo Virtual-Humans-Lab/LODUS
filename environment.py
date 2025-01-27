@@ -975,7 +975,7 @@ class EnvironmentGraph():
         for node in self.node_list:
             for blob in node.contained_blobs:
                 prop_block = population.SampledCharacteristicCollection(_population = blob.get_population_size())
-                prop_block.set_values_profile(blob.blob_factory.block_template, blob.profiles)
+                prop_block.set_values_profile(blob.blob_factory.characteristics_factory, blob.profiles)
                 if node.original_node_population == None:
                     node.original_node_population = prop_block
                 else:
