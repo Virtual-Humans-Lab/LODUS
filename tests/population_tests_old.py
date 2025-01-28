@@ -2075,7 +2075,7 @@ class PopulationTests(unittest.TestCase):
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
-        blob_2 = blob_1.grab_population(50)
+        blob_2: Blob = blob_1.grab_population(50) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -2099,7 +2099,7 @@ class PopulationTests(unittest.TestCase):
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
-        blob_2 = blob_1.grab_population(200)
+        blob_2: Blob = blob_1.grab_population(200) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -2123,7 +2123,7 @@ class PopulationTests(unittest.TestCase):
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
-        blob_2 = blob_1.grab_population(300)
+        blob_2:Blob = blob_1.grab_population(300) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -2193,7 +2193,7 @@ class PopulationTests(unittest.TestCase):
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
-        blob_2 = blob_1.grab_population(blob_1_available_size // 2, pop_template)
+        blob_2:Blob = blob_1.grab_population(blob_1_available_size // 2, pop_template) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -2222,7 +2222,7 @@ class PopulationTests(unittest.TestCase):
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
-        blob_2 = blob_1.grab_population(blob_1_available_size, pop_template)
+        blob_2: Blob = blob_1.grab_population(blob_1_available_size, pop_template) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -2250,7 +2250,7 @@ class PopulationTests(unittest.TestCase):
         blob_1_original_size = blob_1.get_population_size()
         
         # Grab population from Blob1
-        blob_2 = blob_1.grab_population(blob_1_available_size * 2, pop_template)
+        blob_2: Blob = blob_1.grab_population(blob_1_available_size * 2, pop_template) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()
@@ -2281,7 +2281,7 @@ class PopulationTests(unittest.TestCase):
         # Change the PopTemplate and tries to grab population from Blob1
         pop_template.set_traceable_property('traceable_A', 2)
 
-        blob_2 = blob_1.grab_population(blob_1_available_size * 2, pop_template)
+        blob_2: Blob = blob_1.grab_population(blob_1_available_size * 2, pop_template) # type: ignore
 
         # Get final Blob sizes
         blob_1_final_size = blob_1.get_population_size()

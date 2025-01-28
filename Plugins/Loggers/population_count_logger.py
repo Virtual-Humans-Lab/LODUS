@@ -1,7 +1,7 @@
 
 from time import sleep
-import environment
-from population import PopulationTemplate
+from core.environment import EnvironmentGraph
+from core.population import PopulationTemplate
 from logger_plugin import LoggerPlugin
 import os 
 import util
@@ -24,7 +24,7 @@ class PopulationCountRecordKey(Enum):
 
 class PopulationCountLogger(LoggerPlugin):
     
-    def __init__(self, base_filename, graph:environment.EnvironmentGraph, time_cycle=24):
+    def __init__(self, base_filename, graph:EnvironmentGraph, time_cycle=24):
         self.graph = graph
         
         # Sets paths and create folders
@@ -183,7 +183,7 @@ class PopulationCountLogger(LoggerPlugin):
         #self.process_env_population_line_plots(show_figures, export_html, export_figures, layout_update)
         #self.process_custom_line_plots(show_figures, export_html, export_figures, layout_update)
     
-    def global_frame(self, graph: environment.EnvironmentGraph, frame:int):
+    def global_frame(self, graph: EnvironmentGraph, frame:int):
         
         # Sets the default row
         _row = f"{frame};{frame % self.cycle_length};{frame // self.cycle_length}"
@@ -202,7 +202,7 @@ class PopulationCountLogger(LoggerPlugin):
         self.global_prev_frame = {k:v for k,v in _current_frame.items()}
         self.global_f.write(_row + '\n')
 
-    def region_frame(self, graph: environment.EnvironmentGraph, frame:int):
+    def region_frame(self, graph: EnvironmentGraph, frame:int):
         
         for _name, _rg in graph.region_dict.items():
             # Gets populations from this frame
@@ -234,7 +234,7 @@ class PopulationCountLogger(LoggerPlugin):
             self.regions_prev_frame[_name]['__populations'] = [total_pop, local_pop]
             self.regions_f.write(_row + '\n')
             
-    def node_frame(self, graph:environment.EnvironmentGraph, frame:int):
+    def node_frame(self, graph:EnvironmentGraph, frame:int):
         
         for _name, _nd in graph.node_dict.items():
             # Gets populations from this frame
@@ -266,7 +266,7 @@ class PopulationCountLogger(LoggerPlugin):
             self.nodes_f.write(_row + '\n')
 
 
-    def node_region_id2position(self, graph: environment.EnvironmentGraph):
+    def node_region_id2position(self, graph: EnvironmentGraph):
         region_f =  open('output_logs/' + self.base_filename + "//" + "region_ids.csv", 'w', encoding='utf8')
         region_f.write('ID;ImagePosition;Name;\n')
         node_f =  open('output_logs/' + self.base_filename + "//" +  "node_ids.csv", 'w', encoding='utf8')
@@ -274,7 +274,7 @@ class PopulationCountLogger(LoggerPlugin):
         for region in graph.region_list:
             region_f.write(f'{region.id};{region.position};{region.name};\n')
             for node in region.node_list:
-                node_f.write(f'{node.id};{node.get_characteristic("long_lat_position")};{node.get_unique_name()};\n')
+                node_f.write(f'{node.id};{node.get_attribute("long_lat_position")};{node.get_unique_name()};\n')
         region_f.close()
         node_f.close()
 

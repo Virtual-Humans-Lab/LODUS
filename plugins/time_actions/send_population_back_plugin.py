@@ -1,13 +1,16 @@
 import copy
 import sys
 import time
+
+from core.routine import TimeAction
 sys.path.append('../')
 
-import environment
+from core.environment import EnvironmentGraph
+from core.plugin import TimeActionPlugin
 
-class SendPopulationBackPlugin(environment.TimeActionPlugin):
+class SendPopulationBackPlugin(TimeActionPlugin):
 
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: EnvironmentGraph):
         '''
         Plugin that consumes a 'send_population_back' TimeAction type.
         Complex TimeAction that returns multiple 'move_population' actions.
@@ -74,7 +77,7 @@ class SendPopulationBackPlugin(environment.TimeActionPlugin):
                                  'destination_region': destination_region.name,
                                  'destination_node': destination_node.name,
                                  'quantity': quant}
-            new_action = environment.TimeAction(action_type = new_action_type, 
+            new_action = TimeAction(action_type = new_action_type, 
                                                 pop_template = temp,
                                                 values = new_action_values)
             sub_list.append(new_action)

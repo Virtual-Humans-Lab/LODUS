@@ -1,7 +1,8 @@
 from itertools import count
 from types import NoneType
-import environment
-from population import PopulationTemplate
+import core.environment
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -10,9 +11,9 @@ import csv
 import util
 import json
 
-class CustomTimeActionPlugin(environment.TimeActionPlugin):
+class CustomTimeActionPlugin(TimeActionPlugin):
     
-    def __init__(self, env_graph: environment.EnvironmentGraph, config_file_path):
+    def __init__(self, env_graph: core.environment.EnvironmentGraph, config_file_path):
 
         super().__init__()
         # JSON file containing the configuration of the Node Density Plugin
@@ -32,4 +33,4 @@ class CustomTimeActionPlugin(environment.TimeActionPlugin):
                 _density = _custom_den_values[_node.name]
             else:
                 _density = self.default_density
-            _node.add_characteristic('density', _density)
+            _node.add_attribute('density', _density)

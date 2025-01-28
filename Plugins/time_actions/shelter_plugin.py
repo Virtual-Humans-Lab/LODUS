@@ -72,11 +72,11 @@ class ShelterPlugin(environment.TimeActionPlugin):
             return
         
         self.last_reallocation = cycle_step
-        _total_cap = sum([node.get_characteristic("capacity") for node in self.shelters])
+        _total_cap = sum([node.get_attribute("capacity") for node in self.shelters])
         _total_sheltered = sum([node.get_population_size(self.sheltered_template) for node in self.shelters])
         _to_move = _total_cap - _total_sheltered
         _av_target_shelters = [_sh for _sh in self.shelters if 
-                               _sh.get_characteristic("capacity") > _sh.get_population_size(self.sheltered_template)]
+                               _sh.get_attribute("capacity") > _sh.get_population_size(self.sheltered_template)]
         _av_origin_shelters = {_sh: _sh.get_population_size(self.in_danger_template) for _sh in self.shelters}
         _av_origin_shelters = {k: v for k, v in _av_origin_shelters.items() if v > 0}
         _total_in_danger = sum(_av_origin_shelters.values())
@@ -110,7 +110,7 @@ class ShelterPlugin(environment.TimeActionPlugin):
             if _av_origin_shelters[acting_node] == 0:
                 # print("removing", acting_node.get_unique_name())
                 _av_origin_shelters.pop(acting_node, None)
-            if target_node.get_population_size() >= target_node.get_characteristic("capacity"):
+            if target_node.get_population_size() >= target_node.get_attribute("capacity"):
                 # print("removing 2",target_node.get_unique_name())
                 _av_target_shelters.remove(target_node)
         # print("WTF")
@@ -125,7 +125,7 @@ class ShelterPlugin(environment.TimeActionPlugin):
         # if target_region not in self.affected_regions: return
         if "shelter" not in target_node.name: return
 
-        _capacity = target_node.get_characteristic("capacity")
+        _capacity = target_node.get_attribute("capacity")
         _sheltered = target_node.get_population_size(self.sheltered_template)
         _to_shelter = _capacity - _sheltered
         

@@ -7,7 +7,9 @@ from data_parse_util import parse_routines
 sys.path.append("/../../")
 from pathlib import Path
 
-from environment import EnvironmentGraph, RoutinePlugin
+from core.environment import EnvironmentGraph
+
+from core.plugin import RoutinePlugin
 
 
 class OffCycleRoutinePlugin(RoutinePlugin):

@@ -2,8 +2,9 @@ from enum import IntEnum
 import sys
 sys.path.append('../')
 
-import environment 
-from population import PopulationTemplate
+from core.environment import EnvNode, EnvironmentGraph
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 from random_inst import FixedRandom
 import copy
 import random
@@ -19,9 +20,9 @@ class IsolationMode(IntEnum):
     REGULAR = 1,
     QUANTITY_CORRECTION = 2
 
-class GatherPopulationPlugin(environment.TimeActionPlugin):
+class GatherPopulationPlugin(TimeActionPlugin):
 
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: EnvironmentGraph):
         '''
         Plugin that consumes a 'gather_population' TimeAction type
             
@@ -83,7 +84,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         return
 
     # Returns the distance between two nodes
-    def get_nodes_distance(self, node1:environment.EnvNode, node2:environment.EnvNode)->float:
+    def get_nodes_distance(self, node1:EnvNode, node2:EnvNode)->float:
         n1_name = node1.get_unique_name()
         n2_name = node2.get_unique_name()
         # Checks if the distance was calculated previously
@@ -97,13 +98,13 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         return self.distances_map[n1_name+n2_name]
 
 
-    def compute_node_weights(self, target_node:environment.EnvNode, mode:WeightingMode)->list[tuple[environment.EnvNode,float]]:
+    def compute_node_weights(self, target_node:EnvNode, mode:WeightingMode)->list[tuple[EnvNode,float]]:
         if mode == WeightingMode.DISTANCE:
             return self.distance_weighting(target_node=target_node)
         else:
             return self.population_weighting(target_node=target_node)
     
-    def population_weighting(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
+    def population_weighting(self, target_node:EnvNode)->list[tuple[EnvNode,float]]:
         unique_name = target_node.get_unique_name()
         pop_list = []
         # Gets distances to other EnvNodes
@@ -115,7 +116,7 @@ class GatherPopulationPlugin(environment.TimeActionPlugin):
         pop_list = [(n,  ( d / total_pop)) for (n, d) in pop_list]
         return pop_list
     
-    def distance_weighting(self, target_node:environment.EnvNode)->list[tuple[environment.EnvNode,float]]:
+    def distance_weighting(self, target_node:EnvNode)->list[tuple[EnvNode,float]]:
         
         # Checks if weights were calculated previously
         unique_name = target_node.get_unique_name()

@@ -1,7 +1,8 @@
 from itertools import count
 from types import NoneType
-import environment
-from population import PopulationTemplate
+import core.environment
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -11,7 +12,7 @@ from loggers.population_count_logger import PopulationCountLogger
 import util
 import json
 
-class NewInfectionPlugin(environment.TimeActionPlugin):
+class NewInfectionPlugin(TimeActionPlugin):
     '''
     This Plugin tmplements the SIR (Susceptible, Infected, Removed) model. 
 
@@ -35,7 +36,7 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
             population_template :  susceptible population. Block types should be empty.
     
     '''
-    def __init__(self, env_graph: environment.EnvironmentGraph, config_file_path, day_duration: int):
+    def __init__(self, env_graph: core.environment.EnvironmentGraph, config_file_path, day_duration: int):
 
         super().__init__()
         
@@ -310,10 +311,10 @@ class NewInfectionPlugin(environment.TimeActionPlugin):
                 infect_values['node'] = node
                 self.infect(infect_values, hour, time)
 
-    def solve_infection_remainder(self, _counts: list[int], _node: environment.EnvNode, values: dict, _beta:float, _gamma:float):
+    def solve_infection_remainder(self, _counts: list[int], _node: core.environment.EnvNode, values: dict, _beta:float, _gamma:float):
         
-        if 'density' in _node.characteristics: 
-            _density = _node.get_characteristic('density')
+        if 'density' in _node.attributes: 
+            _density = _node.get_attribute('density')
         else:
             _density = 1.0
         

@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 from time_actions.levy_walk_plugin import LevyWalkPlugin
 
-from environment import EnvironmentGraph
+from core.environment import EnvironmentGraph
 from logger_plugin import LoggerPlugin
 
 

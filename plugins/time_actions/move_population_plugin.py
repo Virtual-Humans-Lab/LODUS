@@ -1,8 +1,9 @@
 import sys
 sys.path.append('../')
 
-import environment 
-from population import PopulationTemplate
+from core.environment import EnvironmentGraph
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 from random_inst import FixedRandom
 import copy
 import random
@@ -11,9 +12,9 @@ import numpy as np
 import util
 import time
 
-class MovePopulationPlugin(environment.TimeActionPlugin):
+class MovePopulationPlugin(TimeActionPlugin):
     
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: EnvironmentGraph):
         '''gather_population
             TODO WARNING IS CURRENTLY OFF BY ONE!
             
@@ -36,11 +37,20 @@ class MovePopulationPlugin(environment.TimeActionPlugin):
         '''
         super().__init__()
         self.graph = env_graph
-        self.set_pair('move_population', self.move_population)
+        self.add_type_to_action('move_population', self.move_population)
         self.graph.base_actions.add('move_population')
 
     def update_time_step(self, cycle_step, simulation_step):
-        return
+        return super().update_time_step(cycle_step, simulation_step)
+    
+    def setup_logger(self, logger):
+        return super().setup_logger(logger)
+
+    def log_data(self, logger):
+        return super().log_data(logger)
+    
+    def stop_logger(self, logger):
+        return super().stop_logger(logger)
 
     ## Pre-condition: assumes move population operation is valid
     def move_population(self, pop_template ,values, cycle_step, simulation_step):

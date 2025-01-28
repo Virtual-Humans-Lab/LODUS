@@ -1,7 +1,7 @@
 # LODUS core
 import sys
 sys.path.append('/../../')
-from environment import EnvironmentGraph
+from core.environment import EnvironmentGraph
 from logger_plugin import LoggerPlugin
 
 import plotly.graph_objects as go

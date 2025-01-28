@@ -1,8 +1,9 @@
 import sys
 sys.path.append('../')
 
-import environment 
-from population import PopulationTemplate
+import core.environment 
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 import copy
 import random
 from random_inst import FixedRandom
@@ -10,7 +11,7 @@ import math
 import numpy as np
 import util
 
-class ReverseSocialIsolationPlugin(environment.TimeActionPlugin):
+class ReverseSocialIsolationPlugin(TimeActionPlugin):
 
     def __init__(self, env_graph,  isolation_table_path = '', isolation_rate = 0.0, to_total_ratio_correction = 0.0, locals_only = False):
         '''gather_population

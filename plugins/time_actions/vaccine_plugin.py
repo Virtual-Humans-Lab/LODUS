@@ -1,7 +1,8 @@
 from pathlib import Path
 import time
-import environment
-from population import Blob, PopulationTemplate
+import core.environment
+from core.population import Blob, PopulationTemplate
+from core.plugin import TimeActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -10,7 +11,7 @@ from loggers.population_count_logger import PopulationCountLogger
 import util
 import json
 
-class VaccinePlugin(environment.TimeActionPlugin):
+class VaccinePlugin(TimeActionPlugin):
     '''
     Adds TimeActions to model infection behavior.
             Requires specific Property Blocks:
@@ -32,7 +33,7 @@ class VaccinePlugin(environment.TimeActionPlugin):
 
     '''
 
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: core.environment.EnvironmentGraph):
         super().__init__()
         
         self.__header:str = "Vaccine Plugin:"

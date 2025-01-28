@@ -33,8 +33,8 @@ from time_actions.vaccine_plugin import VaccinePlugin
 from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
 from data.global_infection_data_plugin import GlobalInfectionDataPlugin
 
-import environment
-import population
+import core.environment
+import core.population
 from data_parse_util import *
 from random_inst import FixedRandom
 from util import *
@@ -146,7 +146,7 @@ if 'off_cycle_routine_plugin' in env_graph.experiment_config:
 
 '''
 Logging
-'''z
+'''
 
 pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
 pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
@@ -231,16 +231,16 @@ od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
 #                             ODMovementRecordKey.NODE_TO_NODE]
 
 # Age tracking
-od_logger.region_custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": "children"})
+od_logger.region_custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": ["children"]})
 #od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
-od_logger.region_custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": "adults"})
-od_logger.region_custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": "elders"})
+od_logger.region_custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": ["adults"]})
+od_logger.region_custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": ["elders"]})
 
 # Occupation tracking
 #od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
-od_logger.region_custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": "student"})
-od_logger.region_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": "worker"})
-od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": "worker"})
+od_logger.region_custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": ["student"]})
+od_logger.region_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
+od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
 #----------------------------
 
 # Movement Displacement Logger
@@ -258,14 +258,14 @@ if infection is not None:
 #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
 
 output_str += "Population per Age:\n"
-output_str += "Children:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "children"}))) + "\n"
-output_str += "Youngs:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "youngs"}))) + "\n"
-output_str += "Adults:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "adults"}))) + "\n"
-output_str += "Elders:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "elders"}))) + "\n"
+output_str += "Children:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": ["children"]}))) + "\n"
+output_str += "Youngs:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": ["youngs"]}))) + "\n"
+output_str += "Adults:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": ["adults"]}))) + "\n"
+output_str += "Elders:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": ["elders"]}))) + "\n"
 output_str += "Population per Occupation:\n"
-output_str += "Worker:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": "worker"}))) + "\n"
-output_str += "Student:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": "student"}))) + "\n"
-output_str += "Other:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": "other"}))) + "\n"
+output_str += "Worker:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": ["worker"]}))) + "\n"
+output_str += "Student:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": ["student"]}))) + "\n"
+output_str += "Other:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": ["other"]}))) + "\n"
 print(output_str)
 '''
 Simulation

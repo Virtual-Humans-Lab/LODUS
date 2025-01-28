@@ -9,73 +9,6 @@ from events import Events
 
 from typing import Any, Union, List, Dict, Optional
 
-class CharacteristicsFactory():
-    """
-    A factory for generating population characteristics.
-
-    This class allows for the addition of sampled and traceable characteristics,
-    and provides methods to generate collections of sampled characteristics for a given population.
-
-    Attributes:
-        sampled_characteristics (dict[str, list[str]]): A dictionary to store sampled characteristics.
-        traceable_characteristics (dict[str, Any]): A dictionary to store traceable characteristics.
-
-    Methods:
-        add_sampled_characteristic(name: str, categories: list[str]):
-            Adds a sampled characteristic with the given name and categories.
-        add_traceable_characteristic(name: str, value):
-            Adds a traceable characteristic with the given name and value.
-        generate_characteristic_collection(population: int) -> SampledCharacteristicCollection:
-            Generates a characteristic collection for the given population.
-        generate_characteristic_collection_empty() -> SampledCharacteristicCollection:
-            Generates an empty characteristic collection.
-        generate_characteristic_collection_with_profile(population: int, pop_profile: dict):
-            Generates a characteristic collection for the given population with a profile.
-
-    Use case:
-        dummy = PopulationCharacteristicsTemplate()
-        dummy.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
-        dummy.add_sampled_characteristic('economic_profile', ['unemployed', 'worker'])
-        dummy.add_sampled_characteristic('social_profile', ['low', 'mid', 'high'])
-        dummy.add_sampled_characteristic('risk', ['low', 'mid', 'high'])
-    """
-    
-    def __init__(self):
-        self.sampled_characteristics: dict[str, list[str]] = {}
-        self.traceable_characteristics: dict[str, Any] = {}
-
-    def add_sampled_characteristic(self, name: str, categories: list[str]):
-        self.sampled_characteristics[name] = list(dict.fromkeys(categories))
-        
-    def add_traceable_characteristic(self, name: str, value):
-        self.traceable_characteristics[name] = value
-
-    def _validate_population(self, population: int) -> bool:
-        return bool(self.sampled_characteristics) and population > 0
-
-    def _create_characteristic_collection(self, population: int) -> SampledCharacteristicCollection:
-        characteristic_collection = SampledCharacteristicCollection(population, self)
-        characteristic_collection.set_values_rand(self)
-        return characteristic_collection
-         
-    def generate_characteristic_collection_rand(self, population: int) -> SampledCharacteristicCollection:
-        if not self._validate_population(population):
-            raise ValueError(f"Invalid population. Size must be greater than 0, is {population}. Characteristics should be valid, and are {bool(self.sampled_characteristics)}.")
-        return self._create_characteristic_collection(population)
-    
-    def generate_characteristic_collection_empty(self) -> SampledCharacteristicCollection:
-        if not self.sampled_characteristics:
-            raise ValueError("No sampled characteristics defined before using generate.")
-        return self._create_characteristic_collection(0) 
-  
-    def generate_characteristic_collection_with_profile(self, population: int, pop_profile: dict):
-        if not self._validate_population(population):
-            raise ValueError(f"Invalid population. Size must be greater than 0, is {population}. Characteristics should be valid, and are {bool(self.sampled_characteristics)}.")
-        characteristic_collection = SampledCharacteristicCollection(population, self)
-        characteristic_collection.set_values_profile(self, pop_profile)
-        return characteristic_collection
-    
-
 class SampledCharacteristic():
     """A sampled characteristic models a single attribute of a population.
     
@@ -425,13 +358,80 @@ class SampledCharacteristicCollection():
 
         return extracted_collection
 
+    def copy(self) -> SampledCharacteristicCollection:
+        return copy.deepcopy(self)
+
     def __str__(self):
         return "{" + ", ".join(str(bucket) for bucket in self.characteristics.values()) + "}"
 
     def __repr__(self):
         return self.__str__()
 
+class CharacteristicsFactory():
+    """
+    A factory for generating population characteristics.
 
+    This class allows for the addition of sampled and traceable characteristics,
+    and provides methods to generate collections of sampled characteristics for a given population.
+
+    Attributes:
+        sampled_characteristics (dict[str, list[str]]): A dictionary to store sampled characteristics.
+        traceable_characteristics (dict[str, Any]): A dictionary to store traceable characteristics.
+
+    Methods:
+        add_sampled_characteristic(name: str, categories: list[str]):
+            Adds a sampled characteristic with the given name and categories.
+        add_traceable_characteristic(name: str, value):
+            Adds a traceable characteristic with the given name and value.
+        generate_characteristic_collection(population: int) -> SampledCharacteristicCollection:
+            Generates a characteristic collection for the given population.
+        generate_characteristic_collection_empty() -> SampledCharacteristicCollection:
+            Generates an empty characteristic collection.
+        generate_characteristic_collection_with_profile(population: int, pop_profile: dict):
+            Generates a characteristic collection for the given population with a profile.
+
+    Use case:
+        dummy = PopulationCharacteristicsTemplate()
+        dummy.add_sampled_characteristic('age', ['child', 'adult', 'ancient'])
+        dummy.add_sampled_characteristic('economic_profile', ['unemployed', 'worker'])
+        dummy.add_sampled_characteristic('social_profile', ['low', 'mid', 'high'])
+        dummy.add_sampled_characteristic('risk', ['low', 'mid', 'high'])
+    """
+    
+    def __init__(self):
+        self.sampled_characteristics: dict[str, list[str]] = {}
+        self.traceable_characteristics: dict[str, Any] = {}
+
+    def add_sampled_characteristic(self, name: str, categories: list[str]):
+        self.sampled_characteristics[name] = list(dict.fromkeys(categories))
+        
+    def add_traceable_characteristic(self, name: str, value):
+        self.traceable_characteristics[name] = value
+
+    def _validate_population(self, population: int) -> bool:
+        return bool(self.sampled_characteristics) and population > 0
+
+    def _create_characteristic_collection(self, population: int) -> SampledCharacteristicCollection:
+        characteristic_collection = SampledCharacteristicCollection(population, self)
+        characteristic_collection.set_values_rand(self)
+        return characteristic_collection
+         
+    def generate_characteristic_collection_rand(self, population: int) -> SampledCharacteristicCollection:
+        if not self._validate_population(population):
+            raise ValueError(f"Invalid population. Size must be greater than 0, is {population}. Characteristics should be valid, and are {bool(self.sampled_characteristics)}.")
+        return self._create_characteristic_collection(population)
+    
+    def generate_characteristic_collection_empty(self) -> SampledCharacteristicCollection:
+        if not self.sampled_characteristics:
+            raise ValueError("No sampled characteristics defined before using generate.")
+        return self._create_characteristic_collection(0) 
+  
+    def generate_characteristic_collection_with_profile(self, population: int, pop_profile: dict):
+        if not self._validate_population(population):
+            raise ValueError(f"Invalid population. Size must be greater than 0, is {population}. Characteristics should be valid, and are {bool(self.sampled_characteristics)}.")
+        characteristic_collection = SampledCharacteristicCollection(population, self)
+        characteristic_collection.set_values_profile(self, pop_profile)
+        return characteristic_collection
 
 class PopulationTemplate():
     """

@@ -2,7 +2,7 @@ from typing import List, Set
 from random_inst import FixedRandom
 
 import pytest
-from population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
+from core.population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():

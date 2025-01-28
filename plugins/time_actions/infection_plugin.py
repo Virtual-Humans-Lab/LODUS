@@ -3,8 +3,9 @@ from pathlib import Path
 import time
 from types import NoneType
 # from time_actions.vaccine_local_plugin import VaccinePlugin
-import environment
-from population import PopulationTemplate
+import core.environment
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -14,7 +15,7 @@ import csv
 import util
 import json
 
-class InfectionPlugin(environment.TimeActionPlugin):
+class InfectionPlugin(TimeActionPlugin):
     ''' 
     This Plugin tmplements the SIR (Susceptible, Infected, Removed) model. 
 
@@ -39,7 +40,7 @@ class InfectionPlugin(environment.TimeActionPlugin):
     
     '''
 
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: core.environment.EnvironmentGraph):
 
         super().__init__()
         self.__header:str = "Infection Plugin:"
@@ -273,8 +274,8 @@ class InfectionPlugin(environment.TimeActionPlugin):
 
     def solve_infection_remainder(self, 
                                   _counts: list[int], 
-                                  _region: environment.EnvRegion,
-                                  _node: environment.EnvNode, 
+                                  _region: core.environment.EnvRegion,
+                                  _node: core.environment.EnvNode, 
                                   _beta:float, 
                                   _gamma:float):
         

@@ -1,12 +1,12 @@
 # LODUS core
 import sys
 sys.path.append('/../../')
-from environment import EnvironmentGraph, EnvNode, EnvRegion
+from core.environment import EnvironmentGraph, EnvNode, EnvRegion
 from time_actions.vaccine_plugin import VaccinePlugin
 #import VaccineLocalPlugin
 #from VaccineLocalPlugin import VaccinePlugin 
 from logger_plugin import LoggerPlugin
-from population import Blob, PopulationTemplate
+from core.population import Blob, PopulationTemplate
 
 # Graphic and data libraries
 import plotly.graph_objects as go

@@ -1,8 +1,9 @@
 from itertools import count
 from pathlib import Path
 from types import NoneType
-import environment
-from population import PopulationTemplate
+from core.environment import EnvNode, EnvRegion, EnvironmentGraph
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -11,9 +12,9 @@ import csv
 import util
 import json
 
-class NodeDensityDataPlugin(environment.TimeActionPlugin):
+class NodeDensityDataPlugin(TimeActionPlugin):
     
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: EnvironmentGraph):
 
         super().__init__()
         # JSON file containing the configuration of the Node Density Plugin
@@ -34,7 +35,7 @@ class NodeDensityDataPlugin(environment.TimeActionPlugin):
     def update_time_step(self, cycle_step, simulation_step):
         return #super().update_time_step(cycle_step, simulation_step)
     
-    def get_node_density(self, region:environment.EnvRegion, node:environment.EnvNode):
+    def get_node_density(self, region:EnvRegion, node:EnvNode):
         _unique_name = node.get_unique_name()
 
         if _unique_name in self.custom_density:

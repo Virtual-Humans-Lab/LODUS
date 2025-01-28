@@ -1,8 +1,9 @@
 import math
 import json
 from pathlib import Path
-from environment import *
-from population import *
+from core.environment import *
+from core.population import *
+from core.routine import TimeAction
 
 def DummyEnv():
     return ''
@@ -60,7 +61,7 @@ def Generate_EnvironmentGraph(env_input):
         repeating_global_actions = rot_json['global_routine']
 
         for rga in repeating_global_actions:
-            pt = population.PopulationTemplate(sampled_characteristics=rga["action"]['population_template']["sampled_characteristics"],
+            pt = PopulationTemplate(sampled_characteristics=rga["action"]['population_template']["sampled_characteristics"],
                                         traceable_characteristics=rga["action"]['population_template']["traceable_characteristics"])
                 
             if 'cycle_length' in rga:
@@ -116,7 +117,7 @@ def Generate_EnvironmentGraph(env_input):
             # Add routines
             if poi_unique_name in rot_json["routines"]:
                 for rt in rot_json["routines"][poi_unique_name]:
-                    pt = population.PopulationTemplate(
+                    pt = PopulationTemplate(
                         sampled_characteristics=rt["action"]['population_template']["sampled_characteristics"],
                         traceable_characteristics=rt["action"]['population_template']["traceable_characteristics"])
                     action = TimeAction(action_type=rt["action"]['type'], 
@@ -144,7 +145,7 @@ def parse_routines(data:dict):
             _global_actions.append(_ga['frames'], TimeAction(_ga['type'], _ga['values']))
             #env.set_repeating_action(_ga['frames'], TimeAction(_ga['type'], _ga['values']))
         elif 'cycle_step' in _ga:
-            pt = population.PopulationTemplate(
+            pt = PopulationTemplate(
                     sampled_characteristics=_ga["action"]['population_template']["sampled_characteristics"],
                     traceable_characteristics=_ga["action"]['population_template']["traceable_characteristics"])
             if isinstance(_ga['cycle_step'], list):
@@ -160,7 +161,7 @@ def parse_routines(data:dict):
     # EnvNode Routines
     for _node in data.get('routines', []):
         for _a in data['routines'][_node]:
-            pt = population.PopulationTemplate(
+            pt = PopulationTemplate(
                     sampled_characteristics=_a["action"]['population_template']["sampled_characteristics"],
                     traceable_characteristics=_a["action"]['population_template']["traceable_characteristics"])
             action = TimeAction(action_type=_a["action"]['type'], 

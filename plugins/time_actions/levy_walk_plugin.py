@@ -2,8 +2,9 @@ import copy
 import pprint
 import sys
 from typing import Optional
-from population import PopulationTemplate
-
+from core.population import PopulationTemplate
+from core.routine import TimeAction
+from core.plugin import TimeActionPlugin
 from random_inst import FixedRandom
 
 sys.path.append('../')
@@ -12,16 +13,15 @@ import random
 import time
 
 from scipy.stats import levy as scipy_levy
-
-import environment
+from core.environment import EnvironmentGraph, EnvNode, EnvRegion
 from util import DistanceType
 
 import pandas as pd
 
 
-class LevyWalkPlugin(environment.TimeActionPlugin):
+class LevyWalkPlugin(TimeActionPlugin):
 
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: EnvironmentGraph):
         '''
         Plugin that consumes a 'levy_walk' TimeAction type.
         Complex TimeAction that returns multiple 'move_population' actions.
@@ -191,7 +191,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
 
-            new_action = environment.TimeAction(action_type = new_action_type,
+            new_action = TimeAction(action_type = new_action_type,
                                                 pop_template = temp,
                                                 values = new_action_values)
             # print(new_action)
@@ -287,7 +287,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
 
-            new_action = environment.TimeAction(action_type = new_action_type,
+            new_action = TimeAction(action_type = new_action_type,
                                                 pop_template = temp,
                                                 values = new_action_values)
             #print(new_action)
@@ -322,7 +322,7 @@ class LevyWalkPlugin(environment.TimeActionPlugin):
         self.sampled_distances.append(sampled_dist)
         return target_unique_name
     
-    def get_node_distance_bucket(self, target_node:environment.EnvNode, graph:environment.EnvironmentGraph):
+    def get_node_distance_bucket(self, target_node:EnvNode, graph:EnvironmentGraph):
         '''Gets distances in buckets (based on overall distance)'''
         unique_name = target_node.get_unique_name()
         

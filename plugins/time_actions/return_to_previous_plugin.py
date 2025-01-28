@@ -2,10 +2,11 @@ import sys
 import time
 sys.path.append('../')
 
-import environment
-from population import PopulationTemplate
+from core.environment import EnvironmentGraph
+from core.population import PopulationTemplate
+from core.plugin import TimeActionPlugin
 
-class ReturnToPreviousPlugin(environment.TimeActionPlugin):
+class ReturnToPreviousPlugin(TimeActionPlugin):
     '''return_to_previous
             
             Returns a population to the previous EnvNode they were occupying
@@ -26,7 +27,7 @@ class ReturnToPreviousPlugin(environment.TimeActionPlugin):
             
     '''
 
-    def __init__(self, env_graph: environment.EnvironmentGraph):
+    def __init__(self, env_graph: EnvironmentGraph):
         super().__init__()
 
         self.graph = env_graph
