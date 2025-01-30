@@ -162,7 +162,7 @@ class GatherPopulationPlugin(ActionPlugin):
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
         
         acting_region = self.graph.get_region_by_name(values['region'])
-        acting_node = acting_region.get_node_by_name(values['node'])
+        acting_node = acting_region.get_node_by_unique_name(values['node'])
         sub_list = [] 
         
         quantity = int(values['quantity'])

@@ -741,6 +741,14 @@ class Blob():
         return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.previous_node, self.frame_origin_node)
 
 
+class BlobTemplate():
+    """A template for creating Blob objects based on predefined characteristics templates."""
+    def __init__(self, population: int, traceable_characteristics: dict[str, Any], sampled_characteristics: dict[str, dict[str, int]]):
+        self.population = population
+        self.traceable_characteristics = traceable_characteristics
+        self.sampled_characteristics = sampled_characteristics
+
+
 class BlobFactory():
     """
     A factory for creating Blob objects based on predefined characteristics templates.
@@ -782,6 +790,16 @@ class BlobFactory():
         
         collection = self.characteristics_factory.generate_characteristic_collection_with_profile(population, profile)
         traceable = self._traceable_characteristics_override(traceable_prop_override)
+        blob = Blob(mother_blob_id, node_of_origin, 0, self)
+        blob.initialize_characteristics(collection, traceable)
+        return blob
+    
+    def generate_blob_from_template(self,mother_blob_id, node_of_origin, blob_template: BlobTemplate):
+        if blob_template.population <= 0:
+            raise ValueError("Invalid population size.")
+        
+        collection = self.characteristics_factory.generate_characteristic_collection_with_profile(blob_template.population, blob_template.sampled_characteristics)
+        traceable = blob_template.traceable_characteristics
         blob = Blob(mother_blob_id, node_of_origin, 0, self)
         blob.initialize_characteristics(collection, traceable)
         return blob

@@ -13,7 +13,7 @@ def DummyPop(env_graph):
     pass
 
 
-def Generate_EnvironmentGraph(env_input):
+def Generate_EnvironmentGraph(env_input: str) -> EnvironmentGraph:
     print("Generating EnvGraph with new parsing. Experiment Config File:", env_input)
     # if env_input == 'dummy':
     #     env = DummyEnv()
@@ -89,11 +89,14 @@ def Generate_EnvironmentGraph(env_input):
 
     # Creating Regions
     for reg_dict in env_json['regions']:
-        region_template = EnvRegionTemplate()
+        region_name:str = reg_dict['name']
+        region_position: list[float] = reg_dict['lng_lat']
+        region_template = EnvRegionTemplate(region_name, region_position)
 
         # Creating each Point of Interest/Node
         for poi_dict in reg_dict['points_of_interest']:
-            node_template = EnvNodeTemplate()
+            node_name = poi_dict["name"]
+            node_template = EnvNodeTemplate(node_name)
 
             # Node Long-Lat position
             node_template.long_lat = poi_dict["lng_lat"]
@@ -101,18 +104,17 @@ def Generate_EnvironmentGraph(env_input):
             # Additional characteristics
             if "characteristics" in poi_dict:
                 for a, b in poi_dict["characteristics"].items():
-                    node_template.add_characteristic(a, b)
+                    node_template.add_node_attributes(a, b)
 
             # Add initial populations:
-            poi_unique_name = reg_dict["name"] + "//" + poi_dict["name"]
+            poi_unique_name = region_name + "//" + poi_dict["name"]
             
             if poi_unique_name in pop_json["initial_population"]:
                 for ip in pop_json["initial_population"][poi_unique_name]:
-                    node_template.add_blob_description(
-                        population=ip["total_population"],
-                        traceable_properties=ip['traceable_characteristics'],
-                        description=ip['sampled_characteristics'], 
-                        blob_factory=blob_factory)
+                    blob_template = BlobTemplate(population=ip["total_population"],
+                        traceable_characteristics=ip['traceable_characteristics'],
+                        sampled_characteristics=ip['sampled_characteristics'])
+                    node_template.add_blob_template(blob_template)
 
             # Add routines
             if poi_unique_name in rot_json["routines"]:
@@ -123,11 +125,11 @@ def Generate_EnvironmentGraph(env_input):
                     action = Action(action_type=rt["action"]['type'], 
                                         values=rt["action"]['values'], 
                                         pop_template=pt)
-                    node_template.routine_template.add_action_to_template(rt["cycle_step"], action)
+                    node_template.add_action_to_routine_template(rt["cycle_step"], action)
 
-            region_template.add_template_node(poi_dict["name"], node_template)
+            region_template.add_envnode_template(node_template)
         
-        env.add_region(reg_dict['lng_lat'], region_template, reg_dict['name'])
+        env.add_region(reg_dict['lng_lat'], region_template, blob_factory)
         env.region_list[-1].long_lat = reg_dict['lng_lat']
     env.set_spawning_nodes()
     env.set_original_populations()
@@ -226,7 +228,7 @@ def generate_EnvironmentGraph(env_input):
 
                     elif key == 'population_groups':
                         for group in characteristic:
-                            node_template.add_blob_description(group['size'],group['traceable_properties'],group['description'], blob_factory)
+                            node_template.add_blob_template(group['size'],group['traceable_properties'],group['description'], blob_factory)
 
                     # Add TimeActions to the EnvNode
                     elif key == 'time_actions':
@@ -242,9 +244,9 @@ def generate_EnvironmentGraph(env_input):
                                                     pop_template=pop_template,
                                                     values=_a['values'])
                                 node_actions.append(action)
-                            node_template.add_routine_template(frame_key, node_actions)
+                            node_template.add_actions_to_routine_template(frame_key, node_actions)
 
-                region_template.add_template_node(node_k, node_template)
+                region_template.add_envnode_template(node_k, node_template)
             
             env.add_region(region_description['long_lat_position'], region_template, region_description['name'])
             env.region_list[-1].long_lat = region_description['long_lat_position']

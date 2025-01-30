@@ -62,7 +62,7 @@ class SendPopulationBackPlugin(ActionPlugin):
         assert 'quantity' in values or 'percentage' in values, "quantity or percentage is not defined in Send Population Back TimeAction"
         
         acting_region = self.graph.get_region_by_name(values['region'])
-        acting_node = acting_region.get_node_by_name(values['node'])
+        acting_node = acting_region.get_first_node_with_name(values['node'])
 
         sub_list = []
         for b in acting_node.contained_blobs:

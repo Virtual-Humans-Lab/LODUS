@@ -184,7 +184,7 @@ class InfectionPlugin(ActionPlugin):
             
         # Gets the target region and node
         acting_region = self.graph.get_region_by_name(values['region'])
-        acting_node = acting_region.get_node_by_name(values['node'])
+        acting_node = acting_region.get_node_by_unique_name(values['node'])
         if acting_node.get_population_size() == 0: return
 
         # Load beta and gamma from data actions (if available)

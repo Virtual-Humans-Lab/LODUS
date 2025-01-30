@@ -69,9 +69,9 @@ class MovePopulationPlugin(ActionPlugin):
             return
         
         origin_region = self.graph.get_region_by_name(values['origin_region'])
-        origin_node = origin_region.get_node_by_name(values['origin_node'])
+        origin_node = origin_region.get_first_node_with_name(values['origin_node'])
         destination_region = self.graph.get_region_by_name(values['destination_region'])
-        destination_node = destination_region.get_node_by_name(values['destination_node'])
+        destination_node = destination_region.get_first_node_with_name(values['destination_node'])
 
         if quantity == -1:
             quantity = origin_node.get_population_size(pop_template)

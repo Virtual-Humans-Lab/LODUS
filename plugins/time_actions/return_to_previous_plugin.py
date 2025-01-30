@@ -48,7 +48,7 @@ class ReturnToPreviousPlugin(ActionPlugin):
             from_node = self.graph.get_node_by_id(node_id)
         else:
             from_region = self.graph.get_region_by_name(values['region'])
-            from_node = from_region.get_node_by_name(values['node'])
+            from_node = from_region.get_node_by_unique_name(values['node'])
             node_id = from_node.id
         
 

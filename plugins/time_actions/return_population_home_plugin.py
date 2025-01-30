@@ -49,7 +49,7 @@ class ReturnPopulationHomePlugin(ActionPlugin):
 
         node = values['node']
         if isinstance(node, str):
-            node = target_region.get_node_by_name(node)
+            node = target_region.get_node_by_unique_name(node)
         
         #pop_template = PopTemplate()
         #if 'population_template' in values:

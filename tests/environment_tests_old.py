@@ -3548,7 +3548,7 @@ class EnvironmentTests(unittest.TestCase):
         reg_aux_1 = self.envA.get_region_by_name('Centro')
         reg_aux_2 = self.envA.get_region_by_name('Partenon')
 
-        node = desired_region.get_node_by_name("home")
+        node = desired_region.get_node_by_unique_name("home")
         node_blobs = node.contained_blobs
         #gets the one blob
         blob_1 = node_blobs[0]
@@ -3559,9 +3559,9 @@ class EnvironmentTests(unittest.TestCase):
         clone_blob_4 = blob_1.blob_factory.generate_blob_with_profile(desired_region.id+1, (100,0,0,0), blob_1.profiles)
         ## add blobs to other regions
 
-        reg_aux_1.get_node_by_name('school').add_blob(clone_blob_2)
-        reg_aux_2.get_node_by_name('work').add_blob(clone_blob_3)
-        reg_aux_2.get_node_by_name('work').add_blob(clone_blob_4)
+        reg_aux_1.get_node_by_unique_name('school').add_blob(clone_blob_2)
+        reg_aux_2.get_node_by_unique_name('work').add_blob(clone_blob_3)
+        reg_aux_2.get_node_by_unique_name('work').add_blob(clone_blob_4)
 
 
         # test function

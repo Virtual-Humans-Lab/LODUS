@@ -91,7 +91,7 @@ def weighted_distribution_with_weights(available, quantity, weight_list):
     
     weighted_available = [min(available[x], quantity_weight[x]) for x in range(len(available))]
 
-def distribute_ints_from_weights(quantity: int, weight_list:list[float]):
+def distribute_ints_from_weights(quantity: int, weight_list:list[int]):
     """Distributes a given quantity among a list of available items based on their weights."""
     if quantity == 0:
         return np.zeros(len(weight_list), dtype=int)

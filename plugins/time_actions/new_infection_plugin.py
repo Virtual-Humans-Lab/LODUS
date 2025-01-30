@@ -135,7 +135,7 @@ class NewInfectionPlugin(ActionPlugin):
 
         origin_node = values['origin_node']
         if isinstance(origin_node, str):
-            origin_node = origin_region.get_node_by_name(origin_node)
+            origin_node = origin_region.get_node_by_unique_name(origin_node)
 
         destination_region = values['destination_region']
         if isinstance(destination_region, str):
@@ -143,7 +143,7 @@ class NewInfectionPlugin(ActionPlugin):
 
         destination_node = values['destination_node']
         if isinstance(destination_node, str):
-            destination_node = destination_region.get_node_by_name(destination_node)
+            destination_node = destination_region.get_node_by_unique_name(destination_node)
 
         beta = self.beta
         if isinstance(beta, str):
@@ -235,7 +235,7 @@ class NewInfectionPlugin(ActionPlugin):
             
         # Gets the target region and node
         region = self.graph.get_region_by_name(values['region'])
-        node = region.get_node_by_name(values['node'])
+        node = region.get_node_by_unique_name(values['node'])
         if node.get_population_size() == 0: return
 
         # Sets some PopTemplates
@@ -306,7 +306,7 @@ class NewInfectionPlugin(ActionPlugin):
 
             for node in region.node_list:
                 if isinstance(node, str):
-                    node = region.get_node_by_name(node)
+                    node = region.get_node_by_unique_name(node)
 
                 infect_values['node'] = node
                 self.infect(infect_values, hour, time)

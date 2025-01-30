@@ -1,5 +1,6 @@
 import copy
 import pprint
+import re
 import sys
 from typing import Optional
 from core.population import PopulationTemplate
@@ -120,7 +121,7 @@ class LevyWalkPlugin(ActionPlugin):
         assert 'node' in values, "node is not defined in Levy Walk TimeAction"
 
         acting_region = self.graph.get_region_by_name(values['region'])
-        acting_node = acting_region.get_node_by_name(values['node'])
+        acting_node = acting_region.get_node_by_unique_name(values['node'])
         sub_list = [] 
 
         if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
@@ -191,7 +192,7 @@ class LevyWalkPlugin(ActionPlugin):
             
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.graph.get_region_by_name(target_region)
-            target_node = target_region.get_node_by_name(target_node)
+            target_node = target_region.get_node_by_unique_name(target_node)
             
             # Creates a Move Population action from the Acting Nodo to the Target Node
             new_action_type = 'move_population'
@@ -220,12 +221,13 @@ class LevyWalkPlugin(ActionPlugin):
         start_time = time.perf_counter()
         assert 'region' in values, "region is not defined in Levy Walk TimeAction"
         assert 'node' in values, "node is not defined in Levy Walk TimeAction"
-
+        
         acting_region = self.graph.get_region_by_name(values['region'])
-        acting_node = acting_region.get_node_by_name(values['node'])
-        sub_list = [] 
-
-        if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
+        acting_node = acting_region.get_first_node_with_name(values['node'])
+        assert acting_node is not None, f"Node {values['node']} not found in region {values['region']}"
+        
+        sub_list = []
+        if "ignore_acting_node_type" in values and acting_node.node_type in values["ignore_acting_node_type"]:
             return sub_list
 
         
@@ -249,7 +251,6 @@ class LevyWalkPlugin(ActionPlugin):
         node_population = acting_node.get_population_size(pop_template)
         if node_population == 0:
             return sub_list
-        
 
         if _use_buckets:
             distances = self.get_node_distance_bucket(acting_node, self.graph)
@@ -259,7 +260,7 @@ class LevyWalkPlugin(ActionPlugin):
         if "target_node_type" in values:
             distances = self.filter_target_node_types(buckets_dict=distances,
                                                       target_nodes=values["target_node_type"])
-            
+
         # if 'node_type' in values and 'home' in values['node_type']:
         #     print(distances)
         #     exit()
@@ -287,7 +288,7 @@ class LevyWalkPlugin(ActionPlugin):
             
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.graph.get_region_by_name(target_region)
-            target_node = target_region.get_node_by_name(target_node)
+            target_node = target_region.get_node_by_unique_name(target_node_u_name)
             
             # Creates a Move Population action from the Acting Nodo to the Target Node
             new_action_type = 'move_population'
@@ -368,7 +369,7 @@ class LevyWalkPlugin(ActionPlugin):
                                       any(s in (str(dist[0]).split("//")[1]) for s in target_nodes)]
             else:
                 __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
-                                    str(dist[0]).split("//")[1] in target_nodes]
+                                    re.sub(r'[0-9]+', '', str(dist[0]).split("//")[1]) in target_nodes]
         return __filtered
 
     def levy_sample(self, location:Optional[float] = None,

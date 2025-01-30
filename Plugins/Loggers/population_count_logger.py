@@ -272,7 +272,7 @@ class PopulationCountLogger(LoggerPlugin):
         node_f =  open('output_logs/' + self.base_filename + "//" +  "node_ids.csv", 'w', encoding='utf8')
         node_f.write('ID;ImagePosition;Name;\n')
         for region in graph.region_list:
-            region_f.write(f'{region.id};{region.position};{region.name};\n')
+            region_f.write(f'{region.id};{region.long_lat};{region.name};\n')
             for node in region.node_list:
                 node_f.write(f'{node.id};{node.get_attribute("long_lat_position")};{node.get_unique_name()};\n')
         region_f.close()

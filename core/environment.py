@@ -7,7 +7,7 @@ from typing import Any, Optional
 from core.plugin import RoutinePlugin, ActionPlugin
 import logger_plugin
 import copy
-from core.population import Blob, BlobFactory, PopulationTemplate, SampledCharacteristicCollection
+from core.population import Blob, BlobFactory, BlobTemplate, PopulationTemplate, SampledCharacteristicCollection
 from core.routine import Routine, Action, RoutineFactory, RoutineTemplate
 import util
 from util import DistanceType as DistType
@@ -59,27 +59,35 @@ class EnvNode():
         routine: The current time action Routine this region is implementing.
     """
 
-    def __init__(self):
-        """"Inits EnvNode with an empty template."""
+    def __init__(self, node_type: str, name:str = ''):
+        """Initializes an EnvNode."""
+        self.node_type = node_type
         self.id = util.IDGen('nodes').get_id()
-        self.type_id = util.IDGen('node_type').get_id()
-        self.node_type = '' 
-        self.name = ''
-        self.containing_region_name = None
+        self.type_id = util.IDGen(f'node_{node_type}').get_id()
+        self.name = node_type
+
+        self.containing_region_name:str = ''
         self.long_lat:list[float] = [0.0, 0.0]
         self.attributes: dict[str, Any] = {}
+
         self.contained_blobs:list[Blob] = [] 
         self.routine: Routine = None # type: ignore
         self.original_node_population:SampledCharacteristicCollection = None # type: ignore
 
     def get_unique_name(self):
-        return f"{self.containing_region_name}//{self.name}"
+        return f"{self.containing_region_name}//{self.node_type}{self.type_id}"
     
     def add_attribute(self, key: str, value: Any) -> None:
         self.attributes[key] = value
 
     def get_attribute(self, key: str) -> Any:
         return self.attributes[key]
+    
+    def set_long_lat_position(self, longitude: float, latitude: float) -> None:
+        """Sets the physical position of this node."""
+        if not isinstance(longitude, (int, float)) or not isinstance(latitude, (int, float)):
+            raise ValueError(f"longitude and latitude must be of type int or float, are {type(longitude)} and {type(latitude)}")
+        self.long_lat = [longitude, latitude]
 
     def process_routine(self, cycle_step) -> list[Action]:
         """Returns the list of Actions for the given cycle_step."""
@@ -135,17 +143,19 @@ class EnvNode():
         available_quantities = [blob.get_population_size(template) for blob in self.contained_blobs]
         int_adjusted_quantities = util.distribute_ints_from_weights(quantity, available_quantities)
         # int_adjusted_quantities = util.weighted_int_distribution(available_quantities, quantity)
-
-        new_blobs = [
+        new_blobs:list[Blob] = [
             blob.grab_population(int_adjusted_quantities[x], template)
             for x, blob in enumerate(self.contained_blobs)
             if int_adjusted_quantities[x] > 0
-        ]
-
+        ] # type: ignore
         self.remove_blobs(new_blobs)
         return new_blobs
 
-    def change_multiple_blobs_traceable_property(self, traceable_property_key:str, new_value: Any, desired_quantity:int, population_template:Optional[PopulationTemplate] = None):
+    def change_multiple_blobs_traceable_property(self, 
+                                                 traceable_property_key:str, 
+                                                 new_value: Any, 
+                                                 desired_quantity:int, 
+                                                 population_template:Optional[PopulationTemplate] = None) -> list[Blob]:
         """Grabs a quantity of population and changes their traceable properties. 
         May affect multiple blobs. Newly created blobs are added to this EnvNode.
         """
@@ -155,12 +165,19 @@ class EnvNode():
         for blob in grabbed_blobs:
             self._set_blob_traceable_properties(blob, traceable_property_key, new_value)
 
-    def change_single_blob_traceable_property(self, blob:Blob, traceable_property_key:str, new_value: Any, desired_quantity:int, population_template:Optional[PopulationTemplate] = None) -> Blob:
+        return grabbed_blobs
+
+    def change_single_blob_traceable_property(self, 
+                                              blob:Blob, 
+                                              traceable_property_key:str, 
+                                              new_value: Any, 
+                                              desired_quantity:int, 
+                                              population_template:Optional[PopulationTemplate] = None) -> Blob:
         """Changes a traceable property of a single blob contained in this EnvNode.
         May split a blob during grab_population. Newly created blob is added to this EnvNode.
         """
         if desired_quantity == 0:
-            return
+            return None
 
         if blob not in self.contained_blobs:
             raise ValueError(f"Blob is not in the contained blobs of node {blob.verbose_str()} {self}")
@@ -168,56 +185,59 @@ class EnvNode():
         grabbed_blob = blob.grab_population(desired_quantity, population_template)
 
         if grabbed_blob is None:
-            return
+            return None
         if blob is not grabbed_blob:
             self.add_blob(grabbed_blob)
 
         self._set_blob_traceable_properties(grabbed_blob, traceable_property_key, new_value, blob)
         return grabbed_blob
 
-    def _set_blob_traceable_properties(self, blob: Blob, key: str, value: Any, origin_blob: Blob = None):
+    def _set_blob_traceable_properties(self, blob: Blob, key: str, value: Any, origin_blob: Optional[Blob] = None):
+        """Internal function to set a traceable property of a contained blob."""
         blob.set_traceable_characteristic(key, value)
         blob.previous_node = self.id if origin_blob is None else origin_blob.previous_node
         blob.frame_origin_node = self.id if origin_blob is None else origin_blob.frame_origin_node
 
     def __str__(self):
-        return json.dumps({
-        "name": self.name,
-        "id": self.id,
-        "routine": self.routine,
-        "characteristics": self.attributes,
-        "blobs": self.contained_blobs
-    }, indent=4)                                                                   
+        return (
+        f"Type: {self.node_type}\n"
+        f"Unique Name: {self.get_unique_name()}\n"
+        f"Name: {self.name}\n"
+        f"ID: {self.id}\n"
+        f"Routine: {self.routine}\n"
+        f"Characteristics: {self.attributes}\n"
+        f"Blobs: {self.contained_blobs}\n"
+    )                                                                
 
     def __repr__(self):
         return self.__str__()
 
-class EnvNodeTemplate():    
+class EnvNodeTemplate:
     """Describes an EnvNode generation template.
     
     EnvNodeFactory objects can generate EnvNodes based on this template.
     """
-
-    def __init__(self):
-        self.node_attributes:dict[str, Any] = {}
+    def __init__(self, node_type: str, node_name: Optional[str] = None):
+        self.node_type: str = node_type
+        self.node_name: str = node_name if node_name else node_type
+        self.node_attributes: dict[str, Any] = {}
         self.routine_template: RoutineTemplate = RoutineTemplate()
-        self.blob_descriptions: list[tuple[int, list[str], str, BlobFactory]] = []
-        self.long_lat:list[float] = [0.0, 0.0]
+        self.blob_templates: list[BlobTemplate] = []
+        self.long_lat: list[float] = [0.0, 0.0]
 
     def add_node_attributes(self, key: str, value: Any) -> None:
         """Adds an attribute to the node."""
         self.node_attributes[key] = value
 
-    def add_routine_template(self, cycle_stop: int, actions: list[Action]) -> None:
-        """Adds a Action to the designated time slot."""
-        if not all(isinstance(action, Action) for action in actions):
-            raise ValueError("Actions must be of type TimeAction")
-        if not isinstance(cycle_stop, int) or cycle_stop < 0:
-            raise ValueError("hour must be a non-negative integer")
-        raise ValueError("Not implemented yet")
+    def add_action_to_routine_template(self, cycle_stop: int, action: Action) -> None:
+        self.routine_template.add_action_to_template(cycle_stop, action)
 
-    def add_blob_description(self, population: int, traceable_properties: list[str], description: str, blob_factory: BlobFactory) -> None:
-        self.blob_descriptions.append((population, traceable_properties, description, blob_factory))
+    def add_actions_to_routine_template(self, cycle_stop: int, actions: list[Action]) -> None:
+        for action in actions:
+            self.routine_template.add_action_to_template(cycle_stop, action)
+
+    def add_blob_template(self, blob_template: BlobTemplate) -> None:
+        self.blob_templates.append(blob_template)
 
     def set_long_lat_position(self, longitude: float, latitude: float) -> None:
         """Sets the physical position of this node."""
@@ -229,31 +249,47 @@ class EnvNodeFactory():
     """A factory to generate EnvNodes with a particular EnvNodeTemplate.
     
     Generates both an EnvNode and the respective Routine for the node.
-    
     """
-    def __init__(self, node_template: EnvNodeTemplate):
-        self.node_template:EnvNodeTemplate = node_template
-        self.routine_factory: RoutineFactory = RoutineFactory()
+    def __init__(self):
+        self.default_routine_factory = RoutineFactory()
 
-    def generate_envnode(self, target_region: EnvRegion, name) -> EnvNode:
-        node  = EnvNode()
-        node.name = name
-        node.long_lat = self.node_template.long_lat
-        node.routine = self.routine_factory.generate_routine(self.node_template.routine_template)
-        for k in self.node_template.node_attributes.keys():
-            node.attributes[k] = self.node_template.node_attributes[k]
+    def generate_envnode(self,
+                         node_template: EnvNodeTemplate,
+                         blob_factory: BlobFactory,
+                         target_region: EnvRegion, 
+                         routine_factory: Optional[RoutineFactory] = None) -> EnvNode:
+        """Generates an EnvNode based on a NodeTemplate and Blob Factory."""
+        routine_factory = routine_factory or self.default_routine_factory
 
-        for (pop,trace,desc,factory) in self.node_template.blob_descriptions:
-            blob: Blob = factory.generate_blob_with_profile(target_region.id, node.id, pop, desc, trace)
-            node.add_blob(blob)
-            
-        return node
+        env_node = EnvNode(node_template.node_type)
+        env_node.set_long_lat_position(node_template.long_lat[0], node_template.long_lat[1])
+        env_node.routine = routine_factory.generate_routine(node_template.routine_template)
+        env_node.attributes.update(node_template.node_attributes)
+    
+        for template in node_template.blob_templates:
+            blob = blob_factory.generate_blob_from_template(
+                target_region.id,
+                env_node.id,
+                template
+            )
+            env_node.add_blob(blob)
+
+        # for template in node_template.blob_templates:
+        #     blob = blob_factory.generate_blob_with_profile(
+        #         target_region.id, 
+        #         env_node.id, 
+        #         template.population, 
+        #         template.sampled_characteristics, 
+        #         template.traceable_characteristics
+        #     )
+        #     env_node.add_blob(blob)
+        
+        return env_node
 
 
 class EnvRegion():
-    """"Represents a particular region of simulation.
-    
-    A region is an abstraction for a set of points of interest and initial population.
+    """"Represents a particular region in the simulation.
+    A region is an abstraction for a set of points of interest and their initial populations.
     It is assumed its initial population returns frequently.
 
     EnvRegions are a possible abstraction for an aggregation of points-of-interest.
@@ -265,141 +301,91 @@ class EnvRegion():
         A country containing states;
 
     Ideally, an EnvRegion is constructed using an EnvRegionFactory.
-
-    Attributes:
-        id: A unique integer region identifier.
-        position: The physical location of this region.
-        population: The total population size in this region.
-        node_list: Contained EnvNodes in this region.
-        neighbours: Currently unused. The relation between this region and each other region.
-
     """
 
-    def __init__(self, _position = (0.0, 0.0), _long_lat = (0.0, 0.0), population = 0, _id = None):
-        """Initializes an empty EnvRegion"""
-        self.name:str = ''
-        self.id: int = _id
-        if _id is None:
-            self.id = util.IDGen("regions").get_id()
-        self.position:tuple[float, float] = _position
-        self.long_lat:tuple[float, float] = _long_lat
-        self.population:int = population
-        self.node_list:list[EnvNode] = []
-        self.node_dict:dict[str, EnvNode] = {}
-        self.neighbours = [[]]
+    def __init__(self, region_name: str, long_lat: list[float]):
+        """Initializes an EnvRegion"""
+        self.name: str = region_name
+        self.id = util.IDGen("regions").get_id()
+        self.long_lat: list[float] = long_lat
+        self.node_list: list[EnvNode] = []
+        self.node_dict: dict[str, EnvNode] = {}
 
-    def add_node(self, _node: EnvNode):
-        self.node_list.append(_node)
-        self.node_dict[_node.name] = _node
-        _node.containing_region_name = self.name
+    def add_node(self, node: EnvNode):
+        node.containing_region_name = self.name
+        self.node_list.append(node)
+        self.node_dict[node.get_unique_name()] = node
 
-    def get_population_size(self, template = None):
-        """Gets the total population size contained in this EnvRegion.
-        
-        Gets the sum of each EnvNode's get_population_size.
-        If a population_template is defined, gets the population size of the 
-        population which matches that template.
+    def get_first_node_with_name(self, name: str) -> EnvNode | None:
+        """Gets an EnvNode by name."""
+        return next((node for node in self.node_list if node.name == name), None)
 
-        Args:
-            population_template: A PopTemplate to be matched by this operation.
+    def get_node_by_unique_name(self, unique_name: str) -> EnvNode:
+        """Gets an EnvNode by name."""
+        if unique_name not in self.node_dict:
+            raise ValueError(f"Node {unique_name} not found in region {self.name}")
+        return self.node_dict[unique_name]
 
-        Returns:
-            The sum of each EnvNode in node_list's get_population_size, matching the population_template.
-        """
-        count = 0
-        for node in self.node_list:
-            count += node.get_population_size(template)
+    def get_population_size(self, population_template: Optional[PopulationTemplate] = None) -> int:
+        """Gets the total population size contained in this EnvRegion."""
+        return sum(node.get_population_size(population_template) for node in self.node_list)
 
-        return count
-    
-    def get_blob_count(self)->int:
+    def get_blob_count(self) -> int:
         """Gets the total number of Blobs contained in this EnvRegion."""
-        return sum([len(nd.contained_blobs) for nd in self.node_list])
+        return sum(len(node.contained_blobs) for node in self.node_list)
 
-    def generate_action_list(self, hour: int):
-        """Gets the TimeAction list for each EnvNode in this EnvRegion for this time slot.
-        
-        Generate a TimeAction list which contais  each TimeAction for EnvNodes in this EnvRegion. 
-
-        Args:
-            time: The requested time slot.
-
-        Returns:
-            The concatenated TimeAction list.
-        """
-        action_list = []
-        for node in self.node_list:
-            action_list += node.process_routine(hour)
-
-        return action_list
-
-    def get_node_by_name(self, name) -> EnvNode:
-        return self.node_dict[name]
-
-    ## Not sure if its needed TODO
-    ## maybe we only should do population grabs per node
-    def grab_population(self, quantity, pop_template):
+    def generate_action_list(self, hour: int) -> list:
+        """Generates a list of Actions for each EnvNode in this EnvRegion."""
+        return [action for node in self.node_list for action in node.process_routine(hour)]
+   
+    def grab_population(self, quantity: int, pop_template: PopulationTemplate) -> list:
         """Gets and removes a population matching a template from this EnvRegion.
         
-        The population removed is returned as a list of blobs, each with a unique mother_blob_id.
+        The population removed is returned as a list of blobs.
 
-        If quantity is larger than the current population size matching the tamplate,
+        If quantity is larger than the current population size matching the template,
         this method returns the largest possible population.
 
         Population is extracted evenly from EnvNodes.
-
-        TODO NOT IMPLEMENTED YET.
-
-        Args:
-            quantity: The desired population size to be grabbed from this EnvRegion.
-            template: The PopTemplate to be matched.,
-
-        Returns:
-            A list containing the grabbed population. This list might have more than one Blob.
-            In such case, each blob is guaranteed to be from different mother_blob_id.
         """
-        print("EnvRegion.grab_population not implemented yet")
-        pass
+        raise NotImplementedError
 
-    def __str__(self):
-        return '{{\"id\" : {0}, \"name\" : \"{1}\",  \"position\" : {2}, \"nodes\" : {3}}}'.format(
-                                                            self.id,
-                                                            self.name,
-                                                            self.position,
-                                                            self.node_list
+    def __str__(self) -> str:
+        return '{{"id" : {0}, "name" : "{1}",  "position" : {2}, "nodes" : {3}}}'.format(
+            self.id, self.name, self.long_lat, self.node_list
         )
-    
-    def __repr__(self):
-        return '{{\"id\" : {0}, \"name\" : \"{1}\",  \"position\" : {2}, \"nodes\" : {3}}}'.format(
-                                                            self.id,
-                                                            self.name,
-                                                            self.position,
-                                                            self.node_list
-        )
+
+    def __repr__(self) -> str:
+        return self.__str__()
 
 class EnvRegionTemplate():
     """Describes a template for generating EnvRegions"""
 
-    def __init__(self):
-        self.template:list[tuple[str,EnvNodeTemplate]] = []
+    def __init__(self, region_name: str, long_lat: list[float]):
+        self.region_name:str = region_name
+        self.long_lat:list[float] = long_lat
+        self.envnode_templates:list[EnvNodeTemplate] = []
 
-    def add_template_node(self, node_name:str, _node_template:EnvNodeTemplate):
-        self.template.append((node_name, _node_template))
+    def add_envnode_template(self, node_template:EnvNodeTemplate):
+        """Adds an EnvNodeTemplate to the region template."""
+        if not isinstance(node_template, EnvNodeTemplate):
+            raise ValueError("node_template must be of type EnvNodeTemplate")
+        self.envnode_templates.append(node_template)
     
-
 class EnvRegionFactory():
     """Generates EnvRegions based on a specific EnvRegionTemplate."""
 
-    def __init__(self, _template:EnvRegionTemplate):
-        self.region_template = _template
+    def __init__(self, template:EnvRegionTemplate, default_blob_factory: BlobFactory):
+        self.envregion_template = template
+        self.default_blob_factory = default_blob_factory
     
-    def Generate(self, _position:tuple[float,float]):
-        region = EnvRegion(_position)
+    def generate_envregion(self):
+        """Generates an EnvRegion based on the template."""
+        region = EnvRegion(self.envregion_template.region_name, long_lat=self.envregion_template.long_lat)
 
-        for c in self.region_template.template:
-            node_name, node_template = c
-            factory = EnvNodeFactory(node_template)
-            node = factory.generate_envnode(region,node_name)
+        for envnode_template in self.envregion_template.envnode_templates:
+            factory = EnvNodeFactory()
+            node = factory.generate_envnode(envnode_template, self.default_blob_factory, region)
             
             region.add_node(node)
         
@@ -521,7 +507,7 @@ class EnvironmentGraph():
       
 
     def get_node_by_name(self, region_name, node_name):
-        return self.region_dict[region_name].get_node_by_name(node_name)
+        return self.region_dict[region_name].get_node_by_unique_name(node_name)
 
     def get_node_by_id(self, _id) -> EnvNode:
         return self.node_id_dict[_id]
@@ -595,9 +581,9 @@ class EnvironmentGraph():
             if (type(rga[0]) is int and hour % rga[0] == 0) or (type(rga[0]) is list and hour in rga[0]):
                 for region in self.region_list:
                     for node in region.node_list:
-                        if 'node_name' in rga[1].values and node.name != rga[1].values['node_name']:
+                        if 'node_name' in rga[1].values and node.node_type != rga[1].values['node_name']:
                             continue
-                        if 'node_type' in rga[1].values and node.name not in rga[1].values['node_type']:
+                        if 'node_type' in rga[1].values and node.node_type not in rga[1].values['node_type']:
                             continue
                         
                         action = copy.deepcopy(rga[1])
@@ -606,7 +592,7 @@ class EnvironmentGraph():
                         else:
                             action.values['cycle_length'] = rga[0]
                         action.values['region'] = region.name
-                        action.values['node'] = node.name
+                        action.values['node'] = node.node_type
                         action.values['node_id'] = node.id
                         action_list += [action]
         return action_list
@@ -773,10 +759,9 @@ class EnvironmentGraph():
 
         return action_list
 
-    def add_region(self, _position, _template: EnvRegionTemplate, name):
-        factory = EnvRegionFactory(_template)
-        new_region = factory.Generate(_position)
-        new_region.name = name
+    def add_region(self, _position, _template: EnvRegionTemplate, blob_factory: BlobFactory):
+        factory = EnvRegionFactory(_template, blob_factory)
+        new_region = factory.generate_envregion()
         new_region.population = new_region.get_population_size()
         self.edge_table.append(['' for x in range(len(self.region_list))])
 
@@ -786,18 +771,18 @@ class EnvironmentGraph():
             self.node_dict[node.get_unique_name()] = node
             self.node_id_dict[node.id] = node
 
-        self.region_dict[name] = new_region        
+        self.region_dict[_template.region_name] = new_region        
         self.region_list.append(new_region)
         self.region_id_dict[new_region.id] = new_region
 
-    def add_node_to_region(self, region:EnvRegion, node_template:EnvNodeTemplate, node_unique_name:str) -> EnvNode: 
-        factory = EnvNodeFactory(node_template)
-        node = factory.generate_envnode(region,node_unique_name)
-        region.add_node(node)
-        self.node_list.append(node)
-        self.node_dict[node.get_unique_name()] = node
-        self.node_id_dict[node.id] = node
-        return node
+    # def add_node_to_region(self, region:EnvRegion, node_template:EnvNodeTemplate, node_unique_name:str) -> EnvNode: 
+    #     factory = EnvNodeFactory(node_template)
+    #     node = factory.generate_envnode(region,node_unique_name)
+    #     region.add_node(node)
+    #     self.node_list.append(node)
+    #     self.node_dict[node.get_unique_name()] = node
+    #     self.node_id_dict[node.id] = node
+    #     return node
 
 
     def add_edge(self, region1, region2, _type):
