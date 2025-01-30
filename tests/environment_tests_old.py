@@ -2212,7 +2212,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': origin_node_original_size//2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[0].consume_time_action(action, 0, 0)
@@ -2257,7 +2257,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': origin_node_original_size,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[1].consume_time_action(action, 0, 0)
@@ -2302,7 +2302,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': origin_node_original_size * 2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[2].consume_time_action(action, 0, 0)
@@ -2347,7 +2347,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': -1,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[3].consume_time_action(action, 0, 0)
@@ -2392,7 +2392,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': 0,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[4].consume_time_action(action, 0, 0)
@@ -2486,7 +2486,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population//2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[0].consume_time_action(action, 0, 0)
@@ -2537,7 +2537,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[1].consume_time_action(action, 0, 0)
@@ -2590,7 +2590,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population * 2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[2].consume_time_action(action, 0, 0)
@@ -2643,7 +2643,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': -1,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[3].consume_time_action(action, 0, 0)
@@ -2696,7 +2696,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': 0,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[4].consume_time_action(action, 0, 0)
@@ -2785,7 +2785,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population,
                     'population_template':pop_template_A}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         self.envA.consume_time_action(action, 0, 0)
@@ -2839,7 +2839,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population,
                     'population_template':pop_template_B}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         self.envA.consume_time_action(action, 0, 0)
@@ -2951,7 +2951,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population//2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[0].consume_time_action(action, 0, 0)
@@ -3002,7 +3002,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[1].consume_time_action(action, 0, 0)
@@ -3055,7 +3055,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population * 2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[2].consume_time_action(action, 0, 0)
@@ -3108,7 +3108,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': -1,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[3].consume_time_action(action, 0, 0)
@@ -3161,7 +3161,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': 0,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[4].consume_time_action(action, 0, 0)
@@ -3255,7 +3255,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population//2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[0].consume_time_action(action, 0, 0)
@@ -3306,7 +3306,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[1].consume_time_action(action, 0, 0)
@@ -3359,7 +3359,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': original_available_population * 2,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[2].consume_time_action(action, 0, 0)
@@ -3412,7 +3412,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': -1,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[3].consume_time_action(action, 0, 0)
@@ -3465,7 +3465,7 @@ class EnvironmentTests(unittest.TestCase):
                     'destination_node': node_destination.name,
                     'quantity': 0,
                     'population_template':pop_template}
-        action = TimeAction('move_population', values)
+        action = Action('move_population', values)
         
         # Consumes the TimeAction
         _envs[4].consume_time_action(action, 0, 0)
@@ -3512,7 +3512,7 @@ class EnvironmentTests(unittest.TestCase):
         values = {'destination_region': 'Petropolis', 'destination_node': 'work', 'quantity':50, 'population_template':pop_template}
 
 
-        action = TimeAction('gather_population', values)
+        action = Action('gather_population', values)
         old_graph_size = self.envA.get_population_size()
         
         target_node = self.envA.get_node_by_name("Petropolis", "work")
@@ -3569,7 +3569,7 @@ class EnvironmentTests(unittest.TestCase):
         pop_template.mother_blob_id = desired_region.id
 
         values = {'region': 'Petropolis', 'node':'home', 'quantity':-1, 'population_template':pop_template}
-        action = TimeAction('return_population_home', values)
+        action = Action('return_population_home', values)
         
         old_graph_size = self.envA.get_population_size()
 

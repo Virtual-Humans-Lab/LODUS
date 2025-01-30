@@ -289,10 +289,10 @@ if args['i'] != 0:
                       'nu': 1,
                       'quantity': 0,
                       'population_template': PopulationTemplate()}
-    vaccinate = TimeAction('vaccinate', vaccine_values)
+    vaccinate = Action('vaccinate', vaccine_values)
     infect_values = { 'region_list' : env_graph.region_list,
                       'population_template': PopulationTemplate()}
-    infect_city = TimeAction('infect_population', infect_values)
+    infect_city = Action('infect_population', infect_values)
 
 
 if args['m'] == 0:

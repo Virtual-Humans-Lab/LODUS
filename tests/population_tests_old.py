@@ -1,11 +1,9 @@
 import sys
 
-from numpy import character
 sys.path.append('../')
-from population import *
-import environment
+from core.population import SampledCharacteristic, SampledCharacteristicCollection, PopulationTemplate, Blob, BlobFactory, CharacteristicsFactory
 import unittest
-import util
+from random_inst import FixedRandom
 
 
 def verify_block_validity(block:SampledCharacteristicCollection):

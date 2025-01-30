@@ -3,8 +3,8 @@ import pprint
 import sys
 from typing import Optional
 from core.population import PopulationTemplate
-from core.routine import TimeAction
-from core.plugin import TimeActionPlugin
+from core.routine import Action
+from core.plugin import ActionPlugin
 from random_inst import FixedRandom
 
 sys.path.append('../')
@@ -19,7 +19,7 @@ from util import DistanceType
 import pandas as pd
 
 
-class LevyWalkPlugin(TimeActionPlugin):
+class LevyWalkPlugin(ActionPlugin):
 
     def __init__(self, env_graph: EnvironmentGraph):
         '''
@@ -62,8 +62,8 @@ class LevyWalkPlugin(TimeActionPlugin):
         
         self.distribution_sampler = scipy_levy
         self.graph = env_graph
-        self.set_pair('levy_walk', self.levy_walk)
-        self.set_pair('levy_walk_direct', self.levy_walk_direct)
+        self.add_action_type_to_function('levy_walk', self.levy_walk)
+        self.add_action_type_to_function('levy_walk_direct', self.levy_walk_direct)
         
         if "levy_walk_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry (default plugin values)")
@@ -98,8 +98,20 @@ class LevyWalkPlugin(TimeActionPlugin):
         self.sampled_distances = []
         self.random = FixedRandom.instance
 
+    def setup_logger(self, logger):
+        return super().setup_logger(logger)
+    
     def update_time_step(self, cycle_step, simulation_step):
-        return
+        return super().update_time_step(cycle_step, simulation_step)
+    
+    def log_data(self, logger):
+        return super().log_data(logger)
+    
+    def stop_logger(self, logger):
+        return super().stop_logger(logger)
+    
+    def unload_plugin(self):
+        return super().unload_plugin()
 
     def levy_walk_direct(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         '''Function to consume a 'levy_walk' TimeAction type.'''
@@ -191,7 +203,7 @@ class LevyWalkPlugin(TimeActionPlugin):
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
 
-            new_action = TimeAction(action_type = new_action_type,
+            new_action = Action(action_type = new_action_type,
                                                 pop_template = temp,
                                                 values = new_action_values)
             # print(new_action)
@@ -287,7 +299,7 @@ class LevyWalkPlugin(TimeActionPlugin):
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
 
-            new_action = TimeAction(action_type = new_action_type,
+            new_action = Action(action_type = new_action_type,
                                                 pop_template = temp,
                                                 values = new_action_values)
             #print(new_action)

@@ -1,7 +1,7 @@
 from core.environment import EnvironmentGraph
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 
-class GlobalInfectionDataPlugin(TimeActionPlugin):
+class GlobalInfectionDataPlugin(ActionPlugin):
 
     def __init__(self, env_graph: EnvironmentGraph):
         super().__init__()

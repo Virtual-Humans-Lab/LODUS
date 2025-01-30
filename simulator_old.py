@@ -210,10 +210,10 @@ if args['i'] != 2:
 					  'nu': config.nu,
 					  'quantity': config.vaccination_amount,
 					  'population_template': PopulationTemplate()}
-	vaccinate = TimeAction('vaccinate', vaccine_values)
+	vaccinate = Action('vaccinate', vaccine_values)
 	infect_values = { 'region_list' : env_graph.region_list,
 					  'population_template': PopulationTemplate()}
-	infect_city = TimeAction('infect_population', infect_values)
+	infect_city = Action('infect_population', infect_values)
 
 if args['s'] == 0:
 	gather_pop = GatherPopulationPlugin(env_graph, isolation_rate = 0.8)
@@ -237,7 +237,7 @@ soccer = PlaySoccerPlugin(env_graph, isolation_rate = 0.0)
 soccer.iso_mode = 'regular'
 env_graph.load_time_action_plugin(soccer)
 
-jogar_futebol = TimeAction('play_soccer', config.soccer_values)
+jogar_futebol = Action('play_soccer', config.soccer_values)
 
 
 '''
@@ -473,7 +473,7 @@ for i in range(config.simulation_steps):
 		inf_plugin.beta = 1.0
 		#input("pressione uma tecla!")
 		inf_stadium_values = {'region': config.match_region, 'node': 'stadium', 'beta' : 1.0, 'gamma' : inf_plugin.gamma, 'mu' : 0.0, 'nu' : 0.0, 'population_template': PopulationTemplate()}
-		infectar_no_estadio = TimeAction('infect', inf_stadium_values)
+		infectar_no_estadio = Action('infect', inf_stadium_values)
 		env_graph.consume_time_action(infectar_no_estadio, hour, i)
 		inf_plugin.beta = old_beta
 		new_random.new_random.set_random_instance(envRandom, "envRandom")
@@ -490,7 +490,7 @@ for i in range(config.simulation_steps):
 		#input("pressione uma tecla!")
 		for region in env_graph.region_list:
 			return_values = {'region': region.name, 'node':'home', 'population_template':PopulationTemplate()}
-			return_action = TimeAction('return_population_home', return_values)
+			return_action = Action('return_population_home', return_values)
 			env_graph.consume_time_action(return_action, config.match_end_time, config.day_duration*config.match_day + config.match_end_time)
 
 		inf_plugin.beta = old_beta

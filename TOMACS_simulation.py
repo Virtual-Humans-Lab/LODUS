@@ -1,11 +1,9 @@
 #encoding: utf-8
 import sys
 sys.path.append('./plugins/')
-
 import argparse
 import time
 from pathlib import Path
-
 from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 from loggers.characteristic_change_logger import CharacteristicChangeLogger
 from loggers.movement_displacement_logger import MovementDisplacementLogger

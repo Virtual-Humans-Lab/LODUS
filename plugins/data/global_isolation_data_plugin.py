@@ -1,8 +1,8 @@
 from core.environment import EnvironmentGraph
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 
 
-class GlobalIsolationDataPlugin(TimeActionPlugin):
+class GlobalIsolationDataPlugin(ActionPlugin):
 
     def __init__(self, env_graph: EnvironmentGraph):
         super().__init__()

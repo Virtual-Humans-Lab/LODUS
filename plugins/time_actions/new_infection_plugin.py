@@ -2,7 +2,7 @@ from itertools import count
 from types import NoneType
 import core.environment
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -12,7 +12,7 @@ from loggers.population_count_logger import PopulationCountLogger
 import util
 import json
 
-class NewInfectionPlugin(TimeActionPlugin):
+class NewInfectionPlugin(ActionPlugin):
     '''
     This Plugin tmplements the SIR (Susceptible, Infected, Removed) model. 
 
@@ -96,7 +96,7 @@ class NewInfectionPlugin(TimeActionPlugin):
             else:
                 _quant = self.config["default_infection_value"]
             if isinstance(_quant,float): _quant = math.floor(_node.get_population_size() * _quant)
-            _node.change_blobs_traceable_property('sir_status', 'infected', _quant)
+            _node.change_multiple_blobs_traceable_property('sir_status', 'infected', _quant)
                 
                    
         
@@ -278,18 +278,18 @@ class NewInfectionPlugin(TimeActionPlugin):
         
         if self.vacc_plugin is not None:
             if to_rem > 0:
-                node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+                node.change_multiple_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
             if to_inf > 0:
                 i_grabbed = node.grab_population(to_inf, pt_sus)
                 node.add_blobs(i_grabbed)
                 for b in i_grabbed:
                     _eff = self.vacc_plugin.get_blob_vacc_efficiency(b)
                     _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
-                    node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
+                    node.change_single_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
                       
         else:
-            node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
-            node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
+            node.change_multiple_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+            node.change_multiple_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
 
     def infect_population(self, values, hour, time):
         print("infect population")

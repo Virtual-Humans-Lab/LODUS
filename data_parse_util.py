@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from core.environment import *
 from core.population import *
-from core.routine import TimeAction
+from core.routine import Action
 
 def DummyEnv():
     return ''
@@ -66,23 +66,23 @@ def Generate_EnvironmentGraph(env_input):
                 
             if 'cycle_length' in rga:
                 env.set_repeating_action(int(rga['cycle_length']), 
-                                         TimeAction(action_type=rga['action']['type'], 
+                                         Action(action_type=rga['action']['type'], 
                                                     pop_template=pt,
                                                     values=rga['action']['values']))
             elif 'frames' in rga:
-                env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
+                env.set_repeating_action(rga['frames'], Action(rga['type'], rga['values']))
             elif 'cycle_step' in rga:
                 # pt = population.PopTemplate(
                 #         sampled_properties=rga["action"]['population_template']["sampled_characteristics"],
                 #         traceable_properties=rga["action"]['population_template']["traceable_characteristics"])
                 if isinstance(rga['cycle_step'], list):
                     env.set_repeating_action(rga['cycle_step'], 
-                                            TimeAction(action_type=rga['action']['type'], 
+                                            Action(action_type=rga['action']['type'], 
                                                         pop_template=pt,
                                                         values=rga['action']['values']))
                 else:
                     env.set_repeating_action(int(rga['cycle_step']), 
-                                            TimeAction(action_type=rga['action']['type'], 
+                                            Action(action_type=rga['action']['type'], 
                                                         pop_template=pt,
                                                         values=rga['action']['values']))
 
@@ -120,10 +120,10 @@ def Generate_EnvironmentGraph(env_input):
                     pt = PopulationTemplate(
                         sampled_characteristics=rt["action"]['population_template']["sampled_characteristics"],
                         traceable_characteristics=rt["action"]['population_template']["traceable_characteristics"])
-                    action = TimeAction(action_type=rt["action"]['type'], 
+                    action = Action(action_type=rt["action"]['type'], 
                                         values=rt["action"]['values'], 
                                         pop_template=pt)
-                    node_template.add_action_to_template(rt["cycle_step"], action)
+                    node_template.routine_template.add_action_to_template(rt["cycle_step"], action)
 
             region_template.add_template_node(poi_dict["name"], node_template)
         
@@ -140,9 +140,9 @@ def parse_routines(data:dict):
     # Global Routines
     for _ga in data.get('global_routine', {}):
         if 'cycle_length' in _ga:
-            _global_actions.append((int(_ga['cycle_length']),TimeAction(_ga['type'], _ga['values'])))
+            _global_actions.append((int(_ga['cycle_length']),Action(_ga['type'], _ga['values'])))
         elif 'frames' in _ga:
-            _global_actions.append(_ga['frames'], TimeAction(_ga['type'], _ga['values']))
+            _global_actions.append(_ga['frames'], Action(_ga['type'], _ga['values']))
             #env.set_repeating_action(_ga['frames'], TimeAction(_ga['type'], _ga['values']))
         elif 'cycle_step' in _ga:
             pt = PopulationTemplate(
@@ -150,12 +150,12 @@ def parse_routines(data:dict):
                     traceable_characteristics=_ga["action"]['population_template']["traceable_characteristics"])
             if isinstance(_ga['cycle_step'], list):
                 _global_actions.append((_ga['cycle_step'], 
-                                        TimeAction(action_type=_ga['action']['type'], 
+                                        Action(action_type=_ga['action']['type'], 
                                                     pop_template=pt,
                                                     values=_ga['action']['values'])))
             else:
                 _global_actions.append((int(_ga['cycle_step']), 
-                                        TimeAction(action_type=_ga['action']['type'], 
+                                        Action(action_type=_ga['action']['type'], 
                                                     pop_template=pt,
                                                     values=_ga['action']['values'])))
     # EnvNode Routines
@@ -164,7 +164,7 @@ def parse_routines(data:dict):
             pt = PopulationTemplate(
                     sampled_characteristics=_a["action"]['population_template']["sampled_characteristics"],
                     traceable_characteristics=_a["action"]['population_template']["traceable_characteristics"])
-            action = TimeAction(action_type=_a["action"]['type'], 
+            action = Action(action_type=_a["action"]['type'], 
                                 values=_a["action"]['values'], 
                                 pop_template=pt) 
             _actions.append((_a["cycle_step"], action))
@@ -208,9 +208,9 @@ def generate_EnvironmentGraph(env_input):
 
             for rga in repeating_global_actions:
                 if 'cycle_length' in rga:
-                    env.set_repeating_action(int(rga['cycle_length']), TimeAction(rga['type'], rga['values']))
+                    env.set_repeating_action(int(rga['cycle_length']), Action(rga['type'], rga['values']))
                 elif 'frames' in rga:
-                    env.set_repeating_action(rga['frames'], TimeAction(rga['type'], rga['values']))
+                    env.set_repeating_action(rga['frames'], Action(rga['type'], rga['values']))
 
         for region_description in descrip['regions']:
             region_template = EnvRegionTemplate()
@@ -238,7 +238,7 @@ def generate_EnvironmentGraph(env_input):
                                 pop_template = PopulationTemplate()
                                 if 'population_template' in _a['values']:
                                     pop_template = PopulationTemplate(_a['values']['population_template'])
-                                action = TimeAction(action_type=_a['type'], 
+                                action = Action(action_type=_a['type'], 
                                                     pop_template=pop_template,
                                                     values=_a['values'])
                                 node_actions.append(action)

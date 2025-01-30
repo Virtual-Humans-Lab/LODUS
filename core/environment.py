@@ -1,13 +1,14 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
+import json
 from pprint import pprint
 import time
-from typing import Any
-from core.plugin import RoutinePlugin, TimeActionPlugin
+from typing import Any, Optional
+from core.plugin import RoutinePlugin, ActionPlugin
 import logger_plugin
 import copy
-from core.population import Blob, PopulationTemplate, SampledCharacteristicCollection
-from core.routine import Routine, TimeAction
+from core.population import Blob, BlobFactory, PopulationTemplate, SampledCharacteristicCollection
+from core.routine import Routine, Action, RoutineFactory, RoutineTemplate
 import util
 from util import DistanceType as DistType
 from events import Events
@@ -23,9 +24,19 @@ class EnvEdge():
 
     def __init__(self):
         self.edge_type = ''
+
+
+@dataclass
+class EnvNodeDistances():
+    """Class representing distances between a node and all other nodes."""
+    node_name: str = ''
+    distance_to_others:dict[str, float] = field(default_factory = lambda: ({}))
+
+    def get_distance_tuples(self):
+        return sorted(self.distance_to_others.items(), key=lambda item: item[1])
         
 
-#point-of-interest
+
 class EnvNode():
     """A point of interest in an Environment Graph. 
     
@@ -46,7 +57,6 @@ class EnvNode():
         name: The name of the node.
         contained_blobs: A list of the blobs currently occupying this space.
         routine: The current time action Routine this region is implementing.
-        characteristics: The environment characteristics this node has. 
     """
 
     def __init__(self):
@@ -64,197 +74,156 @@ class EnvNode():
 
     def get_unique_name(self):
         return f"{self.containing_region_name}//{self.name}"
-
-    def get_attribute(self, key: str) -> Any:
-        return self.attributes[key]
     
     def add_attribute(self, key: str, value: Any) -> None:
         self.attributes[key] = value
 
-    def process_routine(self, hour) -> list[TimeAction]:
-        """Generates and returns the TimeAction list of the routine for a certain time.
-        
-        Args:
-            time: The time slot to be processed.
+    def get_attribute(self, key: str) -> Any:
+        return self.attributes[key]
 
-        Returns:
-            A list containing all TimeAction this EnvNode requires for the corresponding time.
-        """
-        return self.routine.process_routine(hour)
+    def process_routine(self, cycle_step) -> list[Action]:
+        """Returns the list of Actions for the given cycle_step."""
+        return self.routine.process_routine(cycle_step)
 
     def remove_blob(self, blob: Blob):
-        if isinstance(blob, Blob) and blob in self.contained_blobs:
+        """Removes a blob from this EnvNode."""
+        if not isinstance(blob, Blob):
+            raise ValueError(f"blob must be of type Blob, is {type(blob)}")
+        try:
             self.contained_blobs.remove(blob)
+        except ValueError:
+            pass
             
     def remove_blobs(self, blobs: list[Blob]):
+        """Removes a list of blobs from this EnvNode."""
         for blob in blobs:
             self.remove_blob(blob)
 
     def add_blob(self, blob: Blob):
-        if isinstance(blob, Blob):
-            assert blob not in self.contained_blobs, "BLOB ALREADY HERE"
-            self.contained_blobs.append(blob)
+        """Adds a blob to this EnvNode."""
+        if not isinstance(blob, Blob):
+            raise ValueError(f"blob must be of type Blob, is {type(blob)}")
+        if blob in self.contained_blobs:
+            raise ValueError("BLOB ALREADY HERE")
+        self.contained_blobs.append(blob)
 
     def add_blobs(self, blobs: list[Blob]):
+        """Adds a list of blobs to this EnvNode."""
         for blob in blobs:
             self.add_blob(blob)
 
-    def get_population_size(self, population_template = None):
-        """Gets the total population size contained in this EnvNode.
-        
-        Gets the sum of each blob's get_population_size.
-        If a population_template is defined, gets the population size of the 
-        population which matches that template.
+    def get_population_size(self, population_template: Optional[PopulationTemplate] = None):
+        """Gets the total population size contained in this EnvNode."""
+        return sum(blob.get_population_size(population_template) for blob in self.contained_blobs)
 
-        Args:
-            population_template: A PopTemplate to be matched by this operation.
-
-        Returns:
-            The sum of each contained_blob's get_population_size, matching the population_template.
-        """
-        count = 0
-        for blob in self.contained_blobs:
-            count += blob.get_population_size(population_template)
-        return count
-
-    def grab_population(self, quantity: int, template : PopulationTemplate = None) -> list[Blob]:
+    def grab_population(self, quantity: int, template : Optional[PopulationTemplate] = None) -> list[Blob]:
         """Gets and removes a population matching a template from this EnvNode.
-        
-        The population removed is returned as a list of blobs, each with a unique mother_blob_id.
+        The population removed is returned as a list of blobs.
 
         If quantity is larger than the current population size matching the tamplate,
         this method returns the largest possible population.
 
-        Args:
-            quantity: The desired population size to be grabbed from this EnvNode.
-            template: The PopTemplate to be matched.,
-
-        Returns:
-            If there are enough population, a list containing the grabbed population. This list might have more than one Blob.
-                In such case, each blob is guaranteed to be from different mother_blob_id.
-            If there are not enough population, returns the available amount.
+        Grabbed blobs are removed from this EnvNode.
         """
         total_available_population = self.get_population_size(template)
 
-        if total_available_population == 0:
+        if total_available_population == 0 or quantity <= 0:
             return []
 
         quantity = min(quantity, total_available_population)
-        
-        if quantity <= 0:
-            return []
-        
-        new_blobs = []
 
         available_quantities = [blob.get_population_size(template) for blob in self.contained_blobs]
-        int_adjusted_quantities = util.weighted_int_distribution(available_quantities, quantity)
-        
-        for x in range(len(self.contained_blobs)):
-            # quantity * ratio of this blobs contribution to the total
-            if int_adjusted_quantities[x] == 0:
-                continue
-            blob = self.contained_blobs[x]
-            
-            adjusted_quantity = int_adjusted_quantities[x]
-            grabbed_blob = blob.grab_population(adjusted_quantity, template)
-            new_blobs.append(grabbed_blob)
+        int_adjusted_quantities = util.distribute_ints_from_weights(quantity, available_quantities)
+        # int_adjusted_quantities = util.weighted_int_distribution(available_quantities, quantity)
+
+        new_blobs = [
+            blob.grab_population(int_adjusted_quantities[x], template)
+            for x, blob in enumerate(self.contained_blobs)
+            if int_adjusted_quantities[x] > 0
+        ]
 
         self.remove_blobs(new_blobs)
         return new_blobs
 
-    def change_blobs_traceable_property(self, key, value, quantity:int, template:PopulationTemplate = None):
-        _grabbed = self.grab_population(quantity, template)
-        self.add_blobs(_grabbed)
+    def change_multiple_blobs_traceable_property(self, traceable_property_key:str, new_value: Any, desired_quantity:int, population_template:Optional[PopulationTemplate] = None):
+        """Grabs a quantity of population and changes their traceable properties. 
+        May affect multiple blobs. Newly created blobs are added to this EnvNode.
+        """
+        grabbed_blobs = self.grab_population(desired_quantity, population_template)
+        self.add_blobs(grabbed_blobs)
 
-        for _blob in _grabbed:
-            _blob.set_traceable_characteristic(key, value)
-            _blob.previous_node = self.id
-            
-            #if _blob.spawning_node is None:
-            #    _blob.spawning_node = self.id
-            _blob.frame_origin_node = self.id
+        for blob in grabbed_blobs:
+            self._set_blob_traceable_properties(blob, traceable_property_key, new_value)
 
-    def change_blob_traceable_property(self, blob:Blob, key, value, quantity:int, template:PopulationTemplate = None) -> Blob:
-        
-        if quantity == 0:
+    def change_single_blob_traceable_property(self, blob:Blob, traceable_property_key:str, new_value: Any, desired_quantity:int, population_template:Optional[PopulationTemplate] = None) -> Blob:
+        """Changes a traceable property of a single blob contained in this EnvNode.
+        May split a blob during grab_population. Newly created blob is added to this EnvNode.
+        """
+        if desired_quantity == 0:
             return
 
-        assert blob in self.contained_blobs, "Blob is not in the contained blobs of node" + blob.verbose_str() + str(self)
-                    
-        _grabbed = blob.grab_population(quantity, template)
+        if blob not in self.contained_blobs:
+            raise ValueError(f"Blob is not in the contained blobs of node {blob.verbose_str()} {self}")
 
-        if _grabbed is None:
+        grabbed_blob = blob.grab_population(desired_quantity, population_template)
+
+        if grabbed_blob is None:
             return
-        if blob is not _grabbed:
-            self.add_blob(_grabbed)
-        
-        _grabbed.set_traceable_characteristic(key, value)
-        _grabbed.previous_node = blob.previous_node
-        #if _blob.spawning_node is None:
-        #    _blob.spawning_node = self.id
-        _grabbed.frame_origin_node = blob.frame_origin_node
-        return _grabbed
+        if blob is not grabbed_blob:
+            self.add_blob(grabbed_blob)
+
+        self._set_blob_traceable_properties(grabbed_blob, traceable_property_key, new_value, blob)
+        return grabbed_blob
+
+    def _set_blob_traceable_properties(self, blob: Blob, key: str, value: Any, origin_blob: Blob = None):
+        blob.set_traceable_characteristic(key, value)
+        blob.previous_node = self.id if origin_blob is None else origin_blob.previous_node
+        blob.frame_origin_node = self.id if origin_blob is None else origin_blob.frame_origin_node
 
     def __str__(self):
-        return '{{\"name\" : \"{0}\", \"id\" : \"{1}\", \"routine\"  : {2}, \"characteristics\"  : {3}, \"blobs\"  : {4}}}'.format(
-                                                                                self.name,
-                                                                                self.id,
-                                                                                self.routine,
-                                                                                self.attributes,
-                                                                                self.contained_blobs)
+        return json.dumps({
+        "name": self.name,
+        "id": self.id,
+        "routine": self.routine,
+        "characteristics": self.attributes,
+        "blobs": self.contained_blobs
+    }, indent=4)                                                                   
 
     def __repr__(self):
-        return '{{\"name\" : \"{0}\", \"id\" : \"{1}\", \"routine\"  : {2}, \"characteristics\"  : {3}, \"blobs\"  : {4}}}'.format(
-                                                                                self.name,
-                                                                                self.id,
-                                                                                self.routine,
-                                                                                self.attributes,
-                                                                                self.contained_blobs)
+        return self.__str__()
 
 class EnvNodeTemplate():    
     """Describes an EnvNode generation template.
     
-    EnvNodeFactory objects can generate EnvNodes based on templates.
-        
-    TODO Use case.
+    EnvNodeFactory objects can generate EnvNodes based on this template.
     """
 
     def __init__(self):
         self.node_attributes:dict[str, Any] = {}
-        self.routine_template = {}
-        self.blob_descriptions: list[tuple[int, list[str], str, Any]] = []
+        self.routine_template: RoutineTemplate = RoutineTemplate()
+        self.blob_descriptions: list[tuple[int, list[str], str, BlobFactory]] = []
         self.long_lat:list[float] = [0.0, 0.0]
 
     def add_node_attributes(self, key: str, value: Any) -> None:
+        """Adds an attribute to the node."""
         self.node_attributes[key] = value
 
-    def add_routine_template(self, hour: int, actions: list[TimeAction]) -> None:
-        """Adds a TimeAction to the designated time slot."""
-        if not all(isinstance(action, TimeAction) for action in actions):
+    def add_routine_template(self, cycle_stop: int, actions: list[Action]) -> None:
+        """Adds a Action to the designated time slot."""
+        if not all(isinstance(action, Action) for action in actions):
             raise ValueError("Actions must be of type TimeAction")
-        if not isinstance(hour, int) or hour < 0:
+        if not isinstance(cycle_stop, int) or cycle_stop < 0:
             raise ValueError("hour must be a non-negative integer")
-        self.routine_template[hour] = actions
+        raise ValueError("Not implemented yet")
 
-    def add_action_to_template(self, hour: int, action: Any) -> None:
-        """Adds a TimeAction to the designated time slot."""
-        if not isinstance(action, TimeAction):
-            raise ValueError("Action must be of type TimeAction")
-        if not isinstance(hour, int) or hour < 0:
-            raise ValueError("hour must be a non-negative integer")
-        self.routine_template.setdefault(hour, []).append(action)
-
-    # def add_action_to_template(self, hour, action):
-    #     """Adds a TimeAction to the designated time slot."""
-    #     if str(hour) not in self.routine_template:
-    #         self.routine_template[str(hour)] = []
-    #     self.routine_template[str(hour)].append(action)
+    def add_blob_description(self, population: int, traceable_properties: list[str], description: str, blob_factory: BlobFactory) -> None:
+        self.blob_descriptions.append((population, traceable_properties, description, blob_factory))
 
     def set_long_lat_position(self, longitude: float, latitude: float) -> None:
+        """Sets the physical position of this node."""
+        if not isinstance(longitude, (int, float)) or not isinstance(latitude, (int, float)):
+            raise ValueError(f"longitude and latitude must be of type int or float, are {type(longitude)} and {type(latitude)}")
         self.long_lat = [longitude, latitude]
-
-    def add_blob_description(self, population: int, traceable_properties: list[str], description: str, blob_factory: Any) -> None:
-        self.blob_descriptions.append((population, traceable_properties, description, blob_factory))
 
 class EnvNodeFactory():
     """A factory to generate EnvNodes with a particular EnvNodeTemplate.
@@ -264,21 +233,13 @@ class EnvNodeFactory():
     """
     def __init__(self, node_template: EnvNodeTemplate):
         self.node_template:EnvNodeTemplate = node_template
-
-    def GenerateRoutine(self, routine_template)->Routine:
-        routine = Routine()
-        for k, v in routine_template.items():
-            for action in v:
-                routine.add_time_action(k, action)
-            
-        
-        return routine
+        self.routine_factory: RoutineFactory = RoutineFactory()
 
     def generate_envnode(self, target_region: EnvRegion, name) -> EnvNode:
         node  = EnvNode()
         node.name = name
         node.long_lat = self.node_template.long_lat
-        node.routine = self.GenerateRoutine(self.node_template.routine_template)
+        node.routine = self.routine_factory.generate_routine(self.node_template.routine_template)
         for k in self.node_template.node_attributes.keys():
             node.attributes[k] = self.node_template.node_attributes[k]
 
@@ -287,6 +248,7 @@ class EnvNodeFactory():
             node.add_blob(blob)
             
         return node
+
 
 class EnvRegion():
     """"Represents a particular region of simulation.
@@ -443,15 +405,6 @@ class EnvRegionFactory():
         
         return region
 
-@dataclass
-class EnvNodeDistances():
-    node_name: str = ''
-    distance_to_others:dict[str, float] = field(default_factory = lambda: ({}))
-
-    def get_distance_tuples(self):
-        return sorted(self.distance_to_others.items(), key=lambda item: item[1])
-    
-    #distance_to_others:list[tuple[float,str]] = field(default_factory=lambda: [])
 
 class EnvironmentGraph():
     """Models the top level of the Crowd Dynamics simulator. Additionally, handles TimeAction and Routine logic.
@@ -533,7 +486,7 @@ class EnvironmentGraph():
         # self.time_action_map:dict[str, callable] = { 'move_population' : self.move_population }
         # self.base_actions = {'move_population'}
         
-        self.loaded_plugins: list[TimeActionPlugin] = []
+        self.loaded_plugins: list[ActionPlugin] = []
         self.loaded_logger_plugins: list[logger_plugin.LoggerPlugin] = []
         self.loaded_routine_plugins: list[RoutinePlugin] = []
         self.global_actions = set()
@@ -745,7 +698,7 @@ class EnvironmentGraph():
 
         return action_list
 
-    def consume_time_action(self, time_action:TimeAction, hour, time):
+    def consume_time_action(self, time_action:Action, hour, time):
         """Applies the graph operations (moving population, etc) of a given TimeAction.
         Args:
             time_action: A TimeAction to be processed.
@@ -792,7 +745,7 @@ class EnvironmentGraph():
         for action in action_list:
             self.time_action_map[action.type](action.values)
 
-    def simplify_action_list(self, action_list:list[TimeAction], hour, time):
+    def simplify_action_list(self, action_list:list[Action], hour, time):
         #simp_list = []
 
         while not all([x.action_type in self.base_actions for x in action_list]):
@@ -867,9 +820,9 @@ class EnvironmentGraph():
         if is_base:
             self.base_actions.add(action_type)
 
-    def load_time_action_plugin(self, plugin:TimeActionPlugin):
+    def load_time_action_plugin(self, plugin:ActionPlugin):
         self.loaded_plugins.append(plugin)
-        for k, v in plugin.get_type_to_action_pairs().items():
+        for k, v in plugin.get_action_type_to_function().items():
             self.time_action_map[k] = v
                 
     def has_plugin(self, _type:type) -> bool:
@@ -1012,4 +965,3 @@ class EnvironmentGraph():
     
     def __repr__(self):
         return "{\"graph\":" + str(self.region_list) + "}"
-

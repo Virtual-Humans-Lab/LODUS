@@ -3,7 +3,7 @@ sys.path.append('../')
 
 from core.environment import EnvironmentGraph
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 from random_inst import FixedRandom
 import copy
 import random
@@ -12,7 +12,7 @@ import numpy as np
 import util
 import time
 
-class MovePopulationPlugin(TimeActionPlugin):
+class MovePopulationPlugin(ActionPlugin):
     
     def __init__(self, env_graph: EnvironmentGraph):
         '''gather_population
@@ -37,7 +37,7 @@ class MovePopulationPlugin(TimeActionPlugin):
         '''
         super().__init__()
         self.graph = env_graph
-        self.add_type_to_action('move_population', self.move_population)
+        self.add_action_type_to_function('move_population', self.move_population)
         self.graph.base_actions.add('move_population')
 
     def update_time_step(self, cycle_step, simulation_step):
@@ -51,6 +51,9 @@ class MovePopulationPlugin(TimeActionPlugin):
     
     def stop_logger(self, logger):
         return super().stop_logger(logger)
+    
+    def unload_plugin(self):
+        return super().unload_plugin()
 
     ## Pre-condition: assumes move population operation is valid
     def move_population(self, pop_template ,values, cycle_step, simulation_step):

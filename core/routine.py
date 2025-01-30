@@ -1,6 +1,7 @@
+from typing import Optional
 from core.population import PopulationTemplate
 
-class TimeAction:
+class Action:
     """Describes a command-like Action.
 
     Actions should be modeled and described in a contract for the simulator.
@@ -31,29 +32,44 @@ class TimeAction:
     def __repr__(self) -> str:
         return self.__str__()
 
+class RoutineTemplate:
+    """Describes a template for a Routine.
+    
+    A bit redundant with the Routine class, but this is a template for it.
+    """
+    def __init__(self):
+        self.cycle_step_to_action_list: dict[int, list[Action]] = {}
+
+    def add_action_to_template(self, cycle_step: int, action: Action) -> None:
+        """Adds an Action to the designated cycle step."""
+        if not isinstance(action, Action):
+            raise ValueError("Action must be of type Action")
+        if not isinstance(cycle_step, int) or cycle_step < 0:
+            raise ValueError("cycle_step must be a non-negative integer")
+        self.cycle_step_to_action_list.setdefault(cycle_step, []).append(action)
 
 class Routine:
-    """Describes a mapping of time slot -> TimeAction.
+    """Describes a mapping of time slot -> list of Actions.
 
     This mapping should describe the routine an EnvNode follows during the simulation period, cyclically.
     The period of Routine repetition is part of simulation modeling.
-
-    Each time slot matches to one specific TimeAction, describing the requested operation for any given time slot.
     """
     def __init__(self, routine_label: str = ""):
-        self.actions: dict[int, list[TimeAction]] = {}
+        self.actions: dict[int, list[Action]] = {}
         self.label: str = routine_label
 
-    def add_time_action(self, cycle_step: int, time_action: TimeAction):
+    def add_action_to_routine(self, cycle_step: int, time_action: Action):
         """Add a TimeAction to the Routine."""
-        if not isinstance(time_action, TimeAction):
+        if not isinstance(time_action, Action):
             raise ValueError(f"time_action must be of type TimeAction, is {type(time_action)}")
         if cycle_step < 0:
             raise ValueError(f"cycle_step must be a non-negative integer, is {cycle_step}")
         self.actions.setdefault(cycle_step, []).append(time_action)
 
-    def process_routine(self, cycle_step: int) -> list[TimeAction]:
+    def process_routine(self, cycle_step: int) -> list[Action]:
         """Return the list of Actions for the given cycle_step."""
+        if cycle_step < 0:
+            raise ValueError(f"cycle_step must be a non-negative integer, is {cycle_step}")
         return self.actions.get(cycle_step, [])
 
     def __str__(self) -> str:
@@ -61,3 +77,16 @@ class Routine:
 
     def __repr__(self) -> str:
         return self.__str__()
+
+class RoutineFactory:
+    """Generates a Routine from a RoutineTemplate."""
+    def __init__(self):
+        pass
+
+    def generate_routine(self, routine_template: RoutineTemplate) -> Routine:
+        """Generates a Routine from the given RoutineTemplate."""
+        routine = Routine()
+        for cycle_step, action_list in routine_template.cycle_step_to_action_list.items():
+            for action in action_list:
+                routine.add_action_to_routine(cycle_step, action)
+        return routine

@@ -5,7 +5,7 @@ from types import NoneType
 # from time_actions.vaccine_local_plugin import VaccinePlugin
 import core.environment
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -15,7 +15,7 @@ import csv
 import util
 import json
 
-class InfectionPlugin(TimeActionPlugin):
+class InfectionPlugin(ActionPlugin):
     ''' 
     This Plugin tmplements the SIR (Susceptible, Infected, Removed) model. 
 
@@ -133,7 +133,7 @@ class InfectionPlugin(TimeActionPlugin):
             else: # default
                 _quant = self.initial_infected_default
             if isinstance(_quant,float): _quant = math.floor(_node.get_population_size() * _quant)
-            _node.change_blobs_traceable_property('sir_status', 'infected', _quant)
+            _node.change_multiple_blobs_traceable_property('sir_status', 'infected', _quant)
                 
          
         # Sets PopTemplates to be used later
@@ -241,8 +241,8 @@ class InfectionPlugin(TimeActionPlugin):
         if to_inf <= 0 and to_rem <= 0:
             return
         
-        acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
-        acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
+        acting_node.change_multiple_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
+        acting_node.change_multiple_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)
         self.sum_infected += to_inf
 
         # if self.vaccine_efficiency_blob_data_action is not None:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import copy
 import sys
 from types import NoneType
-from util import *
+from util import IDGen, distribute_randomly, distribute_ints_from_weights
 from random_inst import FixedRandom
 from events import Events
 
@@ -527,52 +527,6 @@ class PopulationTemplate():
         return '{{"blob_id" : {0}, "mother_blob_id" : {1}, "pairs"  : {2}, "traceable_prop"  : {3}}}'.format(
             blob_id, mother_blob_id, self.sampled_characteristics, self.traceable_characteristics)
     
-   
-
-class BlobFactory():
-    """
-    A factory for creating Blob objects based on predefined characteristics templates.
-
-    Attributes:
-        characteristics_factory (CharacteristicsFactory): The factory that provides characteristic templates for blobs.
-    """
-    def __init__(self, factory: CharacteristicsFactory):
-        self.characteristics_factory: CharacteristicsFactory = factory
-
-    def _traceable_characteristics_override(self, traceable_prop_override: dict[str, Any]):
-        if not isinstance(traceable_prop_override, dict):
-            raise ValueError("Invalid traceable property override. Must be a dictionary.")
-        traceable_characteristics = self.characteristics_factory.traceable_characteristics.copy()
-        traceable_characteristics.update(traceable_prop_override)
-        return traceable_characteristics
-
-    def generate_blob_rand(self, mother_blob_id: int, node_of_origin: int, population: int, traceable_prop_override: dict[str, Any] = {}):
-        if population <= 0:
-            raise ValueError("Invalid population size.")
-
-        collection = self.characteristics_factory.generate_characteristic_collection_rand(population)
-        traceable = self._traceable_characteristics_override(traceable_prop_override)
-        
-        blob = Blob(mother_blob_id, node_of_origin, 0, self)
-        blob.initialize_characteristics(collection, traceable)
-        return blob
-
-    def generate_blob_empty(self, mother_blob_id, node_of_origin, traceable_prop_override:dict = {}):
-        collection = self.characteristics_factory.generate_characteristic_collection_empty()
-        traceable = self._traceable_characteristics_override(traceable_prop_override)
-        blob = Blob(mother_blob_id, node_of_origin, 0, self)
-        blob.initialize_characteristics(collection, traceable)
-        return blob
-
-    def generate_blob_with_profile(self,mother_blob_id, node_of_origin, population, profile, traceable_prop_override:dict = {}):
-        if population <= 0:
-            raise ValueError("Invalid population size.")
-        
-        collection = self.characteristics_factory.generate_characteristic_collection_with_profile(population, profile)
-        traceable = self._traceable_characteristics_override(traceable_prop_override)
-        blob = Blob(mother_blob_id, node_of_origin, 0, self)
-        blob.initialize_characteristics(collection, traceable)
-        return blob
 
 class Blob():
     """Blobs represent a part of a population.
@@ -612,23 +566,12 @@ class Blob():
         self.previous_node:int = node_of_origin
         
     def initialize_characteristics(self, sampled_characteristics:SampledCharacteristicCollection, traceable_characteristics:dict):
+        """Initialize the blob with sampled and traceable characteristics."""
         self.sampled_characteristics = sampled_characteristics
         self.traceable_characteristics = traceable_characteristics
-              
-    # def initialize_blocks(self, block_template:CharacteristicsFactory, population):
-    #     self.sampled_characteristics = block_template.generate_characteristic_collection_rand(population)
-    #     self.traceable_characteristics = copy.deepcopy(block_template.traceable_characteristics)
-
-    # def initialize_blocks_empty(self, block_template:CharacteristicsFactory):
-    #     self.sampled_characteristics = block_template.generate_characteristic_collection_empty()
-    #     self.traceable_characteristics = copy.deepcopy(block_template.traceable_characteristics)
-
-    # def initialize_blocks_profile(self, block_template:CharacteristicsFactory, population, profiles):
-    #     self.profiles = profiles
-    #     self.sampled_characteristics = block_template.generate_characteristic_collection_with_profile(population, profiles)
-    #     self.traceable_characteristics = copy.deepcopy(block_template.traceable_characteristics)
         
     def set_traceable_characteristic(self, key:str, value: Any) -> None:
+        """Set a traceable characteristic."""
         prev_val = self.traceable_characteristics.get(key, None)
         if prev_val == value:
             return
@@ -636,9 +579,11 @@ class Blob():
         Blob.events.on_traceable_property_changed(self, key, prev_val, value)
 
     def get_traceable_characteristic(self, key:str) -> Any:
+        """Get a traceable characteristic."""
         return self.traceable_characteristics.get(key)
 
     def get_traceable_characteristics(self) -> dict[str, Any]:
+        """Get all traceable characteristics."""
         return self.traceable_characteristics
     
     def get_population_size(self, population_template:Optional[PopulationTemplate] = None)->int:
@@ -796,7 +741,50 @@ class Blob():
         return template_string.format(self.blob_id, self.mother_blob_id, self.get_population_size(), self.previous_node, self.frame_origin_node)
 
 
+class BlobFactory():
+    """
+    A factory for creating Blob objects based on predefined characteristics templates.
 
+    Attributes:
+        characteristics_factory (CharacteristicsFactory): The factory that provides characteristic templates for blobs.
+    """
+    def __init__(self, factory: CharacteristicsFactory):
+        self.characteristics_factory: CharacteristicsFactory = factory
+
+    def _traceable_characteristics_override(self, traceable_prop_override: dict[str, Any]):
+        if not isinstance(traceable_prop_override, dict):
+            raise ValueError("Invalid traceable property override. Must be a dictionary.")
+        traceable_characteristics = self.characteristics_factory.traceable_characteristics.copy()
+        traceable_characteristics.update(traceable_prop_override)
+        return traceable_characteristics
+
+    def generate_blob_rand(self, mother_blob_id: int, node_of_origin: int, population: int, traceable_prop_override: dict[str, Any] = {}):
+        if population <= 0:
+            raise ValueError("Invalid population size.")
+
+        collection = self.characteristics_factory.generate_characteristic_collection_rand(population)
+        traceable = self._traceable_characteristics_override(traceable_prop_override)
+        
+        blob = Blob(mother_blob_id, node_of_origin, 0, self)
+        blob.initialize_characteristics(collection, traceable)
+        return blob
+
+    def generate_blob_empty(self, mother_blob_id, node_of_origin, traceable_prop_override:dict = {}):
+        collection = self.characteristics_factory.generate_characteristic_collection_empty()
+        traceable = self._traceable_characteristics_override(traceable_prop_override)
+        blob = Blob(mother_blob_id, node_of_origin, 0, self)
+        blob.initialize_characteristics(collection, traceable)
+        return blob
+
+    def generate_blob_with_profile(self,mother_blob_id, node_of_origin, population, profile, traceable_prop_override:dict = {}):
+        if population <= 0:
+            raise ValueError("Invalid population size.")
+        
+        collection = self.characteristics_factory.generate_characteristic_collection_with_profile(population, profile)
+        traceable = self._traceable_characteristics_override(traceable_prop_override)
+        blob = Blob(mother_blob_id, node_of_origin, 0, self)
+        blob.initialize_characteristics(collection, traceable)
+        return blob
 
 # EXAMPLES 
 if __name__ == "__main__":

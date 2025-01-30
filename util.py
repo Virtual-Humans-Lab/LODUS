@@ -51,35 +51,29 @@ def distribute_randomly(total_sum: int, n_partitions: int) -> List[int]:
     # Compute differences between consecutive boundaries to get partition values
     return [boundaries[i + 1] - boundaries[i] for i in range(len(boundaries) - 1)]
 
-def weighted_int_distribution(available, quantity):
-    total_population = sum(available)
+def weighted_int_distribution(available_items:list[int], quantity:int):
+    """Distributes a given quantity among a list of available items based on their weights.
+    Ensures that the distribution is as fair as possible given the constraints of integer values
+    """
+    total_population = sum(available_items)
     quantity = min(quantity, total_population)
 
-    adjusted_quantities  = [0 for x in available]
-    for x in range(len(available)):
-        if available[x] == 0:
-            adjusted_quantities[x] = 0
-        else:
-            adjusted_quantities[x] = quantity / (total_population / available[x])
+    adjusted_quantities = [
+            0 if available_items[x] == 0 else quantity / (total_population / available_items[x])
+            for x in range(len(available_items))
+    ]
     
-    int_adjusted_quantities =  [int(x) for x in adjusted_quantities]
-
-    reduced_quantities = [x - y for (x,y) in zip(available, int_adjusted_quantities)]
+    int_adjusted_quantities = [int(x) for x in adjusted_quantities]
+    reduced_quantities = [x - y for x, y in zip(available_items, int_adjusted_quantities)]
     sum_adjusted = sum(int_adjusted_quantities)
 
-    if sum(int_adjusted_quantities) != quantity:
+    if sum_adjusted != quantity:
         remaining = quantity - sum_adjusted
 
         while remaining > 0:
-            largest_x = 0
-            largest_quant = 0
-            for x in range(len(reduced_quantities)):
-                if reduced_quantities[x] > largest_quant:
-                    largest_x = x
-                    largest_quant = reduced_quantities[x]
-            
+            largest_x = max(range(len(reduced_quantities)), key=lambda x: reduced_quantities[x])
             int_adjusted_quantities[largest_x] += 1
-            reduced_quantities[largest_x] -=1
+            reduced_quantities[largest_x] -= 1
             remaining -= 1
 
     return int_adjusted_quantities
@@ -97,31 +91,24 @@ def weighted_distribution_with_weights(available, quantity, weight_list):
     
     weighted_available = [min(available[x], quantity_weight[x]) for x in range(len(available))]
 
-def distribute_ints_from_weights(quantity, weight_list:list[float]):
-    
+def distribute_ints_from_weights(quantity: int, weight_list:list[float]):
+    """Distributes a given quantity among a list of available items based on their weights."""
     if quantity == 0:
         return np.zeros(len(weight_list), dtype=int)
-    
-    weights_sum = sum(weight_list)
-    adjusted_weights = [w/weights_sum for w in weight_list]
-    int_quantities = [math.floor(aw*quantity) for aw in adjusted_weights]
-        
-    if sum(int_quantities) == quantity:
-        return int_quantities
-    
-    # adds remaining quantities 
-    for x in range(quantity - sum(int_quantities)):    
-        largest_index = 0;
-        largest_value = 0.0;
 
-        for i in range(len(adjusted_weights)):
-            if adjusted_weights[i] > largest_value:
-                largest_index = i;
-                largest_value = adjusted_weights[i];
-        #print(largest_index, len(int_quantities))
-        int_quantities[largest_index] += 1;
-        adjusted_weights[largest_index] -= 1.0/quantity;
-    
+    weights_sum = sum(weight_list)
+    adjusted_weights = [w / weights_sum for w in weight_list]
+    int_quantities = [math.floor(aw * quantity) for aw in adjusted_weights]
+
+    remaining = quantity - sum(int_quantities)
+    if remaining == 0:
+        return int_quantities
+
+    for _ in range(remaining):
+        largest_index = max(range(len(adjusted_weights)), key=lambda i: adjusted_weights[i])
+        int_quantities[largest_index] += 1
+        adjusted_weights[largest_index] -= 1.0 / quantity
+
     return int_quantities
     
 def distribute_ints_from_weights_with_limit(quantity, weight_list:list[float], limits:list[int]):

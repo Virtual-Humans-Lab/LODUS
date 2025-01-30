@@ -8,7 +8,7 @@ class BasePlugin(ABC):
         pass
 
     @abstractmethod
-    def update_time_step(self, cycle_step, simulation_step):
+    def update_time_step(self, cycle_step: int, simulation_step: int):
         pass
 
     @abstractmethod
@@ -19,11 +19,12 @@ class BasePlugin(ABC):
     def stop_logger(self, logger):
         pass
 
+    @abstractmethod
     def unload_plugin(self):
         pass
 
-class TimeActionPlugin(BasePlugin):
-    """Describes a set of action types and action function pairs.
+class ActionPlugin(BasePlugin):
+    """Describes a set of Action types and action function pairs.
     This class is used to extend the functionality of the simulator with additional TimeActions.
     
     Added functions should be 
@@ -34,11 +35,13 @@ class TimeActionPlugin(BasePlugin):
     This parameters passed in the dictionary are defined by the plugin contracts.
     """ 
     def __init__(self):
-        self.type_to_action_pairs = {}
-        self.execution_times = []
+        self.action_type_to_function: dict[str, Callable] = {}
+        self.execution_times:list[float] = []
 
     def add_execution_time(self, time: float) -> None:
         """Adds an execution time to the list."""
+        if not isinstance(time, (int, float)):
+            raise ValueError(f"time must be of type int or float, is {type(time)}")
         self.execution_times.append(time)
 
     def print_execution_time_data(self) -> str:
@@ -56,17 +59,17 @@ class TimeActionPlugin(BasePlugin):
         print(out)
         return out
 
-    def add_type_to_action(self, action_type: str, action_function: Callable) -> None:
+    def add_action_type_to_function(self, action_type: str, action_function: Callable) -> None:
         """Sets an action type and its corresponding function."""
         if not isinstance(action_type, str):
             raise ValueError(f"action_type must be of type str, is {type(action_type)}")
         if not callable(action_function):
             raise ValueError(f"action_function must be a callable, is {type(action_function)}")
-        self.type_to_action_pairs[action_type] = action_function
+        self.action_type_to_function[action_type] = action_function
 
-    def get_type_to_action_pairs(self) -> dict:
+    def get_action_type_to_function(self) -> dict:
         """Returns the dictionary of action type-function pairs."""
-        return self.type_to_action_pairs
+        return self.action_type_to_function
 
 class RoutinePlugin(BasePlugin):
     def __init__(self):

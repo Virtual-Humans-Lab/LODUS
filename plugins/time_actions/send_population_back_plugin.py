@@ -2,13 +2,13 @@ import copy
 import sys
 import time
 
-from core.routine import TimeAction
+from core.routine import Action
 sys.path.append('../')
 
 from core.environment import EnvironmentGraph
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 
-class SendPopulationBackPlugin(TimeActionPlugin):
+class SendPopulationBackPlugin(ActionPlugin):
 
     def __init__(self, env_graph: EnvironmentGraph):
         '''
@@ -30,7 +30,7 @@ class SendPopulationBackPlugin(TimeActionPlugin):
         super().__init__()
 
         self.graph = env_graph
-        self.set_pair('send_population_back', self.send_population_back)
+        self.add_action_type_to_function('send_population_back', self.send_population_back)
 
         if "send_population_back_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'send_population_back' key.")
@@ -38,8 +38,20 @@ class SendPopulationBackPlugin(TimeActionPlugin):
         # Performance log for quantity of sub-actions
         self.sublist_count = []
 
-    def update_time_step(self, cycle_step:int, simulation_step:int):
-        return #super().update_time_step(cycle_step, simulation_step)
+    def setup_logger(self, logger):
+        return super().setup_logger(logger)
+    
+    def update_time_step(self, cycle_step, simulation_step):
+        return super().update_time_step(cycle_step, simulation_step)
+    
+    def log_data(self, logger):
+        return super().log_data(logger)
+    
+    def stop_logger(self, logger):
+        return super().stop_logger(logger)
+    
+    def unload_plugin(self):
+        return super().unload_plugin()
     
     def send_population_back(self, pop_template, values:dict, cycle_step:int, sim_step:int):
         '''Function to consume a 'send_population_back' TimeAction type.'''
@@ -77,7 +89,7 @@ class SendPopulationBackPlugin(TimeActionPlugin):
                                  'destination_region': destination_region.name,
                                  'destination_node': destination_node.name,
                                  'quantity': quant}
-            new_action = TimeAction(action_type = new_action_type, 
+            new_action = Action(action_type = new_action_type, 
                                                 pop_template = temp,
                                                 values = new_action_values)
             sub_list.append(new_action)

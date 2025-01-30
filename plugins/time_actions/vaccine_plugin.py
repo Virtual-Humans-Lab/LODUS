@@ -2,16 +2,16 @@ from pathlib import Path
 import time
 import core.environment
 from core.population import Blob, PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
 import csv
-from loggers.population_count_logger import PopulationCountLogger
+from plugins.loggers.population_count_logger import PopulationCountLogger
 import util
 import json
 
-class VaccinePlugin(TimeActionPlugin):
+class VaccinePlugin(ActionPlugin):
     '''
     Adds TimeActions to model infection behavior.
             Requires specific Property Blocks:

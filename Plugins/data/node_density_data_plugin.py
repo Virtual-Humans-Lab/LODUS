@@ -3,7 +3,7 @@ from pathlib import Path
 from types import NoneType
 from core.environment import EnvNode, EnvRegion, EnvironmentGraph
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 import copy
 from random_inst import FixedRandom
 import math
@@ -12,7 +12,7 @@ import csv
 import util
 import json
 
-class NodeDensityDataPlugin(TimeActionPlugin):
+class NodeDensityDataPlugin(ActionPlugin):
     
     def __init__(self, env_graph: EnvironmentGraph):
 

@@ -4,9 +4,9 @@ sys.path.append('../')
 
 from core.environment import EnvironmentGraph
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 
-class ReturnPopulationHomePlugin(TimeActionPlugin):
+class ReturnPopulationHomePlugin(ActionPlugin):
 
     def __init__(self, env_graph: EnvironmentGraph):
         '''gather_population

@@ -4,7 +4,7 @@ sys.path.append('../')
 
 from core.environment import EnvNode, EnvironmentGraph
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 from random_inst import FixedRandom
 import copy
 import random
@@ -20,7 +20,7 @@ class IsolationMode(IntEnum):
     REGULAR = 1,
     QUANTITY_CORRECTION = 2
 
-class GatherPopulationPlugin(TimeActionPlugin):
+class GatherPopulationPlugin(ActionPlugin):
 
     def __init__(self, env_graph: EnvironmentGraph):
         '''
@@ -52,7 +52,7 @@ class GatherPopulationPlugin(TimeActionPlugin):
         '''
         super().__init__()
         self.graph = env_graph
-        self.set_pair('gather_population', self.gather_population)
+        self.add_action_type_to_function('gather_population', self.gather_population)
 
         if "gather_population_plugin" not in self.graph.experiment_config:
             print("Experiment config should have a 'gather_population' key. Using an empty entry (default plugin values)")
@@ -80,8 +80,20 @@ class GatherPopulationPlugin(TimeActionPlugin):
         self.sublist_count = []
         self.random = FixedRandom.instance
 
+    def setup_logger(self, logger):
+        return super().setup_logger(logger)
+    
     def update_time_step(self, cycle_step, simulation_step):
-        return
+        return super().update_time_step(cycle_step, simulation_step)
+    
+    def log_data(self, logger):
+        return super().log_data(logger)
+    
+    def stop_logger(self, logger):
+        return super().stop_logger(logger)
+    
+    def unload_plugin(self):
+        return super().unload_plugin()
 
     # Returns the distance between two nodes
     def get_nodes_distance(self, node1:EnvNode, node2:EnvNode)->float:

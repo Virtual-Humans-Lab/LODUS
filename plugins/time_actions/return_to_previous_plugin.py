@@ -4,9 +4,9 @@ sys.path.append('../')
 
 from core.environment import EnvironmentGraph
 from core.population import PopulationTemplate
-from core.plugin import TimeActionPlugin
+from core.plugin import ActionPlugin
 
-class ReturnToPreviousPlugin(TimeActionPlugin):
+class ReturnToPreviousPlugin(ActionPlugin):
     '''return_to_previous
             
             Returns a population to the previous EnvNode they were occupying
