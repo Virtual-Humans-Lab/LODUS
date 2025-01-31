@@ -344,7 +344,7 @@ class LevyWalkPlugin(ActionPlugin):
             return self.dist_buckets[unique_name].copy()
         
         # Gets distances in buckets (based on overall distance)
-        distance_list = self.graph.get_node_distances(target_node, self.distance_type).get_distance_tuples()
+        distance_list = self.graph.get_node_distances(target_node, self.distance_type).get_sorted_distance_to_others()
         max_bucket = int(distance_list[-1][1] // self.bucket_size)
         self.dist_buckets[unique_name] = {}
         for i in range(max_bucket+1):

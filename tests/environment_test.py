@@ -1,7 +1,7 @@
 
 
 import pytest
-from core.environment import EnvNode, EnvNodeFactory, EnvNodeTemplate, EnvRegion
+from core.environment import EnvNode, EnvNodeDistances, EnvNodeFactory, EnvNodeTemplate, EnvRegion, EnvRegionFactory, EnvRegionTemplate
 from core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
 from core.routine import Action, RoutineFactory
 from random_inst import FixedRandom
@@ -40,6 +40,14 @@ def env_region() -> EnvRegion:
 @pytest.fixture
 def routine_factory() -> RoutineFactory:
     return RoutineFactory()
+
+@pytest.fixture
+def env_node() -> EnvNode:
+    return EnvNode(node_type="test_type")
+
+@pytest.fixture
+def population_template() -> PopulationTemplate:
+    return PopulationTemplate()
 
 class TestEnvNodeTemplate:
     
@@ -262,3 +270,135 @@ class TestEnvNode:
         assert sum(blob.get_population_size() for blob in node.contained_blobs) == 100
         assert blob.get_population_size()== 99
         assert modified_blob.get_population_size() == 1
+
+class TestEnvNodeDistances:
+    def test_initialization(self):
+        distances = EnvNodeDistances()
+        assert distances.node_name == ''
+        assert distances.distance_to_others == {}
+
+    def test_initialization_with_values(self):
+        distances = EnvNodeDistances(node_name='Node1', distance_to_others={'Node2': 10.0, 'Node3': 5.0})
+        assert distances.node_name == 'Node1'
+        assert distances.distance_to_others == {'Node2': 10.0, 'Node3': 5.0}
+
+    def test_get_distance_tuples_empty(self):
+        distances = EnvNodeDistances()
+        assert distances.get_sorted_distance_to_others() == []
+
+    def test_get_sorted_distance_to_others(self):
+        distances = EnvNodeDistances(node_name='Node1', distance_to_others={'Node2': 10.0, 'Node3': 5.0, 'Node4': 15.0})
+        assert distances.get_sorted_distance_to_others() == [('Node3', 5.0), ('Node2', 10.0), ('Node4', 15.0)]
+
+    def test_get_sorted_distance_to_others_with_equal_distances(self):
+        distances = EnvNodeDistances(node_name='Node1', distance_to_others={'Node2': 10.0, 'Node3': 10.0, 'Node4': 5.0})
+        assert distances.get_sorted_distance_to_others() == [('Node4', 5.0), ('Node2', 10.0), ('Node3', 10.0)]
+
+class TestEnvRegionTemplate:
+    def test_initialization(self):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        assert region_template.region_name == "test_region"
+        assert region_template.long_lat == [30.0, 40.0]
+        assert region_template.envnode_templates == []
+
+    def test_add_envnode_template(self):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        node_template = EnvNodeTemplate(node_type="test_type")
+        region_template.add_envnode_template(node_template)
+        assert len(region_template.envnode_templates) == 1
+        assert region_template.envnode_templates[0] == node_template
+
+    def test_add_envnode_template_invalid_type(self):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        with pytest.raises(ValueError, match="node_template must be of type EnvNodeTemplate"):
+            region_template.add_envnode_template("invalid_template")  # type: ignore
+
+class TestEnvRegionFactory:
+    def test_generate_envregion(self, env_node_template: EnvNodeTemplate, blob_factory: BlobFactory):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        region_template.add_envnode_template(env_node_template)
+        
+        factory = EnvRegionFactory(template=region_template, default_blob_factory=blob_factory)
+        region = factory.generate_envregion()
+        
+        assert isinstance(region, EnvRegion)
+        assert region.name == "test_region"
+        assert region.long_lat == [30.0, 40.0]
+        assert len(region.node_list) == 1
+        assert region.node_list[0].node_type == "test_type"
+        assert region.node_list[0].long_lat == [10.0, 20.0]
+        assert region.node_list[0].attributes["attr1"] == "value1"
+
+    def test_generate_envregion_multiple_nodes(self, env_node_template: EnvNodeTemplate, blob_factory: BlobFactory):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        region_template.add_envnode_template(env_node_template)
+        region_template.add_envnode_template(env_node_template)
+        
+        factory = EnvRegionFactory(template=region_template, default_blob_factory=blob_factory)
+        region = factory.generate_envregion()
+        
+        assert isinstance(region, EnvRegion)
+        assert region.name == "test_region"
+        assert region.long_lat == [30.0, 40.0]
+        assert len(region.node_list) == 2
+        for node in region.node_list:
+            assert node.node_type == "test_type"
+            assert node.long_lat == [10.0, 20.0]
+            assert node.attributes["attr1"] == "value1"
+
+    def test_generate_envregion_no_nodes(self, blob_factory: BlobFactory):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        
+        factory = EnvRegionFactory(template=region_template, default_blob_factory=blob_factory)
+        region = factory.generate_envregion()
+        
+        assert isinstance(region, EnvRegion)
+        assert region.name == "test_region"
+        assert region.long_lat == [30.0, 40.0]
+        assert len(region.node_list) == 0
+
+    def test_generate_envregion_invalid_node_template(self, blob_factory: BlobFactory):
+        region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
+        
+        with pytest.raises(ValueError, match="node_template must be of type EnvNodeTemplate"):
+            region_template.add_envnode_template("invalid_template")  # type: ignore
+
+class TestEnvRegion:
+    def test_initialization(self, env_region: EnvRegion):
+        assert env_region.name == "test_region"
+        assert env_region.long_lat == [30.0, 40.0]
+        assert env_region.node_list == []
+        assert env_region.node_dict == {}
+
+    def test_add_node(self, env_region: EnvRegion, env_node: EnvNode):
+        env_region.add_node(env_node)
+        assert env_node in env_region.node_list
+        assert env_region.node_dict[env_node.get_unique_name()] == env_node
+
+    def test_get_first_node_with_name(self, env_region: EnvRegion, env_node: EnvNode):
+        env_node.name = "test_node"
+        env_region.add_node(env_node)
+        assert env_region.get_first_node_with_name("test_node") == env_node
+        assert env_region.get_first_node_with_name("non_existent") is None
+
+    def test_get_node_by_unique_name(self, env_region: EnvRegion, env_node: EnvNode):
+        env_region.add_node(env_node)
+        assert env_region.get_node_by_unique_name(env_node.get_unique_name()) == env_node
+        with pytest.raises(ValueError):
+            env_region.get_node_by_unique_name("non_existent")
+
+    def test_get_population_size(self, env_region: EnvRegion, env_node: EnvNode, population_template: PopulationTemplate):
+        env_node.get_population_size = lambda tempalte: 100
+        env_region.add_node(env_node)
+        assert env_region.get_population_size(population_template) == 100
+
+    def test_get_blob_count(self, env_region: EnvRegion, env_node: EnvNode, blob_factory: BlobFactory):   
+        blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]
+        env_node.add_blobs(blobs)
+        env_region.add_node(env_node)
+        assert env_region.get_blob_count() == 3
+
+    def test_generate_action_list(self, env_region: EnvRegion, env_node: EnvNode):
+        env_node.process_routine = lambda cycle_step: ["action1", "action2"]
+        env_region.add_node(env_node)
+        assert env_region.generate_action_list(1) == ["action1", "action2"]

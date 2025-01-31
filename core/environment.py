@@ -25,18 +25,6 @@ class EnvEdge():
     def __init__(self):
         self.edge_type = ''
 
-
-@dataclass
-class EnvNodeDistances():
-    """Class representing distances between a node and all other nodes."""
-    node_name: str = ''
-    distance_to_others:dict[str, float] = field(default_factory = lambda: ({}))
-
-    def get_distance_tuples(self):
-        return sorted(self.distance_to_others.items(), key=lambda item: item[1])
-        
-
-
 class EnvNode():
     """A point of interest in an Environment Graph. 
     
@@ -274,17 +262,16 @@ class EnvNodeFactory():
             )
             env_node.add_blob(blob)
 
-        # for template in node_template.blob_templates:
-        #     blob = blob_factory.generate_blob_with_profile(
-        #         target_region.id, 
-        #         env_node.id, 
-        #         template.population, 
-        #         template.sampled_characteristics, 
-        #         template.traceable_characteristics
-        #     )
-        #     env_node.add_blob(blob)
-        
         return env_node
+
+@dataclass
+class EnvNodeDistances():
+    """Class representing distances between a node and all other nodes."""
+    node_name: str = ''
+    distance_to_others:dict[str, float] = field(default_factory = lambda: ({}))
+
+    def get_sorted_distance_to_others(self):
+        return sorted(self.distance_to_others.items(), key=lambda item: item[1])
 
 
 class EnvRegion():
