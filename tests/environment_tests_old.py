@@ -109,7 +109,7 @@ class EnvironmentTests(unittest.TestCase):
         node_sizes = []
         
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         node_sizes.append(target_node.get_population_size())
         
         # Gets the population size for multiple PopTemplates
@@ -188,7 +188,7 @@ class EnvironmentTests(unittest.TestCase):
         node_sizes = []
         
         # Gets a target EnvNode with population 100
-        target_node = self.envB.get_node_by_name("Petropolis", "home")
+        target_node = self.envB.get_node_by_unique_name("Petropolis", "home")
         node_sizes.append(target_node.get_population_size())
         
         # Gets the population size for multiple PopTemplates
@@ -283,7 +283,7 @@ class EnvironmentTests(unittest.TestCase):
         """
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -317,7 +317,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Partenon", "home")
+        target_node = self.envA.get_node_by_unique_name("Partenon", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -359,7 +359,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Centro", "home")
+        target_node = self.envA.get_node_by_unique_name("Centro", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -426,7 +426,7 @@ class EnvironmentTests(unittest.TestCase):
 
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         node_blobs = target_node.contained_blobs
 
         # Gets the first Blob in target node
@@ -466,7 +466,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Partenon", "home")
+        target_node = self.envA.get_node_by_unique_name("Partenon", "home")
         node_blobs = target_node.contained_blobs
 
         # Gets the first Blob in target node
@@ -513,7 +513,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Centro", "home")
+        target_node = self.envA.get_node_by_unique_name("Centro", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -594,7 +594,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -640,7 +640,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Partenon", "home")
+        target_node = self.envA.get_node_by_unique_name("Partenon", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -692,7 +692,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Centro", "home")
+        target_node = self.envA.get_node_by_unique_name("Centro", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -776,7 +776,7 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -810,7 +810,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Partenon", "home")
+        target_node = self.envA.get_node_by_unique_name("Partenon", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -844,7 +844,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Centro", "home")
+        target_node = self.envA.get_node_by_unique_name("Centro", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -911,7 +911,7 @@ class EnvironmentTests(unittest.TestCase):
 
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
 
         # Gets the first Blob in target node
         source_blob = target_node.contained_blobs[0]
@@ -953,7 +953,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Partenon", "home")
+        target_node = self.envA.get_node_by_unique_name("Partenon", "home")
         node_blobs = target_node.contained_blobs
 
         # Gets the first Blob in target node
@@ -998,7 +998,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Centro", "home")
+        target_node = self.envA.get_node_by_unique_name("Centro", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -1076,7 +1076,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         
         # Gets the first Blob in target node
         source_blob = target_node.contained_blobs[0]
@@ -1122,7 +1122,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Partenon", "home")
+        target_node = self.envA.get_node_by_unique_name("Partenon", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -1171,7 +1171,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Centro", "home")
+        target_node = self.envA.get_node_by_unique_name("Centro", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -1252,7 +1252,7 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 1:
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -1283,7 +1283,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with the remaining population of 40
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         source_blob = target_node.contained_blobs[0]
         node_original_size = target_node.get_population_size()
         source_original_size = source_blob.get_population_size()
@@ -1352,7 +1352,7 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 1:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Petropolis", "home")
+        target_node = self.envB.get_node_by_unique_name("Petropolis", "home")
         node_original_size = target_node.get_population_size()
 
         # Grabs 100 people from the target node - less than available
@@ -1383,7 +1383,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Partenon", "home")
+        target_node = self.envB.get_node_by_unique_name("Partenon", "home")
         node_original_size = target_node.get_population_size()
         
         # Grabs 200 people from the target node - equal as available
@@ -1414,7 +1414,7 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 3:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Centro", "home")
+        target_node = self.envB.get_node_by_unique_name("Centro", "home")
         node_original_size = target_node.get_population_size()
 
         # Grabs 400 people from the target node - more than available
@@ -1476,7 +1476,7 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 1:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Petropolis", "home")
+        target_node = self.envB.get_node_by_unique_name("Petropolis", "home")
         node_original_size = target_node.get_population_size()
 
         # Grabs 200 people from the target node - less than available
@@ -1507,7 +1507,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Partenon", "home")
+        target_node = self.envB.get_node_by_unique_name("Partenon", "home")
         node_original_size = target_node.get_population_size()
         
         # Grabs 400 people from the target node - equal as available
@@ -1538,7 +1538,7 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 3:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Centro", "home")
+        target_node = self.envB.get_node_by_unique_name("Centro", "home")
         node_original_size = target_node.get_population_size()
 
         # Grabs 800 people from the target node - more than available
@@ -1582,9 +1582,9 @@ class EnvironmentTests(unittest.TestCase):
         """
         # Case 1:
         # Gets target EnvNodes with the EnrivonmentGraph
-        target_node_A = self.envA.get_node_by_name("Petropolis", "home")
-        target_node_B = self.envA.get_node_by_name("Petropolis", "school")
-        target_node_C = self.envA.get_node_by_name("Petropolis", "work")
+        target_node_A = self.envA.get_node_by_unique_name("Petropolis", "home")
+        target_node_B = self.envA.get_node_by_unique_name("Petropolis", "school")
+        target_node_C = self.envA.get_node_by_unique_name("Petropolis", "work")
         
         # Gets a list of routines per hour
         hours = range(0, 24)
@@ -1986,7 +1986,7 @@ class EnvironmentTests(unittest.TestCase):
         """
         
         # Gets a target EnvNode with population 100
-        target_node = self.envA.get_node_by_name("Petropolis", "home")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "home")
         node_blobs = target_node.contained_blobs
         
         # Gets the first Blob in target node
@@ -2057,7 +2057,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 1:
         # Gets a target EnvNode with population 400
-        target_node = self.envB.get_node_by_name("Petropolis", "home")
+        target_node = self.envB.get_node_by_unique_name("Petropolis", "home")
         node_original_size = target_node.get_population_size()
         
         # Merge Blobs in target node - no Blobs should change
@@ -2197,8 +2197,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 1:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[0].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[0].get_node_by_name('Centro', 'work')
+        node_origin = _envs[0].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[0].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[0].get_population_size()
@@ -2215,7 +2215,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[0].consume_time_action(action, 0, 0)
+        _envs[0].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[0].get_population_size()
@@ -2242,8 +2242,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[1].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[1].get_node_by_name('Centro', 'work')
+        node_origin = _envs[1].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[1].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[1].get_population_size()
@@ -2260,7 +2260,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[1].consume_time_action(action, 0, 0)
+        _envs[1].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[1].get_population_size()
@@ -2287,8 +2287,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[2].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[2].get_node_by_name('Centro', 'work')
+        node_origin = _envs[2].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[2].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[2].get_population_size()
@@ -2305,7 +2305,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[2].consume_time_action(action, 0, 0)
+        _envs[2].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[2].get_population_size()
@@ -2332,8 +2332,8 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 4:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[3].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[3].get_node_by_name('Centro', 'work')
+        node_origin = _envs[3].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[3].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[3].get_population_size()
@@ -2350,7 +2350,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[3].consume_time_action(action, 0, 0)
+        _envs[3].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[3].get_population_size()
@@ -2377,8 +2377,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 5:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[4].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[4].get_node_by_name('Centro', 'work')
+        node_origin = _envs[4].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[4].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[4].get_population_size()
@@ -2395,7 +2395,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[4].consume_time_action(action, 0, 0)
+        _envs[4].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[3].get_population_size()
@@ -2470,8 +2470,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 1:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[0].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[0].get_node_by_name('Centro', 'work')
+        node_origin = _envs[0].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[0].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[0].get_population_size()
@@ -2489,7 +2489,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[0].consume_time_action(action, 0, 0)
+        _envs[0].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[0].get_population_size()
@@ -2521,8 +2521,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[1].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[1].get_node_by_name('Centro', 'work')
+        node_origin = _envs[1].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[1].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[1].get_population_size()
@@ -2540,7 +2540,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[1].consume_time_action(action, 0, 0)
+        _envs[1].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[1].get_population_size()
@@ -2574,8 +2574,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[2].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[2].get_node_by_name('Centro', 'work')
+        node_origin = _envs[2].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[2].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[2].get_population_size()
@@ -2593,7 +2593,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[2].consume_time_action(action, 0, 0)
+        _envs[2].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[2].get_population_size()
@@ -2627,8 +2627,8 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 4:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[3].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[3].get_node_by_name('Centro', 'work')
+        node_origin = _envs[3].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[3].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[3].get_population_size()
@@ -2646,7 +2646,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[3].consume_time_action(action, 0, 0)
+        _envs[3].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[3].get_population_size()
@@ -2680,8 +2680,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 5:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[4].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[4].get_node_by_name('Centro', 'work')
+        node_origin = _envs[4].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[4].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[4].get_population_size()
@@ -2699,7 +2699,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[4].consume_time_action(action, 0, 0)
+        _envs[4].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[3].get_population_size()
@@ -2768,8 +2768,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 1:
         # Gets the EnvNodes used in the operation
-        node_origin = self.envA.get_node_by_name('Petropolis', 'home')
-        node_destination = self.envA.get_node_by_name('Centro', 'work')
+        node_origin = self.envA.get_node_by_unique_name('Petropolis', 'home')
+        node_destination = self.envA.get_node_by_unique_name('Centro', 'work')
         source_blob = node_origin.contained_blobs[0]
         
         # Gets sizes before operation
@@ -2788,7 +2788,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        self.envA.consume_time_action(action, 0, 0)
+        self.envA.consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = self.envA.get_population_size()
@@ -2822,8 +2822,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets the EnvNodes used in the operation
-        node_origin = self.envA.get_node_by_name('Petropolis', 'home')
-        node_destination = self.envA.get_node_by_name('Centro', 'work')
+        node_origin = self.envA.get_node_by_unique_name('Petropolis', 'home')
+        node_destination = self.envA.get_node_by_unique_name('Centro', 'work')
         source_blob = node_origin.contained_blobs[0]
         
         # Gets sizes before operation
@@ -2842,7 +2842,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        self.envA.consume_time_action(action, 0, 0)
+        self.envA.consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = self.envA.get_population_size()
@@ -2935,8 +2935,8 @@ class EnvironmentTests(unittest.TestCase):
         pop_template.set_traceable_property('traceable_A', 'default')
         
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[0].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[0].get_node_by_name('Centro', 'work')
+        node_origin = _envs[0].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[0].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = self.envA.get_population_size()
@@ -2954,7 +2954,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[0].consume_time_action(action, 0, 0)
+        _envs[0].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = self.envA.get_population_size()
@@ -2986,8 +2986,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[1].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[1].get_node_by_name('Centro', 'work')
+        node_origin = _envs[1].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[1].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[1].get_population_size()
@@ -3005,7 +3005,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[1].consume_time_action(action, 0, 0)
+        _envs[1].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[1].get_population_size()
@@ -3039,8 +3039,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[2].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[2].get_node_by_name('Centro', 'work')
+        node_origin = _envs[2].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[2].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[2].get_population_size()
@@ -3058,7 +3058,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[2].consume_time_action(action, 0, 0)
+        _envs[2].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[2].get_population_size()
@@ -3092,8 +3092,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 4:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[3].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[3].get_node_by_name('Centro', 'work')
+        node_origin = _envs[3].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[3].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[3].get_population_size()
@@ -3111,7 +3111,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[3].consume_time_action(action, 0, 0)
+        _envs[3].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[3].get_population_size()
@@ -3145,8 +3145,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 5:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[4].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[4].get_node_by_name('Centro', 'work')
+        node_origin = _envs[4].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[4].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[4].get_population_size()
@@ -3164,7 +3164,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[4].consume_time_action(action, 0, 0)
+        _envs[4].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[4].get_population_size()
@@ -3239,8 +3239,8 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 1:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[0].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[0].get_node_by_name('Centro', 'work')
+        node_origin = _envs[0].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[0].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[0].get_population_size()
@@ -3258,7 +3258,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[0].consume_time_action(action, 0, 0)
+        _envs[0].consume_action(action, 0, 0)
 
         # Gets sizes after operation
         graph_final_size  = _envs[0].get_population_size()
@@ -3290,8 +3290,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 2:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[1].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[1].get_node_by_name('Centro', 'work')
+        node_origin = _envs[1].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[1].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[1].get_population_size()
@@ -3309,7 +3309,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[1].consume_time_action(action, 0, 0)
+        _envs[1].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[1].get_population_size()
@@ -3343,8 +3343,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 3:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[2].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[2].get_node_by_name('Centro', 'work')
+        node_origin = _envs[2].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[2].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[2].get_population_size()
@@ -3362,7 +3362,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[2].consume_time_action(action, 0, 0)
+        _envs[2].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[2].get_population_size()
@@ -3396,8 +3396,8 @@ class EnvironmentTests(unittest.TestCase):
                 
         # Case 4:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[3].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[3].get_node_by_name('Centro', 'work')
+        node_origin = _envs[3].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[3].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[3].get_population_size()
@@ -3415,7 +3415,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[3].consume_time_action(action, 0, 0)
+        _envs[3].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[3].get_population_size()
@@ -3449,8 +3449,8 @@ class EnvironmentTests(unittest.TestCase):
         
         # Case 5:
         # Gets the EnvNodes used in the operation
-        node_origin = _envs[4].get_node_by_name('Petropolis', 'home')
-        node_destination = _envs[4].get_node_by_name('Centro', 'work')
+        node_origin = _envs[4].get_node_by_unique_name('Petropolis', 'home')
+        node_destination = _envs[4].get_node_by_unique_name('Centro', 'work')
         
         # Gets sizes before operation
         graph_original_size = _envs[4].get_population_size()
@@ -3468,7 +3468,7 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('move_population', values)
         
         # Consumes the TimeAction
-        _envs[4].consume_time_action(action, 0, 0)
+        _envs[4].consume_action(action, 0, 0)
 
         # Gets sizes before operation
         graph_final_size  = _envs[4].get_population_size()
@@ -3515,9 +3515,9 @@ class EnvironmentTests(unittest.TestCase):
         action = Action('gather_population', values)
         old_graph_size = self.envA.get_population_size()
         
-        target_node = self.envA.get_node_by_name("Petropolis", "work")
+        target_node = self.envA.get_node_by_unique_name("Petropolis", "work")
         old_node_size = target_node.get_population_size()
-        self.envA.consume_time_action(action, 0, 0)
+        self.envA.consume_action(action, 0, 0)
         new_graph_size  = self.envA.get_population_size()
         new_node_size = target_node.get_population_size()
 
@@ -3575,7 +3575,7 @@ class EnvironmentTests(unittest.TestCase):
 
         old_node_size = node.get_population_size()
 
-        self.envA.consume_time_action(action, 0, 0)
+        self.envA.consume_action(action, 0, 0)
 
         new_graph_size  = self.envA.get_population_size()
         new_node_size = node.get_population_size()

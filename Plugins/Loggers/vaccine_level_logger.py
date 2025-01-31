@@ -5,7 +5,7 @@ from core.environment import EnvironmentGraph, EnvNode, EnvRegion
 from time_actions.vaccine_plugin import VaccinePlugin
 #import VaccineLocalPlugin
 #from VaccineLocalPlugin import VaccinePlugin 
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
 
 # Graphic and data libraries
@@ -114,7 +114,7 @@ class VaccineLevelLogger(LoggerPlugin):
     def log_simulation_step(self):
         return
 
-    def log_data(self, **kwargs):
+    def log_simulation_step(self, **kwargs):
         assert 'graph' in kwargs and 'frame' in kwargs, "Invalid inputs for logging"
         
         # Gets data from logger

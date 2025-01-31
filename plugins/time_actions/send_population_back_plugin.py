@@ -3,6 +3,7 @@ import sys
 import time
 
 from core.routine import Action
+from core.simulator import LodusSimulation
 sys.path.append('../')
 
 from core.environment import EnvironmentGraph
@@ -10,7 +11,7 @@ from core.plugin import ActionPlugin
 
 class SendPopulationBackPlugin(ActionPlugin):
 
-    def __init__(self, env_graph: EnvironmentGraph):
+    def __init__(self):
         '''
         Plugin that consumes a 'send_population_back' TimeAction type.
         Complex TimeAction that returns multiple 'move_population' actions.
@@ -29,10 +30,11 @@ class SendPopulationBackPlugin(ActionPlugin):
         '''
         super().__init__()
 
-        self.graph = env_graph
-        self.add_action_type_to_function('send_population_back', self.send_population_back)
+    def load_plugin(self, simulation: LodusSimulation):    
+        self.env_graph = simulation.env_graph
+        simulation.add_action_type_to_function('send_population_back', self.send_population_back, False)
 
-        if "send_population_back_plugin" not in self.graph.experiment_config:
+        if "send_population_back_plugin" not in self.env_graph.experiment_config:
             print("Experiment config should have a 'send_population_back' key.")
 
         # Performance log for quantity of sub-actions
@@ -44,8 +46,8 @@ class SendPopulationBackPlugin(ActionPlugin):
     def update_time_step(self, cycle_step, simulation_step):
         return super().update_time_step(cycle_step, simulation_step)
     
-    def log_data(self, logger):
-        return super().log_data(logger)
+    def log_simulation_step(self, logger):
+        return super().log_simulation_step(logger)
     
     def stop_logger(self, logger):
         return super().stop_logger(logger)
@@ -61,13 +63,13 @@ class SendPopulationBackPlugin(ActionPlugin):
         assert 'node' in values, "node is not defined in Send Population Back TimeAction"
         assert 'quantity' in values or 'percentage' in values, "quantity or percentage is not defined in Send Population Back TimeAction"
         
-        acting_region = self.graph.get_region_by_name(values['region'])
+        acting_region = self.env_graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_first_node_with_name(values['node'])
 
         sub_list = []
         for b in acting_node.contained_blobs:
-            destination_node = self.graph.get_node_by_id(b.node_of_origin)
-            destination_region = self.graph.get_region_by_name(destination_node.containing_region_name)
+            destination_node = self.env_graph.get_node_by_id(b.node_of_origin)
+            destination_region = self.env_graph.get_region_by_name(destination_node.containing_region_name)
            
             if destination_node.get_unique_name() == acting_node.get_unique_name():
                 continue

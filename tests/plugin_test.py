@@ -1,5 +1,6 @@
 import pytest
 from core.plugin import ActionPlugin, BasePlugin
+from core.simulator import LodusSimulation
 
 class TestBasePlugin:
     def test_setup_logger_not_implemented(self):
@@ -7,7 +8,7 @@ class TestBasePlugin:
             def update_time_step(self, cycle_step, simulation_step):
                 pass
 
-            def log_data(self, logger):
+            def log_simulation_step(self, logger):
                 pass
 
             def stop_logger(self, logger):
@@ -24,7 +25,7 @@ class TestBasePlugin:
             def setup_logger(self, logger):
                 pass
 
-            def log_data(self, logger):
+            def log_simulation_step(self, logger):
                 pass
 
             def stop_logger(self, logger):
@@ -61,7 +62,7 @@ class TestBasePlugin:
             def update_time_step(self, cycle_step, simulation_step):
                 pass
 
-            def log_data(self, logger):
+            def log_simulation_step(self, logger):
                 pass
 
             def unload_plugin(self):
@@ -78,7 +79,7 @@ class TestBasePlugin:
             def update_time_step(self, cycle_step, simulation_step):
                 pass
 
-            def log_data(self, logger):
+            def log_simulation_step(self, logger):
                 pass
 
             def stop_logger(self, logger):
@@ -89,37 +90,42 @@ class TestBasePlugin:
 
     def test_mock_plugin(self):
         class MockPlugin(BasePlugin):
-            def setup_logger(self, logger):
+            def load_plugin(self, simulation: LodusSimulation):
+                pass
+            
+            def setup_logger(self):
                 pass
 
             def update_time_step(self, cycle_step, simulation_step):
                 pass
 
-            def log_data(self, logger):
+            def log_simulation_step(self):
                 pass
 
-            def stop_logger(self, logger):
+            def stop_logger(self):
                 pass
 
             def unload_plugin(self):
                 pass
 
         plugin = MockPlugin()
-        assert plugin.setup_logger(None) is None
-        assert plugin.update_time_step(None, None) is None
-        assert plugin.log_data(None) is None
-        assert plugin.stop_logger(None) is None
+        assert plugin.setup_logger() is None
+        assert plugin.update_time_step(None, None) is None # type: ignore
+        assert plugin.log_simulation_step() is None
+        assert plugin.stop_logger() is None
         assert plugin.unload_plugin() is None
 
 class MockActionPlugin(ActionPlugin):
-        def setup_logger(self, logger):
-            return super().setup_logger(logger)
+        def load_plugin(self, simulation: LodusSimulation):
+            return super().load_plugin(simulation)
+        def setup_logger(self):
+            return super().setup_logger()
         def update_time_step(self, cycle_step, simulation_step):
             return super().update_time_step(cycle_step, simulation_step)
-        def log_data(self, logger):
-            return super().log_data(logger)
-        def stop_logger(self, logger):
-            return super().stop_logger(logger)
+        def log_simulation_step(self):
+            return super().log_simulation_step()
+        def stop_logger(self):
+            return super().stop_logger()
         def unload_plugin(self):
             return super().unload_plugin()
 
@@ -140,28 +146,3 @@ class TestActionPlugin:
         assert "Total execution time: 3.0" in captured.out
         assert "Average execution time: 1.5" in captured.out
         assert output == captured.out
-
-    def test_add_action_type_to_function(self):
-        plugin = MockActionPlugin()
-        def dummy_action():
-            pass
-        plugin.add_action_type_to_function("dummy", dummy_action)
-        assert plugin.action_type_to_function["dummy"] == dummy_action
-
-    def test_add_action_type_to_function_invalid_type(self):
-        plugin = MockActionPlugin()
-        with pytest.raises(ValueError):
-            plugin.add_action_type_to_function(123, lambda: None)
-
-    def test_add_action_type_to_function_invalid_callable(self):
-        plugin = MockActionPlugin()
-        with pytest.raises(ValueError):
-            plugin.add_action_type_to_function("dummy", "not_callable")
-
-    def test_get_action_type_to_function(self):
-        plugin = MockActionPlugin()
-        def dummy_action():
-            pass
-        plugin.add_action_type_to_function("dummy", dummy_action)
-        action_dict = plugin.get_action_type_to_function()
-        assert action_dict == {"dummy": dummy_action}

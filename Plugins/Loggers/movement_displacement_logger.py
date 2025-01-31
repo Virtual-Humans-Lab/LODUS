@@ -1,9 +1,10 @@
 import sys
 
+from core.simulator import LodusSimulation
 from util import DistanceType
 sys.path.append("/../../")
 from core.environment import EnvironmentGraph, EnvNode, EnvRegion
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
 
 # Graphic and data libraries
@@ -18,8 +19,7 @@ from enum import Enum
 
 class MovementDisplacementLogger(LoggerPlugin):
 
-    def __init__(self, base_filename:str):
-
+    def __init__(self):
         # Movement dicts 
         self.movement_counter = {}
         self.group_movement_counter = {}
@@ -32,21 +32,21 @@ class MovementDisplacementLogger(LoggerPlugin):
         self.region_custom_templates: dict[str,PopulationTemplate] = {}
         self.node_custom_templates: dict[str,PopulationTemplate] = {}
 
-        # Paths for folders
-        self.base_path = "output_logs/" + base_filename + "/"
-        self.data_frames_path = self.base_path + "/data_frames/"
-
-    def load_to_enviroment(self, env:EnvironmentGraph):
+    def load_plugin(self, simulation: LodusSimulation):
          # Attaches itself to the EnvGraph
-        self.graph: EnvironmentGraph = env
-        self.graph.movement_logger_dict["displacement"] = self.log_od_movement
+        self.env_graph: EnvironmentGraph = simulation.env_graph
+        self.env_graph.movement_logger_dict["displacement"] = self.log_od_movement
         #graph.od_matrix_logger = self
         
         # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = env.routine_cycle_length
+        self.cycle_lenght:int = simulation.cycle_lenght
         self.sim_step: int = 0 
 
-    def start_logger(self):
+        # Paths for folders
+        self.base_path = "output_logs/" + simulation.experiment_name + "/"
+        self.data_frames_path = self.base_path + "/data_frames/"
+
+    def setup_logger(self):
         # Create the required directories
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
@@ -62,7 +62,7 @@ class MovementDisplacementLogger(LoggerPlugin):
     def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
         total = sum([b.get_population_size() for b in _blobs])
-        node_distances = self.graph.get_node_distances(target_node=_ori, dist_type=self.graph.default_distance_type)
+        node_distances = self.env_graph.get_node_distances(target_node=_ori, dist_type=self.env_graph.default_distance_type)
         distance = node_distances.distance_to_others[_dest.get_unique_name()]
         
         self.movement_counter[distance] = self.movement_counter.get(distance,0) + total
@@ -96,3 +96,6 @@ class MovementDisplacementLogger(LoggerPlugin):
                                  sep=";", 
                                  encoding="utf-8-sig",
                                  header=["frequency"])
+
+    def unload_plugin(self):
+        return super().unload_plugin()

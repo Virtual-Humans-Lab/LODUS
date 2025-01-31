@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Optional
 from core.population import PopulationTemplate
 
 class Action:
@@ -13,13 +13,13 @@ class Action:
         - With a graph operator, for base actions; or
         - A base Action's decomposition, for composite actions.
     """
-    def __init__(self, action_type: str, pop_template: PopulationTemplate, values: dict):
+    def __init__(self, action_type: str, pop_template: PopulationTemplate, values: dict[str, Any]):
         if not isinstance(pop_template, PopulationTemplate):
             raise ValueError("pop_template must be of type PopulationTemplate")
 
         self.action_type: str = action_type
         self.pop_template: PopulationTemplate = pop_template
-        self.values: dict = values
+        self.values: dict[str, Any] = values
         self.values.pop("population_template", None)
 
     def __str__(self) -> str:
@@ -31,6 +31,21 @@ class Action:
 
     def __repr__(self) -> str:
         return self.__str__()
+    
+class GlobalAction (Action):
+    """Describes a GlobalAction, which is an Action that is performed in all EnvNodes."""
+    def __init__(self, action_type: str, population_template: PopulationTemplate, values: dict, cycle_step_definition: int | list[int]):
+        """Initializes a GlobalAction.
+        If cycle_step_definition is an int, the action will be performed every cycle_step_definition cycles.
+        If cycle_step_definition is a list of ints, the action will be performed at the specified cycle_steps.
+        """
+        self.cycle_step_definition: int | list[int] = cycle_step_definition
+        super().__init__(action_type, population_template, values)
+
+    def should_process_action(self, cycle_step: int) -> bool:
+        """Returns True if the action should be processed at the given cycle_step."""
+        return (isinstance(self.cycle_step_definition, int) and cycle_step % self.cycle_step_definition == 0) or (isinstance(self.cycle_step_definition, list) and cycle_step in self.cycle_step_definition)
+
 
 class RoutineTemplate:
     """Describes a template for a Routine.

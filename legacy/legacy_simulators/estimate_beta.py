@@ -389,7 +389,7 @@ for i in range(simulation_steps):
         #print(f'vaccinate {vaccine_quantity} individuals.')
         
         print(f'Antes da vacinação:\nS:{env_graph.get_population_size(pop_template_suc)}')
-        env_graph.consume_time_action(vaccinate, hour, i)
+        env_graph.consume_action(vaccinate, hour, i)
         print(f'Depois da vacinação:\nS:{env_graph.get_population_size(pop_template_suc)}')
         #print(f'Total vacinado: {env_graph.get_population_size(pop_template_vac)}')
 

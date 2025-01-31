@@ -233,6 +233,92 @@ class TestEnvNode:
         assert all(blob not in node.contained_blobs for blob in blobs)
         assert node.get_population_size() == 0
 
+    def test_merge_blobs_in_node(self, blob_factory: BlobFactory):
+        # Create blobs with the same mother_blob_id and traceable characteristics
+        blob1 = blob_factory.generate_blob_rand(0, 0, 100)
+        blob2 = blob_factory.generate_blob_rand(0, 0, 50)
+        blob1.mother_blob_id = 1
+        blob2.mother_blob_id = 1
+        blob1.set_traceable_characteristic('vaccine_level', 0)
+        blob2.set_traceable_characteristic('vaccine_level', 0)
+
+        node = EnvNode(node_type="test_type")
+        node.add_blob(blob1)
+        node.add_blob(blob2)
+
+        # Merge blobs
+        node.merge_blobs_in_node()
+
+        # Check if blobs are merged
+        assert len(node.contained_blobs) == 1
+        assert node.contained_blobs[0].get_population_size() == 150
+        assert node.get_population_size() == 150
+
+    def test_merge_blobs_in_node_different_mother_blob_id(self, blob_factory: BlobFactory):
+        # Create blobs with different mother_blob_id
+        blob1 = blob_factory.generate_blob_rand(0, 0, 100)
+        blob2 = blob_factory.generate_blob_rand(0, 0, 50)
+        blob1.mother_blob_id = 1
+        blob2.mother_blob_id = 2
+        blob1.set_traceable_characteristic('vaccine_level', 0)
+        blob2.set_traceable_characteristic('vaccine_level', 0)
+
+        node = EnvNode(node_type="test_type")
+        node.add_blob(blob1)
+        node.add_blob(blob2)
+
+        # Merge blobs
+        node.merge_blobs_in_node()
+
+        # Check if blobs are not merged
+        assert len(node.contained_blobs) == 2
+        assert node.get_population_size() == 150
+
+    def test_merge_blobs_in_node_different_traceable_characteristics(self, blob_factory: BlobFactory):
+        # Create blobs with the same mother_blob_id but different traceable characteristics
+        blob1 = blob_factory.generate_blob_rand(0, 0, 100)
+        blob2 = blob_factory.generate_blob_rand(0, 0, 50)
+        blob1.mother_blob_id = 1
+        blob2.mother_blob_id = 1
+        blob1.set_traceable_characteristic('vaccine_level', 0)
+        blob2.set_traceable_characteristic('vaccine_level', 1)
+
+        node = EnvNode(node_type="test_type")
+        node.add_blob(blob1)
+        node.add_blob(blob2)
+
+        # Merge blobs
+        node.merge_blobs_in_node()
+
+        # Check if blobs are not merged
+        assert len(node.contained_blobs) == 2
+        assert node.get_population_size() == 150
+
+    def test_merge_blobs_in_node_multiple_blobs(self, blob_factory: BlobFactory):
+        # Create multiple blobs with the same mother_blob_id and traceable characteristics
+        blob1 = blob_factory.generate_blob_rand(0, 0, 100)
+        blob2 = blob_factory.generate_blob_rand(0, 0, 50)
+        blob3 = blob_factory.generate_blob_rand(0, 0, 75)
+        blob1.mother_blob_id = 1
+        blob2.mother_blob_id = 1
+        blob3.mother_blob_id = 1
+        blob1.set_traceable_characteristic('vaccine_level', 0)
+        blob2.set_traceable_characteristic('vaccine_level', 0)
+        blob3.set_traceable_characteristic('vaccine_level', 0)
+
+        node = EnvNode(node_type="test_type")
+        node.add_blob(blob1)
+        node.add_blob(blob2)
+        node.add_blob(blob3)
+
+        # Merge blobs
+        node.merge_blobs_in_node()
+
+        # Check if all blobs are merged
+        assert len(node.contained_blobs) == 1
+        assert node.contained_blobs[0].get_population_size() == 225
+        assert node.get_population_size() == 225
+
     def test_get_population_size(self, blob_factory: BlobFactory):
         node = EnvNode(node_type="test_type")
         blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]

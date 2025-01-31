@@ -395,7 +395,7 @@ class NewInfectionPlugin(ActionPlugin):
                                     x_label="Frame", y_label="Population",
                                     columns= ['Susceptible', 'Infected', 'Removed'])
         
-    def log_data(self, **kwargs):
+    def log_simulation_step(self, **kwargs):
         assert 'graph' in kwargs and 'frame' in kwargs, "Invalid inputs for logging"
 
     def stop_logger(self, **kwargs):

@@ -3,7 +3,8 @@ import json
 from pathlib import Path
 from core.environment import *
 from core.population import *
-from core.routine import Action
+from core.routine import Action, GlobalAction
+from core.simulator import LodusSimulation
 
 def DummyEnv():
     return ''
@@ -12,6 +13,118 @@ def DummyEnv():
 def DummyPop(env_graph):
     pass
 
+def generate_lodus_simulation(env_input: str):
+    #env = Generate_EnvironmentGraph(env_input)
+    env_graph = EnvironmentGraph()
+    simulation = LodusSimulation(env_graph)
+
+    exp_path = Path(__file__).parent / "experiments"
+    data_path =  Path(__file__).parent / "data_input"
+
+    exp_config = json.load(open(exp_path / (env_input + ".json"), 'r', encoding='utf8'))
+    input_files = exp_config["envgraph_inputs_files"]
+
+    env_file = open(data_path / input_files["environment_file"],'r', encoding='utf8')
+    pop_file = open(data_path / input_files["population_file"],'r', encoding='utf8')
+    rot_file = open(data_path / input_files["routine_file"],'r', encoding='utf8')
+
+    env_json = json.load(env_file)
+    pop_json = json.load(pop_file)
+    rot_json = json.load(rot_file)
+
+    
+    env_graph.experiment_config = exp_config
+
+    block_template = CharacteristicsFactory()
+    pop_template = { "traceable_properties": pop_json["default_traceable_characteristics"],
+                    "sampled_properties": pop_json["sampled_characteristics_bins"]}
+    
+     # Default values for traceable properties
+    if 'traceable_properties' in pop_template:
+        tp = pop_template['traceable_properties']
+        for k in tp:
+            block_template.add_traceable_characteristic(k, tp[k])
+
+    # Default values for sampled properties
+    if 'sampled_properties' in pop_template:
+        sp = pop_template['sampled_properties']
+        for k in sp:
+            block_template.add_sampled_characteristic(k, sp[k])
+
+    blob_factory = BlobFactory(block_template)
+    env_graph.original_block_template = block_template
+
+    # Creating Regions
+    for reg_dict in env_json['regions']:
+        region_name:str = reg_dict['name']
+        region_position: list[float] = reg_dict['lng_lat']
+        region_template = EnvRegionTemplate(region_name, region_position)
+
+        # Creating each Point of Interest/Node
+        for poi_dict in reg_dict['points_of_interest']:
+            node_name = poi_dict["name"]
+            node_template = EnvNodeTemplate(node_name)
+
+            # Node Long-Lat position
+            node_template.long_lat = poi_dict["lng_lat"]
+
+            # Additional characteristics
+            if "characteristics" in poi_dict:
+                for a, b in poi_dict["characteristics"].items():
+                    node_template.add_node_attributes(a, b)
+
+            # Add initial populations:
+            poi_unique_name = region_name + "//" + poi_dict["name"]
+            
+            if poi_unique_name in pop_json["initial_population"]:
+                for ip in pop_json["initial_population"][poi_unique_name]:
+                    blob_template = BlobTemplate(population=ip["total_population"],
+                        traceable_characteristics=ip['traceable_characteristics'],
+                        sampled_characteristics=ip['sampled_characteristics'])
+                    node_template.add_blob_template(blob_template)
+
+            # Add routines
+            if poi_unique_name in rot_json["routines"]:
+                for rt in rot_json["routines"][poi_unique_name]:
+                    pt = PopulationTemplate(
+                        sampled_characteristics=rt["action"]['population_template']["sampled_characteristics"],
+                        traceable_characteristics=rt["action"]['population_template']["traceable_characteristics"])
+                    action = Action(action_type=rt["action"]['type'], 
+                                        values=rt["action"]['values'], 
+                                        pop_template=pt)
+                    node_template.add_action_to_routine_template(rt["cycle_step"], action)
+
+            region_template.add_envnode_template(node_template)
+        
+        env_graph.add_region(reg_dict['lng_lat'], region_template, blob_factory)
+        env_graph.region_list[-1].long_lat = reg_dict['lng_lat']
+    env_graph.set_spawning_nodes()
+    env_graph.set_original_populations()
+
+
+    # Process repeating global actions
+    if 'global_routine' in rot_json:
+        repeating_global_actions = rot_json['global_routine']
+
+        for rga in repeating_global_actions:
+            action_type = rga['action']['type']
+            pt = PopulationTemplate(sampled_characteristics=rga["action"]['population_template']["sampled_characteristics"],
+                                        traceable_characteristics=rga["action"]['population_template']["traceable_characteristics"])
+            values = rga['action']['values']
+
+            if 'cycle_length' in rga:
+                cycle_definiton = int(rga['cycle_length'])
+            elif 'frames' in rga:
+                cycle_definiton = rga['frames']
+            elif 'cycle_step' in rga and isinstance(rga['cycle_step'], list):
+                cycle_definiton = rga['cycle_step']
+            else:
+                cycle_definiton = int(rga['cycle_step'])
+            simulation.add_global_action(GlobalAction(action_type=action_type,
+                                        population_template=pt,
+                                        values=values,
+                                        cycle_step_definition=cycle_definiton))
+    return simulation
 
 def Generate_EnvironmentGraph(env_input: str) -> EnvironmentGraph:
     print("Generating EnvGraph with new parsing. Experiment Config File:", env_input)

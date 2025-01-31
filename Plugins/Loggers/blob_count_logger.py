@@ -1,8 +1,10 @@
 # LODUS core
 import sys
+
+from core.simulator import LodusSimulation
 sys.path.append('/../../')
 from core.environment import EnvironmentGraph
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 
 import plotly.graph_objects as go
 import plotly.express as px
@@ -19,10 +21,24 @@ class BlobCountRecordKey(Enum):
 
 class BlobCountLogger(LoggerPlugin):
     
-    def __init__(self, base_filename):
+    def __init__(self):
+        pass
+
+
+    def load_plugin(self, simulation: LodusSimulation):
+        # Attaches itself to the EnvGraph
+        self.env_graph = simulation.env_graph
+
+        # Cycle length and Current SimulationStep
+        self.cycle_lenght:int = simulation.cycle_lenght
+        self.sim_step: int = 0 
+
+        self.blob_global_count = []
+        self.blob_region_count = {r:[] for r in self.env_graph.region_dict}
+        self.blob_node_count = {n:[] for n in self.env_graph.node_dict}
 
         # Sets paths and create folders
-        self.base_path = 'output_logs/' + base_filename + '/'
+        self.base_path = 'output_logs/' + simulation.experiment_name + '/'
         self.data_frames_path = self.base_path + "/data_frames/"
         
         # Which data is being recorded
@@ -33,19 +49,7 @@ class BlobCountLogger(LoggerPlugin):
         self.blob_region_count = {}
         self.blob_node_count = {}
 
-    def load_to_enviroment(self, env:EnvironmentGraph):
-         # Attaches itself to the EnvGraph
-        self.graph = env
-
-        # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = self.graph.routine_cycle_length
-        self.sim_step: int = 0 
-
-        self.blob_global_count = []
-        self.blob_region_count = {r:[] for r in self.graph.region_dict}
-        self.blob_node_count = {n:[] for n in self.graph.node_dict}
-
-    def start_logger(self):
+    def setup_logger(self):
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
 
@@ -54,14 +58,13 @@ class BlobCountLogger(LoggerPlugin):
 
     def log_simulation_step(self):
         if BlobCountRecordKey.BLOB_COUNT_GLOBAL in self.data_to_record:
-            self.blob_global_count.append(self.graph.get_blob_count())
+            self.blob_global_count.append(self.env_graph.get_blob_count())
         if BlobCountRecordKey.BLOB_COUNT_REGION in self.data_to_record:
-            for r,v in self.graph.region_dict.items():
+            for r,v in self.env_graph.region_dict.items():
                 self.blob_region_count[r].append(v.get_blob_count())
         if BlobCountRecordKey.BLOB_COUNT_NODE in self.data_to_record:
-            for n,v in self.graph.node_dict.items():
+            for n,v in self.env_graph.node_dict.items():
                 self.blob_node_count[n].append(len(v.contained_blobs))
-
 
     def stop_logger(self):
         if BlobCountRecordKey.BLOB_COUNT_GLOBAL in self.data_to_record:
@@ -76,6 +79,9 @@ class BlobCountLogger(LoggerPlugin):
             df = pd.DataFrame(self.blob_node_count)
             df = df.rename_axis('Simulation Frame').rename_axis('Node', axis=1)
             df.to_csv(self.data_frames_path + 'blob_count_node.csv', sep = ';', encoding="utf-8-sig")
+
+    def unload_plugin(self):
+        return super().unload_plugin()
 
     def process_blob_count_line_plots(self):#, show_figures: bool, export_html: bool, export_figures: bool, layout_update=None):
         

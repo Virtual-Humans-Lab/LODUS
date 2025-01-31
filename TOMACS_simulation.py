@@ -60,14 +60,16 @@ data_input_file_path = args['f']
 experiment_configuration_file = args['e']
 if ".json" in args['f']: 
     raise Exception("please use the new format of inputs (experiment config)")
-env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
+lodus_simulation = generate_lodus_simulation(experiment_configuration_file)
+env_graph = lodus_simulation.env_graph
 '''
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles:int = 1
 cycle_length:int = 24
-env_graph.routine_cycle_length = cycle_length
+lodus_simulation.cycle_lenght = cycle_length
+# env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
 env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
@@ -96,13 +98,13 @@ if 'node_density_data_plugin' in env_graph.experiment_config:
 TimeAction Plugins
 '''
 
-move_population_plugin = MovePopulationPlugin(env_graph)
-env_graph.load_time_action_plugin(move_population_plugin)
+move_population_plugin = MovePopulationPlugin()
+lodus_simulation.load_action_plugin(move_population_plugin)
 
 gather_pop = None
 if 'gather_population_plugin' in env_graph.experiment_config:
-    gather_pop = GatherPopulationPlugin(env_graph)
-    env_graph.load_time_action_plugin(gather_pop)
+    gather_pop = GatherPopulationPlugin()
+    lodus_simulation.load_action_plugin(gather_pop)
 
 return_pop_home = None
 if 'return_population_home_plugin' in env_graph.experiment_config:
@@ -111,28 +113,28 @@ if 'return_population_home_plugin' in env_graph.experiment_config:
 
 send_pop_back = None
 if 'send_population_back_plugin' in env_graph.experiment_config:
-    send_pop_back = SendPopulationBackPlugin(env_graph)
-    env_graph.load_time_action_plugin(send_pop_back)
+    send_pop_back = SendPopulationBackPlugin()
+    lodus_simulation.load_action_plugin(send_pop_back)
 
 return_to_previous = None
 if 'return_to_previous' in env_graph.experiment_config:
-    return_to_previous = ReturnToPreviousPlugin(env_graph)
-    env_graph.load_time_action_plugin(return_to_previous)
+    return_to_previous = ReturnToPreviousPlugin()
+    lodus_simulation.load_action_plugin(return_to_previous)
 
 levy_walk = None
 if 'levy_walk_plugin' in env_graph.experiment_config:
-    levy_walk = LevyWalkPlugin(env_graph)
-    env_graph.load_time_action_plugin(levy_walk)
+    levy_walk = LevyWalkPlugin()
+    lodus_simulation.load_action_plugin(levy_walk)
 
 vaccine = None
 if 'vaccine_plugin' in env_graph.experiment_config:
-    vaccine = VaccinePlugin(env_graph)
-    env_graph.load_time_action_plugin(vaccine)
+    vaccine = VaccinePlugin()
+    lodus_simulation.load_action_plugin(vaccine)
 
 infection = None
 if 'infection_plugin' in env_graph.experiment_config:
-    infection = InfectionPlugin(env_graph)
-    env_graph.load_time_action_plugin(infection)
+    infection = InfectionPlugin()
+    lodus_simulation.load_action_plugin(infection)
     
 
 '''
@@ -146,7 +148,7 @@ if 'off_cycle_routine_plugin' in env_graph.experiment_config:
 Logging
 '''
 
-pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
+pop_count_logger = PopulationCountLogger()
 pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
                                     PopulationCountRecordKey.POPULATION_COUNT_REGION}#,
                                     #PopulationCountRecordKey.POPULATION_COUNT_NODE}
@@ -180,7 +182,7 @@ if vaccine:
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
-blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
+blob_count_logger = BlobCountLogger()
 blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                     BlobCountRecordKey.BLOB_COUNT_REGION,
                                     BlobCountRecordKey.BLOB_COUNT_NODE}
@@ -220,10 +222,10 @@ pop_count_logger.pop_template = pop_temp
 #                                     level="Node", filter=['stadium'])
 
 # CharacteristicChange logger
-traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
+traceable_logger = CharacteristicChangeLogger()
 
 # OD-Matrix logger
-od_logger = ODMatrixLogger(f'{env_graph.experiment_name}')
+od_logger = ODMatrixLogger()
 od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
 # od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
 #                             ODMovementRecordKey.NODE_TO_NODE]
@@ -242,12 +244,12 @@ od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sam
 #----------------------------
 
 # Movement Displacement Logger
-displacement_logger = MovementDisplacementLogger(f'{env_graph.experiment_name}')
+displacement_logger = MovementDisplacementLogger()
 
 # Levy Sample Logger
 levy_sample_logger = None
 if levy_walk is not None:
-    levy_sample_logger = LevyWalkSampleLogger(f'{env_graph.experiment_name}')
+    levy_sample_logger = LevyWalkSampleLogger()
 
 infection_sum_logger = None
 if infection is not None:
@@ -269,17 +271,18 @@ print(output_str)
 Simulation
 '''
 
-env_graph.LoadLoggerPlugin(pop_count_logger)
+lodus_simulation.load_logger_plugin(pop_count_logger)
 # env_graph.LoadLoggerPlugin(od_logger)
-env_graph.LoadLoggerPlugin(blob_count_logger)
+lodus_simulation.load_logger_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
-env_graph.LoadLoggerPlugin(displacement_logger)
-if levy_sample_logger is not None: env_graph.LoadLoggerPlugin(levy_sample_logger)
-if infection_sum_logger is not None: env_graph.LoadLoggerPlugin(infection_sum_logger)
+lodus_simulation.load_logger_plugin(displacement_logger)
+# if levy_sample_logger is not None: lodus_simulation.load_logger_plugin(levy_sample_logger)
+if infection_sum_logger is not None: lodus_simulation.load_logger_plugin(infection_sum_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
-env_graph.start_logging()
+
+lodus_simulation.setup_logging()
 
 start_time = time.perf_counter()
 for i in range(simulation_steps):
@@ -294,10 +297,10 @@ for i in range(simulation_steps):
 
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
-    env_graph.update_time_step(i % cycle_length, i)
-
+    #env_graph.update_time_step(i % cycle_length, i)
+    lodus_simulation.update_time_step()
     # Log current simulation step
-    env_graph.log_simulation_step()
+    lodus_simulation.log_simulation_step()
     
     #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
     #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
@@ -309,7 +312,7 @@ for i in range(simulation_steps):
 # od_logger.stop_logging()
 
 end_time = time.perf_counter()
-env_graph.stop_logging()
+lodus_simulation.stop_logging()
 
 
 #print("TimeAction Plugins execution times")
@@ -324,14 +327,14 @@ if move_population_plugin is not None: output_str += move_population_plugin.prin
 
 output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
 output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
-output_str += "Loaded TimeAction Keys: " + str(env_graph.time_action_map.keys()) + "\n"
+output_str += "Loaded TimeAction Keys: " + str(lodus_simulation.routine_controller.action_type_to_function.keys()) + "\n"
 
 print("Total Simulation time")
 print(end_time - start_time)
 print("Average Cycle time")
 print((end_time - start_time)/cycles)
 
-print("Loaded TimeAction Keys: ", env_graph.time_action_map.keys())
+print("Loaded TimeAction Keys: ", lodus_simulation.routine_controller.action_type_to_function.keys())
 print("writing Output File")
 text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
 text_file.write(output_str)

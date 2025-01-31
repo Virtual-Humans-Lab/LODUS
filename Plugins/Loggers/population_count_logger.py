@@ -2,8 +2,9 @@
 from time import sleep
 from core.environment import EnvironmentGraph
 from core.population import PopulationTemplate
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 import os 
+from core.simulator import LodusSimulation
 import util
 import plotly.graph_objects as go
 import plotly.express as px
@@ -24,12 +25,25 @@ class PopulationCountRecordKey(Enum):
 
 class PopulationCountLogger(LoggerPlugin):
     
-    def __init__(self, base_filename, graph:EnvironmentGraph, time_cycle=24):
-        self.graph = graph
+    def __init__(self):
+        self.data_to_record:set[PopulationCountRecordKey] = set()
+
+        # Custom Logging
+        self.global_custom_templates: dict[str, PopulationTemplate] = {}
+        self.region_custom_templates: dict[str, PopulationTemplate] = {}
+        self.node_custom_templates: dict[str, PopulationTemplate] = {}
+        self.custom_line_plots: dict = {}
+        self.global_custom_line_plots: dict = {}
+        self.region_custom_line_plots: dict = {}
+        self.node_custom_line_plots: dict = {}
+
+    def load_plugin(self, simulation: LodusSimulation):
+        # self, base_filename, graph:EnvironmentGraph, time_cycle=24
+        self.env_graph = simulation.env_graph
         
         # Sets paths and create folders
-        self.base_filename = base_filename
-        self.base_path = 'output_logs/' + base_filename + '/'
+        self.base_filename = simulation.experiment_name
+        self.base_path = 'output_logs/' + self.base_filename + '/'
         self.data_frames_path = self.base_path + "/data_frames/"
         self.figures_path = self.base_path + "/figures/"
         self.html_plots_path = self.base_path + "/html_plots/"
@@ -38,14 +52,12 @@ class PopulationCountLogger(LoggerPlugin):
         Path(self.figures_path).mkdir(parents=True, exist_ok=True)
         Path(self.html_plots_path).mkdir(parents=True, exist_ok=True)
         
-        self.data_to_record:set[PopulationCountRecordKey] = set()
-        
-        self.cycle_length = time_cycle
+        self.cycle_length = simulation.cycle_lenght
 
         # Data recorded in previous frame
         self.global_prev_frame = {}
-        self.regions_prev_frame = {n:{} for n in self.graph.region_dict}
-        self.nodes_prev_frame = {n:{} for n in self.graph.node_dict}
+        self.regions_prev_frame = {n:{} for n in self.env_graph.region_dict}
+        self.nodes_prev_frame = {n:{} for n in self.env_graph.node_dict}
         self.nodes_sir_last_frames = {}
 
         self.logs = {}
@@ -61,18 +73,11 @@ class PopulationCountLogger(LoggerPlugin):
 
         self.pop_template:PopulationTemplate = None
                 
-        # Custom Logging
-        self.global_custom_templates: dict[str, PopulationTemplate] = {}
-        self.region_custom_templates: dict[str, PopulationTemplate] = {}
-        self.node_custom_templates: dict[str, PopulationTemplate] = {}
-        self.custom_line_plots: dict = {}
-        self.global_custom_line_plots: dict = {}
-        self.region_custom_line_plots: dict = {}
-        self.node_custom_line_plots: dict = {}
-
-    def load_to_enviroment(self, env):
-        pass
-        #return super().load_to_enviroment(env)
+        return super().load_plugin(simulation)
+    
+  
+    def unload_plugin(self):
+        return super().unload_plugin()
 
     def set_data_to_record(self, _data: PopulationCountRecordKey):
         self.data_to_record.add(_data)
@@ -92,8 +97,7 @@ class PopulationCountLogger(LoggerPlugin):
     def add_node_custom_line_plot(self, _key:str, x_label:str, y_label:str, columns:list[str] = None, node_types:list[str] = None, hours: list[str] =None):
         self.node_custom_line_plots[_key] = (x_label, y_label, columns, node_types, hours)
         
-    def start_logger(self):
-        
+    def setup_logger(self):
         self.simulation_step = 0
 
         # Global data file
@@ -106,7 +110,7 @@ class PopulationCountLogger(LoggerPlugin):
         self.global_f.write(header + '\n')
         
         # Regions data file
-        for n, r in self.graph.region_dict.items():
+        for n, r in self.env_graph.region_dict.items():
             self.regions_prev_frame[n]['__populations'] = [r.get_population_size()] * 2
             for k in self.region_custom_templates:
                 self.regions_prev_frame[n][k] = 0
@@ -118,7 +122,7 @@ class PopulationCountLogger(LoggerPlugin):
         self.regions_f.write(header + '\n')
         
         # Nodes data file
-        for _name, _node in self.graph.node_dict.items():
+        for _name, _node in self.env_graph.node_dict.items():
             self.nodes_prev_frame[_name]['__populations'] = [_node.get_population_size()] * 2
             for k in self.node_custom_templates:
                 self.nodes_prev_frame[_name][k] = 0
@@ -148,26 +152,24 @@ class PopulationCountLogger(LoggerPlugin):
         #return super().update_time_step(cycle_step, simulation_step)
 
     
-            
-    
     def log_simulation_step(self):
         if PopulationCountRecordKey.POPULATION_COUNT_GLOBAL in self.data_to_record:
-            self.global_frame(self.graph, self.simulation_step)
+            self.global_frame(self.env_graph, self.simulation_step)
         if PopulationCountRecordKey.POPULATION_COUNT_REGION in self.data_to_record:
-            self.region_frame(self.graph, self.simulation_step)
+            self.region_frame(self.env_graph, self.simulation_step)
         if PopulationCountRecordKey.POPULATION_COUNT_NODE in self.data_to_record:
-            self.node_frame(self.graph, self.simulation_step)
+            self.node_frame(self.env_graph, self.simulation_step)
                                 
         if 'graph' in self.data_to_record:
-            self.graph_frame(self.graph, self.simulation_step)
+            self.graph_frame(self.env_graph, self.simulation_step)
         if 'metrics' in self.data_to_record:
-            self.record_metrics(self.graph, self.simulation_step)
+            self.record_metrics(self.env_graph, self.simulation_step)
         if 'nodes_sir' in self.data_to_record:
-            self.node_sir_frame(self.graph, self.simulation_step)
+            self.node_sir_frame(self.env_graph, self.simulation_step)
         if 'positions' in self.data_to_record:
-            self.positions_frame(self.graph, self.simulation_step)
+            self.positions_frame(self.env_graph, self.simulation_step)
         if 'neighbourhood_disserta' in self.data_to_record:
-            self.disserta_frame(self.graph, self.simulation_step)
+            self.disserta_frame(self.env_graph, self.simulation_step)
         
     
     def stop_logger(self, show_figures: bool = False, export_html: bool = True, export_figures: bool = True):

@@ -6,6 +6,7 @@ from typing import Optional
 from core.population import PopulationTemplate
 from core.routine import Action
 from core.plugin import ActionPlugin
+from core.simulator import LodusSimulation
 from random_inst import FixedRandom
 
 sys.path.append('../')
@@ -22,7 +23,7 @@ import pandas as pd
 
 class LevyWalkPlugin(ActionPlugin):
 
-    def __init__(self, env_graph: EnvironmentGraph):
+    def __init__(self):
         '''
         Plugin that consumes a 'levy_walk' TimeAction type.
         Complex TimeAction that returns multiple 'move_population' actions.
@@ -60,20 +61,21 @@ class LevyWalkPlugin(ActionPlugin):
                 The 'distance_type' and 'bucket_size' cannot be overridden.
         '''
         super().__init__()
-        
+
+    def load_plugin(self, simulation: LodusSimulation):
         self.distribution_sampler = scipy_levy
-        self.graph = env_graph
-        self.add_action_type_to_function('levy_walk', self.levy_walk)
-        self.add_action_type_to_function('levy_walk_direct', self.levy_walk_direct)
+        self.env_graph = simulation.env_graph
+        simulation.add_action_type_to_function('levy_walk', self.levy_walk, False)
+        simulation.add_action_type_to_function('levy_walk_direct', self.levy_walk_direct, False)
         
-        if "levy_walk_plugin" not in self.graph.experiment_config:
+        if "levy_walk_plugin" not in self.env_graph.experiment_config:
             print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry (default plugin values)")
 
         # Loads isolation data, if available
-        self.isolation_data_action = self.graph.data_action_map.get("isolation", None)
+        self.isolation_data_action = self.env_graph.data_action_map.get("isolation", None)
 
         # Loads experiment configuration, if any
-        self.config:dict = self.graph.experiment_config.get("levy_walk_plugin", {})
+        self.config:dict = self.env_graph.experiment_config.get("levy_walk_plugin", {})
         
         self.distance_type:DistanceType = DistanceType(self.config.get("distance_type",
                                                                        DistanceType.LONG_LAT))
@@ -99,14 +101,14 @@ class LevyWalkPlugin(ActionPlugin):
         self.sampled_distances = []
         self.random = FixedRandom.instance
 
-    def setup_logger(self, logger):
-        return super().setup_logger(logger)
+    def setup_logger(self):
+        return super().setup_logger()
     
     def update_time_step(self, cycle_step, simulation_step):
         return super().update_time_step(cycle_step, simulation_step)
     
-    def log_data(self, logger):
-        return super().log_data(logger)
+    def log_simulation_step(self, logger):
+        return super().log_simulation_step(logger)
     
     def stop_logger(self, logger):
         return super().stop_logger(logger)
@@ -120,7 +122,7 @@ class LevyWalkPlugin(ActionPlugin):
         assert 'region' in values, "region is not defined in Levy Walk TimeAction"
         assert 'node' in values, "node is not defined in Levy Walk TimeAction"
 
-        acting_region = self.graph.get_region_by_name(values['region'])
+        acting_region = self.env_graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_node_by_unique_name(values['node'])
         sub_list = [] 
 
@@ -154,9 +156,9 @@ class LevyWalkPlugin(ActionPlugin):
         
 
         if _use_buckets:
-            distances = self.get_node_distance_bucket(acting_node, self.graph)
+            distances = self.get_node_distance_bucket(acting_node, self.env_graph)
         else:
-            distances = self.get_node_distance(acting_node, self.graph)
+            distances = self.get_node_distance(acting_node, self.env_graph)
         
         if "target_node_type" in values:
             distances = self.filter_target_node_types(buckets_dict=distances,
@@ -191,7 +193,7 @@ class LevyWalkPlugin(ActionPlugin):
                                                           distances=distances)
             
             target_region, target_node = target_node_u_name.split('//')
-            target_region = self.graph.get_region_by_name(target_region)
+            target_region = self.env_graph.get_region_by_name(target_region)
             target_node = target_region.get_node_by_unique_name(target_node)
             
             # Creates a Move Population action from the Acting Nodo to the Target Node
@@ -222,7 +224,7 @@ class LevyWalkPlugin(ActionPlugin):
         assert 'region' in values, "region is not defined in Levy Walk TimeAction"
         assert 'node' in values, "node is not defined in Levy Walk TimeAction"
         
-        acting_region = self.graph.get_region_by_name(values['region'])
+        acting_region = self.env_graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_first_node_with_name(values['node'])
         assert acting_node is not None, f"Node {values['node']} not found in region {values['region']}"
         
@@ -253,9 +255,9 @@ class LevyWalkPlugin(ActionPlugin):
             return sub_list
 
         if _use_buckets:
-            distances = self.get_node_distance_bucket(acting_node, self.graph)
+            distances = self.get_node_distance_bucket(acting_node, self.env_graph)
         else:
-            distances = self.get_node_distance(acting_node, self.graph)
+            distances = self.get_node_distance(acting_node, self.env_graph)
         
         if "target_node_type" in values:
             distances = self.filter_target_node_types(buckets_dict=distances,
@@ -287,7 +289,7 @@ class LevyWalkPlugin(ActionPlugin):
                                                           distances=distances)
             
             target_region, target_node = target_node_u_name.split('//')
-            target_region = self.graph.get_region_by_name(target_region)
+            target_region = self.env_graph.get_region_by_name(target_region)
             target_node = target_region.get_node_by_unique_name(target_node_u_name)
             
             # Creates a Move Population action from the Acting Nodo to the Target Node
@@ -344,7 +346,7 @@ class LevyWalkPlugin(ActionPlugin):
             return self.dist_buckets[unique_name].copy()
         
         # Gets distances in buckets (based on overall distance)
-        distance_list = self.graph.get_node_distances(target_node, self.distance_type).get_sorted_distance_to_others()
+        distance_list = self.env_graph.get_node_distances(target_node, self.distance_type).get_sorted_distance_to_others()
         max_bucket = int(distance_list[-1][1] // self.bucket_size)
         self.dist_buckets[unique_name] = {}
         for i in range(max_bucket+1):

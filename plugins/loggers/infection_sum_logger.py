@@ -9,7 +9,7 @@ from time_actions.levy_walk_plugin import LevyWalkPlugin
 from time_actions.infection_plugin import InfectionPlugin
 
 from core.environment import EnvironmentGraph
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 
 class InfectionSumLogger(LoggerPlugin):
 

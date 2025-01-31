@@ -1,5 +1,7 @@
 from enum import IntEnum
 import sys
+
+from core.simulator import LodusSimulation
 sys.path.append('../')
 
 from core.environment import EnvNode, EnvironmentGraph
@@ -22,7 +24,7 @@ class IsolationMode(IntEnum):
 
 class GatherPopulationPlugin(ActionPlugin):
 
-    def __init__(self, env_graph: EnvironmentGraph):
+    def __init__(self):
         '''
         Plugin that consumes a 'gather_population' TimeAction type
             
@@ -51,14 +53,18 @@ class GatherPopulationPlugin(ActionPlugin):
                 corrects to assume the operation requested x% of the population, but wanted the entire population.
         '''
         super().__init__()
-        self.graph = env_graph
-        self.add_action_type_to_function('gather_population', self.gather_population)
+        
 
-        if "gather_population_plugin" not in self.graph.experiment_config:
+    def load_plugin(self, simulation: LodusSimulation):
+        self.simulation = simulation
+        self.env_graph = simulation.env_graph
+        simulation.add_action_type_to_function('gather_population', self.gather_population, False)
+
+        if "gather_population_plugin" not in self.env_graph.experiment_config:
             print("Experiment config should have a 'gather_population' key. Using an empty entry (default plugin values)")
 
         # Loads experiment configuration, if any
-        self.config:dict = self.graph.experiment_config.get("gather_population", {})
+        self.config:dict = self.env_graph.experiment_config.get("gather_population", {})
         self.isolation_mode:IsolationMode = IsolationMode(self.config.get("isolation_mode",
                                                                           IsolationMode.REGULAR))
         self.weighting_mode:WeightingMode = WeightingMode(self.config.get("weighting_mode",
@@ -80,14 +86,14 @@ class GatherPopulationPlugin(ActionPlugin):
         self.sublist_count = []
         self.random = FixedRandom.instance
 
-    def setup_logger(self, logger):
-        return super().setup_logger(logger)
+    def setup_logger(self):
+        return super().setup_logger()
     
     def update_time_step(self, cycle_step, simulation_step):
         return super().update_time_step(cycle_step, simulation_step)
     
-    def log_data(self, logger):
-        return super().log_data(logger)
+    def log_simulation_step(self, logger):
+        return super().log_simulation_step(logger)
     
     def stop_logger(self, logger):
         return super().stop_logger(logger)
@@ -120,7 +126,7 @@ class GatherPopulationPlugin(ActionPlugin):
         unique_name = target_node.get_unique_name()
         pop_list = []
         # Gets distances to other EnvNodes
-        for other in self.graph.node_list:
+        for other in self.env_graph.node_list:
             if other.get_unique_name() == unique_name:
                 continue
             pop_list.append((other,other.get_population_size()))
@@ -138,7 +144,7 @@ class GatherPopulationPlugin(ActionPlugin):
         distance_list:list[tuple[environment.EnvNode,float]] = []
 
         # Gets distances to other EnvNodes
-        for other in self.graph.node_list:
+        for other in self.env_graph.node_list:
             if other.get_unique_name() == unique_name:
                 continue
             distance_to_other = self.get_nodes_distance(target_node, other)
@@ -161,7 +167,7 @@ class GatherPopulationPlugin(ActionPlugin):
         assert 'region' in values, "region is not defined in Gather Population TimeAction"
         assert 'node' in values, "node is not defined in Gather Population TimeAction"
         
-        acting_region = self.graph.get_region_by_name(values['region'])
+        acting_region = self.env_graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_node_by_unique_name(values['node'])
         sub_list = [] 
         
@@ -246,7 +252,7 @@ class GatherPopulationPlugin(ActionPlugin):
         remainder = 0.0
         for node_aux, w, i in node_targets:
             
-            origin_region = self.graph.get_region_by_name(node_aux.containing_region_name)
+            origin_region = self.env_graph.get_region_by_name(node_aux.containing_region_name)
             isolation_factor:float = _isolation_rate
             
             new_action_type = 'move_population'

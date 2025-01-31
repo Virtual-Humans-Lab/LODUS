@@ -463,7 +463,6 @@ class PopulationTemplate():
         if traceable_characteristics:
             self.set_traceable_properties(traceable_characteristics)
 
-
     def set_mother_blob_id(self, value: int) -> None:
         """Set the mother_blob_id."""
         try:
@@ -512,7 +511,9 @@ class PopulationTemplate():
                 self.mother_blob_id == other.mother_blob_id and
                 self.sampled_characteristics.items() == other.sampled_characteristics.items() and
                 self.traceable_characteristics.items() == other.traceable_characteristics.items())
-
+    
+    def copy(self) -> PopulationTemplate:
+        return copy.deepcopy(self)
 
     def __str__(self):
         blob_id = "\"\"" if self.blob_id is None else self.blob_id

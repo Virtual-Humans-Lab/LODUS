@@ -1,8 +1,10 @@
 # LODUS core
 import sys
+
+from core.simulator import LodusSimulation
 sys.path.append("/../../")
 from core.environment import EnvironmentGraph, EnvNode, EnvRegion
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
 
 # Graphic and data libraries
@@ -22,7 +24,7 @@ class ODMovementRecordKey(Enum):
 
 class ODMatrixLogger(LoggerPlugin):
 
-    def __init__(self, base_filename:str):
+    def __init__(self):
         # Which data is being recorded
         self.data_to_record:set[ODMovementRecordKey] = set()
 
@@ -33,22 +35,23 @@ class ODMatrixLogger(LoggerPlugin):
         # Custom PopTemplates
         self.region_custom_templates: dict[str,PopulationTemplate] = {}
         self.node_custom_templates: dict[str,PopulationTemplate] = {}
-
-        # Paths for folders
-        self.base_path = "output_logs/" + base_filename + "/"
-        self.data_frames_path = self.base_path + "/data_frames/"
-
-    def load_to_enviroment(self, env:EnvironmentGraph):
-         # Attaches itself to the EnvGraph
-        self.graph: EnvironmentGraph = env
-        self.graph.movement_logger_dict["od_logger"] = self.log_od_movement
+        
+    def load_plugin(self, simulation: LodusSimulation):
+        # Attaches itself to the EnvGraph
+        self.env_graph: EnvironmentGraph = simulation.env_graph
+        self.env_graph.movement_logger_dict["od_logger"] = self.log_od_movement
         #graph.od_matrix_logger = self
 
         # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = env.routine_cycle_length
+        self.cycle_lenght:int = simulation.cycle_lenght
         self.sim_step: int = 0 
 
-    def start_logger(self):
+        # Paths for folders
+        self.base_path = "output_logs/" + simulation.experiment_name + "/"
+        self.data_frames_path = self.base_path + "/data_frames/"
+
+
+    def setup_logger(self):
         # Create the required directories
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
@@ -60,9 +63,9 @@ class ODMatrixLogger(LoggerPlugin):
         # Setup Region-Region dict: SimulationStep > Origin > Destination > Quantities
         if ODMovementRecordKey.REGION_TO_REGION in self.data_to_record:
             self.region_od_matrix[self.sim_step] = {}
-            for orig in self.graph.region_list:
+            for orig in self.env_graph.region_list:
                 self.region_od_matrix[self.sim_step][orig.name] = {}
-                for dest in self.graph.region_list:
+                for dest in self.env_graph.region_list:
                     self.region_od_matrix[self.sim_step][orig.name][dest.name] = {"Total" : 0}
                     for _key in self.region_custom_templates:
                         self.region_od_matrix[self.sim_step][orig.name][dest.name][_key] = 0
@@ -70,9 +73,9 @@ class ODMatrixLogger(LoggerPlugin):
         # Setup Node-Node dict: SimulationStep > Origin > Destination > Quantities
         if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
             self.node_od_matrix[self.sim_step] = {}
-            for orig in self.graph.node_list:
+            for orig in self.env_graph.node_list:
                 self.node_od_matrix[self.sim_step][orig.get_unique_name()] = {}
-                for dest in self.graph.node_list:
+                for dest in self.env_graph.node_list:
                     self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()] = {"Total" : 0}
                     for _key in self.node_custom_templates:
                         self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()][_key] = 0
@@ -140,3 +143,6 @@ class ODMatrixLogger(LoggerPlugin):
         df_cycle.drop("Cycle", inplace=True, axis=1) 
         df_sim = df_cycle.groupby(["Origin", "Destination"]).sum().reset_index()
         df_sim.to_csv(self.data_frames_path + "od_matrix_" + label + ".csv", sep=";", encoding="utf-8-sig")
+
+    def unload_plugin(self):
+        return super().unload_plugin()

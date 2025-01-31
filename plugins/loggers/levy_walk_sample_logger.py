@@ -1,5 +1,7 @@
 import sys
 
+from core.simulator import LodusSimulation
+
 sys.path.append("/../../")
 from pathlib import Path
 
@@ -8,26 +10,28 @@ import pandas as pd
 from time_actions.levy_walk_plugin import LevyWalkPlugin
 
 from core.environment import EnvironmentGraph
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 
 
 class LevyWalkSampleLogger(LoggerPlugin):
 
-    def __init__(self, base_filename:str):
-        # Paths for folders
-        self.base_path = "output_logs/" + base_filename + "/"
-        self.data_frames_path = self.base_path + "/data_frames/"
-        self.levy_walk_plugin = None
+    def __init__(self):
+        pass
 
-    def load_to_enviroment(self, env:EnvironmentGraph):
-         # Attaches itself to the EnvGraph
-        self.graph: EnvironmentGraph = env
-        self.levy_walk_plugin = self.graph.get_first_plugin(LevyWalkPlugin)
+    def load_plugin(self, simulation: LodusSimulation):
+        # Attaches itself to the EnvGraph
+        self.env_graph: EnvironmentGraph = simulation.env_graph
+        self.levy_walk_plugin = self.env_graph.get_first_plugin(LevyWalkPlugin)
         if self.levy_walk_plugin is None:
             exit("LEVY PLUGIN NOT LOADED")
+
+        # Paths for folders
+        self.base_path = "output_logs/" + simulation.experiment_name + "/"
+        self.data_frames_path = self.base_path + "/data_frames/"
+        self.levy_walk_plugin = None
             
 
-    def start_logger(self):
+    def setup_logger(self):
         # Create the required directories
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
@@ -48,3 +52,5 @@ class LevyWalkSampleLogger(LoggerPlugin):
                            header=["samples"] if len(self.distance_samples) > 0 else [],
                            index = False)
     
+    def unload_plugin(self):
+        return super().unload_plugin()

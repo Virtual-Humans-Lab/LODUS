@@ -1,10 +1,18 @@
 from abc import ABC, abstractmethod
 from typing import Callable
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from core.simulator import LodusSimulation
+from core.routine import Action, GlobalAction
 
 class BasePlugin(ABC):
     """Base class for all plugins. This class is used to extend the functionality of the simulator with additional features."""
     @abstractmethod
-    def setup_logger(self, logger):
+    def load_plugin(self, simulation: 'LodusSimulation'):
+        pass
+    
+    @abstractmethod
+    def setup_logger(self):
         pass
 
     @abstractmethod
@@ -12,11 +20,11 @@ class BasePlugin(ABC):
         pass
 
     @abstractmethod
-    def log_data(self, logger):
+    def log_simulation_step(self):
         pass
 
     @abstractmethod
-    def stop_logger(self, logger):
+    def stop_logger(self):
         pass
 
     @abstractmethod
@@ -35,7 +43,7 @@ class ActionPlugin(BasePlugin):
     This parameters passed in the dictionary are defined by the plugin contracts.
     """ 
     def __init__(self):
-        self.action_type_to_function: dict[str, Callable] = {}
+        # self.action_type_to_function: dict[str, Callable] = {}
         self.execution_times:list[float] = []
 
     def add_execution_time(self, time: float) -> None:
@@ -59,29 +67,36 @@ class ActionPlugin(BasePlugin):
         print(out)
         return out
 
-    def add_action_type_to_function(self, action_type: str, action_function: Callable) -> None:
-        """Sets an action type and its corresponding function."""
-        if not isinstance(action_type, str):
-            raise ValueError(f"action_type must be of type str, is {type(action_type)}")
-        if not callable(action_function):
-            raise ValueError(f"action_function must be a callable, is {type(action_function)}")
-        self.action_type_to_function[action_type] = action_function
+    # def add_action_type_to_function(self, action_type: str, action_function: Callable) -> None:
+    #     """Sets an action type and its corresponding function."""
+    #     if not isinstance(action_type, str):
+    #         raise ValueError(f"action_type must be of type str, is {type(action_type)}")
+    #     if not callable(action_function):
+    #         raise ValueError(f"action_function must be a callable, is {type(action_function)}")
+    #     self.action_type_to_function[action_type] = action_function
 
-    def get_action_type_to_function(self) -> dict:
-        """Returns the dictionary of action type-function pairs."""
-        return self.action_type_to_function
+    # def get_action_type_to_function(self) -> dict:
+    #     """Returns the dictionary of action type-function pairs."""
+    #     return self.action_type_to_function
 
 class RoutinePlugin(BasePlugin):
     def __init__(self):
-        self.start_of_step_global_actions = []
-        self.start_of_step_actions = []
-        self.end_of_step_global_actions = []
-        self.end_of_step_actions = []
+        self.start_of_step_global_actions:list[GlobalAction] = []
+        self.start_of_step_actions:list[Action] = []
+        self.end_of_step_global_actions:list[GlobalAction] = []
+        self.end_of_step_actions:list[Action] = []
 
     @abstractmethod
-    def process_start_of_step_actions(self, cycle_step, simulation_step):
+    def process_start_of_step_actions(self, cycle_step, simulation_step) -> list[Action]:
         pass
 
     @abstractmethod
-    def process_end_of_step_actions(self, cycle_step, simulation_step):
+    def process_end_of_step_actions(self, cycle_step, simulation_step) -> list[Action]:
+        pass
+
+class LoggerPlugin(BasePlugin):
+    """
+
+    """ 
+    def __init__(self):
         pass

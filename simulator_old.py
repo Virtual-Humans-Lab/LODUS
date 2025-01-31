@@ -313,7 +313,7 @@ for i in range(config.simulation_steps):
 		vaccine_values['quantity'] = int(new_quantity * config.vaccination_multiplier)
 		print(f'vaccinate {new_quantity} individuals.')
 		print(f'Antes da vacinação:\nS:{env_graph.get_population_size(pop_template_suc)}')
-		env_graph.consume_time_action(vaccinate, hour, i)
+		env_graph.consume_action(vaccinate, hour, i)
 		print(f'Depois da vacinação:\nS:{env_graph.get_population_size(pop_template_suc)}')
 		print(f'Total vacinado: {env_graph.total_vaccinated}')
 		#input("press key!")
@@ -453,7 +453,7 @@ for i in range(config.simulation_steps):
 		old_beta = inf_plugin.beta
 		inf_plugin.beta = 1.0
 		#input("pressione uma tecla!")
-		env_graph.consume_time_action(jogar_futebol, hour, i)
+		env_graph.consume_action(jogar_futebol, hour, i)
 		inf_plugin.beta = old_beta
 		env_graph.load_time_action_plugin(inf_plugin)
 		new_random.new_random.set_random_instance(envRandom, "envRandom")
@@ -462,7 +462,7 @@ for i in range(config.simulation_steps):
 	env_graph.update_time_step(hour, i)
 
 	if current_date > datetime.date.fromisoformat('2021-02-27'):
-		env_graph.consume_time_action(infect_city, hour, i)
+		env_graph.consume_action(infect_city, hour, i)
 	
 	# durante o jogo
 	if(day==config.match_day and hour >= config.match_start_time and hour <= config.match_end_time):
@@ -474,7 +474,7 @@ for i in range(config.simulation_steps):
 		#input("pressione uma tecla!")
 		inf_stadium_values = {'region': config.match_region, 'node': 'stadium', 'beta' : 1.0, 'gamma' : inf_plugin.gamma, 'mu' : 0.0, 'nu' : 0.0, 'population_template': PopulationTemplate()}
 		infectar_no_estadio = Action('infect', inf_stadium_values)
-		env_graph.consume_time_action(infectar_no_estadio, hour, i)
+		env_graph.consume_action(infectar_no_estadio, hour, i)
 		inf_plugin.beta = old_beta
 		new_random.new_random.set_random_instance(envRandom, "envRandom")
 		print("done!")
@@ -491,7 +491,7 @@ for i in range(config.simulation_steps):
 		for region in env_graph.region_list:
 			return_values = {'region': region.name, 'node':'home', 'population_template':PopulationTemplate()}
 			return_action = Action('return_population_home', return_values)
-			env_graph.consume_time_action(return_action, config.match_end_time, config.day_duration*config.match_day + config.match_end_time)
+			env_graph.consume_action(return_action, config.match_end_time, config.day_duration*config.match_day + config.match_end_time)
 
 		inf_plugin.beta = old_beta
 		new_random.new_random.set_random_instance(envRandom, "envRandom")

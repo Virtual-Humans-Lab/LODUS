@@ -1,8 +1,10 @@
 # LODUS core
 import sys
+
+from core.simulator import LodusSimulation
 sys.path.append("/../../")
 from core.environment import EnvironmentGraph, EnvNode, EnvRegion
-from logger_plugin import LoggerPlugin
+from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
 
 # Graphic and data libraries
@@ -17,26 +19,26 @@ from enum import Enum
 
 class CharacteristicChangeLogger(LoggerPlugin):
 
-    def __init__(self, base_filename:str):
-              
+    def __init__(self):
+        pass     
+        
+    def load_plugin(self, simulation: LodusSimulation): 
+        # Attaches itself to the EnvGraph
+        self.env_graph: EnvironmentGraph = simulation.env_graph
+        self.env_graph.characteristic_change_logger["characteristic_change_logger"] = self.log_characteristic_change
+
+        # Cycle length and Current SimulationStep
+        self.cycle_lenght:int = simulation.cycle_lenght
+        self.sim_step: int = 0 
+
         # Charactirstic Change logging
         self.char_change_logs = []
 
         # Paths for folders
-        self.base_path = "output_logs/" + base_filename + "/"
+        self.base_path = "output_logs/" + simulation.experiment_name + "/"
         self.data_frames_path = self.base_path + "/data_frames/"
 
-    def load_to_enviroment(self, env:EnvironmentGraph):
-        # Attaches itself to the EnvGraph
-        self.graph: EnvironmentGraph = env
-        self.graph.characteristic_change_logger["characteristic_change_logger"] = self.log_characteristic_change
-
-        # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = env.routine_cycle_length
-        self.sim_step: int = 0 
-
-
-    def start_logger(self):
+    def setup_logger(self):
         # Create the required directories
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
@@ -50,7 +52,7 @@ class CharacteristicChangeLogger(LoggerPlugin):
 
     def log_characteristic_change(self, blob:Blob, char_key, prev_value, new_value):
         node = None
-        for n in self.graph.node_dict.values():
+        for n in self.env_graph.node_dict.values():
             if blob in n.contained_blobs:
                 node = n
                 break
@@ -78,3 +80,6 @@ class CharacteristicChangeLogger(LoggerPlugin):
                                         "Population Size"])
         
         df.to_csv(self.data_frames_path + 'characteristic_change_entries.csv', sep = ';', encoding="utf-8-sig")
+
+    def unload_plugin(self):
+        return super().unload_plugin()
