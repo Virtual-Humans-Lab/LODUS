@@ -4,22 +4,19 @@ import sys
 from core.simulator import LodusSimulation
 sys.path.append('../')
 
-from core.environment import EnvNode, EnvironmentGraph
-from core.population import PopulationTemplate
+from core.environment import EnvNode
 from core.plugin import ActionPlugin
-from random_inst import FixedRandom
 import copy
-import random
 import math
-import util
+from util.random_instance import FixedRandom
 import time
 
 class WeightingMode(IntEnum):
-    DISTANCE = 1,
+    DISTANCE = 1
     POPULATION = 2
 
 class IsolationMode(IntEnum):
-    REGULAR = 1,
+    REGULAR = 1
     QUANTITY_CORRECTION = 2
 
 class GatherPopulationPlugin(ActionPlugin):
@@ -60,11 +57,11 @@ class GatherPopulationPlugin(ActionPlugin):
         self.env_graph = simulation.env_graph
         simulation.add_action_type_to_function('gather_population', self.gather_population, False)
 
-        if "gather_population_plugin" not in self.env_graph.experiment_config:
+        if "gather_population_plugin" not in self.simulation.experiment_config:
             print("Experiment config should have a 'gather_population' key. Using an empty entry (default plugin values)")
 
         # Loads experiment configuration, if any
-        self.config:dict = self.env_graph.experiment_config.get("gather_population", {})
+        self.config:dict = self.simulation.experiment_config.get("gather_population", {})
         self.isolation_mode:IsolationMode = IsolationMode(self.config.get("isolation_mode",
                                                                           IsolationMode.REGULAR))
         self.weighting_mode:WeightingMode = WeightingMode(self.config.get("weighting_mode",

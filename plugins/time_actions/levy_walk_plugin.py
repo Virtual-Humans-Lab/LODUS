@@ -1,24 +1,19 @@
 import copy
-import pprint
 import re
 import sys
 from typing import Optional
-from core.population import PopulationTemplate
 from core.routine import Action
 from core.plugin import ActionPlugin
 from core.simulator import LodusSimulation
-from random_inst import FixedRandom
+from util.random_instance import FixedRandom
+from util.math import DistanceType
 
 sys.path.append('../')
 
-import random
 import time
 
 from scipy.stats import levy as scipy_levy
-from core.environment import EnvironmentGraph, EnvNode, EnvRegion
-from util import DistanceType
-
-import pandas as pd
+from core.environment import EnvironmentGraph, EnvNode
 
 
 class LevyWalkPlugin(ActionPlugin):
@@ -68,14 +63,14 @@ class LevyWalkPlugin(ActionPlugin):
         simulation.add_action_type_to_function('levy_walk', self.levy_walk, False)
         simulation.add_action_type_to_function('levy_walk_direct', self.levy_walk_direct, False)
         
-        if "levy_walk_plugin" not in self.env_graph.experiment_config:
+        if "levy_walk_plugin" not in simulation.experiment_config:
             print("Experiment config should have a 'levy_walk_plugin' key. Using an empty entry (default plugin values)")
 
         # Loads isolation data, if available
         self.isolation_data_action = self.env_graph.data_action_map.get("isolation", None)
 
         # Loads experiment configuration, if any
-        self.config:dict = self.env_graph.experiment_config.get("levy_walk_plugin", {})
+        self.config:dict = simulation.experiment_config.get("levy_walk_plugin", {})
         
         self.distance_type:DistanceType = DistanceType(self.config.get("distance_type",
                                                                        DistanceType.LONG_LAT))
@@ -307,7 +302,7 @@ class LevyWalkPlugin(ActionPlugin):
                                                 values = new_action_values)
             #print(new_action)
             sub_list.append(new_action)
-        self.add_execution_time(time.perf_counter() - start_time)
+        self.add_execution_time('levy_walk', time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         # if acting_region.name == "Sarandi":
         #     print(f"\tTrying to move: {int(len(sub_list) * _pop_group_size)}")

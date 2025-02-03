@@ -32,10 +32,9 @@ from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
 from data.global_infection_data_plugin import GlobalInfectionDataPlugin
 
 import core.environment
-import core.population
-from data_parse_util import *
-from random_inst import FixedRandom
-from util import *
+from core.population import PopulationTemplate
+from util.random_instance import FixedRandom
+from util.data_parse import generate_lodus_simulation
 import numpy as np
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
@@ -72,8 +71,8 @@ lodus_simulation.cycle_lenght = cycle_length
 # env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
-env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
-print("Creating experiment:", env_graph.experiment_name)
+# lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
+print("Creating experiment:", lodus_simulation.experiment_name)
 print("EnvNode Count", len(env_graph.node_list))
 
 '''
@@ -81,17 +80,17 @@ Data Plugins
 '''
 
 isolation_data = None
-if 'global_isolation_data_plugin' in env_graph.experiment_config:
+if 'global_isolation_data_plugin' in lodus_simulation.experiment_config:
     isolation_data = GlobalIsolationDataPlugin(env_graph)
     env_graph.load_time_action_plugin(isolation_data)
 
 infection_data = None
-if 'global_infection_data_plugin' in env_graph.experiment_config:
+if 'global_infection_data_plugin' in lodus_simulation.experiment_config:
     isolation_data = GlobalInfectionDataPlugin(env_graph)
     env_graph.load_time_action_plugin(isolation_data)
 
 node_density_data = None
-if 'node_density_data_plugin' in env_graph.experiment_config:
+if 'node_density_data_plugin' in lodus_simulation.experiment_config:
     node_density_data = NodeDensityDataPlugin(env_graph)
     env_graph.load_time_action_plugin(node_density_data)
 '''
@@ -99,48 +98,48 @@ TimeAction Plugins
 '''
 
 move_population_plugin = MovePopulationPlugin()
-lodus_simulation.load_action_plugin(move_population_plugin)
+lodus_simulation.load_plugin(move_population_plugin)
 
 gather_pop = None
-if 'gather_population_plugin' in env_graph.experiment_config:
+if 'gather_population_plugin' in lodus_simulation.experiment_config:
     gather_pop = GatherPopulationPlugin()
-    lodus_simulation.load_action_plugin(gather_pop)
+    lodus_simulation.load_plugin(gather_pop)
 
 return_pop_home = None
-if 'return_population_home_plugin' in env_graph.experiment_config:
+if 'return_population_home_plugin' in lodus_simulation.experiment_config:
     return_pop_home = ReturnPopulationHomePlugin(env_graph)
     env_graph.load_time_action_plugin(return_pop_home)
 
 send_pop_back = None
-if 'send_population_back_plugin' in env_graph.experiment_config:
+if 'send_population_back_plugin' in lodus_simulation.experiment_config:
     send_pop_back = SendPopulationBackPlugin()
-    lodus_simulation.load_action_plugin(send_pop_back)
+    lodus_simulation.load_plugin(send_pop_back)
 
 return_to_previous = None
-if 'return_to_previous' in env_graph.experiment_config:
+if 'return_to_previous' in lodus_simulation.experiment_config:
     return_to_previous = ReturnToPreviousPlugin()
-    lodus_simulation.load_action_plugin(return_to_previous)
+    lodus_simulation.load_plugin(return_to_previous)
 
 levy_walk = None
-if 'levy_walk_plugin' in env_graph.experiment_config:
+if 'levy_walk_plugin' in lodus_simulation.experiment_config:
     levy_walk = LevyWalkPlugin()
-    lodus_simulation.load_action_plugin(levy_walk)
+    lodus_simulation.load_plugin(levy_walk)
 
 vaccine = None
-if 'vaccine_plugin' in env_graph.experiment_config:
+if 'vaccine_plugin' in lodus_simulation.experiment_config:
     vaccine = VaccinePlugin()
-    lodus_simulation.load_action_plugin(vaccine)
+    lodus_simulation.load_plugin(vaccine)
 
 infection = None
-if 'infection_plugin' in env_graph.experiment_config:
+if 'infection_plugin' in lodus_simulation.experiment_config:
     infection = InfectionPlugin()
-    lodus_simulation.load_action_plugin(infection)
+    lodus_simulation.load_plugin(infection)
     
 
 '''
 Routine Plugins
 '''
-if 'off_cycle_routine_plugin' in env_graph.experiment_config:
+if 'off_cycle_routine_plugin' in lodus_simulation.experiment_config:
     off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
     env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
 
@@ -188,7 +187,7 @@ blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                     BlobCountRecordKey.BLOB_COUNT_NODE}
 
 
-pop_temp = PopulationTemplate()
+pop_temp = core.population.PopulationTemplate()
 #pop_temp.set_property('age', 'adults')
 pop_count_logger.pop_template = pop_temp
 # logger.foreign_only = True
@@ -271,14 +270,14 @@ print(output_str)
 Simulation
 '''
 
-lodus_simulation.load_logger_plugin(pop_count_logger)
+lodus_simulation.load_plugin(pop_count_logger)
 # env_graph.LoadLoggerPlugin(od_logger)
-lodus_simulation.load_logger_plugin(blob_count_logger)
+lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
-lodus_simulation.load_logger_plugin(displacement_logger)
-# if levy_sample_logger is not None: lodus_simulation.load_logger_plugin(levy_sample_logger)
-if infection_sum_logger is not None: lodus_simulation.load_logger_plugin(infection_sum_logger)
+lodus_simulation.load_plugin(displacement_logger)
+# if levy_sample_logger is not None: lodus_simulation.load_plugin(levy_sample_logger)
+if infection_sum_logger is not None: lodus_simulation.load_plugin(infection_sum_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
 #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
 
@@ -336,7 +335,7 @@ print((end_time - start_time)/cycles)
 
 print("Loaded TimeAction Keys: ", lodus_simulation.routine_controller.action_type_to_function.keys())
 print("writing Output File")
-text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
+text_file = open(f"output_logs/{lodus_simulation.experiment_name}/output.txt", "w")
 text_file.write(output_str)
 text_file.close()
 exit(0)

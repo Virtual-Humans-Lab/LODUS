@@ -1,14 +1,17 @@
 
 from __future__ import annotations
+import enum
 from typing import Callable
 from core.environment import EnvNode, EnvironmentGraph
-from core.plugin import ActionPlugin, RoutinePlugin, LoggerPlugin
+from core.plugin import ActionPlugin, BasePlugin, RoutinePlugin, LoggerPlugin
+from core.population import CharacteristicsFactory
 from core.routine import Action, GlobalAction
 
 class RoutineController:
     def __init__(self, lodus_simulation: LodusSimulation):
         self.simulator = lodus_simulation
         self.env_graph = lodus_simulation.env_graph
+        self.plugin_controller = lodus_simulation.plugin_controller
         
         self.base_action_types = set()
         self.action_type_to_function:dict[str, Callable] = { }
@@ -85,10 +88,10 @@ class RoutineController:
         """Processes the actions of all loaded RoutinePlugins."""
         actions: list[Action] = []
         if at_cycle_step_start:
-            for rp in self.simulator.loaded_routine_plugins:
+            for rp in self.plugin_controller.loaded_routine_plugins:
                 actions.extend(rp.process_start_of_step_actions(cycle_step=cycle_step, simulation_step=simulation_step))
         else:
-            for rp in self.simulator.loaded_routine_plugins:
+            for rp in self.plugin_controller.loaded_routine_plugins:
                 actions.extend(rp.process_end_of_step_actions(cycle_step=cycle_step, simulation_step=simulation_step))
         return actions
     
@@ -96,10 +99,10 @@ class RoutineController:
         """Processes the global actions of all loaded RoutinePlugins."""
         actions: list[Action] = []
         if at_cycle_step_start:
-            for rp in self.simulator.loaded_routine_plugins:
+            for rp in self.plugin_controller.loaded_routine_plugins:
                 actions.extend(self.process_repeating_global_actions(rp.start_of_step_global_actions, cycle_step))
         else:
-            for rp in self.simulator.loaded_routine_plugins:
+            for rp in self.plugin_controller.loaded_routine_plugins:
                 actions.extend(self.process_repeating_global_actions(rp.end_of_step_global_actions, cycle_step))
         return actions
     
@@ -185,6 +188,11 @@ class RoutineController:
             for action in simplified_actions:
                 self.consume_action(action, hour, time)
     
+class PluginType(enum.Enum):
+    ACTION = 0,
+    LOGGER = 1,
+    ROUTINE = 2
+
 class PluginController:
     def __init__(self, lodus_simulation: LodusSimulation):
         self.simulator = lodus_simulation
@@ -193,74 +201,93 @@ class PluginController:
         self.loaded_action_plugins: list[ActionPlugin] = []
         self.loaded_logger_plugins: list[LoggerPlugin] = []
         self.loaded_routine_plugins: list[RoutinePlugin] = []
+        self.loaded_plugins: list[BasePlugin] = []
 
-class LodusSimulation:
-    def __init__(self, environment_graph: EnvironmentGraph):
-        self.experiment_name = "Lodus Simulation"
-        self.env_graph = environment_graph
-        self.routine_controller = RoutineController(self)
-
-        self.current_simulation_step = -1
-        self.cycle_lenght = 24
-
-        self.loaded_action_plugins: list[ActionPlugin] = []
-        self.loaded_logger_plugins: list[LoggerPlugin] = []
-        self.loaded_routine_plugins: list[RoutinePlugin] = []
+    def load_plugin(self, plugin: BasePlugin):
+        """Loads a Plugin into the PluginController."""
+        if plugin in self.loaded_plugins:
+            raise ValueError("Plugin is already loaded")
+        
+        if isinstance(plugin, ActionPlugin):
+            self.load_action_plugin(plugin)
+        elif isinstance(plugin, LoggerPlugin):
+            self.load_logger_plugin(plugin)
+        elif isinstance(plugin, RoutinePlugin):
+            self.load_routine_plugin(plugin)
+        else:
+            raise ValueError("Plugin must be of type ActionPlugin, LoggerPlugin or RoutinePlugin")
+        self.loaded_plugins.append(plugin)
 
     def load_action_plugin(self, plugin:ActionPlugin):
+        """Loads an ActionPlugin into the PluginController."""
         self.loaded_action_plugins.append(plugin)
-        plugin.load_plugin(self)
+        plugin.load_plugin(self.simulator)
 
     def load_logger_plugin(self, plugin:LoggerPlugin):
+        """Loads a LoggerPlugin into the PluginController."""
         self.loaded_logger_plugins.append(plugin)
-        plugin.load_plugin(self)
+        plugin.load_plugin(self.simulator)
 
     def load_routine_plugin(self, plugin:RoutinePlugin):
+        """Loads a RoutinePlugin into the PluginController."""
         self.loaded_routine_plugins.append(plugin)
 
+    def has_plugin(self, plugin_cls:type) -> bool:
+        """Checks if a Plugin of a given class is loaded."""
+        return any(isinstance(x, plugin_cls) for x in self.loaded_plugins)
+            
+    def get_first_plugin_of_type(self, plugin_cls:type):
+        return next(p for p in self.loaded_plugins if isinstance(p,plugin_cls))
+        for p in self.loaded_plugins:
+            if isinstance(p,plugin_cls): return p
+    
+    def get_all_plugins_of_type(self, plugin_class:type) -> list:
+        """Returns a list of all Plugins of a given class."""
+        return [p for p in self.loaded_plugins if isinstance(p,plugin_class)]
+
     def setup_logging(self):
+        """Sets up the logging for all loaded LoggerPlugins."""
         for plugin in self.loaded_logger_plugins:
             plugin.setup_logger()
 
-    def log_simulation_step(self):    
+    def log_simulation_step(self):
+        """Logs the current simulation step for all loaded LoggerPlugins."""
         for l in self.loaded_logger_plugins:
             l.log_simulation_step()
 
     def stop_logging(self):
+        """Stops the logging for all loaded LoggerPlugins."""
         for plugin in self.loaded_logger_plugins:
             plugin.stop_logger()
 
-    def has_plugin(self, _type:type) -> bool:
-        return any(isinstance(x, _type) for x in self.loaded_action_plugins)
-            
-    def get_plugins(self, _type:type) -> list:
-        return [p for p in self.loaded_action_plugins if isinstance(p,_type)]
+    def update_plugins(self, cycle_step: int, simulation_step: int):
+        for plugin in self.loaded_logger_plugins:
+            plugin.update_time_step(cycle_step, simulation_step)
+        for plugin in self.loaded_routine_plugins:
+            plugin.update_time_step(cycle_step, simulation_step)
+        for plugin in self.loaded_action_plugins:
+            plugin.update_time_step(cycle_step, simulation_step)
     
-    def get_first_plugin(self, _type:type):
-        for p in self.loaded_action_plugins:
-            if isinstance(p,_type): return p
-        return None
 
-    def has_logger_plugin(self, _type:type) -> bool:
-        return any(isinstance(x, _type) for x in self.loaded_logger_plugins)
-            
-    def get_logger_plugins(self, _type:type) -> list:
-        return [p for p in self.loaded_logger_plugins if isinstance(p,_type)]
-    
-    def get_first_logger_plugin(self, _type:type):
-        for p in self.loaded_logger_plugins:
-            if isinstance(p,_type): return p
-        return None 
+class LodusSimulation:
+    def __init__(self, environment_graph: EnvironmentGraph):
+        self.env_graph = environment_graph
 
-    def add_action_type_to_function(self, action_type: str, function: Callable, is_base_action: bool):
-        self.routine_controller.add_action_type_to_function(action_type, function, is_base_action)
+        self.plugin_controller = PluginController(self)
+        self.routine_controller = RoutineController(self)
 
-    def add_global_action(self, global_action: GlobalAction):
-        self.routine_controller.add_global_action(global_action)
+        self.current_simulation_step = -1
+        self.cycle_lenght = 24
+        
+        self.experiment_name = "Lodus Simulation"
+        self.experiment_config = {}
 
-    def direct_action_invoke(self, action: Action, cycle_step: int, simulation_step: int):
-        self.routine_controller.consume_action(action, cycle_step, simulation_step)
+        # Extra logging data (not used for now)
+        self.original_population_template = None
+        self.original_block_template: CharacteristicsFactory = None # type: ignore
+        self.original_repeating_actions = None
 
+    ### Simulation Methods
     def update_time_step(self):
         """Updates a time step for a given time.
         Updates Routines and Repeating Global Actions.
@@ -269,21 +296,25 @@ class LodusSimulation:
         """
         self.current_simulation_step += 1
         cycle_step = self.current_simulation_step % self.cycle_lenght
-        self.update_logger_plugins(cycle_step, self.current_simulation_step)
-        self.update_plugins(cycle_step, self.current_simulation_step)
+        self.plugin_controller.update_plugins(cycle_step, self.current_simulation_step)
         
         self.process_actions(cycle_step, self.current_simulation_step)
 
         self.merge_blobs_in_all_nodes()
         self.env_graph.set_frame_origin_of_all_blobs()
 
-    def update_logger_plugins(self, cycle_step: int, simulation_step: int):
-        for plugin in self.loaded_logger_plugins:
-            plugin.update_time_step(cycle_step, simulation_step)
+    def merge_blobs_in_all_nodes(self):
+        self.env_graph.merge_blobs_in_all_envnodes()
 
-    def update_plugins(self, cycle_step: int, simulation_step: int):
-        for plugin in self.loaded_action_plugins:
-            plugin.update_time_step(cycle_step, simulation_step)
+    ### Routine Controller Methods
+    def add_action_type_to_function(self, action_type: str, function: Callable, is_base_action: bool):
+        self.routine_controller.add_action_type_to_function(action_type, function, is_base_action)
+
+    def add_global_action(self, global_action: GlobalAction):
+        self.routine_controller.add_global_action(global_action)
+
+    def direct_action_invoke(self, action: Action, cycle_step: int, simulation_step: int):
+        self.routine_controller.consume_action(action, cycle_step, simulation_step)
 
     def queue_action_to_next_cycle_step(self, action: Action, at_cycle_step_start: bool =True):
         """Queues an action to be executed in the next cycle step."""
@@ -296,5 +327,30 @@ class LodusSimulation:
         for action in simplified_actions:
             self.routine_controller.consume_action(action, cycle_step, simulation_step)
 
-    def merge_blobs_in_all_nodes(self):
-        self.env_graph.merge_blobs_in_all_envnodes()
+    ### Plugin Controller Methods
+    def load_plugin(self, plugin: BasePlugin):
+        """Loads a Plugin into the LodusSimulation."""
+        self. plugin_controller.load_plugin(plugin)
+
+    def setup_logging(self):
+        """Sets up the logging for all loaded LoggerPlugins."""
+        self.plugin_controller.setup_logging()
+
+    def log_simulation_step(self):    
+        """Logs the current simulation step for all loaded LoggerPlugins."""
+        self.plugin_controller.log_simulation_step()
+
+    def stop_logging(self):
+        """Stops the logging for all loaded LoggerPlugins."""
+        self.plugin_controller.stop_logging()
+
+    def has_plugin(self, plugin_cls:type) -> bool:
+        """Checks if a Plugin of a given class is loaded."""
+        return self.plugin_controller.has_plugin(plugin_cls)
+            
+    def get_plugins(self, _type:type) -> list:
+        """Returns a list of all Plugins of a given class."""
+        return self.plugin_controller.get_all_plugins_of_type(_type)
+    
+    def get_first_plugin(self, _type:type):
+        return self.plugin_controller.get_first_plugin_of_type(_type)

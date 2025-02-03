@@ -1,15 +1,6 @@
-from itertools import count
 from pathlib import Path
-from types import NoneType
 from core.environment import EnvNode, EnvRegion, EnvironmentGraph
-from core.population import PopulationTemplate
 from core.plugin import ActionPlugin
-import copy
-from random_inst import FixedRandom
-import math
-import numpy as np
-import csv
-import util
 import json
 
 class NodeDensityDataPlugin(ActionPlugin):

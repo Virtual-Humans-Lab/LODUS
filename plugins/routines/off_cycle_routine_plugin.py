@@ -2,7 +2,7 @@
 import json
 import sys
 
-from data_parse_util import parse_routines
+from util.data_parse import parse_routines
 
 sys.path.append("/../../")
 from pathlib import Path

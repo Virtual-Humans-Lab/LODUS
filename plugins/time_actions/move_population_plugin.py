@@ -3,15 +3,7 @@ import sys
 from core.simulator import LodusSimulation
 sys.path.append('../')
 
-from core.environment import EnvironmentGraph
-from core.population import PopulationTemplate
 from core.plugin import ActionPlugin
-from random_inst import FixedRandom
-import copy
-import random
-import math
-import numpy as np
-import util
 import time
 
 class MovePopulationPlugin(ActionPlugin):
@@ -48,7 +40,7 @@ class MovePopulationPlugin(ActionPlugin):
         start_time = time.perf_counter()
         quantity = values['quantity']
         if quantity == 0:
-            self.execution_times.append(time.perf_counter() - start_time)
+            self.add_execution_time('move_population_quantity_0', time.perf_counter() - start_time)
             return
         
         origin_region = self.env_graph.get_region_by_name(values['origin_region'])
@@ -71,4 +63,4 @@ class MovePopulationPlugin(ActionPlugin):
         
         self.env_graph.log_blob_movement(origin_node, destination_node, grabbed_population)
         destination_node.add_blobs(grabbed_population)
-        self.execution_times.append(time.perf_counter() - start_time)
+        self.add_execution_time('move_population', time.perf_counter() - start_time)

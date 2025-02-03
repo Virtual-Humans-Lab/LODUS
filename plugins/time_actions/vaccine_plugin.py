@@ -3,11 +3,8 @@ import time
 import core.environment
 from core.population import Blob, PopulationTemplate
 from core.plugin import ActionPlugin
-import copy
-from random_inst import FixedRandom
 import math
 import csv
-from plugins.loggers.population_count_logger import PopulationCountLogger
 import util
 import json
 

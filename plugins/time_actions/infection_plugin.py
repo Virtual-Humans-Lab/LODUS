@@ -1,18 +1,10 @@
-from itertools import count
 from pathlib import Path
 import time
-from types import NoneType
-# from time_actions.vaccine_local_plugin import VaccinePlugin
 import core.environment
 from core.population import PopulationTemplate
 from core.plugin import ActionPlugin
 import copy
-from random_inst import FixedRandom
 import math
-import numpy as np
-import csv
-# from loggers.population_count_logger import PopulationCountLogger
-import util
 import json
 
 class InfectionPlugin(ActionPlugin):

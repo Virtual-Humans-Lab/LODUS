@@ -9,9 +9,10 @@ import copy
 from core.population import Blob, BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate, SampledCharacteristicCollection
 from core.routine import Routine, Action, RoutineFactory, RoutineTemplate
 import util
-from util import DistanceType as DistType
+from util.math import DistanceType as DistType, distance2D, distribute_ints_from_weights, geopy_distance_metre, pyproj_distance_metre
+from util.random_instance import FixedRandom
+from util.id_gen import IDGen
 from events import Events
-from random_inst import FixedRandom
 
 DEBUG_OPERATION_OUTPUT =  False
 
@@ -49,8 +50,8 @@ class EnvNode():
     def __init__(self, node_type: str, name:str = ''):
         """Initializes an EnvNode."""
         self.node_type = node_type
-        self.id = util.IDGen('nodes').get_id()
-        self.type_id = util.IDGen(f'node_{node_type}').get_id()
+        self.id = IDGen('nodes').get_id()
+        self.type_id = IDGen(f'node_{node_type}').get_id()
         self.name = node_type
 
         self.containing_region_name:str = ''
@@ -62,7 +63,7 @@ class EnvNode():
         self.original_node_population:SampledCharacteristicCollection = None # type: ignore
 
     def get_unique_name(self):
-        return f"{self.containing_region_name}//{self.node_type}{self.type_id}"
+        return f"{self.containing_region_name}//{self.node_type}_{self.type_id}"
     
     def add_attribute(self, key: str, value: Any) -> None:
         self.attributes[key] = value
@@ -148,7 +149,7 @@ class EnvNode():
         quantity = min(quantity, total_available_population)
 
         available_quantities = [blob.get_population_size(template) for blob in self.contained_blobs]
-        int_adjusted_quantities = util.distribute_ints_from_weights(quantity, available_quantities)
+        int_adjusted_quantities = distribute_ints_from_weights(quantity, available_quantities)
         # int_adjusted_quantities = util.weighted_int_distribution(available_quantities, quantity)
         new_blobs:list[Blob] = [
             blob.grab_population(int_adjusted_quantities[x], template)
@@ -312,12 +313,21 @@ class EnvRegion():
     def __init__(self, region_name: str, long_lat: list[float]):
         """Initializes an EnvRegion"""
         self.name: str = region_name
-        self.id = util.IDGen("regions").get_id()
+        self.id = IDGen("regions").get_id()
         self.long_lat: list[float] = long_lat
         self.node_list: list[EnvNode] = []
         self.node_dict: dict[str, EnvNode] = {}
 
-    def add_node(self, node: EnvNode):
+    def set_long_lat_position(self, longitude: float, latitude: float) -> None:
+        """Sets the physical position of this region."""
+        if not isinstance(longitude, (int, float)) or not isinstance(latitude, (int, float)):
+            raise ValueError(f"longitude and latitude must be of type int or float, are {type(longitude)} and {type(latitude)}")
+        self.long_lat = [longitude, latitude]
+
+    def add_envnode(self, node: EnvNode):
+        """Adds an EnvNode to this EnvRegion."""
+        if not isinstance(node, EnvNode):
+            raise ValueError(f"node must be of type EnvNode, is {type(node)}")
         node.containing_region_name = self.name
         self.node_list.append(node)
         self.node_dict[node.get_unique_name()] = node
@@ -381,19 +391,19 @@ class EnvRegionTemplate():
 class EnvRegionFactory():
     """Generates EnvRegions based on a specific EnvRegionTemplate."""
 
-    def __init__(self, template:EnvRegionTemplate, default_blob_factory: BlobFactory):
-        self.envregion_template = template
-        self.default_blob_factory = default_blob_factory
+    def __init__(self):
+        pass
     
-    def generate_envregion(self):
+    def generate_envregion(self, envregion_template:EnvRegionTemplate, default_blob_factory: BlobFactory) -> EnvRegion:
         """Generates an EnvRegion based on the template."""
-        region = EnvRegion(self.envregion_template.region_name, long_lat=self.envregion_template.long_lat)
 
-        for envnode_template in self.envregion_template.envnode_templates:
+        region = EnvRegion(envregion_template.region_name, long_lat=envregion_template.long_lat)
+
+        for envnode_template in envregion_template.envnode_templates:
             factory = EnvNodeFactory()
-            node = factory.generate_envnode(envnode_template, self.default_blob_factory, region)
+            node = factory.generate_envnode(envnode_template, default_blob_factory, region)
             
-            region.add_node(node)
+            region.add_envnode(node)
         
         return region
 
@@ -449,17 +459,10 @@ class EnvironmentGraph():
 
         self.data_action_map:dict[str, Callable] = { }
 
-        # Logging data
-        self.original_population_template = None
-        self.original_block_template: CharacteristicsFactory = None
-        self.original_repeating_actions = None
-
-        self.experiment_config = {}
-
         # Distances:
         # self.node_distances:dict[str,list[tuple[float,str]]] = {}
-        self.default_distance_type: util.DistanceType = DistType.METRES_PYPROJ
-        self.node_distances:dict[util.DistanceType, dict[str, EnvNodeDistances]] = {t:{} for t in util.DistanceType}
+        self.default_distance_type: DistType = DistType.METRES_PYPROJ
+        self.node_distances:dict[DistType, dict[str, EnvNodeDistances]] = {t:{} for t in DistType}
 
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
         self.movement_logger_dict = {}
@@ -529,18 +532,18 @@ class EnvironmentGraph():
     def __get_distance(self, p1, p2, dist_type:DistType = DistType.LONG_LAT):
         '''Gets distances based on selected distance type'''
         if dist_type == DistType.LONG_LAT:
-            return util.distance2D(p1, p2)
+            return distance2D(p1, p2)
         elif dist_type == DistType.METRES_GEOPY:
-            return util.geopy_distance_metre(p1, p2)
+            return geopy_distance_metre(p1, p2)
         elif dist_type == DistType.METRES_PYPROJ:
-            return util.pyproj_distance_metre(p1, p2)
+            return pyproj_distance_metre(p1, p2)
         else:
             raise Exception("Distance Type is invalid")
 
-    def add_region(self, _position, _template: EnvRegionTemplate, blob_factory: BlobFactory):
-        factory = EnvRegionFactory(_template, blob_factory)
-        new_region = factory.generate_envregion()
-        new_region.population = new_region.get_population_size()
+    def add_region(self, long_lat_position, region_template: EnvRegionTemplate, blob_factory: BlobFactory):
+        """Adds a region to the EnvironmentGraph."""
+        factory = EnvRegionFactory()
+        new_region = factory.generate_envregion(region_template, blob_factory)
         self.edge_table.append(['' for x in range(len(self.region_list))])
 
         for node in new_region.node_list:
@@ -549,19 +552,9 @@ class EnvironmentGraph():
             self.node_dict[node.get_unique_name()] = node
             self.node_id_dict[node.id] = node
 
-        self.region_dict[_template.region_name] = new_region        
+        self.region_dict[region_template.region_name] = new_region        
         self.region_list.append(new_region)
         self.region_id_dict[new_region.id] = new_region
-
-    # def add_node_to_region(self, region:EnvRegion, node_template:EnvNodeTemplate, node_unique_name:str) -> EnvNode: 
-    #     factory = EnvNodeFactory(node_template)
-    #     node = factory.generate_envnode(region,node_unique_name)
-    #     region.add_node(node)
-    #     self.node_list.append(node)
-    #     self.node_dict[node.get_unique_name()] = node
-    #     self.node_id_dict[node.id] = node
-    #     return node
-
 
     def add_edge(self, region1, region2, _type):
         self.edge_table[region1][region2] = _type

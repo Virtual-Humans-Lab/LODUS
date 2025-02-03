@@ -1,14 +1,5 @@
-from itertools import count
-from types import NoneType
 import core.environment
-from core.population import PopulationTemplate
 from core.plugin import ActionPlugin
-import copy
-from random_inst import FixedRandom
-import math
-import numpy as np
-import csv
-import util
 import json
 
 class CustomTimeActionPlugin(ActionPlugin):

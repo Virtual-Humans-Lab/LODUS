@@ -457,34 +457,34 @@ class TestEnvRegion:
         assert env_region.node_dict == {}
 
     def test_add_node(self, env_region: EnvRegion, env_node: EnvNode):
-        env_region.add_node(env_node)
+        env_region.add_envnode(env_node)
         assert env_node in env_region.node_list
         assert env_region.node_dict[env_node.get_unique_name()] == env_node
 
     def test_get_first_node_with_name(self, env_region: EnvRegion, env_node: EnvNode):
         env_node.name = "test_node"
-        env_region.add_node(env_node)
+        env_region.add_envnode(env_node)
         assert env_region.get_first_node_with_name("test_node") == env_node
         assert env_region.get_first_node_with_name("non_existent") is None
 
     def test_get_node_by_unique_name(self, env_region: EnvRegion, env_node: EnvNode):
-        env_region.add_node(env_node)
+        env_region.add_envnode(env_node)
         assert env_region.get_node_by_unique_name(env_node.get_unique_name()) == env_node
         with pytest.raises(ValueError):
             env_region.get_node_by_unique_name("non_existent")
 
     def test_get_population_size(self, env_region: EnvRegion, env_node: EnvNode, population_template: PopulationTemplate):
         env_node.get_population_size = lambda tempalte: 100
-        env_region.add_node(env_node)
+        env_region.add_envnode(env_node)
         assert env_region.get_population_size(population_template) == 100
 
     def test_get_blob_count(self, env_region: EnvRegion, env_node: EnvNode, blob_factory: BlobFactory):   
         blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]
         env_node.add_blobs(blobs)
-        env_region.add_node(env_node)
+        env_region.add_envnode(env_node)
         assert env_region.get_blob_count() == 3
 
     def test_generate_action_list(self, env_region: EnvRegion, env_node: EnvNode):
         env_node.process_routine = lambda cycle_step: ["action1", "action2"]
-        env_region.add_node(env_node)
+        env_region.add_envnode(env_node)
         assert env_region.generate_action_list(1) == ["action1", "action2"]

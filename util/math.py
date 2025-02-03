@@ -1,13 +1,10 @@
 from enum import Enum
 import math
-import json
 from typing import List
 import numpy as np
 from geopy import distance
-from pyproj import Proj
 from pyproj import Geod
 
-from random_inst import FixedRandom
 
 class DistanceType(Enum):
     LONG_LAT = 1
@@ -129,16 +126,16 @@ def distribute_ints_from_weights_with_limit(quantity, weight_list:list[float], l
     
     # adds remaining quantities 
     for x in range(quantity - sum(int_quantities)):    
-        largest_index = 0;
-        largest_value = -10000.0;
+        largest_index = 0
+        largest_value = -10000.0
 
         for i in range(len(adjusted_weights)):
             if int_quantities[i] < limits[i] and adjusted_weights[i] > largest_value:
-                largest_index = i;
-                largest_value = adjusted_weights[i];
+                largest_index = i
+                largest_value = adjusted_weights[i]
         #print(largest_index, len(int_quantities))
-        int_quantities[largest_index] += 1;
-        adjusted_weights[largest_index] -= 1.0/quantity;
+        int_quantities[largest_index] += 1
+        adjusted_weights[largest_index] -= 1.0/quantity
     
     return int_quantities
 
@@ -182,16 +179,3 @@ def weighted_int_distribution_with_weights(available, quantity, weight_list):
             remaining_to_pick -= 1
 
     return weighted_available
- 
-# never reuses an id for a given attribute
-class IDGen:
-    stacks = {}
-    
-    def __init__(self, attribute, current_id=0):
-        self.attribute = attribute
-        IDGen.stacks.setdefault(attribute, current_id)
-
-    def get_id(self) -> int:
-        current_id = IDGen.stacks[self.attribute]
-        IDGen.stacks[self.attribute] += 1
-        return current_id

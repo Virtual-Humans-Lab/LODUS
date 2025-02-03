@@ -3,8 +3,9 @@ from __future__ import annotations
 import copy
 import sys
 from types import NoneType
-from util import IDGen, distribute_randomly, distribute_ints_from_weights
-from random_inst import FixedRandom
+from util.math import distribute_randomly, distribute_ints_from_weights
+from util.random_instance import FixedRandom
+from util.id_gen import IDGen
 from events import Events
 
 from typing import Any, Union, List, Dict, Optional

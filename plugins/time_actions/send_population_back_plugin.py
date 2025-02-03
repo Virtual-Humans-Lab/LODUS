@@ -34,7 +34,7 @@ class SendPopulationBackPlugin(ActionPlugin):
         self.env_graph = simulation.env_graph
         simulation.add_action_type_to_function('send_population_back', self.send_population_back, False)
 
-        if "send_population_back_plugin" not in self.env_graph.experiment_config:
+        if "send_population_back_plugin" not in simulation.experiment_config:
             print("Experiment config should have a 'send_population_back' key.")
 
         # Performance log for quantity of sub-actions
@@ -96,7 +96,7 @@ class SendPopulationBackPlugin(ActionPlugin):
                                                 values = new_action_values)
             sub_list.append(new_action)
         
-        self.add_execution_time(time.perf_counter() - start_time)
+        self.add_execution_time('send_population_back',time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list
     

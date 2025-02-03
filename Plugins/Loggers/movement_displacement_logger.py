@@ -1,21 +1,16 @@
 import sys
 
 from core.simulator import LodusSimulation
-from util import DistanceType
 sys.path.append("/../../")
-from core.environment import EnvironmentGraph, EnvNode, EnvRegion
+from core.environment import EnvironmentGraph, EnvNode
 from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
 
 # Graphic and data libraries
-import plotly.graph_objects as go
-import plotly.express as px
 import pandas as pd
 pd.options.plotting.backend = "plotly"
-import numpy as np
 
 from pathlib import Path
-from enum import Enum
 
 class MovementDisplacementLogger(LoggerPlugin):
 

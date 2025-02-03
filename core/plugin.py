@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Callable
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from core.simulator import LodusSimulation
@@ -10,21 +9,9 @@ class BasePlugin(ABC):
     @abstractmethod
     def load_plugin(self, simulation: 'LodusSimulation'):
         pass
-    
-    @abstractmethod
-    def setup_logger(self):
-        pass
 
     @abstractmethod
     def update_time_step(self, cycle_step: int, simulation_step: int):
-        pass
-
-    @abstractmethod
-    def log_simulation_step(self):
-        pass
-
-    @abstractmethod
-    def stop_logger(self):
         pass
 
     @abstractmethod
@@ -44,40 +31,34 @@ class ActionPlugin(BasePlugin):
     """ 
     def __init__(self):
         # self.action_type_to_function: dict[str, Callable] = {}
-        self.execution_times:list[float] = []
+        self.execution_times:dict[str, list[float]] = {}
 
-    def add_execution_time(self, time: float) -> None:
+    def add_execution_time(self, action_type: str, time: float) -> None:
         """Adds an execution time to the list."""
         if not isinstance(time, (int, float)):
             raise ValueError(f"time must be of type int or float, is {type(time)}")
-        self.execution_times.append(time)
+        if not isinstance(action_type, str):
+            raise ValueError(f"action_type must be of type str, is {type(action_type)}")
+        if action_type not in self.execution_times:
+            self.execution_times[action_type] = []
+        self.execution_times[action_type].append(time)
 
     def print_execution_time_data(self) -> str:
         """Prints and returns a summary of execution time data."""
-        num_executions = len(self.execution_times)
-        total_time = sum(self.execution_times)
-        avg_time = total_time / num_executions if num_executions else 0
+        out = f"\n{self.__class__.__name__} Execution Time Data:\n"
 
-        out = (
-            f"\n{self.__class__.__name__} Execution Time Data:\n"
-            f"---Number of executions: {num_executions}\n"
-            f"---Total execution time: {total_time}\n"
-            f"---Average execution time: {avg_time}\n"
-        )
+        for action_type, times in self.execution_times.items():
+            num_executions = len(times)
+            total_time = sum(times)
+            avg_time = total_time / num_executions if num_executions else 0
+            out += (
+                f"---Action Type: {action_type}\n"
+                f"------Number of executions: {num_executions}\n"
+                f"------Total execution time: {total_time}\n"
+                f"------Average execution time: {avg_time}\n"
+            )
         print(out)
         return out
-
-    # def add_action_type_to_function(self, action_type: str, action_function: Callable) -> None:
-    #     """Sets an action type and its corresponding function."""
-    #     if not isinstance(action_type, str):
-    #         raise ValueError(f"action_type must be of type str, is {type(action_type)}")
-    #     if not callable(action_function):
-    #         raise ValueError(f"action_function must be a callable, is {type(action_function)}")
-    #     self.action_type_to_function[action_type] = action_function
-
-    # def get_action_type_to_function(self) -> dict:
-    #     """Returns the dictionary of action type-function pairs."""
-    #     return self.action_type_to_function
 
 class RoutinePlugin(BasePlugin):
     def __init__(self):
@@ -95,8 +76,18 @@ class RoutinePlugin(BasePlugin):
         pass
 
 class LoggerPlugin(BasePlugin):
-    """
-
-    """ 
+    """Describes a logger plugin that can be used to log simulation data."""
     def __init__(self):
+        pass
+
+    @abstractmethod
+    def setup_logger(self):
+        pass
+
+    @abstractmethod
+    def log_simulation_step(self):
+        pass
+
+    @abstractmethod
+    def stop_logger(self):
         pass

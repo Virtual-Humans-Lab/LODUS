@@ -1,15 +1,9 @@
 import sys
 sys.path.append('../')
 
-import core.environment 
-from core.population import PopulationTemplate
 from core.plugin import ActionPlugin
 import copy
-import random
-from random_inst import FixedRandom
-import math
-import numpy as np
-import util
+from util.random_instance import FixedRandom
 
 class ReverseSocialIsolationPlugin(ActionPlugin):
 
