@@ -74,11 +74,11 @@ class ODMatrixLogger(LoggerPlugin):
         if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
             self.node_od_matrix[self.sim_step] = {}
             for orig in self.env_graph.node_list:
-                self.node_od_matrix[self.sim_step][orig.get_unique_name()] = {}
+                self.node_od_matrix[self.sim_step][orig.get_complete_name()] = {}
                 for dest in self.env_graph.node_list:
-                    self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()] = {"Total" : 0}
+                    self.node_od_matrix[self.sim_step][orig.get_complete_name()][dest.get_complete_name()] = {"Total" : 0}
                     for _key in self.node_custom_templates:
-                        self.node_od_matrix[self.sim_step][orig.get_unique_name()][dest.get_unique_name()][_key] = 0
+                        self.node_od_matrix[self.sim_step][orig.get_complete_name()][dest.get_complete_name()][_key] = 0
             
     def log_simulation_step(self):
         pass
@@ -97,7 +97,7 @@ class ODMatrixLogger(LoggerPlugin):
         
         # Record Node-Node movement
         if ODMovementRecordKey.NODE_TO_NODE in self.data_to_record:
-            _x = self.node_od_matrix[self.sim_step][_ori.get_unique_name()][_dest.get_unique_name()]
+            _x = self.node_od_matrix[self.sim_step][_ori.get_complete_name()][_dest.get_complete_name()]
             _x["Total"] += total
             for _b in _blobs:
                 for _key, _pt in self.node_custom_templates.items():

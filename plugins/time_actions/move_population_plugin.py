@@ -19,15 +19,6 @@ class MovePopulationPlugin(ActionPlugin):
     def update_time_step(self, cycle_step, simulation_step):
         return super().update_time_step(cycle_step, simulation_step)
     
-    def setup_logger(self):
-        return super().setup_logger()
-
-    def log_simulation_step(self, logger):
-        return super().log_simulation_step(logger)
-    
-    def stop_logger(self, logger):
-        return super().stop_logger(logger)
-    
     def unload_plugin(self):
         return super().unload_plugin()
 

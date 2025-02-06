@@ -20,8 +20,8 @@ class CustomTimeActionPlugin(ActionPlugin):
                 _density = _custom_den_values[_name]
             elif _node.containing_region_name in _custom_den_values:
                 _density = _custom_den_values[_node.containing_region_name]
-            elif _node.name in _custom_den_values:
-                _density = _custom_den_values[_node.name]
+            elif _node.unique_name in _custom_den_values:
+                _density = _custom_den_values[_node.unique_name]
             else:
                 _density = self.default_density
             _node.add_attribute('density', _density)

@@ -27,13 +27,13 @@ class NodeDensityDataPlugin(ActionPlugin):
         return #super().update_time_step(cycle_step, simulation_step)
     
     def get_node_density(self, region:EnvRegion, node:EnvNode):
-        _unique_name = node.get_unique_name()
+        _unique_name = node.get_complete_name()
 
         if _unique_name in self.custom_density:
             return self.custom_density[_unique_name]
         elif node.containing_region_name in self.custom_density:
             return self.custom_density[node.containing_region_name]
-        elif node.name in self.custom_density:
-            return self.custom_density[node.name]
+        elif node.unique_name in self.custom_density:
+            return self.custom_density[node.unique_name]
         else:
             return self.default_density

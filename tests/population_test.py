@@ -1,5 +1,5 @@
 from typing import List, Set
-from random_inst import FixedRandom
+from util.random_instance import FixedRandom
 
 import pytest
 from core.population import Blob, BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection

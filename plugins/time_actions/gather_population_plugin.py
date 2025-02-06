@@ -100,8 +100,8 @@ class GatherPopulationPlugin(ActionPlugin):
 
     # Returns the distance between two nodes
     def get_nodes_distance(self, node1:EnvNode, node2:EnvNode)->float:
-        n1_name = node1.get_unique_name()
-        n2_name = node2.get_unique_name()
+        n1_name = node1.get_complete_name()
+        n2_name = node2.get_complete_name()
         # Checks if the distance was calculated previously
         if n1_name + n2_name in self.distances_map:
             return self.distances_map[n1_name + n2_name]
@@ -120,11 +120,11 @@ class GatherPopulationPlugin(ActionPlugin):
             return self.population_weighting(target_node=target_node)
     
     def population_weighting(self, target_node:EnvNode)->list[tuple[EnvNode,float]]:
-        unique_name = target_node.get_unique_name()
+        unique_name = target_node.get_complete_name()
         pop_list = []
         # Gets distances to other EnvNodes
         for other in self.env_graph.node_list:
-            if other.get_unique_name() == unique_name:
+            if other.get_complete_name() == unique_name:
                 continue
             pop_list.append((other,other.get_population_size()))
         total_pop = sum([ d for (n, d) in pop_list])
@@ -134,7 +134,7 @@ class GatherPopulationPlugin(ActionPlugin):
     def distance_weighting(self, target_node:EnvNode)->list[tuple[EnvNode,float]]:
         
         # Checks if weights were calculated previously
-        unique_name = target_node.get_unique_name()
+        unique_name = target_node.get_complete_name()
         if unique_name in self.dist_weights_map:
             return self.dist_weights_map[unique_name]
         
@@ -142,12 +142,12 @@ class GatherPopulationPlugin(ActionPlugin):
 
         # Gets distances to other EnvNodes
         for other in self.env_graph.node_list:
-            if other.get_unique_name() == unique_name:
+            if other.get_complete_name() == unique_name:
                 continue
             distance_to_other = self.get_nodes_distance(target_node, other)
             # 
             if distance_to_other == 0.0: 
-                print(distance_to_other, unique_name, target_node.long_lat, other.get_unique_name(), other.long_lat)
+                print(distance_to_other, unique_name, target_node.long_lat, other.get_complete_name(), other.long_lat)
             distance_list.append((other,distance_to_other))
 
         # Weights are according to the inverse of the distance
@@ -190,7 +190,7 @@ class GatherPopulationPlugin(ActionPlugin):
         if _locals_only:
             weight_list = [(node, weight) for (node,weight) in weight_list if (node.containing_region_name == acting_node.containing_region_name)]
         if 'different_node_name' in values and bool(values['different_node_name']):
-            weight_list = [(node, weight) for (node,weight) in weight_list if (node.name != acting_node.name)]
+            weight_list = [(node, weight) for (node,weight) in weight_list if (node.unique_name != acting_node.unique_name)]
         
         # Shuffles the remaining EnvNodes
         self.random.shuffle(weight_list)
@@ -256,7 +256,7 @@ class GatherPopulationPlugin(ActionPlugin):
             new_action_values:dict = { 'origin_region': origin_region.name,
                                 'origin_node': node_aux.name,
                                 'destination_region': acting_region.name,
-                                'destination_node': acting_node.name,
+                                'destination_node': acting_node.unique_name,
                                 'quantity': quantity}
            
             if _isolation_mode == IsolationMode.REGULAR:

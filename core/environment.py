@@ -47,12 +47,12 @@ class EnvNode():
         routine: The current time action Routine this region is implementing.
     """
 
-    def __init__(self, node_type: str, name:str = ''):
+    def __init__(self, node_type: str, node_unique_name:str):
         """Initializes an EnvNode."""
         self.node_type = node_type
         self.id = IDGen('nodes').get_id()
         self.type_id = IDGen(f'node_{node_type}').get_id()
-        self.name = node_type
+        self.unique_name = node_unique_name
 
         self.containing_region_name:str = ''
         self.long_lat:list[float] = [0.0, 0.0]
@@ -62,8 +62,8 @@ class EnvNode():
         self.routine: Routine = None # type: ignore
         self.original_node_population:SampledCharacteristicCollection = None # type: ignore
 
-    def get_unique_name(self):
-        return f"{self.containing_region_name}//{self.node_type}_{self.type_id}"
+    def get_complete_name(self):
+        return f"{self.containing_region_name}//{self.unique_name}"
     
     def add_attribute(self, key: str, value: Any) -> None:
         self.attributes[key] = value
@@ -209,8 +209,8 @@ class EnvNode():
     def __str__(self):
         return (
         f"Type: {self.node_type}\n"
-        f"Unique Name: {self.get_unique_name()}\n"
-        f"Name: {self.name}\n"
+        f"Unique Name: {self.get_complete_name()}\n"
+        f"Name: {self.unique_name}\n"
         f"ID: {self.id}\n"
         f"Routine: {self.routine}\n"
         f"Characteristics: {self.attributes}\n"
@@ -225,9 +225,9 @@ class EnvNodeTemplate:
     
     EnvNodeFactory objects can generate EnvNodes based on this template.
     """
-    def __init__(self, node_type: str, node_name: Optional[str] = None):
+    def __init__(self, node_type: str, node_unique_name: str):
         self.node_type: str = node_type
-        self.node_name: str = node_name if node_name else node_type
+        self.node_unique_name: str = node_unique_name
         self.node_attributes: dict[str, Any] = {}
         self.routine_template: RoutineTemplate = RoutineTemplate()
         self.blob_templates: list[BlobTemplate] = []
@@ -269,7 +269,7 @@ class EnvNodeFactory():
         """Generates an EnvNode based on a NodeTemplate and Blob Factory."""
         routine_factory = routine_factory or self.default_routine_factory
 
-        env_node = EnvNode(node_template.node_type)
+        env_node = EnvNode(node_template.node_type, node_template.node_unique_name)
         env_node.set_long_lat_position(node_template.long_lat[0], node_template.long_lat[1])
         env_node.routine = routine_factory.generate_routine(node_template.routine_template)
         env_node.attributes.update(node_template.node_attributes)
@@ -330,11 +330,11 @@ class EnvRegion():
             raise ValueError(f"node must be of type EnvNode, is {type(node)}")
         node.containing_region_name = self.name
         self.node_list.append(node)
-        self.node_dict[node.get_unique_name()] = node
+        self.node_dict[node.get_complete_name()] = node
 
     def get_first_node_with_name(self, name: str) -> EnvNode | None:
         """Gets an EnvNode by name."""
-        return next((node for node in self.node_list if node.name == name), None)
+        return next((node for node in self.node_list if node.unique_name == name), None)
 
     def get_node_by_unique_name(self, unique_name: str) -> EnvNode:
         """Gets an EnvNode by name."""
@@ -513,7 +513,7 @@ class EnvironmentGraph():
                           target_node:EnvNode, 
                           dist_type:DistType = DistType.LONG_LAT) -> EnvNodeDistances:
         '''Gets distances between a target node and all other nodes'''
-        unique_name = target_node.get_unique_name()
+        unique_name = target_node.get_complete_name()
 
         # Checks if the distance was calculated previously
         if unique_name in self.node_distances[dist_type]:
@@ -522,9 +522,9 @@ class EnvironmentGraph():
         node_dist = EnvNodeDistances(unique_name)
         node_pos = target_node.long_lat
         for other in self.node_list:
-            if unique_name == other.get_unique_name():
+            if unique_name == other.get_complete_name():
                 continue
-            node_dist.distance_to_others[other.get_unique_name()] = self.__get_distance(node_pos, other.long_lat, dist_type)
+            node_dist.distance_to_others[other.get_complete_name()] = self.__get_distance(node_pos, other.long_lat, dist_type)
 
         self.node_distances[dist_type][unique_name] = node_dist
         return self.node_distances[dist_type][unique_name]
@@ -540,7 +540,7 @@ class EnvironmentGraph():
         else:
             raise Exception("Distance Type is invalid")
 
-    def add_region(self, long_lat_position, region_template: EnvRegionTemplate, blob_factory: BlobFactory):
+    def add_region(self, region_template: EnvRegionTemplate, blob_factory: BlobFactory):
         """Adds a region to the EnvironmentGraph."""
         factory = EnvRegionFactory()
         new_region = factory.generate_envregion(region_template, blob_factory)
@@ -549,7 +549,11 @@ class EnvironmentGraph():
         for node in new_region.node_list:
             node.containing_region_name = new_region.name
             self.node_list.append(node)
-            self.node_dict[node.get_unique_name()] = node
+            if node.get_complete_name() in self.node_dict:
+                raise ValueError(f"Node {node.get_complete_name()} already exists in the graph")
+            self.node_dict[node.get_complete_name()] = node
+            if node.id in self.node_id_dict:
+                raise ValueError(f"Node {node.id} already exists in the graph")
             self.node_id_dict[node.id] = node
 
         self.region_dict[region_template.region_name] = new_region        

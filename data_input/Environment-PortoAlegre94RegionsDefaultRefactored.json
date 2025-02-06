@@ -1,0 +1,5728 @@
+{
+  "regions": [
+    {
+      "name": "Aberta dos Morros",
+      "lng_lat": [
+        -51.1975768802765,
+        -30.1564777842068
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_0",
+          "lng_lat": [
+            -51.196644996600774,
+            -30.15638184077893
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_0",
+          "lng_lat": [
+            -51.19926682524699,
+            -30.15101931968696
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_0",
+          "lng_lat": [
+            -51.20429032444015,
+            -30.15036288322885
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_0",
+          "lng_lat": [
+            -51.19615632248636,
+            -30.158589577962626
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_0",
+          "lng_lat": [
+            -51.19359666252489,
+            -30.14923275083782
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_0",
+          "lng_lat": [
+            -51.20834467719669,
+            -30.152852788471336
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Agronomia",
+      "lng_lat": [
+        -51.1251443431221,
+        -30.0765791683866
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_1",
+          "lng_lat": [
+            -51.14800078194141,
+            -30.082027534140504
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_1",
+          "lng_lat": [
+            -51.1224066087637,
+            -30.075626593743916
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_1",
+          "lng_lat": [
+            -51.12994721521221,
+            -30.061266763960425
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_1",
+          "lng_lat": [
+            -51.11819549946089,
+            -30.075346753587535
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_1",
+          "lng_lat": [
+            -51.12407644609673,
+            -30.060850851529647
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_1",
+          "lng_lat": [
+            -51.14390063231947,
+            -30.088475016307726
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Anchieta",
+      "lng_lat": [
+        -51.1710672994942,
+        -29.9876687647294
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_2",
+          "lng_lat": [
+            -51.15791402418942,
+            -29.991332122782296
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_2",
+          "lng_lat": [
+            -51.177266145720274,
+            -29.998253473773538
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_2",
+          "lng_lat": [
+            -51.17536614843348,
+            -29.98893123565236
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_2",
+          "lng_lat": [
+            -51.179182999938945,
+            -29.98670239696231
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_2",
+          "lng_lat": [
+            -51.17672514660218,
+            -29.988061585270653
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_2",
+          "lng_lat": [
+            -51.17827960957997,
+            -29.98035866739299
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Arquipélago",
+      "lng_lat": [
+        -51.2150073288261,
+        -29.9953102852364
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_3",
+          "lng_lat": [
+            -51.25941825321441,
+            -29.99999046024318
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_3",
+          "lng_lat": [
+            -51.29724527290558,
+            -29.95666196589025
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_3",
+          "lng_lat": [
+            -51.28975296834439,
+            -30.061007825794306
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_3",
+          "lng_lat": [
+            -51.28809760165448,
+            -29.965257532944452
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_3",
+          "lng_lat": [
+            -51.28455349283761,
+            -29.96086943055209
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_3",
+          "lng_lat": [
+            -51.24403568884144,
+            -29.94613354898058
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Auxiliadora",
+      "lng_lat": [
+        -51.1914387184847,
+        -30.0217230293811
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_4",
+          "lng_lat": [
+            -51.19758242357742,
+            -30.018299829125226
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_4",
+          "lng_lat": [
+            -51.1966181303032,
+            -30.0203615937487
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_4",
+          "lng_lat": [
+            -51.19685508713745,
+            -30.02305850595199
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_4",
+          "lng_lat": [
+            -51.19577698646521,
+            -30.02408057143352
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_4",
+          "lng_lat": [
+            -51.19078624546918,
+            -30.0188411995844
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_4",
+          "lng_lat": [
+            -51.195426933599876,
+            -30.020517182725925
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Azenha",
+      "lng_lat": [
+        -51.2147436812232,
+        -30.0510199525848
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_5",
+          "lng_lat": [
+            -51.211141376446804,
+            -30.059153996586307
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_5",
+          "lng_lat": [
+            -51.21315647550092,
+            -30.05708593665619
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_5",
+          "lng_lat": [
+            -51.209040603583425,
+            -30.058233936606896
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_5",
+          "lng_lat": [
+            -51.217114198273606,
+            -30.04933833536528
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_5",
+          "lng_lat": [
+            -51.217463755944756,
+            -30.043425486044637
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_5",
+          "lng_lat": [
+            -51.2098277905704,
+            -30.05810392969458
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_0",
+          "lng_lat": [
+            -51.21708289828961,
+            -30.050339285640163
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_0",
+          "lng_lat": [
+            -51.21513936003259,
+            -30.049677251903255
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Bela Vista",
+      "lng_lat": [
+        -51.1908984265664,
+        -30.0337919612383
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_6",
+          "lng_lat": [
+            -51.19043252443855,
+            -30.033079351658465
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_6",
+          "lng_lat": [
+            -51.18491386796134,
+            -30.02864026425794
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_6",
+          "lng_lat": [
+            -51.19225395362832,
+            -30.0309652459857
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_6",
+          "lng_lat": [
+            -51.19248244033591,
+            -30.03169640700932
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_6",
+          "lng_lat": [
+            -51.19524628015787,
+            -30.034411357960604
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_6",
+          "lng_lat": [
+            -51.190413067477486,
+            -30.031036753266328
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Belém Novo",
+      "lng_lat": [
+        -51.1761378741623,
+        -30.2086566357334
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_7",
+          "lng_lat": [
+            -51.16915287350415,
+            -30.221521692479996
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_7",
+          "lng_lat": [
+            -51.16141878992457,
+            -30.20198656506392
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_7",
+          "lng_lat": [
+            -51.173345064092345,
+            -30.203996884591504
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_7",
+          "lng_lat": [
+            -51.19471912848787,
+            -30.210761816239998
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_7",
+          "lng_lat": [
+            -51.170547818124014,
+            -30.197709760227227
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_7",
+          "lng_lat": [
+            -51.16762814771589,
+            -30.19484972374952
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Belém Velho",
+      "lng_lat": [
+        -51.1770457873857,
+        -30.1152236129312
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_8",
+          "lng_lat": [
+            -51.163672476194314,
+            -30.103601302023968
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_8",
+          "lng_lat": [
+            -51.17137198193342,
+            -30.115171649443692
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_8",
+          "lng_lat": [
+            -51.17528515747189,
+            -30.12319738632332
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_8",
+          "lng_lat": [
+            -51.17831462403659,
+            -30.119815693016182
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_8",
+          "lng_lat": [
+            -51.158283914438876,
+            -30.118367648319666
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_8",
+          "lng_lat": [
+            -51.16880814109855,
+            -30.124127373694844
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Boa Vista",
+      "lng_lat": [
+        -51.1745726986059,
+        -30.0225461039166
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_9",
+          "lng_lat": [
+            -51.16531177728604,
+            -30.024404576533
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_9",
+          "lng_lat": [
+            -51.16613485867786,
+            -30.022552210734506
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_9",
+          "lng_lat": [
+            -51.18262365276625,
+            -30.021555427173762
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_9",
+          "lng_lat": [
+            -51.17980945123345,
+            -30.02313547775595
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_9",
+          "lng_lat": [
+            -51.17271321231018,
+            -30.024585865335727
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_9",
+          "lng_lat": [
+            -51.172540874044444,
+            -30.027359775328097
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Boa Vista do Sul",
+      "lng_lat": [
+        -51.1285309151451,
+        -30.2139803381475
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_10",
+          "lng_lat": [
+            -51.15007502990398,
+            -30.227196036104534
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_10",
+          "lng_lat": [
+            -51.11872876292919,
+            -30.230671804820485
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_10",
+          "lng_lat": [
+            -51.14283917899246,
+            -30.22693656959353
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_10",
+          "lng_lat": [
+            -51.143842156500796,
+            -30.2461130146727
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_10",
+          "lng_lat": [
+            -51.13696061652126,
+            -30.22762173966702
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_10",
+          "lng_lat": [
+            -51.146672483089006,
+            -30.22363773886503
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Bom Fim",
+      "lng_lat": [
+        -51.2104807594223,
+        -30.0330589939714
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_11",
+          "lng_lat": [
+            -51.20960963037644,
+            -30.03449571714201
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_11",
+          "lng_lat": [
+            -51.218237476889925,
+            -30.030527422634943
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_11",
+          "lng_lat": [
+            -51.2118267232145,
+            -30.032272579294162
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_11",
+          "lng_lat": [
+            -51.215894181931624,
+            -30.033156951931538
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_11",
+          "lng_lat": [
+            -51.20943089227038,
+            -30.032247526338686
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_11",
+          "lng_lat": [
+            -51.216982974443084,
+            -30.032387958915123
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Bom Jesus",
+      "lng_lat": [
+        -51.1577957990433,
+        -30.0449931482782
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_12",
+          "lng_lat": [
+            -51.166282401630355,
+            -30.044663363000105
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_12",
+          "lng_lat": [
+            -51.15907980597314,
+            -30.045039621010208
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_12",
+          "lng_lat": [
+            -51.16434098271376,
+            -30.047068047343522
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_12",
+          "lng_lat": [
+            -51.15698584578141,
+            -30.041575160961848
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_12",
+          "lng_lat": [
+            -51.154837635335255,
+            -30.044747345845657
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_12",
+          "lng_lat": [
+            -51.15330659916657,
+            -30.04884206627023
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Camaquã",
+      "lng_lat": [
+        -51.2376726676268,
+        -30.1043845491444
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_13",
+          "lng_lat": [
+            -51.24134140071701,
+            -30.11143702415516
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_13",
+          "lng_lat": [
+            -51.244510985932614,
+            -30.108119959939724
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_13",
+          "lng_lat": [
+            -51.23822868345199,
+            -30.10773144697036
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_13",
+          "lng_lat": [
+            -51.23282969384572,
+            -30.1106481109125
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_13",
+          "lng_lat": [
+            -51.24476931535569,
+            -30.108459944145903
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_13",
+          "lng_lat": [
+            -51.24534176057373,
+            -30.106071834859378
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Campo Novo",
+      "lng_lat": [
+        -51.1950480912986,
+        -30.1379242117638
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_14",
+          "lng_lat": [
+            -51.19428906760712,
+            -30.14567855137875
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_14",
+          "lng_lat": [
+            -51.204929954274434,
+            -30.147216872269958
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_14",
+          "lng_lat": [
+            -51.20185576573967,
+            -30.12878125739682
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_14",
+          "lng_lat": [
+            -51.193086237574526,
+            -30.131942489329866
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_14",
+          "lng_lat": [
+            -51.20393479689308,
+            -30.14473260271856
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_14",
+          "lng_lat": [
+            -51.18755910619806,
+            -30.135905516850958
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Cascata",
+      "lng_lat": [
+        -51.1806328801207,
+        -30.0915442976803
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_15",
+          "lng_lat": [
+            -51.18017999869994,
+            -30.086137746906008
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_15",
+          "lng_lat": [
+            -51.17613531944957,
+            -30.08427621910244
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_15",
+          "lng_lat": [
+            -51.18210792097373,
+            -30.08542205195668
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_15",
+          "lng_lat": [
+            -51.17658714772259,
+            -30.091533932433403
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_15",
+          "lng_lat": [
+            -51.15859292934444,
+            -30.101107851118634
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_15",
+          "lng_lat": [
+            -51.19107049978624,
+            -30.093819776754824
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Cavalhada",
+      "lng_lat": [
+        -51.2286910107397,
+        -30.1012402995036
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_16",
+          "lng_lat": [
+            -51.22952023366858,
+            -30.12550982964592
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_16",
+          "lng_lat": [
+            -51.22768017145162,
+            -30.101416599376815
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_16",
+          "lng_lat": [
+            -51.226912549946334,
+            -30.10979779887674
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_16",
+          "lng_lat": [
+            -51.23051591997812,
+            -30.111481948277248
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_16",
+          "lng_lat": [
+            -51.226298154971765,
+            -30.09994655148031
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_16",
+          "lng_lat": [
+            -51.23009769175948,
+            -30.11912699419998
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_1",
+          "lng_lat": [
+            -51.230321850472706,
+            -30.096423268327644
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Centro Histórico",
+      "lng_lat": [
+        -51.2278480810808,
+        -30.031004727877
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_17",
+          "lng_lat": [
+            -51.225875574283016,
+            -30.026583815040162
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_17",
+          "lng_lat": [
+            -51.23536261108229,
+            -30.036360180988154
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_17",
+          "lng_lat": [
+            -51.227488754088405,
+            -30.030441229156494
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_17",
+          "lng_lat": [
+            -51.229762234131826,
+            -30.035393334420466
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_17",
+          "lng_lat": [
+            -51.23454559695662,
+            -30.031632688467365
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_17",
+          "lng_lat": [
+            -51.22864084440008,
+            -30.03287648144619
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_1",
+          "lng_lat": [
+            -51.23567448490226,
+            -30.035170183436225
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_2",
+          "lng_lat": [
+            -51.22806967756034,
+            -30.029866069903523
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Chácara das Pedras",
+      "lng_lat": [
+        -51.163276698502,
+        -30.0357931271579
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_18",
+          "lng_lat": [
+            -51.16356324506859,
+            -30.029030326616873
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_18",
+          "lng_lat": [
+            -51.1667816973106,
+            -30.034045848964272
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_18",
+          "lng_lat": [
+            -51.16580212222244,
+            -30.030374416731778
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_18",
+          "lng_lat": [
+            -51.16367092252755,
+            -30.03188372904591
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_18",
+          "lng_lat": [
+            -51.159696824140724,
+            -30.03252782255064
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_18",
+          "lng_lat": [
+            -51.16519367746459,
+            -30.029905655376208
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Chapéu do Sol",
+      "lng_lat": [
+        -51.1629759174341,
+        -30.1783214415483
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_19",
+          "lng_lat": [
+            -51.1668130171396,
+            -30.180362227648537
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_19",
+          "lng_lat": [
+            -51.14869888996221,
+            -30.18007002950946
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_19",
+          "lng_lat": [
+            -51.14813383679628,
+            -30.176826171048454
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_19",
+          "lng_lat": [
+            -51.157248539651654,
+            -30.178091024854087
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_19",
+          "lng_lat": [
+            -51.15434792276255,
+            -30.17445714059604
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_19",
+          "lng_lat": [
+            -51.152423308169034,
+            -30.181649892504424
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Cidade Baixa",
+      "lng_lat": [
+        -51.2224525885919,
+        -30.0404993243547
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_20",
+          "lng_lat": [
+            -51.22165359383402,
+            -30.03927028732829
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_20",
+          "lng_lat": [
+            -51.217797368939,
+            -30.041544683861186
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_20",
+          "lng_lat": [
+            -51.22154658672218,
+            -30.03939070525529
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_20",
+          "lng_lat": [
+            -51.220938310050265,
+            -30.038681366935773
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_20",
+          "lng_lat": [
+            -51.22022993418004,
+            -30.0402591707023
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_20",
+          "lng_lat": [
+            -51.22486441995886,
+            -30.036860147650245
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Cel. Aparício Borges",
+      "lng_lat": [
+        -51.185133456099,
+        -30.0702984413031
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_21",
+          "lng_lat": [
+            -51.17017004456546,
+            -30.08152482802266
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_21",
+          "lng_lat": [
+            -51.16565850129632,
+            -30.082306911997204
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_21",
+          "lng_lat": [
+            -51.1827458020197,
+            -30.069865241819155
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_21",
+          "lng_lat": [
+            -51.18156033002943,
+            -30.076108204322505
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_21",
+          "lng_lat": [
+            -51.1762424110017,
+            -30.081393192779718
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_21",
+          "lng_lat": [
+            -51.183412376320284,
+            -30.068672400564274
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Costa e Silva",
+      "lng_lat": [
+        -51.1182597986804,
+        -30.0093278582727
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_22",
+          "lng_lat": [
+            -51.112916061460204,
+            -30.002967925061856
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_22",
+          "lng_lat": [
+            -51.122253457423604,
+            -30.006046385448435
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_22",
+          "lng_lat": [
+            -51.12742189105076,
+            -30.005855119065913
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_22",
+          "lng_lat": [
+            -51.11202891749342,
+            -30.004558513183614
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_22",
+          "lng_lat": [
+            -51.117335723863945,
+            -30.01189566047701
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_22",
+          "lng_lat": [
+            -51.12589685447729,
+            -30.008142184180638
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Cristal",
+      "lng_lat": [
+        -51.2397892751413,
+        -30.0847512289742
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_23",
+          "lng_lat": [
+            -51.2474755920226,
+            -30.081112888434347
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_23",
+          "lng_lat": [
+            -51.2386002855307,
+            -30.07875037414716
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_23",
+          "lng_lat": [
+            -51.25010508802216,
+            -30.09672085925174
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_23",
+          "lng_lat": [
+            -51.23460302467764,
+            -30.091012148810396
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_23",
+          "lng_lat": [
+            -51.24074576810741,
+            -30.08431663323892
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_23",
+          "lng_lat": [
+            -51.24124834118967,
+            -30.08881714409332
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Cristo Redentor",
+      "lng_lat": [
+        -51.158022313181,
+        -30.0104082772241
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_24",
+          "lng_lat": [
+            -51.15390457626622,
+            -30.012444538301924
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_24",
+          "lng_lat": [
+            -51.161130562911694,
+            -30.010524483954356
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_24",
+          "lng_lat": [
+            -51.152339141599384,
+            -30.0137583289235
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_24",
+          "lng_lat": [
+            -51.154613926793886,
+            -30.011553016932446
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_24",
+          "lng_lat": [
+            -51.15573542147973,
+            -30.005873766174734
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_24",
+          "lng_lat": [
+            -51.16022853007904,
+            -30.009696455080476
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_2",
+          "lng_lat": [
+            -51.157141063318505,
+            -30.00486817776536
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_3",
+          "lng_lat": [
+            -51.15412917418357,
+            -30.013944931839784
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Espírito Santo",
+      "lng_lat": [
+        -51.2173615905172,
+        -30.149301452718
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_25",
+          "lng_lat": [
+            -51.21082273043152,
+            -30.14644596061503
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_25",
+          "lng_lat": [
+            -51.20896757923552,
+            -30.1482710994421
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_25",
+          "lng_lat": [
+            -51.21731435764517,
+            -30.152447507237596
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_25",
+          "lng_lat": [
+            -51.22206767564806,
+            -30.14614053678007
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_25",
+          "lng_lat": [
+            -51.21920393904338,
+            -30.151624695271256
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_25",
+          "lng_lat": [
+            -51.2240796745857,
+            -30.148482482621652
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Extrema",
+      "lng_lat": [
+        -51.0626153011275,
+        -30.2109093767902
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_26",
+          "lng_lat": [
+            -51.08557392957363,
+            -30.196790264663207
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_26",
+          "lng_lat": [
+            -51.0616451713806,
+            -30.219545663123338
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_26",
+          "lng_lat": [
+            -51.04887195934757,
+            -30.218428438354838
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_26",
+          "lng_lat": [
+            -51.08194689673662,
+            -30.217810637627444
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_26",
+          "lng_lat": [
+            -51.08900063934832,
+            -30.1962266992654
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_26",
+          "lng_lat": [
+            -51.06861857870632,
+            -30.21570370870996
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Farrapos",
+      "lng_lat": [
+        -51.1974023529904,
+        -29.9850699991564
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_27",
+          "lng_lat": [
+            -51.198103699421196,
+            -29.980220365254663
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_27",
+          "lng_lat": [
+            -51.192371245699135,
+            -29.971675074915915
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_27",
+          "lng_lat": [
+            -51.193024706968565,
+            -29.981878544969263
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_27",
+          "lng_lat": [
+            -51.19877614680906,
+            -29.975643574610636
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_27",
+          "lng_lat": [
+            -51.19867826565592,
+            -29.9720922497138
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_27",
+          "lng_lat": [
+            -51.1959207091479,
+            -29.98256332057294
+          ]
+        },
+        {
+          "poi_type": "stadium",
+          "unique_name": "stadium_0",
+          "lng_lat": [
+            -51.197252384232385,
+            -29.971775356527
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Farroupilha",
+      "lng_lat": [
+        -51.2136185372287,
+        -30.038368061923
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_28",
+          "lng_lat": [
+            -51.212336461596294,
+            -30.036074745811085
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_28",
+          "lng_lat": [
+            -51.21979435502687,
+            -30.03657691985199
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_28",
+          "lng_lat": [
+            -51.21570748781142,
+            -30.03976283195942
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_28",
+          "lng_lat": [
+            -51.212974616758515,
+            -30.038756277907865
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_28",
+          "lng_lat": [
+            -51.21556901441983,
+            -30.040045258140022
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_28",
+          "lng_lat": [
+            -51.21858917245818,
+            -30.03690983824806
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_3",
+          "lng_lat": [
+            -51.22034675448811,
+            -30.03375427547931
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Floresta",
+      "lng_lat": [
+        -51.2120255115732,
+        -30.0218580655156
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_29",
+          "lng_lat": [
+            -51.20662702203543,
+            -30.018102007548542
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_29",
+          "lng_lat": [
+            -51.19787492975012,
+            -30.017697124955184
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_29",
+          "lng_lat": [
+            -51.21081234905655,
+            -30.02020793671576
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_29",
+          "lng_lat": [
+            -51.20044186366907,
+            -30.017505715070797
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_29",
+          "lng_lat": [
+            -51.210016162904914,
+            -30.019633605818203
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_29",
+          "lng_lat": [
+            -51.208944650356905,
+            -30.02039073372653
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Glória",
+      "lng_lat": [
+        -51.1985906238754,
+        -30.0785891096479
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_30",
+          "lng_lat": [
+            -51.18675261362225,
+            -30.07938657571375
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_30",
+          "lng_lat": [
+            -51.18362778936269,
+            -30.080374741961812
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_30",
+          "lng_lat": [
+            -51.19288020377326,
+            -30.077572285532593
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_30",
+          "lng_lat": [
+            -51.191539291733235,
+            -30.0779074284378
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_30",
+          "lng_lat": [
+            -51.192594940452246,
+            -30.091141507305984
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_30",
+          "lng_lat": [
+            -51.18749942368517,
+            -30.082620393334597
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_4",
+          "lng_lat": [
+            -51.1916937709369,
+            -30.09209313829436
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Guarujá",
+      "lng_lat": [
+        -51.2191885570036,
+        -30.156853443553
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_31",
+          "lng_lat": [
+            -51.21145863285065,
+            -30.156048272352805
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_31",
+          "lng_lat": [
+            -51.21811307288891,
+            -30.154113340731072
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_31",
+          "lng_lat": [
+            -51.215596784985,
+            -30.161760039449103
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_31",
+          "lng_lat": [
+            -51.2135760379387,
+            -30.16312104153931
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_31",
+          "lng_lat": [
+            -51.2200777797539,
+            -30.155843731782102
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_31",
+          "lng_lat": [
+            -51.207650920668435,
+            -30.16010506719222
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Higienópolis",
+      "lng_lat": [
+        -51.1814201095827,
+        -30.0146237279222
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_32",
+          "lng_lat": [
+            -51.178714585560684,
+            -30.012416845771263
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_32",
+          "lng_lat": [
+            -51.18048689203144,
+            -30.011382496573038
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_32",
+          "lng_lat": [
+            -51.18706484751442,
+            -30.0130652353228
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_32",
+          "lng_lat": [
+            -51.17947188633454,
+            -30.013582337234332
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_32",
+          "lng_lat": [
+            -51.18617134414594,
+            -30.01402269353363
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_32",
+          "lng_lat": [
+            -51.1819757760359,
+            -30.0168764224135
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Hípica",
+      "lng_lat": [
+        -51.1761044540436,
+        -30.1561358366347
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_33",
+          "lng_lat": [
+            -51.16858597401735,
+            -30.140991250309213
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_33",
+          "lng_lat": [
+            -51.16849034378389,
+            -30.147901797889592
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_33",
+          "lng_lat": [
+            -51.19436293178049,
+            -30.168951999730194
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_33",
+          "lng_lat": [
+            -51.18854044387412,
+            -30.145238968349837
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_33",
+          "lng_lat": [
+            -51.18202964718702,
+            -30.1592188223812
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_33",
+          "lng_lat": [
+            -51.17606108593445,
+            -30.16837604526273
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Humaitá",
+      "lng_lat": [
+        -51.1876065448791,
+        -29.9843768763043
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_34",
+          "lng_lat": [
+            -51.18696008002664,
+            -29.98898446921647
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_34",
+          "lng_lat": [
+            -51.191097799442474,
+            -29.99445194399522
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_34",
+          "lng_lat": [
+            -51.187612182315156,
+            -29.972377374324616
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_34",
+          "lng_lat": [
+            -51.185392074397356,
+            -29.98693663231653
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_34",
+          "lng_lat": [
+            -51.18277096810343,
+            -29.973453299384055
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_34",
+          "lng_lat": [
+            -51.19267808066743,
+            -29.98304228847302
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Independência",
+      "lng_lat": [
+        -51.2114165227445,
+        -30.0283138642156
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_35",
+          "lng_lat": [
+            -51.21183466646268,
+            -30.028147243715644
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_35",
+          "lng_lat": [
+            -51.21163391188642,
+            -30.028365007072857
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_35",
+          "lng_lat": [
+            -51.21102834952863,
+            -30.029056524523817
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_35",
+          "lng_lat": [
+            -51.21232797001517,
+            -30.026524127068914
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_35",
+          "lng_lat": [
+            -51.21365627878435,
+            -30.027458457924418
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_35",
+          "lng_lat": [
+            -51.21285277597247,
+            -30.02915335599899
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_5",
+          "lng_lat": [
+            -51.217973375481144,
+            -30.029649784686708
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_4",
+          "lng_lat": [
+            -51.21107955438429,
+            -30.03024800065475
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Ipanema",
+      "lng_lat": [
+        -51.2242015748011,
+        -30.135351867939
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_36",
+          "lng_lat": [
+            -51.222773192455705,
+            -30.13217382613492
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_36",
+          "lng_lat": [
+            -51.23299469610967,
+            -30.133259098040565
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_36",
+          "lng_lat": [
+            -51.23224062591187,
+            -30.135002905634888
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_36",
+          "lng_lat": [
+            -51.22701615148826,
+            -30.129320112909603
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_36",
+          "lng_lat": [
+            -51.215263008068185,
+            -30.134283619238282
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_36",
+          "lng_lat": [
+            -51.22342183214983,
+            -30.127705149257366
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Botânico",
+      "lng_lat": [
+        -51.1866150813593,
+        -30.0541730304667
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_37",
+          "lng_lat": [
+            -51.17333615165232,
+            -30.051189809981885
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_37",
+          "lng_lat": [
+            -51.18582162011984,
+            -30.051748670519437
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_37",
+          "lng_lat": [
+            -51.17540419239252,
+            -30.048219506389245
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_37",
+          "lng_lat": [
+            -51.17649147277872,
+            -30.050369764357466
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_37",
+          "lng_lat": [
+            -51.179471231068625,
+            -30.047094698813858
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_37",
+          "lng_lat": [
+            -51.18347203734049,
+            -30.05173600848657
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_6",
+          "lng_lat": [
+            -51.1788941411008,
+            -30.056106917267886
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_5",
+          "lng_lat": [
+            -51.17269838717616,
+            -30.053875433734664
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Carvalho",
+      "lng_lat": [
+        -51.1462547180695,
+        -30.0520131347363
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_38",
+          "lng_lat": [
+            -51.14929304125112,
+            -30.05891163347074
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_38",
+          "lng_lat": [
+            -51.14331244265066,
+            -30.060326806760486
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_38",
+          "lng_lat": [
+            -51.14899271814335,
+            -30.052338539090144
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_38",
+          "lng_lat": [
+            -51.15258536450588,
+            -30.05685831604064
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_38",
+          "lng_lat": [
+            -51.15131427323175,
+            -30.052604322695593
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_38",
+          "lng_lat": [
+            -51.142259886751816,
+            -30.062225745436344
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_7",
+          "lng_lat": [
+            -51.1505842340168,
+            -30.05226735527232
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim do Salso",
+      "lng_lat": [
+        -51.1682005959831,
+        -30.0492071284135
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_39",
+          "lng_lat": [
+            -51.16632439654578,
+            -30.05425324361669
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_39",
+          "lng_lat": [
+            -51.161751737462815,
+            -30.05274022522786
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_39",
+          "lng_lat": [
+            -51.16665317873265,
+            -30.049161746031846
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_39",
+          "lng_lat": [
+            -51.162398360797496,
+            -30.055442557968437
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_39",
+          "lng_lat": [
+            -51.16904254129537,
+            -30.05313926249398
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_39",
+          "lng_lat": [
+            -51.16542625318584,
+            -30.050191994452376
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Leopoldina",
+      "lng_lat": [
+        -51.1110911832298,
+        -30.0215478036466
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_40",
+          "lng_lat": [
+            -51.11257173027409,
+            -30.01634446087772
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_40",
+          "lng_lat": [
+            -51.10993418173741,
+            -30.025861114269265
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_40",
+          "lng_lat": [
+            -51.11183010857228,
+            -30.017831524034452
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_40",
+          "lng_lat": [
+            -51.11439947944473,
+            -30.021254121137005
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_40",
+          "lng_lat": [
+            -51.1092478821451,
+            -30.02586251754297
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_40",
+          "lng_lat": [
+            -51.10840920401159,
+            -30.019872163435434
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Europa",
+      "lng_lat": [
+        -51.1601184972897,
+        -30.0228209964289
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_41",
+          "lng_lat": [
+            -51.15775442706971,
+            -30.024079550091702
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_41",
+          "lng_lat": [
+            -51.1592633737004,
+            -30.026274148740317
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_41",
+          "lng_lat": [
+            -51.161456217962126,
+            -30.02786486494871
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_41",
+          "lng_lat": [
+            -51.15562036811202,
+            -30.027408277543387
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_41",
+          "lng_lat": [
+            -51.161229917125276,
+            -30.02142423257516
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_41",
+          "lng_lat": [
+            -51.15879286136652,
+            -30.02131178138595
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_6",
+          "lng_lat": [
+            -51.16030029164834,
+            -30.025380762969547
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Floresta",
+      "lng_lat": [
+        -51.1594853717086,
+        -30.0008770326953
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_42",
+          "lng_lat": [
+            -51.16028741559417,
+            -30.003212369273886
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_42",
+          "lng_lat": [
+            -51.15567413142393,
+            -29.996406971795192
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_42",
+          "lng_lat": [
+            -51.157027106632384,
+            -30.00367136595655
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_42",
+          "lng_lat": [
+            -51.15778800851897,
+            -30.003524149838686
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_42",
+          "lng_lat": [
+            -51.159985765690465,
+            -30.002728012699638
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_42",
+          "lng_lat": [
+            -51.16082468803568,
+            -29.996963965428957
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Isabel",
+      "lng_lat": [
+        -51.2367285492751,
+        -30.1259771787583
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_43",
+          "lng_lat": [
+            -51.233858689325274,
+            -30.127328487506176
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_43",
+          "lng_lat": [
+            -51.23651935080674,
+            -30.12510732621806
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_43",
+          "lng_lat": [
+            -51.23621354311886,
+            -30.128845220497663
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_43",
+          "lng_lat": [
+            -51.23975069609291,
+            -30.124317854578436
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_43",
+          "lng_lat": [
+            -51.23862857790288,
+            -30.125728392899738
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_43",
+          "lng_lat": [
+            -51.23935890596235,
+            -30.12501341854346
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Itú",
+      "lng_lat": [
+        -51.138345289989,
+        -30.0211282251709
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_44",
+          "lng_lat": [
+            -51.138246452209074,
+            -30.02012711250497
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_44",
+          "lng_lat": [
+            -51.13587064473972,
+            -30.015953583821744
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_44",
+          "lng_lat": [
+            -51.14082691602009,
+            -30.019368346823914
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_44",
+          "lng_lat": [
+            -51.14266029328179,
+            -30.023711432764205
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_44",
+          "lng_lat": [
+            -51.13723101050794,
+            -30.024293202859706
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_44",
+          "lng_lat": [
+            -51.13875072658532,
+            -30.021776158997255
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Lindóia",
+      "lng_lat": [
+        -51.1515796569746,
+        -30.0030091011001
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_45",
+          "lng_lat": [
+            -51.14971518560753,
+            -30.005328984504384
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_45",
+          "lng_lat": [
+            -51.15322690192404,
+            -30.00579254630404
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_45",
+          "lng_lat": [
+            -51.15371965903328,
+            -30.008748223840254
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_45",
+          "lng_lat": [
+            -51.15311888857714,
+            -30.003862905348456
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_45",
+          "lng_lat": [
+            -51.1542779698509,
+            -30.00137169508583
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_45",
+          "lng_lat": [
+            -51.153934263937806,
+            -30.003071476961907
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_7",
+          "lng_lat": [
+            -51.14892683947528,
+            -30.001217739884286
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim Sabará",
+      "lng_lat": [
+        -51.1436646588742,
+        -30.030604478588
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_46",
+          "lng_lat": [
+            -51.14358262172941,
+            -30.039848643098097
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_46",
+          "lng_lat": [
+            -51.137889939121884,
+            -30.042835277637586
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_46",
+          "lng_lat": [
+            -51.14235567748833,
+            -30.03068897389373
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_46",
+          "lng_lat": [
+            -51.13920978109906,
+            -30.028747643448
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_46",
+          "lng_lat": [
+            -51.14584811827969,
+            -30.030453149069263
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_46",
+          "lng_lat": [
+            -51.14555233131834,
+            -30.037090967274295
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Jardim São Pedro",
+      "lng_lat": [
+        -51.1651556518396,
+        -30.0065367215187
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_47",
+          "lng_lat": [
+            -51.16367038838605,
+            -29.998551769955593
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_47",
+          "lng_lat": [
+            -51.16394858748227,
+            -30.00856667539696
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_47",
+          "lng_lat": [
+            -51.17082604317917,
+            -30.00150088603763
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_47",
+          "lng_lat": [
+            -51.169861767127664,
+            -29.999513252609898
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_47",
+          "lng_lat": [
+            -51.16557256485741,
+            -29.99679363289966
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_47",
+          "lng_lat": [
+            -51.16671247646895,
+            -29.996624702608614
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Lageado",
+      "lng_lat": [
+        -51.133789013813,
+        -30.189616989235
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_48",
+          "lng_lat": [
+            -51.11501510821449,
+            -30.202507841559846
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_48",
+          "lng_lat": [
+            -51.13132166556768,
+            -30.188981966668212
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_48",
+          "lng_lat": [
+            -51.1329376067997,
+            -30.18324197832754
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_48",
+          "lng_lat": [
+            -51.11776809237947,
+            -30.173781916478962
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_48",
+          "lng_lat": [
+            -51.098500181143905,
+            -30.18401200964145
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_48",
+          "lng_lat": [
+            -51.09924096227376,
+            -30.17017425159457
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Lami",
+      "lng_lat": [
+        -51.0955285479783,
+        -30.2209883173142
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_49",
+          "lng_lat": [
+            -51.11452539107083,
+            -30.23143866824086
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_49",
+          "lng_lat": [
+            -51.108254046569584,
+            -30.237389662373666
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_49",
+          "lng_lat": [
+            -51.05908672078695,
+            -30.24053465543091
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_49",
+          "lng_lat": [
+            -51.06997396349068,
+            -30.24692990593578
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_49",
+          "lng_lat": [
+            -51.111087428796594,
+            -30.22355887112349
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_49",
+          "lng_lat": [
+            -51.07410994365398,
+            -30.244099474580498
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Lomba do Pinheiro",
+      "lng_lat": [
+        -51.1261023865233,
+        -30.0985224307081
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_50",
+          "lng_lat": [
+            -51.15106977168813,
+            -30.09822198298348
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_50",
+          "lng_lat": [
+            -51.091389858792326,
+            -30.14634159935324
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_50",
+          "lng_lat": [
+            -51.08146405490521,
+            -30.175154454572343
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_50",
+          "lng_lat": [
+            -51.13802114704744,
+            -30.09060563660688
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_50",
+          "lng_lat": [
+            -51.08853140989991,
+            -30.16455433672919
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_50",
+          "lng_lat": [
+            -51.105318987817554,
+            -30.110065386833618
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Mário Quintana",
+      "lng_lat": [
+        -51.1064402167177,
+        -30.0308938155853
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_51",
+          "lng_lat": [
+            -51.10201337023631,
+            -30.03049619313504
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_51",
+          "lng_lat": [
+            -51.106939510669,
+            -30.032982738296926
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_51",
+          "lng_lat": [
+            -51.09993271237172,
+            -30.037397104036245
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_51",
+          "lng_lat": [
+            -51.11269891909606,
+            -30.02703093386625
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_51",
+          "lng_lat": [
+            -51.090928078059704,
+            -30.027302565840603
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_51",
+          "lng_lat": [
+            -51.10009406576295,
+            -30.04681847847589
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Medianeira",
+      "lng_lat": [
+        -51.2108669474596,
+        -30.0647837981581
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_52",
+          "lng_lat": [
+            -51.21621071853596,
+            -30.06481260055469
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_52",
+          "lng_lat": [
+            -51.21252799998882,
+            -30.06621055045022
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_52",
+          "lng_lat": [
+            -51.21428402264192,
+            -30.06390503848303
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_52",
+          "lng_lat": [
+            -51.209653860747494,
+            -30.060971529993143
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_52",
+          "lng_lat": [
+            -51.20453687444267,
+            -30.063978957656687
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_52",
+          "lng_lat": [
+            -51.21305847828534,
+            -30.067692168625026
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Menino Deus",
+      "lng_lat": [
+        -51.222051547168,
+        -30.0529677373194
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_53",
+          "lng_lat": [
+            -51.22753587699349,
+            -30.04778172893015
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_53",
+          "lng_lat": [
+            -51.225960519344184,
+            -30.063778944628368
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_53",
+          "lng_lat": [
+            -51.2219507236654,
+            -30.054814758065216
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_53",
+          "lng_lat": [
+            -51.22132639719485,
+            -30.052479282933106
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_53",
+          "lng_lat": [
+            -51.220132410789404,
+            -30.05993887886033
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_53",
+          "lng_lat": [
+            -51.22723992368051,
+            -30.063783832905575
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_8",
+          "lng_lat": [
+            -51.22312336992338,
+            -30.060960847644388
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Moinhos de Vento",
+      "lng_lat": [
+        -51.202415370788,
+        -30.0237549822533
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_54",
+          "lng_lat": [
+            -51.20024877432415,
+            -30.026318644422417
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_54",
+          "lng_lat": [
+            -51.19912042304164,
+            -30.027244911033296
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_54",
+          "lng_lat": [
+            -51.20353455809319,
+            -30.019689769451908
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_54",
+          "lng_lat": [
+            -51.20824237233996,
+            -30.028832292069133
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_54",
+          "lng_lat": [
+            -51.20338166106375,
+            -30.02769485996972
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_54",
+          "lng_lat": [
+            -51.206013596050155,
+            -30.02285303898441
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_9",
+          "lng_lat": [
+            -51.199526028840395,
+            -30.023646837848226
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_8",
+          "lng_lat": [
+            -51.203305964874275,
+            -30.021967817626205
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Mont'Serrat",
+      "lng_lat": [
+        -51.1907313259732,
+        -30.0269442926526
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_55",
+          "lng_lat": [
+            -51.184158801360105,
+            -30.026603170129686
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_55",
+          "lng_lat": [
+            -51.185671836021704,
+            -30.027621474029008
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_55",
+          "lng_lat": [
+            -51.188310726541616,
+            -30.02922061843248
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_55",
+          "lng_lat": [
+            -51.19443882358761,
+            -30.029476091584375
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_55",
+          "lng_lat": [
+            -51.18799621186079,
+            -30.027035116418805
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_55",
+          "lng_lat": [
+            -51.18734417931823,
+            -30.02970417854014
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Morro Santana",
+      "lng_lat": [
+        -51.129110197202,
+        -30.040364313615
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_56",
+          "lng_lat": [
+            -51.11712261673268,
+            -30.041365859087538
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_56",
+          "lng_lat": [
+            -51.1258608393544,
+            -30.049837493726244
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_56",
+          "lng_lat": [
+            -51.13050636938657,
+            -30.04907273433552
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_56",
+          "lng_lat": [
+            -51.11649692370775,
+            -30.050142056826765
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_56",
+          "lng_lat": [
+            -51.13471243511889,
+            -30.032264896513315
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_56",
+          "lng_lat": [
+            -51.116418940738996,
+            -30.039327600552763
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Navegantes",
+      "lng_lat": [
+        -51.1986723174991,
+        -30.0031248682091
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_57",
+          "lng_lat": [
+            -51.207434755518214,
+            -29.9978226183842
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_57",
+          "lng_lat": [
+            -51.1970078494122,
+            -29.991347584397058
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_57",
+          "lng_lat": [
+            -51.20136480485722,
+            -29.99995423007521
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_57",
+          "lng_lat": [
+            -51.20133980928135,
+            -30.00456297863045
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_57",
+          "lng_lat": [
+            -51.204246168843724,
+            -29.997744100322066
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_57",
+          "lng_lat": [
+            -51.19528798913042,
+            -30.003417179120508
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_9",
+          "lng_lat": [
+            -51.19958814930543,
+            -29.990763204903857
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Nonoai",
+      "lng_lat": [
+        -51.2178406122179,
+        -30.0891731624708
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_58",
+          "lng_lat": [
+            -51.21230894033561,
+            -30.09749221219327
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_58",
+          "lng_lat": [
+            -51.21769110806094,
+            -30.089980616631973
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_58",
+          "lng_lat": [
+            -51.216918472408146,
+            -30.095547692052573
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_58",
+          "lng_lat": [
+            -51.21987038283667,
+            -30.094051421995275
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_58",
+          "lng_lat": [
+            -51.20408326291798,
+            -30.090120781330217
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_58",
+          "lng_lat": [
+            -51.22152622316245,
+            -30.098785968980355
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Parque Santa Fé",
+      "lng_lat": [
+        -51.1087313515186,
+        -30.0138777573214
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_59",
+          "lng_lat": [
+            -51.107981081148246,
+            -30.00642731941783
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_59",
+          "lng_lat": [
+            -51.1052895429109,
+            -30.007451978096142
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_59",
+          "lng_lat": [
+            -51.10190041514846,
+            -30.012895205097283
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_59",
+          "lng_lat": [
+            -51.1064377188667,
+            -30.009053970486995
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_59",
+          "lng_lat": [
+            -51.11166629826167,
+            -30.013280733303983
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_59",
+          "lng_lat": [
+            -51.10220405192252,
+            -30.01519532118375
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Partenon",
+      "lng_lat": [
+        -51.1751631207019,
+        -30.0575959830085
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_60",
+          "lng_lat": [
+            -51.19736812157791,
+            -30.072185647308714
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_60",
+          "lng_lat": [
+            -51.19814151573648,
+            -30.072674758386526
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_60",
+          "lng_lat": [
+            -51.18936708289916,
+            -30.06549526984784
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_60",
+          "lng_lat": [
+            -51.158410220141654,
+            -30.069369281118302
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_60",
+          "lng_lat": [
+            -51.1830430825869,
+            -30.062653586438522
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_60",
+          "lng_lat": [
+            -51.1634538303031,
+            -30.060447057308455
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Passo D'Areia",
+      "lng_lat": [
+        -51.1717152784613,
+        -30.014395435791
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_61",
+          "lng_lat": [
+            -51.16261963543479,
+            -30.017062457764794
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_61",
+          "lng_lat": [
+            -51.17661573042143,
+            -30.009613581383665
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_61",
+          "lng_lat": [
+            -51.16287467430934,
+            -30.016076631848254
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_61",
+          "lng_lat": [
+            -51.17585713615612,
+            -30.017871789116256
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_61",
+          "lng_lat": [
+            -51.172061178610385,
+            -30.014050960902757
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_61",
+          "lng_lat": [
+            -51.171669102058765,
+            -30.017595452273188
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Passo das Pedras",
+      "lng_lat": [
+        -51.1265034279473,
+        -30.0188904433147
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_62",
+          "lng_lat": [
+            -51.1251397783847,
+            -30.016285036877452
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_62",
+          "lng_lat": [
+            -51.12720390615797,
+            -30.016237944126832
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_62",
+          "lng_lat": [
+            -51.122785023577535,
+            -30.01620630436345
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_62",
+          "lng_lat": [
+            -51.13024600101331,
+            -30.021101421395148
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_62",
+          "lng_lat": [
+            -51.123538351625434,
+            -30.023301125901423
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_62",
+          "lng_lat": [
+            -51.12445947429658,
+            -30.018233852118325
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Pedra Redonda",
+      "lng_lat": [
+        -51.2435128333611,
+        -30.1256110371717
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_63",
+          "lng_lat": [
+            -51.250953608265775,
+            -30.124085898213167
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_63",
+          "lng_lat": [
+            -51.24646245769851,
+            -30.124675620027546
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_63",
+          "lng_lat": [
+            -51.24240605059806,
+            -30.130067675736356
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_63",
+          "lng_lat": [
+            -51.249512131163144,
+            -30.12209979177863
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_63",
+          "lng_lat": [
+            -51.24482713160477,
+            -30.123554313643695
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_63",
+          "lng_lat": [
+            -51.24285597912585,
+            -30.127248266128237
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Petrópolis",
+      "lng_lat": [
+        -51.1834624501667,
+        -30.0433923674216
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_64",
+          "lng_lat": [
+            -51.18397477367133,
+            -30.040580239147662
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_64",
+          "lng_lat": [
+            -51.18227540883326,
+            -30.038251874567333
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_64",
+          "lng_lat": [
+            -51.18010905344618,
+            -30.03833461330661
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_64",
+          "lng_lat": [
+            -51.18161207846431,
+            -30.035993247255416
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_64",
+          "lng_lat": [
+            -51.193039039513074,
+            -30.046338661398405
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_64",
+          "lng_lat": [
+            -51.17822251517178,
+            -30.037430583701948
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Pitinga",
+      "lng_lat": [
+        -51.1042679090053,
+        -30.1419030235185
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_65",
+          "lng_lat": [
+            -51.10363839037318,
+            -30.14666608797948
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_65",
+          "lng_lat": [
+            -51.12391641273145,
+            -30.13989070485258
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_65",
+          "lng_lat": [
+            -51.115287895659414,
+            -30.15443009293861
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_65",
+          "lng_lat": [
+            -51.09892741880082,
+            -30.140482315400817
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_65",
+          "lng_lat": [
+            -51.113404823041236,
+            -30.157208295350106
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_65",
+          "lng_lat": [
+            -51.11168498949815,
+            -30.159547745583723
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Ponta Grossa",
+      "lng_lat": [
+        -51.1945022293607,
+        -30.1857845444933
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_66",
+          "lng_lat": [
+            -51.22586754309896,
+            -30.18026279188944
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_66",
+          "lng_lat": [
+            -51.191690275936416,
+            -30.176234846895607
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_66",
+          "lng_lat": [
+            -51.198239980167244,
+            -30.186854180214812
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_66",
+          "lng_lat": [
+            -51.217373330433944,
+            -30.182226943296286
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_66",
+          "lng_lat": [
+            -51.1851160959687,
+            -30.174924501923172
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_66",
+          "lng_lat": [
+            -51.21244474564093,
+            -30.18494842016213
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Praia de Belas",
+      "lng_lat": [
+        -51.230172636,
+        -30.0472881985923
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_67",
+          "lng_lat": [
+            -51.233163246660446,
+            -30.064000311654073
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_67",
+          "lng_lat": [
+            -51.23118302221453,
+            -30.060305094565628
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_67",
+          "lng_lat": [
+            -51.23494742613891,
+            -30.061168233148347
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_67",
+          "lng_lat": [
+            -51.23130827632802,
+            -30.040528017469047
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_67",
+          "lng_lat": [
+            -51.23278888866135,
+            -30.04698172685807
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_67",
+          "lng_lat": [
+            -51.23269207485713,
+            -30.04050906118079
+          ]
+        },
+        {
+          "poi_type": "stadium",
+          "unique_name": "stadium_1",
+          "lng_lat": [
+            -51.22869689715968,
+            -30.042433388226584
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_10",
+          "lng_lat": [
+            -51.23177852491091,
+            -30.04002237530899
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Restinga",
+      "lng_lat": [
+        -51.1393367535089,
+        -30.1549269702203
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_68",
+          "lng_lat": [
+            -51.14849210018571,
+            -30.14102171584812
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_68",
+          "lng_lat": [
+            -51.15621309982954,
+            -30.14692635947846
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_68",
+          "lng_lat": [
+            -51.15141294742293,
+            -30.157153514051647
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_68",
+          "lng_lat": [
+            -51.152046264004795,
+            -30.124373445558934
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_68",
+          "lng_lat": [
+            -51.12563013018762,
+            -30.168885918564897
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_68",
+          "lng_lat": [
+            -51.141737505154225,
+            -30.167307977500116
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_10",
+          "lng_lat": [
+            -51.142672903936614,
+            -30.166259048435887
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Rio Branco",
+      "lng_lat": [
+        -51.2019103556617,
+        -30.0331907998885
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_69",
+          "lng_lat": [
+            -51.19704904805964,
+            -30.036629053252064
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_69",
+          "lng_lat": [
+            -51.20502588223434,
+            -30.029448579638494
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_69",
+          "lng_lat": [
+            -51.201633498682945,
+            -30.032537277152176
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_69",
+          "lng_lat": [
+            -51.19772914445415,
+            -30.039073553367107
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_69",
+          "lng_lat": [
+            -51.20419836717147,
+            -30.03444165986607
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_69",
+          "lng_lat": [
+            -51.203996554257685,
+            -30.03472293450762
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_11",
+          "lng_lat": [
+            -51.202433563625306,
+            -30.030300092554757
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Rubem Berta",
+      "lng_lat": [
+        -51.1044480063116,
+        -30.0209385301047
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_70",
+          "lng_lat": [
+            -51.09391610377145,
+            -30.00747389027449
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_70",
+          "lng_lat": [
+            -51.098031850775875,
+            -30.013784932703945
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_70",
+          "lng_lat": [
+            -51.0912017398424,
+            -30.019082543553143
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_70",
+          "lng_lat": [
+            -51.09695931745659,
+            -30.013202336325406
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_70",
+          "lng_lat": [
+            -51.088892160365994,
+            -30.021405142584882
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_70",
+          "lng_lat": [
+            -51.088432499790976,
+            -30.001946950227428
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Santa Cecília",
+      "lng_lat": [
+        -51.201331073605,
+        -30.0408947118911
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_71",
+          "lng_lat": [
+            -51.197183005232944,
+            -30.044789930351143
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_71",
+          "lng_lat": [
+            -51.207451863526956,
+            -30.042908099856472
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_71",
+          "lng_lat": [
+            -51.19685290433734,
+            -30.041139439166184
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_71",
+          "lng_lat": [
+            -51.207461946886085,
+            -30.043429419295013
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_71",
+          "lng_lat": [
+            -51.199047300386674,
+            -30.04016107453275
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_71",
+          "lng_lat": [
+            -51.1969996551623,
+            -30.04371746555792
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_12",
+          "lng_lat": [
+            -51.1965065638956,
+            -30.040590014703845
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Santa Maria Goretti",
+      "lng_lat": [
+        -51.1755307420072,
+        -30.0058292780705
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_72",
+          "lng_lat": [
+            -51.179917048402885,
+            -30.008083133223902
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_72",
+          "lng_lat": [
+            -51.181724417673635,
+            -30.003778593443556
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_72",
+          "lng_lat": [
+            -51.181310450988946,
+            -30.003878962393564
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_72",
+          "lng_lat": [
+            -51.17437980739035,
+            -30.005258620288913
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_72",
+          "lng_lat": [
+            -51.17636856153074,
+            -30.005661710023983
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_72",
+          "lng_lat": [
+            -51.18014340242323,
+            -30.006976370669864
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Santa Rosa de Lima",
+      "lng_lat": [
+        -51.1077101812265,
+        -30.0006905147282
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_73",
+          "lng_lat": [
+            -51.10192542256839,
+            -29.981263838564008
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_73",
+          "lng_lat": [
+            -51.095518253789905,
+            -29.996471627401895
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_73",
+          "lng_lat": [
+            -51.10245416641912,
+            -30.00121709644023
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_73",
+          "lng_lat": [
+            -51.092571155162204,
+            -29.981618891029125
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_73",
+          "lng_lat": [
+            -51.103153599385614,
+            -29.999659977991687
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_73",
+          "lng_lat": [
+            -51.095839794212104,
+            -29.983377735612713
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Santa Tereza",
+      "lng_lat": [
+        -51.2223411881961,
+        -30.0756585341733
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_74",
+          "lng_lat": [
+            -51.22760924298837,
+            -30.072030695041597
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_74",
+          "lng_lat": [
+            -51.22226780577116,
+            -30.079293738968634
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_74",
+          "lng_lat": [
+            -51.23323747174961,
+            -30.07839230259834
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_74",
+          "lng_lat": [
+            -51.22964417701009,
+            -30.06770638303437
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_74",
+          "lng_lat": [
+            -51.2158892969452,
+            -30.070192034941712
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_74",
+          "lng_lat": [
+            -51.22967779001215,
+            -30.077698340135086
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Santana",
+      "lng_lat": [
+        -51.2055865687131,
+        -30.046728905517
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_75",
+          "lng_lat": [
+            -51.2026779789485,
+            -30.047571225186605
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_75",
+          "lng_lat": [
+            -51.20230419829598,
+            -30.04905907155745
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_75",
+          "lng_lat": [
+            -51.201804125575975,
+            -30.04919182210207
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_75",
+          "lng_lat": [
+            -51.20619575814943,
+            -30.04939953720209
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_75",
+          "lng_lat": [
+            -51.21207808155426,
+            -30.04127343490732
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_75",
+          "lng_lat": [
+            -51.20610606341968,
+            -30.0498768514145
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_13",
+          "lng_lat": [
+            -51.2126836040131,
+            -30.040064114764437
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Santo Antônio",
+      "lng_lat": [
+        -51.2034922412774,
+        -30.0581503937635
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_76",
+          "lng_lat": [
+            -51.204540239118266,
+            -30.058658823052237
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_76",
+          "lng_lat": [
+            -51.20553219138091,
+            -30.062080103286952
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_76",
+          "lng_lat": [
+            -51.20143317436525,
+            -30.054796473105583
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_76",
+          "lng_lat": [
+            -51.200104001723716,
+            -30.059799529237797
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_76",
+          "lng_lat": [
+            -51.19958608473485,
+            -30.056383603615718
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_76",
+          "lng_lat": [
+            -51.19967397058276,
+            -30.061261590779655
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "São Caetano",
+      "lng_lat": [
+        -51.1057829543841,
+        -30.2049260216445
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_77",
+          "lng_lat": [
+            -51.07375690485075,
+            -30.18004470287456
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_77",
+          "lng_lat": [
+            -51.09509546013022,
+            -30.194534856847206
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_77",
+          "lng_lat": [
+            -51.102323095579294,
+            -30.1984867555066
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_77",
+          "lng_lat": [
+            -51.09208324268631,
+            -30.210206570168882
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_77",
+          "lng_lat": [
+            -51.08744984730556,
+            -30.189762456943356
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_77",
+          "lng_lat": [
+            -51.0849229780222,
+            -30.18205642328423
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "São Geraldo",
+      "lng_lat": [
+        -51.200194789571,
+        -30.0095047133709
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_78",
+          "lng_lat": [
+            -51.19552626766842,
+            -30.010356497608722
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_78",
+          "lng_lat": [
+            -51.1988382022122,
+            -30.013758023274598
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_78",
+          "lng_lat": [
+            -51.19868723728961,
+            -30.013470582872273
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_78",
+          "lng_lat": [
+            -51.20332724788898,
+            -30.01297399062949
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_78",
+          "lng_lat": [
+            -51.19688776626302,
+            -30.010280483044486
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_78",
+          "lng_lat": [
+            -51.20642289278996,
+            -30.00559455483916
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "São João",
+      "lng_lat": [
+        -51.1886611352902,
+        -30.0080480610763
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_79",
+          "lng_lat": [
+            -51.19031821691731,
+            -30.012867014170016
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_79",
+          "lng_lat": [
+            -51.19004345660906,
+            -30.00978553689481
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_79",
+          "lng_lat": [
+            -51.19524955874724,
+            -30.016130920917682
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_79",
+          "lng_lat": [
+            -51.18994957661293,
+            -30.00477087203206
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_79",
+          "lng_lat": [
+            -51.193517008399404,
+            -30.013807193638904
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_79",
+          "lng_lat": [
+            -51.1911858867904,
+            -30.002829833984983
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_11",
+          "lng_lat": [
+            -51.19279430107759,
+            -30.01270941763401
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "São Sebastião",
+      "lng_lat": [
+        -51.1459279435762,
+        -30.0023080640551
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_80",
+          "lng_lat": [
+            -51.14604757099733,
+            -30.002706683917012
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_80",
+          "lng_lat": [
+            -51.14715358494756,
+            -30.00900681922106
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_80",
+          "lng_lat": [
+            -51.143845190995826,
+            -30.000236606987954
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_80",
+          "lng_lat": [
+            -51.140081559380505,
+            -30.003382241157766
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_80",
+          "lng_lat": [
+            -51.145489663197445,
+            -30.00997210690082
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_80",
+          "lng_lat": [
+            -51.14285141238226,
+            -30.004991458574295
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_12",
+          "lng_lat": [
+            -51.14582812840171,
+            -30.00794900616498
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Sarandi",
+      "lng_lat": [
+        -51.1314013320029,
+        -30.0026489358974
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_81",
+          "lng_lat": [
+            -51.11864241839156,
+            -29.99437499227229
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_81",
+          "lng_lat": [
+            -51.11553376863139,
+            -29.96667389482218
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_81",
+          "lng_lat": [
+            -51.1312015453486,
+            -30.003392947919643
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_81",
+          "lng_lat": [
+            -51.14857697412611,
+            -29.963242091534926
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_81",
+          "lng_lat": [
+            -51.15249489476923,
+            -29.98068143306477
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_81",
+          "lng_lat": [
+            -51.11719862844781,
+            -29.995123219827505
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_13",
+          "lng_lat": [
+            -51.117263723012904,
+            -29.99057047046065
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Serraria",
+      "lng_lat": [
+        -51.2144874603135,
+        -30.1667067660624
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_82",
+          "lng_lat": [
+            -51.213513424983475,
+            -30.173562205412665
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_82",
+          "lng_lat": [
+            -51.226103479632044,
+            -30.174784098159737
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_82",
+          "lng_lat": [
+            -51.21359824791215,
+            -30.16880009914424
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_82",
+          "lng_lat": [
+            -51.21062631895001,
+            -30.164138916137784
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_82",
+          "lng_lat": [
+            -51.22081097021375,
+            -30.16495168086985
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_82",
+          "lng_lat": [
+            -51.21150817046109,
+            -30.171790770410365
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Sétimo Céu",
+      "lng_lat": [
+        -51.2510435000969,
+        -30.1195984127114
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_83",
+          "lng_lat": [
+            -51.246364019195376,
+            -30.121132533751915
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_83",
+          "lng_lat": [
+            -51.23556879039096,
+            -30.122764044479727
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_83",
+          "lng_lat": [
+            -51.233110874636886,
+            -30.120563776955706
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_83",
+          "lng_lat": [
+            -51.239861616280294,
+            -30.121392480756914
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_83",
+          "lng_lat": [
+            -51.23414955860902,
+            -30.116830687413955
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_83",
+          "lng_lat": [
+            -51.242036201886,
+            -30.124385762800458
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Teresópolis",
+      "lng_lat": [
+        -51.209418742318,
+        -30.0799772466779
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_84",
+          "lng_lat": [
+            -51.20116366471942,
+            -30.08130744952294
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_84",
+          "lng_lat": [
+            -51.20660503705994,
+            -30.099412349072793
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_84",
+          "lng_lat": [
+            -51.2027141983776,
+            -30.089207242443752
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_84",
+          "lng_lat": [
+            -51.204266493841956,
+            -30.080149573091884
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_84",
+          "lng_lat": [
+            -51.20547017048732,
+            -30.085348222626482
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_84",
+          "lng_lat": [
+            -51.20731309414109,
+            -30.084135425054935
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_14",
+          "lng_lat": [
+            -51.204013188288215,
+            -30.101684358453177
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Três Figueiras",
+      "lng_lat": [
+        -51.1749180398318,
+        -30.0320173995828
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_85",
+          "lng_lat": [
+            -51.172493221868784,
+            -30.03527117794526
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_85",
+          "lng_lat": [
+            -51.17969084135616,
+            -30.03069176498246
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_85",
+          "lng_lat": [
+            -51.171589475764925,
+            -30.031728129092087
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_85",
+          "lng_lat": [
+            -51.17288443787606,
+            -30.032127878824674
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_85",
+          "lng_lat": [
+            -51.16793102175739,
+            -30.037581922480005
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_85",
+          "lng_lat": [
+            -51.16742281373702,
+            -30.03160228764527
+          ]
+        },
+        {
+          "poi_type": "shopping_mall",
+          "unique_name": "shopping_mall_14",
+          "lng_lat": [
+            -51.17128893219566,
+            -30.029962206756245
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Tristeza",
+      "lng_lat": [
+        -51.2514556815603,
+        -30.1090465282678
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_86",
+          "lng_lat": [
+            -51.260173502854514,
+            -30.11772933141293
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_86",
+          "lng_lat": [
+            -51.256828677955895,
+            -30.109143645090768
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_86",
+          "lng_lat": [
+            -51.24989041483819,
+            -30.106567072303882
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_86",
+          "lng_lat": [
+            -51.25291531431145,
+            -30.10538069701906
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_86",
+          "lng_lat": [
+            -51.25999156250488,
+            -30.119090093512433
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_86",
+          "lng_lat": [
+            -51.260815836774874,
+            -30.106205758128933
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Vila Assunção",
+      "lng_lat": [
+        -51.2550204942162,
+        -30.100180146807
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_87",
+          "lng_lat": [
+            -51.26515118468984,
+            -30.09971267752083
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_87",
+          "lng_lat": [
+            -51.25630914840943,
+            -30.096158685606795
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_87",
+          "lng_lat": [
+            -51.25474078159782,
+            -30.09667136768341
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_87",
+          "lng_lat": [
+            -51.25156397577861,
+            -30.099085037182334
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_87",
+          "lng_lat": [
+            -51.249893327299766,
+            -30.10135410481953
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_87",
+          "lng_lat": [
+            -51.26035919476489,
+            -30.103363686901034
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_15",
+          "lng_lat": [
+            -51.253693613275786,
+            -30.099850198458842
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Vila Conceição",
+      "lng_lat": [
+        -51.2585407467141,
+        -30.1211497819494
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_88",
+          "lng_lat": [
+            -51.25757286630087,
+            -30.122524710917915
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_88",
+          "lng_lat": [
+            -51.25370766885335,
+            -30.119188278276685
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_88",
+          "lng_lat": [
+            -51.25377086928075,
+            -30.117700280954864
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_88",
+          "lng_lat": [
+            -51.25524342657645,
+            -30.11865340166965
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_88",
+          "lng_lat": [
+            -51.254615472482776,
+            -30.121146847462423
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_88",
+          "lng_lat": [
+            -51.25884514862534,
+            -30.12076876690112
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Vila Ipiranga",
+      "lng_lat": [
+        -51.1489673177001,
+        -30.021489930859
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_89",
+          "lng_lat": [
+            -51.14886616372608,
+            -30.0255771233107
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_89",
+          "lng_lat": [
+            -51.156063965766066,
+            -30.019396159685694
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_89",
+          "lng_lat": [
+            -51.15132442057512,
+            -30.021510333098657
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_89",
+          "lng_lat": [
+            -51.15276161669787,
+            -30.017856855253218
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_89",
+          "lng_lat": [
+            -51.153134927825505,
+            -30.019787535910435
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_89",
+          "lng_lat": [
+            -51.156649201001315,
+            -30.018224808137514
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Vila Jardim",
+      "lng_lat": [
+        -51.1530055820369,
+        -30.0344525915643
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_90",
+          "lng_lat": [
+            -51.15923037604187,
+            -30.03353465096448
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_90",
+          "lng_lat": [
+            -51.153369210109226,
+            -30.030903329157752
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_90",
+          "lng_lat": [
+            -51.154640485451374,
+            -30.039349207056215
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_90",
+          "lng_lat": [
+            -51.15157625202834,
+            -30.03207334067331
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_90",
+          "lng_lat": [
+            -51.15841674025086,
+            -30.03241846150845
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_90",
+          "lng_lat": [
+            -51.14834839311777,
+            -30.031805251233497
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Vila João Pessoa",
+      "lng_lat": [
+        -51.1765277755466,
+        -30.067579722071
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_91",
+          "lng_lat": [
+            -51.17112194219213,
+            -30.067150676918565
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_91",
+          "lng_lat": [
+            -51.172270253838455,
+            -30.069874414197308
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_91",
+          "lng_lat": [
+            -51.175021039293306,
+            -30.062355293588602
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_91",
+          "lng_lat": [
+            -51.17544041280912,
+            -30.06418788521191
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_91",
+          "lng_lat": [
+            -51.17063406492281,
+            -30.075934482474892
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_91",
+          "lng_lat": [
+            -51.17476854034378,
+            -30.064264834815734
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "Vila Nova",
+      "lng_lat": [
+        -51.2124293380064,
+        -30.1173459931917
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_92",
+          "lng_lat": [
+            -51.19035683077899,
+            -30.132156794309523
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_92",
+          "lng_lat": [
+            -51.2218130459126,
+            -30.11780937773488
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_92",
+          "lng_lat": [
+            -51.18610675015899,
+            -30.11467210592002
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_92",
+          "lng_lat": [
+            -51.205391003094974,
+            -30.128821364756675
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_92",
+          "lng_lat": [
+            -51.2054476968198,
+            -30.120069089767032
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_92",
+          "lng_lat": [
+            -51.18797850189747,
+            -30.105102112958434
+          ]
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_16",
+          "lng_lat": [
+            -51.19732755733892,
+            -30.118696587110048
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "São José",
+      "lng_lat": [
+        -51.1661842488243,
+        -30.068548635895
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_93",
+          "lng_lat": [
+            -51.167218258850475,
+            -30.077337216626667
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_93",
+          "lng_lat": [
+            -51.17111667360064,
+            -30.07064321956407
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_93",
+          "lng_lat": [
+            -51.16225777945825,
+            -30.07059441500273
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_93",
+          "lng_lat": [
+            -51.16713592641596,
+            -30.06509165687196
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_93",
+          "lng_lat": [
+            -51.165775502634446,
+            -30.073012757089657
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_93",
+          "lng_lat": [
+            -51.16192498506937,
+            -30.08816111468866
+          ]
+        }
+      ],
+      "neighbors": []
+    }
+  ]
+}

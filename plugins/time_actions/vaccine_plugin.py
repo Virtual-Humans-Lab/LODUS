@@ -196,7 +196,7 @@ class VaccinePlugin(ActionPlugin):
             new_action_values = {}
             new_action_type = 'gather_population'
             new_action_values['region'] = target_region.name
-            new_action_values['node'] = target_node.name
+            new_action_values['node'] = target_node.unique_name
             new_action_values['quantity'] = to_vacc
             new_action_values['different_node_name'] = "true"
             # print(cycle_step, target_node.get_unique_name(), "Quant", to_vacc, self.prev_vac[_dose_index])

@@ -71,7 +71,7 @@ class SendPopulationBackPlugin(ActionPlugin):
             destination_node = self.env_graph.get_node_by_id(b.node_of_origin)
             destination_region = self.env_graph.get_region_by_name(destination_node.containing_region_name)
            
-            if destination_node.get_unique_name() == acting_node.get_unique_name():
+            if destination_node.get_complete_name() == acting_node.get_complete_name():
                 continue
             
             temp = copy.deepcopy(pop_template)
@@ -87,9 +87,9 @@ class SendPopulationBackPlugin(ActionPlugin):
             # Creates a 'move_population' TimeAction
             new_action_type = 'move_population'
             new_action_values = {'origin_region': acting_region.name,
-                                 'origin_node': acting_node.name,
+                                 'origin_node': acting_node.unique_name,
                                  'destination_region': destination_region.name,
-                                 'destination_node': destination_node.name,
+                                 'destination_node': destination_node.unique_name,
                                  'quantity': quant}
             new_action = Action(action_type = new_action_type, 
                                                 pop_template = temp,

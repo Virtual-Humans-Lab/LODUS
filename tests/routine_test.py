@@ -1,9 +1,8 @@
-from typing import List, Set
-from random_inst import FixedRandom
+from util.random_instance import FixedRandom
 
 import pytest
 from core.population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
-from core.routine import Action, Routine, RoutineFactory, RoutineTemplate
+from core.routine import Action, GlobalAction, Routine, RoutineFactory, RoutineTemplate
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
@@ -23,6 +22,39 @@ class TestAction:
     def test_time_action_invalid_pop_template(self):
         with pytest.raises(ValueError, match="pop_template must be of type PopulationTemplate"):
             Action(action_type="TestAction", pop_template="InvalidTemplate", values={}) # type: ignore
+
+class TestGlobalAction:
+    def test_global_action_initialization(self):
+        pop_template = PopulationTemplate()
+        values = {"key1": "value1", "key2": "value2"}
+        cycle_step_definition = 5
+        global_action = GlobalAction(action_type="GlobalTestAction", population_template=pop_template, values=values, cycle_step_definition=cycle_step_definition)
+        
+        assert global_action.action_type == "GlobalTestAction"
+        assert global_action.pop_template == pop_template
+        assert global_action.values == values
+        assert global_action.cycle_step_definition == cycle_step_definition
+
+    def test_global_action_should_process_action_int(self):
+        pop_template = PopulationTemplate()
+        values = {"key1": "value1", "key2": "value2"}
+        cycle_step_definition = 5
+        global_action = GlobalAction(action_type="GlobalTestAction", population_template=pop_template, values=values, cycle_step_definition=cycle_step_definition)
+        
+        assert global_action.should_process_action(5) == True
+        assert global_action.should_process_action(10) == True
+        assert global_action.should_process_action(3) == False
+
+    def test_global_action_should_process_action_list(self):
+        pop_template = PopulationTemplate()
+        values = {"key1": "value1", "key2": "value2"}
+        cycle_step_definition = [1, 3, 5]
+        global_action = GlobalAction(action_type="GlobalTestAction", population_template=pop_template, values=values, cycle_step_definition=cycle_step_definition)
+        
+        assert global_action.should_process_action(1) == True
+        assert global_action.should_process_action(3) == True
+        assert global_action.should_process_action(5) == True
+        assert global_action.should_process_action(2) == False
 
 class TestRoutineTemplate:
     def test_routine_template_initialization(self):

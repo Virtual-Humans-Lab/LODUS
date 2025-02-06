@@ -1,15 +1,17 @@
-
-
 import pytest
 from core.environment import EnvNode, EnvNodeDistances, EnvNodeFactory, EnvNodeTemplate, EnvRegion, EnvRegionFactory, EnvRegionTemplate
 from core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
 from core.routine import Action, RoutineFactory
-from random_inst import FixedRandom
+from util.random_instance import FixedRandom
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
     """Initialize FixedRandom to ensure deterministic behavior in tests."""
     FixedRandom()  # Ensure FixedRandom is defined or imported properly.
+
+@pytest.fixture
+def population_template() -> PopulationTemplate:
+    return PopulationTemplate()
 
 @pytest.fixture
 def default_action() -> Action:
@@ -19,10 +21,14 @@ def default_action() -> Action:
 
 @pytest.fixture
 def env_node_template() -> EnvNodeTemplate:
-    template = EnvNodeTemplate(node_type="test_type")
+    template = EnvNodeTemplate(node_type="test_type", node_unique_name="test_name")
     template.set_long_lat_position(10.0, 20.0)
     template.add_node_attributes("attr1", "value1")
     return template
+
+@pytest.fixture
+def env_node() -> EnvNode:
+    return EnvNode(node_type="test_type", node_unique_name="test_name")
 
 @pytest.fixture
 def blob_factory() -> BlobFactory:
@@ -41,39 +47,31 @@ def env_region() -> EnvRegion:
 def routine_factory() -> RoutineFactory:
     return RoutineFactory()
 
-@pytest.fixture
-def env_node() -> EnvNode:
-    return EnvNode(node_type="test_type")
-
-@pytest.fixture
-def population_template() -> PopulationTemplate:
-    return PopulationTemplate()
-
 class TestEnvNodeTemplate:
     
     def test_add_node_attributes(self):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         template.add_node_attributes("key1", "value1")
         assert template.node_attributes["key1"] == "value1"
 
     def test_add_action_to_routine_template(self, default_action: Action):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         template.add_action_to_routine_template(1, default_action)
         assert template.routine_template.cycle_step_to_action_list[1] == [default_action]
 
 
     def test_add_routine_template_invalid_action(self):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         with pytest.raises(ValueError, match="Action must be of type Action"):
             template.add_actions_to_routine_template(1, ["invalid_action"]) # type: ignore
 
     def test_add_routine_template_invalid_cycle_stop(self, default_action: Action):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         with pytest.raises(ValueError, match="cycle_step must be a non-negative integer"):
             template.add_actions_to_routine_template(-1, [default_action])
 
     def test_add_blob_template(self):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         traceable_characteristics = {"key1": "value1"}
         sampled_characteristics = {"key2": {"subkey": 1}}
         blob_template = BlobTemplate(100, traceable_characteristics, sampled_characteristics)
@@ -84,17 +82,17 @@ class TestEnvNodeTemplate:
         assert template.blob_templates[0].sampled_characteristics == sampled_characteristics
 
     def test_set_long_lat_position(self):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         template.set_long_lat_position(10.0, 20.0)
         assert template.long_lat == [10.0, 20.0]
 
     def test_set_long_lat_position_invalid_longitude(self):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         with pytest.raises(ValueError, match="longitude and latitude must be of type int or float"):
             template.set_long_lat_position("invalid", 20.0) # type: ignore
 
     def test_set_long_lat_position_invalid_latitude(self):
-        template = EnvNodeTemplate(node_type="default")
+        template = EnvNodeTemplate(node_type="default", node_unique_name="test_name")
         with pytest.raises(ValueError, match="longitude and latitude must be of type int or float"):
             template.set_long_lat_position(10.0, "invalid") # type: ignore
 
@@ -147,93 +145,80 @@ class TestEnvNodeFactory:
         assert env_node.contained_blobs[0].sampled_characteristics.characteristics["economic_profile"].categories == {'unemployed': 30, 'worker': 70}
 
 class TestEnvNode:     
-    def test_initialization(self):
-        node = EnvNode(node_type="test_type")
-        assert node.node_type == "test_type"
-        assert node.name == "test_type"
-        assert node.long_lat == [0.0, 0.0]
-        assert node.attributes == {}
-        assert node.contained_blobs == []
-        assert node.routine is None
+    def test_initialization(self, env_node: EnvNode):
+        assert env_node.node_type == "test_type"
+        assert env_node.unique_name == "test_name"
+        assert env_node.long_lat == [0.0, 0.0]
+        assert env_node.attributes == {}
+        assert env_node.contained_blobs == []
+        assert env_node.routine is None
 
-    def test_get_unique_name(self):
-        node = EnvNode(node_type="test_type")
-        node.containing_region_name = "test_region"
-        assert node.get_unique_name() == f"test_region//test_type{node.type_id}"
+    def test_get_unique_name(self, env_node: EnvNode):
+        env_node.containing_region_name = "test_region"
+        assert env_node.get_complete_name() == f"test_region//test_name"
 
-    def test_add_attribute(self):
-        node = EnvNode(node_type="test_type")
-        node.add_attribute("key", "value")
-        assert node.attributes["key"] == "value"
+    def test_add_attribute(self, env_node: EnvNode):
+        env_node.add_attribute("key", "value")
+        assert env_node.attributes["key"] == "value"
 
-    def test_get_attribute(self):
-        node = EnvNode(node_type="test_type")
-        node.add_attribute("key", "value")
-        assert node.get_attribute("key") == "value"
+    def test_get_attribute(self, env_node: EnvNode):
+        env_node.add_attribute("key", "value")
+        assert env_node.get_attribute("key") == "value"
 
-    def test_set_long_lat_position(self):
-        node = EnvNode(node_type="test_type")
-        node.set_long_lat_position(10.0, 20.0)
-        assert node.long_lat == [10.0, 20.0]
+    def test_set_long_lat_position(self, env_node: EnvNode):
+        env_node.set_long_lat_position(10.0, 20.0)
+        assert env_node.long_lat == [10.0, 20.0]
 
-    def test_set_long_lat_position_invalid_longitude(self):
-        node = EnvNode(node_type="test_type")
+    def test_set_long_lat_position_invalid_longitude(self, env_node: EnvNode):
         with pytest.raises(ValueError, match="longitude and latitude must be of type int or float"):
-            node.set_long_lat_position("invalid", 20.0) # type: ignore
+            env_node.set_long_lat_position("invalid", 20.0) # type: ignore
 
-    def test_set_long_lat_position_invalid_latitude(self):
-        node = EnvNode(node_type="test_type")
+    def test_set_long_lat_position_invalid_latitude(self, env_node: EnvNode):
         with pytest.raises(ValueError, match="longitude and latitude must be of type int or float"):
-            node.set_long_lat_position(10.0, "invalid") # type: ignore
+            env_node.set_long_lat_position(10.0, "invalid") # type: ignore
 
-    def test_add_blob(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_add_blob(self, blob_factory: BlobFactory, env_node: EnvNode):
         blob = blob_factory.generate_blob_rand(0, 0, 100)
-        node.add_blob(blob)
-        assert blob in node.contained_blobs
+        env_node.add_blob(blob)
+        assert blob in env_node.contained_blobs
         assert blob.get_population_size() == 100
-        assert node.get_population_size() == 100
+        assert env_node.get_population_size() == 100
 
-    def test_add_blob_invalid_type(self):
-        node = EnvNode(node_type="test_type")
+    def test_add_blob_invalid_type(self, env_node: EnvNode):
         with pytest.raises(ValueError, match="blob must be of type Blob"):
-            node.add_blob("invalid_blob") # type: ignore
+            env_node.add_blob("invalid_blob") # type: ignore
 
-    def test_add_blob_already_here(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_add_blob_already_here(self, env_node: EnvNode, blob_factory: BlobFactory):
         blob = blob_factory.generate_blob_rand(0, 0, 100)
-        node.add_blob(blob)
+        env_node.add_blob(blob)
         assert blob.get_population_size() == 100
-        assert node.get_population_size() == 100
+        assert env_node.get_population_size() == 100
         with pytest.raises(ValueError, match="BLOB ALREADY HERE"):
-            node.add_blob(blob)
+            env_node.add_blob(blob)
 
-    def test_remove_blob(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_remove_blob(self, env_node: EnvNode, blob_factory: BlobFactory):
         blob = blob_factory.generate_blob_rand(0, 0, 100)
-        node.add_blob(blob)
+        env_node.add_blob(blob)
         assert blob.get_population_size() == 100
-        assert node.get_population_size() == 100
-        node.remove_blob(blob)
-        assert blob not in node.contained_blobs
+        assert env_node.get_population_size() == 100
+        env_node.remove_blob(blob)
+        assert blob not in env_node.contained_blobs
         assert blob.get_population_size() == 100
-        assert node.get_population_size() == 0
+        assert env_node.get_population_size() == 0
 
-    def test_remove_blob_invalid_type(self):
-        node = EnvNode(node_type="test_type")
+    def test_remove_blob_invalid_type(self, env_node: EnvNode):
         with pytest.raises(ValueError, match="blob must be of type Blob"):
-            node.remove_blob("invalid_blob") # type: ignore
+            env_node.remove_blob("invalid_blob") # type: ignore
 
-    def test_remove_blobs(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_remove_blobs(self, env_node: EnvNode, blob_factory: BlobFactory):
         blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]
-        node.add_blobs(blobs)
-        assert node.get_population_size() == 300
-        node.remove_blobs(blobs)
-        assert all(blob not in node.contained_blobs for blob in blobs)
-        assert node.get_population_size() == 0
+        env_node.add_blobs(blobs)
+        assert env_node.get_population_size() == 300
+        env_node.remove_blobs(blobs)
+        assert all(blob not in env_node.contained_blobs for blob in blobs)
+        assert env_node.get_population_size() == 0
 
-    def test_merge_blobs_in_node(self, blob_factory: BlobFactory):
+    def test_merge_blobs_in_node(self, env_node: EnvNode, blob_factory: BlobFactory):
         # Create blobs with the same mother_blob_id and traceable characteristics
         blob1 = blob_factory.generate_blob_rand(0, 0, 100)
         blob2 = blob_factory.generate_blob_rand(0, 0, 50)
@@ -242,19 +227,18 @@ class TestEnvNode:
         blob1.set_traceable_characteristic('vaccine_level', 0)
         blob2.set_traceable_characteristic('vaccine_level', 0)
 
-        node = EnvNode(node_type="test_type")
-        node.add_blob(blob1)
-        node.add_blob(blob2)
+        env_node.add_blob(blob1)
+        env_node.add_blob(blob2)
 
         # Merge blobs
-        node.merge_blobs_in_node()
+        env_node.merge_blobs_in_node()
 
         # Check if blobs are merged
-        assert len(node.contained_blobs) == 1
-        assert node.contained_blobs[0].get_population_size() == 150
-        assert node.get_population_size() == 150
+        assert len(env_node.contained_blobs) == 1
+        assert env_node.contained_blobs[0].get_population_size() == 150
+        assert env_node.get_population_size() == 150
 
-    def test_merge_blobs_in_node_different_mother_blob_id(self, blob_factory: BlobFactory):
+    def test_merge_blobs_in_node_different_mother_blob_id(self, env_node: EnvNode, blob_factory: BlobFactory):
         # Create blobs with different mother_blob_id
         blob1 = blob_factory.generate_blob_rand(0, 0, 100)
         blob2 = blob_factory.generate_blob_rand(0, 0, 50)
@@ -263,18 +247,17 @@ class TestEnvNode:
         blob1.set_traceable_characteristic('vaccine_level', 0)
         blob2.set_traceable_characteristic('vaccine_level', 0)
 
-        node = EnvNode(node_type="test_type")
-        node.add_blob(blob1)
-        node.add_blob(blob2)
+        env_node.add_blob(blob1)
+        env_node.add_blob(blob2)
 
         # Merge blobs
-        node.merge_blobs_in_node()
+        env_node.merge_blobs_in_node()
 
         # Check if blobs are not merged
-        assert len(node.contained_blobs) == 2
-        assert node.get_population_size() == 150
+        assert len(env_node.contained_blobs) == 2
+        assert env_node.get_population_size() == 150
 
-    def test_merge_blobs_in_node_different_traceable_characteristics(self, blob_factory: BlobFactory):
+    def test_merge_blobs_in_node_different_traceable_characteristics(self, env_node: EnvNode, blob_factory: BlobFactory):
         # Create blobs with the same mother_blob_id but different traceable characteristics
         blob1 = blob_factory.generate_blob_rand(0, 0, 100)
         blob2 = blob_factory.generate_blob_rand(0, 0, 50)
@@ -283,18 +266,17 @@ class TestEnvNode:
         blob1.set_traceable_characteristic('vaccine_level', 0)
         blob2.set_traceable_characteristic('vaccine_level', 1)
 
-        node = EnvNode(node_type="test_type")
-        node.add_blob(blob1)
-        node.add_blob(blob2)
+        env_node.add_blob(blob1)
+        env_node.add_blob(blob2)
 
         # Merge blobs
-        node.merge_blobs_in_node()
+        env_node.merge_blobs_in_node()
 
         # Check if blobs are not merged
-        assert len(node.contained_blobs) == 2
-        assert node.get_population_size() == 150
+        assert len(env_node.contained_blobs) == 2
+        assert env_node.get_population_size() == 150
 
-    def test_merge_blobs_in_node_multiple_blobs(self, blob_factory: BlobFactory):
+    def test_merge_blobs_in_node_multiple_blobs(self, env_node: EnvNode, blob_factory: BlobFactory):
         # Create multiple blobs with the same mother_blob_id and traceable characteristics
         blob1 = blob_factory.generate_blob_rand(0, 0, 100)
         blob2 = blob_factory.generate_blob_rand(0, 0, 50)
@@ -306,54 +288,49 @@ class TestEnvNode:
         blob2.set_traceable_characteristic('vaccine_level', 0)
         blob3.set_traceable_characteristic('vaccine_level', 0)
 
-        node = EnvNode(node_type="test_type")
-        node.add_blob(blob1)
-        node.add_blob(blob2)
-        node.add_blob(blob3)
+        env_node.add_blob(blob1)
+        env_node.add_blob(blob2)
+        env_node.add_blob(blob3)
 
         # Merge blobs
-        node.merge_blobs_in_node()
+        env_node.merge_blobs_in_node()
 
         # Check if all blobs are merged
-        assert len(node.contained_blobs) == 1
-        assert node.contained_blobs[0].get_population_size() == 225
-        assert node.get_population_size() == 225
+        assert len(env_node.contained_blobs) == 1
+        assert env_node.contained_blobs[0].get_population_size() == 225
+        assert env_node.get_population_size() == 225
 
-    def test_get_population_size(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_get_population_size(self, env_node: EnvNode, blob_factory: BlobFactory):
         blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]
         for blob in blobs:
             assert blob.get_population_size() == 100
-        node.add_blobs(blobs)
-        assert node.get_population_size() == 300
+        env_node.add_blobs(blobs)
+        assert env_node.get_population_size() == 300
 
-    def test_grab_population(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_grab_population(self, env_node: EnvNode, blob_factory: BlobFactory):
         blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]
         for blob in blobs:
             assert blob.get_population_size() == 100
-        node.add_blobs(blobs)
-        assert node.get_population_size() == 300
-        grabbed_blobs = node.grab_population(15)
+        env_node.add_blobs(blobs)
+        assert env_node.get_population_size() == 300
+        grabbed_blobs = env_node.grab_population(15)
         assert len(grabbed_blobs) == 3
-        assert node.get_population_size() == 285
+        assert env_node.get_population_size() == 285
 
-    def test_change_multiple_blobs_traceable_property(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_change_multiple_blobs_traceable_property(self, env_node: EnvNode, blob_factory: BlobFactory):
         blobs = [blob_factory.generate_blob_rand(0, 0, 100) for _ in range(3)]
-        node.add_blobs(blobs)
-        modified_blobs = node.change_multiple_blobs_traceable_property("vaccine_level", 1, 3)
-        assert sum(blob.get_population_size() for blob in node.contained_blobs) == 300
+        env_node.add_blobs(blobs)
+        modified_blobs = env_node.change_multiple_blobs_traceable_property("vaccine_level", 1, 3)
+        assert sum(blob.get_population_size() for blob in env_node.contained_blobs) == 300
         assert sum(blob.get_population_size() for blob in blobs) == 297
         assert sum(blob.get_population_size() for blob in modified_blobs) == 3
 
-    def test_change_single_blob_traceable_property(self, blob_factory: BlobFactory):
-        node = EnvNode(node_type="test_type")
+    def test_change_single_blob_traceable_property(self, env_node: EnvNode, blob_factory: BlobFactory):
         blob = blob_factory.generate_blob_rand(0, 0, 100)
-        node.add_blob(blob)
-        modified_blob = node.change_single_blob_traceable_property(blob, "vaccine_level", 1, 1)
+        env_node.add_blob(blob)
+        modified_blob = env_node.change_single_blob_traceable_property(blob, "vaccine_level", 1, 1)
         assert blob.get_traceable_characteristic("vaccine_level") == 0
-        assert sum(blob.get_population_size() for blob in node.contained_blobs) == 100
+        assert sum(blob.get_population_size() for blob in env_node.contained_blobs) == 100
         assert blob.get_population_size()== 99
         assert modified_blob.get_population_size() == 1
 
@@ -387,12 +364,11 @@ class TestEnvRegionTemplate:
         assert region_template.long_lat == [30.0, 40.0]
         assert region_template.envnode_templates == []
 
-    def test_add_envnode_template(self):
+    def test_add_envnode_template(self, env_node_template: EnvNodeTemplate):
         region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
-        node_template = EnvNodeTemplate(node_type="test_type")
-        region_template.add_envnode_template(node_template)
+        region_template.add_envnode_template(env_node_template)
         assert len(region_template.envnode_templates) == 1
-        assert region_template.envnode_templates[0] == node_template
+        assert region_template.envnode_templates[0] == env_node_template
 
     def test_add_envnode_template_invalid_type(self):
         region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
@@ -404,8 +380,8 @@ class TestEnvRegionFactory:
         region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
         region_template.add_envnode_template(env_node_template)
         
-        factory = EnvRegionFactory(template=region_template, default_blob_factory=blob_factory)
-        region = factory.generate_envregion()
+        factory = EnvRegionFactory()
+        region = factory.generate_envregion(region_template, blob_factory)
         
         assert isinstance(region, EnvRegion)
         assert region.name == "test_region"
@@ -420,8 +396,8 @@ class TestEnvRegionFactory:
         region_template.add_envnode_template(env_node_template)
         region_template.add_envnode_template(env_node_template)
         
-        factory = EnvRegionFactory(template=region_template, default_blob_factory=blob_factory)
-        region = factory.generate_envregion()
+        factory = EnvRegionFactory()
+        region = factory.generate_envregion(region_template, blob_factory)
         
         assert isinstance(region, EnvRegion)
         assert region.name == "test_region"
@@ -435,8 +411,8 @@ class TestEnvRegionFactory:
     def test_generate_envregion_no_nodes(self, blob_factory: BlobFactory):
         region_template = EnvRegionTemplate(region_name="test_region", long_lat=[30.0, 40.0])
         
-        factory = EnvRegionFactory(template=region_template, default_blob_factory=blob_factory)
-        region = factory.generate_envregion()
+        factory = EnvRegionFactory()
+        region = factory.generate_envregion(region_template, blob_factory)
         
         assert isinstance(region, EnvRegion)
         assert region.name == "test_region"
@@ -459,22 +435,22 @@ class TestEnvRegion:
     def test_add_node(self, env_region: EnvRegion, env_node: EnvNode):
         env_region.add_envnode(env_node)
         assert env_node in env_region.node_list
-        assert env_region.node_dict[env_node.get_unique_name()] == env_node
+        assert env_region.node_dict[env_node.get_complete_name()] == env_node
 
     def test_get_first_node_with_name(self, env_region: EnvRegion, env_node: EnvNode):
-        env_node.name = "test_node"
+        env_node.unique_name = "test_node"
         env_region.add_envnode(env_node)
         assert env_region.get_first_node_with_name("test_node") == env_node
         assert env_region.get_first_node_with_name("non_existent") is None
 
     def test_get_node_by_unique_name(self, env_region: EnvRegion, env_node: EnvNode):
         env_region.add_envnode(env_node)
-        assert env_region.get_node_by_unique_name(env_node.get_unique_name()) == env_node
+        assert env_region.get_node_by_unique_name(env_node.get_complete_name()) == env_node
         with pytest.raises(ValueError):
             env_region.get_node_by_unique_name("non_existent")
 
     def test_get_population_size(self, env_region: EnvRegion, env_node: EnvNode, population_template: PopulationTemplate):
-        env_node.get_population_size = lambda tempalte: 100
+        env_node.get_population_size = lambda template: 100 # type: ignore
         env_region.add_envnode(env_node)
         assert env_region.get_population_size(population_template) == 100
 
@@ -485,6 +461,6 @@ class TestEnvRegion:
         assert env_region.get_blob_count() == 3
 
     def test_generate_action_list(self, env_region: EnvRegion, env_node: EnvNode):
-        env_node.process_routine = lambda cycle_step: ["action1", "action2"]
+        env_node.process_routine = lambda cycle_step: ["action1", "action2"] # type: ignore
         env_region.add_envnode(env_node)
         assert env_region.generate_action_list(1) == ["action1", "action2"]

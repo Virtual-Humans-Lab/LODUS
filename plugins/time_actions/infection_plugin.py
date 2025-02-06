@@ -120,8 +120,8 @@ class InfectionPlugin(ActionPlugin):
                 _quant = _custom_inf_values[_name]
             elif _node.containing_region_name in _custom_inf_values: # region name in list
                 _quant = _custom_inf_values[_node.containing_region_name]
-            elif _node.name in _custom_inf_values: # noty type in list
-                _quant = _custom_inf_values[_node.name]
+            elif _node.unique_name in _custom_inf_values: # noty type in list
+                _quant = _custom_inf_values[_node.unique_name]
             else: # default
                 _quant = self.initial_infected_default
             if isinstance(_quant,float): _quant = math.floor(_node.get_population_size() * _quant)
@@ -276,7 +276,7 @@ class InfectionPlugin(ActionPlugin):
         else:
             _density = 1.0
 
-        _node_name = _node.get_unique_name()
+        _node_name = _node.get_complete_name()
         _total = sum(_counts)
         _sus, _inf, _rem = _counts
         _eff = 1

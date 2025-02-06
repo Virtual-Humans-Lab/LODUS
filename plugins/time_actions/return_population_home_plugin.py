@@ -66,11 +66,11 @@ class ReturnPopulationHomePlugin(ActionPlugin):
                     new_action_values['origin_region'] = region.name
 
                     # TODO placeholder 
-                    new_action_values['origin_node'] = origin_node.name
+                    new_action_values['origin_node'] = origin_node.unique_name
                     new_action_values['destination_region'] = target_region.name
 
                     # TODO placeholder 
-                    new_action_values['destination_node'] = node.name
+                    new_action_values['destination_node'] = node.unique_name
                     
                     new_action_values['quantity'] = -1
                     pop_template.set_mother_blob_id(target_region.id)

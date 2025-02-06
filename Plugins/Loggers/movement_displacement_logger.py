@@ -58,7 +58,7 @@ class MovementDisplacementLogger(LoggerPlugin):
         # Total population in all Blobs
         total = sum([b.get_population_size() for b in _blobs])
         node_distances = self.env_graph.get_node_distances(target_node=_ori, dist_type=self.env_graph.default_distance_type)
-        distance = node_distances.distance_to_others[_dest.get_unique_name()]
+        distance = node_distances.distance_to_others[_dest.get_complete_name()]
         
         self.movement_counter[distance] = self.movement_counter.get(distance,0) + total
         self.group_movement_counter[distance] = self.group_movement_counter.get(distance,0) + len(_blobs)

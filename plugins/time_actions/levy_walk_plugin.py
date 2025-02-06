@@ -121,7 +121,7 @@ class LevyWalkPlugin(ActionPlugin):
         acting_node = acting_region.get_node_by_unique_name(values['node'])
         sub_list = [] 
 
-        if "ignore_acting_node_type" in values and acting_node.name in values["ignore_acting_node_type"]:
+        if "ignore_acting_node_type" in values and acting_node.unique_name in values["ignore_acting_node_type"]:
             return sub_list
 
         
@@ -194,9 +194,9 @@ class LevyWalkPlugin(ActionPlugin):
             # Creates a Move Population action from the Acting Nodo to the Target Node
             new_action_type = 'move_population'
             new_action_values = {'origin_region': acting_region.name,
-                                 'origin_node': acting_node.name,
+                                 'origin_node': acting_node.unique_name,
                                  'destination_region': target_region.name,
-                                 'destination_node': target_node.name,
+                                 'destination_node': target_node.unique_name,
                                  'quantity': _pop_group_size}
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
@@ -217,15 +217,21 @@ class LevyWalkPlugin(ActionPlugin):
         '''Function to consume a 'levy_walk' TimeAction type.'''
         start_time = time.perf_counter()
         assert 'region' in values, "region is not defined in Levy Walk TimeAction"
-        assert 'node' in values, "node is not defined in Levy Walk TimeAction"
+        assert 'node_id' in values or 'node_unique_name' in values, "node is not defined in Levy Walk TimeAction"
         
         acting_region = self.env_graph.get_region_by_name(values['region'])
-        acting_node = acting_region.get_first_node_with_name(values['node'])
+
+        if 'node_id' in values:
+            acting_node = self.env_graph.get_node_by_id(values['node_id'])
+        else:
+            acting_node = acting_region.get_node_by_unique_name(values['node_unique_name'])
         assert acting_node is not None, f"Node {values['node']} not found in region {values['region']}"
         
         sub_list = []
-        if "ignore_acting_node_type" in values and acting_node.node_type in values["ignore_acting_node_type"]:
+        if acting_node.node_type not in values.get("acting_node_types", [acting_node.node_type]):
             return sub_list
+        # if "ignore_acting_node_type" in values and acting_node.node_type in values["ignore_acting_node_type"]:
+        #     return sub_list
 
         
         # Loads optional action parameters, otherwise, use default values
@@ -290,9 +296,9 @@ class LevyWalkPlugin(ActionPlugin):
             # Creates a Move Population action from the Acting Nodo to the Target Node
             new_action_type = 'move_population'
             new_action_values = {'origin_region': acting_region.name,
-                                 'origin_node': acting_node.name,
+                                 'origin_node': acting_node.unique_name,
                                  'destination_region': target_region.name,
-                                 'destination_node': target_node.name,
+                                 'destination_node': target_node.unique_name,
                                  'quantity': _pop_group_size}
             temp = copy.deepcopy(pop_template)
             #temp.mother_blob_id = acting_region.id
@@ -334,7 +340,7 @@ class LevyWalkPlugin(ActionPlugin):
     
     def get_node_distance_bucket(self, target_node:EnvNode, graph:EnvironmentGraph):
         '''Gets distances in buckets (based on overall distance)'''
-        unique_name = target_node.get_unique_name()
+        unique_name = target_node.get_complete_name()
         
         # Checks if the distance was calculated previously
         if unique_name in self.dist_buckets:

@@ -63,7 +63,7 @@ class ReturnToPreviousPlugin(ActionPlugin):
             #    return []
             to_node = self.graph.get_node_by_id(target_blob.previous_node)
             
-            if from_node.get_unique_name()== to_node.get_unique_name():
+            if from_node.get_complete_name()== to_node.get_complete_name():
                 return []
 
             grabbed = target_blob.grab_population(target_blob.get_population_size(pop_template), pop_template)

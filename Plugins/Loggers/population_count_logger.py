@@ -276,7 +276,7 @@ class PopulationCountLogger(LoggerPlugin):
         for region in graph.region_list:
             region_f.write(f'{region.id};{region.long_lat};{region.name};\n')
             for node in region.node_list:
-                node_f.write(f'{node.id};{node.get_attribute("long_lat_position")};{node.get_unique_name()};\n')
+                node_f.write(f'{node.id};{node.get_attribute("long_lat_position")};{node.get_complete_name()};\n')
         region_f.close()
         node_f.close()
 

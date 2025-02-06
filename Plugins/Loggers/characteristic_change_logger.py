@@ -61,7 +61,7 @@ class CharacteristicChangeLogger(LoggerPlugin):
                                         self.sim_step % self.cycle_lenght,
                                         self.sim_step//self.cycle_lenght,
                                         node.containing_region_name,
-                                        node.get_unique_name(),
+                                        node.get_complete_name(),
                                         char_key,
                                         prev_value,
                                         new_value,

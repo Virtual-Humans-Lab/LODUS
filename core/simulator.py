@@ -126,7 +126,8 @@ class RoutineController:
                     else:
                         action.values['cycle_length'] = global_action.cycle_step_definition
                     action.values['region'] = region.name
-                    action.values['node'] = node.node_type
+                    action.values['node_type'] = node.node_type
+                    action.values['node_unique_name'] = node.unique_name
                     action.values['node_id'] = node.id
                     action_list += [action]
         return action_list
@@ -180,7 +181,7 @@ class RoutineController:
         action_type = action.action_type
         pop_template = action.pop_template
         values = action.values
-
+        
         if action_type in self.base_action_types:
             self.action_type_to_function[action_type](pop_template, values, hour, time)
         else:
