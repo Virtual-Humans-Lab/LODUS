@@ -4,3 +4,6 @@ events
 seaborn
 scipy
 kaleido
+pyproj
+events
+plotly

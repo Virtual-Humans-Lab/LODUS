@@ -1,6 +1,6 @@
 #encoding: utf-8
 import sys
-sys.path.append('./plugins/')
+sys.path.append('./Plugins/')
 
 import argparse
 import time
@@ -338,4 +338,5 @@ print("writing Output File")
 text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
 text_file.write(output_str)
 text_file.close()
+
 exit(0)

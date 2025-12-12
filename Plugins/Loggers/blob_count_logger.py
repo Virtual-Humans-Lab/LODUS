@@ -11,6 +11,7 @@ pd.options.plotting.backend = "plotly"
 
 from pathlib import Path
 from enum import Enum
+from time import sleep
 
 class BlobCountRecordKey(Enum):
     BLOB_COUNT_GLOBAL = 0
@@ -19,11 +20,14 @@ class BlobCountRecordKey(Enum):
 
 class BlobCountLogger(LoggerPlugin):
     
-    def __init__(self, base_filename):
+    def __init__(self, base_filename, generate_figures:bool = True):
 
         # Sets paths and create folders
         self.base_path = 'output_logs/' + base_filename + '/'
         self.data_frames_path = self.base_path + "/data_frames/"
+        self.figures_path = self.base_path + "/figures/"
+        self.html_plots_path = self.base_path + "/html_plots/"
+        self.generate_figures = generate_figures
         
         # Which data is being recorded
         self.data_to_record:set[BlobCountRecordKey] = set()
@@ -76,8 +80,9 @@ class BlobCountLogger(LoggerPlugin):
             df = pd.DataFrame(self.blob_node_count)
             df = df.rename_axis('Simulation Frame').rename_axis('Node', axis=1)
             df.to_csv(self.data_frames_path + 'blob_count_node.csv', sep = ';', encoding="utf-8-sig")
+        self.process_blob_count_line_plots(show_figures=False, export_html=True, export_figures=True)
 
-    def process_blob_count_line_plots(self):#, show_figures: bool, export_html: bool, export_figures: bool, layout_update=None):
+    def process_blob_count_line_plots(self, show_figures: bool, export_html: bool, export_figures: bool, layout_update=None):
         
         figures = []
         xaxes_upt = {"tickmode": "linear", "tick0": 0, "dtick": 24}
@@ -132,4 +137,17 @@ class BlobCountLogger(LoggerPlugin):
                             title="Blob Count - Per Node - Hour 0", markers=True)
             figures.append(fig)
             
-        # self.generate_figures(show_figures,export_figures, export_html, layout_update, figures)
+        if self.generate_figures:
+            self._generate_figures(show_figures,export_figures, export_html, layout_update, figures)
+
+    def _generate_figures(self, show_figures:bool, export_figures:bool, export_html:bool, layout_update:dict, figures):
+        for f in figures: 
+            f.update_layout(layout_update)
+            if show_figures:
+                sleep(0.5)
+                f.show()
+        for f in figures:
+            if export_figures:
+                f.write_image(self.figures_path + f.layout.title.text.replace(" ","") + ".png", format = 'png')
+            if export_html:
+                f.write_html(self.html_plots_path + f.layout.title.text.replace(" ","") + ".html")
