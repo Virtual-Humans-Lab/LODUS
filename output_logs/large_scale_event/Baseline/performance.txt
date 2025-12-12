@@ -1,0 +1,295 @@
+Filename: TOMACS_simulation.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    61    141.6 MiB    141.6 MiB           1   @profile(stream=performance_log_file)
+    62                                         def main():
+    63    141.6 MiB      0.0 MiB           1       output_str = ""
+    64                                         
+    65    141.6 MiB      0.0 MiB           1       '''
+    66                                             Data Loading
+    67                                             '''
+    68    141.6 MiB      0.0 MiB           1       data_input_file_path = args['f']
+    69    141.6 MiB      0.0 MiB           1       experiment_configuration_file = args['e']
+    70    141.6 MiB      0.0 MiB           1       if ".json" in args['f']: 
+    71                                                 raise Exception("please use the new format of inputs (experiment config)")
+    72    146.3 MiB      4.7 MiB           1       env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
+    73    146.3 MiB      0.0 MiB           1       '''
+    74                                             Parameters
+    75                                             '''
+    76                                             # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
+    77    146.3 MiB      0.0 MiB           1       cycles:int = 1
+    78    146.3 MiB      0.0 MiB           1       cycle_length:int = 24
+    79    146.3 MiB      0.0 MiB           1       env_graph.routine_cycle_length = cycle_length
+    80    146.3 MiB      0.0 MiB           1       simulation_steps = cycles * cycle_length
+    81                                         
+    82    146.3 MiB      0.0 MiB           1       env_graph.experiment_name = experiment_name
+    83                                             #print("Creating experiment:", env_graph.experiment_name)
+    84    146.3 MiB      0.0 MiB           1       print("EnvNode Count", len(env_graph.node_list))
+    85                                         
+    86    146.3 MiB      0.0 MiB           1       '''
+    87                                             Data Plugins
+    88                                             '''
+    89                                         
+    90    146.3 MiB      0.0 MiB           1       isolation_data = None
+    91    146.3 MiB      0.0 MiB           1       if 'global_isolation_data_plugin' in env_graph.experiment_config:
+    92                                                 isolation_data = GlobalIsolationDataPlugin(env_graph)
+    93                                                 env_graph.load_time_action_plugin(isolation_data)
+    94                                         
+    95    146.3 MiB      0.0 MiB           1       infection_data = None
+    96    146.3 MiB      0.0 MiB           1       if 'global_infection_data_plugin' in env_graph.experiment_config:
+    97                                                 isolation_data = GlobalInfectionDataPlugin(env_graph)
+    98                                                 env_graph.load_time_action_plugin(isolation_data)
+    99                                         
+   100    146.3 MiB      0.0 MiB           1       node_density_data = None
+   101    146.3 MiB      0.0 MiB           1       if 'node_density_data_plugin' in env_graph.experiment_config:
+   102                                                 node_density_data = NodeDensityDataPlugin(env_graph)
+   103                                                 env_graph.load_time_action_plugin(node_density_data)
+   104    146.3 MiB      0.0 MiB           1       '''
+   105                                             TimeAction Plugins
+   106                                             '''
+   107                                         
+   108    146.3 MiB      0.0 MiB           1       move_population_plugin = MovePopulationPlugin(env_graph)
+   109    146.3 MiB      0.0 MiB           1       env_graph.load_time_action_plugin(move_population_plugin)
+   110                                         
+   111    146.3 MiB      0.0 MiB           1       gather_pop = None
+   112    146.3 MiB      0.0 MiB           1       if 'gather_population_plugin' in env_graph.experiment_config:
+   113    146.3 MiB      0.0 MiB           1           gather_pop = GatherPopulationPlugin(env_graph)
+   114    146.3 MiB      0.0 MiB           1           env_graph.load_time_action_plugin(gather_pop)
+   115                                         
+   116    146.3 MiB      0.0 MiB           1       return_pop_home = None
+   117    146.3 MiB      0.0 MiB           1       if 'return_population_home_plugin' in env_graph.experiment_config:
+   118                                                 return_pop_home = ReturnPopulationHomePlugin(env_graph)
+   119                                                 env_graph.load_time_action_plugin(return_pop_home)
+   120                                         
+   121    146.3 MiB      0.0 MiB           1       send_pop_back = None
+   122    146.3 MiB      0.0 MiB           1       if 'send_population_back_plugin' in env_graph.experiment_config:
+   123    146.3 MiB      0.0 MiB           1           send_pop_back = SendPopulationBackPlugin(env_graph)
+   124    146.3 MiB      0.0 MiB           1           env_graph.load_time_action_plugin(send_pop_back)
+   125                                         
+   126    146.3 MiB      0.0 MiB           1       return_to_previous = None
+   127    146.3 MiB      0.0 MiB           1       if 'return_to_previous' in env_graph.experiment_config:
+   128                                                 return_to_previous = ReturnToPreviousPlugin(env_graph)
+   129                                                 env_graph.load_time_action_plugin(return_to_previous)
+   130                                         
+   131    146.3 MiB      0.0 MiB           1       levy_walk = None
+   132    146.3 MiB      0.0 MiB           1       if 'levy_walk_plugin' in env_graph.experiment_config:
+   133    146.3 MiB      0.0 MiB           1           levy_walk = LevyWalkPlugin(env_graph)
+   134    146.3 MiB      0.0 MiB           1           env_graph.load_time_action_plugin(levy_walk)
+   135                                         
+   136    146.3 MiB      0.0 MiB           1       vaccine = None
+   137    146.3 MiB      0.0 MiB           1       if 'vaccine_plugin' in env_graph.experiment_config:
+   138                                                 vaccine = VaccinePlugin(env_graph)
+   139                                                 env_graph.load_time_action_plugin(vaccine)
+   140                                         
+   141    146.3 MiB      0.0 MiB           1       infection = None
+   142    146.3 MiB      0.0 MiB           1       if 'infection_plugin' in env_graph.experiment_config:
+   143                                                 infection = InfectionPlugin(env_graph)
+   144                                                 env_graph.load_time_action_plugin(infection)
+   145                                                 
+   146                                         
+   147    146.3 MiB      0.0 MiB           1       '''
+   148                                             Routine Plugins
+   149                                             '''
+   150    146.3 MiB      0.0 MiB           1       if 'off_cycle_routine_plugin' in env_graph.experiment_config:
+   151                                                 off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
+   152                                                 env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
+   153                                         
+   154    146.3 MiB      0.0 MiB           1       '''
+   155                                             Logging
+   156                                             '''
+   157                                         
+   158    146.3 MiB      0.0 MiB           1       pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
+   159    146.3 MiB      0.0 MiB           2       pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
+   160    146.3 MiB      0.0 MiB           1                                           PopulationCountRecordKey.POPULATION_COUNT_REGION}#,
+   161                                                                                 #PopulationCountRecordKey.POPULATION_COUNT_NODE}
+   162                                         
+   163    146.3 MiB      0.0 MiB           1       if infection:
+   164                                                 pop_count_logger.global_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+   165                                                 pop_count_logger.global_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+   166                                                 pop_count_logger.global_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+   167                                         
+   168                                                 # pop_count_logger.region_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+   169                                                 # pop_count_logger.region_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+   170                                                 # pop_count_logger.region_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+   171                                         
+   172                                                 # pop_count_logger.node_custom_templates["Students"] = PopTemplate(sampled_properties={"occupation": "student"})
+   173                                                 # pop_count_logger.node_custom_templates["Workers"] = PopTemplate(sampled_properties={"occupation": "worker"})
+   174                                                 # pop_count_logger.node_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+   175                                                 # pop_count_logger.node_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+   176                                                 # pop_count_logger.node_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+   177                                         
+   178    146.3 MiB      0.0 MiB           1       if vaccine:
+   179                                                 pop_count_logger.global_custom_templates["VaccineLevel:0"] = PopTemplate(traceable_properties={"vaccine_level": 0})
+   180                                                 pop_count_logger.global_custom_templates["VaccineLevel:1"] = PopTemplate(traceable_properties={"vaccine_level": 1})
+   181                                                 pop_count_logger.global_custom_templates["VaccineLevel:2"] = PopTemplate(traceable_properties={"vaccine_level": 2})
+   182                                                 pop_count_logger.global_custom_templates["VaccineLevel:3"] = PopTemplate(traceable_properties={"vaccine_level": 3})
+   183                                         
+   184                                                 # pop_count_logger.region_custom_templates["VaccineLevel:0"] = PopTemplate(traceable_properties={"vaccine_level": 0})
+   185                                                 # pop_count_logger.region_custom_templates["VaccineLevel:1"] = PopTemplate(traceable_properties={"vaccine_level": 1})
+   186                                                 # pop_count_logger.region_custom_templates["VaccineLevel:2"] = PopTemplate(traceable_properties={"vaccine_level": 2})
+   187                                                 # pop_count_logger.region_custom_templates["VaccineLevel:3"] = PopTemplate(traceable_properties={"vaccine_level": 3})
+   188                                             #logger.set_to_record('neighbourhood_disserta')
+   189                                             #logger.set_to_record('metrics')
+   190                                             #logger.set_to_record('positions')
+   191                                         
+   192    146.3 MiB      0.0 MiB           1       blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
+   193    146.3 MiB      0.0 MiB           2       blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
+   194    146.3 MiB      0.0 MiB           1                                           BlobCountRecordKey.BLOB_COUNT_REGION,
+   195    146.3 MiB      0.0 MiB           1                                           BlobCountRecordKey.BLOB_COUNT_NODE}
+   196                                         
+   197                                         
+   198    146.3 MiB      0.0 MiB           1       pop_temp = PopTemplate()
+   199                                             #pop_temp.set_property('age', 'adults')
+   200    146.3 MiB      0.0 MiB           1       pop_count_logger.pop_template = pop_temp
+   201                                             # logger.foreign_only = True
+   202                                             # this option saves REALLY big files
+   203                                             # logger.set_to_record('graph')
+   204                                             # logger.set_pluggin_to_record(infection_plugin)
+   205                                             # logger.set_pluggin_to_record(vaccine_plugin)
+   206                                         
+   207                                             # pop_count_logger.add_custom_line_plot('Total Population - Hospital Nodes', 
+   208                                             #                                     file = 'nodes.csv',
+   209                                             #                                     x_label="Frame", y_label="Population",
+   210                                             #                                     columns= ['Total'],
+   211                                             #                                     level="Node", filter=['hospital'])
+   212                                         
+   213                                             # pop_count_logger.add_custom_line_plot('Total Population - School Nodes', 
+   214                                             #                                     file = 'nodes.csv',
+   215                                             #                                     x_label="Frame", y_label="Population",
+   216                                             #                                     columns= ['Total'],
+   217                                             #                                     level="Node", filter=['school'])
+   218                                         
+   219                                             # pop_count_logger.add_custom_line_plot('Total Population - Work Nodes', 
+   220                                             #                                     file = 'nodes.csv',
+   221                                             #                                     x_label="Frame", y_label="Population",
+   222                                             #                                     columns= ['Total'],
+   223                                             #                                     level="Node", filter=['work'])
+   224                                         
+   225                                             # pop_count_logger.add_custom_line_plot('Total Population - Stadium Nodes', 
+   226                                             #                                     file = 'nodes.csv',
+   227                                             #                                     x_label="Frame", y_label="Population",
+   228                                             #                                     columns= ['Total'],
+   229                                             #                                     level="Node", filter=['stadium'])
+   230                                         
+   231                                             # CharacteristicChange logger
+   232    146.3 MiB      0.0 MiB           1       traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
+   233                                         
+   234                                             # OD-Matrix logger
+   235    146.3 MiB      0.0 MiB           1       od_logger = ODMatrixLogger(f'{env_graph.experiment_name}')
+   236    146.3 MiB      0.0 MiB           1       od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
+   237                                             # od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
+   238                                             #                             ODMovementRecordKey.NODE_TO_NODE]
+   239                                         
+   240                                             # Age tracking
+   241    146.3 MiB      0.0 MiB           1       od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
+   242                                             #od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
+   243    146.3 MiB      0.0 MiB           1       od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
+   244    146.3 MiB      0.0 MiB           1       od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
+   245                                         
+   246                                             # Occupation tracking
+   247                                             #od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
+   248    146.3 MiB      0.0 MiB           1       od_logger.region_custom_templates["occupation: [student]"] = PopTemplate(sampled_properties={"occupation": "student"})
+   249    146.3 MiB      0.0 MiB           1       od_logger.region_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
+   250    146.3 MiB      0.0 MiB           1       od_logger.node_custom_templates["occupation: [worker]"] = PopTemplate(sampled_properties={"occupation": "worker"})
+   251                                             #----------------------------
+   252                                         
+   253                                             # Movement Displacement Logger
+   254    146.3 MiB      0.0 MiB           1       displacement_logger = MovementDisplacementLogger(f'{env_graph.experiment_name}')
+   255                                         
+   256                                             # Levy Sample Logger
+   257    146.3 MiB      0.0 MiB           1       levy_sample_logger = None
+   258    146.3 MiB      0.0 MiB           1       if levy_walk is not None:
+   259    146.3 MiB      0.0 MiB           1           levy_sample_logger = LevyWalkSampleLogger(f'{env_graph.experiment_name}')
+   260                                         
+   261    146.3 MiB      0.0 MiB           1       infection_sum_logger = None
+   262    146.3 MiB      0.0 MiB           1       if infection is not None:
+   263                                                 infection_sum_logger = InfectionSumLogger(f'{env_graph.experiment_name}')
+   264                                             # Vaccine Logger
+   265                                             #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
+   266                                         
+   267    146.3 MiB      0.0 MiB           1       output_str += "Population per Age:\n"
+   268    146.3 MiB      0.0 MiB           1       output_str += "Children:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "children"}))) + "\n"
+   269    146.3 MiB      0.0 MiB           1       output_str += "Youngs:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "youngs"}))) + "\n"
+   270    146.3 MiB      0.0 MiB           1       output_str += "Adults:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "adults"}))) + "\n"
+   271    146.3 MiB      0.0 MiB           1       output_str += "Elders:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "elders"}))) + "\n"
+   272    146.3 MiB      0.0 MiB           1       output_str += "Population per Occupation:\n"
+   273    146.3 MiB      0.0 MiB           1       output_str += "Worker:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "worker"}))) + "\n"
+   274    146.3 MiB      0.0 MiB           1       output_str += "Student:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "student"}))) + "\n"
+   275    146.3 MiB      0.0 MiB           1       output_str += "Other:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"occupation": "other"}))) + "\n"
+   276    146.3 MiB      0.0 MiB           1       print(output_str)
+   277    146.3 MiB      0.0 MiB           1       '''
+   278                                             Simulation
+   279                                             '''
+   280                                         
+   281    146.3 MiB      0.0 MiB           1       env_graph.LoadLoggerPlugin(pop_count_logger)
+   282                                             # env_graph.LoadLoggerPlugin(od_logger)
+   283    146.3 MiB      0.0 MiB           1       env_graph.LoadLoggerPlugin(blob_count_logger)
+   284                                             # # env_graph.LoadLoggerPlugin(traceable_logger)
+   285                                             # # env_graph.LoadLoggerPlugin(vacc_logger)
+   286    146.3 MiB      0.0 MiB           1       env_graph.LoadLoggerPlugin(displacement_logger)
+   287    146.3 MiB      0.0 MiB           1       if levy_sample_logger is not None: env_graph.LoadLoggerPlugin(levy_sample_logger)
+   288    146.3 MiB      0.0 MiB           1       if infection_sum_logger is not None: env_graph.LoadLoggerPlugin(infection_sum_logger)
+   289                                             #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
+   290                                             #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
+   291    146.3 MiB      0.0 MiB           1       env_graph.start_logging()
+   292                                         
+   293    146.3 MiB      0.0 MiB           1       start_time = time.perf_counter()
+   294    177.9 MiB      0.0 MiB          25       for i in range(simulation_steps):
+   295    177.9 MiB      0.0 MiB          24           print(i, end='\r')
+   296                                                     
+   297                                                 #infection_plugin.update_time_step(i % day_duration, i)
+   298                                         
+   299                                                 #if i % day_duration == 0:
+   300                                                 #    vaccine_plugin.update_time_step(i % day_duration, i)
+   301                                         
+   302                                                 # Routine/Repeating Global Action Invoke example
+   303                                         
+   304                                                 # Updates Node Routines and Repeating Global Actions
+   305                                                 # These are defined in the input environment descriptor
+   306    177.9 MiB     31.5 MiB          24           env_graph.update_time_step(i % cycle_length, i)
+   307                                         
+   308                                                 # Log current simulation step
+   309    177.9 MiB      0.0 MiB          24           env_graph.log_simulation_step()
+   310                                                 
+   311                                                 #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
+   312                                                 #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
+   313                                                 
+   314                                         
+   315                                             #logger.compute_composite_data(env_graph, simulation_steps)
+   316                                         
+   317                                             #logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
+   318                                             # od_logger.stop_logging()
+   319                                         
+   320    177.9 MiB      0.0 MiB           1       end_time = time.perf_counter()
+   321    212.0 MiB     34.2 MiB           1       env_graph.stop_logging()
+   322                                         
+   323                                         
+   324                                             #print("TimeAction Plugins execution times")
+   325    212.0 MiB      0.0 MiB           1       if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
+   326    212.0 MiB      0.0 MiB           1       if infection is not None: output_str += infection.print_execution_time_data()
+   327    212.0 MiB      0.0 MiB           1       if vaccine is not None: output_str += vaccine.print_execution_time_data()
+   328    212.0 MiB      0.0 MiB           1       if gather_pop is not None: output_str += gather_pop.print_execution_time_data()
+   329    212.0 MiB      0.0 MiB           1       if return_pop_home is not None: output_str += return_pop_home.print_execution_time_data()
+   330    212.0 MiB      0.0 MiB           1       if send_pop_back is not None: output_str += send_pop_back.print_execution_time_data()
+   331    212.0 MiB      0.0 MiB           1       if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
+   332    212.0 MiB      0.0 MiB           1       if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
+   333                                         
+   334    212.0 MiB      0.0 MiB           1       output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
+   335    212.0 MiB      0.0 MiB           1       output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
+   336    212.0 MiB      0.0 MiB           1       output_str += "Loaded TimeAction Keys: " + str(env_graph.time_action_map.keys()) + "\n"
+   337                                         
+   338    212.0 MiB      0.0 MiB           1       print("Total Simulation time")
+   339    212.0 MiB      0.0 MiB           1       print(end_time - start_time)
+   340    212.0 MiB      0.0 MiB           1       print("Average Cycle time")
+   341    212.0 MiB      0.0 MiB           1       print((end_time - start_time)/cycles)
+   342                                         
+   343    212.0 MiB      0.0 MiB           1       print("Loaded TimeAction Keys: ", env_graph.time_action_map.keys())
+   344    212.0 MiB      0.0 MiB           1       print("writing Output File")
+   345    212.0 MiB      0.0 MiB           1       text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
+   346    212.0 MiB      0.0 MiB           1       text_file.write(output_str)
+   347    212.0 MiB      0.0 MiB           1       text_file.close()
+   348                                         
+   349                                             #exit(0)
+
+

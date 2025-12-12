@@ -7,3 +7,4 @@ kaleido
 pyproj
 events
 plotly
+memory_profiler
