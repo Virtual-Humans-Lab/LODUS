@@ -1,5 +1,4 @@
 #encoding: utf-8
-#from memory_profiler import profile
 import sys
 sys.path.append('./Plugins/')
 
@@ -50,15 +49,17 @@ arg_parser.add_argument('--c', metavar="C", type=str, default = ".\\DataInput\\C
 arg_parser.add_argument('--d', metavar="D", type=str, default = ".\\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
 arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
 arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
+arg_parser.add_argument('--p', metavar="P", type=int, default = 0, help='Performance Profiling Flag (0 - off, 1 - memory profiler, 2).')
+
 args = vars(arg_parser.parse_args())
 
 experiment_name = args["n"] if args["n"] is not None else args["e"]
 print("Creating experiment:", experiment_name)
 
 FixedRandom(seed=0, numpy_seed=0)
+   
 
-#performance_log_file = open(f"output_logs/{experiment_name}/performance.txt", "w")
-#@profile(stream=performance_log_file)
+#@profile(stream=perf_mem_profiler_log_file)
 def main():
     output_str = ""
 
@@ -349,7 +350,47 @@ def main():
     #exit(0)
 
 if __name__ == '__main__':
-    main()
+    # Performance Profiling using memory_profiler
+    if args['p'] == 1:
+        from memory_profiler import memory_usage
+        with open(f"output_logs/{experiment_name}/performance_memory_profiler.txt", "w") as perf_mem_profiler_log_file:
+            mem_usage = memory_usage(proc=(main,(),{}))
+            perf_mem_profiler_log_file.write(str(mem_usage))
+            perf_mem_profiler_log_file.write("\n" + str(max(mem_usage)))
+        print("Memory Profiler Log written")
+        print("Max Memory Usage:", max(mem_usage))
+    # Performance Profiling using tracemalloc
+    elif args['p'] == 2:
+        import tracemalloc
+        perf_tracemalloc_profiler_log_file = open(f"output_logs/{experiment_name}/performance_tracem_profiler.txt", "w")
+        with open(f"output_logs/{experiment_name}/performance_tracem_profiler.txt", "w") as perf_tracemalloc_profiler_log_file:
 
-# python -m memory_profiler TOMACS_simulation.py --e large_scale_event/Baseline
+            tracemalloc.start()
+            main()
+            
+            snapshot = tracemalloc.take_snapshot()
+            top_stats = snapshot.statistics('lineno')
+            
+            current, peak = tracemalloc.get_traced_memory()
+            print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
+            perf_tracemalloc_profiler_log_file.write(f"Current memory usage is {current}; Peak was {peak}\n")
+            perf_tracemalloc_profiler_log_file.write("Top 10 lines\n")
+            for stat in top_stats[:10]:
+                perf_tracemalloc_profiler_log_file.write(str(stat) + "\n")
+            tracemalloc.stop()
+        print("Peak Memory Usage:", peak)
+    # No Performance Profiling
+    else:
+        main()
+
 # python .\TOMACS_simulation.py --e large_scale_event/Baseline
+# For memory profiling
+# python .\TOMACS_simulation.py --e large_scale_event/Baseline --p 1
+# For tracemalloc 
+# python .\TOMACS_simulation.py --e large_scale_event/Baseline --p 2
+
+
+# Code below for memory profiling requires memory_profiler and the @profile decorator above main()
+# python -m memory_profiler TOMACS_simulation.py --e large_scale_event/Baseline --p 1
+# mprof run --python TOMACS_simulation.py --e large_scale_event/Baseline --p 1
+# mprof plot

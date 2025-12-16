@@ -1,0 +1,12 @@
+Current memory usage is 60159594; Peak was 95309800
+Top 10 lines
+C:\Users\Gabriel\Documents\GitHub\LODUS\environment.py:194: size=11.0 MiB, count=169328, average=68 B
+C:\Program Files\Python313\Lib\json\decoder.py:361: size=10147 KiB, count=146409, average=71 B
+<frozen importlib._bootstrap_external>:784: size=9133 KiB, count=49452, average=189 B
+C:\Users\Gabriel\Documents\GitHub\LODUS\.venv\Lib\site-packages\pyproj\geod.py:398: size=3946 KiB, count=168354, average=24 B
+C:\Users\Gabriel\Documents\GitHub\LODUS\environment.py:590: size=3578 KiB, count=282, average=12.7 KiB
+C:\Users\Gabriel\Documents\GitHub\LODUS\environment.py:439: size=3067 KiB, count=56079, average=56 B
+C:\Program Files\Python313\Lib\copy.py:222: size=945 KiB, count=4755, average=203 B
+C:\Program Files\Python313\Lib\copy.py:144: size=574 KiB, count=8316, average=71 B
+C:\Users\Gabriel\Documents\GitHub\LODUS\.venv\Lib\site-packages\_plotly_utils\basevalidators.py:2439: size=555 KiB, count=3308, average=172 B
+C:\Users\Gabriel\Documents\GitHub\LODUS\Plugins\time_actions\levy_walk_plugin.py:237: size=546 KiB, count=4542, average=123 B
