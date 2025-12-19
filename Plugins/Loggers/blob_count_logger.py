@@ -42,7 +42,7 @@ class BlobCountLogger(LoggerPlugin):
         self.graph = env
 
         # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = self.graph.routine_cycle_length
+        self.cycle_length:int = self.graph.routine_cycle_length
         self.sim_step: int = 0 
 
         self.blob_global_count = []

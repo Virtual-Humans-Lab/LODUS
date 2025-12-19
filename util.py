@@ -2,10 +2,11 @@ from enum import Enum
 import math
 import json
 import typing
-import numpy
+import numpy as np
 from geopy import distance
 from pyproj import Proj
 from pyproj import Geod
+
 
 class DistanceType(Enum):
     LONG_LAT = 1
@@ -72,7 +73,7 @@ def weighted_distribution_with_weights(available, quantity, weight_list):
 def distribute_ints_from_weights(quantity, weight_list:list[float]):
     
     if quantity == 0:
-        return numpy.zeros(len(weight_list), dtype=int)
+        return np.zeros(len(weight_list), dtype=int)
     
     weights_sum = sum(weight_list)
     adjusted_weights = [w/weights_sum for w in weight_list]
@@ -99,7 +100,7 @@ def distribute_ints_from_weights(quantity, weight_list:list[float]):
 def distribute_ints_from_weights_with_limit(quantity, weight_list:list[float], limits:list[int]):
     
     if quantity == 0:
-        return numpy.zeros(len(weight_list), dtype=int)
+        return np.zeros(len(weight_list), dtype=int)
     if quantity > sum(limits):
         print("QUANTITY REQUESTED IS BIGGER THAN LIMIT SUM")
         quantity = sum(limits)
@@ -167,6 +168,21 @@ def weighted_int_distribution_with_weights(available, quantity, weight_list):
             remaining_to_pick -= 1
 
     return weighted_available
+
+
+def gini_coefficient(values: list[float]):
+    '''Calculate the Gini coefficient of an array.'''
+    x = np.asarray(values)
+    x = x[~np.isnan(x)]
+    if x.size == 0:
+        raise ValueError("Gini is undefined for empty arrays.")
+    if np.any(x < 0):
+        raise ValueError("Gini is undefined for negative values.")
+    if np.sum(x) == 0:
+        raise ValueError("Gini is undefined for arrays with all values equal to zero.")
+    x = np.sort(x)
+    n = x.size
+    return (np.sum((2 * np.arange(1, n + 1) - n - 1) * x)) / (n * np.sum(x))
  
 # never reuses an id for a given attribute
 class IDGen:

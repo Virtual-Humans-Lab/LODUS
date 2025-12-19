@@ -1,5 +1,7 @@
 #encoding: utf-8
 import sys
+
+
 sys.path.append('./Plugins/')
 
 import argparse
@@ -13,6 +15,7 @@ from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from loggers.gini_coefficient_logger import GiniCoefficientLogger, GiniCoefficientRecordKey
 
 from loggers.infection_sum_logger import InfectionSumLogger
 from loggers.vaccine_level_logger import VaccineLevelLogger
@@ -190,7 +193,7 @@ def main():
     #logger.set_to_record('metrics')
     #logger.set_to_record('positions')
 
-    blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
+    blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}', generate_figures=False)
     blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
                                         BlobCountRecordKey.BLOB_COUNT_REGION,
                                         BlobCountRecordKey.BLOB_COUNT_NODE}
@@ -228,6 +231,24 @@ def main():
     #                                     x_label="Frame", y_label="Population",
     #                                     columns= ['Total'],
     #                                     level="Node", filter=['stadium'])
+
+
+    # Gini Coefficient Logger
+    gini_logger = GiniCoefficientLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
+    gini_logger.data_to_record = {GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL,
+                                  GiniCoefficientRecordKey.GINI_COEFFICIENT_REGION}
+    
+    gini_logger.add_sampled_characteristic_logging("age", GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL)
+    gini_logger.add_sampled_characteristic_logging("occupation", GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL)
+    
+    #gini_logger.add_global_sampled_characteristic("occupation")
+    # gini_logger.region_custom_templates["Occupation"] = PopTemplate(sampled_properties={"occupation": "student"})
+    # gini_logger.node_custom_templates["Age"] = PopTemplate(sampled_properties={"occupation": "worker"})
+    # gini_logger.node_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+    # gini_logger.node_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+    # gini_logger.node_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+
+    
 
     # CharacteristicChange logger
     traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
@@ -289,6 +310,7 @@ def main():
     if infection_sum_logger is not None: env_graph.LoadLoggerPlugin(infection_sum_logger)
     #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
     #print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
+    env_graph.LoadLoggerPlugin(gini_logger)
     env_graph.start_logging()
 
     start_time = time.perf_counter()
