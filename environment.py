@@ -865,8 +865,8 @@ class EnvironmentGraph():
 
     ## ----------- Logging Functions ----------- ##
 
-    def LoadLoggerPlugin(self, plugin:LoggerPlugin):
-        plugin.load_to_enviroment(self)
+    def LoadLoggerPlugin(self, plugin:logger_plugin.LoggerPlugin):
+        plugin.load_to_environment(self)
         self.loaded_logger_plugins.append(plugin)
 
     def has_logger_plugin(self, _type:type) -> bool:

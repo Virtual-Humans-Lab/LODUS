@@ -15,7 +15,7 @@ from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
-from loggers.gini_coefficient_logger import GiniCoefficientLogger, GiniCoefficientRecordKey
+from loggers.gini_coefficient_logger import GiniCoefficientLogger, GiniLevel
 
 from loggers.infection_sum_logger import InfectionSumLogger
 from loggers.vaccine_level_logger import VaccineLevelLogger
@@ -235,11 +235,17 @@ def main():
 
     # Gini Coefficient Logger
     gini_logger = GiniCoefficientLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
-    gini_logger.data_to_record = {GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL,
-                                  GiniCoefficientRecordKey.GINI_COEFFICIENT_REGION}
+    # gini_logger.data_to_record = {GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL,
+    #                               GiniCoefficientRecordKey.GINI_COEFFICIENT_REGION}
     
-    gini_logger.add_sampled_characteristic_logging("age", GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL)
-    gini_logger.add_sampled_characteristic_logging("occupation", GiniCoefficientRecordKey.GINI_COEFFICIENT_GLOBAL)
+    gini_logger.add_sampled_characteristic_logging(characteristic_label= "age",
+                                                   levels = {GiniLevel.GLOBAL,
+                                                             GiniLevel.REGION,
+                                                             GiniLevel.NODE})
+    gini_logger.add_sampled_characteristic_logging(characteristic_label="occupation", 
+                                                   levels={GiniLevel.GLOBAL,
+                                                           GiniLevel.REGION,
+                                                           GiniLevel.NODE})
     
     #gini_logger.add_global_sampled_characteristic("occupation")
     # gini_logger.region_custom_templates["Occupation"] = PopTemplate(sampled_properties={"occupation": "student"})
@@ -354,7 +360,7 @@ def main():
     if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
     if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
 
-    output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
+    output_str += "\n" + "Total Simulation Time: " + str(end_time - start_time) + "\n"
     output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
     output_str += "Loaded TimeAction Keys: " + str(env_graph.time_action_map.keys()) + "\n"
 
@@ -364,7 +370,7 @@ def main():
     print((end_time - start_time)/cycles)
 
     print("Loaded TimeAction Keys: ", env_graph.time_action_map.keys())
-    print("writing Output File")
+    print("writing Output File at: ", f"output_logs/{env_graph.experiment_name}/output.txt")
     text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
     text_file.write(output_str)
     text_file.close()

@@ -37,7 +37,7 @@ class BlobCountLogger(LoggerPlugin):
         self.blob_region_count = {}
         self.blob_node_count = {}
 
-    def load_to_enviroment(self, env:EnvironmentGraph):
+    def load_to_environment(self, env:EnvironmentGraph):
          # Attaches itself to the EnvGraph
         self.graph = env
 

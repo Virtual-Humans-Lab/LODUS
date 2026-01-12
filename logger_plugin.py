@@ -2,7 +2,7 @@ class LoggerPlugin():
     """
 
     """ 
-    def load_to_enviroment(self, env):
+    def load_to_environment(self, env):
         raise NotImplementedError("SubClass should implement the \"load_to_enviroment\" method", type(self))
 
     def start_logger(self):    

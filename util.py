@@ -170,7 +170,7 @@ def weighted_int_distribution_with_weights(available, quantity, weight_list):
     return weighted_available
 
 
-def gini_coefficient(values: list[float]):
+def gini_coefficient(values: list[int]) -> float:
     '''Calculate the Gini coefficient of an array.'''
     x = np.asarray(values)
     x = x[~np.isnan(x)]
@@ -179,7 +179,8 @@ def gini_coefficient(values: list[float]):
     if np.any(x < 0):
         raise ValueError("Gini is undefined for negative values.")
     if np.sum(x) == 0:
-        raise ValueError("Gini is undefined for arrays with all values equal to zero.")
+        #raise ValueError("Gini is undefined for arrays with all values equal to zero.")
+        return float('nan')
     x = np.sort(x)
     n = x.size
     return (np.sum((2 * np.arange(1, n + 1) - n - 1) * x)) / (n * np.sum(x))

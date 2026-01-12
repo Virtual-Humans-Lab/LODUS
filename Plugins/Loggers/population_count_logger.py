@@ -70,7 +70,7 @@ class PopulationCountLogger(LoggerPlugin):
         self.region_custom_line_plots: dict = {}
         self.node_custom_line_plots: dict = {}
 
-    def load_to_enviroment(self, env):
+    def load_to_environment(self, env):
         pass
         #return super().load_to_enviroment(env)
 

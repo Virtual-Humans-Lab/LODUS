@@ -19,7 +19,7 @@ class LevyWalkSampleLogger(LoggerPlugin):
         self.data_frames_path = self.base_path + "/data_frames/"
         self.levy_walk_plugin = None
 
-    def load_to_enviroment(self, env:EnvironmentGraph):
+    def load_to_environment(self, env:EnvironmentGraph):
          # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = env
         self.levy_walk_plugin = self.graph.get_first_plugin(LevyWalkPlugin)
