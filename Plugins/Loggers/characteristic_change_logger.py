@@ -26,7 +26,7 @@ class CharacteristicChangeLogger(LoggerPlugin):
         self.base_path = "output_logs/" + base_filename + "/"
         self.data_frames_path = self.base_path + "/data_frames/"
 
-    def load_to_environment(self, env:EnvironmentGraph):
+    def load_to_enviroment(self, env:EnvironmentGraph):
         # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = env
         self.graph.characteristic_change_logger["characteristic_change_logger"] = self.log_characteristic_change

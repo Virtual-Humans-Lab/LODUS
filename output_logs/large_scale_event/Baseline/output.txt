@@ -10,8 +10,8 @@ Other:334253
 
 LevyWalkPlugin Execution Time Data:
 ---Number of executions: 2989
----Total execution time:: 1.2434379956685007
----Average execution time: 0.0004160046823916028
+---Total execution time:: 1.1317373104393482
+---Average execution time: 0.0003786340951620436
 ---Total subactions count:5287
 ---Average subaction count:1.7688190030110404
 
@@ -22,16 +22,16 @@ GatherPopulationPlugin Execution Time Data:
 
 SendPopulationBackPlugin Execution Time Data:
 ---Number of executions: 1162
----Total execution time:: 0.0784807070158422
----Average execution time: 6.753933478127556e-05
+---Total execution time:: 0.06920910160988569
+---Average execution time: 5.956032840781901e-05
 ---Total subactions count:7272
 ---Average subaction count:6.258175559380379
 
 MovePopulationPlugin Execution Time Data:
 ---Number of executions: 12559
----Total execution time:: 1.370671977289021
----Average execution time: 0.00010913862387841556
+---Total execution time:: 1.2541627138853073
+---Average execution time: 9.986167002829105e-05
 
-Total Simulation Time: 4.041325100231916
-Average Cycle Time: 4.041325100231916
+Total Simulation Time: 3.6606010999530554
+Average Cycle Time: 3.6606010999530554
 Loaded TimeAction Keys: dict_keys(['move_population', 'gather_population', 'send_population_back', 'levy_walk'])

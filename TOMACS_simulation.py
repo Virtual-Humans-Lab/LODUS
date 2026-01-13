@@ -247,12 +247,6 @@ def main():
                                                            GiniLevel.REGION,
                                                            GiniLevel.NODE})
     
-    #gini_logger.add_global_sampled_characteristic("occupation")
-    # gini_logger.region_custom_templates["Occupation"] = PopTemplate(sampled_properties={"occupation": "student"})
-    # gini_logger.node_custom_templates["Age"] = PopTemplate(sampled_properties={"occupation": "worker"})
-    # gini_logger.node_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
-    # gini_logger.node_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
-    # gini_logger.node_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
 
     
 
