@@ -1,9 +1,5 @@
 import sys
-
-sys.path.append('../')
-
 import argparse
-
 from pathlib import Path
 
 import pandas as pd
@@ -11,6 +7,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import plotly.express as px
+
+_repo_root = Path(__file__).resolve().parent.parent
+if str(_repo_root) not in sys.path:
+    sys.path.insert(0, str(_repo_root))
 
 def displacement_histogram_comparison(experiment_names:list[str], 
                                       label_list:list[str],
@@ -21,38 +21,52 @@ def displacement_histogram_comparison(experiment_names:list[str],
 
     # Setup
     # Creates the output directory if necessary
-    dir_path = Path() / "movement_displacement_comparison" / additional_exp_path
+    base_dir = Path(__file__).resolve().parent
+    dir_path = base_dir / "movement_displacement_comparison" / additional_exp_path
     dir_path.mkdir(parents=True, exist_ok=True)
-    data_list:list[tuple[str,np.ndarray]] = []
+    # store (label, x_values, weights)
+    data_list:list[tuple[str,np.ndarray,np.ndarray]] = []
     for exp in experiment_names:
         _exp_path = Path(__file__).parent.parent / "output_logs" / additional_exp_path / exp / "data_frames"
-        _df = pd.read_csv(_exp_path / "movement_counter.csv", sep=';')
-        _exp_movement_list = []
-        for index, row in _df.iterrows():
-            _exp_movement_list.extend([row.iloc[0]] * int(row.iloc[1]))
-        _exp_movement_data = np.array(_exp_movement_list)
-        data_list.append((exp, _exp_movement_data))
+        csv_path = _exp_path / "movement_counter.csv"
+        if not csv_path.exists():
+            print(__header, f"Skipping '{exp}': file not found -> {csv_path}")
+            continue
+        _df = pd.read_csv(csv_path, sep=';')
+        if _df.empty:
+            print(__header, f"Skipping '{exp}': empty dataset -> {csv_path}")
+            continue
+        # assume first column = distance, second column = count
+        x_vals = _df.iloc[:, 0].to_numpy(dtype=float)
+        weights = _df.iloc[:, 1].to_numpy(dtype=float)
+        data_list.append((exp, x_vals, weights))
 
-    if label_list: 
+    # Validate and apply custom labels
+    if label_list:
+        if len(label_list) != len(experiment_names):
+            raise ValueError("label_list length must match experiment_names length")
+        # map original experiment name -> label
+        name_to_label = {orig: lab for orig, lab in zip(experiment_names, label_list)}
+        data_list = [ (name_to_label.get(name, name), x, w) for (name, x, w) in data_list ]
         experiment_names = label_list
-        for i in range(len(data_list)):
-            __list = list(data_list[i])
-            __list[0]  = label_list[i]
-            data_list[i] = __list # type: ignore
     
     print(f"displacement_histogram_comparison_{experiment_names}.png")
     # Find max displacement to create bins
-    max_displacement = 0
-    for (exp, _data) in data_list:
-        if _data.size > 0:
-            max_displacement = max(max_displacement, np.amax(_data) * 1.05)
-    bins = np.arange(0.0, max_displacement, bin_size)
+    max_displacement = 0.0
+    for (_, x_vals, _weights) in data_list:
+        if x_vals.size > 0:
+            max_displacement = max(max_displacement, float(np.max(x_vals)) * 1.05)
+    # include upper edge to prevent off-by-one issues
+    bins = np.arange(0.0, max_displacement + bin_size, bin_size)
 
     # Plot multiple histograms
     sns.set_theme()
     plt.figure(figsize=(8,3))
-    for (exp, _data) in data_list:
-        s = sns.histplot(data=_data, bins=bins, element='poly', fill=False, label=exp) # type: ignore
+    for (exp, x_vals, weights) in data_list:
+        counts, edges = np.histogram(x_vals, bins=bins, weights=weights)
+        # Use bin centers and connect as a line (less bar-like than steps)
+        centers = 0.5 * (edges[:-1] + edges[1:])
+        plt.plot(centers, counts, label=exp, linewidth=1.5)
     plt.legend(fancybox=True, shadow=True, fontsize = 'x-small')
     plt.xlabel("Distance (m)")
     plt.ylabel("Total Displacements")
@@ -72,6 +86,7 @@ def combined_movement_displacement_barchart(experiment_name:str, bin_size:float 
     dir_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "data_frames"
     output_path = Path(__file__).parent.parent / "output_logs" / experiment_name / "results"
     dir_path.mkdir(parents=True, exist_ok=True)
+    output_path.mkdir(parents=True, exist_ok=True)
 
     xaxis = dict(tickmode = 'linear',
                  tick0 = 0.0,
@@ -82,13 +97,16 @@ def combined_movement_displacement_barchart(experiment_name:str, bin_size:float 
     
     # Gets max distance traveled and organizes bins
     max_distance = float(df_movement.max().loc['distance'])
-    bins_limits = np.arange(0.0, max_distance, bin_size).tolist()
+    bins_limits = np.arange(0.0, max_distance + bin_size, bin_size).tolist()
     data = {b:0 for b in bins_limits}
 
     # Sums frequencies for each bin
+    keys_list = list(data.keys())
+    last_idx = len(keys_list) - 1
     for index, row in df_movement.iterrows():
         key = int((row.iloc[0] // bin_size))
-        data[list(data.keys())[key]] += int(row.iloc[1])
+        key = min(max(key, 0), last_idx)
+        data[keys_list[key]] += int(row.iloc[1])
         
     # Creates a dataframe from dict and the
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -104,13 +122,16 @@ def combined_movement_displacement_barchart(experiment_name:str, bin_size:float 
     
     # Repeats process for the group movement data
     df_group_movement = pd.read_csv(dir_path / "group_movement_counter.csv", sep=';')
-    max_distance = df_group_movement.max().loc['distance']
-    bins_limits = np.arange(0.0, max_distance, bin_size).tolist()#[1:]
+    max_distance = float(df_group_movement.max().loc['distance'])
+    bins_limits = np.arange(0.0, max_distance + bin_size, bin_size).tolist()
     data = {b:0 for b in bins_limits}
 
+    keys_list = list(data.keys())
+    last_idx = len(keys_list) - 1
     for index, row in df_group_movement.iterrows():
         key = int((row.iloc[0] // bin_size))
-        data[list(data.keys())[key]] += int(row.iloc[1])
+        key = min(max(key, 0), last_idx)
+        data[keys_list[key]] += int(row.iloc[1])
 
     df = pd.DataFrame.from_dict(data, orient='index')
     fig = px.bar(df, title=f'Group movement displacement data - {experiment_name}')

@@ -563,7 +563,7 @@ def plot_mean_gini_bar(
         import matplotlib.pyplot as plt
 
         fig, ax = plt.subplots(figsize=(cfg.width / 100, max(cfg.height / 100, len(means) / 4)))
-        ax.barh(means.index[::-1], means.values[::-1])
+        ax.barh(means.index[::-1], means.values[::-1]) # pyright: ignore[reportArgumentType]
         ax.set_title(title)
         ax.set_xlabel("Mean Gini")
         ax.set_ylabel("Region")
