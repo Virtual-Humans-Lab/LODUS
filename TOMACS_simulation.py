@@ -1,11 +1,14 @@
 #encoding: utf-8
+
+import time
+pre_import_time = time.perf_counter()
+datetime = time.strftime("%Y%m%d-%H%M%S")
 import sys
 
 
 sys.path.append('./Plugins/')
 
 import argparse
-import time
 from pathlib import Path
 
 from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
@@ -356,16 +359,28 @@ def main():
 
     output_str += "\n" + "Total Simulation Time: " + str(end_time - start_time) + "\n"
     output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
+    output_str += "Import To Simulation Start Time: " + str(start_time - pre_import_time) + "\n"
+    output_str += "Total Time: " + str(end_time - pre_import_time) + "\n"
     output_str += "Loaded TimeAction Keys: " + str(env_graph.time_action_map.keys()) + "\n"
 
     print("Total Simulation time")
     print(end_time - start_time)
     print("Average Cycle time")
     print((end_time - start_time)/cycles)
+    print("Import To Simulation Start Time")
+    print(start_time - pre_import_time)
+    print("Total Time")
+    print(end_time - pre_import_time)
+
 
     print("Loaded TimeAction Keys: ", env_graph.time_action_map.keys())
     print("writing Output File at: ", f"output_logs/{env_graph.experiment_name}/output.txt")
     text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
+    text_file.write(output_str)
+    text_file.close()
+    # write to a file with timestamp
+    text_file = open(f"output_logs/{env_graph.experiment_name}/output_{datetime}.txt", "w")
+    print("writing Output File at: ", f"output_logs/{env_graph.experiment_name}/output_{datetime}.txt")
     text_file.write(output_str)
     text_file.close()
 
@@ -375,7 +390,15 @@ if __name__ == '__main__':
     # Performance Profiling using memory_profiler
     if args['p'] == 1:
         from memory_profiler import memory_usage
-        with open(f"output_logs/{experiment_name}/performance_memory_profiler.txt", "w") as perf_mem_profiler_log_file:
+        exp_path = Path(experiment_name)
+        mem_dir = Path("performance") / "memory_consumption" / experiment_name
+        #if exp_path.parent != Path(""):
+        #    mem_dir = mem_dir / exp_path.parent
+        mem_dir.mkdir(parents=True, exist_ok=True)
+
+        mem_profiler_path = mem_dir / f"memory_profiler_{datetime}.txt"
+
+        with open(mem_profiler_path, "w") as perf_mem_profiler_log_file:
             mem_usage = memory_usage(proc=(main,(),{}))
             perf_mem_profiler_log_file.write(str(mem_usage))
             perf_mem_profiler_log_file.write("\n" + str(max(mem_usage)))
@@ -384,8 +407,15 @@ if __name__ == '__main__':
     # Performance Profiling using tracemalloc
     elif args['p'] == 2:
         import tracemalloc
-        perf_tracemalloc_profiler_log_file = open(f"output_logs/{experiment_name}/performance_tracem_profiler.txt", "w")
-        with open(f"output_logs/{experiment_name}/performance_tracem_profiler.txt", "w") as perf_tracemalloc_profiler_log_file:
+        exp_path = Path(experiment_name)
+        mem_dir = Path("performance") / "memory_consumption" / experiment_name
+        #if exp_path.parent != Path(""):
+        #    mem_dir = mem_dir / exp_path.parent
+        mem_dir.mkdir(parents=True, exist_ok=True)
+
+        tracemalloc_profiler_path = mem_dir / f"tracemalloc_{datetime}.txt"
+
+        with open(tracemalloc_profiler_path, "w") as perf_tracemalloc_profiler_log_file:
 
             tracemalloc.start()
             main()
