@@ -3,6 +3,36 @@ Parse simulation output logs and generate summary statistics.
 
 This script processes all output files in a specified experiment folder,
 extracts timing metrics, and generates a CSV file with statistics.
+
+Usage Examples:
+    
+    Basic usage with experiment folder:
+        python parse_simulation_outputs.py isolation_tests/Baseline
+    
+    Parse outputs from a nested experiment:
+        python parse_simulation_outputs.py levy_parameter_tests_94/WorkSchool94-BW_500-S_250
+    
+    Parse outputs from epidemic tests:
+        python parse_simulation_outputs.py epidemic_tests/High_Transmission
+    
+    Parse outputs from vaccine experiments:
+        python parse_simulation_outputs.py vaccine_tests/Centro_3cpd-i1-m2
+
+Arguments:
+    experiment_path : Path to the experiment folder (relative to output_logs directory)
+
+Output:
+    CSV file saved to: performance/{experiment_name}_simulation_times.csv
+    
+    The CSV contains:
+    - Individual metrics for each simulation run
+    - AVERAGE, MIN, and MAX statistics rows
+    - Columns: file, total_simulation_time, average_cycle_time, 
+               import_to_simulation_time, total_time
+
+Command Line Examples:
+    python parse_simulation_outputs.py isolation_tests/Baseline
+    python parse_simulation_outputs.py levy_tests/WorkSchool94-BW_500-S_1000
 """
 
 import os

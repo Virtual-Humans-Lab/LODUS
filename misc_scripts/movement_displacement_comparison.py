@@ -133,11 +133,16 @@ def displacement_histogram_comparison(experiment_names: list[str],
     # Plot multiple histograms
     sns.set_theme()
     plt.figure(figsize=DEFAULT_FIGURE_SIZE)
+    ax = plt.gca()
+    ax.set_facecolor("#eaeaf2ff")  # Light gray background
+    
     for (exp, x_vals, weights) in data_list:
         counts, edges = np.histogram(x_vals, bins=bins, weights=weights)
         # Use bin centers and connect as a line (less bar-like than steps)
         centers = 0.5 * (edges[:-1] + edges[1:])
         plt.plot(centers, counts, label=exp, linewidth=DEFAULT_LINE_WIDTH)
+    
+    plt.grid(True, alpha=0.4, linestyle='--', linewidth=0.5)
     plt.legend(fancybox=True, shadow=True, fontsize='x-small')
     plt.xlabel("Distance (m)")
     plt.ylabel("Total Displacements")

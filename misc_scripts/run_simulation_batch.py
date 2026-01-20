@@ -173,4 +173,4 @@ if __name__ == '__main__':
 
 # python misc_scripts/run_simulation_batch.py --experiments isolation_tests/Baseline isolation_tests/Baseline-Iso_25 isolation_tests/Baseline-Iso_50 isolation_tests/Baseline-Iso_75 isolation_tests/Baseline-Iso_100 --runs 5
 # python misc_scripts/run_simulation_batch.py --experiment isolation_tests/Baseline --runs 2 --args --p 1 --someOtherFlag value
-#python misc_scripts/run_simulation_batch.py --experiments isolation_tests/Baseline isolation_tests/Baseline-Iso_25 --runs 5 --args --p 1
+# python misc_scripts/run_simulation_batch.py --experiments isolation_tests/Baseline isolation_tests/Baseline-Iso_25 --runs 5 --args --p 1

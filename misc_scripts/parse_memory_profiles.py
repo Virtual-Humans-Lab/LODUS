@@ -3,6 +3,37 @@ Parse memory profiling results from performance/memory_consumption folder.
 
 This script processes memory_profiler and tracemalloc output files,
 extracts memory consumption metrics, and generates a CSV summary.
+
+Usage Examples:
+    
+    Basic usage with experiment folder:
+        python misc_scripts/parse_memory_profiles.py isolation_tests/Baseline
+    
+    Parse memory profiles from nested experiment:
+        python misc_scripts/parse_memory_profiles.py levy_parameter_tests_94/WorkSchool94-BW_500-S_250
+    
+    Parse memory profiles from isolation tests:
+        python misc_scripts/parse_memory_profiles.py isolation_tests/Baseline-Iso_50
+    
+    Parse memory profiles from epidemic experiments:
+        python misc_scripts/parse_memory_profiles.py epidemic_tests/High_Transmission
+
+Arguments:
+    experiment_path : Path to the experiment folder (relative to performance/memory_consumption directory)
+
+Output:
+    CSV file saved to: Performance/{experiment_name}_memory_summary.csv
+    
+    The CSV contains:
+    - Individual metrics for each profiler run (memory_profiler and tracemalloc)
+    - MIN, MAX, AVG, and STDDEV statistics rows for each profiler type
+    - Columns: file, profiler_type, min_memory_mb, max_memory_mb, 
+               avg_memory_mb, peak_memory_mb
+
+Command Line Examples:
+    python misc_scripts/parse_memory_profiles.py isolation_tests/Baseline
+    python misc_scripts/parse_memory_profiles.py isolation_tests/Baseline-Iso_25
+    python misc_scripts/parse_memory_profiles.py levy_tests/WorkSchool94-BW_500-S_1000
 """
 
 import os
