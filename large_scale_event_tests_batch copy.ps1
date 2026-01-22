@@ -1,54 +1,41 @@
-param(
-    [int]$N = 5  # Number of times to run each simulation
-)
+python .\TOMACS_simulation.py --e large_scale_event/Baseline
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+A_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+A_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+B_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+B_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+C_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+C_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+P_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+P_Pop
 
-$experiments = @(
-    "large_scale_event/Baseline",
-    "large_scale_event/Baseline+A_Dist",
-    "large_scale_event/Baseline+A_Pop",
-    "large_scale_event/Baseline+B_Dist",
-    "large_scale_event/Baseline+B_Pop",
-    "large_scale_event/Baseline+C_Dist",
-    "large_scale_event/Baseline+C_Pop",
-    "large_scale_event/Baseline+P_Dist",
-    "large_scale_event/Baseline+P_Pop",
-    "large_scale_event/Baseline+AB_Dist",
-    "large_scale_event/Baseline+AB_Pop",
-    "large_scale_event/Baseline+AC_Dist",
-    "large_scale_event/Baseline+AC_Pop",
-    "large_scale_event/Baseline+AP_Dist",
-    "large_scale_event/Baseline+AP_Pop",
-    "large_scale_event/Baseline+BC_Dist",
-    "large_scale_event/Baseline+BC_Pop",
-    "large_scale_event/Baseline+BP_Dist",
-    "large_scale_event/Baseline+BP_Pop",
-    "large_scale_event/Baseline+CP_Dist",
-    "large_scale_event/Baseline+CP_Pop",
-    "large_scale_event/Baseline+ABC_Dist",
-    "large_scale_event/Baseline+ABC_Pop",
-    "large_scale_event/Baseline+ABP_Dist",
-    "large_scale_event/Baseline+ABP_Pop",
-    "large_scale_event/Baseline+ACP_Dist",
-    "large_scale_event/Baseline+ACP_Pop",
-    "large_scale_event/Baseline+BCP_Dist",
-    "large_scale_event/Baseline+BCP_Pop",
-    "large_scale_event/Baseline+ABCP_Dist",
-    "large_scale_event/Baseline+ABCP_Pop",
-    "large_scale_event/Baseline+DiffStep_ACP_Dist",
-    "large_scale_event/Baseline+DiffStep_ACP_Pop",
-    "large_scale_event/Baseline+DiffStep_ABCP_Dist",
-    "large_scale_event/Baseline+DiffStep_ABCP_Pop"
-)
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AB_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AB_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AC_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AC_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+AP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BC_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BC_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+CP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+CP_Pop
 
-foreach ($experiment in $experiments) {
-    for ($i = 1; $i -le $N; $i++) {
-        Write-Host "Running experiment $experiment - iteration $i of $N" -ForegroundColor Cyan
-        python .\TOMACS_simulation.py --e $experiment
-    }
-    
-    Write-Host "Parsing experiment $experiment" -ForegroundColor Green
-    python .\misc_scripts\parse_simulation_outputs.py $experiment
-}
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABC_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABC_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ACP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ACP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BCP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+BCP_Pop
+
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABCP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+ABCP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ACP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ACP_Pop
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ABCP_Dist
+python .\TOMACS_simulation.py --e large_scale_event/Baseline+DiffStep_ABCP_Pop
 
 cd misc_scripts
 

@@ -20,7 +20,7 @@ class InfectionSumLogger(LoggerPlugin):
         self.infection_plugin = None
         self.infection_sums = []
 
-    def load_to_enviroment(self, env:EnvironmentGraph):
+    def load_to_environment(self, env:EnvironmentGraph):
          # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = env
         self.cycle_length = self.graph.routine_cycle_length
