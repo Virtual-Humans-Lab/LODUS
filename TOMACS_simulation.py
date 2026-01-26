@@ -81,7 +81,7 @@ def main():
     Parameters
     '''
     # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-    cycles:int = 1
+    cycles:int = 500
     cycle_length:int = 24
     env_graph.routine_cycle_length = cycle_length
     simulation_steps = cycles * cycle_length
@@ -101,8 +101,8 @@ def main():
 
     infection_data = None
     if 'global_infection_data_plugin' in env_graph.experiment_config:
-        isolation_data = GlobalInfectionDataPlugin(env_graph)
-        env_graph.load_time_action_plugin(isolation_data)
+        infection_data = GlobalInfectionDataPlugin(env_graph)
+        env_graph.load_time_action_plugin(infection_data)
 
     node_density_data = None
     if 'node_density_data_plugin' in env_graph.experiment_config:
@@ -164,23 +164,23 @@ def main():
 
     pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
     pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
-                                        PopulationCountRecordKey.POPULATION_COUNT_REGION}#,
-                                        #PopulationCountRecordKey.POPULATION_COUNT_NODE}
+                                        PopulationCountRecordKey.POPULATION_COUNT_REGION,
+                                        PopulationCountRecordKey.POPULATION_COUNT_NODE}
 
     if infection:
         pop_count_logger.global_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
         pop_count_logger.global_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
         pop_count_logger.global_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
-
-        # pop_count_logger.region_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
-        # pop_count_logger.region_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
-        # pop_count_logger.region_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+        
+        pop_count_logger.region_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+        pop_count_logger.region_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+        pop_count_logger.region_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
 
         # pop_count_logger.node_custom_templates["Students"] = PopTemplate(sampled_properties={"occupation": "student"})
         # pop_count_logger.node_custom_templates["Workers"] = PopTemplate(sampled_properties={"occupation": "worker"})
-        # pop_count_logger.node_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
-        # pop_count_logger.node_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
-        # pop_count_logger.node_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
+        pop_count_logger.node_custom_templates["Susceptible"] = PopTemplate(traceable_properties={"sir_status": "susceptible"})
+        pop_count_logger.node_custom_templates["Infected"] = PopTemplate(traceable_properties={"sir_status": "infected"})
+        pop_count_logger.node_custom_templates["Removed"] = PopTemplate(traceable_properties={"sir_status": "removed"})
 
     if vaccine:
         pop_count_logger.global_custom_templates["VaccineLevel:0"] = PopTemplate(traceable_properties={"vaccine_level": 0})
@@ -188,10 +188,10 @@ def main():
         pop_count_logger.global_custom_templates["VaccineLevel:2"] = PopTemplate(traceable_properties={"vaccine_level": 2})
         pop_count_logger.global_custom_templates["VaccineLevel:3"] = PopTemplate(traceable_properties={"vaccine_level": 3})
 
-        # pop_count_logger.region_custom_templates["VaccineLevel:0"] = PopTemplate(traceable_properties={"vaccine_level": 0})
-        # pop_count_logger.region_custom_templates["VaccineLevel:1"] = PopTemplate(traceable_properties={"vaccine_level": 1})
-        # pop_count_logger.region_custom_templates["VaccineLevel:2"] = PopTemplate(traceable_properties={"vaccine_level": 2})
-        # pop_count_logger.region_custom_templates["VaccineLevel:3"] = PopTemplate(traceable_properties={"vaccine_level": 3})
+        pop_count_logger.region_custom_templates["VaccineLevel:0"] = PopTemplate(traceable_properties={"vaccine_level": 0})
+        pop_count_logger.region_custom_templates["VaccineLevel:1"] = PopTemplate(traceable_properties={"vaccine_level": 1})
+        pop_count_logger.region_custom_templates["VaccineLevel:2"] = PopTemplate(traceable_properties={"vaccine_level": 2})
+        pop_count_logger.region_custom_templates["VaccineLevel:3"] = PopTemplate(traceable_properties={"vaccine_level": 3})
     #logger.set_to_record('neighbourhood_disserta')
     #logger.set_to_record('metrics')
     #logger.set_to_record('positions')
@@ -264,7 +264,7 @@ def main():
 
     # Age tracking
     od_logger.region_custom_templates["age: [children]"] = PopTemplate(sampled_properties={"age": "children"})
-    #od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
+    od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
     od_logger.region_custom_templates["age: [adults]"] = PopTemplate(sampled_properties={"age": "adults"})
     od_logger.region_custom_templates["age: [elders]"] = PopTemplate(sampled_properties={"age": "elders"})
 
@@ -287,7 +287,8 @@ def main():
     if infection is not None:
         infection_sum_logger = InfectionSumLogger(f'{env_graph.experiment_name}')
     # Vaccine Logger
-    #vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, day_duration)
+    if vaccine is not None:
+        vacc_logger = VaccineLevelLogger(f'{args["n"]}', env_graph, cycle_length)
 
     output_str += "Population per Age:\n"
     output_str += "Children:" + str(env_graph.get_population_size(PopTemplate(sampled_properties={"age": "children"}))) + "\n"
@@ -304,10 +305,10 @@ def main():
     '''
 
     env_graph.LoadLoggerPlugin(pop_count_logger)
-    # env_graph.LoadLoggerPlugin(od_logger)
+    env_graph.LoadLoggerPlugin(od_logger)
     env_graph.LoadLoggerPlugin(blob_count_logger)
-    # # env_graph.LoadLoggerPlugin(traceable_logger)
-    # # env_graph.LoadLoggerPlugin(vacc_logger)
+    env_graph.LoadLoggerPlugin(traceable_logger)
+    if vaccine is not None: env_graph.LoadLoggerPlugin(vacc_logger)
     env_graph.LoadLoggerPlugin(displacement_logger)
     if levy_sample_logger is not None: env_graph.LoadLoggerPlugin(levy_sample_logger)
     if infection_sum_logger is not None: env_graph.LoadLoggerPlugin(infection_sum_logger)

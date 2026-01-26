@@ -1,17 +1,21 @@
 param(
-    [int]$N = 5,              # Number of times to run each simulation
-    [int]$MaxParallel = 6     # Max experiments to run in parallel
+    [int]$N = 5,              # Number of times to run each simulation,
+    [int]$MemoryRuns = 1,     # Number of times to run each memory profiling simulation
+    [int]$MaxParallel = 5     # Max experiments to run in parallel
 )
 
 $RepoRoot = Split-Path -Parent $PSCommandPath
 
 $experiments = @(
-    "infection_tests/R0-2.6",
-    "infection_tests/R0-3.07",
-    "infection_tests/R0-6.0",
-    "infection_tests/R0-2.6_Mov25",
-    "infection_tests/R0-3.07_Mov25",
-    "infection_tests/R0-6.0_Mov25"
+    "epidemic_nb_tests/R0-2.6",
+    "epidemic_nb_tests/R0-2.6-Mov25.json",
+    "epidemic_nb_tests/R0-2.6-Mov50.json",
+    "epidemic_nb_tests/R0-2.6-VaccA-Mov100",
+    "epidemic_nb_tests/R0-2.6-VaccB-Mov100",
+    "epidemic_nb_tests/R0-2.6-VaccC-Mov100",
+    "epidemic_nb_tests/R0-2.6-VaccD-Mov100",
+    "epidemic_nb_tests/R0-2.6-VaccC-Mov25",
+    "epidemic_nb_tests/R0-2.6-VaccC-Mov50"
 )
 
 # Launch experiment jobs with throttling
@@ -52,34 +56,6 @@ if ($failed) {
 }
 Remove-Job -Job $jobs -Force
 
-# ...existing code...
-Set-Location misc_scripts
-
-# Experiments for infection analysis
-$infectionExperiments = @(
-    "R0-2.6",
-    "R0-3.07",
-    "R0-6.0"
-)
-
-# Global population analysis
-foreach ($exp in $infectionExperiments) {
-    Write-Host "Analyzing global population for $exp" -ForegroundColor Cyan
-    python .\experiment_global_population.py --p infection_tests --e $exp --c Susceptible Infected Removed
-}
-
-# Infection sum analysis
-foreach ($exp in $infectionExperiments) {
-    Write-Host "Analyzing infection sum for $exp" -ForegroundColor Cyan
-    python .\experiment_infection_sum.py --p infection_tests --e $exp
-}
-
-# Infection sum comparison
-Write-Host "Comparing infection sums" -ForegroundColor Cyan
-$args = @(".\infection_sum_comparison.py", "--p", "infection_tests", "--e") + $infectionExperiments
-python @args
-
-Set-Location ..
 
 Write-Host "`nRunning memory profiles for all experiments in parallel..." -ForegroundColor Green
 $memoryJobs = @()
@@ -92,12 +68,12 @@ foreach ($experiment in $experiments) {
 
     $jobName = ("mem_" + ($experiment -replace '[^A-Za-z0-9_-]', '_'))
 
-    $job = Start-Job -Name $jobName -ArgumentList $experiment, $RepoRoot -ScriptBlock {
-        param($exp, $root)
+    $job = Start-Job -Name $jobName -ArgumentList $experiment, $RepoRoot, $MemoryRuns -ScriptBlock {
+        param($exp, $root, $memoryRuns)
         Set-Location $root
 
         Write-Host "Running memory profile for $exp" -ForegroundColor Cyan
-        python .\misc_scripts\run_memory_profiles.py -e $exp --runs 5
+        python .\misc_scripts\run_memory_profiles.py -e $exp --runs $memoryRuns
     }
 
     $memoryJobs += $job

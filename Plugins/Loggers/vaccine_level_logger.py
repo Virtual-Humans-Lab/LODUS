@@ -26,9 +26,9 @@ class VaccineLevelLogger(LoggerPlugin):
     def __init__(self, base_filename:str, graph:EnvironmentGraph, cycle_length: int=24) -> None:
         # Attaches itself to the EnvGraph
         self.graph: EnvironmentGraph = graph
-        if not graph.has_plugin(VaccineLocalPlugin):
+        if not graph.has_plugin(VaccinePlugin):
             exit("No VaccinePlugin found in the EnviromentGraph")
-        self.vacc_plugin:VaccineLocalPlugin = graph.get_first_plugin(VaccineLocalPlugin)
+        self.vacc_plugin:VaccinePlugin = graph.get_first_plugin(VaccinePlugin)
         self.DEBUG_VACC_DATA = True
         self.DEBUG_ALL_REGIONS = False
         self.DEBUG_REGIONS = []
@@ -56,10 +56,19 @@ class VaccineLevelLogger(LoggerPlugin):
 
         self.vacc_levels:int = self.vacc_plugin.vacc_levels
         self.profiles_to_record:list[PopTemplate] = []
+        
+        # Custom Logging
+        self.global_custom_templates: dict[str, PopTemplate] = {}
+        self.region_custom_templates: dict[str, PopTemplate] = {}
+        self.node_custom_templates: dict[str, PopTemplate] = {}
+        self.custom_line_plots: dict = {}
 
+    def add_custom_line_plot(self, _key:str, file, x_label:str, y_label:str, columns:list[str] = None, hours: list[str] = None, level:str = None, filter: list[str] = None):
+        self.custom_line_plots[_key] = (file, x_label, y_label, columns, hours, level, filter)
 
     #### Logging Functions
-    def start_logger(self):    
+    def start_logger(self):
+    
         
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
@@ -77,41 +86,47 @@ class VaccineLevelLogger(LoggerPlugin):
         for lvl in range(self.vacc_levels):
             pop_template = PopTemplate()
             pop_template.set_traceable_property("vaccine_level", lvl)
-            logger.global_custom_templates['VaccLvl_' + str(lvl)] = pop_template
-            logger.region_custom_templates['VaccLvl_' + str(lvl)] = pop_template
-            logger.node_custom_templates['VaccLvl_' + str(lvl)] = pop_template
+            self.global_custom_templates['VaccLvl_' + str(lvl)] = pop_template
+            self.region_custom_templates['VaccLvl_' + str(lvl)] = pop_template
+            self.node_custom_templates['VaccLvl_' + str(lvl)] = pop_template
         
-        logger.add_custom_line_plot('Vaccination Levels - Global', 
+        self.add_custom_line_plot('Vaccination Levels - Global', 
                                     file = 'global.csv',
                                     x_label="Frame", y_label="Population",
                                     columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)])
-        logger.add_custom_line_plot('Vaccination Levels - Azenha and Bom Fim', 
+        self.add_custom_line_plot('Vaccination Levels - Azenha and Bom Fim', 
                                     file = 'regions.csv',
                                     x_label="Frame", y_label="Population",
                                     columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)],
                                     level="Region", filter=['Azenha', 'Bom Fim'])
-        logger.add_custom_line_plot('Vaccination Levels - Per Region', 
+        self.add_custom_line_plot('Vaccination Levels - Per Region', 
                                     file = 'regions.csv',
                                     x_label="Frame", y_label="Population",
                                     columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)],
                                     level="Region")
-        logger.add_custom_line_plot('Vaccination Level 2 - Per Region', 
+        self.add_custom_line_plot('Vaccination Level 2 - Per Region', 
                                     file = 'regions.csv',
                                     x_label="Frame", y_label="Population",
                                     columns= ['VaccLvl_2'],
                                     level="Region")
-        logger.add_custom_line_plot('Vaccination Levels - Pharmacy Nodes', 
+        self.add_custom_line_plot('Vaccination Levels - Pharmacy Nodes', 
                                     file = 'nodes.csv',
                                     x_label="Frame", y_label="Population",
                                     columns= ['VaccLvl_' + str(lvl) for lvl in range(self.vacc_levels)],
                                     level="Node", filter=['pharmacy'])
-        logger.add_custom_line_plot('Total Population - Pharmacy Nodes', 
+        self.add_custom_line_plot('Total Population - Pharmacy Nodes', 
                                     file = 'nodes.csv',
                                     x_label="Frame", y_label="Population",
                                     columns= ['Total'],
                                     level="Node", filter=['pharmacy'])
-        
+    
+    def load_to_environment(self, env):
+        return
+
     def log_simulation_step(self):
+        return
+    
+    def update_time_step(self, cycle_step, simulation_step):
         return
 
     def log_data(self, **kwargs):
@@ -124,7 +139,7 @@ class VaccineLevelLogger(LoggerPlugin):
         _current_frame_counts = [0] * self.vacc_levels
         _pop_template = PopTemplate()
         
-        # Gets number of vaccinated ler level
+        # Gets number of vaccinated per level
         for lvl in range(self.vacc_levels):
             _pop_template.set_traceable_property('vaccine_level', lvl)
             for node in _graph.node_list:
