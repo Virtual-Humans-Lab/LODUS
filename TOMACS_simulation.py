@@ -1,40 +1,38 @@
 #encoding: utf-8
-import sys
-sys.path.append('./plugins/')
 import argparse
 import time
 from pathlib import Path
-from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from loggers.characteristic_change_logger import CharacteristicChangeLogger
-from loggers.movement_displacement_logger import MovementDisplacementLogger
-from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from loggers.population_count_logger import (PopulationCountLogger,
+from lodus.plugins.loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from lodus.plugins.loggers.characteristic_change_logger import CharacteristicChangeLogger
+from lodus.plugins.loggers.movement_displacement_logger import MovementDisplacementLogger
+from lodus.plugins.loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from lodus.plugins.loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from lodus.plugins.loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
-from loggers.infection_sum_logger import InfectionSumLogger
-from loggers.vaccine_level_logger import VaccineLevelLogger
-from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
-from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
-from time_actions.gather_population_plugin import GatherPopulationPlugin
-from time_actions.infection_plugin import InfectionPlugin
-from time_actions.levy_walk_plugin import LevyWalkPlugin
-from time_actions.move_population_plugin import MovePopulationPlugin
-from time_actions.new_infection_plugin import NewInfectionPlugin
-from data.node_density_data_plugin import NodeDensityDataPlugin
-from time_actions.return_population_home_plugin import ReturnPopulationHomePlugin
-from time_actions.return_to_previous_plugin import ReturnToPreviousPlugin
-from time_actions.reverse_social_isolation_plugin import \
+from lodus.plugins.loggers.infection_sum_logger import InfectionSumLogger
+from lodus.plugins.loggers.vaccine_level_logger import VaccineLevelLogger
+from lodus.plugins.routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
+from lodus.plugins.time_actions.custom_time_action_plugin import CustomTimeActionPlugin
+from lodus.plugins.time_actions.gather_population_plugin import GatherPopulationPlugin
+from lodus.plugins.time_actions.infection_plugin import InfectionPlugin
+from lodus.plugins.time_actions.levy_walk_plugin import LevyWalkPlugin
+from lodus.plugins.time_actions.move_population_plugin import MovePopulationPlugin
+from lodus.plugins.time_actions.new_infection_plugin import NewInfectionPlugin
+from lodus.plugins.data.node_density_data_plugin import NodeDensityDataPlugin
+from lodus.plugins.time_actions.return_population_home_plugin import ReturnPopulationHomePlugin
+from lodus.plugins.time_actions.return_to_previous_plugin import ReturnToPreviousPlugin
+from lodus.plugins.time_actions.reverse_social_isolation_plugin import \
     ReverseSocialIsolationPlugin
-from time_actions.send_population_back_plugin import SendPopulationBackPlugin
-from time_actions.vaccine_plugin import VaccinePlugin
-from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
-from data.global_infection_data_plugin import GlobalInfectionDataPlugin
+from lodus.plugins.time_actions.send_population_back_plugin import SendPopulationBackPlugin
+from lodus.plugins.time_actions.vaccine_plugin import VaccinePlugin
+from lodus.plugins.data.global_isolation_data_plugin import GlobalIsolationDataPlugin
+from lodus.plugins.data.global_infection_data_plugin import GlobalInfectionDataPlugin
 
-import core.environment
-from core.population import PopulationTemplate
-from util.random_instance import FixedRandom
-from util.data_parse import generate_lodus_simulation
+import lodus.core.environment
+from lodus.core.population import PopulationTemplate
+from lodus.util.random_instance import FixedRandom
+from lodus.util.data_parse import generate_lodus_simulation
 import numpy as np
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")

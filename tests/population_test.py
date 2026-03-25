@@ -1,8 +1,8 @@
 from typing import List, Set
-from util.random_instance import FixedRandom
+from lodus.util.random_instance import FixedRandom
 
 import pytest
-from core.population import Blob, BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
+from lodus.core.population import Blob, BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():

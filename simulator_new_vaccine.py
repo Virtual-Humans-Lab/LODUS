@@ -5,7 +5,7 @@ sys.path.append('./Plugins/')
 
 import argparse
 import environment
-from util import *
+from lodus.util import *
 from data_parse_util import *
 import population
 

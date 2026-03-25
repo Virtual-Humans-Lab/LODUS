@@ -10,7 +10,7 @@ from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 
 import argparse
 import environment
-from util import *
+from lodus.util import *
 from data_parse_util import *
 import population
 

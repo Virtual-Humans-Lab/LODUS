@@ -1,8 +1,8 @@
 import pytest
-from core.environment import EnvNode, EnvNodeDistances, EnvNodeFactory, EnvNodeTemplate, EnvRegion, EnvRegionFactory, EnvRegionTemplate
-from core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
-from core.routine import Action, RoutineFactory
-from util.random_instance import FixedRandom
+from lodus.core.environment import EnvNode, EnvNodeDistances, EnvNodeFactory, EnvNodeTemplate, EnvRegion, EnvRegionFactory, EnvRegionTemplate
+from lodus.core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
+from lodus.core.routine import Action, RoutineFactory
+from lodus.util.random_instance import FixedRandom
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():

@@ -10,7 +10,7 @@ import numpy as np
 import seaborn as sns
 
 from data_parse_util import *
-from util import *
+from lodus.util import *
 
 
 def create_node_distante_distribution_figure(experiment_configuration_file:str,

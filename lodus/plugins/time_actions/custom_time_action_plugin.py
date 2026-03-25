@@ -1,0 +1,27 @@
+import .environment
+from .plugin import ActionPlugin
+import json
+
+class CustomTimeActionPlugin(ActionPlugin):
+    
+    def __init__(self, env_graph: core.environment.EnvironmentGraph, config_file_path):
+
+        super().__init__()
+        # JSON file containing the configuration of the Node Density Plugin
+        self.config = json.loads(open(config_file_path ,'r').read())
+        
+        self.graph = env_graph
+        
+        # Sets the density of each EnvNode at the start of the simulation
+        self.default_density = self.config['default_density']
+        _custom_den_values = {t[0]:t[1] for t in self.config['custom_density_values']}
+        for _name, _node in self.graph.node_dict.items():
+            if _name in _custom_den_values:
+                _density = _custom_den_values[_name]
+            elif _node.containing_region_name in _custom_den_values:
+                _density = _custom_den_values[_node.containing_region_name]
+            elif _node.unique_name in _custom_den_values:
+                _density = _custom_den_values[_node.unique_name]
+            else:
+                _density = self.default_density
+            _node.add_attribute('density', _density)

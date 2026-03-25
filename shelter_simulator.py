@@ -1,30 +1,27 @@
 #encoding: utf-8
-import sys
-sys.path.append('./plugins/')
-
 import argparse
 import time
 from pathlib import Path
 
 
-from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from loggers.characteristic_change_logger import CharacteristicChangeLogger
-from loggers.movement_displacement_logger import MovementDisplacementLogger
-from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from loggers.population_count_logger import (PopulationCountLogger,
+from lodus.plugins.loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from lodus.plugins.loggers.characteristic_change_logger import CharacteristicChangeLogger
+from lodus.plugins.loggers.movement_displacement_logger import MovementDisplacementLogger
+from lodus.plugins.loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from lodus.plugins.loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 
-from time_actions.move_population_plugin import MovePopulationPlugin
-from time_actions.gather_population_plugin import GatherPopulationPlugin
-from time_actions.shelter_plugin import ShelterPlugin
-from time_actions.levy_walk_plugin import LevyWalkPlugin
+from lodus.plugins.time_actions.move_population_plugin import MovePopulationPlugin
+from lodus.plugins.time_actions.gather_population_plugin import GatherPopulationPlugin
+from lodus.plugins.time_actions.shelter_plugin import ShelterPlugin
+from lodus.plugins.time_actions.levy_walk_plugin import LevyWalkPlugin
 
 
 import environment
 import population
 from data_parse_util import *
 from random_inst import FixedRandom
-from util import *
+from lodus.util import *
 import numpy as np
 
 

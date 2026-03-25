@@ -1,0 +1,109 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lodus"
+version = "0.1.0"
+description = "A simulation framework with configurable mobility models"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+    {name = "Gabriel", email = "fonseca.gabriel@pucrs.br"}
+]
+license = {text = "MIT"}
+keywords = ["simulation", "epidemic", "infection", "mobility", "agent-based"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+    "numpy>=2.3.0",
+    "pandas>=2.3.0",
+    "matplotlib>=3.10.0",
+    "plotly>=6.5.0",
+    "seaborn>=0.13.0",
+    "scipy>=1.16.0",
+    "geopy>=2.4.0",
+    "pyproj>=3.7.0",
+    "events>=0.5",
+    "kaleido>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-timeout>=2.4.0",
+    "black>=24.0.0",
+    "isort>=5.13.0",
+    "flake8>=7.0.0",
+    "mypy>=1.0.0",
+    "sphinx>=7.0.0",
+]
+
+[project.scripts]
+lodus-simulator = "lodus.simulator:main"
+
+[tool.setuptools]
+packages = ["lodus", "lodus.core", "lodus.util"]
+
+[tool.setuptools.package-data]
+lodus = ["data/**/*.json"]
+
+[tool.black]
+line-length = 100
+target-version = ["py313"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = "-v --cov=lodus --cov-report=html --cov-report=term-missing"
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["lodus"]
+omit = [
+    "*/tests/*",
+    "*/venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

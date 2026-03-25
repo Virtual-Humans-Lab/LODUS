@@ -1,7 +1,7 @@
 import pytest
-from core.plugin import ActionPlugin, BasePlugin, LoggerPlugin, RoutinePlugin
-from core.routine import Action
-from core.simulator import LodusSimulation
+from lodus.core.plugin import ActionPlugin, BasePlugin, LoggerPlugin, RoutinePlugin
+from lodus.core.routine import Action
+from lodus.core.simulator import LodusSimulation
 
 class TestBasePlugin:
     def test_load_plugin_not_implemented(self):

@@ -1,8 +1,8 @@
-from util.random_instance import FixedRandom
+from lodus.util.random_instance import FixedRandom
 
 import pytest
-from core.population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
-from core.routine import Action, GlobalAction, Routine, RoutineFactory, RoutineTemplate
+from lodus.core.population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
+from lodus.core.routine import Action, GlobalAction, Routine, RoutineFactory, RoutineTemplate
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
