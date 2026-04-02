@@ -65,7 +65,6 @@ def create_region(env_graph: EnvironmentGraph,
     region_name = region_description['name']
     region_position = region_description['lng_lat']
     region_template = EnvRegionTemplate(region_name, region_position)
-
     for poi_dict in region_description['points_of_interest']:
         node_template = create_node_template(poi_dict, region_name, population_json, routines_json)
         region_template.add_envnode_template(node_template)
@@ -81,6 +80,7 @@ def create_node_template(node_description: dict,
     node_unique_name = node_description["unique_name"]
     node_template = EnvNodeTemplate(node_type, node_unique_name)
     node_template.long_lat = node_description["lng_lat"]
+    node_template.node_attributes = node_description.get("attributes", {})
 
     if "characteristics" in node_description:
         for a, b in node_description["characteristics"].items():
