@@ -142,6 +142,7 @@ class RoutineController:
     def simplify_action_list(self, action_list:list[Action], cycle_step: int, simulation_step: int) -> list[Action]:
         """Simplifies the action list by consuming all complex Actions."""
         while not all([x.action_type in self.base_action_types for x in action_list]):
+            print("Simulation Step", simulation_step, "Current action list length:", len(action_list), end='\r')
             i  = action_list.pop(0)
             if i.action_type not in self.base_action_types:
                 if i.action_type not in self.action_type_to_function:

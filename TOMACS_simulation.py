@@ -8,6 +8,7 @@ from pathlib import Path
 from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 from Loggers.characteristic_change_logger import CharacteristicChangeLogger
 from Loggers.movement_displacement_logger import MovementDisplacementLogger
+from Loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLogger
 from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
@@ -66,8 +67,8 @@ env_graph = lodus_simulation.env_graph
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 1
-cycle_length:int = 1
+cycles:int = 10
+cycle_length:int = 24
 lodus_simulation.cycle_lenght = cycle_length
 # env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
@@ -240,16 +241,31 @@ od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
 
 # Age tracking
 od_logger.region_custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": ["children"]})
-#od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
+od_logger.region_custom_templates["age: [youngs]"] = PopulationTemplate(sampled_characteristics={"age": ["youngs"]})
 od_logger.region_custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": ["adults"]})
 od_logger.region_custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": ["elders"]})
 
 # Occupation tracking
-#od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
+#od_logger.region_custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": ["other"]})
 od_logger.region_custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": ["student"]})
 od_logger.region_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
-od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
+od_logger.region_custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": ["other"]})
+#od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
 #----------------------------
+
+# EnumerationArea OD-Matrix logger
+enum_area_logger = EnumerationAreaODMatrixLogger()
+
+# Age tracking
+enum_area_logger.custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": ["children"]})
+enum_area_logger.custom_templates["age: [youngs]"] = PopulationTemplate(sampled_characteristics={"age": ["youngs"]})
+enum_area_logger.custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": ["adults"]})
+enum_area_logger.custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": ["elders"]})
+
+# Occupation tracking
+enum_area_logger.custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": ["student"]})
+enum_area_logger.custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
+enum_area_logger.custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": ["other"]})
 
 # Movement Displacement Logger
 displacement_logger = MovementDisplacementLogger()
@@ -281,6 +297,7 @@ Simulation
 
 lodus_simulation.load_plugin(pop_count_logger)
 lodus_simulation.load_plugin(od_logger)
+lodus_simulation.load_plugin(enum_area_logger)
 lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
