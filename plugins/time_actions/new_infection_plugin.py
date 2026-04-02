@@ -3,7 +3,7 @@ from core.population import PopulationTemplate
 from core.plugin import ActionPlugin
 import copy
 import math
-from loggers.population_count_logger import PopulationCountLogger
+from Loggers.population_count_logger import PopulationCountLogger
 import json
 
 class NewInfectionPlugin(ActionPlugin):

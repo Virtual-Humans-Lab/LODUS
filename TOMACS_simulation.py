@@ -1,19 +1,20 @@
 #encoding: utf-8
 import sys
 sys.path.append('./plugins/')
+sys.path.append('./Plugins/')
 import argparse
 import time
 from pathlib import Path
-from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from loggers.characteristic_change_logger import CharacteristicChangeLogger
-from loggers.movement_displacement_logger import MovementDisplacementLogger
-from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from loggers.population_count_logger import (PopulationCountLogger,
+from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from Loggers.characteristic_change_logger import CharacteristicChangeLogger
+from Loggers.movement_displacement_logger import MovementDisplacementLogger
+from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
 from loggers.infection_sum_logger import InfectionSumLogger
-from loggers.vaccine_level_logger import VaccineLevelLogger
+from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
@@ -66,14 +67,22 @@ Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles:int = 1
-cycle_length:int = 24
+cycle_length:int = 1
 lodus_simulation.cycle_lenght = cycle_length
 # env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
-# lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
+lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
 print("Creating experiment:", lodus_simulation.experiment_name)
+print("EnvRegion Count", len(env_graph.region_dict))
 print("EnvNode Count", len(env_graph.node_list))
+print("Population Count", env_graph.get_population_size())
+print("Blob Count", env_graph.get_blob_count())
+print("----------------------")
+
+#print([reg.name for reg in env_graph.region_dict.values()])
+#print([node.get_complete_name() for node in env_graph.node_list])
+
 
 '''
 Data Plugins
@@ -271,7 +280,7 @@ Simulation
 '''
 
 lodus_simulation.load_plugin(pop_count_logger)
-# env_graph.LoadLoggerPlugin(od_logger)
+lodus_simulation.load_plugin(od_logger)
 lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
@@ -314,7 +323,7 @@ end_time = time.perf_counter()
 lodus_simulation.stop_logging()
 
 
-#print("TimeAction Plugins execution times")
+#print("TimeAction Plugins execution times")python .\TOMACS_simulation.py --e BaselineRefactored
 if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
 if infection is not None: output_str += infection.print_execution_time_data()
 if vaccine is not None: output_str += vaccine.print_execution_time_data()
