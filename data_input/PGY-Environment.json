@@ -1,0 +1,73 @@
+{
+  "regions": [
+    {
+      "name": "Centro Histórico",
+      "lng_lat": [
+        -51.2278480810808,
+        -30.031004727877
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_17",
+          "lng_lat": [
+            -51.225875574283016,
+            -30.026583815040162
+          ]
+        },
+        
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_17",
+          "lng_lat": [
+            -51.229762234131826,
+            -30.035393334420466
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_17",
+          "lng_lat": [
+            -51.23454559695662,
+            -30.031632688467365
+          ]
+        }
+      ],
+      "neighbors": ["Cidade Baixa"]
+    },
+    {
+      "name": "Cidade Baixa",
+      "lng_lat": [
+        -51.2224525885919,
+        -30.0404993243547
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_20",
+          "lng_lat": [
+            -51.22165359383402,
+            -30.03927028732829
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_20",
+          "lng_lat": [
+            -51.220938310050265,
+            -30.038681366935773
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_20",
+          "lng_lat": [
+            -51.22022993418004,
+            -30.0402591707023
+          ]
+        }
+      ],
+      "neighbors": ["Centro Histórico"]
+    }
+  ]
+}

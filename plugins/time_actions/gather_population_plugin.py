@@ -6,8 +6,10 @@ sys.path.append('../')
 
 from core.environment import EnvNode
 from core.plugin import ActionPlugin
+from core.routine import Action
 import copy
 import math
+from util import math as util_math
 from util.random_instance import FixedRandom
 import time
 
@@ -109,7 +111,7 @@ class GatherPopulationPlugin(ActionPlugin):
             return self.distances_map[n2_name + n1_name]
 
         # Adds new entry and returns it
-        self.distances_map[n1_name+n2_name] = util.distance2D(node1.long_lat, node2.long_lat)
+        self.distances_map[n1_name+n2_name] = util_math.distance2D(node1.long_lat, node2.long_lat)
         return self.distances_map[n1_name+n2_name]
 
 
@@ -227,7 +229,7 @@ class GatherPopulationPlugin(ActionPlugin):
 
         # Distributes the weights and available population (limit)
         # Gets a list of integers (quantities) of population to be moved per EnvNode
-        int_weights = util.distribute_ints_from_weights_with_limit(quantity, 
+        int_weights = util_math.distribute_ints_from_weights_with_limit(quantity, 
             [w for (n, w, a) in weight_and_available],
             [a for (n, w, a) in weight_and_available])
         
@@ -254,7 +256,7 @@ class GatherPopulationPlugin(ActionPlugin):
             
             new_action_type = 'move_population'
             new_action_values:dict = { 'origin_region': origin_region.name,
-                                'origin_node': node_aux.name,
+                                'origin_node': node_aux.unique_name,
                                 'destination_region': acting_region.name,
                                 'destination_node': acting_node.unique_name,
                                 'quantity': quantity}
@@ -282,14 +284,14 @@ class GatherPopulationPlugin(ActionPlugin):
                 temp.mother_blob_id = acting_region.id
 
             total_quant += int(new_action_values['quantity'])
-            new_action = environment.TimeAction(action_type = new_action_type, 
+            new_action = Action(action_type = new_action_type, 
                                                 pop_template = temp,
                                                 values = new_action_values)
             sub_list.append(new_action)
             #self.graph.direct_action_invoke(new_action, cycle_step, sim_step)
             #list_count +=1 
 
-        self.add_execution_time(time.perf_counter() - start_time)
+        self.add_execution_time('gather_population', time.perf_counter() - start_time)
         self.sublist_count.append(len(sub_list))
         return sub_list
     
