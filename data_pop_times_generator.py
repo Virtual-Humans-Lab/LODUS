@@ -3,6 +3,9 @@ from collections import Counter
 from pathlib import Path
 import csv
 
+#rng = np.random.default_rng(seed=0)
+
+BASE_DIR = Path(__file__).resolve().parent
 
 PLACES_CONFIG = {
     "marketplace": {
@@ -64,24 +67,25 @@ def generate_popular_times(place: str, sample_size: int = 1000) -> None:
     
     config = PLACES_CONFIG[place_lower]
     probs = config["probabilities"]
+    rng = np.random.default_rng(seed=0)
+    #rng = np.random.default_rng() # Descomente essa linha e comente a de cima para voltar a mudar os csv.
     
     # Sample from probabilities for each weekday
     samples = {}
     for day in WEEKDAYS:
         hours_range = config["hours"]
         prob_list = probs[day]
-        samples[day] = np.random.choice(hours_range, size=sample_size, p=prob_list)
+        samples[day] = rng.choice(hours_range, size=sample_size, p=prob_list)
     
     # Special handling for Sunday if it exists
     if "dom" in probs:
         hours_sunday = config.get("hours_sunday", config["hours"])
-        samples["dom"] = np.random.choice(hours_sunday, size=sample_size, p=probs["dom"])
+        samples["dom"] = rng.choice(hours_sunday, size=sample_size, p=probs["dom"])
     
     
     counts = {day: Counter(samples[day]) for day in samples}
     
-    # Format and write output to CSV
-    output_file = Path(config["output_file"])
+    output_file = BASE_DIR / config["output_file"]
     hours_range = config["hours"]
     hours_sunday = config.get("hours_sunday", config["hours"])
     

@@ -23,11 +23,11 @@ class PopularTimesPlugin(ActionPlugin):
         print("[PopularTimes] Plugin carregado!")
         
         # Regenera CSVs a cada simulação para valores diferentes
-        #pop_times = data_pop_times_generator.generate_popular_times
-        #pop_times("restaurant", 1000)
-        #pop_times("marketplace", 1000)
-        #pop_times("pharmacy", 1000)
-        #print("[PopularTimes] CSVs regenerados!")
+        pop_times = data_pop_times_generator.generate_popular_times
+        pop_times("restaurant", 1000)
+        pop_times("marketplace", 1000)
+        pop_times("pharmacy", 1000)
+        print("[PopularTimes] CSVs regenerados!")
 
         simulation.add_action_type_to_function('popular_times', self.popular_times_action, False)
         #print("[PopularTimes] Ação 'popular_times' registrada!")
