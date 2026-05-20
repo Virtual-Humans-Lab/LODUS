@@ -24,6 +24,7 @@ from time_actions.levy_walk_plugin import LevyWalkPlugin
 from time_actions.move_population_plugin import MovePopulationPlugin
 from time_actions.new_infection_plugin import NewInfectionPlugin
 from data.node_density_data_plugin import NodeDensityDataPlugin
+from data.node_dependency_data_plugin import NodeDependencyDataPlugin
 from time_actions.return_population_home_plugin import ReturnPopulationHomePlugin
 from time_actions.return_to_previous_plugin import ReturnToPreviousPlugin
 from time_actions.reverse_social_isolation_plugin import \
@@ -103,6 +104,11 @@ node_density_data = None
 if 'node_density_data_plugin' in lodus_simulation.experiment_config:
     node_density_data = NodeDensityDataPlugin(env_graph)
     env_graph.load_time_action_plugin(node_density_data)
+
+node_dependency_data = None
+if 'node_dependency_data_plugin' in lodus_simulation.experiment_config:
+    node_dependency_data = NodeDependencyDataPlugin(env_graph)
+    env_graph.load_time_action_plugin(node_dependency_data)
 '''
 TimeAction Plugins
 '''

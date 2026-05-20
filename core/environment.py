@@ -57,6 +57,7 @@ class EnvNode():
         self.containing_region_name:str = ''
         self.long_lat:list[float] = [0.0, 0.0]
         self.attributes: dict[str, Any] = {}
+        self.enabled: bool = True
 
         self.contained_blobs:list[Blob] = [] 
         self.routine: Routine = None # type: ignore
@@ -70,6 +71,20 @@ class EnvNode():
 
     def get_attribute(self, key: str) -> Any:
         return self.attributes[key]
+
+    def set_enabled(self, enabled: bool) -> None:
+        if not isinstance(enabled, bool):
+            raise ValueError(f"enabled must be of type bool, is {type(enabled)}")
+        self.enabled = enabled
+
+    def enable(self) -> None:
+        self.enabled = True
+
+    def disable(self) -> None:
+        self.enabled = False
+
+    def is_enabled(self) -> bool:
+        return self.enabled
     
     def set_long_lat_position(self, longitude: float, latitude: float) -> None:
         """Sets the physical position of this node."""
@@ -212,6 +227,7 @@ class EnvNode():
         f"Unique Name: {self.get_complete_name()}\n"
         f"Name: {self.unique_name}\n"
         f"ID: {self.id}\n"
+        f"Enabled: {self.enabled}\n"
         f"Routine: {self.routine}\n"
         f"Characteristics: {self.attributes}\n"
         f"Blobs: {self.contained_blobs}\n"
@@ -501,6 +517,7 @@ class EnvironmentGraph():
     def get_blob_count(self)->int:
         """Gets the total number of Blobs contained in this EnvironmentGraph."""
         return sum([region.get_blob_count() for region in self.region_list])
+
 
 
     # Node Distance Functions

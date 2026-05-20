@@ -1,5 +1,5 @@
 import pytest
-from core.environment import EnvNode, EnvNodeDistances, EnvNodeFactory, EnvNodeTemplate, EnvRegion, EnvRegionFactory, EnvRegionTemplate
+from core.environment import EnvNode, EnvNodeDistances, EnvNodeFactory, EnvNodeTemplate, EnvRegion, EnvRegionFactory, EnvRegionTemplate, EnvironmentGraph
 from core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
 from core.routine import Action, RoutineFactory
 from util.random_instance import FixedRandom
@@ -150,8 +150,20 @@ class TestEnvNode:
         assert env_node.unique_name == "test_name"
         assert env_node.long_lat == [0.0, 0.0]
         assert env_node.attributes == {}
+        assert env_node.enabled is True
         assert env_node.contained_blobs == []
         assert env_node.routine is None
+
+    def test_enabled_helpers(self, env_node: EnvNode):
+        assert env_node.is_enabled() is True
+        env_node.disable()
+        assert env_node.enabled is False
+        env_node.enable()
+        assert env_node.enabled is True
+        env_node.set_enabled(False)
+        assert env_node.is_enabled() is False
+        with pytest.raises(ValueError, match="enabled must be of type bool"):
+            env_node.set_enabled("invalid")  # type: ignore
 
     def test_get_unique_name(self, env_node: EnvNode):
         env_node.containing_region_name = "test_region"
