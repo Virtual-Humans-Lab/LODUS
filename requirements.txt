@@ -1,0 +1,10 @@
+numpy
+pandas
+geopy
+pyproj
+events
+scipy
+matplotlib
+seaborn
+plotly
+kaleido

@@ -1,6 +1,0 @@
-geopy
-pyproj
-events
-seaborn
-scipy
-kaleido

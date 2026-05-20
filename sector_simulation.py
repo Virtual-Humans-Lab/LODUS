@@ -67,8 +67,8 @@ env_graph = lodus_simulation.env_graph
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 10
-cycle_length:int = 24
+cycles:int = 1
+cycle_length:int = 2
 lodus_simulation.cycle_lenght = cycle_length
 # env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
