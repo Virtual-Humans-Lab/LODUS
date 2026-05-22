@@ -1,0 +1,503 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Centro Histórico//marketplace_17": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "popular_times_marketplace_08",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 9,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 9,
+        "action": {
+          "name": "popular_times_marketplace_09",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 10,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 10,
+        "action": {
+          "name": "popular_times_marketplace_010",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 11,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 11,
+        "action": {
+          "name": "popular_times_marketplace_011",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 12,
+        "action": {
+          "name": "popular_times_marketplace_012",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 13,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 13,
+        "action": {
+          "name": "popular_times_marketplace_013",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 14,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 14,
+        "action": {
+          "name": "popular_times_marketplace_014",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 15,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 15,
+        "action": {
+          "name": "popular_times_marketplace_015",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "popular_times_marketplace_016",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 17,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 17,
+        "action": {
+          "name": "popular_times_marketplace_017",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 18,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 18,
+        "action": {
+          "name": "popular_times_marketplace_018",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 19,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 19,
+        "action": {
+          "name": "popular_times_marketplace_019",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 20,
+        "action": {
+          "name": "popular_times_marketplace_020",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 21,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 21,
+        "action": {
+          "name": "popular_times_marketplace_021",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 22,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 22,
+        "action": {
+          "name": "popular_times_marketplace_022",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 23,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_17",
+            "quantity": -1
+          }
+        }
+      }
+
+    ]
+  }
+}
