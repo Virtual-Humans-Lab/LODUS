@@ -88,24 +88,26 @@ def generate_popular_times(place: str, sample_size: int = 1000) -> None:
     output_file = BASE_DIR / config["output_file"]
     hours_range = config["hours"]
     hours_sunday = config.get("hours_sunday", config["hours"])
+    ciclo = 0
     
     with open(output_file, "w", newline="", encoding="utf8") as f:
         writer = csv.writer(f)
-        writer.writerow(["hora", "quantidade"])  
+        writer.writerow(["ciclo", "hora", "quantidade"])  
 
-        for hour in hours_range:
-            quantity = counts["seg"].get(hour, 0) # Only monday (for now)
-            writer.writerow([hour, quantity])
+        #for hour in hours_range:
+            #quantity = counts["seg"].get(hour, 0) # Only monday (for now)
+            #writer.writerow([ciclo, hour, quantity])
         
-        #for day in WEEKDAYS:      # Maybe including the number of cicles, to simulate 7 days
-        #   for hour in hours_range:
-        #        quantity = counts[day].get(hour, 0)
-        #        writer.writerow([hour, quantity])
+        for day in WEEKDAYS:      # Maybe including the number of cicles, to simulate 7 days
+           for hour in hours_range:
+                quantity = counts[day].get(hour, 0)
+                writer.writerow([ciclo, hour, quantity])
+           ciclo = ciclo + 1
         
-        #if "dom" in probs:
-        #    for hour in hours_sunday:
-        #        quantity = counts["dom"].get(hour, 0)
-        #        writer.writerow([hour, quantity])
+        if "dom" in probs:
+            for hour in hours_sunday:
+                quantity = counts["dom"].get(hour, 0)
+                writer.writerow([ciclo, hour, quantity])
     
     #Used for debugging
     #print(f"Popular times data generated for '{place}' (sample size: {sample_size})")
