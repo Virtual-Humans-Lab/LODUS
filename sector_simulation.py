@@ -70,7 +70,7 @@ Parameters
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles:int = 1
 cycle_length:int = 2
-lodus_simulation.cycle_lenght = cycle_length
+lodus_simulation.cycle_length = cycle_length
 # env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 

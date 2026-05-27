@@ -35,7 +35,7 @@ class EnumerationAreaODMatrixLogger(LoggerPlugin):
         self.env_graph.movement_logger_dict["enum_area_od_logger"] = self.log_enumeration_area_movement
 
         # Cycle length and current simulation step
-        self.cycle_lenght: int = simulation.cycle_lenght
+        self.cycle_lenght: int = simulation.cycle_length
         self.sim_step: int = 0
 
         # Paths for folders

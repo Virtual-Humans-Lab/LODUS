@@ -52,7 +52,7 @@ class PopulationCountLogger(LoggerPlugin):
         Path(self.figures_path).mkdir(parents=True, exist_ok=True)
         Path(self.html_plots_path).mkdir(parents=True, exist_ok=True)
         
-        self.cycle_length = simulation.cycle_lenght
+        self.cycle_length = simulation.cycle_length
 
         # Data recorded in previous frame
         self.global_prev_frame = {}

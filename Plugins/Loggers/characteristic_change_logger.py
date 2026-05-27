@@ -28,7 +28,7 @@ class CharacteristicChangeLogger(LoggerPlugin):
         self.env_graph.characteristic_change_logger["characteristic_change_logger"] = self.log_characteristic_change
 
         # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = simulation.cycle_lenght
+        self.cycle_lenght:int = simulation.cycle_length
         self.sim_step: int = 0 
 
         # Charactirstic Change logging
