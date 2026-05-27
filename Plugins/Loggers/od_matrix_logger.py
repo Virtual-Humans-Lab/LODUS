@@ -43,7 +43,7 @@ class ODMatrixLogger(LoggerPlugin):
         #graph.od_matrix_logger = self
 
         # Cycle length and Current SimulationStep
-        self.cycle_lenght:int = simulation.cycle_length
+        self.cycle_lenght:int = simulation.time_status.cycle_length
         self.sim_step: int = 0 
 
         # Paths for folders

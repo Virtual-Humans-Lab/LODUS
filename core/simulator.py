@@ -6,6 +6,7 @@ from core.environment import EnvNode, EnvironmentGraph
 from core.plugin import ActionPlugin, BasePlugin, RoutinePlugin, LoggerPlugin
 from core.population import CharacteristicsFactory
 from core.routine import Action, GlobalAction
+from util.simulation_time import SimulationTimeStatus
 
 class RoutineController:
     def __init__(self, lodus_simulation: LodusSimulation):
@@ -278,8 +279,7 @@ class LodusSimulation:
         self.plugin_controller = PluginController(self)
         self.routine_controller = RoutineController(self)
 
-        self.current_simulation_step = -1
-        self.cycle_lenght = 24
+        self.time_status: SimulationTimeStatus = SimulationTimeStatus(simulation_step=-1, cycle_length=24, total_cycles=1)
         
         self.experiment_name = "Lodus Simulation"
         self.experiment_config = {}
@@ -289,6 +289,23 @@ class LodusSimulation:
         self.original_block_template: CharacteristicsFactory = None # type: ignore
         self.original_repeating_actions = None
 
+    ### Simulation Parameters Methods
+    def set_cycle_length(self, cycle_length: int):
+        """Sets the cycle length for the simulation."""
+        self.time_status = SimulationTimeStatus(
+            simulation_step=self.time_status.simulation_step,
+            cycle_length=cycle_length,
+            total_cycles=self.time_status.total_cycles
+        )
+
+    def set_total_cycles(self, total_cycles: int):
+        """Sets the total number of cycles for the simulation."""
+        self.time_status = SimulationTimeStatus(
+            simulation_step=self.time_status.simulation_step,
+            cycle_length=self.time_status.cycle_length,
+            total_cycles=total_cycles
+        )
+
     ### Simulation Methods
     def update_time_step(self):
         """Updates a time step for a given time.
@@ -296,11 +313,14 @@ class LodusSimulation:
 
         Applies every TimeAction which matches time argument.
         """
-        self.current_simulation_step += 1
-        cycle_step = self.current_simulation_step % self.cycle_lenght
-        self.plugin_controller.update_plugins(cycle_step, self.current_simulation_step)
-        
-        self.process_actions(cycle_step, self.current_simulation_step)
+        self.time_status = SimulationTimeStatus(
+            simulation_step=self.time_status.simulation_step + 1,
+            cycle_length=self.time_status.cycle_length,
+            total_cycles=self.time_status.total_cycles
+        )
+        self.plugin_controller.update_plugins(self.time_status.cycle_step, self.time_status.simulation_step)
+
+        self.process_actions(self.time_status.cycle_step, self.time_status.simulation_step)
 
         self.merge_blobs_in_all_nodes()
         self.env_graph.set_frame_origin_of_all_blobs()
@@ -324,7 +344,7 @@ class LodusSimulation:
 
     def process_actions(self, cycle_step: int, simulation_step: int):
         """Processes all actions for the given cycle_step and simulation_step."""
-        actions = self.routine_controller.generate_action_list(cycle_step, self.current_simulation_step)
+        actions = self.routine_controller.generate_action_list(cycle_step, self.time_status.simulation_step)
         simplified_actions = self.routine_controller.simplify_action_list(actions, cycle_step, simulation_step)
         for action in simplified_actions:
             self.routine_controller.consume_action(action, cycle_step, simulation_step)

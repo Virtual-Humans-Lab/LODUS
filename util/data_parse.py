@@ -18,6 +18,11 @@ def generate_lodus_simulation(input_path: str):
 
     simulation.experiment_config = experiment_config
 
+    if "simulation_parameters" in experiment_config:
+        sim_params = experiment_config["simulation_parameters"]
+        simulation.set_total_cycles(sim_params.get("total_cycles", simulation.time_status.total_cycles))
+        simulation.set_cycle_length(sim_params.get("cycle_length", simulation.time_status.cycle_length))
+
     env_json = load_json(data_path / input_files["environment_file"])
     pop_json = load_json(data_path / input_files["population_file"])
     rot_json = load_json(data_path / input_files["routine_file"])

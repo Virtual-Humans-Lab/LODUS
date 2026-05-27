@@ -70,9 +70,9 @@ Parameters
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles:int = 1
 cycle_length:int = 2
-lodus_simulation.cycle_length = cycle_length
+lodus_simulation.set_total_cycles(cycles)
+lodus_simulation.set_cycle_length(cycle_length)
 # env_graph.routine_cycle_length = cycle_length
-simulation_steps = cycles * cycle_length
 
 lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
 lodus_simulation.env_graph.print_overview()
@@ -103,8 +103,9 @@ if 'node_density_data_plugin' in lodus_simulation.experiment_config:
 
 node_dependency_data = None
 if 'node_dependency_data_plugin' in lodus_simulation.experiment_config:
-    node_dependency_data = NodeDependencyDataPlugin(env_graph)
-    env_graph.load_time_action_plugin(node_dependency_data)
+    node_dependency_data = NodeDependencyDataPlugin()
+    lodus_simulation.load_plugin(node_dependency_data)
+    #env_graph.load_time_action_plugin(node_dependency_data)
 '''
 TimeAction Plugins
 '''
@@ -312,10 +313,12 @@ if infection_sum_logger is not None: lodus_simulation.load_plugin(infection_sum_
 lodus_simulation.setup_logging()
 
 start_time = time.perf_counter()
-for i in range(simulation_steps):
+#for i in range(simulation_steps):
+while not lodus_simulation.time_status.is_final_step:
+    i = lodus_simulation.time_status.simulation_step
     print(i, end='\r')
-        
-    #infection_plugin.update_time_step(i % day_duration, i)
+
+    #infection_plugin.update_time_step(lodus_simulation.time_status.simulation_step % day_duration, lodus_simulation.time_status.simulation_step)
 
     #if i % day_duration == 0:
     #    vaccine_plugin.update_time_step(i % day_duration, i)
