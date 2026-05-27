@@ -634,6 +634,13 @@ class EnvironmentGraph():
 
     def update_time_step(self, cycle_step, simulation_step):
         raise NotImplementedError("update_time_step was moved to the Simulation class. Please, create a simulator")
+    
+    def print_overview(self, show_nodes_with_population: bool = False):
+        print(f"EnvironmentGraph with {len(self.region_list)} regions and {len(self.node_list)} nodes.")
+        print(f"-- Population Count: {self.get_population_size()}")
+        print(f"-- Blob Count: {self.get_blob_count()}")
+        if show_nodes_with_population:
+            print(f"-- Nodes with Population: {[node.get_complete_name() for node in self.node_list if node.get_population_size() > 0]}")
 
     def __str__(self):
         return "{\"graph\":" + str(self.region_list) + "}"

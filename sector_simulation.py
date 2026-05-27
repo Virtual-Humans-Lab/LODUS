@@ -75,11 +75,7 @@ lodus_simulation.cycle_lenght = cycle_length
 simulation_steps = cycles * cycle_length
 
 lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
-print("Creating experiment:", lodus_simulation.experiment_name)
-print("EnvRegion Count", len(env_graph.region_dict))
-print("EnvNode Count", len(env_graph.node_list))
-print("Population Count", env_graph.get_population_size())
-print("Blob Count", env_graph.get_blob_count())
+lodus_simulation.env_graph.print_overview()
 print("----------------------")
 
 #print([reg.name for reg in env_graph.region_dict.values()])
