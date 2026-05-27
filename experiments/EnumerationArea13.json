@@ -5,6 +5,10 @@
         "population_file": "enumeration_area/Population-13-EnumArea.json",
         "routine_file": "enumeration_area/Routine-POA-EnumArea.json"
     },
+     "simulation_parameters": {
+        "cycles": 10,
+        "cycle_length": 24
+    },
     "levy_walk_plugin": {
         "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",
         "distance_type": 3,
@@ -17,5 +21,10 @@
         "distance_bucket_size": 500
     },
     "send_population_back_plugin": {},
-    "gather_population_plugin": {}
+    "gather_population_plugin": {}, 
+    "node_dependency_data_plugin" : {
+        "__comment1__": "This plugin gathers data on node dependencies, which can be used to create a graph of dependencies between nodes.",
+        "dependency_files": ["enumeration_area/dependency_rules/Env13-Dependency.json"]
+    }
+   
 }

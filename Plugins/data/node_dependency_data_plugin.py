@@ -7,6 +7,7 @@ import json
 
 from core.environment import EnvironmentGraph
 from core.plugin import ActionPlugin
+from core.simulator import LodusSimulation
 
 
 @dataclass(frozen=True)
@@ -22,32 +23,74 @@ class NodeDependencyRule:
 
 
 class NodeDependencyDataPlugin(ActionPlugin):
-    def __init__(self, env_graph: EnvironmentGraph):
+    def __init__(self):
         super().__init__()
-        self.graph = env_graph
-        self.config: dict[str, Any] = self.graph.experiment_config.get("node_dependency_data_plugin", {})
 
-        if "configuration_file" in self.config:
-            config_path = Path(self.config["configuration_file"])
-            if not config_path.is_absolute():
-                config_path = Path(__file__).resolve().parents[2] / "data_input" / config_path
-            with open(config_path, "r", encoding="utf-8") as content:
-                self.config = json.load(content)
+    def load_plugin(self, simulation: LodusSimulation):
+        self.graph = simulation.env_graph
+        self.config: dict[str, Any] = simulation.experiment_config.get("node_dependency_data_plugin", {})
 
-        self.node_dependency_rules: dict[str, NodeDependencyRule] = self._parse_node_dependency_rules(self.config)
+        self._load_dependency_files()
+        parsed = self._parse_node_dependency_rules(self.config)
+
+        # Normalize all node identifiers to complete names (Region//UniqueName).
+        # Accepts either complete names in the JSON or unique names; unique names
+        # are resolved against the loaded environment graph when unambiguous.
+        self.node_dependency_rules: dict[str, NodeDependencyRule] = {}
+        for node_name, rule in parsed.items():
+            resolved_node = self._resolve_to_complete_name(node_name)
+            # resolve prerequisites inside rule
+            all_of = tuple(self._resolve_to_complete_name(n) for n in rule.all_of)
+            min_of = []
+            for mof in rule.min_of:
+                nodes = tuple(self._resolve_to_complete_name(n) for n in mof.nodes)
+                min_of.append(MinOfRule(minimum_enabled=mof.minimum_enabled, nodes=nodes))
+            self.node_dependency_rules[resolved_node] = NodeDependencyRule(all_of=all_of, min_of=tuple(min_of))
+
         self.node_to_dependents: dict[str, set[str]] = self._build_reverse_dependency_map(self.node_dependency_rules)
+        
+        print(f"Loaded node dependency rules for {len(self.node_dependency_rules)} nodes.")
+
+
+
         # Register a single dispatcher callable on the graph for dependency queries.
         # Usage: graph.data_action_map['node_dependency'](command, *args, **kwargs)
         self.graph.data_action_map["node_dependency"] = self._node_dependency_action
 
-    def load_plugin(self, simulation):
-        return None
+    def _load_dependency_files(self):
+        # Allow specifying one or more dependency files via the `dependency_files` key.
+        # Accepts a single string or a list of strings. Files are resolved relative
+        # to the repository `data_input` folder when given as relative paths.
+        if "dependency_files" in self.config:
+            files = self.config["dependency_files"]
+            if isinstance(files, str):
+                files = [files]
+            if not isinstance(files, list):
+                raise ValueError("dependency_files must be a string or list of strings")
 
-    def update_time_step(self, cycle_step, simulation_step):
-        return None
+            # Start from any other keys present in the plugin config (except the
+            # dependency_files key) so inline settings are preserved.
+            merged_config: dict[str, Any] = {k: v for k, v in self.config.items() if k != "dependency_files"}
 
-    def unload_plugin(self):
-        return None
+            for file_entry in files:
+                config_path = Path(file_entry)
+                if not config_path.is_absolute():
+                    config_path = Path(__file__).resolve().parents[2] / "data_input" / config_path
+                with open(config_path, "r", encoding="utf-8") as fh:
+                    file_data = json.load(fh)
+                if not isinstance(file_data, dict):
+                    raise ValueError(f"dependency file {config_path} must contain a JSON object at top level")
+
+                # Merge top-level keys. For nested mappings, perform a shallow merge
+                # so that e.g. multiple files can contribute entries under
+                # "node_dependencies".
+                for key, value in file_data.items():
+                    if key in merged_config and isinstance(merged_config[key], dict) and isinstance(value, dict):
+                        merged_config[key].update(value)
+                    else:
+                        merged_config[key] = value
+
+            self.config = merged_config
 
     def _parse_node_dependency_rules(self, config: dict[str, Any]) -> dict[str, NodeDependencyRule]:
         dependency_config = config.get("node_dependencies", config)
@@ -78,7 +121,28 @@ class NodeDependencyDataPlugin(ActionPlugin):
                 min_of_rules.append(MinOfRule(minimum_enabled=int(minimum_enabled), nodes=nodes))
 
             parsed_rules[str(node_name)] = NodeDependencyRule(all_of=all_of, min_of=tuple(min_of_rules))
+        return parsed_rules
 
+    def _resolve_to_complete_name(self, name: str) -> str:
+        """Resolve an identifier from the dependency file to a complete node name.
+
+        If `name` already contains '//' it is treated as a complete name and must
+        exist in the graph. Otherwise it is treated as a unique name and resolved
+        against `graph.node_list`. If multiple matches exist an error is raised.
+        """
+        # If already a complete name
+        if "//" in name:
+            if name not in self.graph.node_dict:
+                raise ValueError(f"Dependency references unknown node complete name: {name}")
+            return name
+
+        # Treat as unique name: attempt to find unique match across graph
+        matches = [n.get_complete_name() for n in self.graph.node_list if n.unique_name == name]
+        if not matches:
+            raise ValueError(f"Dependency references unknown node unique name: {name}")
+        if len(matches) > 1:
+            raise ValueError(f"Ambiguous dependency node name '{name}' resolves to multiple complete names: {matches}")
+        return matches[0]
         return parsed_rules
 
     def _build_reverse_dependency_map(self, node_dependency_rules: dict[str, NodeDependencyRule]) -> dict[str, set[str]]:
@@ -167,3 +231,9 @@ class NodeDependencyDataPlugin(ActionPlugin):
             raise KeyError(f"Unknown node_dependency command: {command}")
 
         return mapping[command](*args, **kwargs)
+
+    def update_time_step(self, cycle_step, simulation_step):
+        return None
+
+    def unload_plugin(self):
+        return None

@@ -507,6 +507,74 @@ class EnvironmentGraph():
             raise ValueError(f"Region {region_name} not found in region_dict")
         return self.region_dict[region_name].get_first_node_with_name(node_name)
 
+    def change_node_enabled_state(self, node_complete_name: str, enabled: bool, cascade_reenable: bool = False) -> dict:
+        """Change enabled state for a single node given by its complete name (`RegionName//UniqueName`).
+
+        - Uses `node_dependency` plugin (if present) for validations and cascading.
+        - Only the node matching `node_complete_name` is targeted directly; cascades
+          (disables) may affect multiple nodes per dependency rules.
+
+        Returns a summary dict with keys: `enabled`, `disabled`, and `blocked`.
+        """
+        # Find the exact node by complete name
+        targets = [n for n in self.node_list if n.get_complete_name() == node_complete_name]
+        if not targets:
+            raise ValueError(f"Node with complete name '{node_complete_name}' not found in graph")
+        if len(targets) > 1:
+            raise ValueError(f"Multiple nodes with complete name '{node_complete_name}' found in graph")
+        
+        node = targets[0]
+        dep_action = self.data_action_map.get("node_dependency")
+        summary = {"enabled": [], "disabled": [], "blocked": {}}
+
+        # Helper: unique name portion used by the dependency plugin
+        unique_name = node.unique_name
+
+        if enabled:
+            # Build current enabled set (by complete_name)
+            current_enabled = {n.get_complete_name() for n in self.node_list if n.is_enabled()}
+
+            # If plugin exists, validate prerequisites first
+            if dep_action:
+                can_enable = dep_action("can_node_be_enabled", node.get_complete_name(), current_enabled)
+                if not can_enable:
+                    missing = [p for p in dep_action("get_transitive_dependency_nodes", node.get_complete_name()) if p not in current_enabled]
+                    summary["blocked"][node.get_complete_name()] = missing
+                    return summary
+
+            # Enable target node
+            node.enable()
+            summary["enabled"].append(node.get_complete_name())
+            current_enabled.add(unique_name)
+
+            # Optionally cascade re-enable: try to re-enable dependents that are now satisfiable
+            if dep_action and cascade_reenable:
+                dependents = dep_action("get_transitive_dependent_nodes", node.get_complete_name())
+                for dep in dependents:
+                    for n in self.node_list:
+                        if n.get_complete_name() == dep and not n.is_enabled():
+                            if dep_action("can_node_be_enabled", n.get_complete_name(), current_enabled):
+                                n.enable()
+                                summary["enabled"].append(n.get_complete_name())
+                                current_enabled.add(n.get_complete_name())
+
+        else:
+            # Disable target node
+            if node.is_enabled():
+                node.disable()
+                summary["disabled"].append(node.get_complete_name())
+
+            # If plugin exists, disable all transitive dependents
+            if dep_action:
+                dependents = dep_action("get_transitive_dependent_nodes", node.get_complete_name())
+                for dep_name in dependents:
+                    for n in self.node_list:
+                        if n.get_complete_name() == dep_name and n.is_enabled():
+                            n.disable()
+                            summary["disabled"].append(n.get_complete_name())
+
+        return summary
+
     def get_node_by_id(self, _id) -> EnvNode:
         return self.node_id_dict[_id]
     
