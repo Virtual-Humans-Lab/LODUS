@@ -1,0 +1,2564 @@
+{
+  "default_traceable_characteristics": {},
+  "sampled_characteristics_categories": {
+    "age": [
+      "children",
+      "youngs",
+      "adults",
+      "elders"
+    ],
+    "occupation": [
+      "student",
+      "worker",
+      "other"
+    ]
+  },
+  "initial_population": {
+    "Centro Histórico//home_0": [
+      {
+        "total_population": 218,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 20,
+            "adults": 125,
+            "elders": 56
+          },
+          "occupation": {
+            "student": 47,
+            "worker": 119,
+            "other": 51
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_1": [
+      {
+        "total_population": 133,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 6,
+            "youngs": 17,
+            "adults": 80,
+            "elders": 30
+          },
+          "occupation": {
+            "student": 28,
+            "worker": 72,
+            "other": 31
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_2": [
+      {
+        "total_population": 448,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 28,
+            "youngs": 55,
+            "adults": 233,
+            "elders": 132
+          },
+          "occupation": {
+            "student": 96,
+            "worker": 245,
+            "other": 106
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_3": [
+      {
+        "total_population": 240,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 9,
+            "youngs": 17,
+            "adults": 127,
+            "elders": 87
+          },
+          "occupation": {
+            "student": 51,
+            "worker": 131,
+            "other": 56
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_4": [
+      {
+        "total_population": 435,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 28,
+            "youngs": 78,
+            "adults": 250,
+            "elders": 79
+          },
+          "occupation": {
+            "student": 93,
+            "worker": 237,
+            "other": 103
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_5": [
+      {
+        "total_population": 338,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 24,
+            "youngs": 61,
+            "adults": 173,
+            "elders": 80
+          },
+          "occupation": {
+            "student": 72,
+            "worker": 184,
+            "other": 80
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_6": [
+      {
+        "total_population": 304,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 40,
+            "adults": 159,
+            "elders": 85
+          },
+          "occupation": {
+            "student": 65,
+            "worker": 166,
+            "other": 72
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_7": [
+      {
+        "total_population": 204,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 19,
+            "adults": 101,
+            "elders": 66
+          },
+          "occupation": {
+            "student": 44,
+            "worker": 111,
+            "other": 48
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_8": [
+      {
+        "total_population": 261,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 39,
+            "adults": 142,
+            "elders": 60
+          },
+          "occupation": {
+            "student": 56,
+            "worker": 142,
+            "other": 61
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_9": [
+      {
+        "total_population": 228,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 13,
+            "youngs": 19,
+            "adults": 113,
+            "elders": 83
+          },
+          "occupation": {
+            "student": 49,
+            "worker": 124,
+            "other": 54
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_10": [
+      {
+        "total_population": 228,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 16,
+            "youngs": 25,
+            "adults": 125,
+            "elders": 62
+          },
+          "occupation": {
+            "student": 49,
+            "worker": 124,
+            "other": 54
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_11": [
+      {
+        "total_population": 447,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 39,
+            "youngs": 47,
+            "adults": 215,
+            "elders": 146
+          },
+          "occupation": {
+            "student": 96,
+            "worker": 244,
+            "other": 106
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_12": [
+      {
+        "total_population": 318,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 19,
+            "youngs": 31,
+            "adults": 172,
+            "elders": 96
+          },
+          "occupation": {
+            "student": 68,
+            "worker": 173,
+            "other": 75
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_13": [
+      {
+        "total_population": 244,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 10,
+            "youngs": 29,
+            "adults": 136,
+            "elders": 69
+          },
+          "occupation": {
+            "student": 52,
+            "worker": 133,
+            "other": 57
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_14": [
+      {
+        "total_population": 432,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 27,
+            "youngs": 46,
+            "adults": 200,
+            "elders": 159
+          },
+          "occupation": {
+            "student": 93,
+            "worker": 236,
+            "other": 102
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_15": [
+      {
+        "total_population": 353,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 34,
+            "youngs": 36,
+            "adults": 190,
+            "elders": 93
+          },
+          "occupation": {
+            "student": 76,
+            "worker": 193,
+            "other": 83
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_16": [
+      {
+        "total_population": 543,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 43,
+            "youngs": 71,
+            "adults": 255,
+            "elders": 174
+          },
+          "occupation": {
+            "student": 117,
+            "worker": 297,
+            "other": 128
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_17": [
+      {
+        "total_population": 200,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 5,
+            "youngs": 20,
+            "adults": 104,
+            "elders": 71
+          },
+          "occupation": {
+            "student": 43,
+            "worker": 109,
+            "other": 47
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_18": [
+      {
+        "total_population": 196,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 26,
+            "adults": 104,
+            "elders": 46
+          },
+          "occupation": {
+            "student": 42,
+            "worker": 107,
+            "other": 46
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_19": [
+      {
+        "total_population": 497,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 43,
+            "youngs": 46,
+            "adults": 279,
+            "elders": 129
+          },
+          "occupation": {
+            "student": 107,
+            "worker": 271,
+            "other": 117
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_20": [
+      {
+        "total_population": 397,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 30,
+            "youngs": 42,
+            "adults": 251,
+            "elders": 74
+          },
+          "occupation": {
+            "student": 85,
+            "worker": 217,
+            "other": 94
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_21": [
+      {
+        "total_population": 298,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 41,
+            "youngs": 44,
+            "adults": 145,
+            "elders": 68
+          },
+          "occupation": {
+            "student": 64,
+            "worker": 163,
+            "other": 70
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_22": [
+      {
+        "total_population": 425,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 28,
+            "youngs": 43,
+            "adults": 249,
+            "elders": 105
+          },
+          "occupation": {
+            "student": 91,
+            "worker": 232,
+            "other": 100
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_23": [
+      {
+        "total_population": 562,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 58,
+            "youngs": 61,
+            "adults": 309,
+            "elders": 134
+          },
+          "occupation": {
+            "student": 121,
+            "worker": 307,
+            "other": 133
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_24": [
+      {
+        "total_population": 305,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 16,
+            "adults": 161,
+            "elders": 110
+          },
+          "occupation": {
+            "student": 65,
+            "worker": 166,
+            "other": 72
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_25": [
+      {
+        "total_population": 202,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 8,
+            "youngs": 38,
+            "adults": 93,
+            "elders": 63
+          },
+          "occupation": {
+            "student": 43,
+            "worker": 110,
+            "other": 47
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_26": [
+      {
+        "total_population": 330,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 26,
+            "youngs": 24,
+            "adults": 181,
+            "elders": 99
+          },
+          "occupation": {
+            "student": 71,
+            "worker": 180,
+            "other": 78
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_27": [
+      {
+        "total_population": 316,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 19,
+            "youngs": 46,
+            "adults": 174,
+            "elders": 77
+          },
+          "occupation": {
+            "student": 68,
+            "worker": 172,
+            "other": 74
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_28": [
+      {
+        "total_population": 281,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 39,
+            "adults": 169,
+            "elders": 56
+          },
+          "occupation": {
+            "student": 60,
+            "worker": 153,
+            "other": 66
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_29": [
+      {
+        "total_population": 341,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 37,
+            "adults": 172,
+            "elders": 112
+          },
+          "occupation": {
+            "student": 73,
+            "worker": 186,
+            "other": 80
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_30": [
+      {
+        "total_population": 287,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 22,
+            "youngs": 31,
+            "adults": 135,
+            "elders": 99
+          },
+          "occupation": {
+            "student": 61,
+            "worker": 157,
+            "other": 68
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_31": [
+      {
+        "total_population": 446,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 36,
+            "youngs": 73,
+            "adults": 231,
+            "elders": 106
+          },
+          "occupation": {
+            "student": 96,
+            "worker": 243,
+            "other": 105
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_32": [
+      {
+        "total_population": 242,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 43,
+            "adults": 138,
+            "elders": 46
+          },
+          "occupation": {
+            "student": 52,
+            "worker": 132,
+            "other": 57
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_33": [
+      {
+        "total_population": 258,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 8,
+            "youngs": 30,
+            "adults": 154,
+            "elders": 66
+          },
+          "occupation": {
+            "student": 55,
+            "worker": 141,
+            "other": 61
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_34": [
+      {
+        "total_population": 196,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 9,
+            "youngs": 21,
+            "adults": 125,
+            "elders": 41
+          },
+          "occupation": {
+            "student": 42,
+            "worker": 107,
+            "other": 46
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_35": [
+      {
+        "total_population": 319,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 11,
+            "youngs": 58,
+            "adults": 167,
+            "elders": 83
+          },
+          "occupation": {
+            "student": 68,
+            "worker": 174,
+            "other": 75
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_36": [
+      {
+        "total_population": 270,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 13,
+            "youngs": 35,
+            "adults": 179,
+            "elders": 43
+          },
+          "occupation": {
+            "student": 58,
+            "worker": 147,
+            "other": 64
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_37": [
+      {
+        "total_population": 288,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 8,
+            "youngs": 41,
+            "adults": 194,
+            "elders": 45
+          },
+          "occupation": {
+            "student": 62,
+            "worker": 157,
+            "other": 68
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_38": [
+      {
+        "total_population": 256,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 9,
+            "youngs": 40,
+            "adults": 149,
+            "elders": 58
+          },
+          "occupation": {
+            "student": 55,
+            "worker": 140,
+            "other": 60
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_39": [
+      {
+        "total_population": 310,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 10,
+            "youngs": 89,
+            "adults": 169,
+            "elders": 42
+          },
+          "occupation": {
+            "student": 66,
+            "worker": 169,
+            "other": 73
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_40": [
+      {
+        "total_population": 337,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 5,
+            "youngs": 58,
+            "adults": 173,
+            "elders": 101
+          },
+          "occupation": {
+            "student": 72,
+            "worker": 184,
+            "other": 79
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_41": [
+      {
+        "total_population": 519,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 33,
+            "youngs": 91,
+            "adults": 270,
+            "elders": 125
+          },
+          "occupation": {
+            "student": 111,
+            "worker": 283,
+            "other": 123
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_42": [
+      {
+        "total_population": 339,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 47,
+            "adults": 185,
+            "elders": 90
+          },
+          "occupation": {
+            "student": 73,
+            "worker": 185,
+            "other": 80
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_43": [
+      {
+        "total_population": 458,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 36,
+            "youngs": 43,
+            "adults": 271,
+            "elders": 108
+          },
+          "occupation": {
+            "student": 98,
+            "worker": 250,
+            "other": 108
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_44": [
+      {
+        "total_population": 234,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 34,
+            "adults": 115,
+            "elders": 65
+          },
+          "occupation": {
+            "student": 50,
+            "worker": 128,
+            "other": 55
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_45": [
+      {
+        "total_population": 262,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 33,
+            "adults": 148,
+            "elders": 69
+          },
+          "occupation": {
+            "student": 56,
+            "worker": 143,
+            "other": 62
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_46": [
+      {
+        "total_population": 615,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 61,
+            "youngs": 79,
+            "adults": 319,
+            "elders": 156
+          },
+          "occupation": {
+            "student": 132,
+            "worker": 336,
+            "other": 145
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_47": [
+      {
+        "total_population": 451,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 34,
+            "youngs": 47,
+            "adults": 270,
+            "elders": 100
+          },
+          "occupation": {
+            "student": 97,
+            "worker": 246,
+            "other": 106
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_48": [
+      {
+        "total_population": 382,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 16,
+            "youngs": 51,
+            "adults": 232,
+            "elders": 83
+          },
+          "occupation": {
+            "student": 82,
+            "worker": 208,
+            "other": 90
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_49": [
+      {
+        "total_population": 256,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 19,
+            "youngs": 15,
+            "adults": 131,
+            "elders": 91
+          },
+          "occupation": {
+            "student": 55,
+            "worker": 140,
+            "other": 60
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_50": [
+      {
+        "total_population": 264,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 20,
+            "adults": 155,
+            "elders": 74
+          },
+          "occupation": {
+            "student": 56,
+            "worker": 144,
+            "other": 62
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_51": [
+      {
+        "total_population": 245,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 20,
+            "adults": 152,
+            "elders": 56
+          },
+          "occupation": {
+            "student": 52,
+            "worker": 134,
+            "other": 58
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_52": [
+      {
+        "total_population": 247,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 33,
+            "adults": 163,
+            "elders": 34
+          },
+          "occupation": {
+            "student": 53,
+            "worker": 135,
+            "other": 58
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_53": [
+      {
+        "total_population": 426,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 35,
+            "youngs": 37,
+            "adults": 182,
+            "elders": 172
+          },
+          "occupation": {
+            "student": 91,
+            "worker": 233,
+            "other": 101
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_54": [
+      {
+        "total_population": 280,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 14,
+            "youngs": 37,
+            "adults": 155,
+            "elders": 74
+          },
+          "occupation": {
+            "student": 60,
+            "worker": 153,
+            "other": 66
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_55": [
+      {
+        "total_population": 424,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 27,
+            "youngs": 47,
+            "adults": 249,
+            "elders": 101
+          },
+          "occupation": {
+            "student": 91,
+            "worker": 231,
+            "other": 100
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_56": [
+      {
+        "total_population": 421,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 29,
+            "youngs": 37,
+            "adults": 226,
+            "elders": 129
+          },
+          "occupation": {
+            "student": 90,
+            "worker": 230,
+            "other": 99
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_57": [
+      {
+        "total_population": 430,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 24,
+            "youngs": 53,
+            "adults": 216,
+            "elders": 137
+          },
+          "occupation": {
+            "student": 92,
+            "worker": 235,
+            "other": 101
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_58": [
+      {
+        "total_population": 466,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 31,
+            "youngs": 45,
+            "adults": 269,
+            "elders": 121
+          },
+          "occupation": {
+            "student": 100,
+            "worker": 254,
+            "other": 110
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_59": [
+      {
+        "total_population": 414,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 19,
+            "youngs": 44,
+            "adults": 256,
+            "elders": 95
+          },
+          "occupation": {
+            "student": 89,
+            "worker": 226,
+            "other": 98
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_60": [
+      {
+        "total_population": 447,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 37,
+            "youngs": 57,
+            "adults": 249,
+            "elders": 104
+          },
+          "occupation": {
+            "student": 96,
+            "worker": 244,
+            "other": 106
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_61": [
+      {
+        "total_population": 352,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 35,
+            "adults": 214,
+            "elders": 83
+          },
+          "occupation": {
+            "student": 75,
+            "worker": 192,
+            "other": 83
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_62": [
+      {
+        "total_population": 213,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 15,
+            "adults": 134,
+            "elders": 49
+          },
+          "occupation": {
+            "student": 45,
+            "worker": 116,
+            "other": 50
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_63": [
+      {
+        "total_population": 293,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 26,
+            "adults": 170,
+            "elders": 82
+          },
+          "occupation": {
+            "student": 63,
+            "worker": 160,
+            "other": 69
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_64": [
+      {
+        "total_population": 299,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 22,
+            "adults": 180,
+            "elders": 79
+          },
+          "occupation": {
+            "student": 64,
+            "worker": 163,
+            "other": 70
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_65": [
+      {
+        "total_population": 278,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 7,
+            "youngs": 15,
+            "adults": 159,
+            "elders": 97
+          },
+          "occupation": {
+            "student": 59,
+            "worker": 152,
+            "other": 65
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_66": [
+      {
+        "total_population": 329,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 24,
+            "youngs": 27,
+            "adults": 186,
+            "elders": 92
+          },
+          "occupation": {
+            "student": 70,
+            "worker": 179,
+            "other": 78
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_67": [
+      {
+        "total_population": 294,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 22,
+            "youngs": 16,
+            "adults": 186,
+            "elders": 70
+          },
+          "occupation": {
+            "student": 63,
+            "worker": 160,
+            "other": 69
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_68": [
+      {
+        "total_population": 538,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 43,
+            "youngs": 42,
+            "adults": 319,
+            "elders": 134
+          },
+          "occupation": {
+            "student": 116,
+            "worker": 294,
+            "other": 127
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_69": [
+      {
+        "total_population": 363,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 29,
+            "adults": 215,
+            "elders": 101
+          },
+          "occupation": {
+            "student": 78,
+            "worker": 198,
+            "other": 86
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_70": [
+      {
+        "total_population": 328,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 35,
+            "adults": 213,
+            "elders": 65
+          },
+          "occupation": {
+            "student": 70,
+            "worker": 179,
+            "other": 77
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_71": [
+      {
+        "total_population": 199,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 21,
+            "youngs": 21,
+            "adults": 117,
+            "elders": 40
+          },
+          "occupation": {
+            "student": 42,
+            "worker": 108,
+            "other": 47
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_72": [
+      {
+        "total_population": 372,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 30,
+            "adults": 228,
+            "elders": 102
+          },
+          "occupation": {
+            "student": 80,
+            "worker": 203,
+            "other": 88
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_73": [
+      {
+        "total_population": 347,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 33,
+            "youngs": 32,
+            "adults": 206,
+            "elders": 76
+          },
+          "occupation": {
+            "student": 74,
+            "worker": 189,
+            "other": 82
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_74": [
+      {
+        "total_population": 275,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 13,
+            "youngs": 22,
+            "adults": 176,
+            "elders": 64
+          },
+          "occupation": {
+            "student": 59,
+            "worker": 150,
+            "other": 65
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_75": [
+      {
+        "total_population": 287,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 22,
+            "youngs": 28,
+            "adults": 155,
+            "elders": 82
+          },
+          "occupation": {
+            "student": 61,
+            "worker": 157,
+            "other": 68
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_76": [
+      {
+        "total_population": 321,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 26,
+            "youngs": 36,
+            "adults": 206,
+            "elders": 53
+          },
+          "occupation": {
+            "student": 69,
+            "worker": 175,
+            "other": 76
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_77": [
+      {
+        "total_population": 239,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 16,
+            "youngs": 23,
+            "adults": 118,
+            "elders": 82
+          },
+          "occupation": {
+            "student": 51,
+            "worker": 130,
+            "other": 56
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_78": [
+      {
+        "total_population": 119,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 8,
+            "youngs": 11,
+            "adults": 75,
+            "elders": 25
+          },
+          "occupation": {
+            "student": 25,
+            "worker": 65,
+            "other": 28
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_79": [
+      {
+        "total_population": 289,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 27,
+            "adults": 168,
+            "elders": 74
+          },
+          "occupation": {
+            "student": 62,
+            "worker": 158,
+            "other": 68
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_80": [
+      {
+        "total_population": 222,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 8,
+            "youngs": 21,
+            "adults": 121,
+            "elders": 72
+          },
+          "occupation": {
+            "student": 47,
+            "worker": 121,
+            "other": 52
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_81": [
+      {
+        "total_population": 257,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 18,
+            "adults": 178,
+            "elders": 49
+          },
+          "occupation": {
+            "student": 55,
+            "worker": 140,
+            "other": 60
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_82": [
+      {
+        "total_population": 355,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 25,
+            "youngs": 31,
+            "adults": 219,
+            "elders": 80
+          },
+          "occupation": {
+            "student": 76,
+            "worker": 194,
+            "other": 84
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_83": [
+      {
+        "total_population": 393,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 26,
+            "youngs": 36,
+            "adults": 249,
+            "elders": 82
+          },
+          "occupation": {
+            "student": 84,
+            "worker": 214,
+            "other": 93
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_84": [
+      {
+        "total_population": 386,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 36,
+            "youngs": 32,
+            "adults": 213,
+            "elders": 105
+          },
+          "occupation": {
+            "student": 83,
+            "worker": 211,
+            "other": 91
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_85": [
+      {
+        "total_population": 344,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 21,
+            "youngs": 27,
+            "adults": 216,
+            "elders": 80
+          },
+          "occupation": {
+            "student": 74,
+            "worker": 188,
+            "other": 81
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_86": [
+      {
+        "total_population": 280,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 33,
+            "adults": 166,
+            "elders": 66
+          },
+          "occupation": {
+            "student": 60,
+            "worker": 153,
+            "other": 66
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_87": [
+      {
+        "total_population": 308,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 16,
+            "youngs": 36,
+            "adults": 188,
+            "elders": 68
+          },
+          "occupation": {
+            "student": 66,
+            "worker": 168,
+            "other": 73
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_88": [
+      {
+        "total_population": 312,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 28,
+            "adults": 199,
+            "elders": 73
+          },
+          "occupation": {
+            "student": 67,
+            "worker": 170,
+            "other": 74
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_89": [
+      {
+        "total_population": 148,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 2,
+            "youngs": 30,
+            "adults": 86,
+            "elders": 30
+          },
+          "occupation": {
+            "student": 31,
+            "worker": 80,
+            "other": 35
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_90": [
+      {
+        "total_population": 317,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 16,
+            "youngs": 39,
+            "adults": 177,
+            "elders": 85
+          },
+          "occupation": {
+            "student": 68,
+            "worker": 173,
+            "other": 75
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_91": [
+      {
+        "total_population": 247,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 23,
+            "youngs": 29,
+            "adults": 124,
+            "elders": 71
+          },
+          "occupation": {
+            "student": 53,
+            "worker": 135,
+            "other": 58
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_92": [
+      {
+        "total_population": 125,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 11,
+            "adults": 80,
+            "elders": 14
+          },
+          "occupation": {
+            "student": 26,
+            "worker": 68,
+            "other": 29
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_93": [
+      {
+        "total_population": 382,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 32,
+            "youngs": 44,
+            "adults": 220,
+            "elders": 86
+          },
+          "occupation": {
+            "student": 82,
+            "worker": 208,
+            "other": 90
+          }
+        }
+      }
+    ],
+    "Centro Histórico//home_94": [
+      {
+        "total_population": 245,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 36,
+            "adults": 135,
+            "elders": 59
+          },
+          "occupation": {
+            "student": 52,
+            "worker": 134,
+            "other": 58
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_0": [
+      {
+        "total_population": 448,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 28,
+            "youngs": 41,
+            "adults": 271,
+            "elders": 108
+          },
+          "occupation": {
+            "student": 96,
+            "worker": 245,
+            "other": 106
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_1": [
+      {
+        "total_population": 477,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 35,
+            "youngs": 36,
+            "adults": 285,
+            "elders": 121
+          },
+          "occupation": {
+            "student": 102,
+            "worker": 260,
+            "other": 113
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_2": [
+      {
+        "total_population": 442,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 70,
+            "youngs": 71,
+            "adults": 219,
+            "elders": 82
+          },
+          "occupation": {
+            "student": 95,
+            "worker": 241,
+            "other": 104
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_3": [
+      {
+        "total_population": 307,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 33,
+            "adults": 192,
+            "elders": 64
+          },
+          "occupation": {
+            "student": 66,
+            "worker": 167,
+            "other": 72
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_4": [
+      {
+        "total_population": 411,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 21,
+            "youngs": 39,
+            "adults": 245,
+            "elders": 106
+          },
+          "occupation": {
+            "student": 88,
+            "worker": 224,
+            "other": 97
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_5": [
+      {
+        "total_population": 243,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 29,
+            "adults": 143,
+            "elders": 59
+          },
+          "occupation": {
+            "student": 52,
+            "worker": 132,
+            "other": 57
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_6": [
+      {
+        "total_population": 289,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 32,
+            "adults": 178,
+            "elders": 61
+          },
+          "occupation": {
+            "student": 62,
+            "worker": 158,
+            "other": 68
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_7": [
+      {
+        "total_population": 377,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 32,
+            "youngs": 39,
+            "adults": 225,
+            "elders": 81
+          },
+          "occupation": {
+            "student": 81,
+            "worker": 206,
+            "other": 89
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_8": [
+      {
+        "total_population": 151,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 18,
+            "adults": 90,
+            "elders": 31
+          },
+          "occupation": {
+            "student": 32,
+            "worker": 82,
+            "other": 35
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_9": [
+      {
+        "total_population": 325,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 37,
+            "adults": 197,
+            "elders": 71
+          },
+          "occupation": {
+            "student": 70,
+            "worker": 177,
+            "other": 77
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_10": [
+      {
+        "total_population": 378,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 39,
+            "adults": 224,
+            "elders": 95
+          },
+          "occupation": {
+            "student": 81,
+            "worker": 206,
+            "other": 89
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_11": [
+      {
+        "total_population": 195,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 14,
+            "adults": 116,
+            "elders": 45
+          },
+          "occupation": {
+            "student": 42,
+            "worker": 106,
+            "other": 46
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_12": [
+      {
+        "total_population": 416,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 34,
+            "youngs": 46,
+            "adults": 218,
+            "elders": 118
+          },
+          "occupation": {
+            "student": 89,
+            "worker": 227,
+            "other": 98
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_13": [
+      {
+        "total_population": 246,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 24,
+            "youngs": 32,
+            "adults": 149,
+            "elders": 41
+          },
+          "occupation": {
+            "student": 53,
+            "worker": 134,
+            "other": 58
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_14": [
+      {
+        "total_population": 523,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 45,
+            "youngs": 44,
+            "adults": 340,
+            "elders": 94
+          },
+          "occupation": {
+            "student": 112,
+            "worker": 286,
+            "other": 124
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_15": [
+      {
+        "total_population": 265,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 20,
+            "adults": 148,
+            "elders": 77
+          },
+          "occupation": {
+            "student": 57,
+            "worker": 144,
+            "other": 62
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_16": [
+      {
+        "total_population": 226,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 9,
+            "youngs": 22,
+            "adults": 145,
+            "elders": 50
+          },
+          "occupation": {
+            "student": 48,
+            "worker": 123,
+            "other": 53
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_17": [
+      {
+        "total_population": 375,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 26,
+            "youngs": 34,
+            "adults": 194,
+            "elders": 121
+          },
+          "occupation": {
+            "student": 80,
+            "worker": 205,
+            "other": 88
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_18": [
+      {
+        "total_population": 327,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 27,
+            "adults": 173,
+            "elders": 110
+          },
+          "occupation": {
+            "student": 70,
+            "worker": 178,
+            "other": 77
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_19": [
+      {
+        "total_population": 265,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 15,
+            "youngs": 29,
+            "adults": 156,
+            "elders": 65
+          },
+          "occupation": {
+            "student": 57,
+            "worker": 144,
+            "other": 62
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_20": [
+      {
+        "total_population": 305,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 35,
+            "adults": 172,
+            "elders": 86
+          },
+          "occupation": {
+            "student": 65,
+            "worker": 166,
+            "other": 72
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_21": [
+      {
+        "total_population": 676,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 52,
+            "youngs": 78,
+            "adults": 406,
+            "elders": 140
+          },
+          "occupation": {
+            "student": 145,
+            "worker": 369,
+            "other": 160
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_22": [
+      {
+        "total_population": 428,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 28,
+            "youngs": 33,
+            "adults": 223,
+            "elders": 144
+          },
+          "occupation": {
+            "student": 92,
+            "worker": 234,
+            "other": 101
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_23": [
+      {
+        "total_population": 312,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 18,
+            "youngs": 27,
+            "adults": 170,
+            "elders": 97
+          },
+          "occupation": {
+            "student": 67,
+            "worker": 170,
+            "other": 74
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_24": [
+      {
+        "total_population": 204,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 10,
+            "adults": 115,
+            "elders": 67
+          },
+          "occupation": {
+            "student": 44,
+            "worker": 111,
+            "other": 48
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_25": [
+      {
+        "total_population": 407,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 32,
+            "youngs": 45,
+            "adults": 227,
+            "elders": 103
+          },
+          "occupation": {
+            "student": 87,
+            "worker": 222,
+            "other": 96
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_26": [
+      {
+        "total_population": 389,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 17,
+            "youngs": 48,
+            "adults": 238,
+            "elders": 86
+          },
+          "occupation": {
+            "student": 83,
+            "worker": 212,
+            "other": 92
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_27": [
+      {
+        "total_population": 263,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 27,
+            "adults": 148,
+            "elders": 68
+          },
+          "occupation": {
+            "student": 56,
+            "worker": 143,
+            "other": 62
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_28": [
+      {
+        "total_population": 221,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 5,
+            "youngs": 25,
+            "adults": 130,
+            "elders": 61
+          },
+          "occupation": {
+            "student": 47,
+            "worker": 120,
+            "other": 52
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_29": [
+      {
+        "total_population": 412,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 32,
+            "youngs": 65,
+            "adults": 216,
+            "elders": 99
+          },
+          "occupation": {
+            "student": 88,
+            "worker": 225,
+            "other": 97
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_30": [
+      {
+        "total_population": 340,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 24,
+            "youngs": 48,
+            "adults": 193,
+            "elders": 75
+          },
+          "occupation": {
+            "student": 73,
+            "worker": 186,
+            "other": 80
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_31": [
+      {
+        "total_population": 339,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 49,
+            "adults": 204,
+            "elders": 66
+          },
+          "occupation": {
+            "student": 73,
+            "worker": 185,
+            "other": 80
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_32": [
+      {
+        "total_population": 262,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 32,
+            "adults": 161,
+            "elders": 57
+          },
+          "occupation": {
+            "student": 56,
+            "worker": 143,
+            "other": 62
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_33": [
+      {
+        "total_population": 128,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 12,
+            "youngs": 15,
+            "adults": 75,
+            "elders": 26
+          },
+          "occupation": {
+            "student": 27,
+            "worker": 70,
+            "other": 30
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_34": [
+      {
+        "total_population": 176,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 10,
+            "youngs": 20,
+            "adults": 101,
+            "elders": 45
+          },
+          "occupation": {
+            "student": 37,
+            "worker": 96,
+            "other": 41
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_35": [
+      {
+        "total_population": 259,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 27,
+            "youngs": 24,
+            "adults": 141,
+            "elders": 67
+          },
+          "occupation": {
+            "student": 55,
+            "worker": 141,
+            "other": 61
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_36": [
+      {
+        "total_population": 461,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 27,
+            "youngs": 65,
+            "adults": 266,
+            "elders": 103
+          },
+          "occupation": {
+            "student": 99,
+            "worker": 252,
+            "other": 109
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_37": [
+      {
+        "total_population": 442,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 26,
+            "youngs": 66,
+            "adults": 237,
+            "elders": 113
+          },
+          "occupation": {
+            "student": 95,
+            "worker": 241,
+            "other": 104
+          }
+        }
+      }
+    ],
+    "Cidade Baixa//home_38": [
+      {
+        "total_population": 304,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 14,
+            "youngs": 40,
+            "adults": 151,
+            "elders": 99
+          },
+          "occupation": {
+            "student": 65,
+            "worker": 166,
+            "other": 72
+          }
+        }
+      }
+    ]
+  }
+}

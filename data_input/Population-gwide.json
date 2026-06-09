@@ -1,0 +1,56 @@
+{
+  "default_traceable_characteristics": {},
+  "sampled_characteristics_categories": {
+    "age": [
+      "children",
+      "youngs",
+      "adults",
+      "elders"
+    ],
+    "occupation": [
+      "student",
+      "worker",
+      "other"
+    ]
+  },
+  "initial_population": {
+    "RegionA//home_0": [
+      {
+        "total_population": 7149,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 1928,
+            "youngs": 1367,
+            "adults": 3001,
+            "elders": 853
+          },
+          "occupation": {
+            "student": 1542,
+            "worker": 3912,
+            "other": 1695
+          }
+        }
+      }
+    ],
+    "RegionB//home_1": [
+      {
+        "total_population": 2331,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 656,
+            "youngs": 530,
+            "adults": 908,
+            "elders": 237
+          },
+          "occupation": {
+            "student": 502,
+            "worker": 1277,
+            "other": 552
+          }
+        }
+      }
+    ]
+  }
+}

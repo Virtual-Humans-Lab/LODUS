@@ -36,12 +36,12 @@ class InfectionSumLogger(LoggerPlugin):
     def update_time_step(self, cycle_step, simulation_step) -> None:
         # Update SimulationStep
         self.sim_step = simulation_step
-                    
+
     def log_simulation_step(self):
         self.infection_sums.append((self.sim_step, 
                                     self.sim_step % self.cycle_length,
                                     self.infection_plugin.sum_infected))
- 
+
     def stop_logger(self):
         df = pd.DataFrame(self.infection_sums)
         df.to_csv(self.data_frames_path + "infection_sum.csv", 

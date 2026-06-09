@@ -58,7 +58,8 @@ class EnvNode():
         self.long_lat:list[float] = [0.0, 0.0]
         self.attributes: dict[str, Any] = {}
 
-        self.contained_blobs:list[Blob] = [] 
+        
+        self.contained_blobs:list[Blob] = []
         self.routine: Routine = None # type: ignore
         self.original_node_population:SampledCharacteristicCollection = None # type: ignore
 
@@ -107,7 +108,7 @@ class EnvNode():
         """Removes a list of blobs from this EnvNode."""
         for blob in blobs:
             self.remove_blob(blob)
-    
+
     def merge_blobs_in_node(self):
         """Merges all blobs in this EnvNode that have the same mother_blob_id and traceable characteristics."""
         blob_list = self.contained_blobs
@@ -623,3 +624,7 @@ class EnvironmentGraph():
     
     def __repr__(self):
         return "{\"graph\":" + str(self.region_list) + "}"
+
+FLOODED_ATTRIBUTES = {
+    "is_flooded": bool
+}

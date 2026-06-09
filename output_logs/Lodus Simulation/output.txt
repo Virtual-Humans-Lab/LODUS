@@ -1,0 +1,37 @@
+Population per Age:
+Children:275
+Youngs:526
+Adults:2806
+Elders:1226
+Population per Occupation:
+Worker:2646
+Student:1042
+Other:1145
+
+LevyWalkPlugin Execution Time Data:
+---Action Type: levy_walk
+------Number of executions: 512
+------Total execution time: 0.08286016620695591
+------Average execution time: 0.00016183626212296076
+---Total subactions count:1
+---Average subaction count:0.001953125
+
+GatherPopulationPlugin Execution Time Data:
+---Total subactions count:0
+
+SendPopulationBackPlugin Execution Time Data:
+---Action Type: send_population_back
+------Number of executions: 4
+------Total execution time: 2.0833685994148254e-05
+------Average execution time: 5.208421498537064e-06
+---Total subactions count:0
+---Average subaction count:0.0
+
+MovePopulationPlugin Execution Time Data:
+---Action Type: move_population
+------Number of executions: 1
+------Total execution time: 0.00038275006227195263
+------Average execution time: 0.00038275006227195263
+Total Simulation Time: 1.608542334055528
+Average Cycle Time: 1.608542334055528
+Loaded TimeAction Keys: dict_keys(['move_population', 'gather_population', 'send_population_back', 'levy_walk', 'levy_walk_direct'])

@@ -4,16 +4,16 @@ sys.path.append('./plugins/')
 import argparse
 import time
 from pathlib import Path
-from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from loggers.characteristic_change_logger import CharacteristicChangeLogger
-from loggers.movement_displacement_logger import MovementDisplacementLogger
-from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from loggers.population_count_logger import (PopulationCountLogger,
+from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from Loggers.characteristic_change_logger import CharacteristicChangeLogger
+from Loggers.movement_displacement_logger import MovementDisplacementLogger
+from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
-from loggers.infection_sum_logger import InfectionSumLogger
-from loggers.vaccine_level_logger import VaccineLevelLogger
+from Loggers.infection_sum_logger import InfectionSumLogger
+from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
@@ -44,7 +44,8 @@ arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
 arg_parser.add_argument('--c', metavar="C", type=str, default = ".\\DataInput\\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
 arg_parser.add_argument('--d', metavar="D", type=str, default = ".\\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
-arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
+arg_parser.add_argument('lf', metavar="LF", type=str, default = ".\\DataInput\\FloodLevels.json", help='Level Flood Plugin Configuration File (.json)')
+#arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
 arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
@@ -74,20 +75,22 @@ simulation_steps = cycles * cycle_length
 # lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
 print("Creating experiment:", lodus_simulation.experiment_name)
 print("EnvNode Count", len(env_graph.node_list))
+print("Loaded experiment inputs:", lodus_simulation.experiment_config.get('envgraph_inputs_files', {}))
+print("First regions:", [r.name for r in env_graph.region_list[:5]])
 
 '''
 Data Plugins
 '''
 
-isolation_data = None
-if 'global_isolation_data_plugin' in lodus_simulation.experiment_config:
-    isolation_data = GlobalIsolationDataPlugin(env_graph)
-    env_graph.load_time_action_plugin(isolation_data)
+#isolation_data = None
+#if 'global_isolation_data_plugin' in lodus_simulation.experiment_config:
+#    isolation_data = GlobalIsolationDataPlugin(env_graph)
+#    env_graph.load_time_action_plugin(isolation_data)
 
-infection_data = None
-if 'global_infection_data_plugin' in lodus_simulation.experiment_config:
-    isolation_data = GlobalInfectionDataPlugin(env_graph)
-    env_graph.load_time_action_plugin(isolation_data)
+#infection_data = None
+#if 'global_infection_data_plugin' in lodus_simulation.experiment_config:
+#    isolation_data = GlobalInfectionDataPlugin(env_graph)
+#    env_graph.load_time_action_plugin(isolation_data)
 
 node_density_data = None
 if 'node_density_data_plugin' in lodus_simulation.experiment_config:
@@ -125,15 +128,15 @@ if 'levy_walk_plugin' in lodus_simulation.experiment_config:
     levy_walk = LevyWalkPlugin()
     lodus_simulation.load_plugin(levy_walk)
 
-vaccine = None
-if 'vaccine_plugin' in lodus_simulation.experiment_config:
-    vaccine = VaccinePlugin()
-    lodus_simulation.load_plugin(vaccine)
+#vaccine = None
+#if 'vaccine_plugin' in lodus_simulation.experiment_config:
+#    vaccine = VaccinePlugin()
+#    lodus_simulation.load_plugin(vaccine)
 
-infection = None
-if 'infection_plugin' in lodus_simulation.experiment_config:
-    infection = InfectionPlugin()
-    lodus_simulation.load_plugin(infection)
+#infection = None
+#if 'infection_plugin' in lodus_simulation.experiment_config:
+#    infection = InfectionPlugin()
+#    lodus_simulation.load_plugin(infection)
     
 
 '''
@@ -265,7 +268,7 @@ output_str += "Population per Occupation:\n"
 output_str += "Worker:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": ["worker"]}))) + "\n"
 output_str += "Student:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": ["student"]}))) + "\n"
 output_str += "Other:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": ["other"]}))) + "\n"
-print(output_str)
+#print(lodus_simulation.get_population_size())
 '''
 Simulation
 '''
@@ -286,7 +289,14 @@ lodus_simulation.setup_logging()
 start_time = time.perf_counter()
 for i in range(simulation_steps):
     print(i, end='\r')
-        
+    if env_graph.node_list:
+        sample_node = env_graph.node_list[0]
+        print('home sample node:' + sample_node.get_complete_name() + ' pop=' + str(sample_node.get_population_size()))
+    else:
+        print('home: no nodes available')
+
+    #print('work sample node:' + str(sample_node.get_complete_name()) + '\r')    
+
     #infection_plugin.update_time_step(i % day_duration, i)
 
     #if i % day_duration == 0:
@@ -298,6 +308,9 @@ for i in range(simulation_steps):
     # These are defined in the input environment descriptor
     #env_graph.update_time_step(i % cycle_length, i)
     lodus_simulation.update_time_step()
+    #print(env_graph.get_blob_count())
+    #print(env_graph.get_population_size())
+
     # Log current simulation step
     lodus_simulation.log_simulation_step()
     
@@ -311,11 +324,12 @@ for i in range(simulation_steps):
 # od_logger.stop_logging()
 
 end_time = time.perf_counter()
+
 lodus_simulation.stop_logging()
 
 
 #print("TimeAction Plugins execution times")
-if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
+if levy_walk is not None: output_str += levy_walk.print_execution_time_data() # aqui mudar para me dar informacao 
 if infection is not None: output_str += infection.print_execution_time_data()
 if vaccine is not None: output_str += vaccine.print_execution_time_data()
 if gather_pop is not None: output_str += gather_pop.print_execution_time_data()
@@ -323,6 +337,9 @@ if return_pop_home is not None: output_str += return_pop_home.print_execution_ti
 if send_pop_back is not None: output_str += send_pop_back.print_execution_time_data()
 if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
 if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
+
+
+
 
 output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
 output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
