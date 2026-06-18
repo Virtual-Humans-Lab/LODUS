@@ -18,6 +18,7 @@ class PopularTimesPlugin(ActionPlugin):
         
         self.popular_times_data_by_node_type: dict[str, list[tuple[int, int]]] = {} # Ex: "restaurant" -> [(0, 10), (1, 5), ..., (23, 20)]
         self.bairro_multipliers: dict[str, float] = {}
+        self.setores_multipliers: dict[str, float] = {}
         self.data_path = Path(__file__).parent.parent.parent / "data_input" / "popular_times"
 
 
@@ -72,7 +73,7 @@ class PopularTimesPlugin(ActionPlugin):
         try:
             with open(csv_path, 'r', encoding='utf8') as csvfile:
                 reader = csv.reader(csvfile)
-                header = next(reader, None)
+                #header = next(reader, None)
                 for row in reader:
                     if not row:
                         continue
@@ -88,7 +89,32 @@ class PopularTimesPlugin(ActionPlugin):
         except Exception as e:
             print(f"Erro ao carregar CSV de bairros: {e}")
 
-    def get_quantity_for_hour(self, sim_step: int,  node_type: str, hour: int, bairro: str | None = None) -> int:
+    def _load_setores_csv(self):
+        csv_path = self.data_path / "Setores-13Bairros.csv"
+        if not csv_path.exists():
+            print(f"Arquivo de setores não encontrado: {csv_path}")
+            return
+
+        try:
+            with open(csv_path, 'r', encoding='utf8') as csvfile:
+                reader = csv.reader(csvfile)
+                #header = next(reader, None)
+                for row in reader:
+                    if not row:
+                        continue
+                    if len(row) < 2:
+                        continue
+                    nome = row[0].strip().lower()
+                    try:
+                        mult = float(row[1])
+                    except Exception:
+                        mult = 1.0
+                    self.setores_multipliers[nome] = mult
+            print(f"Carregados {len(self.setores_multipliers)} setores com multiplicadores")
+        except Exception as e:
+            print(f"Erro ao carregar CSV de setores: {e}")
+
+    def get_quantity_for_hour(self, sim_step: int, node_type: str, hour: int, region: str, node: str | None = None) -> int:
         """Retorna a quantidade de pessoas para um node_type em uma hora específica.
 
         A quantidade será multiplicada por um multiplicador que corresponde a população
@@ -104,26 +130,33 @@ class PopularTimesPlugin(ActionPlugin):
         cycle_length = self.simulation.cycle_lenght
         current_cycle = (sim_step // cycle_length) % 7
         base_quantity = 0
+
         for cicle, h, quantity in data:
             if cicle == current_cycle and h == hour:
                 base_quantity = quantity
                 break
 
-        if bairro:
-            # normaliza o nome do bairro
-            bairro_key = bairro.strip().lower()
-            if not self.bairro_multipliers:
-                self._load_bairros_csv()
+        #NO MOMENTO SETADO APENAS PARA SETORES, COM BAIRROS APLICA O MULTIPLICADOR ERRADO
+        if region:
+            if node:
+                number = node.split("_")[1]
+                region_key = region.strip().lower()
+                region_key = region_key+"//home_"+number
+            else:
+                region_key = region.strip().lower()
 
-            mult = self.bairro_multipliers.get(bairro_key, 1.0)
-            try:
-                mult = float(mult)
-            except Exception:
-                mult = 1.0
+            if not self.setores_multipliers:
+            #if not self.bairro_multipliers:
+                #self._load_bairros_csv()
+                self._load_setores_csv()
+
+            #mult = self.bairro_multipliers.get(region_key, 1.0)
+            mult = self.setores_multipliers.get(region_key, 1.0)
 
             return int(round(base_quantity * mult))
 
         return round(base_quantity)
+
 
     def popular_times_action(self,  pop_template, values: dict, cycle_step: int, sim_step: int):
         """Ação TimeAction que chama gather_population com quantidade do CSV."""
@@ -141,12 +174,10 @@ class PopularTimesPlugin(ActionPlugin):
         current_hour = cycle_step
         current_sim_step = sim_step
         
+        region = values.get('region')
+        unique_name_node = values.get('node')
 
-        # determina o bairro a partir dos valores (se fornecido) ou usa a região como fallback
-        bairro = values.get('bairro') or values.get('region')
-
-        # Obtém quantidade do CSV e aplica multiplicador de bairro (se houver)
-        quantity = self.get_quantity_for_hour(current_sim_step,node_type, current_hour, bairro)
+        quantity = self.get_quantity_for_hour(current_sim_step, node_type, current_hour, region, unique_name_node)
         #print(f"[PopularTimes] Quantidade para {node_type} às {current_hour}h: {quantity}")
         
         # parâmetros para o gather_population

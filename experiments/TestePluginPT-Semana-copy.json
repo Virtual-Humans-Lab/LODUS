@@ -1,9 +1,9 @@
 {
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": "PGY-Environment.json",
-        "population_file": "Population-PortoAlegre94RegionsDefaultRefactored.json",
-        "routine_file": "Routine-PT-SEMANA-TOTAL.json"
+        "environment_file": "Env-pontos-Pedro.json",
+        "population_file": "Population-Pedro.json",
+        "routine_file": "Routine-Empty-copy.json"
     },
     "popular_times_plugin": {},
     "gather_population_plugin": {},

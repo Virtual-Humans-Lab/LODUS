@@ -1,0 +1,436 @@
+local,multiplicador
+Azenha//home_0,0.284
+Azenha//home_1,0.271
+Azenha//home_2,0.454
+Azenha//home_3,0.202
+Azenha//home_4,0.282
+Azenha//home_5,0.445
+Azenha//home_6,0.176
+Azenha//home_7,0.307
+Azenha//home_8,0.208
+Azenha//home_9,0.254
+Azenha//home_10,0.431
+Azenha//home_11,0.209
+Azenha//home_12,0.64
+Azenha//home_13,0.387
+Azenha//home_14,0.403
+Azenha//home_15,0.32
+Azenha//home_16,0.623
+Azenha//home_17,0.628
+Azenha//home_18,0.15
+Azenha//home_19,0.383
+Azenha//home_20,0.446
+Azenha//home_21,0.264
+Azenha//home_22,0.25
+Azenha//home_23,0.603
+Azenha//home_24,0.442
+Azenha//home_25,0.08
+Azenha//home_26,0.453
+Azenha//home_27,0.357
+Azenha//home_28,0.463
+Azenha//home_29,0.435
+Azenha//home_30,0.566
+Azenha//home_31,0.331
+Azenha//home_32,0.317
+Bom Fim//home_0,0.147
+Bom Fim//home_1,0.457
+Bom Fim//home_2,0.431
+Bom Fim//home_3,0.416
+Bom Fim//home_4,0.299
+Bom Fim//home_5,0.377
+Bom Fim//home_6,0.414
+Bom Fim//home_7,0.442
+Bom Fim//home_8,0.245
+Bom Fim//home_9,0.478
+Bom Fim//home_10,0.341
+Bom Fim//home_11,0.476
+Bom Fim//home_12,0.387
+Bom Fim//home_13,0.515
+Bom Fim//home_14,0.193
+Bom Fim//home_15,0.425
+Bom Fim//home_16,0.461
+Bom Fim//home_17,0.443
+Bom Fim//home_18,0.419
+Bom Fim//home_19,0.553
+Bom Fim//home_20,0.512
+Bom Fim//home_21,0.524
+Bom Fim//home_22,0.459
+Bom Fim//home_23,0.306
+Bom Fim//home_24,0.224
+Bom Fim//home_25,0.216
+Centro Histórico//home_0,0.218
+Centro Histórico//home_1,0.133
+Centro Histórico//home_2,0.448
+Centro Histórico//home_3,0.24
+Centro Histórico//home_4,0.435
+Centro Histórico//home_5,0.338
+Centro Histórico//home_6,0.304
+Centro Histórico//home_7,0.204
+Centro Histórico//home_8,0.261
+Centro Histórico//home_9,0.228
+Centro Histórico//home_10,0.228
+Centro Histórico//home_11,0.447
+Centro Histórico//home_12,0.318
+Centro Histórico//home_13,0.244
+Centro Histórico//home_14,0.432
+Centro Histórico//home_15,0.353
+Centro Histórico//home_16,0.543
+Centro Histórico//home_17,0.2
+Centro Histórico//home_18,0.196
+Centro Histórico//home_19,0.497
+Centro Histórico//home_20,0.397
+Centro Histórico//home_21,0.298
+Centro Histórico//home_22,0.425
+Centro Histórico//home_23,0.562
+Centro Histórico//home_24,0.305
+Centro Histórico//home_25,0.202
+Centro Histórico//home_26,0.33
+Centro Histórico//home_27,0.316
+Centro Histórico//home_28,0.281
+Centro Histórico//home_29,0.341
+Centro Histórico//home_30,0.287
+Centro Histórico//home_31,0.446
+Centro Histórico//home_32,0.242
+Centro Histórico//home_33,0.258
+Centro Histórico//home_34,0.196
+Centro Histórico//home_35,0.319
+Centro Histórico//home_36,0.27
+Centro Histórico//home_37,0.288
+Centro Histórico//home_38,0.256
+Centro Histórico//home_39,0.31
+Centro Histórico//home_40,0.337
+Centro Histórico//home_41,0.519
+Centro Histórico//home_42,0.339
+Centro Histórico//home_43,0.458
+Centro Histórico//home_44,0.234
+Centro Histórico//home_45,0.262
+Centro Histórico//home_46,0.615
+Centro Histórico//home_47,0.451
+Centro Histórico//home_48,0.382
+Centro Histórico//home_49,0.256
+Centro Histórico//home_50,0.264
+Centro Histórico//home_51,0.245
+Centro Histórico//home_52,0.247
+Centro Histórico//home_53,0.426
+Centro Histórico//home_54,0.28
+Centro Histórico//home_55,0.424
+Centro Histórico//home_56,0.421
+Centro Histórico//home_57,0.43
+Centro Histórico//home_58,0.466
+Centro Histórico//home_59,0.414
+Centro Histórico//home_60,0.447
+Centro Histórico//home_61,0.352
+Centro Histórico//home_62,0.213
+Centro Histórico//home_63,0.293
+Centro Histórico//home_64,0.299
+Centro Histórico//home_65,0.278
+Centro Histórico//home_66,0.329
+Centro Histórico//home_67,0.294
+Centro Histórico//home_68,0.538
+Centro Histórico//home_69,0.363
+Centro Histórico//home_70,0.328
+Centro Histórico//home_71,0.199
+Centro Histórico//home_72,0.372
+Centro Histórico//home_73,0.347
+Centro Histórico//home_74,0.275
+Centro Histórico//home_75,0.287
+Centro Histórico//home_76,0.321
+Centro Histórico//home_77,0.239
+Centro Histórico//home_78,0.119
+Centro Histórico//home_79,0.289
+Centro Histórico//home_80,0.222
+Centro Histórico//home_81,0.257
+Centro Histórico//home_82,0.355
+Centro Histórico//home_83,0.393
+Centro Histórico//home_84,0.386
+Centro Histórico//home_85,0.344
+Centro Histórico//home_86,0.28
+Centro Histórico//home_87,0.308
+Centro Histórico//home_88,0.312
+Centro Histórico//home_89,0.148
+Centro Histórico//home_90,0.317
+Centro Histórico//home_91,0.247
+Centro Histórico//home_92,0.125
+Centro Histórico//home_93,0.382
+Centro Histórico//home_94,0.245
+Cidade Baixa//home_0,0.448
+Cidade Baixa//home_1,0.477
+Cidade Baixa//home_2,0.442
+Cidade Baixa//home_3,0.307
+Cidade Baixa//home_4,0.411
+Cidade Baixa//home_5,0.243
+Cidade Baixa//home_6,0.289
+Cidade Baixa//home_7,0.377
+Cidade Baixa//home_8,0.151
+Cidade Baixa//home_9,0.325
+Cidade Baixa//home_10,0.378
+Cidade Baixa//home_11,0.195
+Cidade Baixa//home_12,0.416
+Cidade Baixa//home_13,0.246
+Cidade Baixa//home_14,0.523
+Cidade Baixa//home_15,0.265
+Cidade Baixa//home_16,0.226
+Cidade Baixa//home_17,0.375
+Cidade Baixa//home_18,0.327
+Cidade Baixa//home_19,0.265
+Cidade Baixa//home_20,0.305
+Cidade Baixa//home_21,0.676
+Cidade Baixa//home_22,0.428
+Cidade Baixa//home_23,0.312
+Cidade Baixa//home_24,0.204
+Cidade Baixa//home_25,0.407
+Cidade Baixa//home_26,0.389
+Cidade Baixa//home_27,0.263
+Cidade Baixa//home_28,0.221
+Cidade Baixa//home_29,0.412
+Cidade Baixa//home_30,0.34
+Cidade Baixa//home_31,0.339
+Cidade Baixa//home_32,0.262
+Cidade Baixa//home_33,0.128
+Cidade Baixa//home_34,0.176
+Cidade Baixa//home_35,0.259
+Cidade Baixa//home_36,0.461
+Cidade Baixa//home_37,0.442
+Cidade Baixa//home_38,0.304
+Farroupilha//home_0,0.435
+Farroupilha//home_1,0.339
+Floresta//home_0,0.962
+Floresta//home_1,0.01
+Floresta//home_2,0.315
+Floresta//home_3,0.493
+Floresta//home_4,0.289
+Floresta//home_5,0.339
+Floresta//home_6,0.315
+Floresta//home_7,0.526
+Floresta//home_8,0.258
+Floresta//home_9,0.284
+Floresta//home_10,0.582
+Floresta//home_11,0.21
+Floresta//home_12,0.283
+Floresta//home_13,0.546
+Floresta//home_14,0.448
+Floresta//home_15,0.234
+Floresta//home_16,0.317
+Floresta//home_17,0.402
+Floresta//home_18,0.523
+Floresta//home_19,0.365
+Floresta//home_20,0.326
+Floresta//home_21,0.385
+Floresta//home_22,0.386
+Independência//home_0,0.465
+Independência//home_1,0.277
+Independência//home_2,0.197
+Independência//home_3,0.179
+Independência//home_4,0.49
+Independência//home_5,0.328
+Independência//home_6,0.255
+Independência//home_7,0.329
+Independência//home_8,0.472
+Independência//home_9,0.289
+Independência//home_10,0.41
+Independência//home_11,0.419
+Independência//home_12,0.179
+Independência//home_13,0.49
+Independência//home_14,0.218
+Independência//home_15,0.395
+Independência//home_16,0.285
+Independência//home_17,0.443
+Independência//home_18,0.251
+Independência//home_19,0.237
+Independência//home_20,0.106
+Independência//home_21,0.171
+Menino-Deus//home_0,0.313
+Menino-Deus//home_1,0.301
+Menino-Deus//home_2,0.303
+Menino-Deus//home_3,0.282
+Menino-Deus//home_4,0.251
+Menino-Deus//home_5,0.298
+Menino-Deus//home_6,0.188
+Menino-Deus//home_7,0.304
+Menino-Deus//home_8,0.58
+Menino-Deus//home_9,0.345
+Menino-Deus//home_10,0.553
+Menino-Deus//home_11,0.49
+Menino-Deus//home_12,0.573
+Menino-Deus//home_13,0.309
+Menino-Deus//home_14,0.504
+Menino-Deus//home_15,0.269
+Menino-Deus//home_16,0.386
+Menino-Deus//home_17,0.359
+Menino-Deus//home_18,0.547
+Menino-Deus//home_19,0.281
+Menino-Deus//home_20,0.227
+Menino-Deus//home_21,0.282
+Menino-Deus//home_22,0.35
+Menino-Deus//home_23,0.402
+Menino-Deus//home_24,0.405
+Menino-Deus//home_25,0.339
+Menino-Deus//home_26,0.447
+Menino-Deus//home_27,0.402
+Menino-Deus//home_28,0.517
+Menino-Deus//home_29,0.335
+Menino-Deus//home_30,0.389
+Menino-Deus//home_31,0.48
+Menino-Deus//home_32,0.611
+Menino-Deus//home_33,0.368
+Menino-Deus//home_34,0.271
+Menino-Deus//home_35,0.718
+Menino-Deus//home_36,0.388
+Menino-Deus//home_37,0.399
+Menino-Deus//home_38,0.566
+Menino-Deus//home_39,0.442
+Menino-Deus//home_40,0.404
+Menino-Deus//home_41,0.555
+Menino-Deus//home_42,0.333
+Menino-Deus//home_43,0.41
+Menino-Deus//home_44,0.598
+Menino-Deus//home_45,0.626
+Menino-Deus//home_46,0.453
+Menino-Deus//home_47,0.453
+Menino-Deus//home_48,0.434
+Menino-Deus//home_49,0.228
+Menino-Deus//home_50,0.384
+Menino-Deus//home_51,0.454
+Menino-Deus//home_52,0.431
+Menino-Deus//home_53,0.368
+Menino-Deus//home_54,0.648
+Menino-Deus//home_55,0.914
+Menino-Deus//home_56,0.401
+Menino-Deus//home_57,0.295
+Menino-Deus//home_58,0.35
+Menino-Deus//home_59,0.518
+Menino-Deus//home_60,0.396
+Menino-Deus//home_61,0.41
+Menino-Deus//home_62,0.443
+Menino-Deus//home_63,0.275
+Menino-Deus//home_64,0.218
+Menino-Deus//home_65,0.363
+Menino-Deus//home_66,0.825
+Moinhos de Vento//home_0,0.357
+Moinhos de Vento//home_1,0.365
+Moinhos de Vento//home_2,0.203
+Moinhos de Vento//home_3,0.371
+Moinhos de Vento//home_4,0.788
+Moinhos de Vento//home_5,0.339
+Moinhos de Vento//home_6,0.248
+Moinhos de Vento//home_7,0.326
+Moinhos de Vento//home_8,0.447
+Moinhos de Vento//home_9,0.276
+Moinhos de Vento//home_10,0.153
+Moinhos de Vento//home_11,0.276
+Moinhos de Vento//home_12,0.561
+Moinhos de Vento//home_13,0.563
+Moinhos de Vento//home_14,0.216
+Moinhos de Vento//home_15,0.518
+Moinhos de Vento//home_16,0.509
+Moinhos de Vento//home_17,0.477
+Moinhos de Vento//home_18,0.325
+Moinhos de Vento//home_19,0.501
+Moinhos de Vento//home_20,0.321
+Moinhos de Vento//home_21,0.271
+Moinhos de Vento//home_22,0.382
+Moinhos de Vento//home_23,0.357
+Moinhos de Vento//home_24,0.542
+Moinhos de Vento//home_25,0.303
+Praia de Belas//home_0,0.14
+Praia de Belas//home_1,0.357
+Praia de Belas//home_2,0.137
+Praia de Belas//home_3,0.288
+Praia de Belas//home_4,0.239
+Praia de Belas//home_5,0.006
+Praia de Belas//home_6,0.355
+Rio Branco//home_0,0.309
+Rio Branco//home_1,0.209
+Rio Branco//home_2,0.192
+Rio Branco//home_3,0.503
+Rio Branco//home_4,0.365
+Rio Branco//home_5,0.272
+Rio Branco//home_6,0.325
+Rio Branco//home_7,0.32
+Rio Branco//home_8,0.275
+Rio Branco//home_9,0.336
+Rio Branco//home_10,0.178
+Rio Branco//home_11,0.487
+Rio Branco//home_12,0.335
+Rio Branco//home_13,0.292
+Rio Branco//home_14,0.443
+Rio Branco//home_15,0.403
+Rio Branco//home_16,0.917
+Rio Branco//home_17,0.154
+Rio Branco//home_18,0.62
+Rio Branco//home_19,0.656
+Rio Branco//home_20,0.153
+Rio Branco//home_21,0.259
+Rio Branco//home_22,0.541
+Rio Branco//home_23,0.419
+Rio Branco//home_24,0.604
+Rio Branco//home_25,0.689
+Rio Branco//home_26,0.403
+Rio Branco//home_27,0.413
+Rio Branco//home_28,0.504
+Rio Branco//home_29,0.712
+Rio Branco//home_30,0.119
+Rio Branco//home_31,0.353
+Rio Branco//home_32,0.256
+Rio Branco//home_33,0.267
+Rio Branco//home_34,0.45
+Rio Branco//home_35,0.527
+Rio Branco//home_36,0.442
+Rio Branco//home_37,0.602
+Rio Branco//home_38,0.406
+Santa Cecília//home_0,0.477
+Santa Cecília//home_1,0.308
+Santa Cecília//home_2,0.542
+Santa Cecília//home_3,0.29
+Santa Cecília//home_4,0.541
+Santa Cecília//home_5,0.345
+Santa Cecília//home_6,0.444
+Santa Cecília//home_7,0.403
+Santa Cecília//home_8,0.59
+Santa Cecília//home_9,0.382
+Santa Cecília//home_10,0.318
+Santana//home_0,0.382
+Santana//home_1,0.231
+Santana//home_2,0.195
+Santana//home_3,0.269
+Santana//home_4,0.489
+Santana//home_5,0.417
+Santana//home_6,0.481
+Santana//home_7,0.348
+Santana//home_8,0.505
+Santana//home_9,0.329
+Santana//home_10,0.267
+Santana//home_11,0.304
+Santana//home_12,0.487
+Santana//home_13,0.324
+Santana//home_14,0.425
+Santana//home_15,0.309
+Santana//home_16,0.241
+Santana//home_17,0.192
+Santana//home_18,0.264
+Santana//home_19,0.408
+Santana//home_20,0.468
+Santana//home_21,0.429
+Santana//home_22,0.401
+Santana//home_23,0.38
+Santana//home_24,0.459
+Santana//home_25,0.33
+Santana//home_26,0.499
+Santana//home_27,0.315
+Santana//home_28,0.277
+Santana//home_29,0.423
+Santana//home_30,0.65
+Santana//home_31,0.175
+Santana//home_32,0.576
+Santana//home_33,0.829
+Santana//home_34,0.409
+Santana//home_35,0.559
+Santana//home_36,0.195
+Santana//home_37,0.59
+Santana//home_38,0.197
+Santana//home_39,0.554
+Santana//home_40,0.438
+Santana//home_41,0.538
+Santana//home_42,0.407
+Santana//home_43,0.445
+Santana//home_44,0.384
