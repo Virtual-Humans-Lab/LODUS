@@ -23,10 +23,11 @@ class NodeDependencyRule:
 
 
 class NodeDependencyDataPlugin(ActionPlugin):
-    def __init__(self):
+    def __init__(self, graph: EnvironmentGraph | None = None):
         super().__init__()
+        self.graph = graph
 
-    def load_plugin(self, simulation: LodusSimulation):
+    def load_plugin(self, simulation: Any):
         self.graph = simulation.env_graph
         self.config: dict[str, Any] = simulation.experiment_config.get("node_dependency_data_plugin", {})
 
@@ -50,8 +51,6 @@ class NodeDependencyDataPlugin(ActionPlugin):
         self.node_to_dependents: dict[str, set[str]] = self._build_reverse_dependency_map(self.node_dependency_rules)
         
         print(f"Loaded node dependency rules for {len(self.node_dependency_rules)} nodes.")
-
-
 
         # Register a single dispatcher callable on the graph for dependency queries.
         # Usage: graph.data_action_map['node_dependency'](command, *args, **kwargs)
@@ -93,35 +92,98 @@ class NodeDependencyDataPlugin(ActionPlugin):
             self.config = merged_config
 
     def _parse_node_dependency_rules(self, config: dict[str, Any]) -> dict[str, NodeDependencyRule]:
-        dependency_config = config.get("node_dependencies", config)
-        if not isinstance(dependency_config, dict):
+        dependency_rules_config = config.get("dependency_rules", {})
+        if dependency_rules_config and not isinstance(dependency_rules_config, dict):
+            raise ValueError("dependency_rules must be provided as a mapping")
+
+        dependency_rules = self._parse_rule_mapping(dependency_rules_config, "dependency_rules")
+
+        node_dependency_config = config.get("node_dependencies", config if not dependency_rules_config else {})
+        if not isinstance(node_dependency_config, dict):
             raise ValueError("node_dependencies must be provided as a mapping")
 
         parsed_rules: dict[str, NodeDependencyRule] = {}
+        for node_name, node_config in node_dependency_config.items():
+            parsed_rules[str(node_name)] = self._parse_node_dependency_entry(node_name, node_config, dependency_rules)
 
-        for node_name, rule_config in dependency_config.items():
-            if not isinstance(rule_config, dict):
-                raise ValueError(f"dependency rule for node {node_name} must be a mapping")
-
-            all_of = tuple(str(node) for node in rule_config.get("all_of", []))
-            min_of_config = rule_config.get("min_of", [])
-            if isinstance(min_of_config, dict):
-                min_of_config = [min_of_config]
-            if not isinstance(min_of_config, list):
-                raise ValueError(f"min_of for node {node_name} must be a list of mappings")
-
-            min_of_rules: list[MinOfRule] = []
-            for rule in min_of_config:
-                if not isinstance(rule, dict):
-                    raise ValueError(f"min_of rule for node {node_name} must be a mapping")
-                minimum_enabled = rule.get("minimum_enabled", rule.get("count"))
-                if minimum_enabled is None:
-                    raise ValueError(f"min_of rule for node {node_name} must define minimum_enabled")
-                nodes = tuple(str(node) for node in rule.get("nodes", []))
-                min_of_rules.append(MinOfRule(minimum_enabled=int(minimum_enabled), nodes=nodes))
-
-            parsed_rules[str(node_name)] = NodeDependencyRule(all_of=all_of, min_of=tuple(min_of_rules))
         return parsed_rules
+
+    def _parse_rule_mapping(self, rule_mapping: dict[str, Any], section_name: str) -> dict[str, NodeDependencyRule]:
+        parsed_rules: dict[str, NodeDependencyRule] = {}
+
+        for rule_name, rule_config in rule_mapping.items():
+            if not isinstance(rule_config, dict):
+                raise ValueError(f"{section_name} entry '{rule_name}' must be a mapping")
+            parsed_rules[str(rule_name)] = self._parse_rule_config(rule_config, f"{section_name}['{rule_name}']")
+
+        return parsed_rules
+
+    def _parse_node_dependency_entry(
+        self,
+        node_name: str,
+        node_config: Any,
+        dependency_rules: dict[str, NodeDependencyRule],
+    ) -> NodeDependencyRule:
+        if isinstance(node_config, str):
+            rule_names = [node_config]
+            inline_rule = NodeDependencyRule()
+        elif isinstance(node_config, list):
+            rule_names = node_config
+            inline_rule = NodeDependencyRule()
+        elif isinstance(node_config, dict):
+            rule_names = node_config.get("rules", [])
+            if isinstance(rule_names, str):
+                rule_names = [rule_names]
+            if not isinstance(rule_names, list):
+                raise ValueError(f"rules for node {node_name} must be a string or list of strings")
+
+            inline_rule_config = {k: v for k, v in node_config.items() if k != "rules"}
+            inline_rule = self._parse_rule_config(inline_rule_config, f"node_dependencies['{node_name}']") if inline_rule_config else NodeDependencyRule()
+        else:
+            raise ValueError(f"dependency entry for node {node_name} must be a string, list, or mapping")
+
+        referenced_rules: list[NodeDependencyRule] = []
+        for rule_name in rule_names:
+            if not isinstance(rule_name, str):
+                raise ValueError(f"rules for node {node_name} must contain only strings")
+            if rule_name not in dependency_rules:
+                raise ValueError(f"node {node_name} references unknown dependency rule '{rule_name}'")
+            referenced_rules.append(dependency_rules[rule_name])
+
+        if inline_rule == NodeDependencyRule() and not referenced_rules:
+            return NodeDependencyRule()
+
+        return self._combine_dependency_rules([*referenced_rules, inline_rule])
+
+    def _parse_rule_config(self, rule_config: dict[str, Any], context: str) -> NodeDependencyRule:
+        all_of = tuple(str(node) for node in rule_config.get("all_of", []))
+        min_of_config = rule_config.get("min_of", [])
+        if isinstance(min_of_config, dict):
+            min_of_config = [min_of_config]
+        if not isinstance(min_of_config, list):
+            raise ValueError(f"min_of for {context} must be a list of mappings")
+
+        min_of_rules: list[MinOfRule] = []
+        for rule in min_of_config:
+            if not isinstance(rule, dict):
+                raise ValueError(f"min_of rule for {context} must be a mapping")
+            minimum_enabled = rule.get("minimum_enabled", rule.get("count"))
+            if minimum_enabled is None:
+                raise ValueError(f"min_of rule for {context} must define minimum_enabled")
+            nodes = tuple(str(node) for node in rule.get("nodes", []))
+            min_of_rules.append(MinOfRule(minimum_enabled=int(minimum_enabled), nodes=nodes))
+
+        return NodeDependencyRule(all_of=all_of, min_of=tuple(min_of_rules))
+
+    def _combine_dependency_rules(self, rules: list[NodeDependencyRule]) -> NodeDependencyRule:
+        all_of: list[str] = []
+        min_of: list[MinOfRule] = []
+
+        for rule in rules:
+            all_of.extend(rule.all_of)
+            min_of.extend(rule.min_of)
+
+        return NodeDependencyRule(all_of=tuple(sorted(set(all_of))), min_of=tuple(min_of))
 
     def _resolve_to_complete_name(self, name: str) -> str:
         """Resolve an identifier from the dependency file to a complete node name.
@@ -131,19 +193,22 @@ class NodeDependencyDataPlugin(ActionPlugin):
         against `graph.node_list`. If multiple matches exist an error is raised.
         """
         # If already a complete name
+        graph = self.graph
+        if graph is None:
+            raise RuntimeError("NodeDependencyDataPlugin graph is not initialized")
+
         if "//" in name:
-            if name not in self.graph.node_dict:
+            if name not in graph.node_dict:
                 raise ValueError(f"Dependency references unknown node complete name: {name}")
             return name
 
         # Treat as unique name: attempt to find unique match across graph
-        matches = [n.get_complete_name() for n in self.graph.node_list if n.unique_name == name]
+        matches = [n.get_complete_name() for n in graph.node_list if n.unique_name == name]
         if not matches:
             raise ValueError(f"Dependency references unknown node unique name: {name}")
         if len(matches) > 1:
             raise ValueError(f"Ambiguous dependency node name '{name}' resolves to multiple complete names: {matches}")
         return matches[0]
-        return parsed_rules
 
     def _build_reverse_dependency_map(self, node_dependency_rules: dict[str, NodeDependencyRule]) -> dict[str, set[str]]:
         reverse_map: dict[str, set[str]] = {}

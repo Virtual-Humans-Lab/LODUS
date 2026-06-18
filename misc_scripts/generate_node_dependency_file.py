@@ -63,9 +63,12 @@ def build_node_dependency_config(
                 enum_area_to_water_sources.setdefault(enum_area_str, []).append(complete_name)
 
     dependency_rules: dict[str, Any] = {}
+    node_dependencies: dict[str, Any] = {}
 
     for complete_name, poi_type, enum_area_str, _ in all_nodes:
+        rule_name = f"enum_area::{enum_area_str}"
         if poi_type == water_source_type:
+            dependency_rules.setdefault(rule_name, {"all_of": []})
             continue
 
         water_sources = enum_area_to_water_sources.get(enum_area_str, [])
@@ -80,9 +83,13 @@ def build_node_dependency_config(
                 f"required by '{complete_name}': {water_sources}"
             )
 
-        dependency_rules[complete_name] = {"all_of": water_sources}
+        dependency_rules[rule_name] = {"all_of": water_sources}
+        node_dependencies[complete_name] = [rule_name]
 
-    return {"node_dependencies": dict(sorted(dependency_rules.items()))}
+    return {
+        "dependency_rules": dict(sorted(dependency_rules.items())),
+        "node_dependencies": dict(sorted(node_dependencies.items())),
+    }
 
 
 def main() -> None:

@@ -23,17 +23,21 @@ def make_graph_with_nodes(tmp_path):
 
 def write_dependency_file(tmp_path):
     cfg = {
-        "node_dependencies": {
-            "Region1//EnvNode_A": {
+        "dependency_rules": {
+            "grid_rule": {"all_of": ["Region1//Grid"]},
+            "env_node_a_rule": {
                 "all_of": ["Region1//WaterPlant", "Region1//PowerPlant"],
                 "min_of": [
                     {"minimum_enabled": 2, "nodes": ["Region1//Pump1", "Region1//Pump2", "Region1//Pump3"]},
                     {"minimum_enabled": 1, "nodes": ["Region1//Backup1", "Region1//Backup2"]},
                 ],
             },
-            "Region1//WaterPlant": {"all_of": ["Region1//Grid"]},
-            "Region1//PowerPlant": {"all_of": ["Region1//Grid"]},
-            "Region1//Grid": {},
+        },
+        "node_dependencies": {
+            "Region1//EnvNode_A": ["env_node_a_rule"],
+            "Region1//WaterPlant": ["grid_rule"],
+            "Region1//PowerPlant": ["grid_rule"],
+            "Region1//Grid": [],
         }
     }
     p = tmp_path / "deps.json"
