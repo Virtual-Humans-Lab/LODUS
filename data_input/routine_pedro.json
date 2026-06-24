@@ -1,0 +1,122 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Centro Histórico//marketplace_472": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "popular_times_marketplace_08",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_472",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 9,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_472",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 9,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "P9_26",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 9,
+        "action": {
+          "name": "popular_times_marketplace_15",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "pharmacy_552",
+            "node_type": "pharmacy",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 15,
+        "action": {
+          "name": "popular_times_marketplace_15",
+          "type": "popular_times",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_472",
+            "node_type": "marketplace",
+            "different_node_name": true
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Centro Histórico",
+            "node": "marketplace_472",
+            "quantity": -1
+          }
+        }
+      },
+      {
+        "cycle_step": 16,
+        "action": {
+          "name": "send_population_back_end_of_day",
+          "type": "send_population_back",
+          "population_template": {
+            "traceable_characteristics": {},
+            "sampled_characteristics": {}
+          },
+          "values": {
+            "region": "Cidade Baixa",
+            "node": "P9_26",
+            "quantity": -1
+          }
+        }
+      }
+    ]
+  }
+}

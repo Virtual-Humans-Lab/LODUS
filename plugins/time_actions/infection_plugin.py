@@ -36,7 +36,7 @@ class InfectionPlugin(ActionPlugin):
 
         super().__init__()
         self.__header:str = "Infection Plugin:"
-    
+
         self.graph = env_graph
 
         # Loads isolation data, if available
@@ -55,7 +55,7 @@ class InfectionPlugin(ActionPlugin):
                 self.vaccine_level_pop_templates.append(_pt)
 
         # assert not self.infection_beta_data_action or not self.infection_gamma_data_action, "Infection data actions weren't defined. Check if the correct plugins were loaded"
-            
+
         # Loads experiment configuration, if any
         self.config:dict = self.graph.experiment_config.get("infection_plugin", {})
 
@@ -68,7 +68,7 @@ class InfectionPlugin(ActionPlugin):
             for key, value in self.config.items():
                 _json[key] = value
             self.config = _json
-            
+
         self.default_beta:float = self.config.get("default_beta", 0.25)
         self.default_gamma:float = self.config.get("default_gamma", 0.08)
         self.infection_multiplier = self.config.get("infection_multiplier", 1.0)
@@ -112,7 +112,7 @@ class InfectionPlugin(ActionPlugin):
         # Sets infection and recovery remainders for each node
         self.dS_remainder_per_node = {n: 0.0 for n in self.graph.node_dict}
         self.dI_remainder_per_node = {n: 0.0 for n in self.graph.node_dict}
-        
+
         # Sets a number of infected people in the start of the simulation
         _custom_inf_values = {t[0]:t[1] for t in self.config.get('initial_infected_custom', ())}
         for _name, _node in self.graph.node_dict.items():
@@ -126,8 +126,8 @@ class InfectionPlugin(ActionPlugin):
                 _quant = self.initial_infected_default
             if isinstance(_quant,float): _quant = math.floor(_node.get_population_size() * _quant)
             _node.change_multiple_blobs_traceable_property('sir_status', 'infected', _quant)
-                
-         
+
+
         # Sets PopTemplates to be used later
         self.pt_sus = PopulationTemplate()
         self.pt_sus.set_traceable_property("sir_status", 'susceptible')
@@ -140,7 +140,6 @@ class InfectionPlugin(ActionPlugin):
         self.total_infected = self.graph.get_population_size(pop_template_inf)
         print(self.__header, "initial infected:", self.total_infected)
 
-        
 
         # self.sum_susceptible = self.graph.s
         self.sum_infected = self.graph.get_population_size(self.pt_inf)
@@ -149,7 +148,7 @@ class InfectionPlugin(ActionPlugin):
         print(f"{self.__header} Default Infection Data:", 
               f"\n\tBeta {self.default_beta}; Gamma {self.default_gamma}", 
               f"\n\tInfection Mult {self.infection_multiplier}; Removal Mult {self.removal_multiplier}")
-       
+
     def update_time_step(self, cycle_step:int, simulation_step:int):
         # Updates time step data
         self.cycle_length = self.graph.routine_cycle_length
@@ -168,12 +167,12 @@ class InfectionPlugin(ActionPlugin):
         assert 'region' in values and isinstance(values['region'], str), "No 'region' value defined"
         assert 'node' in values and isinstance(values['node'], str), "No 'node' value defined"
         assert 'frames' in values or 'cycle_length' in values, "No 'frames' or 'cycle_length value defined"
-     
+
         if 'frames' in values: 
             infections_per_day = len(values['frames'])
         else:
             infections_per_day = self.cycle_length // values['cycle_length']
-            
+
         # Gets the target region and node
         acting_region = self.graph.get_region_by_name(values['region'])
         acting_node = acting_region.get_node_by_unique_name(values['node'])
@@ -217,7 +216,7 @@ class InfectionPlugin(ActionPlugin):
                                              _beta =_beta / infections_per_day,
                                              _gamma = _gamma / infections_per_day)
         #abc = self.solve_infection(prev_counts)
-            
+
         # if node.get_unique_name() == 'Azenha//home':
         #    print(abc)
         new_counts = abc[1]
@@ -248,7 +247,7 @@ class InfectionPlugin(ActionPlugin):
         #             _quant_after_eff = round(b.get_population_size() * (1.0 - _eff))
         #             acting_node.change_blob_traceable_property(b, 'sir_status', 'infected', _quant_after_eff)
         #             self.sum_infected += _quant_after_eff
-                      
+
         # else:
         #     acting_node.change_blobs_traceable_property('sir_status', 'removed', to_rem, pt_inf)
         #     acting_node.change_blobs_traceable_property('sir_status', 'infected', to_inf, pt_sus)

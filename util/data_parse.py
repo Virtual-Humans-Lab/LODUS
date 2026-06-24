@@ -18,12 +18,18 @@ def generate_lodus_simulation(input_path: str):
 
     simulation.experiment_config = experiment_config
 
-    env_json = load_json(data_path / input_files["environment_file"])
-    pop_json = load_json(data_path / input_files["population_file"])
-    rot_json = load_json(data_path / input_files["routine_file"])
+    env_json = load_input_json(data_path, input_files["environment_file"])
+    pop_json = load_input_json(data_path, input_files["population_file"])
+    rot_json = load_input_json(data_path, input_files["routine_file"])
 
-    population_template = { "traceable_properties": pop_json["default_traceable_characteristics"],
-                    "sampled_properties": pop_json["sampled_characteristics_categories"]}
+    sampled_props_key = ("sampled_characteristics_categories"
+                         if "sampled_characteristics_categories" in pop_json
+                         else "sampled_characteristics_bins")
+
+    population_template = {
+        "traceable_properties": pop_json.get("default_traceable_characteristics", {}),
+        "sampled_properties": pop_json.get(sampled_props_key, {})
+    }
     
     characteristics_factory = CharacteristicsFactory()
     # Default values for traceable properties
@@ -55,6 +61,18 @@ def load_json(file_path):
     """Load a json file from the given path"""
     with open(file_path, 'r', encoding='utf8') as file:
         return json.load(file)
+
+
+def load_input_json(data_path: Path, filename: str):
+    """Load a JSON input file, with fallback to data_gwide_experiments."""
+    file_path = data_path / filename
+    if not file_path.exists():
+        alternate_path = data_path / "data_gwide_experiments" / filename
+        if alternate_path.exists():
+            file_path = alternate_path
+        else:
+            raise FileNotFoundError(f"Input file not found: {filename}")
+    return load_json(file_path)
 
 def create_region(env_graph: EnvironmentGraph, 
                   region_description: dict, 

@@ -24,7 +24,6 @@ class BlobCountLogger(LoggerPlugin):
     def __init__(self):
         pass
 
-
     def load_plugin(self, simulation: LodusSimulation):
         # Attaches itself to the EnvGraph
         self.env_graph = simulation.env_graph

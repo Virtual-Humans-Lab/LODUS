@@ -29,7 +29,6 @@ class LevyWalkSampleLogger(LoggerPlugin):
         self.base_path = "output_logs/" + simulation.experiment_name + "/"
         self.data_frames_path = self.base_path + "/data_frames/"
         self.levy_walk_plugin = None
-            
 
     def setup_logger(self):
         # Create the required directories
@@ -39,10 +38,10 @@ class LevyWalkSampleLogger(LoggerPlugin):
     def update_time_step(self, cycle_step, simulation_step) -> None:
         # Update SimulationStep
         self.sim_step = simulation_step
-                    
+
     def log_simulation_step(self):
         pass
- 
+
     def stop_logger(self):
         self.distance_samples = self.levy_walk_plugin.sampled_distances # type: ignore
         df = pd.DataFrame(self.distance_samples)
@@ -51,6 +50,6 @@ class LevyWalkSampleLogger(LoggerPlugin):
                            encoding="utf-8-sig",
                            header=["samples"] if len(self.distance_samples) > 0 else [],
                            index = False)
-    
+
     def unload_plugin(self):
         return super().unload_plugin()

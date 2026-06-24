@@ -15,6 +15,7 @@ from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 from Loggers.infection_sum_logger import InfectionSumLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
+from Plugins.Flood.lvl_flood import LevelFloodPlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
 from time_actions.infection_plugin import InfectionPlugin
@@ -128,20 +129,16 @@ if 'levy_walk_plugin' in lodus_simulation.experiment_config:
     levy_walk = LevyWalkPlugin()
     lodus_simulation.load_plugin(levy_walk)
 
-#vaccine = None
-#if 'vaccine_plugin' in lodus_simulation.experiment_config:
-#    vaccine = VaccinePlugin()
-#    lodus_simulation.load_plugin(vaccine)
+infection = None
+vaccine = None
 
-#infection = None
-#if 'infection_plugin' in lodus_simulation.experiment_config:
-#    infection = InfectionPlugin()
-#    lodus_simulation.load_plugin(infection)
-    
+flood_plugin = LevelFloodPlugin(env_graph)
+lodus_simulation.load_plugin(flood_plugin)
 
 '''
 Routine Plugins
 '''
+
 if 'off_cycle_routine_plugin' in lodus_simulation.experiment_config:
     off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
     env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
