@@ -12,9 +12,9 @@ from Loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLog
 from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
-from Loggers.infection_sum_logger import InfectionSumLogger
+from loggers.infection_sum_logger import InfectionSumLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
@@ -68,7 +68,7 @@ env_graph = lodus_simulation.env_graph
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 1
+cycles:int = 2
 cycle_length:int = 2
 lodus_simulation.set_total_cycles(cycles)
 lodus_simulation.set_cycle_length(cycle_length)
@@ -315,8 +315,7 @@ lodus_simulation.setup_logging()
 start_time = time.perf_counter()
 #for i in range(simulation_steps):
 while not lodus_simulation.time_status.is_final_step:
-    i = lodus_simulation.time_status.simulation_step
-    print(i, end='\r')
+    
 
     #infection_plugin.update_time_step(lodus_simulation.time_status.simulation_step % day_duration, lodus_simulation.time_status.simulation_step)
 
@@ -328,7 +327,25 @@ while not lodus_simulation.time_status.is_final_step:
     # Updates Node Routines and Repeating Global Actions
     # These are defined in the input environment descriptor
     #env_graph.update_time_step(i % cycle_length, i)
+
     lodus_simulation.update_time_step()
+
+    i = lodus_simulation.time_status.simulation_step
+    print(i, end='\r')
+
+    if i == 1:
+        print("disabling a water_source EnvNove")
+        n = lodus_simulation.env_graph.get_node_by_unique_name("Azenha", "Azenha//water_source_0")
+        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
+        n.set_enabled(False)
+        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
+
+    if i == 2:
+        exit()
+    # print number of disabled nodes at the end of each simulation step
+    disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
+    print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+
     # Log current simulation step
     lodus_simulation.log_simulation_step()
     
