@@ -25,9 +25,12 @@ class LevelFloodPlugin(ActionPlugin):
         self.__header:str = "Level Flood Plugin:"
     
         self.graph = env_graph
+        try:
+            self.pontos = self.read_pontos_aleatorios()
+        except FileNotFoundError:
+            self.pontos = None
 
     def update_blob_attributes(self, dados, flood_lvl):
-        # Mark nodes as flooded if within radius of points whose elevation <= flood level.
         points = []
         if "bairros" in dados:
             for bairro in dados.get("bairros", []):
@@ -51,7 +54,7 @@ class LevelFloodPlugin(ActionPlugin):
         radius_m = 50
         for node in self.graph.node_list:
             node.add_attribute('active', True)
-            node.add_attribute('is_flooded', False)
+            #node.add_attribute('is_flooded', False)
 
         for point in points:
             raw_lvl = point.get("water_lvl")
@@ -77,31 +80,52 @@ class LevelFloodPlugin(ActionPlugin):
                         dist = math.inf
                     if dist <= radius_m:
                         node.add_attribute('active', False)
-                        node.add_attribute('is_flooded', True)
 
         return dados
 
 
     def read_flood_time_step(self):
         entries = []
-        file_path = Path(__file__).parent / "data_flood" / "flood_time_step.csv"
+        repo_root = Path(__file__).resolve().parents[2]
+        file_path = repo_root / "data_input" / "data_gwide_experiments" / "flood_time_step.csv"
         if not file_path.exists():
-            file_path = Path(__file__).resolve().parents[1] / "data_input" / "data_gwide_experiments" / "flood_time_step.csv"
+            file_path = Path(__file__).parent / "data_flood" / "flood_time_step.csv"
+
+        if not file_path.exists():
+            raise FileNotFoundError(f"Flood time step file not found: {file_path}")
 
         with open(file_path, 'r', encoding='utf-8') as file:
             for line in file:
                 parts = line.strip().split(",")
 
-                if len(parts) >= 3:
+                if len(parts) < 3:
+                    continue
+
+                raw_lvl = parts[2].strip()
+                if not raw_lvl:
+                    continue
+
+                try:
                     dt = datetime.strptime(parts[0], "%d/%m/%Y %H:%M")
-                    flood_lvl_cm = float(parts[2].replace(",", "."))
-                    flood_lvl = flood_lvl_cm / 100
-                    entries.append((dt, flood_lvl))
+                    flood_lvl_cm = float(raw_lvl.replace(",", "."))
+                except Exception:
+                    continue
+
+                if dt.minute != 0:
+                    continue
+
+                if (dt.month < 5) or (dt.month == 5 and dt.day < 5):
+                    continue
+
+                flood_lvl = flood_lvl_cm / 100
+                entries.append((dt, flood_lvl))
 
         entries.sort(key=lambda item: item[0])
 
         days = [i for i in range(len(entries))]
         flood_lvls = [lvl for _, lvl in entries]
+
+        print(flood_lvls[:10])
 
         return days, flood_lvls
 
@@ -116,10 +140,11 @@ class LevelFloodPlugin(ActionPlugin):
 
         return dados
 
+
     
     def update_time_step(self, cycle_step:int, simulation_step:int, days: list = None, flood_lvls: list = None):
         # Updates time step data for flood
-        self.cycle_length = self.graph.routine_cycle_length
+        self.cycle_length = getattr(self.graph, 'routine_cycle_length', 24)
         self.cycle_step = cycle_step
         self.simulation_step = simulation_step
         self.cycle = (simulation_step // self.cycle_length)
@@ -128,17 +153,18 @@ class LevelFloodPlugin(ActionPlugin):
         if days is None or flood_lvls is None:
             days, flood_lvls = self.read_flood_time_step()
 
-        current_day = self.simulation_step // self.cycle_length
+        current_day = self.simulation_step
         self.current_day = current_day
         self.flood_lvl = self.get_flood_level_for_day(current_day, days, flood_lvls)
 
         if self.flood_lvl is not None:
-            print(f"{self.__header} Flood level set to {self.flood_lvl}m for day {current_day} (cycle {self.cycle}, step {self.simulation_step}, atributes")
+            if self.pontos is not None:
+                self.update_blob_attributes(self.pontos, self.flood_lvl)
+            print(f"{self.__header} Flood level set to {self.flood_lvl}m for day {current_day} (cycle {self.cycle}, step {self.simulation_step}, non active regions: {sum(1 for node in self.graph.node_list if not node.attributes.get('active', True))})")
         else:
             print(f"{self.__header} No flood level available for day {current_day} (cycle {self.cycle}, step {self.simulation_step})")
 
     def get_flood_level_for_day(self, current_day: int, days: list, flood_lvls: list):
-        # Returns the flood level for the given day, using the latest scheduled level up to that day.
         if not days:
             return None
 
@@ -149,7 +175,7 @@ class LevelFloodPlugin(ActionPlugin):
             else:
                 break
         return best_level
-
+    
     def load_plugin(self, simulation):
         pass
 
