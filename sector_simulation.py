@@ -10,11 +10,12 @@ from Loggers.characteristic_change_logger import CharacteristicChangeLogger
 from Loggers.movement_displacement_logger import MovementDisplacementLogger
 from Loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLogger
 from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from Loggers.envnode_state_logger import EnvNodeStateLogger
 from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
-from loggers.infection_sum_logger import InfectionSumLogger
+from Loggers.infection_sum_logger import InfectionSumLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
@@ -68,8 +69,8 @@ env_graph = lodus_simulation.env_graph
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 2
-cycle_length:int = 2
+cycles:int = 1
+cycle_length:int = 3
 lodus_simulation.set_total_cycles(cycles)
 lodus_simulation.set_cycle_length(cycle_length)
 # env_graph.routine_cycle_length = cycle_length
@@ -273,6 +274,9 @@ enum_area_logger.custom_templates["occupation: [other]"] = PopulationTemplate(sa
 # Movement Displacement Logger
 displacement_logger = MovementDisplacementLogger()
 
+# EnvNode Enabled/Disabled Snapshot Logger
+envnode_state_logger = EnvNodeStateLogger()
+
 # Levy Sample Logger
 levy_sample_logger = None
 if levy_walk is not None:
@@ -305,6 +309,7 @@ lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
 lodus_simulation.load_plugin(displacement_logger)
+lodus_simulation.load_plugin(envnode_state_logger)
 # if levy_sample_logger is not None: lodus_simulation.load_plugin(levy_sample_logger)
 if infection_sum_logger is not None: lodus_simulation.load_plugin(infection_sum_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
@@ -339,8 +344,49 @@ while not lodus_simulation.time_status.is_final_step:
         print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
         n.set_enabled(False)
         print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
+        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
+        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+        print([node.get_complete_name() for node in disabled_nodes])
+        print("-----")
 
+        print("enabling a water_source EnvNove")
+        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
+        n.set_enabled(True)
+        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
+        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
+        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+        print([node.get_complete_name() for node in disabled_nodes])
+        print("-----")
+
+        print("disabling a water_source EnvNove using env_graph.change_node_enabled_state()")
+        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
+        env_graph.change_node_enabled_state(n.get_complete_name(), enabled=False)
+        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
+        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
+        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+        print([node.get_complete_name() for node in disabled_nodes])
+        print("-----")
+
+        print("enabling a water_source EnvNove using env_graph.change_node_enabled_state()")
+        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
+        env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True)
+        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
+        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
+        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+        print([node.get_complete_name() for node in disabled_nodes])
+        print("-----")
+
+        
     if i == 2:
+        print("enabling a water_source EnvNove using env_graph.change_node_enabled_state() with cascade_reenable=True")
+        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
+        env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True, cascade_reenable=True)
+        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
+        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
+        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+        print([node.get_complete_name() for node in disabled_nodes])
+        print("-----")
+    if i == 3:
         exit()
     # print number of disabled nodes at the end of each simulation step
     disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
@@ -387,3 +433,10 @@ text_file = open(f"output_logs/{lodus_simulation.experiment_name}/output.txt", "
 text_file.write(output_str)
 text_file.close()
 exit(0)
+
+
+# python .\sector_simulation.py --e EnumerationArea13
+
+# python.exe visualize_envnode_states.py --experiment-name YOUR_EXPERIMENT_NAME --output-html output_logs/YOUR_EXPERIMENT_NAME/envnode_state_visualization.html
+# python.exe visualize_envnode_states.py --state-log output_logs/YOUR_EXPERIMENT_NAME/data_frames/envnode_state.csv
+# python.exe visualize_envnode_states.py --experiment-name EnumerationArea13 --output-html output_logs/EnumerationArea13/envnode_state_visualization.html
