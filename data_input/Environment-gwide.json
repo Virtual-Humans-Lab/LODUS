@@ -1,0 +1,120 @@
+{
+  "regions": [
+    {
+      "name": "RegionA",
+      "lng_lat": [
+        -51.1975768802765,
+        -30.1564777842068
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_0",
+          "lng_lat": [
+            -51.196644996600774,
+            -30.15638184077893
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_0",
+          "lng_lat": [
+            -51.19926682524699,
+            -30.15101931968696
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_0",
+          "lng_lat": [
+            -51.20429032444015,
+            -30.15036288322885
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_0",
+          "lng_lat": [
+            -51.19615632248636,
+            -30.158589577962626
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_0",
+          "lng_lat": [
+            -51.19359666252489,
+            -30.14923275083782
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_0",
+          "lng_lat": [
+            -51.20834467719669,
+            -30.152852788471336
+          ]
+        }
+      ],
+      "neighbors": []
+    },
+    {
+      "name": "RegionB",
+      "lng_lat": [
+        -51.1251443431221,
+        -30.0765791683866
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_1",
+          "lng_lat": [
+            -51.14800078194141,
+            -30.082027534140504
+          ]
+        },
+        {
+          "poi_type": "work",
+          "unique_name": "work_1",
+          "lng_lat": [
+            -51.1224066087637,
+            -30.075626593743916
+          ]
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_1",
+          "lng_lat": [
+            -51.12994721521221,
+            -30.061266763960425
+          ]
+        },
+        {
+          "poi_type": "marketplace",
+          "unique_name": "marketplace_1",
+          "lng_lat": [
+            -51.11819549946089,
+            -30.075346753587535
+          ]
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_1",
+          "lng_lat": [
+            -51.12407644609673,
+            -30.060850851529647
+          ]
+        },
+        {
+          "poi_type": "gas_station",
+          "unique_name": "gas_station_1",
+          "lng_lat": [
+            -51.14390063231947,
+            -30.088475016307726
+          ]
+        }
+      ],
+      "neighbors": []
+    }
+  ]
+}

@@ -29,7 +29,7 @@
           }
         },
         "values": {
-          "movement_probability": 0.025,
+          "movement_probability": 0.000,
           "acting_node_types": [
             "home"
           ],
@@ -67,7 +67,7 @@
           }
         },
         "values": {
-          "movement_probability": 0.1,
+          "movement_probability": 0.3,
           "acting_node_types": [
             "home"
           ],
@@ -195,7 +195,7 @@
           }
         },
         "values": {
-          "movement_probability": 0.35,
+          "movement_probability": 1.00,
           "acting_node_types": [
             "home"
           ],

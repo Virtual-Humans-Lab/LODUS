@@ -1,25 +1,21 @@
 #encoding: utf-8
 import sys
 sys.path.append('./plugins/')
-sys.path.append('./Plugins/')
 import argparse
 import time
 from pathlib import Path
 from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 from Loggers.characteristic_change_logger import CharacteristicChangeLogger
 from Loggers.movement_displacement_logger import MovementDisplacementLogger
-from Loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLogger
 from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
-from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
 from Loggers.infection_sum_logger import InfectionSumLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
-from Loggers.infection_sum_logger import InfectionSumLogger
-from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
+from Plugins.Flood.lvl_flood import LevelFloodPlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
 from time_actions.infection_plugin import InfectionPlugin
@@ -27,7 +23,6 @@ from time_actions.levy_walk_plugin import LevyWalkPlugin
 from time_actions.move_population_plugin import MovePopulationPlugin
 from time_actions.new_infection_plugin import NewInfectionPlugin
 from data.node_density_data_plugin import NodeDensityDataPlugin
-from data.node_dependency_data_plugin import NodeDependencyDataPlugin
 from time_actions.return_population_home_plugin import ReturnPopulationHomePlugin
 from time_actions.return_to_previous_plugin import ReturnToPreviousPlugin
 from time_actions.reverse_social_isolation_plugin import \
@@ -72,23 +67,15 @@ env_graph = lodus_simulation.env_graph
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 10
+cycles:int = 1
 cycle_length:int = 24
-lodus_simulation.set_cycle_length(cycle_length)
+lodus_simulation.cycle_lenght = cycle_length
 # env_graph.routine_cycle_length = cycle_length
 simulation_steps = cycles * cycle_length
 
-lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
+# lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
 print("Creating experiment:", lodus_simulation.experiment_name)
-print("EnvRegion Count", len(env_graph.region_dict))
 print("EnvNode Count", len(env_graph.node_list))
-print("Population Count", env_graph.get_population_size())
-print("Blob Count", env_graph.get_blob_count())
-print("----------------------")
-
-#print([reg.name for reg in env_graph.region_dict.values()])
-#print([node.get_complete_name() for node in env_graph.node_list])
-
 print("Loaded experiment inputs:", lodus_simulation.experiment_config.get('envgraph_inputs_files', {}))
 print("First regions:", [r.name for r in env_graph.region_list[:5]])
 
@@ -110,11 +97,6 @@ node_density_data = None
 if 'node_density_data_plugin' in lodus_simulation.experiment_config:
     node_density_data = NodeDensityDataPlugin(env_graph)
     env_graph.load_time_action_plugin(node_density_data)
-
-node_dependency_data = None
-if 'node_dependency_data_plugin' in lodus_simulation.experiment_config:
-    node_dependency_data = NodeDependencyDataPlugin(env_graph)
-    env_graph.load_time_action_plugin(node_dependency_data)
 '''
 TimeAction Plugins
 '''
@@ -147,20 +129,16 @@ if 'levy_walk_plugin' in lodus_simulation.experiment_config:
     levy_walk = LevyWalkPlugin()
     lodus_simulation.load_plugin(levy_walk)
 
-#vaccine = None
-#if 'vaccine_plugin' in lodus_simulation.experiment_config:
-#    vaccine = VaccinePlugin()
-#    lodus_simulation.load_plugin(vaccine)
+infection = None
+vaccine = None
 
-#infection = None
-#if 'infection_plugin' in lodus_simulation.experiment_config:
-#    infection = InfectionPlugin()
-#    lodus_simulation.load_plugin(infection)
-    
+flood_plugin = LevelFloodPlugin(env_graph)
+lodus_simulation.load_plugin(flood_plugin)
 
 '''
 Routine Plugins
 '''
+
 if 'off_cycle_routine_plugin' in lodus_simulation.experiment_config:
     off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
     env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
@@ -253,31 +231,16 @@ od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
 
 # Age tracking
 od_logger.region_custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": ["children"]})
-od_logger.region_custom_templates["age: [youngs]"] = PopulationTemplate(sampled_characteristics={"age": ["youngs"]})
+#od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
 od_logger.region_custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": ["adults"]})
 od_logger.region_custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": ["elders"]})
 
 # Occupation tracking
-#od_logger.region_custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": ["other"]})
+#od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
 od_logger.region_custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": ["student"]})
 od_logger.region_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
-od_logger.region_custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": ["other"]})
-#od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
+od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
 #----------------------------
-
-# EnumerationArea OD-Matrix logger
-enum_area_logger = EnumerationAreaODMatrixLogger()
-
-# Age tracking
-enum_area_logger.custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": ["children"]})
-enum_area_logger.custom_templates["age: [youngs]"] = PopulationTemplate(sampled_characteristics={"age": ["youngs"]})
-enum_area_logger.custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": ["adults"]})
-enum_area_logger.custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": ["elders"]})
-
-# Occupation tracking
-enum_area_logger.custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": ["student"]})
-enum_area_logger.custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": ["worker"]})
-enum_area_logger.custom_templates["occupation: [other]"] = PopulationTemplate(sampled_characteristics={"occupation": ["other"]})
 
 # Movement Displacement Logger
 displacement_logger = MovementDisplacementLogger()
@@ -308,8 +271,7 @@ Simulation
 '''
 
 lodus_simulation.load_plugin(pop_count_logger)
-lodus_simulation.load_plugin(od_logger)
-lodus_simulation.load_plugin(enum_area_logger)
+# env_graph.LoadLoggerPlugin(od_logger)
 lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(traceable_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
@@ -363,8 +325,8 @@ end_time = time.perf_counter()
 lodus_simulation.stop_logging()
 
 
-#print("TimeAction Plugins execution times")python .\TOMACS_simulation.py --e BaselineRefactored
-if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
+#print("TimeAction Plugins execution times")
+if levy_walk is not None: output_str += levy_walk.print_execution_time_data() # aqui mudar para me dar informacao 
 if infection is not None: output_str += infection.print_execution_time_data()
 if vaccine is not None: output_str += vaccine.print_execution_time_data()
 if gather_pop is not None: output_str += gather_pop.print_execution_time_data()

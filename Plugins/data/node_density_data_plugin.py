@@ -8,7 +8,6 @@ class NodeDensityDataPlugin(ActionPlugin):
     def __init__(self, env_graph: EnvironmentGraph):
 
         super().__init__()
-        # JSON file containing the configuration of the Node Density Plugin
         self.graph = env_graph
         self.config = self.graph.experiment_config.get("node_density_data_plugin", {})
         self.graph.data_action_map["node_density"] = self.get_node_density

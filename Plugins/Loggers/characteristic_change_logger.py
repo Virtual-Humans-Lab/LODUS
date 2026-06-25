@@ -2,7 +2,7 @@
 import sys
 
 from core.simulator import LodusSimulation
-sys.path.append("/../../")
+
 from core.environment import EnvironmentGraph, EnvNode, EnvRegion
 from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
