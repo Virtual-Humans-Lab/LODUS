@@ -25,10 +25,10 @@ def generate_lodus_simulation(input_path: str):
 
     env_json = load_json(data_path / input_files["environment_file"])
     pop_json = load_json(data_path / input_files["population_file"])
-    rot_json = load_json(data_path / input_files["routine_file"])
-    env_json = load_input_json(data_path, input_files["environment_file"])
-    pop_json = load_input_json(data_path, input_files["population_file"])
-    rot_json = load_input_json(data_path, input_files["routine_file"])
+    if "routine_file" in input_files:
+        rot_json = load_json(data_path / input_files["routine_file"])
+    else:
+        rot_json = None
 
     sampled_props_key = ("sampled_characteristics_categories"
                          if "sampled_characteristics_categories" in pop_json
@@ -129,7 +129,7 @@ def add_initial_populations(node_template: EnvNodeTemplate, poi_unique_name: str
             node_template.add_blob_template(blob_template)
 
 def add_routines(node_template: EnvNodeTemplate, poi_unique_name: str, routine_json):
-    if poi_unique_name in routine_json["routines"]:
+    if routine_json is not None and poi_unique_name in routine_json["routines"]:
         for rt in routine_json["routines"][poi_unique_name]:
             pt = PopulationTemplate(
                 sampled_characteristics=rt["action"]['population_template']["sampled_characteristics"],
@@ -143,7 +143,7 @@ def add_routines(node_template: EnvNodeTemplate, poi_unique_name: str, routine_j
             node_template.add_action_to_routine_template(rt["cycle_step"], action)
 
 def add_global_actions(simulation: LodusSimulation, routines_json):
-    if 'global_routine' in routines_json:
+    if routines_json is not None and 'global_routine' in routines_json:
         for rga in routines_json['global_routine']:
             action_type = rga['action']['type']
             pt = PopulationTemplate(

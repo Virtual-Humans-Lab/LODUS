@@ -1,5 +1,6 @@
 #encoding: utf-8
 import sys
+
 sys.path.append('./plugins/')
 import argparse
 import time
@@ -25,6 +26,7 @@ from time_actions.move_population_plugin import MovePopulationPlugin
 from time_actions.new_infection_plugin import NewInfectionPlugin
 from data.node_density_data_plugin import NodeDensityDataPlugin
 from data.node_dependency_data_plugin import NodeDependencyDataPlugin
+from data.water_level_data_plugin import WaterLevelDataPlugin
 from time_actions.return_population_home_plugin import ReturnPopulationHomePlugin
 from time_actions.return_to_previous_plugin import ReturnToPreviousPlugin
 from time_actions.reverse_social_isolation_plugin import \
@@ -69,7 +71,7 @@ Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
 cycles:int = 1
-cycle_length:int = 3
+cycle_length:int = 24
 lodus_simulation.set_total_cycles(cycles)
 lodus_simulation.set_cycle_length(cycle_length)
 # env_graph.routine_cycle_length = cycle_length
@@ -106,6 +108,11 @@ if 'node_dependency_data_plugin' in lodus_simulation.experiment_config:
     node_dependency_data = NodeDependencyDataPlugin()
     lodus_simulation.load_plugin(node_dependency_data)
     #env_graph.load_time_action_plugin(node_dependency_data)
+
+water_level_data = None
+if 'water_level_data_plugin' in lodus_simulation.experiment_config:
+    water_level_data = WaterLevelDataPlugin(env_graph)
+    lodus_simulation.load_plugin(water_level_data)
 '''
 TimeAction Plugins
 '''
@@ -386,8 +393,8 @@ while not lodus_simulation.time_status.is_final_step:
         print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
         print([node.get_complete_name() for node in disabled_nodes])
         print("-----")
-    if i == 3:
-        exit()
+    #if i == 3:
+    #    exit()
     # print number of disabled nodes at the end of each simulation step
     disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
     print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
@@ -434,9 +441,9 @@ text_file.write(output_str)
 text_file.close()
 exit(0)
 
-
-# python .\sector_simulation.py --e EnumerationArea13
+# source .venv/bin/activate
+# python sector_simulation.py --e EnumerationArea13
 
 # python.exe visualize_envnode_states.py --experiment-name YOUR_EXPERIMENT_NAME --output-html output_logs/YOUR_EXPERIMENT_NAME/envnode_state_visualization.html
 # python.exe visualize_envnode_states.py --state-log output_logs/YOUR_EXPERIMENT_NAME/data_frames/envnode_state.csv
-# python.exe visualize_envnode_states.py --experiment-name EnumerationArea13 --output-html output_logs/EnumerationArea13/envnode_state_visualization.html
+# python misc_scripts/visualize_envnode_states.py --experiment-name EnumerationArea13 --output-html output_logs/EnumerationArea13/envnode_state_visualization.html

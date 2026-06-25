@@ -62,7 +62,7 @@ def shapefile_outline_trace(shp_path: Path, name: str, color: str, visible: bool
             lon_values.append(None)
             lat_values.append(None)
 
-    return go.Scattermapbox(
+    return go.Scattermap(
         lon=lon_values,
         lat=lat_values,
         mode="lines",
@@ -77,7 +77,7 @@ def node_trace(df: pd.DataFrame, enabled: bool, name: str, color: str) -> Any:
     state_value = 1 if enabled else 0
     state_df = df[df["Enabled"] == state_value]
     if state_df.empty:
-        return go.Scattermapbox(
+        return go.Scattermap(
             lon=[],
             lat=[],
             mode="markers",
@@ -97,7 +97,7 @@ def node_trace(df: pd.DataFrame, enabled: bool, name: str, color: str) -> Any:
         + state_df["Enumeration Area"].astype(str)
     )
 
-    return go.Scattermapbox(
+    return go.Scattermap(
         lon=state_df["Longitude"],
         lat=state_df["Latitude"],
         mode="markers",
@@ -264,7 +264,7 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
         title_x=0.5,
         margin=dict(l=0, r=0, t=120, b=30),
         legend=dict(orientation="h", yanchor="top", y=1.02, xanchor="left", x=0),
-        mapbox=dict(
+        map=dict(
             style="open-street-map",
             center=dict(lat=-30.04, lon=-51.22),
             zoom=12,
@@ -326,12 +326,12 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
                     {
                         "label": "Map on",
                         "method": "relayout",
-                        "args": [{"mapbox.style": "open-street-map"}],
+                        "args": [{"map.style": "open-street-map"}],
                     },
                     {
                         "label": "Map off",
                         "method": "relayout",
-                        "args": [{"mapbox.style": "white-bg"}],
+                        "args": [{"map.style": "white-bg"}],
                     },
                 ],
             },
