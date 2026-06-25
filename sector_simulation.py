@@ -13,9 +13,9 @@ from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from Loggers.envnode_state_logger import EnvNodeStateLogger
 from Loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
-from Loggers.infection_sum_logger import InfectionSumLogger
+from loggers.infection_sum_logger import InfectionSumLogger
 from Loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
@@ -367,6 +367,8 @@ while not lodus_simulation.time_status.is_final_step:
         print([node.get_complete_name() for node in disabled_nodes])
         print("-----")
 
+        
+    if i == 2:
         print("enabling a water_source EnvNove using env_graph.change_node_enabled_state()")
         print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
         env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True)
@@ -376,9 +378,8 @@ while not lodus_simulation.time_status.is_final_step:
         print([node.get_complete_name() for node in disabled_nodes])
         print("-----")
 
-        
-    if i == 2:
         print("enabling a water_source EnvNove using env_graph.change_node_enabled_state() with cascade_reenable=True")
+        n = lodus_simulation.env_graph.get_node_by_unique_name("Azenha", "Azenha//water_source_0")
         print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
         env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True, cascade_reenable=True)
         print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")

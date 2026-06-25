@@ -7,10 +7,12 @@ from core.simulator import LodusSimulation
 
 
 class EnvNodeStateLogger(LoggerPlugin):
-    """Logs a full EnvNode enabled/disabled snapshot for every simulation step."""
+    """Logs an initial EnvNode snapshot and then only state changes."""
 
     def __init__(self):
         self.rows: list[list] = []
+        self.last_enabled_by_node: dict[str, int] = {}
+        self.logged_initial_snapshot = False
 
     def load_plugin(self, simulation: LodusSimulation):
         self.env_graph = simulation.env_graph
@@ -32,6 +34,14 @@ class EnvNodeStateLogger(LoggerPlugin):
         cycle = self.sim_step // self.cycle_length
 
         for node in self.env_graph.node_list:
+            node_key = node.get_complete_name()
+            enabled = int(node.is_enabled())
+            previous_enabled = self.last_enabled_by_node.get(node_key)
+
+            if self.logged_initial_snapshot or previous_enabled is not None:
+                if previous_enabled == enabled:
+                    continue
+
             enumeration_area = node.attributes.get("enumeration_area")
             self.rows.append(
                 [
@@ -45,9 +55,12 @@ class EnvNodeStateLogger(LoggerPlugin):
                     node.long_lat[0],
                     node.long_lat[1],
                     enumeration_area,
-                    int(node.is_enabled()),
+                    enabled,
                 ]
             )
+            self.last_enabled_by_node[node_key] = enabled
+
+        self.logged_initial_snapshot = True
 
     def stop_logger(self):
         columns = [

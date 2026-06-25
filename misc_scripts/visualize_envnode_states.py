@@ -8,6 +8,21 @@ import shapefile
 from pyproj import CRS, Transformer
 
 
+REQUIRED_STATE_COLUMNS = {
+    "Simulation Step",
+    "Cycle Step",
+    "Cycle",
+    "Region",
+    "Node",
+    "Unique Name",
+    "Node Type",
+    "Longitude",
+    "Latitude",
+    "Enumeration Area",
+    "Enabled",
+}
+
+
 def find_shapefile(folder: Path) -> Path:
     matches = list(folder.glob("*.shp"))
     if not matches:
@@ -86,15 +101,75 @@ def node_trace(df: pd.DataFrame, enabled: bool, name: str, color: str) -> Any:
         lon=state_df["Longitude"],
         lat=state_df["Latitude"],
         mode="markers",
-        marker=dict(size=7, color=color),
+        marker=dict(size=15, color=color),
         name=name,
         text=hover_text,
         hovertemplate="%{text}<extra></extra>",
     )
 
 
+def validate_state_log(df: pd.DataFrame) -> None:
+    missing_columns = sorted(REQUIRED_STATE_COLUMNS - set(df.columns))
+    if missing_columns:
+        raise ValueError(f"State log is missing required columns: {', '.join(missing_columns)}")
+
+
+def infer_cycle_length(state_df: pd.DataFrame) -> int | None:
+    cycle_rows = state_df[state_df["Cycle"] > 0]
+    if cycle_rows.empty:
+        return None
+
+    offsets = cycle_rows["Simulation Step"] - cycle_rows["Cycle Step"]
+    if not (offsets % cycle_rows["Cycle"] == 0).all():
+        raise ValueError("Cannot infer cycle length from inconsistent cycle metadata.")
+
+    candidates = (offsets // cycle_rows["Cycle"]).astype(int)
+    first_candidate = int(candidates.iloc[0])
+    if not (candidates == first_candidate).all():
+        raise ValueError("Cannot infer cycle length from inconsistent cycle metadata.")
+
+    return first_candidate
+
+
+def node_key_from_row(row: pd.Series) -> str:
+    node_name = row.get("Node")
+    if pd.notna(node_name) and str(node_name):
+        return str(node_name)
+
+    unique_name = row.get("Unique Name")
+    if pd.notna(unique_name) and str(unique_name):
+        return str(unique_name)
+    return str(row["Node"])
+
+
+def sort_snapshot(snapshot_df: pd.DataFrame) -> pd.DataFrame:
+    if snapshot_df.empty:
+        return snapshot_df
+
+    sort_column = "Node" if "Node" in snapshot_df.columns else "Unique Name"
+    return snapshot_df.sort_values(sort_column, kind="stable").reset_index(drop=True)
+
+
+def step_title(step: int, step_rows: pd.DataFrame, cycle_length: int | None) -> str:
+    if cycle_length is not None:
+        return (
+            f"EnvNode State Map | Step {step} "
+            f"| Cycle {step // cycle_length} | Cycle Step {step % cycle_length}"
+        )
+
+    if not step_rows.empty:
+        row = step_rows.iloc[0]
+        return (
+            f"EnvNode State Map | Step {step} "
+            f"| Cycle {int(row['Cycle'])} | Cycle Step {int(row['Cycle Step'])}"
+        )
+
+    return f"EnvNode State Map | Step {step}"
+
+
 def load_state_log(state_log_path: Path) -> pd.DataFrame:
     df = pd.read_csv(state_log_path, sep=";")
+    validate_state_log(df)
     df["Enabled"] = df["Enabled"].astype(int)
     df["Simulation Step"] = df["Simulation Step"].astype(int)
     df["Cycle"] = df["Cycle"].astype(int)
@@ -102,21 +177,27 @@ def load_state_log(state_log_path: Path) -> pd.DataFrame:
     return df
 
 
-def step_title(step_df: pd.DataFrame) -> str:
-    if step_df.empty:
-        return "EnvNode State Map"
-    row = step_df.iloc[0]
-    return (
-        f"EnvNode State Map | Step {int(row['Simulation Step'])} "
-        f"| Cycle {int(row['Cycle'])} | Cycle Step {int(row['Cycle Step'])}"
-    )
-
-
 def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -> go.Figure:
-    steps = sorted(state_df["Simulation Step"].unique().tolist())
-    first_step = steps[0]
-    first_df = state_df[state_df["Simulation Step"] == first_step]
+    if state_df.empty:
+        raise ValueError("State log is empty.")
 
+    sort_columns = ["Simulation Step"]
+    if "Node" in state_df.columns:
+        sort_columns.append("Node")
+    elif "Unique Name" in state_df.columns:
+        sort_columns.append("Unique Name")
+    state_df = state_df.sort_values(sort_columns, kind="stable").reset_index(drop=True)
+    cycle_length = infer_cycle_length(state_df)
+    min_step = int(state_df["Simulation Step"].min())
+    max_step = int(state_df["Simulation Step"].max())
+
+    step_groups: dict[Any, pd.DataFrame] = {}
+    for step, group in state_df.groupby("Simulation Step", sort=True):
+        step_groups[step] = group.reset_index(drop=True)
+
+    empty_step_rows = state_df.iloc[0:0]
+    steps = range(min_step, max_step + 1)
+    current_state: dict[str, dict[str, Any]] = {}
     region_trace = shapefile_outline_trace(
         bairros_shp,
         name="Region geometry (bairros_vigentes)",
@@ -129,21 +210,31 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
         color="#8b5e34",
         visible=False,
     )
-    enabled_trace = node_trace(first_df, enabled=True, name="Enabled nodes", color="#2a9d8f")
-    disabled_trace = node_trace(first_df, enabled=False, name="Disabled nodes", color="#e76f51")
-
     frames = []
     slider_steps = []
+    initial_snapshot_df: pd.DataFrame | None = None
+    initial_step_rows = empty_step_rows
+
     for step in steps:
-        step_df = state_df[state_df["Simulation Step"] == step]
-        frame_enabled = node_trace(step_df, enabled=True, name="Enabled nodes", color="#2a9d8f")
-        frame_disabled = node_trace(step_df, enabled=False, name="Disabled nodes", color="#e76f51")
+        step_rows = step_groups.get(step, empty_step_rows)
+        if not step_rows.empty:
+            for _, row in step_rows.iterrows():
+                row_data: dict[str, Any] = {str(key): value for key, value in row.to_dict().items()}
+                current_state[node_key_from_row(row)] = row_data
+
+        snapshot_df = sort_snapshot(pd.DataFrame(current_state.values()))
+        if initial_snapshot_df is None:
+            initial_snapshot_df = snapshot_df.copy()
+            initial_step_rows = step_rows.copy()
+
+        frame_enabled = node_trace(snapshot_df, enabled=True, name="Enabled nodes", color="#2a9d8f")
+        frame_disabled = node_trace(snapshot_df, enabled=False, name="Disabled nodes", color="#e76f51")
         frames.append(
             go.Frame(
                 name=str(step),
                 data=[frame_enabled, frame_disabled],
                 traces=[2, 3],
-                layout=go.Layout(title=step_title(step_df)),
+                layout=go.Layout(title=step_title(step, step_rows, cycle_length)),
             )
         )
         slider_steps.append(
@@ -161,10 +252,15 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
             }
         )
 
+    if initial_snapshot_df is None:
+        raise ValueError("Unable to reconstruct an initial state snapshot from the log.")
+
+    enabled_trace = node_trace(initial_snapshot_df, enabled=True, name="Enabled nodes", color="#2a9d8f")
+    disabled_trace = node_trace(initial_snapshot_df, enabled=False, name="Disabled nodes", color="#e76f51")
     fig = go.Figure(data=[region_trace, sector_trace, enabled_trace, disabled_trace], frames=frames)
 
     fig.update_layout(
-        title=step_title(first_df),
+        title=step_title(min_step, initial_step_rows, cycle_length),
         title_x=0.5,
         margin=dict(l=0, r=0, t=120, b=30),
         legend=dict(orientation="h", yanchor="top", y=1.02, xanchor="left", x=0),
