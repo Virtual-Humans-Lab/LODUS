@@ -1,6 +1,6 @@
 #encoding: utf-8
 import sys
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 
 import argparse
 import environment

@@ -1,6 +1,6 @@
 #encoding: utf-8
 import sys
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 
 import argparse
 
@@ -19,7 +19,7 @@ from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from LegacyPlugins.LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
-from Loggers.population_count_logger import PopulationCountLogger
+from loggers.population_count_logger import PopulationCountLogger
 from pathlib import Path
 
 import time

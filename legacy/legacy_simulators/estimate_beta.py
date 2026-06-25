@@ -1,7 +1,7 @@
 #encoding: utf-8
 # python .\estimate_beta.py --i 1 --m 2 --f .\DataInput\Vaccine_Infection_Centro_3cpd.json --b none
 import sys
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 
 import argparse
 
@@ -20,7 +20,7 @@ from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from LegacyPlugins.LevyWalkLegacyPlugin import LevyWalkLegacyPlugin
 
-from Loggers.population_count_logger import PopulationCountLogger
+from loggers.population_count_logger import PopulationCountLogger
 from pathlib import Path
 import datetime
 import time
