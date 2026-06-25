@@ -4,7 +4,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from util.data_parse import generate_lodus_simulation
 from util.random_instance import FixedRandom
-from Plugins.Flood.lvl_flood import LevelFloodPlugin
+from plugins.flood.lvl_flood import LevelFloodPlugin
 
 
 def run_flood_test(n_cycles: int = 5):

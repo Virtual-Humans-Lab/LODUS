@@ -1,6 +1,6 @@
 #encoding: utf-8
 import sys
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 
 import argparse
 
@@ -10,12 +10,12 @@ from data_parse_util import *
 import population
 
 from AgentBasedPlugin import AgentBasedPlugin
-from InfectionPlugin import InfectionPlugin
+from time_actions.InfectionPlugin import InfectionPlugin
 from SocialIsolationPlugin import SocialIsolationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 
-from Loggers.population_count_logger import PopulationCountLogger
+from loggers.population_count_logger import PopulationCountLogger
 
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
@@ -43,14 +43,14 @@ Data Loading stuff
 '''
 # environment_path = 'DataInput\\ProofSixNeighborhoods.json'
 # environment_path = 'DataInput\\ProofSixNeighborhoods2.json'
-environment_path = 'DataInput\\ProofSixNeighborhoods3.json'
+environment_path = 'data_input\\ProofSixNeighborhoods3.json'
 # environment_path = 'DataInput\\dummy_input_4.json'
 
 if 'f' in args:
     environment_path = args['f']
 
 env_graph = generate_EnvironmentGraph(environment_path)
-social_table_path = 'DataInput/PortoAlegreOutput_semicolon_avg.csv'
+social_table_path = 'data_input/PortoAlegreOutput_semicolon_avg.csv'
 
 '''
 Load Plugins

@@ -1,7 +1,7 @@
 #encoding: utf-8
 import sys
 
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 
 import argparse
 import environment
@@ -16,10 +16,10 @@ from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
-from NewInfectionPlugin import NewInfectionPlugin
+from time_actions.new_infection_plugin import NewInfectionPlugin
 from ExamplePlugin import ExamplePlugin
 
-from Loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
+from loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
 from pathlib import Path
 
 import time
@@ -28,7 +28,7 @@ arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.csv)')
+arg_parser.add_argument('--v', metavar="V", type=str, default = "./data_input/VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.csv)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom()

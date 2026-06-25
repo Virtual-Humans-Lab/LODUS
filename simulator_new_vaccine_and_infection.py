@@ -1,12 +1,12 @@
 #encoding: utf-8
 import sys
 
-sys.path.append('./Plugins/')
-from Loggers.characteristic_change_logger import CharacteristicChangeLogger
-from Loggers.od_matrix_logger import ODMovementRecordKey, ODMatrixLogger
-from Loggers.vaccine_level_logger import VaccineLevelLogger
-from Loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
-from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+sys.path.append('./plugins/')
+from loggers.characteristic_change_logger import CharacteristicChangeLogger
+from loggers.od_matrix_logger import ODMovementRecordKey, ODMatrixLogger
+from loggers.vaccine_level_logger import VaccineLevelLogger
+from loggers.population_count_logger import PopulationCountRecordKey, PopulationCountLogger
+from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 
 import argparse
 import environment
@@ -21,7 +21,7 @@ from ReturnPopulationHomePlugin import ReturnPopulationHomePlugin
 from ReturnToPrevious import ReturnToPreviousPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 from VaccineLocalPlugin import VaccinePlugin
-from NewInfectionPlugin import NewInfectionPlugin
+from time_actions.new_infection_plugin import NewInfectionPlugin
 from NodeDensityPlugin import NodeDensityPlugin
 from CustomTimeActionPlugin import CustomTimeActionPlugin
 
@@ -33,10 +33,10 @@ arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation
 arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-arg_parser.add_argument('--c', metavar="C", type=str, default = ".\DataInput\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
-arg_parser.add_argument('--d', metavar="D", type=str, default = ".\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
-arg_parser.add_argument('--v', metavar="V", type=str, default = ".\DataInput\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
-arg_parser.add_argument('--i', metavar="I", type=str, default = ".\DataInput\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
+arg_parser.add_argument('--c', metavar="C", type=str, default = "./data_input/CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
+arg_parser.add_argument('--d', metavar="D", type=str, default = "./data_input/NodeDensities.json", help='Node Densities Configuration File (.json)')
+arg_parser.add_argument('--v', metavar="V", type=str, default = "./data_input/VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
+arg_parser.add_argument('--i', metavar="I", type=str, default = "./data_input/SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom()

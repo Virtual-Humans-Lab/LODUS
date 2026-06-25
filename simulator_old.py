@@ -11,7 +11,7 @@ python simulator.py --i 3 --s 2 --conf filename.json
 
 '''
 import sys
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 import winsound
 
 import argparse
@@ -32,12 +32,12 @@ import datetime
 from AgentBasedPlugin import AgentBasedPlugin
 from PlaySoccerPlugin import PlaySoccerPlugin
 #from VaccinePlugin import VaccinePlugin
-from InfectionPlugin import InfectionPlugin
+from time_actions.InfectionPlugin import InfectionPlugin
 from SocialIsolationPlugin import SocialIsolationPlugin
 from GatherPopulationPlugin import GatherPopulationPlugin
 from ReverseSocialIsolationPlugin import ReverseSocialIsolationPlugin
 
-from Loggers.population_count_logger import PopulationCountLogger
+from loggers.population_count_logger import PopulationCountLogger
 import new_random
 import random
 from config_module import config

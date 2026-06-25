@@ -1,24 +1,23 @@
 #encoding: utf-8
 import sys
 sys.path.append('./plugins/')
-sys.path.append('./Plugins/')
 import argparse
 import time
 from pathlib import Path
-from Loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from Loggers.characteristic_change_logger import CharacteristicChangeLogger
-from Loggers.movement_displacement_logger import MovementDisplacementLogger
-from Loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLogger
-from Loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from Loggers.population_count_logger import (PopulationCountLogger,
+from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
+from loggers.characteristic_change_logger import CharacteristicChangeLogger
+from loggers.movement_displacement_logger import MovementDisplacementLogger
+from loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLogger
+from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
+from loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
-from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
-from Loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
+from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
-from Loggers.infection_sum_logger import InfectionSumLogger
-from Loggers.vaccine_level_logger import VaccineLevelLogger
-from Loggers.infection_sum_logger import InfectionSumLogger
-from Loggers.vaccine_level_logger import VaccineLevelLogger
+from loggers.infection_sum_logger import InfectionSumLogger
+from loggers.vaccine_level_logger import VaccineLevelLogger
+from loggers.infection_sum_logger import InfectionSumLogger
+from loggers.vaccine_level_logger import VaccineLevelLogger
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
@@ -48,11 +47,11 @@ arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simula
 arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Configuration File.')
 arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
 arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-arg_parser.add_argument('--c', metavar="C", type=str, default = ".\\DataInput\\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
-arg_parser.add_argument('--d', metavar="D", type=str, default = ".\\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
-arg_parser.add_argument('lf', metavar="LF", type=str, default = ".\\DataInput\\FloodLevels.json", help='Level Flood Plugin Configuration File (.json)')
+arg_parser.add_argument('--c', metavar="C", type=str, default = "./data_input/CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
+arg_parser.add_argument('--d', metavar="D", type=str, default = "./data_input/NodeDensities.json", help='Node Densities Configuration File (.json)')
+arg_parser.add_argument('lf', metavar="LF", type=str, default = "./data_input/FloodLevels.json", help='Level Flood Plugin Configuration File (.json)')
 #arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
-arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
+arg_parser.add_argument('--i', metavar="I", type=str, default = "./data_input/SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 args = vars(arg_parser.parse_args())
 
 FixedRandom(random_seed=0, numpy_seed=0)

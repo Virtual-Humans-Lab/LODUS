@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import pytest
 
 from core.environment import EnvironmentGraph, EnvNode
-from Plugins.data.node_dependency_data_plugin import NodeDependencyDataPlugin
+from plugins.data.node_dependency_data_plugin import NodeDependencyDataPlugin
 
 
 @pytest.fixture

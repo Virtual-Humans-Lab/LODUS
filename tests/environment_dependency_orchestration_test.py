@@ -2,7 +2,7 @@ import json
 from types import SimpleNamespace
 
 from core.environment import EnvironmentGraph, EnvNode
-from Plugins.data.node_dependency_data_plugin import NodeDependencyDataPlugin
+from plugins.data.node_dependency_data_plugin import NodeDependencyDataPlugin
 
 
 def make_graph_with_nodes(tmp_path):

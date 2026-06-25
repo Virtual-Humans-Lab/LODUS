@@ -1,7 +1,7 @@
 #encoding: utf-8
 #python .\simplest_simulator.py --f .\DataInput\NT_13_Routines.json
 import sys
-sys.path.append('./Plugins/')
+sys.path.append('./plugins/')
 
 import argparse
 import environment
