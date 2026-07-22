@@ -23,8 +23,13 @@ def generate_lodus_simulation(input_path: str):
         simulation.set_total_cycles(sim_params.get("total_cycles", simulation.time_status.total_cycles))
         simulation.set_cycle_length(sim_params.get("cycle_length", simulation.time_status.cycle_length))
 
-    env_json = load_json(data_path / input_files["environment_file"])
-    pop_json = load_json(data_path / input_files["population_file"])
+    if "environment_file" not in input_files:
+        raise ValueError("Input JSON must contain 'environment_file' in 'envgraph_inputs_files'")
+
+    env_json = load_json_inputs(
+        data_path, input_files["environment_file"], concatenate_keys={"regions"}
+    )
+    pop_json = load_json_inputs(data_path, input_files["population_file"])
     if "routine_file" in input_files:
         rot_json = load_json(data_path / input_files["routine_file"])
     else:
@@ -71,7 +76,47 @@ def load_json(file_path):
         return json.load(file)
 
 
-def load_input_json(data_path: Path, filename: str):
+def load_json_inputs(data_path: Path, filenames, concatenate_keys=None):
+    """Load and merge one or more JSON input files.
+
+    ``filenames`` may be a single path string or a list of path strings. Object
+    values are merged recursively in the supplied order, so later files
+    override earlier scalar and list values. Lists whose keys are included in
+    ``concatenate_keys`` are instead appended.
+    """
+    if isinstance(filenames, (str, Path)):
+        filenames = [filenames]
+    elif not isinstance(filenames, list) or not all(
+        isinstance(filename, (str, Path)) for filename in filenames
+    ):
+        raise TypeError("JSON input must be a path string or a list of path strings")
+
+    if not filenames:
+        raise ValueError("JSON input file list cannot be empty")
+
+    merged = {}
+    for filename in filenames:
+        loaded = load_input_json(data_path, filename)
+        if not isinstance(loaded, dict):
+            raise ValueError(f"JSON input must contain an object: {filename}")
+        _merge_json_objects(merged, loaded, concatenate_keys or set())
+    return merged
+
+
+def _merge_json_objects(target, source, concatenate_keys):
+    """Recursively merge a loaded JSON object into another object."""
+    for key, value in source.items():
+        if key in concatenate_keys and key in target:
+            if not isinstance(target[key], list) or not isinstance(value, list):
+                raise ValueError(f"JSON field '{key}' must be a list")
+            target[key].extend(value)
+        elif key in target and isinstance(target[key], dict) and isinstance(value, dict):
+            _merge_json_objects(target[key], value, concatenate_keys)
+        else:
+            target[key] = value
+
+
+def load_input_json(data_path: Path, filename):
     """Load a JSON input file, with fallback to data_gwide_experiments."""
     file_path = data_path / filename
     if not file_path.exists():
