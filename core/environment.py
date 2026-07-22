@@ -358,6 +358,10 @@ class EnvRegion():
         if unique_name not in self.node_dict:
             raise ValueError(f"Node {unique_name} not found in region {self.name}")
         return self.node_dict[unique_name]
+    
+    def get_nodes_by_type(self, node_type: str) -> list[EnvNode]:
+        """Gets a list of EnvNodes by type."""
+        return [node for node in self.node_list if node.node_type == node_type]
 
     def get_population_size(self, population_template: Optional[PopulationTemplate] = None) -> int:
         """Gets the total population size contained in this EnvRegion."""
@@ -507,6 +511,10 @@ class EnvironmentGraph():
         if region_name not in self.region_dict:
             raise ValueError(f"Region {region_name} not found in region_dict")
         return self.region_dict[region_name].get_first_node_with_name(node_name)
+    
+    def get_nodes_by_type(self, node_type: str) -> list[EnvNode]:
+        """Gets a list of EnvNodes by type."""
+        return [node for node in self.node_list if node.node_type == node_type]
 
     def change_node_enabled_state(self, node_complete_name: str, enabled: bool, cascade_reenable: bool = False) -> dict:
         """Change enabled state for a single node given by its complete name (`RegionName//UniqueName`).
