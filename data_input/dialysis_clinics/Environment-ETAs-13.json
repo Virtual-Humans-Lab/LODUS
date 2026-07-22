@@ -11,12 +11,13 @@
           "poi_type": "water_source",
           "unique_name": "water_source_0",
           "lng_lat": [
-            -51.2256728,
-            -30.0617176
+            -51.22310500121751,
+            -30.061887342661546
           ],
           "attributes": {
             "water_level": 1000,
-            "enumeration_area": 4314902004
+            "enumeration_area": 4314902004,
+            "eta_name": "ETA Menino Deus"
           }
         }
       ]
@@ -37,7 +38,8 @@
           ],
           "attributes": {
             "water_level": 1000,
-            "enumeration_area": 4314902041
+            "enumeration_area": 4314902041,
+            "eta_name": "ETA Moinhos de Vento"
           }
         }
       ]

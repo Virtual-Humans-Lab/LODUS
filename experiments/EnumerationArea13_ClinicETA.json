@@ -1,7 +1,7 @@
 {
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": ["enumeration_area/Environment-13-EnumArea.json", "enumeration_area/Environment-13-ETAs.json"],
+        "environment_file": ["enumeration_area/Environment-13-EnumArea.json", "dialysis_clinics/Environment-ETAs-13.json", "dialysis_clinics/Environment-Clinics-13.json"],
         "population_file": "enumeration_area/Population-13-EnumArea.json"
     },
      "simulation_parameters": {
@@ -20,7 +20,25 @@
         "distance_bucket_size": 500
     },
     "send_population_back_plugin": {},
-    "gather_population_plugin": {}
+    "gather_population_plugin": {},
+    "node_dependency_data_plugin" : {
+        "dependency_files": []
+    },
+    "custom_dependency_data_plugin" : {
+        "dependency_rules": [
+            {
+                "rule_name": "dialysis_clinic_need_water_source",
+                "target_node_type": "dialysis_clinic",
+                "target_node_attribute": "water_source",
+                "dependency_node_type": "water_source",
+                "dependency_node_attribute": "eta_name",
+                "dependency_rule": "min_of",
+                "min_of": 1    
+
+            }
+
+        ]
+    }
     
    
 }
