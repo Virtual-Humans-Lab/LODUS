@@ -1,7 +1,7 @@
 {
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": "enumeration_area/Environment-13-EnumArea_WaterRandom.json",
+        "environment_file": ["enumeration_area/Environment-13-EnumArea.json", "enumeration_area/Environment-13-ETAs.json"],
         "population_file": "enumeration_area/Population-13-EnumArea.json"
     },
      "simulation_parameters": {
@@ -20,13 +20,7 @@
         "distance_bucket_size": 500
     },
     "send_population_back_plugin": {},
-    "gather_population_plugin": {}, 
-    "node_dependency_data_plugin" : {
-        "__comment1__": "This plugin gathers data on node dependencies, which can be used to create a graph of dependencies between nodes.",
-        "dependency_files": ["enumeration_area/dependency_rules/Env13-Dependency.json"]
-    },
-    "water_level_data_plugin": {
-        "water_level_files": ["water_level/flood_time_step.csv"]
-    }
+    "gather_population_plugin": {}
+    
    
 }

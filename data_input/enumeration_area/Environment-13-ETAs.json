@@ -1,0 +1,46 @@
+{
+  "regions": [
+    {
+      "name": "Menino Deus",
+      "lng_lat": [
+        -51.22677309487171,
+        -30.044416895540678
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "water_source",
+          "unique_name": "water_source_0",
+          "lng_lat": [
+            -51.2256728,
+            -30.0617176
+          ],
+          "attributes": {
+            "water_level": 1000,
+            "enumeration_area": 4314902004
+          }
+        }
+      ]
+    },
+    {
+      "name": "Moinhos de Vento",
+      "lng_lat": [
+        -51.20392520132691,
+        -30.01890370749343
+      ],
+      "points_of_interest": [
+        {
+          "poi_type": "water_source",
+          "unique_name": "water_source_0",
+          "lng_lat": [
+            -51.2081317,
+            -30.0276648
+          ],
+          "attributes": {
+            "water_level": 1000,
+            "enumeration_area": 4314902041
+          }
+        }
+      ]
+    }
+  ]
+}
