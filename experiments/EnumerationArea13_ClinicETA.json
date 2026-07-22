@@ -33,7 +33,7 @@
                 "dependency_node_type": "water_source",
                 "dependency_node_attribute": "eta_name",
                 "dependency_rule": "min_of",
-                "min_of": 1    
+                "minimum_enabled": 1    
 
             }
 

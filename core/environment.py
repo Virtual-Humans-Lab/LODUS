@@ -554,7 +554,7 @@ class EnvironmentGraph():
             # Enable target node
             node.enable()
             summary["enabled"].append(node.get_complete_name())
-            current_enabled.add(unique_name)
+            current_enabled.add(node.get_complete_name())
 
             # Optionally cascade re-enable: try to re-enable dependents that are now satisfiable
             if dep_action and cascade_reenable:

@@ -25,6 +25,7 @@ class NodeDependencyRule:
 class NodeDependencyDataPlugin(ActionPlugin):
     def __init__(self, graph: EnvironmentGraph | None = None):
         super().__init__()
+        self.__header = "Node Dependency Data Plugin:"
         self.graph = graph
 
     def load_plugin(self, simulation: Any):
@@ -34,27 +35,44 @@ class NodeDependencyDataPlugin(ActionPlugin):
         self._load_dependency_files()
         parsed = self._parse_node_dependency_rules(self.config)
 
-        # Normalize all node identifiers to complete names (Region//UniqueName).
-        # Accepts either complete names in the JSON or unique names; unique names
-        # are resolved against the loaded environment graph when unambiguous.
-        self.node_dependency_rules: dict[str, NodeDependencyRule] = {}
-        for node_name, rule in parsed.items():
+        self.node_dependency_rules = self._normalize_dependency_rules(parsed)
+
+        self.node_to_dependents: dict[str, set[str]] = self._build_reverse_dependency_map(self.node_dependency_rules)
+        
+        print(f"{self.__header} Loaded node dependency rules for {len(self.node_dependency_rules)} nodes.")
+
+        # Register a single dispatcher callable on the graph for dependency queries.
+        # Usage: graph.data_action_map['node_dependency'](command, *args, **kwargs)
+        self.graph.data_action_map["node_dependency"] = self._node_dependency_action
+
+    def merge_dependency_rules(self, new_rules: dict[str, NodeDependencyRule]) -> None:
+        """Add dependency rules without discarding existing ones.
+
+        Rules are normalized to complete node names before merging, then any
+        rules already stored for a node are combined additively.
+        """
+        normalized_rules = self._normalize_dependency_rules(new_rules)
+
+        for node_name, rule in normalized_rules.items():
+            existing_rule = self.node_dependency_rules.get(node_name, NodeDependencyRule())
+            self.node_dependency_rules[node_name] = self._combine_dependency_rules([existing_rule, rule])
+
+        self.node_to_dependents = self._build_reverse_dependency_map(self.node_dependency_rules)
+
+    def _normalize_dependency_rules(self, rules: dict[str, NodeDependencyRule]) -> dict[str, NodeDependencyRule]:
+        """Resolve rule targets and prerequisites to complete node names."""
+        normalized_rules: dict[str, NodeDependencyRule] = {}
+
+        for node_name, rule in rules.items():
             resolved_node = self._resolve_to_complete_name(node_name)
-            # resolve prerequisites inside rule
             all_of = tuple(self._resolve_to_complete_name(n) for n in rule.all_of)
             min_of = []
             for mof in rule.min_of:
                 nodes = tuple(self._resolve_to_complete_name(n) for n in mof.nodes)
                 min_of.append(MinOfRule(minimum_enabled=mof.minimum_enabled, nodes=nodes))
-            self.node_dependency_rules[resolved_node] = NodeDependencyRule(all_of=all_of, min_of=tuple(min_of))
+            normalized_rules[resolved_node] = NodeDependencyRule(all_of=all_of, min_of=tuple(min_of))
 
-        self.node_to_dependents: dict[str, set[str]] = self._build_reverse_dependency_map(self.node_dependency_rules)
-        
-        print(f"Loaded node dependency rules for {len(self.node_dependency_rules)} nodes.")
-
-        # Register a single dispatcher callable on the graph for dependency queries.
-        # Usage: graph.data_action_map['node_dependency'](command, *args, **kwargs)
-        self.graph.data_action_map["node_dependency"] = self._node_dependency_action
+        return normalized_rules
 
     def _load_dependency_files(self):
         # Allow specifying one or more dependency files via the `dependency_files` key.
