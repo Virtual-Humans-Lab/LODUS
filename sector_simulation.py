@@ -35,6 +35,7 @@ from time_actions.send_population_back_plugin import SendPopulationBackPlugin
 from time_actions.vaccine_plugin import VaccinePlugin
 from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
 from data.global_infection_data_plugin import GlobalInfectionDataPlugin
+from data.custom_dependency_data_plugin import CustomDependencyDataPlugin
 
 import core.environment
 from core.population import PopulationTemplate
@@ -113,6 +114,11 @@ water_level_data = None
 if 'water_level_data_plugin' in lodus_simulation.experiment_config:
     water_level_data = WaterLevelDataPlugin(env_graph)
     lodus_simulation.load_plugin(water_level_data)
+
+custom_dependency_data = None
+if 'custom_dependency_data_plugin' in lodus_simulation.experiment_config:
+    custom_dependency_data = CustomDependencyDataPlugin()
+    lodus_simulation.load_plugin(custom_dependency_data)
 '''
 TimeAction Plugins
 '''
@@ -344,7 +350,12 @@ while not lodus_simulation.time_status.is_final_step:
     i = lodus_simulation.time_status.simulation_step
     print(i, end='\r')
 
+    print([node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("water_source")])
+    print([node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("dialysis_clinic")])
+    exit()
+
     if i == 1:
+        continue
         print("disabling a water_source EnvNove")
         n = lodus_simulation.env_graph.get_node_by_unique_name("Azenha", "Azenha//water_source_0")
         print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
@@ -375,6 +386,7 @@ while not lodus_simulation.time_status.is_final_step:
 
         
     if i == 2:
+        continue
         print("enabling a water_source EnvNove using env_graph.change_node_enabled_state()")
         print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
         env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True)
