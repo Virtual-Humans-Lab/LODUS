@@ -15,7 +15,7 @@
             -30.0276648
           ],
           "attributes": {
-            "water_level": 1000,
+            "water_level": 10.0,
             "enumeration_area": 4314902041,
             "eta_name": "ETA Moinhos de Vento"
           }
@@ -37,7 +37,7 @@
             -30.061887342661546
           ],
           "attributes": {
-            "water_level": 1000,
+            "water_level": 9.2,
             "enumeration_area": 4314902004,
             "eta_name": "ETA Menino Deus"
           }
@@ -59,7 +59,7 @@
             -30.013356007368614
           ],
           "attributes": {
-            "water_level": 1000,
+            "water_level": 10.0,
             "enumeration_area": 4314902049,
             "eta_name": "ETA São João"
           }
@@ -81,7 +81,7 @@
             -30.2098204
           ],
           "attributes": {
-            "water_level": 1000,
+            "water_level": 10.0,
             "enumeration_area": 431490205,
             "eta_name": "ETA Belém Novo"
           }
@@ -103,8 +103,8 @@
             -30.01379912313908
           ],
           "attributes": {
-            "water_level": 1000,
-            "enumeration_area": 0,
+            "water_level": 3.0,
+            "enumeration_area": 4314902033,
             "eta_name": "ETA Ilhas"
           }
         }
@@ -125,8 +125,8 @@
             -30.0993647920742
           ],
           "attributes": {
-            "water_level": 1000,
-            "enumeration_area": 0,
+            "water_level": 10.0,
+            "enumeration_area": 4314902025,
             "eta_name": "ETA Tristeza"
           }
         }

@@ -15,7 +15,7 @@
             -30.061887342661546
           ],
           "attributes": {
-            "water_level": 1000,
+            "water_level": 9.2,
             "enumeration_area": 4314902004,
             "eta_name": "ETA Menino Deus"
           }
@@ -37,7 +37,7 @@
             -30.0276648
           ],
           "attributes": {
-            "water_level": 1000,
+            "water_level": 10.0,
             "enumeration_area": 4314902041,
             "eta_name": "ETA Moinhos de Vento"
           }
