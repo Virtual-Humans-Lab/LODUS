@@ -1,7 +1,7 @@
 {
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": ["enumeration_area/Environment-13-EnumArea.json", "dialysis_clinics/Environment-ETAs-13.json", "dialysis_clinics/Environment-Clinics-13.json"],
+        "environment_file": ["dialysis_clinics/Environment-ETAs-13.json", "dialysis_clinics/Environment-Clinics-13.json"],
         "population_file": "enumeration_area/Population-13-EnumArea.json"
     },
      "simulation_parameters": {
@@ -38,6 +38,11 @@
             }
 
         ]
+    },
+    "change_enabled_state_plugin": {},
+    "off_cycle_routine_plugin": {
+        "start_of_step_routine_files": ["dialysis_clinics/OffCycleRoutine-DisableETAs.json"],
+        "end_of_step_routine_files": []
     }
     
    

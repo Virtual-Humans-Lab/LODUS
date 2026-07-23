@@ -33,6 +33,8 @@ from time_actions.reverse_social_isolation_plugin import \
     ReverseSocialIsolationPlugin
 from time_actions.send_population_back_plugin import SendPopulationBackPlugin
 from time_actions.vaccine_plugin import VaccinePlugin
+
+from time_actions.change_enabled_state_plugin import ChangeEnabledStatePlugin
 from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
 from data.global_infection_data_plugin import GlobalInfectionDataPlugin
 from data.custom_dependency_data_plugin import CustomDependencyDataPlugin
@@ -160,14 +162,20 @@ infection = None
 if 'infection_plugin' in lodus_simulation.experiment_config:
     infection = InfectionPlugin()
     lodus_simulation.load_plugin(infection)
+
+change_enabled_state = None
+if 'change_enabled_state_plugin' in lodus_simulation.experiment_config:
+    change_enabled_state = ChangeEnabledStatePlugin()
+    lodus_simulation.load_plugin(change_enabled_state)
     
 
 '''
 Routine Plugins
 '''
+off_cycle_routine = None
 if 'off_cycle_routine_plugin' in lodus_simulation.experiment_config:
-    off_cycle_rourtine_plugin = OffCycleRoutinePlugin(env_graph)
-    env_graph.LoadRoutinePlugin(off_cycle_rourtine_plugin)
+    off_cycle_routine = OffCycleRoutinePlugin()
+    lodus_simulation.load_plugin(off_cycle_routine)
 
 '''
 Logging
@@ -331,6 +339,10 @@ lodus_simulation.setup_logging()
 
 start_time = time.perf_counter()
 #for i in range(simulation_steps):
+
+print("Water sources: ", [node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("water_source")])
+print("Dialysis clinics: ", [node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("dialysis_clinic")])
+
 while not lodus_simulation.time_status.is_final_step:
     
 
@@ -348,68 +360,13 @@ while not lodus_simulation.time_status.is_final_step:
     lodus_simulation.update_time_step()
 
     i = lodus_simulation.time_status.simulation_step
-    print(i, end='\r')
+    # print(i, end='\r')
 
-    print([node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("water_source")])
-    print([node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("dialysis_clinic")])
-    exit()
+    n = lodus_simulation.env_graph.get_nodes_by_type("water_source")[1]
 
-    if i == 1:
-        continue
-        print("disabling a water_source EnvNove")
-        n = lodus_simulation.env_graph.get_node_by_unique_name("Azenha", "Azenha//water_source_0")
-        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
-        n.set_enabled(False)
-        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
-        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
-        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
-        print([node.get_complete_name() for node in disabled_nodes])
-        print("-----")
-
-        print("enabling a water_source EnvNove")
-        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
-        n.set_enabled(True)
-        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
-        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
-        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
-        print([node.get_complete_name() for node in disabled_nodes])
-        print("-----")
-
-        print("disabling a water_source EnvNove using env_graph.change_node_enabled_state()")
-        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
-        env_graph.change_node_enabled_state(n.get_complete_name(), enabled=False)
-        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
-        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
-        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
-        print([node.get_complete_name() for node in disabled_nodes])
-        print("-----")
-
-        
-    if i == 2:
-        continue
-        print("enabling a water_source EnvNove using env_graph.change_node_enabled_state()")
-        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
-        env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True)
-        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
-        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
-        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
-        print([node.get_complete_name() for node in disabled_nodes])
-        print("-----")
-
-        print("enabling a water_source EnvNove using env_graph.change_node_enabled_state() with cascade_reenable=True")
-        n = lodus_simulation.env_graph.get_node_by_unique_name("Azenha", "Azenha//water_source_0")
-        print(f"Node {n.get_complete_name()} enabled status before: {n.enabled}")
-        env_graph.change_node_enabled_state(n.get_complete_name(), enabled=True, cascade_reenable=True)
-        print(f"Node {n.get_complete_name()} enabled status after: {n.enabled}")
-        disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
-        print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
-        print([node.get_complete_name() for node in disabled_nodes])
-        print("-----")
-    #if i == 3:
-    #    exit()
     # print number of disabled nodes at the end of each simulation step
     disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
-    print(f"\nStep {i}: {len(disabled_nodes)} disabled nodes")
+    print(f"\nEnd of Step {i}: {len(disabled_nodes)} disabled nodes")
 
     # Log current simulation step
     lodus_simulation.log_simulation_step()

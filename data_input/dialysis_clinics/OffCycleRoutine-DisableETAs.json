@@ -1,0 +1,59 @@
+{
+  "global_routine": [{
+    "cycle_step": [
+      5
+    ],
+    "action": {
+      "name": "disable_eta_moinhos_de_vento",
+      "type": "change_node_enabled_state",
+      "values": {
+        "node_complete_name": "Moinhos de Vento//water_source_0",
+        "enabled": false
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      7
+    ],
+    "action": {
+      "name": "disable_eta_menino_deus",
+      "type": "change_node_enabled_state",
+      "values": {
+        "node_complete_name": "Menino Deus//water_source_0",
+        "enabled": false
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      9
+    ],
+    "action": {
+      "name": "enable_eta_moinhos_de_vento",
+      "type": "change_node_enabled_state",
+      "values": {
+        "node_complete_name": "Moinhos de Vento//water_source_0",
+        "enabled": true,
+        "cascade_reenable": true
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      11
+    ],
+    "action": {
+      "name": "enable_eta_menino_deus",
+      "type": "change_node_enabled_state",
+      "values": {
+        "node_complete_name": "Menino Deus//water_source_0",
+        "enabled": true,
+        "cascade_reenable": true
+      }
+    }
+  }
+
+],
+  "routines": {}
+}

@@ -234,6 +234,7 @@ class PluginController:
     def load_routine_plugin(self, plugin:RoutinePlugin):
         """Loads a RoutinePlugin into the PluginController."""
         self.loaded_routine_plugins.append(plugin)
+        plugin.load_plugin(self.simulator)
 
     def has_plugin(self, plugin_cls:type) -> bool:
         """Checks if a Plugin of a given class is loaded."""

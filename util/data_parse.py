@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from warnings import deprecated
 from core.environment import EnvironmentGraph, EnvRegionTemplate, EnvNodeTemplate
 from core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
 from core.routine import Action, GlobalAction
@@ -66,7 +67,7 @@ def generate_lodus_simulation(input_path: str):
     env_graph.set_spawning_nodes()
     env_graph.set_original_populations()
 
-    add_global_actions(simulation, rot_json)
+    add_initial_global_actions(simulation, rot_json)
 
     return simulation
 
@@ -109,11 +110,49 @@ def _merge_json_objects(target, source, concatenate_keys):
         if key in concatenate_keys and key in target:
             if not isinstance(target[key], list) or not isinstance(value, list):
                 raise ValueError(f"JSON field '{key}' must be a list")
-            target[key].extend(value)
+            if key == "regions":
+                _merge_regions(target[key], value)
+            else:
+                target[key].extend(value)
         elif key in target and isinstance(target[key], dict) and isinstance(value, dict):
             _merge_json_objects(target[key], value, concatenate_keys)
         else:
             target[key] = value
+
+
+def _merge_regions(target_regions, source_regions):
+    """Merge regions by name, combining POIs from repeated regions."""
+    regions_by_name = {}
+    for region in target_regions:
+        if not isinstance(region, dict) or "name" not in region:
+            raise ValueError("Each region must be an object with a 'name' field")
+        regions_by_name[region["name"]] = region
+
+    for region in source_regions:
+        if not isinstance(region, dict) or "name" not in region:
+            raise ValueError("Each region must be an object with a 'name' field")
+
+        existing = regions_by_name.get(region["name"])
+        if existing is None:
+            target_regions.append(region)
+            regions_by_name[region["name"]] = region
+            continue
+
+        for key, value in region.items():
+            if key == "points_of_interest" and key in existing:
+                if not isinstance(existing[key], list) or not isinstance(value, list):
+                    raise ValueError(
+                        "Region field 'points_of_interest' must be a list"
+                    )
+                existing[key].extend(value)
+            elif (
+                key in existing
+                and isinstance(existing[key], dict)
+                and isinstance(value, dict)
+            ):
+                _merge_json_objects(existing[key], value, set())
+            else:
+                existing[key] = value
 
 
 def load_input_json(data_path: Path, filename):
@@ -159,7 +198,7 @@ def create_node_template(node_description: dict,
 
     poi_unique_name = f"{region_name}//{node_unique_name}"
     add_initial_populations(node_template, poi_unique_name, population_json)
-    add_routines(node_template, poi_unique_name, routines_json)
+    add_initial_local_routine(node_template, poi_unique_name, routines_json)
 
     return node_template
 
@@ -173,9 +212,11 @@ def add_initial_populations(node_template: EnvNodeTemplate, poi_unique_name: str
             )
             node_template.add_blob_template(blob_template)
 
-def add_routines(node_template: EnvNodeTemplate, poi_unique_name: str, routine_json):
-    if routine_json is not None and poi_unique_name in routine_json["routines"]:
-        for rt in routine_json["routines"][poi_unique_name]:
+
+def parse_envnode_routines(poi_complete_name: str, routine_json) -> list[tuple[int, Action]]:
+    routines = []
+    if routine_json is not None and poi_complete_name in routine_json["routines"]:
+        for rt in routine_json["routines"][poi_complete_name]:
             pt = PopulationTemplate(
                 sampled_characteristics=rt["action"]['population_template']["sampled_characteristics"],
                 traceable_characteristics=rt["action"]['population_template']["traceable_characteristics"]
@@ -185,28 +226,69 @@ def add_routines(node_template: EnvNodeTemplate, poi_unique_name: str, routine_j
                 values=rt["action"]['values'],
                 pop_template=pt
             )
-            node_template.add_action_to_routine_template(rt["cycle_step"], action)
+            routines.append((rt["cycle_step"], action))
+    return routines
 
-def add_global_actions(simulation: LodusSimulation, routines_json):
+
+def parse_local_routines(routine_json) -> list[tuple[int, str, Action]]:
+    routines:list[tuple[int, str, Action]] = []
+    if routine_json is not None and "routines" in routine_json:
+        for poi_complete_name in routine_json["routines"]:
+            for rt in routine_json["routines"][poi_complete_name]:
+                if "population_template" not in rt["action"]:
+                    pt = PopulationTemplate(sampled_characteristics={}, traceable_characteristics={})
+                else:
+                    pt = PopulationTemplate(
+                        sampled_characteristics=rt["action"]['population_template'].get("sampled_characteristics", {}),
+                        traceable_characteristics=rt["action"]['population_template'].get("traceable_characteristics", {})
+                    )
+                action = Action(
+                    action_type=rt["action"]['type'],
+                    values=rt["action"].get('values', {}),
+                    pop_template=pt
+                )
+                routines.append((rt["cycle_step"], poi_complete_name, action))
+    return routines
+
+def add_initial_local_routine(node_template: EnvNodeTemplate, poi_unique_name: str, routine_json):
+    local_routines = parse_envnode_routines(poi_unique_name, routine_json)
+    for lr in local_routines:
+        node_template.add_action_to_routine_template(lr[0], lr[1])
+
+def parse_global_routines(routines_json) -> list[GlobalAction]:
+    global_actions:list[GlobalAction] = []
+
     if routines_json is not None and 'global_routine' in routines_json:
         for rga in routines_json['global_routine']:
             action_type = rga['action']['type']
-            pt = PopulationTemplate(
-                sampled_characteristics=rga["action"]['population_template']["sampled_characteristics"],
-                traceable_characteristics=rga["action"]['population_template']["traceable_characteristics"]
-            )
-            values = rga['action']['values']
+            if 'population_template' not in rga['action']:
+                pt = PopulationTemplate(sampled_characteristics={}, traceable_characteristics={})
+            else:
+                pt = PopulationTemplate(
+                    sampled_characteristics=rga["action"]['population_template'].get("sampled_characteristics", {}),
+                    traceable_characteristics=rga["action"]['population_template'].get("traceable_characteristics", {})
+                )
+            values = rga['action'].get('values', {})
             cycle_step = rga['cycle_step'] if isinstance(rga['cycle_step'], list) else int(rga['cycle_step'])
             
-            simulation.add_global_action(GlobalAction(
+            global_actions.append(GlobalAction(
                 action_type=action_type,
                 population_template=pt,
                 values=values,
                 cycle_step_definition=cycle_step
             ))
+    return global_actions
 
+def add_initial_global_actions(simulation: LodusSimulation, routines_json):
+    """Load global actions from the routines JSON and add them to the simulation"""
+    global_actions = parse_global_routines(routines_json)
 
+    for ga in global_actions:
+        simulation.add_global_action(ga)
+
+@deprecated("Use parse_global_routines instead")
 def parse_routines(data:dict):
+    return
     _global_actions = []
     _actions = []
     # Global Routines
