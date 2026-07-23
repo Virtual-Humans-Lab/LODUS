@@ -506,6 +506,11 @@ class EnvironmentGraph():
         if region_name not in self.region_dict:
             raise ValueError(f"Region {region_name} not found in region_dict")
         return self.region_dict[region_name].get_node_by_unique_name(node_unique_name)
+
+    def get_node_by_complete_name(self, node_complete_name: str):
+        """Gets an EnvNode by its complete name (RegionName//UniqueName)."""
+        region_name, node_unique_name = node_complete_name.split("//", 1)
+        return self.region_dict[region_name].node_dict[node_complete_name]
     
     def get_first_node_with_name(self, region_name: str, node_name: str):
         if region_name not in self.region_dict:
@@ -569,18 +574,37 @@ class EnvironmentGraph():
 
         else:
             # Disable target node
+            current_enabled = {n.get_complete_name() for n in self.node_list if n.is_enabled()}
             if node.is_enabled():
                 node.disable()
                 summary["disabled"].append(node.get_complete_name())
+                current_enabled.discard(node.get_complete_name())
 
-            # If plugin exists, disable all transitive dependents
+            # If plugin exists, only disable dependents that are no longer valid.
             if dep_action:
                 dependents = dep_action("get_transitive_dependent_nodes", node.get_complete_name())
-                for dep_name in dependents:
-                    for n in self.node_list:
-                        if n.get_complete_name() == dep_name and n.is_enabled():
-                            n.disable()
-                            summary["disabled"].append(n.get_complete_name())
+                remaining_dependents = set(dependents)
+
+                while remaining_dependents:
+                    changed = False
+
+                    for dep_name in list(remaining_dependents):
+                        dep_node = next((n for n in self.node_list if n.get_complete_name() == dep_name), None)
+                        if dep_node is None or not dep_node.is_enabled():
+                            remaining_dependents.discard(dep_name)
+                            continue
+
+                        if dep_action("can_node_be_enabled", dep_name, current_enabled):
+                            continue
+
+                        dep_node.disable()
+                        summary["disabled"].append(dep_node.get_complete_name())
+                        current_enabled.discard(dep_name)
+                        remaining_dependents.discard(dep_name)
+                        changed = True
+
+                    if not changed:
+                        break
 
         return summary
 

@@ -23,12 +23,11 @@ class NodeDependencyRule:
 
 
 class NodeDependencyDataPlugin(ActionPlugin):
-    def __init__(self, graph: EnvironmentGraph | None = None):
+    def __init__(self):
         super().__init__()
         self.__header = "Node Dependency Data Plugin:"
-        self.graph = graph
 
-    def load_plugin(self, simulation: Any):
+    def load_plugin(self, simulation: LodusSimulation):
         self.graph = simulation.env_graph
         self.config: dict[str, Any] = simulation.experiment_config.get("node_dependency_data_plugin", {})
 

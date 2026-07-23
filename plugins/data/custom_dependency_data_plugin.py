@@ -108,9 +108,8 @@ class CustomDependencyDataPlugin(ActionPlugin):
         return NodeDependencyRule(all_of=all_of, min_of=min_of)
 
     def unload_plugin(self):
-        return
+        super().unload_plugin()
 
 
     def update_time_step(self, cycle_step: int, simulation_step: int):
-        # This plugin does not update anything during the simulation.
-        return
+        super().update_time_step(cycle_step, simulation_step)
