@@ -1,7 +1,7 @@
 {
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": ["dialysis_clinics/Environment-ETAs-13.json", "dialysis_clinics/Environment-Clinics-13.json"],
+        "environment_file": ["enumeration_area/Environment-13-EnumArea.json", "dialysis_clinics/Environment-ETAs-13.json", "dialysis_clinics/Environment-Clinics-13.json"],
         "population_file": "enumeration_area/Population-13-EnumArea.json"
     },
      "simulation_parameters": {
@@ -43,6 +43,11 @@
     "off_cycle_routine_plugin": {
         "start_of_step_routine_files": ["dialysis_clinics/OffCycleRoutine-DisableETAs.json"],
         "end_of_step_routine_files": []
+    },
+    "dialysis_plugin": {
+        "patient_count": 120,
+        "treatment_frequency_days": 3,
+        "clinic_data_file": "dialysis_clinics/opening_hours_example.csv"
     }
     
    

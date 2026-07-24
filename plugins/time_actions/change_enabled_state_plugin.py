@@ -23,7 +23,12 @@ class ChangeEnabledStatePlugin(ActionPlugin):
     def set_node_enabled(self, pop_template ,values, cycle_step, simulation_step):
         """ Set node enabled state. Base Operation. """
         assert 'enabled' in values, "Missing 'enabled' in values"
-        assert 'node_complete_name' in values, "Missing 'node_complete_name' in values"
+        if 'execution_scope' not in values or values['execution_scope'] != "once":
+            assert 'region' in values, "Missing 'region' in values"
+            assert 'node_unique_name' in values, "Missing 'node_unique_name' in values"
+
+            if values['node_complete_name'] != f"{values['region']}//{values['node_unique_name']}":
+                return  # Skip if the node_complete_name does not match the expected format
         
         start_time = time.perf_counter()
         

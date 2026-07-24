@@ -33,6 +33,7 @@ from time_actions.reverse_social_isolation_plugin import \
     ReverseSocialIsolationPlugin
 from time_actions.send_population_back_plugin import SendPopulationBackPlugin
 from time_actions.vaccine_plugin import VaccinePlugin
+from time_actions.dialysis_plugin import DialysisPlugin
 
 from time_actions.change_enabled_state_plugin import ChangeEnabledStatePlugin
 from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
@@ -167,6 +168,11 @@ change_enabled_state = None
 if 'change_enabled_state_plugin' in lodus_simulation.experiment_config:
     change_enabled_state = ChangeEnabledStatePlugin()
     lodus_simulation.load_plugin(change_enabled_state)
+
+dialysis = None
+if 'dialysis_plugin' in lodus_simulation.experiment_config:
+    dialysis = DialysisPlugin()
+    lodus_simulation.load_plugin(dialysis)
     
 
 '''
@@ -393,6 +399,8 @@ if return_pop_home is not None: output_str += return_pop_home.print_execution_ti
 if send_pop_back is not None: output_str += send_pop_back.print_execution_time_data()
 if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
 if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
+if change_enabled_state is not None: output_str += change_enabled_state.print_execution_time_data()
+if dialysis is not None: output_str += dialysis.print_execution_time_data()
 
 output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
 output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
