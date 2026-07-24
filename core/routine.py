@@ -1,4 +1,5 @@
-from typing import Any, Optional
+from enum import Enum
+from typing import Any
 from core.population import PopulationTemplate
 
 class Action:
@@ -32,14 +33,29 @@ class Action:
     def __repr__(self) -> str:
         return self.__str__()
     
+class GlobalActionExecutionScope(str, Enum):
+    """Controls how a GlobalAction is expanded when it is scheduled."""
+
+    PER_NODE = "per_node"
+    ONCE = "once"
+
+
 class GlobalAction (Action):
-    """Describes a GlobalAction, which is an Action that is performed in all EnvNodes."""
-    def __init__(self, action_type: str, population_template: PopulationTemplate, values: dict, cycle_step_definition: int | list[int]):
+    """Describes a scheduled action executed once globally or once per EnvNode."""
+    def __init__(
+        self,
+        action_type: str,
+        population_template: PopulationTemplate,
+        values: dict,
+        cycle_step_definition: int | list[int],
+        execution_scope: GlobalActionExecutionScope | str = GlobalActionExecutionScope.PER_NODE,
+    ):
         """Initializes a GlobalAction.
         If cycle_step_definition is an int, the action will be performed every cycle_step_definition cycles.
         If cycle_step_definition is a list of ints, the action will be performed at the specified cycle_steps.
         """
         self.cycle_step_definition: int | list[int] = cycle_step_definition
+        self.execution_scope = GlobalActionExecutionScope(execution_scope)
         super().__init__(action_type, population_template, values)
 
     def should_process_action(self, cycle_step: int) -> bool:

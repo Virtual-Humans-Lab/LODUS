@@ -5,7 +5,7 @@ from typing import Callable
 from core.environment import EnvNode, EnvironmentGraph
 from core.plugin import ActionPlugin, BasePlugin, RoutinePlugin, LoggerPlugin
 from core.population import CharacteristicsFactory
-from core.routine import Action, GlobalAction
+from core.routine import Action, GlobalAction, GlobalActionExecutionScope
 from util.simulation_time import SimulationTimeStatus
 
 class RoutineController:
@@ -113,25 +113,36 @@ class RoutineController:
         for global_action in global_action_list:
             if not global_action.should_process_action(cycle_step):
                 continue
-            
+
+            if global_action.execution_scope == GlobalActionExecutionScope.ONCE:
+                action = self._copy_scheduled_global_action(global_action)
+                action.values['execution_scope'] = "once"
+                action_list.append(action)
+                continue
+
             for region in self.env_graph.region_list:
                 for node in region.node_list:
                     if not self.is_node_matching(node, global_action):
                         continue
-                    action = Action(global_action.action_type,
-                                    global_action.pop_template.copy(),
-                                    global_action.values.copy())
-                    
-                    if isinstance(global_action.cycle_step_definition, list):
-                        action.values['frames'] = global_action.cycle_step_definition
-                    else:
-                        action.values['cycle_length'] = global_action.cycle_step_definition
+                    action = self._copy_scheduled_global_action(global_action)
                     action.values['region'] = region.name
                     action.values['node_type'] = node.node_type
                     action.values['node_unique_name'] = node.unique_name
                     action.values['node_id'] = node.id
                     action_list += [action]
         return action_list
+
+    def _copy_scheduled_global_action(self, global_action: GlobalAction) -> Action:
+        action = Action(
+            global_action.action_type,
+            global_action.pop_template.copy(),
+            global_action.values.copy(),
+        )
+        if isinstance(global_action.cycle_step_definition, list):
+            action.values['frames'] = global_action.cycle_step_definition.copy()
+        else:
+            action.values['cycle_length'] = global_action.cycle_step_definition
+        return action
 
     def is_node_matching(self, node: EnvNode, global_action: GlobalAction):
         if 'node_name' in global_action.values and node.node_type != global_action.values['node_name']:

@@ -3,6 +3,7 @@
     "cycle_step": [
       5
     ],
+    "execution_scope": "once",
     "action": {
       "name": "disable_eta_moinhos_de_vento",
       "type": "set_node_enabled",
@@ -16,6 +17,7 @@
     "cycle_step": [
       7
     ],
+    "execution_scope": "once",
     "action": {
       "name": "disable_eta_menino_deus",
       "type": "set_node_enabled",
@@ -29,6 +31,7 @@
     "cycle_step": [
       9
     ],
+    "execution_scope": "once",
     "action": {
       "name": "enable_eta_moinhos_de_vento",
       "type": "set_node_enabled",
@@ -43,6 +46,7 @@
     "cycle_step": [
       11
     ],
+    "execution_scope": "once",
     "action": {
       "name": "enable_eta_menino_deus",
       "type": "set_node_enabled",
@@ -57,6 +61,7 @@
     "cycle_step": [
       15
     ],
+    "execution_scope": "once",
     "action": {
       "name": "disable_all_etas",
       "type": "set_nodes_enabled_by_type",
@@ -70,6 +75,7 @@
     "cycle_step": [
       17
     ],
+    "execution_scope": "once",
     "action": {
       "name": "enable_all_etas_no_cascade",
       "type": "set_nodes_enabled_by_type",
@@ -83,6 +89,7 @@
     "cycle_step": [
       19
     ],
+    "execution_scope": "once",
     "action": {
       "name": "enable_all_etas_with_cascade",
       "type": "set_nodes_enabled_by_type",

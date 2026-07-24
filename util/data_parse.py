@@ -3,7 +3,7 @@ from pathlib import Path
 from warnings import deprecated
 from core.environment import EnvironmentGraph, EnvRegionTemplate, EnvNodeTemplate
 from core.population import BlobFactory, BlobTemplate, CharacteristicsFactory, PopulationTemplate
-from core.routine import Action, GlobalAction
+from core.routine import Action, GlobalAction, GlobalActionExecutionScope
 from core.simulator import LodusSimulation
 
 def generate_lodus_simulation(input_path: str):
@@ -270,12 +270,26 @@ def parse_global_routines(routines_json) -> list[GlobalAction]:
                 )
             values = rga['action'].get('values', {})
             cycle_step = rga['cycle_step'] if isinstance(rga['cycle_step'], list) else int(rga['cycle_step'])
+            raw_execution_scope = rga.get(
+                'execution_scope', GlobalActionExecutionScope.PER_NODE.value
+            )
+            try:
+                execution_scope = GlobalActionExecutionScope(raw_execution_scope)
+            except ValueError as error:
+                valid_scopes = ", ".join(
+                    scope.value for scope in GlobalActionExecutionScope
+                )
+                raise ValueError(
+                    f"Invalid global routine execution_scope "
+                    f"'{raw_execution_scope}'. Expected one of: {valid_scopes}"
+                ) from error
             
             global_actions.append(GlobalAction(
                 action_type=action_type,
                 population_template=pt,
                 values=values,
-                cycle_step_definition=cycle_step
+                cycle_step_definition=cycle_step,
+                execution_scope=execution_scope,
             ))
     return global_actions
 

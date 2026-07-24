@@ -2,7 +2,14 @@ from util.random_instance import FixedRandom
 
 import pytest
 from core.population import Blob, BlobFactory, CharacteristicsFactory, PopulationTemplate, SampledCharacteristic, SampledCharacteristicCollection
-from core.routine import Action, GlobalAction, Routine, RoutineFactory, RoutineTemplate
+from core.routine import (
+    Action,
+    GlobalAction,
+    GlobalActionExecutionScope,
+    Routine,
+    RoutineFactory,
+    RoutineTemplate,
+)
 
 @pytest.fixture(scope="session", autouse=True)
 def start_fixedrandom():
@@ -34,6 +41,7 @@ class TestGlobalAction:
         assert global_action.pop_template == pop_template
         assert global_action.values == values
         assert global_action.cycle_step_definition == cycle_step_definition
+        assert global_action.execution_scope == GlobalActionExecutionScope.PER_NODE
 
     def test_global_action_should_process_action_int(self):
         pop_template = PopulationTemplate()
