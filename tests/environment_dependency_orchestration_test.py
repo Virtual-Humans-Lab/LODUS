@@ -53,7 +53,7 @@ def test_disable_cascades(tmp_path):
     for n in graph.node_list:
         n.enable()
 
-    summary = graph.change_node_enabled_state("Region1//Grid", enabled=False)
+    summary = graph.set_node_enabled("Region1//Grid", enabled=False)
 
     # Grid and its dependents (PowerPlant, WaterPlant, EnvNode_A) should be disabled
     disabled = set(s.split("//")[-1] for s in summary["disabled"])
@@ -72,10 +72,10 @@ def test_enable_blocked_by_prerequisites(tmp_path):
     plugin.load_plugin(dummy_sim)
 
     # Disable Grid so PowerPlant/WaterPlant/EnvNode_A prerequisites are missing
-    graph.change_node_enabled_state("Region1//Grid", enabled=False)
+    graph.set_node_enabled("Region1//Grid", enabled=False)
 
     # Try to enable EnvNode_A
-    summary = graph.change_node_enabled_state("Region1//EnvNode_A", enabled=True)
+    summary = graph.set_node_enabled("Region1//EnvNode_A", enabled=True)
 
     # Should be blocked and report missing prerequisites (Grid at least)
     assert summary["enabled"] == []

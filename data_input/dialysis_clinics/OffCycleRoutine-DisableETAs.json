@@ -5,7 +5,7 @@
     ],
     "action": {
       "name": "disable_eta_moinhos_de_vento",
-      "type": "change_node_enabled_state",
+      "type": "set_node_enabled",
       "values": {
         "node_complete_name": "Moinhos de Vento//water_source_0",
         "enabled": false
@@ -18,7 +18,7 @@
     ],
     "action": {
       "name": "disable_eta_menino_deus",
-      "type": "change_node_enabled_state",
+      "type": "set_node_enabled",
       "values": {
         "node_complete_name": "Menino Deus//water_source_0",
         "enabled": false
@@ -31,7 +31,7 @@
     ],
     "action": {
       "name": "enable_eta_moinhos_de_vento",
-      "type": "change_node_enabled_state",
+      "type": "set_node_enabled",
       "values": {
         "node_complete_name": "Moinhos de Vento//water_source_0",
         "enabled": true,
@@ -45,9 +45,49 @@
     ],
     "action": {
       "name": "enable_eta_menino_deus",
-      "type": "change_node_enabled_state",
+      "type": "set_node_enabled",
       "values": {
         "node_complete_name": "Menino Deus//water_source_0",
+        "enabled": true,
+        "cascade_reenable": true
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      15
+    ],
+    "action": {
+      "name": "disable_all_etas",
+      "type": "set_nodes_enabled_by_type",
+      "values": {
+        "node_type": "water_source",
+        "enabled": false
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      17
+    ],
+    "action": {
+      "name": "enable_all_etas_no_cascade",
+      "type": "set_nodes_enabled_by_type",
+      "values": {
+        "node_type": "water_source",
+        "enabled": true
+      }
+    }
+  },
+  {
+    "cycle_step": [
+      19
+    ],
+    "action": {
+      "name": "enable_all_etas_with_cascade",
+      "type": "set_nodes_enabled_by_type",
+      "values": {
+        "node_type": "water_source",
         "enabled": true,
         "cascade_reenable": true
       }

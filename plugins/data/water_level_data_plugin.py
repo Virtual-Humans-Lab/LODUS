@@ -124,7 +124,7 @@ class WaterLevelDataPlugin(ActionPlugin):
         for node in self.graph.node_list:
             if node.enabled and node.attributes["water_level"] is not None and self.current_water_level >= node.attributes["water_level"]:
                 #node.enabled = False
-                self.graph.change_node_enabled_state(node.get_complete_name(), False)
+                self.graph.set_node_enabled(node.get_complete_name(), False)
                 print(f"Node {node.get_complete_name()} disabled due to water level {self.current_water_level}.")
 
 

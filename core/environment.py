@@ -521,7 +521,7 @@ class EnvironmentGraph():
         """Gets a list of EnvNodes by type."""
         return [node for node in self.node_list if node.node_type == node_type]
 
-    def change_node_enabled_state(self, node_complete_name: str, enabled: bool, cascade_reenable: bool = False) -> dict:
+    def set_node_enabled(self, node_complete_name: str, enabled: bool, cascade_reenable: bool = False) -> dict:
         """Change enabled state for a single node given by its complete name (`RegionName//UniqueName`).
 
         - Uses `node_dependency` plugin (if present) for validations and cascading.
