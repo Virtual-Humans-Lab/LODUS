@@ -22,6 +22,8 @@ REQUIRED_STATE_COLUMNS = {
     "Enabled",
 }
 
+MARKER_SIZE_SEQUENCE = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40]
+
 
 def find_shapefile(folder: Path) -> Path:
     matches = list(folder.glob("*.shp"))
@@ -73,39 +75,69 @@ def shapefile_outline_trace(shp_path: Path, name: str, color: str, visible: bool
     )
 
 
-def node_trace(df: pd.DataFrame, enabled: bool, name: str, color: str) -> Any:
+def node_type_size_map(node_types: list[str]) -> dict[str, int]:
+    return {
+        node_type: MARKER_SIZE_SEQUENCE[index % len(MARKER_SIZE_SEQUENCE)]
+        for index, node_type in enumerate(node_types)
+    }
+
+
+def node_traces_by_type(
+    df: pd.DataFrame,
+    enabled: bool,
+    state_name: str,
+    color: str,
+    size_map: dict[str, int],
+    node_types: list[str],
+    showlegend: bool,
+) -> list[Any]:
     state_value = 1 if enabled else 0
     state_df = df[df["Enabled"] == state_value]
-    if state_df.empty:
-        return go.Scattermap(
-            lon=[],
-            lat=[],
-            mode="markers",
-            marker=dict(size=7, color=color),
-            name=name,
-            hovertemplate="No nodes<extra></extra>",
+    traces: list[Any] = []
+
+    for node_type in node_types:
+        type_df = state_df[state_df["Node Type"] == node_type]
+        trace_name = f"{state_name} | {node_type}"
+
+        if type_df.empty:
+            traces.append(
+                go.Scattermap(
+                    lon=[],
+                    lat=[],
+                    mode="markers",
+                    marker=dict(size=size_map[node_type], color=color, symbol="circle", opacity=0.95),
+                    name=trace_name,
+                    showlegend=showlegend,
+                    hovertemplate="No nodes<extra></extra>",
+                )
+            )
+            continue
+
+        hover_text = (
+            "Region: "
+            + type_df["Region"].astype(str)
+            + "<br>Node: "
+            + type_df["Node"].astype(str)
+            + "<br>Type: "
+            + type_df["Node Type"].astype(str)
+            + "<br>Enumeration Area: "
+            + type_df["Enumeration Area"].astype(str)
         )
 
-    hover_text = (
-        "Region: "
-        + state_df["Region"].astype(str)
-        + "<br>Node: "
-        + state_df["Node"].astype(str)
-        + "<br>Type: "
-        + state_df["Node Type"].astype(str)
-        + "<br>Enumeration Area: "
-        + state_df["Enumeration Area"].astype(str)
-    )
+        traces.append(
+            go.Scattermap(
+                lon=type_df["Longitude"],
+                lat=type_df["Latitude"],
+                mode="markers",
+                marker=dict(size=size_map[node_type], color=color, symbol="circle", opacity=0.95),
+                name=trace_name,
+                showlegend=showlegend,
+                customdata=hover_text,
+                hovertemplate="%{customdata}<extra></extra>",
+            )
+        )
 
-    return go.Scattermap(
-        lon=state_df["Longitude"],
-        lat=state_df["Latitude"],
-        mode="markers",
-        marker=dict(size=15, color=color),
-        name=name,
-        text=hover_text,
-        hovertemplate="%{text}<extra></extra>",
-    )
+    return traces
 
 
 def validate_state_log(df: pd.DataFrame) -> None:
@@ -174,6 +206,8 @@ def load_state_log(state_log_path: Path) -> pd.DataFrame:
     df["Simulation Step"] = df["Simulation Step"].astype(int)
     df["Cycle"] = df["Cycle"].astype(int)
     df["Cycle Step"] = df["Cycle Step"].astype(int)
+    node_type_values = df["Node Type"].fillna("Unknown").astype(str).str.strip()
+    df["Node Type"] = node_type_values.mask(node_type_values == "", "Unknown")
     return df
 
 
@@ -187,6 +221,11 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
     elif "Unique Name" in state_df.columns:
         sort_columns.append("Unique Name")
     state_df = state_df.sort_values(sort_columns, kind="stable").reset_index(drop=True)
+    node_types = sorted(state_df["Node Type"].astype(str).unique().tolist())
+    if not node_types:
+        node_types = ["Unknown"]
+    size_map = node_type_size_map(node_types)
+
     cycle_length = infer_cycle_length(state_df)
     min_step = int(state_df["Simulation Step"].min())
     max_step = int(state_df["Simulation Step"].max())
@@ -227,13 +266,31 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
             initial_snapshot_df = snapshot_df.copy()
             initial_step_rows = step_rows.copy()
 
-        frame_enabled = node_trace(snapshot_df, enabled=True, name="Enabled nodes", color="#2a9d8f")
-        frame_disabled = node_trace(snapshot_df, enabled=False, name="Disabled nodes", color="#e76f51")
+        frame_enabled = node_traces_by_type(
+            snapshot_df,
+            enabled=True,
+            state_name="Enabled nodes",
+            color="#2a9d8f",
+            size_map=size_map,
+            node_types=node_types,
+            showlegend=False,
+        )
+        frame_disabled = node_traces_by_type(
+            snapshot_df,
+            enabled=False,
+            state_name="Disabled nodes",
+            color="#e76f51",
+            size_map=size_map,
+            node_types=node_types,
+            showlegend=False,
+        )
+        frame_traces = frame_enabled + frame_disabled
+        frame_trace_indices = list(range(2, 2 + len(frame_traces)))
         frames.append(
             go.Frame(
                 name=str(step),
-                data=[frame_enabled, frame_disabled],
-                traces=[2, 3],
+                data=frame_traces,
+                traces=frame_trace_indices,
                 layout=go.Layout(title=step_title(step, step_rows, cycle_length)),
             )
         )
@@ -255,9 +312,30 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
     if initial_snapshot_df is None:
         raise ValueError("Unable to reconstruct an initial state snapshot from the log.")
 
-    enabled_trace = node_trace(initial_snapshot_df, enabled=True, name="Enabled nodes", color="#2a9d8f")
-    disabled_trace = node_trace(initial_snapshot_df, enabled=False, name="Disabled nodes", color="#e76f51")
-    fig = go.Figure(data=[region_trace, sector_trace, enabled_trace, disabled_trace], frames=frames)
+    enabled_traces = node_traces_by_type(
+        initial_snapshot_df,
+        enabled=True,
+        state_name="Enabled nodes",
+        color="#2a9d8f",
+        size_map=size_map,
+        node_types=node_types,
+        showlegend=True,
+    )
+    disabled_traces = node_traces_by_type(
+        initial_snapshot_df,
+        enabled=False,
+        state_name="Disabled nodes",
+        color="#e76f51",
+        size_map=size_map,
+        node_types=node_types,
+        showlegend=True,
+    )
+    node_traces = enabled_traces + disabled_traces
+    fig = go.Figure(data=[region_trace, sector_trace, *node_traces], frames=frames)
+
+    node_visibility = [True] * len(node_traces)
+    region_mode_visibility = [True, False, *node_visibility]
+    sector_mode_visibility = [False, True, *node_visibility]
 
     fig.update_layout(
         title=step_title(min_step, initial_step_rows, cycle_length),
@@ -307,12 +385,12 @@ def build_figure(state_df: pd.DataFrame, bairros_shp: Path, setores_shp: Path) -
                     {
                         "label": "Region level",
                         "method": "update",
-                        "args": [{"visible": [True, False, True, True]}],
+                        "args": [{"visible": region_mode_visibility}],
                     },
                     {
                         "label": "Sector level",
                         "method": "update",
-                        "args": [{"visible": [False, True, True, True]}],
+                        "args": [{"visible": sector_mode_visibility}],
                     },
                 ],
             },
