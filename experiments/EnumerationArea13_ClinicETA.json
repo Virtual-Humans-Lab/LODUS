@@ -41,13 +41,22 @@
     },
     "change_enabled_state_plugin": {},
     "off_cycle_routine_plugin": {
-        "start_of_step_routine_files": ["dialysis_clinics/OffCycleRoutine-DisableETAs.json"],
+        "start_of_step_routine_files": [],
         "end_of_step_routine_files": []
     },
     "dialysis_plugin": {
         "patient_count": 120,
         "treatment_frequency_days": 3,
-        "clinic_data_file": "dialysis_clinics/opening_hours_example.csv"
+        "max_patients_per_node": 20,
+        "clinic_node_type": "dialysis_clinic",
+        "patient_node_type": "home",
+        "clinic_name_attribute": "clinic_name",
+        "clinic_data_file": "dialysis_clinics/opening_hours_example.csv",   
+        "default_values": {
+            "opening_step": 6,
+            "closing_step": 18,
+            "treatment_capacity_per_step": 2
+        }
     }
     
    

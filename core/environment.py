@@ -619,6 +619,10 @@ class EnvironmentGraph():
         """Gets the total number of Blobs contained in this EnvironmentGraph."""
         return sum([region.get_blob_count() for region in self.region_list])
 
+    def get_all_blobs(self) -> list[Blob]:
+        """Gets a list of all Blobs contained in this EnvironmentGraph."""
+        return [blob for region in self.region_list for node in region.node_list for blob in node.contained_blobs]
+
 
 
     # Node Distance Functions
