@@ -17,6 +17,8 @@ from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 
 from loggers.infection_sum_logger import InfectionSumLogger
 from loggers.vaccine_level_logger import VaccineLevelLogger
+from loggers.dialysis_logger import DialysisLogger
+
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
@@ -173,7 +175,8 @@ dialysis = None
 if 'dialysis_plugin' in lodus_simulation.experiment_config:
     dialysis = DialysisPlugin()
     lodus_simulation.load_plugin(dialysis)
-    
+
+
 
 '''
 Routine Plugins
@@ -220,6 +223,10 @@ if vaccine:
 #logger.set_to_record('neighbourhood_disserta')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
+
+if dialysis:
+    dialysis_logger = DialysisLogger()
+    lodus_simulation.load_plugin(dialysis_logger)
 
 blob_count_logger = BlobCountLogger()
 blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,

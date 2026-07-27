@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import csv
+import math
 from pathlib import Path
 import time
+from typing import Callable
 
 from core import environment
 from core.plugin import ActionPlugin
@@ -57,13 +59,52 @@ class DialysisPlugin(ActionPlugin):
         self.simulation: LodusSimulation
         self.env_graph:environment.EnvironmentGraph
         self.clinic_schedules = {}
+        self._event_callbacks: dict[str, Callable[[dict], None]] = {}
+
+    def add_event_listener(self, name: str, callback: Callable[[dict], None]):
+        """Registers a listener for dialysis admission and completion events."""
+        self._event_callbacks[name] = callback
+
+    def remove_event_listener(self, name: str):
+        """Removes a previously registered dialysis event listener."""
+        self._event_callbacks.pop(name, None)
+
+    def _emit_event(
+        self,
+        event_type: str,
+        origin,
+        clinic,
+        blob,
+        cycle_step: int,
+        simulation_step: int,
+    ):
+        event = {
+            "simulation_step": simulation_step,
+            "cycle_step": cycle_step,
+            "cycle": (
+                simulation_step // self.simulation.time_status.cycle_length
+            ),
+            "event_type": event_type,
+            "population": blob.get_population_size(),
+            "origin_id": origin.id,
+            "origin": origin.get_complete_name(),
+            "origin_region": origin.containing_region_name,
+            "clinic_id": clinic.id,
+            "clinic": clinic.get_complete_name(),
+            "clinic_region": clinic.containing_region_name,
+            "due_day": blob.get_traceable_characteristic(self.NEXT_DUE),
+            "treatment_frame": blob.get_traceable_characteristic(
+                self.TREATMENT_FRAME
+            ),
+            "distance": math.sqrt(self._distance(origin, clinic)),
+        }
+        for callback in tuple(self._event_callbacks.values()):
+            callback(event.copy())
 
     def load_plugin(self, simulation: LodusSimulation):
         self.simulation = simulation
         self.env_graph = simulation.env_graph
-        simulation.add_action_type_to_function(
-            self.ACTION_TYPE, self.dialysis, True
-        )
+        simulation.add_action_type_to_function(self.ACTION_TYPE, self.dialysis, True)
 
         self.config:dict = simulation.experiment_config.get("dialysis_plugin", {})
         self.patient_count = self._positive_int(
@@ -102,6 +143,7 @@ class DialysisPlugin(ActionPlugin):
         self.simulation.direct_action_invoke(Action(self.ACTION_TYPE, PopulationTemplate(), {}),cycle_step,simulation_step,)
 
     def unload_plugin(self):
+        self._event_callbacks.clear()
         self.clinic_schedules = {}
 
     def _add_traceable_defaults(self):
@@ -250,11 +292,11 @@ class DialysisPlugin(ActionPlugin):
         ):
             """Treat last frame's arrivals, return them, then admit this hour's demand."""
             started = time.perf_counter()
-            self._complete_treatments(simulation_step)
+            self._complete_treatments(cycle_step, simulation_step)
             self._dispatch_due_patients(cycle_step, simulation_step)
             self.add_execution_time(self.ACTION_TYPE, time.perf_counter() - started)
 
-    def _complete_treatments(self, simulation_step: int):
+    def _complete_treatments(self, cycle_step: int, simulation_step: int):
         """Completes treatment for patients who were admitted in the previous simulation step 
         and returns them to their origin nodes."""
         template = PopulationTemplate(
@@ -264,7 +306,9 @@ class DialysisPlugin(ActionPlugin):
                 self.TREATMENT_FRAME: simulation_step,
             }
         )
-        current_day = self.simulation.time_status.cycle
+        current_day = (
+            simulation_step // self.simulation.time_status.cycle_length
+        )
         for clinic_id in self.clinic_schedules:
             clinic = self.env_graph.get_node_by_id(clinic_id)
             for blob in list(clinic.contained_blobs):
@@ -273,6 +317,14 @@ class DialysisPlugin(ActionPlugin):
                 origin_id = blob.get_traceable_characteristic(self.ORIGIN)
                 origin = self.env_graph.get_node_by_id(origin_id)
                 clinic.remove_blob(blob)
+                self._emit_event(
+                    "completed",
+                    origin,
+                    clinic,
+                    blob,
+                    cycle_step,
+                    simulation_step,
+                )
                 blob.set_traceable_characteristic(
                     self.NEXT_DUE,
                     current_day
@@ -287,7 +339,9 @@ class DialysisPlugin(ActionPlugin):
 
     def _dispatch_due_patients(self, cycle_step: int, simulation_step: int):
         """Dispatches patients who are due for treatment to open clinics."""
-        current_day = self.simulation.time_status.cycle
+        current_day = (
+            simulation_step // self.simulation.time_status.cycle_length
+        )
         open_slots = []
         for clinic_id, schedules in self.clinic_schedules.items():
             clinic = self.env_graph.get_node_by_id(clinic_id)
@@ -323,6 +377,14 @@ class DialysisPlugin(ActionPlugin):
                     blob.set_traceable_characteristic(self.ORIGIN, origin.id)
                     blob.set_traceable_characteristic(
                         self.TREATMENT_FRAME, simulation_step + 1
+                    )
+                    self._emit_event(
+                        "admitted",
+                        origin,
+                        clinic,
+                        blob,
+                        cycle_step,
+                        simulation_step,
                     )
                 self.env_graph.log_blob_movement(origin, clinic, blobs)
                 clinic.add_blobs(blobs)

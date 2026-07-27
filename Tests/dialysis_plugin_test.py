@@ -1,8 +1,11 @@
 from pathlib import Path
 
+import pandas as pd
+
 from core.environment import EnvNode, EnvRegion, EnvironmentGraph
 from core.population import BlobFactory, CharacteristicsFactory, PopulationTemplate
 from core.simulator import LodusSimulation
+from plugins.loggers.dialysis_logger import DialysisLogger
 from plugins.time_actions.dialysis_plugin import DialysisPlugin
 from util.random_instance import FixedRandom
 
@@ -210,3 +213,94 @@ def test_patient_selection_rejects_count_above_eligible_node_capacity():
         assert "max_patients_per_node=2" in str(error)
     else:
         raise AssertionError("Expected patient selection capacity to fail")
+
+
+def test_dialysis_logger_records_events_snapshots_and_outputs(
+    tmp_path, monkeypatch
+):
+    monkeypatch.chdir(tmp_path)
+    simulation, plugin, home, clinic = _simulation(tmp_path)
+    logger = DialysisLogger(export_png=False)
+    simulation.load_plugin(logger)
+    simulation.setup_logging()
+
+    logger.update_time_step(0, 0)
+    plugin.dialysis(PopulationTemplate(), {}, 0, 0)
+    logger.log_simulation_step()
+    logger.update_time_step(1, 1)
+    plugin.dialysis(PopulationTemplate(), {}, 1, 1)
+    logger.log_simulation_step()
+    logger.stop_logger()
+
+    events = logger._events_dataframe()
+    admitted = events[events["Event"] == "admitted"]
+    completed = events[events["Event"] == "completed"]
+    assert admitted["Population"].sum() == 2
+    assert completed["Population"].sum() == 2
+    assert set(events["Origin"]) == {home.get_complete_name()}
+    assert set(events["Clinic"]) == {clinic.get_complete_name()}
+    assert completed.iloc[0]["Treatment Frame"] == 1
+
+    step = pd.DataFrame(logger.step_rows)
+    assert step["Admitted"].tolist() == [2, 0]
+    assert step["Completed"].tolist() == [0, 2]
+    clinic_step = pd.DataFrame(logger.clinic_rows)
+    assert clinic_step["Occupancy"].tolist() == [2, 0]
+
+    data_path = (
+        tmp_path / "output_logs" / simulation.experiment_name / "data_frames"
+    )
+    for filename in [
+        "dialysis_events.csv",
+        "dialysis_step.csv",
+        "dialysis_clinic_step.csv",
+        "dialysis_cycle.csv",
+        "dialysis_origin_clinic.csv",
+    ]:
+        assert (data_path / filename).is_file()
+
+    html_path = (
+        tmp_path
+        / "output_logs"
+        / simulation.experiment_name
+        / "html_plots"
+        / "dialysis"
+    )
+    assert (html_path / "dashboard.html").is_file()
+    assert (html_path / "origin_clinic_sankey.html").is_file()
+
+
+def test_dialysis_logger_handles_empty_simulation(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    simulation, _, _, _ = _simulation(tmp_path, patient_count=0)
+    logger = DialysisLogger(export_png=False)
+    simulation.load_plugin(logger)
+    simulation.setup_logging()
+
+    logger.update_time_step(0, 0)
+    logger.log_simulation_step()
+    logger.stop_logger()
+
+    events_path = (
+        tmp_path
+        / "output_logs"
+        / simulation.experiment_name
+        / "data_frames"
+        / "dialysis_events.csv"
+    )
+    events = pd.read_csv(events_path, sep=";")
+    assert list(events.columns) == DialysisLogger.EVENT_COLUMNS
+    assert events.empty
+
+
+def test_dialysis_logger_does_not_consume_randomness(tmp_path):
+    simulation, _, _, _ = _simulation(tmp_path)
+    state_before = FixedRandom.instance.getstate()
+    logger = DialysisLogger(export_png=False)
+
+    simulation.load_plugin(logger)
+    logger.setup_logger()
+    logger.update_time_step(0, 0)
+    logger.log_simulation_step()
+
+    assert FixedRandom.instance.getstate() == state_before
