@@ -63,31 +63,31 @@ class PopularTimesPlugin(ActionPlugin):
         except Exception as e:
             print(f"Erro ao carregar CSV para {node_type}: {e}")
 
-    def _load_bairros_csv(self):
-        """Carrega o CSV 'bairros.csv' que contém 'bairro,multiplicador'."""
-        csv_path = self.data_path / "bairros.csv"
-        if not csv_path.exists():
-            print(f"Arquivo de bairros não encontrado: {csv_path}")
-            return
+    # def _load_bairros_csv(self):
+    #     """Carrega o CSV 'bairros.csv' que contém 'bairro,multiplicador'."""
+    #     csv_path = self.data_path / "bairros.csv"
+    #     if not csv_path.exists():
+    #         print(f"Arquivo de bairros não encontrado: {csv_path}")
+    #         return
 
-        try:
-            with open(csv_path, 'r', encoding='utf8') as csvfile:
-                reader = csv.reader(csvfile)
-                #header = next(reader, None)
-                for row in reader:
-                    if not row:
-                        continue
-                    if len(row) < 2:
-                        continue
-                    nome = row[0].strip().lower()
-                    try:
-                        mult = float(row[1])
-                    except Exception:
-                        mult = 1.0
-                    self.bairro_multipliers[nome] = mult
-            #print(f"Carregados {len(self.bairro_multipliers)} bairros com multiplicadores")
-        except Exception as e:
-            print(f"Erro ao carregar CSV de bairros: {e}")
+    #     try:
+    #         with open(csv_path, 'r', encoding='utf8') as csvfile:
+    #             reader = csv.reader(csvfile)
+    #             #header = next(reader, None)
+    #             for row in reader:
+    #                 if not row:
+    #                     continue
+    #                 if len(row) < 2:
+    #                     continue
+    #                 nome = row[0].strip().lower()
+    #                 try:
+    #                     mult = float(row[1])
+    #                 except Exception:
+    #                     mult = 1.0
+    #                 self.bairro_multipliers[nome] = mult
+    #         #print(f"Carregados {len(self.bairro_multipliers)} bairros com multiplicadores")
+    #     except Exception as e:
+    #         print(f"Erro ao carregar CSV de bairros: {e}")
 
     def _load_setores_csv(self):
         csv_path = self.data_path / "Setores-13Bairros-Dia.csv"
@@ -110,7 +110,7 @@ class PopularTimesPlugin(ActionPlugin):
                     except Exception:
                         mult = 1.0
                     self.setores_multipliers[nome] = mult
-            print(f"Carregados {len(self.setores_multipliers)} setores com multiplicadores")
+            #print(f"Carregados {len(self.setores_multipliers)} setores com multiplicadores")
         except Exception as e:
             print(f"Erro ao carregar CSV de setores: {e}")
 
@@ -136,7 +136,7 @@ class PopularTimesPlugin(ActionPlugin):
                 base_quantity = quantity
                 break
 
-        #NO MOMENTO SETADO APENAS PARA SETORES, COM BAIRROS APLICA O MULTIPLICADOR ERRADO
+        # NO MOMENTO SETADO APENAS PARA SETORES
         if region:
             if node:
                 number = node.split("_")[1]
