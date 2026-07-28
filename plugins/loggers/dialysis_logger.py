@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from importlib.util import find_spec
+from math import log2
 from pathlib import Path
 
 import pandas as pd
@@ -615,21 +616,129 @@ class DialysisLogger(LoggerPlugin):
             for name in set(flow_df["Origin"]) | set(flow_df["Clinic"])
         ):
             geographic = go.Figure()
+            plotted_longitudes = []
+            plotted_latitudes = []
             for row in flow_df.itertuples(index=False):
                 origin_position = coordinates.get(row.Origin)
                 clinic_position = coordinates.get(row.Clinic)
                 if origin_position is None or clinic_position is None:
                     continue
+                plotted_longitudes.extend(
+                    [origin_position[0], clinic_position[0]]
+                )
+                plotted_latitudes.extend(
+                    [origin_position[1], clinic_position[1]]
+                )
+                hover_text = (
+                    f"<b>{row.Origin} → {row.Clinic}</b>"
+                    f"<br>Admitted: {row.Admitted:,}"
+                    f"<br>Completed: {row.Completed:,}"
+                    f"<br>Average distance: {row[-1]:,.2f}"
+                )
                 geographic.add_trace(
-                    go.Scattergeo(
+                    go.Scattermap(
                         lon=[origin_position[0], clinic_position[0]],
                         lat=[origin_position[1], clinic_position[1]],
                         mode="lines+markers",
                         line={"width": max(1, row.Admitted)},
                         name=f"{row.Origin} → {row.Clinic}",
+                        text=[hover_text, hover_text],
+                        hovertemplate="%{text}<extra></extra>",
                     )
                 )
-            geographic.update_layout(title="Dialysis Geographic Flows")
+                hover_steps = range(1, 32)
+                geographic.add_trace(
+                    go.Scattermap(
+                        lon=[
+                            origin_position[0]
+                            + (clinic_position[0] - origin_position[0])
+                            * step
+                            / 32
+                            for step in hover_steps
+                        ],
+                        lat=[
+                            origin_position[1]
+                            + (clinic_position[1] - origin_position[1])
+                            * step
+                            / 32
+                            for step in hover_steps
+                        ],
+                        mode="markers",
+                        marker={
+                            "size": 16,
+                            "color": "rgba(0, 0, 0, 0.01)",
+                        },
+                        text=[hover_text] * 31,
+                        hovertemplate="%{text}<extra></extra>",
+                        showlegend=False,
+                    )
+                )
+            clinic_names = list(dict.fromkeys(flow_df["Clinic"]))
+            clinic_locations = [
+                (name, coordinates.get(name))
+                for name in clinic_names
+                if coordinates.get(name) is not None
+            ]
+            if clinic_locations:
+                geographic.add_trace(
+                    go.Scattermap(
+                        lon=[
+                            position[0]
+                            for _, position in clinic_locations
+                        ],
+                        lat=[
+                            position[1]
+                            for _, position in clinic_locations
+                        ],
+                        mode="markers",
+                        marker={"size": 18, "color": "#d62728"},
+                        text=[
+                            f"<b>Clinic</b><br>{name}"
+                            for name, _ in clinic_locations
+                        ],
+                        hovertemplate="%{text}<extra></extra>",
+                        name="Clinics",
+                    )
+                )
+            map_layout = {"style": "open-street-map"}
+            if plotted_longitudes:
+                longitude_span = (
+                    max(plotted_longitudes) - min(plotted_longitudes)
+                )
+                latitude_span = max(plotted_latitudes) - min(
+                    plotted_latitudes
+                )
+                longitude_zoom = (
+                    log2(360 / longitude_span) - 1
+                    if longitude_span
+                    else 12
+                )
+                latitude_zoom = (
+                    log2(170 / latitude_span) - 1
+                    if latitude_span
+                    else 12
+                )
+                map_layout["center"] = {
+                    "lon": (
+                        min(plotted_longitudes) + max(plotted_longitudes)
+                    )
+                    / 2,
+                    "lat": (min(plotted_latitudes) + max(plotted_latitudes))
+                    / 2,
+                }
+                map_layout["zoom"] = max(
+                    1,
+                    min(
+                        12,
+                        longitude_zoom,
+                        latitude_zoom,
+                    ),
+                )
+            geographic.update_layout(
+                title="Dialysis Geographic Flows",
+                map=map_layout,
+                margin={"l": 0, "r": 0, "b": 0},
+            )
             self._write_figure(geographic, "geographic_flows")
 
     def stop_logger(self):
