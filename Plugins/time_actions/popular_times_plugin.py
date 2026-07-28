@@ -19,7 +19,7 @@ class PopularTimesPlugin(ActionPlugin):
         self.popular_times_data_by_node_type: dict[str, list[tuple[int, int]]] = {} # Ex: "restaurant" -> [(0, 10), (1, 5), ..., (23, 20)]
         self.bairro_multipliers: dict[str, float] = {}
         self.setores_multipliers: dict[str, float] = {}
-        self.data_path = Path(__file__).parent.parent.parent / "data_input" / "popular_times"
+        self.data_path = Path(__file__).parent.parent.parent / "data_input" / "popular_times"        
 
 
     def load_plugin(self, simulation: LodusSimulation):
@@ -90,7 +90,7 @@ class PopularTimesPlugin(ActionPlugin):
             print(f"Erro ao carregar CSV de bairros: {e}")
 
     def _load_setores_csv(self):
-        csv_path = self.data_path / "Setores-13Bairros.csv"
+        csv_path = self.data_path / "Setores-13Bairros-Dia.csv"
         if not csv_path.exists():
             print(f"Arquivo de setores não encontrado: {csv_path}")
             return
@@ -152,14 +152,17 @@ class PopularTimesPlugin(ActionPlugin):
 
             #mult = self.bairro_multipliers.get(region_key, 1.0)
             mult = self.setores_multipliers.get(region_key, 1.0)
+            
 
-            return int(round(base_quantity * mult))
+            return int(round((base_quantity * mult) /10)) #Ao dividir por 10 aqui (ao invés de colocar o tamanho da amostra como 100)
+                                                          #eu evito que valores "0" apareçam nos csv dos locais
 
         return round(base_quantity)
 
 
     def popular_times_action(self,  pop_template, values: dict, cycle_step: int, sim_step: int):
         """Ação TimeAction que chama gather_population com quantidade do CSV."""
+
         node_type = values.get("node_type")
         if not node_type:
             print("Erro: node_type não definido em values")
@@ -175,15 +178,18 @@ class PopularTimesPlugin(ActionPlugin):
         current_sim_step = sim_step
         
         region = values.get('region')
-        unique_name_node = values.get('node')
+        unique_name_node = values.get('node') or values.get('node_unique_name')
+        if not unique_name_node:
+            print("Erro: node ou node_unique_name não definido em values")
+            return []
 
         quantity = self.get_quantity_for_hour(current_sim_step, node_type, current_hour, region, unique_name_node)
         #print(f"[PopularTimes] Quantidade para {node_type} às {current_hour}h: {quantity}")
         
         # parâmetros para o gather_population
         gather_values = {
-            'region': values['region'],
-            'node': f"{values['region']}//{values['node']}",
+            'region': region,
+            'node': f"{region}//{unique_name_node}",
             'quantity': quantity,
             'different_node_name': values.get('different_node_name', False)
         }
@@ -191,7 +197,7 @@ class PopularTimesPlugin(ActionPlugin):
         # Chama gather_population
         gather_population_func = self.simulation.routine_controller.action_type_to_function.get('gather_population')
         if gather_population_func:
-            print(f"[PopularTimes] Chamando gather_population com quantity={quantity}")
+            #print(f"[PopularTimes] Chamando gather_population com quantity={quantity}")
             return gather_population_func(pop_template, gather_values, cycle_step, sim_step)
         else:
             print("Erro: gather_population não registrada")

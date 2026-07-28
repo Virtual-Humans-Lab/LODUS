@@ -3,7 +3,7 @@
         "__comment1__": "Files will be loaded from the 'data_input' folder",
         "environment_file": "Env-pontos-Pedro.json",
         "population_file": "Population-Pedro.json",
-        "routine_file": "Routine-Empty-copy.json"
+        "routine_file": "Routine-Poa13-PopularTimes-Example.json"
     },
     "popular_times_plugin": {},
     "gather_population_plugin": {},
