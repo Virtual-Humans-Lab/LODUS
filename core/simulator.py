@@ -55,25 +55,47 @@ class RoutineController:
 
     def generate_action_list(self, cycle_step: int, simulation_step: int) -> list[Action]:
         """Generates a list of actions to be executed in the current cycle_step/simulation_step."""
-        action_list: list[Action] = []
+        return (
+            self.generate_start_of_step_action_list(
+                cycle_step, simulation_step
+            )
+            + self.generate_regular_action_list(cycle_step)
+            + self.generate_end_of_step_action_list(
+                cycle_step, simulation_step
+            )
+        )
 
-        # Actions Queued as First
-        action_list += self.process_queued_actions(True) 
-        # Routine Plugins Start Global Actions
-        action_list += self.process_routine_plugins_global_actions(cycle_step, True)
-        # Default Repeating Global Actions
-        action_list += self.process_repeating_global_actions(self.global_actions, cycle_step)
-        # Routine Plugins Start Actions
-        action_list += self.process_routine_plugins_actions(cycle_step, simulation_step, True)
-        # Default Routines
-        action_list += self.process_routines(cycle_step)
-        # Routine Plugins End Actions
-        action_list += self.process_routine_plugins_actions(cycle_step, simulation_step, False)
-        # Routine Plugins End Global Actions
-        action_list += self.process_routine_plugins_global_actions(cycle_step, False)
-        # Actions Queued as Last
-        action_list += self.process_queued_actions(False)
-        return action_list
+    def generate_start_of_step_action_list(
+        self, cycle_step: int, simulation_step: int
+    ) -> list[Action]:
+        """Actions that must take effect before ActionPlugin updates."""
+        return (
+            self.process_queued_actions(True)
+            + self.process_routine_plugins_global_actions(cycle_step, True)
+            + self.process_routine_plugins_actions(
+                cycle_step, simulation_step, True
+            )
+        )
+
+    def generate_regular_action_list(self, cycle_step: int) -> list[Action]:
+        return (
+            self.process_repeating_global_actions(
+                self.global_actions, cycle_step
+            )
+            + self.process_routines(cycle_step)
+        )
+
+    def generate_end_of_step_action_list(
+        self, cycle_step: int, simulation_step: int
+    ) -> list[Action]:
+        """Actions that take effect after ActionPlugin updates."""
+        return (
+            self.process_routine_plugins_actions(
+                cycle_step, simulation_step, False
+            )
+            + self.process_routine_plugins_global_actions(cycle_step, False)
+            + self.process_queued_actions(False)
+        )
 
     def process_routines(self, cycle_step: int):
         return [action for region in self.env_graph.region_list for action in region.generate_action_list(cycle_step)]
@@ -116,7 +138,6 @@ class RoutineController:
 
             if global_action.execution_scope == GlobalActionExecutionScope.ONCE:
                 action = self._copy_scheduled_global_action(global_action)
-                action.values['execution_scope'] = "once"
                 action_list.append(action)
                 continue
 
@@ -276,10 +297,18 @@ class PluginController:
             plugin.stop_logger()
 
     def update_plugins(self, cycle_step: int, simulation_step: int):
+        self.update_loggers_and_routine_plugins(cycle_step, simulation_step)
+        self.update_action_plugins(cycle_step, simulation_step)
+
+    def update_loggers_and_routine_plugins(
+        self, cycle_step: int, simulation_step: int
+    ):
         for plugin in self.loaded_logger_plugins:
             plugin.update_time_step(cycle_step, simulation_step)
         for plugin in self.loaded_routine_plugins:
             plugin.update_time_step(cycle_step, simulation_step)
+
+    def update_action_plugins(self, cycle_step: int, simulation_step: int):
         for plugin in self.loaded_action_plugins:
             plugin.update_time_step(cycle_step, simulation_step)
     
@@ -330,9 +359,18 @@ class LodusSimulation:
             cycle_length=self.time_status.cycle_length,
             total_cycles=self.time_status.total_cycles
         )
-        self.plugin_controller.update_plugins(self.time_status.cycle_step, self.time_status.simulation_step)
-
-        self.process_actions(self.time_status.cycle_step, self.time_status.simulation_step)
+        cycle_step = self.time_status.cycle_step
+        simulation_step = self.time_status.simulation_step
+        self.plugin_controller.update_loggers_and_routine_plugins(
+            cycle_step, simulation_step
+        )
+        self.process_start_of_step_actions(cycle_step, simulation_step)
+        self.plugin_controller.update_action_plugins(
+            cycle_step, simulation_step
+        )
+        self.process_regular_and_end_of_step_actions(
+            cycle_step, simulation_step
+        )
 
         self.merge_blobs_in_all_nodes()
         self.env_graph.set_frame_origin_of_all_blobs()
@@ -357,6 +395,33 @@ class LodusSimulation:
     def process_actions(self, cycle_step: int, simulation_step: int):
         """Processes all actions for the given cycle_step and simulation_step."""
         actions = self.routine_controller.generate_action_list(cycle_step, self.time_status.simulation_step)
+        self._consume_actions(actions, cycle_step, simulation_step)
+
+    def process_start_of_step_actions(
+        self, cycle_step: int, simulation_step: int
+    ):
+        actions = self.routine_controller.generate_start_of_step_action_list(
+            cycle_step, simulation_step
+        )
+        self._consume_actions(actions, cycle_step, simulation_step)
+
+    def process_regular_and_end_of_step_actions(
+        self, cycle_step: int, simulation_step: int
+    ):
+        actions = (
+            self.routine_controller.generate_regular_action_list(cycle_step)
+            + self.routine_controller.generate_end_of_step_action_list(
+                cycle_step, simulation_step
+            )
+        )
+        self._consume_actions(actions, cycle_step, simulation_step)
+
+    def _consume_actions(
+        self,
+        actions: list[Action],
+        cycle_step: int,
+        simulation_step: int,
+    ):
         simplified_actions = self.routine_controller.simplify_action_list(actions, cycle_step, simulation_step)
         for action in simplified_actions:
             self.routine_controller.consume_action(action, cycle_step, simulation_step)

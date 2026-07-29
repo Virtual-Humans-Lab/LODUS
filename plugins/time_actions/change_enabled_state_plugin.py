@@ -4,7 +4,6 @@ import time
 
 class ChangeEnabledStatePlugin(ActionPlugin):
     """Plugin to change the enabled state of nodes in the environment graph."""
-    
     def __init__(self):
         super().__init__()
 
@@ -23,21 +22,47 @@ class ChangeEnabledStatePlugin(ActionPlugin):
     def set_node_enabled(self, pop_template ,values, cycle_step, simulation_step):
         """ Set node enabled state. Base Operation. """
         assert 'enabled' in values, "Missing 'enabled' in values"
-        if 'execution_scope' not in values or values['execution_scope'] != "once":
+        execute_once = (
+            values.get("execution_scope") == "once"
+            or (
+                "node_complete_name" in values
+                and "region" not in values
+                and "node_unique_name" not in values
+            )
+        )
+        if not execute_once:
             assert 'region' in values, "Missing 'region' in values"
             assert 'node_unique_name' in values, "Missing 'node_unique_name' in values"
-
-            if values['node_complete_name'] != f"{values['region']}//{values['node_unique_name']}":
+            expected_name = (
+                f"{values['region']}//{values['node_unique_name']}"
+            )
+            if (
+                "node_complete_name" in values
+                and values["node_complete_name"] != expected_name
+            ):
                 return  # Skip if the node_complete_name does not match the expected format
         
         start_time = time.perf_counter()
         
-        target_node = self.env_graph.get_node_by_complete_name(values['node_complete_name'])
+        node_complete_name = values.get("node_complete_name")
+        if node_complete_name is None:
+            node_complete_name = (
+                f"{values['region']}//{values['node_unique_name']}"
+            )
+        target_node = self.env_graph.get_node_by_complete_name(node_complete_name)
         enabled_state = values['enabled']
         cascade = values.get('cascade_reenable', False)
+        cause = values.get("cause", "off_cycle")
 
 
-        self.env_graph.set_node_enabled(target_node.get_complete_name(), enabled=enabled_state, cascade_reenable=cascade)
+        self.env_graph.set_node_enabled(
+            target_node.get_complete_name(),
+            enabled=enabled_state,
+            cascade_reenable=cascade,
+            cause=cause,
+            simulation_step=simulation_step,
+            cycle_step=cycle_step,
+        )
         self.add_execution_time('set_node_enabled', time.perf_counter() - start_time)
 
     def set_nodes_enabled_by_type(self, pop_template ,values, cycle_step, simulation_step):
@@ -54,6 +79,7 @@ class ChangeEnabledStatePlugin(ActionPlugin):
         target_regions = values.get('target_regions', None)
         enabled_state = values['enabled']
         cascade = values.get('cascade_reenable', False)
+        cause = values.get("cause", "off_cycle")
 
         for node_type_name in node_type:
             nodes = self.env_graph.get_nodes_by_type(node_type_name)
@@ -63,9 +89,10 @@ class ChangeEnabledStatePlugin(ActionPlugin):
                     continue  # Skip nodes not in the target regions
 
                 self.env_graph.set_node_enabled(node.get_complete_name(), 
-                                                         enabled=enabled_state, 
-                                                         cascade_reenable=cascade)
-                            
-        self.add_execution_time('set_nodes_enabled_by_type', time.perf_counter() - start_time)
+                                                enabled=enabled_state,
+                                                cascade_reenable=cascade,
+                                                cause=cause,
+                                                simulation_step=simulation_step,
+                                                cycle_step=cycle_step)
 
-    
+        self.add_execution_time('set_nodes_enabled_by_type', time.perf_counter() - start_time)

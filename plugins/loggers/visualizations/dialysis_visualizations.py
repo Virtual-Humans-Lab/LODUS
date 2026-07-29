@@ -65,6 +65,21 @@ class DialysisVisualizationGenerator:
             if location_path.is_file()
             else pd.DataFrame()
         )
+        optional_files = {
+            "node_states": "envnode_state.csv",
+            "water_levels": "water_level_step.csv",
+        }
+        for name, filename in optional_files.items():
+            path = self.data_path / filename
+            frames[name] = (
+                pd.read_csv(
+                    path,
+                    sep=";",
+                    encoding="utf-8-sig",
+                )
+                if path.is_file()
+                else pd.DataFrame()
+            )
         return frames
 
     def _write(self, figure, filename: str):
@@ -393,6 +408,90 @@ class DialysisVisualizationGenerator:
         )
         self._write(distance, "travel_distance")
 
+    def _resilience_plot(
+        self,
+        steps: pd.DataFrame,
+        node_states: pd.DataFrame,
+        water_levels: pd.DataFrame,
+    ):
+        figure = make_subplots(specs=[[{"secondary_y": True}]])
+        state_counts = []
+        if not node_states.empty:
+            states = {}
+            relevant = node_states[
+                node_states["Node Type"].isin(
+                    ["dialysis_clinic", "water_source"]
+                )
+            ].sort_values("Simulation Step")
+            events_by_step = {
+                step: group
+                for step, group in relevant.groupby("Simulation Step")
+            }
+            for simulation_step in steps["Simulation Step"]:
+                for _, row in events_by_step.get(
+                    simulation_step, pd.DataFrame()
+                ).iterrows():
+                    states[row["Node"]] = (
+                        row["Node Type"],
+                        row["Enabled"],
+                    )
+                state_counts.append(
+                    {
+                        "Simulation Step": simulation_step,
+                        "Active Clinics": sum(
+                            enabled
+                            for node_type, enabled in states.values()
+                            if node_type == "dialysis_clinic"
+                        ),
+                        "Active ETAs": sum(
+                            enabled
+                            for node_type, enabled in states.values()
+                            if node_type == "water_source"
+                        ),
+                    }
+                )
+        counts = pd.DataFrame(state_counts)
+        for metric in ("Active Clinics", "Active ETAs"):
+            if not counts.empty:
+                figure.add_trace(
+                    go.Scatter(
+                        x=counts["Simulation Step"],
+                        y=counts[metric],
+                        mode="lines",
+                        name=metric,
+                    ),
+                    secondary_y=False,
+                )
+        figure.add_trace(
+            go.Scatter(
+                x=steps["Simulation Step"],
+                y=steps["Available Capacity"],
+                mode="lines",
+                name="Available Capacity",
+            ),
+            secondary_y=False,
+        )
+        if not water_levels.empty:
+            figure.add_trace(
+                go.Scatter(
+                    x=water_levels["Simulation Step"],
+                    y=water_levels["Water Level"],
+                    mode="lines",
+                    name="Water Level",
+                ),
+                secondary_y=True,
+            )
+        figure.update_layout(
+            title="Water Level, Active Infrastructure, and Capacity"
+        )
+        figure.update_yaxes(
+            title_text="Nodes / treatment slots", secondary_y=False
+        )
+        figure.update_yaxes(
+            title_text="Water level", secondary_y=True
+        )
+        self._write(figure, "resilience_timeline")
+
     def _geographic_plot(
         self,
         flows: pd.DataFrame,
@@ -555,6 +654,11 @@ class DialysisVisualizationGenerator:
             frames["events"],
             frames["steps"],
             clinic_labels,
+        )
+        self._resilience_plot(
+            frames["steps"],
+            frames["node_states"],
+            frames["water_levels"],
         )
         self._geographic_plot(
             frames["flows"],

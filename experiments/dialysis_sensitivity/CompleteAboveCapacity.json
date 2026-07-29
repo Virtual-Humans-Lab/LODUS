@@ -1,0 +1,6 @@
+{
+  "extends": "dialysis_core/CompleteBase",
+  "dialysis_plugin": {
+    "patient_count": 1740
+  }
+}

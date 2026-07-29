@@ -1,0 +1,8 @@
+{
+  "extends": "dialysis_core/K01_ReducedModerate",
+  "off_cycle_routine_plugin": {
+    "start_of_step_routine_files": [
+      "dialysis_experiments/K02_MoinhosNoRecovery.json"
+    ]
+  }
+}

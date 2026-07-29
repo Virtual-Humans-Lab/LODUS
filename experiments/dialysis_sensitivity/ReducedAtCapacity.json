@@ -1,0 +1,6 @@
+{
+  "extends": "dialysis_core/ReducedBase",
+  "dialysis_plugin": {
+    "patient_count": 1104
+  }
+}

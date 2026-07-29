@@ -1,0 +1,20 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Moinhos de Vento//water_source_0": [
+      {
+        "cycle_step": 78,
+        "action": {
+          "type": "set_node_enabled",
+          "values": {
+            "region": "Moinhos de Vento",
+            "node_unique_name": "water_source_0",
+            "node_complete_name": "Moinhos de Vento//water_source_0",
+            "enabled": false,
+            "cause": "off_cycle"
+          }
+        }
+      }
+    ]
+  }
+}

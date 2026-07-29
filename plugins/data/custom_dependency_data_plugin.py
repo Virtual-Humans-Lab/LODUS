@@ -5,7 +5,18 @@ from typing import Any, cast
 from core.environment import EnvNode, EnvironmentGraph
 from core.plugin import ActionPlugin
 from core.simulator import LodusSimulation
-from data.node_dependency_data_plugin import MinOfRule, NodeDependencyDataPlugin, NodeDependencyRule
+try:
+    from data.node_dependency_data_plugin import (
+        MinOfRule,
+        NodeDependencyDataPlugin,
+        NodeDependencyRule,
+    )
+except ModuleNotFoundError:
+    from plugins.data.node_dependency_data_plugin import (
+        MinOfRule,
+        NodeDependencyDataPlugin,
+        NodeDependencyRule,
+    )
 
 class CustomDependencyDataPlugin(ActionPlugin):
     """Load custom dependency data."""

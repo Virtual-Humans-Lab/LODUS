@@ -58,6 +58,7 @@ class EnvNode():
         self.long_lat:list[float] = [0.0, 0.0]
         self.attributes: dict[str, Any] = {}
         self.enabled: bool = True
+        self.disable_reasons: set[str] = set()
 
         
         self.contained_blobs:list[Blob] = []
@@ -76,16 +77,24 @@ class EnvNode():
     def set_enabled(self, enabled: bool) -> None:
         if not isinstance(enabled, bool):
             raise ValueError(f"enabled must be of type bool, is {type(enabled)}")
-        self.enabled = enabled
+        if enabled:
+            self.enable("manual")
+        else:
+            self.disable("manual")
 
-    def enable(self) -> None:
-        self.enabled = True
+    def enable(self, reason: str = "manual") -> None:
+        self.disable_reasons.discard(reason)
+        self.enabled = not self.disable_reasons
 
-    def disable(self) -> None:
+    def disable(self, reason: str = "manual") -> None:
+        self.disable_reasons.add(reason)
         self.enabled = False
 
     def is_enabled(self) -> bool:
         return self.enabled
+
+    def get_disable_reasons(self) -> tuple[str, ...]:
+        return tuple(sorted(self.disable_reasons))
     
     def set_long_lat_position(self, longitude: float, latitude: float) -> None:
         """Sets the physical position of this node."""
@@ -488,6 +497,7 @@ class EnvironmentGraph():
         #self.od_matrix_logger:od_matrix_logger.ODMatrixLogger = None
         self.movement_logger_dict = {}
         self.characteristic_change_logger = {}
+        self.node_state_events: list[dict[str, Any]] = []
         
         # Events test
         Blob.events.on_traceable_property_changed += self.log_traceable_change
@@ -521,16 +531,30 @@ class EnvironmentGraph():
         """Gets a list of EnvNodes by type."""
         return [node for node in self.node_list if node.node_type == node_type]
 
-    def set_node_enabled(self, node_complete_name: str, enabled: bool, cascade_reenable: bool = False) -> dict:
+    def set_node_enabled(
+        self,
+        node_complete_name: str,
+        enabled: bool,
+        cascade_reenable: bool = False,
+        cause: str = "manual",
+        simulation_step: int | None = None,
+        cycle_step: int | None = None,
+    ) -> dict:
         """Change enabled state for a single node given by its complete name (`RegionName//UniqueName`).
 
-        - Uses `node_dependency` plugin (if present) for validations and cascading.
-        - Only the node matching `node_complete_name` is targeted directly; cascades
-          (disables) may affect multiple nodes per dependency rules.
+        Availability is cause-aware: disabling adds a blocker and enabling removes
+        only the matching blocker. Dependency blockers are then recomputed to a
+        fixed point. ``cascade_reenable`` remains accepted for compatibility;
+        dependency consistency is now always restored automatically.
 
         Returns a summary dict with keys: `enabled`, `disabled`, and `blocked`.
         """
-        # Find the exact node by complete name
+        if not isinstance(enabled, bool):
+            raise ValueError("enabled must be a bool")
+        if not isinstance(cause, str) or not cause.strip():
+            raise ValueError("cause must be a non-empty string")
+        cause = cause.strip()
+
         targets = [n for n in self.node_list if n.get_complete_name() == node_complete_name]
         if not targets:
             raise ValueError(f"Node with complete name '{node_complete_name}' not found in graph")
@@ -541,72 +565,142 @@ class EnvironmentGraph():
         dep_action = self.data_action_map.get("node_dependency")
         summary = {"enabled": [], "disabled": [], "blocked": {}}
 
-        # Helper: unique name portion used by the dependency plugin
-        unique_name = node.unique_name
-
+        before_states = {
+            n.get_complete_name(): n.is_enabled() for n in self.node_list
+        }
+        previous_enabled = node.is_enabled()
+        previous_reasons = node.get_disable_reasons()
         if enabled:
-            # Build current enabled set (by complete_name)
-            current_enabled = {n.get_complete_name() for n in self.node_list if n.is_enabled()}
-
-            # If plugin exists, validate prerequisites first
-            if dep_action:
-                can_enable = dep_action("can_node_be_enabled", node.get_complete_name(), current_enabled)
-                if not can_enable:
-                    missing = [p for p in dep_action("get_transitive_dependency_nodes", node.get_complete_name()) if p not in current_enabled]
-                    summary["blocked"][node.get_complete_name()] = missing
-                    return summary
-
-            # Enable target node
-            node.enable()
-            summary["enabled"].append(node.get_complete_name())
-            current_enabled.add(node.get_complete_name())
-
-            # Optionally cascade re-enable: try to re-enable dependents that are now satisfiable
-            if dep_action and cascade_reenable:
-                dependents = dep_action("get_transitive_dependent_nodes", node.get_complete_name())
-                for dep in dependents:
-                    for n in self.node_list:
-                        if n.get_complete_name() == dep and not n.is_enabled():
-                            if dep_action("can_node_be_enabled", n.get_complete_name(), current_enabled):
-                                n.enable()
-                                summary["enabled"].append(n.get_complete_name())
-                                current_enabled.add(n.get_complete_name())
-
+            node.enable(cause)
+            action = "blocker_removed"
         else:
-            # Disable target node
-            current_enabled = {n.get_complete_name() for n in self.node_list if n.is_enabled()}
-            if node.is_enabled():
-                node.disable()
-                summary["disabled"].append(node.get_complete_name())
-                current_enabled.discard(node.get_complete_name())
+            node.disable(cause)
+            action = "blocker_added"
+        self._record_node_state_event(
+            node,
+            cause,
+            action,
+            previous_enabled,
+            previous_reasons,
+            simulation_step,
+            cycle_step,
+        )
 
-            # If plugin exists, only disable dependents that are no longer valid.
+        if dep_action:
+            self._recompute_dependency_blockers(
+                dep_action,
+                simulation_step,
+                cycle_step,
+            )
+
+        for candidate in self.node_list:
+            name = candidate.get_complete_name()
+            if before_states[name] and not candidate.is_enabled():
+                summary["disabled"].append(name)
+            elif not before_states[name] and candidate.is_enabled():
+                summary["enabled"].append(name)
+
+        if enabled and not node.is_enabled():
+            current_enabled = {
+                n.get_complete_name() for n in self.node_list if n.is_enabled()
+            }
+            missing = []
             if dep_action:
-                dependents = dep_action("get_transitive_dependent_nodes", node.get_complete_name())
-                remaining_dependents = set(dependents)
-
-                while remaining_dependents:
-                    changed = False
-
-                    for dep_name in list(remaining_dependents):
-                        dep_node = next((n for n in self.node_list if n.get_complete_name() == dep_name), None)
-                        if dep_node is None or not dep_node.is_enabled():
-                            remaining_dependents.discard(dep_name)
-                            continue
-
-                        if dep_action("can_node_be_enabled", dep_name, current_enabled):
-                            continue
-
-                        dep_node.disable()
-                        summary["disabled"].append(dep_node.get_complete_name())
-                        current_enabled.discard(dep_name)
-                        remaining_dependents.discard(dep_name)
-                        changed = True
-
-                    if not changed:
-                        break
+                missing = [
+                    prerequisite
+                    for prerequisite in dep_action(
+                        "get_transitive_dependency_nodes",
+                        node.get_complete_name(),
+                    )
+                    if prerequisite not in current_enabled
+                ]
+            summary["blocked"][node.get_complete_name()] = missing
+            self._record_node_state_event(
+                node,
+                cause,
+                "enable_blocked",
+                node.is_enabled(),
+                node.get_disable_reasons(),
+                simulation_step,
+                cycle_step,
+            )
 
         return summary
+
+    def _recompute_dependency_blockers(
+        self,
+        dep_action: Callable,
+        simulation_step: int | None,
+        cycle_step: int | None,
+    ) -> None:
+        """Reconcile dependency blockers until all effective states are stable."""
+        for _ in range(max(1, len(self.node_list) + 1)):
+            changed = False
+            enabled_nodes = {
+                node.get_complete_name()
+                for node in self.node_list
+                if node.is_enabled()
+            }
+            for node in self.node_list:
+                name = node.get_complete_name()
+                has_rule = bool(
+                    dep_action("get_direct_dependency_nodes", name)
+                )
+                if not has_rule:
+                    continue
+                can_enable = dep_action(
+                    "can_node_be_enabled", name, enabled_nodes
+                )
+                has_blocker = "dependency" in node.disable_reasons
+                if can_enable == (not has_blocker):
+                    continue
+                previous_enabled = node.is_enabled()
+                previous_reasons = node.get_disable_reasons()
+                if can_enable:
+                    node.enable("dependency")
+                    action = "blocker_removed"
+                else:
+                    node.disable("dependency")
+                    action = "blocker_added"
+                self._record_node_state_event(
+                    node,
+                    "dependency",
+                    action,
+                    previous_enabled,
+                    previous_reasons,
+                    simulation_step,
+                    cycle_step,
+                )
+                changed = True
+            if not changed:
+                return
+        raise RuntimeError("Node dependency availability did not converge")
+
+    def _record_node_state_event(
+        self,
+        node: EnvNode,
+        cause: str,
+        action: str,
+        previous_enabled: bool,
+        previous_reasons: tuple[str, ...],
+        simulation_step: int | None,
+        cycle_step: int | None,
+    ) -> None:
+        self.node_state_events.append(
+            {
+                "simulation_step": simulation_step,
+                "cycle_step": cycle_step,
+                "node": node.get_complete_name(),
+                "region": node.containing_region_name,
+                "node_type": node.node_type,
+                "cause": cause,
+                "action": action,
+                "previous_enabled": int(previous_enabled),
+                "enabled": int(node.is_enabled()),
+                "previous_blockers": "|".join(previous_reasons),
+                "blockers": "|".join(node.get_disable_reasons()),
+            }
+        )
 
     def get_node_by_id(self, _id) -> EnvNode:
         return self.node_id_dict[_id]

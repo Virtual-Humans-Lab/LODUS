@@ -5,7 +5,7 @@
         "population_file": "enumeration_area/Population-13-EnumArea.json"
     },
      "simulation_parameters": {
-        "cycles": 10,
+        "total_cycles": 10,
         "cycle_length": 24
     },
     "levy_walk_plugin": {

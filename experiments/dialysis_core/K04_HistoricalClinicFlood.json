@@ -1,0 +1,7 @@
+{
+  "extends": "dialysis_core/K01_ReducedModerate",
+  "water_level_data_plugin": {
+    "data_file": "water_level/flood_time_step.csv",
+    "target_node_types": ["dialysis_clinic"]
+  }
+}

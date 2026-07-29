@@ -1,0 +1,50 @@
+{
+  "envgraph_inputs_files": {
+    "environment_file": [
+      "enumeration_area/Environment-13-EnumArea.json",
+      "dialysis_clinics/Environment-ETAs-13.json",
+      "dialysis_clinics/Environment-Clinics-13.json"
+    ],
+    "population_file": "enumeration_area/Population-13-EnumArea.json"
+  },
+  "simulation_parameters": {
+    "total_cycles": 10,
+    "cycle_length": 24,
+    "random_seed": 0
+  },
+  "node_dependency_data_plugin": {
+    "dependency_files": []
+  },
+  "custom_dependency_data_plugin": {
+    "dependency_rules": [
+      {
+        "rule_name": "dialysis_clinic_need_water_source",
+        "target_node_type": "dialysis_clinic",
+        "target_node_attribute": "water_source",
+        "dependency_node_type": "water_source",
+        "dependency_node_attribute": "eta_name",
+        "dependency_rule": "min_of",
+        "minimum_enabled": 1
+      }
+    ]
+  },
+  "change_enabled_state_plugin": {},
+  "off_cycle_routine_plugin": {
+    "start_of_step_routine_files": [],
+    "end_of_step_routine_files": []
+  },
+  "dialysis_plugin": {
+    "patient_count": 120,
+    "treatment_frequency_days": 3,
+    "max_patients_per_node": 20,
+    "clinic_node_type": "dialysis_clinic",
+    "patient_node_type": "home",
+    "clinic_name_attribute": "clinic_name",
+    "clinic_data_file": "dialysis_clinics/opening_hours_example.csv",
+    "default_values": {
+      "opening_step": 6,
+      "closing_step": 18,
+      "treatment_capacity_per_step": 2
+    }
+  }
+}

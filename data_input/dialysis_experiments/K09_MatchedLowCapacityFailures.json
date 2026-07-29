@@ -1,0 +1,65 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Centro Histórico//clinic_0": [
+      {
+        "cycle_step": 78,
+        "action": {
+          "type": "set_node_enabled",
+          "values": {
+            "region": "Centro Histórico",
+            "node_unique_name": "clinic_0",
+            "node_complete_name": "Centro Histórico//clinic_0",
+            "enabled": false,
+            "cause": "off_cycle"
+          }
+        }
+      }
+    ],
+    "Centro Histórico//clinic_1": [
+      {
+        "cycle_step": 78,
+        "action": {
+          "type": "set_node_enabled",
+          "values": {
+            "region": "Centro Histórico",
+            "node_unique_name": "clinic_1",
+            "node_complete_name": "Centro Histórico//clinic_1",
+            "enabled": false,
+            "cause": "off_cycle"
+          }
+        }
+      }
+    ],
+    "Santana//clinic_0": [
+      {
+        "cycle_step": 78,
+        "action": {
+          "type": "set_node_enabled",
+          "values": {
+            "region": "Santana",
+            "node_unique_name": "clinic_0",
+            "node_complete_name": "Santana//clinic_0",
+            "enabled": false,
+            "cause": "off_cycle"
+          }
+        }
+      }
+    ],
+    "Santa Cecília//clinic_0": [
+      {
+        "cycle_step": 78,
+        "action": {
+          "type": "set_node_enabled",
+          "values": {
+            "region": "Santa Cecília",
+            "node_unique_name": "clinic_0",
+            "node_complete_name": "Santa Cecília//clinic_0",
+            "enabled": false,
+            "cause": "off_cycle"
+          }
+        }
+      }
+    ]
+  }
+}

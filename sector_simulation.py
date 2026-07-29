@@ -3,7 +3,11 @@ import sys
 
 sys.path.append('./plugins/')
 import argparse
+import json
+import resource
+import subprocess
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
 from loggers.characteristic_change_logger import CharacteristicChangeLogger
@@ -45,7 +49,7 @@ from data.custom_dependency_data_plugin import CustomDependencyDataPlugin
 import core.environment
 from core.population import PopulationTemplate
 from util.random_instance import FixedRandom
-from util.data_parse import generate_lodus_simulation
+from util.data_parse import generate_lodus_simulation, load_experiment_config
 import numpy as np
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
@@ -57,9 +61,26 @@ arg_parser.add_argument('--c', metavar="C", type=str, default = "./data_input/Cu
 arg_parser.add_argument('--d', metavar="D", type=str, default = "./data_input/NodeDensities.json", help='Node Densities Configuration File (.json)')
 arg_parser.add_argument('--v', metavar="V", type=str, default = "./data_input/VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
 arg_parser.add_argument('--i', metavar="I", type=str, default = "./data_input/SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
+arg_parser.add_argument('--seed', type=int, default=None, help='Random seed. Overrides simulation_parameters.random_seed.')
+arg_parser.add_argument('--no-dialysis-png', action='store_true', help='Generate dialysis HTML outputs without PNG export.')
 args = vars(arg_parser.parse_args())
 
-FixedRandom(random_seed=0, numpy_seed=0)
+configured_seed = None
+if args["e"] is not None:
+    seed_config = load_experiment_config(args["e"])
+    configured_seed = seed_config.get("simulation_parameters", {}).get(
+        "random_seed",
+        seed_config.get("random_seed"),
+    )
+simulation_seed = (
+    args["seed"]
+    if args["seed"] is not None
+    else int(configured_seed or 0)
+)
+FixedRandom(
+    random_seed=simulation_seed,
+    numpy_seed=simulation_seed,
+)
 
 output_str = ""
 
@@ -71,16 +92,16 @@ experiment_configuration_file = args['e']
 if ".json" in args['f']: 
     raise Exception("please use the new format of inputs (experiment config)")
 lodus_simulation = generate_lodus_simulation(experiment_configuration_file)
+lodus_simulation.experiment_config.setdefault(
+    "simulation_parameters", {}
+)["random_seed"] = simulation_seed
 env_graph = lodus_simulation.env_graph
 '''
 Parameters
 '''
 # How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 10
-cycle_length:int = 24
-lodus_simulation.set_total_cycles(cycles)
-lodus_simulation.set_cycle_length(cycle_length)
-# env_graph.routine_cycle_length = cycle_length
+cycles = lodus_simulation.time_status.total_cycles
+cycle_length = lodus_simulation.time_status.cycle_length
 
 lodus_simulation.experiment_name = args["n"] if args["n"] is not None else args["e"]
 lodus_simulation.env_graph.print_overview()
@@ -224,9 +245,11 @@ if vaccine:
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
+dialysis_logger = None
 if dialysis:
-    dialysis_logger = DialysisLogger()
-    lodus_simulation.load_plugin(dialysis_logger)
+    dialysis_logger = DialysisLogger(
+        export_png=not args["no_dialysis_png"]
+    )
 
 blob_count_logger = BlobCountLogger()
 blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
@@ -343,6 +366,8 @@ lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
 lodus_simulation.load_plugin(displacement_logger)
 lodus_simulation.load_plugin(envnode_state_logger)
+if dialysis_logger is not None:
+    lodus_simulation.load_plugin(dialysis_logger)
 # if levy_sample_logger is not None: lodus_simulation.load_plugin(levy_sample_logger)
 if infection_sum_logger is not None: lodus_simulation.load_plugin(infection_sum_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
@@ -351,6 +376,7 @@ if infection_sum_logger is not None: lodus_simulation.load_plugin(infection_sum_
 lodus_simulation.setup_logging()
 
 start_time = time.perf_counter()
+started_at = datetime.now(timezone.utc)
 #for i in range(simulation_steps):
 
 print("Water sources: ", [node.get_complete_name() for node in lodus_simulation.env_graph.get_nodes_by_type("water_source")])
@@ -375,8 +401,6 @@ while not lodus_simulation.time_status.is_final_step:
     i = lodus_simulation.time_status.simulation_step
     # print(i, end='\r')
 
-    n = lodus_simulation.env_graph.get_nodes_by_type("water_source")[1]
-
     # print number of disabled nodes at the end of each simulation step
     disabled_nodes = [node for node in env_graph.node_list if not node.enabled]
     print(f"\nEnd of Step {i}: {len(disabled_nodes)} disabled nodes")
@@ -394,6 +418,7 @@ while not lodus_simulation.time_status.is_final_step:
 # od_logger.stop_logging()
 
 end_time = time.perf_counter()
+finished_at = datetime.now(timezone.utc)
 lodus_simulation.stop_logging()
 
 
@@ -420,9 +445,45 @@ print((end_time - start_time)/cycles)
 
 print("Loaded TimeAction Keys: ", lodus_simulation.routine_controller.action_type_to_function.keys())
 print("writing Output File")
-text_file = open(f"output_logs/{lodus_simulation.experiment_name}/output.txt", "w")
-text_file.write(output_str)
-text_file.close()
+output_path = Path("output_logs") / lodus_simulation.experiment_name
+output_path.mkdir(parents=True, exist_ok=True)
+(output_path / "output.txt").write_text(output_str, encoding="utf8")
+try:
+    commit_sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=Path(__file__).parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+except (OSError, subprocess.CalledProcessError):
+    commit_sha = None
+metadata = {
+    "status": "complete",
+    "experiment": args["e"],
+    "run_name": lodus_simulation.experiment_name,
+    "seed": simulation_seed,
+    "numpy_seed": simulation_seed,
+    "started_at_utc": started_at.isoformat(),
+    "finished_at_utc": finished_at.isoformat(),
+    "runtime_seconds": end_time - start_time,
+    "peak_memory_kib": resource.getrusage(
+        resource.RUSAGE_SELF
+    ).ru_maxrss,
+    "commit_sha": commit_sha,
+    "environment_files": lodus_simulation.experiment_config.get(
+        "envgraph_inputs_files", {}
+    ),
+    "simulation_parameters": {
+        "total_cycles": cycles,
+        "cycle_length": cycle_length,
+    },
+    "resolved_config": lodus_simulation.experiment_config,
+}
+(output_path / "run_metadata.json").write_text(
+    json.dumps(metadata, indent=2, ensure_ascii=False),
+    encoding="utf8",
+)
 exit(0)
 
 # source .venv/bin/activate

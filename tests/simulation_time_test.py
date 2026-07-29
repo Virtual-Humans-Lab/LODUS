@@ -4,7 +4,11 @@ from core.simulator import LodusSimulation
 
 
 def test_simulation_time_status_properties():
-    time_status = SimulationTimeStatus(cycle_step=3, simulation_step=27, cycle_length=12)
+    time_status = SimulationTimeStatus(
+        simulation_step=27,
+        cycle_length=12,
+        total_cycles=3,
+    )
 
     assert time_status.cycle_step == 3
     assert time_status.simulation_step == 27

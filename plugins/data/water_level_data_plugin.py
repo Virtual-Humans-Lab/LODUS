@@ -26,6 +26,8 @@ class WaterLevelDataPlugin(ActionPlugin):
         self.sim_step = 0
         self.cycle = 0
         self._is_setup = False
+        self.target_node_types: set[str] | None = None
+        self.target_regions: set[str] | None = None
 
     def load_plugin(self, simulation: LodusSimulation):
         self.graph = simulation.env_graph
@@ -41,10 +43,30 @@ class WaterLevelDataPlugin(ActionPlugin):
         if self._is_setup:
             return
 
-        self.config = experiment_config.get("water_level_plugin", {})
+        self.config = dict(
+            experiment_config.get(
+                "water_level_data_plugin",
+                experiment_config.get("water_level_plugin", {}),
+            )
+        )
         self._load_configuration_file()
 
-        data_file = self.config.get("data_file", "water_level/flood_time_step.csv")
+        data_file = self.config.get("data_file")
+        if data_file is None:
+            legacy_files = self.config.get("water_level_files", [])
+            if isinstance(legacy_files, str):
+                legacy_files = [legacy_files]
+            data_file = (
+                legacy_files[0]
+                if legacy_files
+                else "water_level/flood_time_step.csv"
+            )
+        self.target_node_types = self._optional_string_set(
+            self.config.get("target_node_types")
+        )
+        self.target_regions = self._optional_string_set(
+            self.config.get("target_regions")
+        )
         self.water_level_data = self._read_water_level_data(data_file)
         self.ordered_steps = sorted(self.water_level_data)
 
@@ -111,10 +133,9 @@ class WaterLevelDataPlugin(ActionPlugin):
         self.sim_step = simulation_step
         self.cycle = simulation_step // self._get_cycle_length()
         self.current_water_level = self.get_water_level_for_step(cycle_step, simulation_step)
-        self.disable_nodes_due_to_water_level()
-        print("HERE", cycle_step, simulation_step, self.current_water_level) 
+        self.update_nodes_due_to_water_level()
 
-    def disable_nodes_due_to_water_level(self):
+    def update_nodes_due_to_water_level(self):
         if self.graph is None:
             return
 
@@ -122,10 +143,35 @@ class WaterLevelDataPlugin(ActionPlugin):
             return
 
         for node in self.graph.node_list:
-            if node.enabled and node.attributes["water_level"] is not None and self.current_water_level >= node.attributes["water_level"]:
-                #node.enabled = False
-                self.graph.set_node_enabled(node.get_complete_name(), False)
-                print(f"Node {node.get_complete_name()} disabled due to water level {self.current_water_level}.")
+            if (
+                self.target_node_types is not None
+                and node.node_type not in self.target_node_types
+            ):
+                continue
+            if (
+                self.target_regions is not None
+                and node.containing_region_name not in self.target_regions
+            ):
+                continue
+            threshold = node.attributes.get("water_level")
+            if threshold is None:
+                continue
+            flooded = self.current_water_level >= float(threshold)
+            has_flood_blocker = "flood" in node.disable_reasons
+            if flooded == has_flood_blocker:
+                continue
+            self.graph.set_node_enabled(
+                node.get_complete_name(),
+                enabled=not flooded,
+                cascade_reenable=True,
+                cause="flood",
+                simulation_step=self.sim_step,
+                cycle_step=self.cycle_step,
+            )
+
+    # Backwards-compatible alias used by older callers.
+    def disable_nodes_due_to_water_level(self):
+        self.update_nodes_due_to_water_level()
 
 
     def get_water_level(self, *args, **kwargs) -> float | None:
@@ -153,3 +199,17 @@ class WaterLevelDataPlugin(ActionPlugin):
         if self.graph is not None and hasattr(self.graph, "routine_cycle_length"):
             return self.graph.routine_cycle_length
         return self.cycle_length
+
+    @staticmethod
+    def _optional_string_set(value) -> set[str] | None:
+        if value is None:
+            return None
+        if isinstance(value, str):
+            value = [value]
+        if not isinstance(value, list) or not all(
+            isinstance(item, str) for item in value
+        ):
+            raise ValueError(
+                "target_node_types and target_regions must be strings or lists of strings"
+            )
+        return set(value)

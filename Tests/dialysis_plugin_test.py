@@ -138,6 +138,26 @@ def test_defaults_can_be_used_without_csv(tmp_path):
     }
 
 
+def test_blank_csv_schedule_fields_inherit_defaults(tmp_path):
+    _, plugin, _, clinic = _simulation(tmp_path)
+    partial = tmp_path / "partial.csv"
+    partial.write_text(
+        "clinic_name;opening_step;closing_step;"
+        "treatment_capacity_per_step\n"
+        "Test Clinic;;22;\n",
+        encoding="utf8",
+    )
+    plugin.default_values = {
+        "opening_step": 6,
+        "closing_step": 18,
+        "treatment_capacity_per_step": 3,
+    }
+
+    assert plugin._load_clinic_schedules(partial) == {
+        clinic.id: [(6, 22, 3)]
+    }
+
+
 def test_csv_can_be_used_without_defaults(tmp_path):
     _, plugin, _, clinic = _simulation(tmp_path)
     plugin.default_values = {}
@@ -240,10 +260,13 @@ def test_dialysis_logger_records_events_snapshots_and_outputs(
     assert set(events["Origin"]) == {home.get_complete_name()}
     assert set(events["Clinic"]) == {clinic.get_complete_name()}
     assert completed.iloc[0]["Treatment Frame"] == 1
+    assert admitted.iloc[0]["Due Step"] == 0
+    assert admitted.iloc[0]["Admission Delay Steps"] == 0
 
     step = pd.DataFrame(logger.step_rows)
     assert step["Admitted"].tolist() == [2, 0]
     assert step["Completed"].tolist() == [0, 2]
+    assert step["New Due Sessions"].tolist() == [2, 0]
     clinic_step = pd.DataFrame(logger.clinic_rows)
     assert clinic_step["Occupancy"].tolist() == [2, 0]
 

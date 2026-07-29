@@ -1,0 +1,14 @@
+{
+  "extends": "dialysis_core/ReducedBase",
+  "envgraph_inputs_files": {
+    "environment_file": [
+      "enumeration_area/Environment-POA-EnumArea.json",
+      "dialysis_clinics/Environment-ETAs.json",
+      "dialysis_clinics/Environment-Clinics.json"
+    ],
+    "population_file": "enumeration_area/Population-POA-EnumArea.json"
+  },
+  "dialysis_plugin": {
+    "patient_count": 696
+  }
+}

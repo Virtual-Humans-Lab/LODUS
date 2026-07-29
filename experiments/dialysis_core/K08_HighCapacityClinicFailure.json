@@ -1,0 +1,11 @@
+{
+  "extends": "dialysis_core/K01_ReducedModerate",
+  "dialysis_plugin": {
+    "clinic_data_file": "dialysis_experiments/opening_hours_topology.csv"
+  },
+  "off_cycle_routine_plugin": {
+    "start_of_step_routine_files": [
+      "dialysis_experiments/K08_HighCapacityClinicFailure.json"
+    ]
+  }
+}

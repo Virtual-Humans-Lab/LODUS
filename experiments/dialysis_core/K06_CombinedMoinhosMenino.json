@@ -1,0 +1,12 @@
+{
+  "extends": "dialysis_core/K01_ReducedModerate",
+  "water_level_data_plugin": {
+    "data_file": "dialysis_experiments/sudden_9_3m.csv",
+    "target_node_types": ["water_source"]
+  },
+  "off_cycle_routine_plugin": {
+    "start_of_step_routine_files": [
+      "dialysis_experiments/K02_MoinhosNoRecovery.json"
+    ]
+  }
+}

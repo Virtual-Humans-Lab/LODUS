@@ -34,6 +34,9 @@ class DialysisLogger(LoggerPlugin):
         "Clinic",
         "Clinic Region",
         "Due Day",
+        "Due Step",
+        "Admission Step",
+        "Admission Delay Steps",
         "Treatment Frame",
         "Lateness",
         "On Time",
@@ -44,6 +47,7 @@ class DialysisLogger(LoggerPlugin):
         "Cycle Step",
         "Cycle",
         "Waiting",
+        "New Due Sessions",
         "Due Demand",
         "Unmet Due Demand",
         "Overdue",
@@ -58,6 +62,8 @@ class DialysisLogger(LoggerPlugin):
         "On Time Rate",
         "Average Admission Lateness",
         "Maximum Admission Lateness",
+        "Average Admission Delay Steps",
+        "Maximum Admission Delay Steps",
     ]
     CLINIC_COLUMNS = [
         "Simulation Step",
@@ -238,6 +244,10 @@ class DialysisLogger(LoggerPlugin):
         admission_lateness_total = sum(
             event["lateness"] * event["population"] for event in admissions
         )
+        admission_delay_total = sum(
+            event["admission_delay_steps"] * event["population"]
+            for event in admissions
+        )
         on_time_admissions = sum(
             event["population"] * event["on_time"] for event in admissions
         )
@@ -247,6 +257,11 @@ class DialysisLogger(LoggerPlugin):
                 "Cycle Step": self.cycle_step,
                 "Cycle": cycle,
                 "Waiting": waiting,
+                "New Due Sessions": (
+                    self.dialysis_plugin.new_due_sessions_by_step.get(
+                        self.sim_step, 0
+                    )
+                ),
                 "Due Demand": admitted + unmet_due,
                 "Unmet Due Demand": unmet_due,
                 "Overdue": overdue,
@@ -272,6 +287,16 @@ class DialysisLogger(LoggerPlugin):
                         default=0,
                     )
                 ),
+                "Average Admission Delay Steps": (
+                    admission_delay_total / admitted if admitted else 0.0
+                ),
+                "Maximum Admission Delay Steps": max(
+                    (
+                        event["admission_delay_steps"]
+                        for event in admissions
+                    ),
+                    default=0,
+                ),
             }
         )
 
@@ -290,6 +315,11 @@ class DialysisLogger(LoggerPlugin):
                 "Clinic": event["clinic"],
                 "Clinic Region": event["clinic_region"],
                 "Due Day": event["due_day"],
+                "Due Step": event["due_step"],
+                "Admission Step": event["admission_step"],
+                "Admission Delay Steps": event[
+                    "admission_delay_steps"
+                ],
                 "Treatment Frame": event["treatment_frame"],
                 "Lateness": event["lateness"],
                 "On Time": event["on_time"],
@@ -309,6 +339,7 @@ class DialysisLogger(LoggerPlugin):
             "Returns",
             "Unique Origin-Clinic Flows",
             "Due Demand",
+            "Due-Wait Patient-Hours",
             "Unmet Due Demand",
             "Overdue End",
             "Available Capacity",
@@ -319,6 +350,8 @@ class DialysisLogger(LoggerPlugin):
             "On Time Rate",
             "Average Admission Lateness",
             "Maximum Admission Lateness",
+            "Average Admission Delay Steps",
+            "Maximum Admission Delay Steps",
             "Average Completed Distance",
             "Incomplete At Cycle End",
         ]
@@ -337,6 +370,10 @@ class DialysisLogger(LoggerPlugin):
             weighted_lateness = (
                 admitted_events["Lateness"] * admitted_events["Population"]
             ).sum()
+            weighted_delay = (
+                admitted_events["Admission Delay Steps"]
+                * admitted_events["Population"]
+            ).sum()
             weighted_distance = (
                 completed_events["Distance"] * completed_events["Population"]
             ).sum()
@@ -349,7 +386,12 @@ class DialysisLogger(LoggerPlugin):
                     "Unique Origin-Clinic Flows": len(
                         admitted_events[["Origin", "Clinic"]].drop_duplicates()
                     ),
-                    "Due Demand": int(cycle_steps["Due Demand"].sum()),
+                    "Due Demand": int(
+                        cycle_steps["New Due Sessions"].sum()
+                    ),
+                    "Due-Wait Patient-Hours": int(
+                        cycle_steps["Unmet Due Demand"].sum()
+                    ),
                     "Unmet Due Demand": int(
                         cycle_steps["Unmet Due Demand"].sum()
                     ),
@@ -386,6 +428,20 @@ class DialysisLogger(LoggerPlugin):
                     ),
                     "Maximum Admission Lateness": (
                         int(admitted_events["Lateness"].max())
+                        if not admitted_events.empty
+                        else 0
+                    ),
+                    "Average Admission Delay Steps": (
+                        float(weighted_delay) / admissions
+                        if admissions
+                        else 0.0
+                    ),
+                    "Maximum Admission Delay Steps": (
+                        int(
+                            admitted_events[
+                                "Admission Delay Steps"
+                            ].max()
+                        )
                         if not admitted_events.empty
                         else 0
                     ),

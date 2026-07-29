@@ -1,0 +1,20 @@
+{
+  "global_routine": [],
+  "routines": {
+    "Moinhos de Vento//clinic_0": [
+      {
+        "cycle_step": 78,
+        "action": {
+          "type": "set_node_enabled",
+          "values": {
+            "region": "Moinhos de Vento",
+            "node_unique_name": "clinic_0",
+            "node_complete_name": "Moinhos de Vento//clinic_0",
+            "enabled": false,
+            "cause": "off_cycle"
+          }
+        }
+      }
+    ]
+  }
+}

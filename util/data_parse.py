@@ -14,14 +14,21 @@ def generate_lodus_simulation(input_path: str):
     experiment_path = Path(__file__).parent.parent / "experiments"
     data_path =  Path(__file__).parent.parent / "data_input"
 
-    experiment_config = load_json(experiment_path / f"{input_path}.json")
+    experiment_config = load_experiment_config(input_path)
     input_files = experiment_config["envgraph_inputs_files"]
 
     simulation.experiment_config = experiment_config
 
     if "simulation_parameters" in experiment_config:
         sim_params = experiment_config["simulation_parameters"]
-        simulation.set_total_cycles(sim_params.get("total_cycles", simulation.time_status.total_cycles))
+        simulation.set_total_cycles(
+            sim_params.get(
+                "total_cycles",
+                sim_params.get(
+                    "cycles", simulation.time_status.total_cycles
+                ),
+            )
+        )
         simulation.set_cycle_length(sim_params.get("cycle_length", simulation.time_status.cycle_length))
 
     if "environment_file" not in input_files:
@@ -75,6 +82,27 @@ def load_json(file_path):
     """Load a json file from the given path"""
     with open(file_path, 'r', encoding='utf8') as file:
         return json.load(file)
+
+
+def load_experiment_config(
+    input_path: str,
+    _loading: tuple[str, ...] = (),
+) -> dict:
+    """Load an experiment, recursively applying its optional ``extends``."""
+    experiment_path = Path(__file__).parent.parent / "experiments"
+    normalized = str(input_path).removesuffix(".json")
+    if normalized in _loading:
+        chain = " -> ".join((*_loading, normalized))
+        raise ValueError(f"Circular experiment inheritance: {chain}")
+    config = load_json(experiment_path / f"{normalized}.json")
+    parent = config.pop("extends", None)
+    if parent is None:
+        return config
+    if not isinstance(parent, str):
+        raise ValueError("Experiment 'extends' must be a string")
+    merged = load_experiment_config(parent, (*_loading, normalized))
+    _merge_json_objects(merged, config, set())
+    return merged
 
 
 def load_json_inputs(data_path: Path, filenames, concatenate_keys=None):
@@ -338,5 +366,3 @@ def parse_routines(data:dict):
             _actions.append((_a["cycle_step"], action))
 
     return _global_actions, _actions
-
-

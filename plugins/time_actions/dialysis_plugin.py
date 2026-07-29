@@ -60,6 +60,7 @@ class DialysisPlugin(ActionPlugin):
         self.env_graph:environment.EnvironmentGraph
         self.clinic_schedules = {}
         self._event_callbacks: dict[str, Callable[[dict], None]] = {}
+        self.new_due_sessions_by_step: dict[int, int] = {}
 
     def add_event_listener(self, name: str, callback: Callable[[dict], None]):
         """Registers a listener for dialysis admission and completion events."""
@@ -78,6 +79,13 @@ class DialysisPlugin(ActionPlugin):
         cycle_step: int,
         simulation_step: int,
     ):
+        due_day = blob.get_traceable_characteristic(self.NEXT_DUE)
+        due_step = due_day * self.simulation.time_status.cycle_length
+        admission_step = (
+            simulation_step
+            if event_type == "admitted"
+            else blob.get_traceable_characteristic(self.TREATMENT_FRAME) - 1
+        )
         event = {
             "simulation_step": simulation_step,
             "cycle_step": cycle_step,
@@ -92,7 +100,10 @@ class DialysisPlugin(ActionPlugin):
             "clinic_id": clinic.id,
             "clinic": clinic.get_complete_name(),
             "clinic_region": clinic.containing_region_name,
-            "due_day": blob.get_traceable_characteristic(self.NEXT_DUE),
+            "due_day": due_day,
+            "due_step": due_step,
+            "admission_step": admission_step,
+            "admission_delay_steps": max(0, admission_step - due_step),
             "treatment_frame": blob.get_traceable_characteristic(
                 self.TREATMENT_FRAME
             ),
@@ -145,6 +156,7 @@ class DialysisPlugin(ActionPlugin):
     def unload_plugin(self):
         self._event_callbacks.clear()
         self.clinic_schedules = {}
+        self.new_due_sessions_by_step = {}
 
     def _add_traceable_defaults(self):
         defaults = {
@@ -161,13 +173,11 @@ class DialysisPlugin(ActionPlugin):
     
     def _load_clinic_schedules(self, configured_path):
         """Builds schedules for simulation clinics from CSV data and defaults."""
-        required = {
-            "clinic_name",
+        schedule_fields = {
             "opening_step",
             "closing_step",
             "treatment_capacity_per_step",
         }
-        schedule_fields = required.difference({"clinic_name"})
         defaults = self.default_values or {}
         if not configured_path and not defaults:
             raise ValueError(
@@ -204,9 +214,18 @@ class DialysisPlugin(ActionPlugin):
                 except csv.Error:
                     dialect = csv.excel
                 reader = csv.DictReader(handle, dialect=dialect)
-                missing = required.difference(reader.fieldnames or [])
-                if missing:
-                    raise ValueError(f"Dialysis clinic data is missing columns: {sorted(missing)}"
+                fieldnames = set(reader.fieldnames or [])
+                if "clinic_name" not in fieldnames:
+                    raise ValueError(
+                        "Dialysis clinic data is missing columns: ['clinic_name']"
+                    )
+                unresolved = schedule_fields.difference(
+                    fieldnames | set(defaults)
+                )
+                if unresolved:
+                    raise ValueError(
+                        "Dialysis clinic data is missing columns without "
+                        f"defaults: {sorted(unresolved)}"
                     )
                 rows = list(reader)
 
@@ -216,7 +235,9 @@ class DialysisPlugin(ActionPlugin):
             if name not in clinics_by_name:
                 raise ValueError(f"Clinic '{name}' from {path} was not found in the environment")
             node = clinics_by_name[name]
-            schedules.setdefault(node.id, []).append(self._parse_schedule(row))
+            schedules.setdefault(node.id, []).append(
+                self._parse_schedule(row, defaults)
+            )
 
         if defaults:
             default_schedule = self._parse_schedule(defaults)
@@ -224,12 +245,24 @@ class DialysisPlugin(ActionPlugin):
                 schedules.setdefault(clinic.id, [default_schedule])
         return schedules
 
-    def _parse_schedule(self, values):
+    def _parse_schedule(self, values, fallbacks=None):
+        fallbacks = fallbacks or {}
+
+        def resolved(field):
+            value = values.get(field)
+            if value is None or str(value).strip() == "":
+                value = fallbacks.get(field)
+            if value is None or str(value).strip() == "":
+                raise ValueError(
+                    f"Dialysis clinic schedule is missing '{field}'"
+                )
+            return value
+
         return (
-            self._hour(values["opening_step"], "opening_step"),
-            self._hour(values["closing_step"], "closing_step"),
+            self._hour(resolved("opening_step"), "opening_step"),
+            self._hour(resolved("closing_step"), "closing_step"),
             self._positive_int(
-                values["treatment_capacity_per_step"],
+                resolved("treatment_capacity_per_step"),
                 "treatment_capacity_per_step",
                 allow_zero=True,
             ),
@@ -292,9 +325,29 @@ class DialysisPlugin(ActionPlugin):
         ):
             """Treat last frame's arrivals, return them, then admit this hour's demand."""
             started = time.perf_counter()
+            self._record_new_due_sessions(cycle_step, simulation_step)
             self._complete_treatments(cycle_step, simulation_step)
             self._dispatch_due_patients(cycle_step, simulation_step)
             self.add_execution_time(self.ACTION_TYPE, time.perf_counter() - started)
+
+    def _record_new_due_sessions(
+        self, cycle_step: int, simulation_step: int
+    ) -> None:
+        if cycle_step != 0:
+            self.new_due_sessions_by_step[simulation_step] = 0
+            return
+        current_day = (
+            simulation_step // self.simulation.time_status.cycle_length
+        )
+        template = PopulationTemplate(
+            traceable_characteristics={
+                self.PATIENT: True,
+                self.NEXT_DUE: current_day,
+            }
+        )
+        self.new_due_sessions_by_step[simulation_step] = (
+            self.env_graph.get_population_size(template)
+        )
 
     def _complete_treatments(self, cycle_step: int, simulation_step: int):
         """Completes treatment for patients who were admitted in the previous simulation step 
