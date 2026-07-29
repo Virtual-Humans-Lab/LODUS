@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import csv
-import math
 from pathlib import Path
 import time
 from typing import Callable
@@ -13,6 +12,7 @@ from core.plugin import ActionPlugin
 from core.population import PopulationTemplate
 from core.routine import Action
 from core.simulator import LodusSimulation
+from util.math import pyproj_distance_metre
 from util.random_instance import FixedRandom
 
 
@@ -96,7 +96,7 @@ class DialysisPlugin(ActionPlugin):
             "treatment_frame": blob.get_traceable_characteristic(
                 self.TREATMENT_FRAME
             ),
-            "distance": math.sqrt(self._distance(origin, clinic)),
+            "distance": self._distance(origin, clinic) / 1000,
         }
         for callback in tuple(self._event_callbacks.values()):
             callback(event.copy())
@@ -334,7 +334,7 @@ class DialysisPlugin(ActionPlugin):
                 blob.set_traceable_characteristic(self.ORIGIN, -1)
                 blob.set_traceable_characteristic(self.TREATMENT_FRAME, -1)
                 self.env_graph.log_blob_movement(clinic, origin, [blob])
-                #print("Returning patient", blob.blob_id, "from clinic", clinic.get_complete_name(), "to origin", origin.get_complete_name())
+                # print(f"Returning {blob.get_population_size()} patients in {blob.blob_id} from clinic {clinic.get_complete_name()} to origin {origin.get_complete_name()}")
                 origin.add_blob(blob)
 
     def _dispatch_due_patients(self, cycle_step: int, simulation_step: int):
@@ -391,11 +391,11 @@ class DialysisPlugin(ActionPlugin):
                 clinic_slot[1] -= quantity
                 if clinic_slot[1] == 0:
                     open_slots.remove(clinic_slot)
-                #print("Dispatching", quantity, "patients from origin", origin.get_complete_name(), "to clinic", clinic.get_complete_name())
+                # print("Dispatching", quantity, "patients from origin", origin.get_complete_name(), "to clinic", clinic.get_complete_name())
 
     @staticmethod
     def _distance(node_a, node_b):
-        return sum((a - b) ** 2 for a, b in zip(node_a.long_lat, node_b.long_lat))
+        return pyproj_distance_metre(node_a.long_lat, node_b.long_lat)
 
     @staticmethod
     def _is_open(hour: int, opening: int, closing: int):

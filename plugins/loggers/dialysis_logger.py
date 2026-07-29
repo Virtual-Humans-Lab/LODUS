@@ -2,18 +2,20 @@
 
 from __future__ import annotations
 
-from importlib.util import find_spec
-from math import log2
 from pathlib import Path
+from typing import TYPE_CHECKING, cast
 
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 from core.plugin import LoggerPlugin
 from core.population import PopulationTemplate
 from core.simulator import LodusSimulation
+from plugins.loggers.visualizations.dialysis_visualizations import (
+    generate_dialysis_visualizations,
+)
+
+if TYPE_CHECKING:
+    from plugins.time_actions.dialysis_plugin import DialysisPlugin
 
 
 class DialysisLogger(LoggerPlugin):
@@ -75,6 +77,14 @@ class DialysisLogger(LoggerPlugin):
         "Unused Capacity",
         "Utilization",
     ]
+    LOCATION_COLUMNS = [
+        "Node ID",
+        "Complete Name",
+        "Display Name",
+        "Longitude",
+        "Latitude",
+        "Is Clinic",
+    ]
 
     def __init__(self, export_png: bool = True):
         self.export_png = export_png
@@ -83,7 +93,6 @@ class DialysisLogger(LoggerPlugin):
         self.clinic_rows: list[dict] = []
         self.sim_step = 0
         self.cycle_step = 0
-        self._png_export_available = False
 
     def load_plugin(self, simulation: LodusSimulation):
         dialysis_plugins = [
@@ -98,24 +107,19 @@ class DialysisLogger(LoggerPlugin):
             )
         self.simulation = simulation
         self.env_graph = simulation.env_graph
-        self.dialysis_plugin = dialysis_plugins[0]
+        self.dialysis_plugin = cast(
+            "DialysisPlugin",
+            dialysis_plugins[0],
+        )
         self.cycle_length = simulation.time_status.cycle_length
         self.base_path = Path("output_logs") / simulation.experiment_name
         self.data_frames_path = self.base_path / "data_frames"
-        self.html_plots_path = self.base_path / "html_plots" / "dialysis"
-        self.figures_path = self.base_path / "figures" / "dialysis"
         self.dialysis_plugin.add_event_listener(
             self.__class__.__name__, self._log_event
         )
 
     def setup_logger(self):
         self.data_frames_path.mkdir(parents=True, exist_ok=True)
-        self.html_plots_path.mkdir(parents=True, exist_ok=True)
-        self._png_export_available = (
-            self.export_png and find_spec("kaleido") is not None
-        )
-        if self._png_export_available:
-            self.figures_path.mkdir(parents=True, exist_ok=True)
 
     def update_time_step(self, cycle_step: int, simulation_step: int):
         self.cycle_step = cycle_step
@@ -437,309 +441,44 @@ class DialysisLogger(LoggerPlugin):
             )
         return pd.DataFrame(rows, columns=columns)
 
-    def _write_figure(self, figure, filename: str):
-        figure.write_html(
-            self.html_plots_path / f"{filename}.html",
-            include_plotlyjs=True,
+    def _locations_dataframe(self) -> pd.DataFrame:
+        clinic_ids = set(self.dialysis_plugin.clinic_schedules)
+        relevant_ids = clinic_ids | {
+            event["origin_id"] for event in self.events
+        }
+        clinic_name_attribute = getattr(
+            self.dialysis_plugin,
+            "clinic_name_attribute",
+            "clinic_name",
         )
-        if self._png_export_available:
-            try:
-                figure.write_image(self.figures_path / f"{filename}.png")
-            except Exception:
-                # HTML and CSV output must remain available when image export
-                # is installed but not operational in the current environment.
-                self._png_export_available = False
-
-    @staticmethod
-    def _empty_figure(title: str):
-        figure = go.Figure()
-        figure.update_layout(title=title)
-        figure.add_annotation(
-            text="No dialysis data recorded",
-            x=0.5,
-            y=0.5,
-            xref="paper",
-            yref="paper",
-            showarrow=False,
-        )
-        return figure
-
-    def _generate_plots(
-        self,
-        events_df: pd.DataFrame,
-        step_df: pd.DataFrame,
-        clinic_df: pd.DataFrame,
-        cycle_df: pd.DataFrame,
-        flow_df: pd.DataFrame,
-    ):
-        dashboard = make_subplots(specs=[[{"secondary_y": True}]])
-        for column in ["Waiting", "In Treatment", "Admitted", "Completed"]:
-            dashboard.add_trace(
-                go.Scatter(
-                    x=step_df["Simulation Step"],
-                    y=step_df[column],
-                    mode="lines",
-                    name=column,
-                ),
-                secondary_y=False,
+        rows = []
+        for node_id in sorted(relevant_ids):
+            node = self.env_graph.get_node_by_id(node_id)
+            complete_name = node.get_complete_name()
+            is_clinic = node_id in clinic_ids
+            clinic_name = (
+                node.attributes.get(clinic_name_attribute)
+                if is_clinic
+                else None
             )
-        dashboard.add_trace(
-            go.Scatter(
-                x=step_df["Simulation Step"],
-                y=step_df["On Time Rate"],
-                mode="lines",
-                name="On Time Rate",
-            ),
-            secondary_y=True,
-        )
-        dashboard.update_layout(title="Dialysis Dashboard")
-        dashboard.update_yaxes(title_text="Population", secondary_y=False)
-        dashboard.update_yaxes(title_text="Rate", secondary_y=True)
-        self._write_figure(dashboard, "dashboard")
-
-        utilization = (
-            px.line(
-                clinic_df,
-                x="Simulation Step",
-                y=[
-                    "Occupancy",
-                    "Admitted",
-                    "Available Capacity",
-                    "Utilization",
-                ],
-                facet_row="Clinic",
-                title="Clinic Occupancy, Capacity, and Utilization",
+            display_name = (
+                f"{clinic_name} ({complete_name})"
+                if clinic_name and clinic_name != complete_name
+                else complete_name
             )
-            if not clinic_df.empty
-            else self._empty_figure(
-                "Clinic Occupancy, Capacity, and Utilization"
-            )
-        )
-        self._write_figure(utilization, "clinic_utilization")
-
-        daily = (
-            px.bar(
-                clinic_df.groupby(["Cycle", "Clinic"], as_index=False)[
-                    "Completed"
-                ].sum(),
-                x="Cycle",
-                y="Completed",
-                color="Clinic",
-                title="Completed Dialysis Treatments by Clinic and Day",
-            )
-            if not clinic_df.empty
-            else self._empty_figure(
-                "Completed Dialysis Treatments by Clinic and Day"
-            )
-        )
-        self._write_figure(daily, "daily_completed_by_clinic")
-
-        labels = list(
-            dict.fromkeys(
-                flow_df.get("Origin", pd.Series(dtype=str)).tolist()
-                + flow_df.get("Clinic", pd.Series(dtype=str)).tolist()
-            )
-        )
-        label_index = {label: index for index, label in enumerate(labels)}
-        sankey = go.Figure(
-            go.Sankey(
-                node={"label": labels},
-                link={
-                    "source": [
-                        label_index[value] for value in flow_df["Origin"]
-                    ],
-                    "target": [
-                        label_index[value] for value in flow_df["Clinic"]
-                    ],
-                    "value": flow_df["Admitted"].tolist(),
-                },
-            )
-        )
-        sankey.update_layout(title="Dialysis Origin-to-Clinic Flows")
-        self._write_figure(sankey, "origin_clinic_sankey")
-
-        if flow_df.empty:
-            heatmap = self._empty_figure(
-                "Dialysis Origin × Clinic Flow"
-            )
-        else:
-            heatmap_data = flow_df.pivot(
-                index="Origin", columns="Clinic", values="Admitted"
-            ).fillna(0)
-            heatmap = px.imshow(
-                heatmap_data,
-                text_auto=True,
-                aspect="auto",
-                title="Dialysis Origin × Clinic Flow",
-            )
-        self._write_figure(heatmap, "origin_clinic_heatmap")
-
-        hourly = px.bar(
-            step_df.groupby("Cycle Step", as_index=False)["Due Demand"].mean(),
-            x="Cycle Step",
-            y="Due Demand",
-            title="Mean Dialysis Demand by Cycle Step",
-        )
-        self._write_figure(hourly, "demand_by_cycle_step")
-
-        admissions = events_df[events_df["Event"] == "admitted"]
-        lateness = px.histogram(
-            admissions,
-            x="Lateness",
-            y="Population",
-            histfunc="sum",
-            title="Dialysis Waiting Lateness",
-        )
-        self._write_figure(lateness, "waiting_lateness")
-
-        completed = events_df[events_df["Event"] == "completed"]
-        distance = px.histogram(
-            completed,
-            x="Distance",
-            y="Population",
-            color="Clinic",
-            histfunc="sum",
-            title="Travel Distance by Clinic",
-        )
-        self._write_figure(distance, "travel_distance")
-
-        coordinates = {}
-        for node in self.env_graph.node_list:
-            if (
-                len(node.long_lat) >= 2
-                and -180 <= node.long_lat[0] <= 180
-                and -90 <= node.long_lat[1] <= 90
-            ):
-                coordinates[node.get_complete_name()] = node.long_lat
-        if not flow_df.empty and any(
-            coordinates.get(name, [0, 0]) != [0, 0]
-            for name in set(flow_df["Origin"]) | set(flow_df["Clinic"])
-        ):
-            geographic = go.Figure()
-            plotted_longitudes = []
-            plotted_latitudes = []
-            for row in flow_df.itertuples(index=False):
-                origin_position = coordinates.get(row.Origin)
-                clinic_position = coordinates.get(row.Clinic)
-                if origin_position is None or clinic_position is None:
-                    continue
-                plotted_longitudes.extend(
-                    [origin_position[0], clinic_position[0]]
-                )
-                plotted_latitudes.extend(
-                    [origin_position[1], clinic_position[1]]
-                )
-                hover_text = (
-                    f"<b>{row.Origin} → {row.Clinic}</b>"
-                    f"<br>Admitted: {row.Admitted:,}"
-                    f"<br>Completed: {row.Completed:,}"
-                    f"<br>Average distance: {row[-1]:,.2f}"
-                )
-                geographic.add_trace(
-                    go.Scattermap(
-                        lon=[origin_position[0], clinic_position[0]],
-                        lat=[origin_position[1], clinic_position[1]],
-                        mode="lines+markers",
-                        line={"width": max(1, row.Admitted)},
-                        name=f"{row.Origin} → {row.Clinic}",
-                        text=[hover_text, hover_text],
-                        hovertemplate="%{text}<extra></extra>",
-                    )
-                )
-                hover_steps = range(1, 32)
-                geographic.add_trace(
-                    go.Scattermap(
-                        lon=[
-                            origin_position[0]
-                            + (clinic_position[0] - origin_position[0])
-                            * step
-                            / 32
-                            for step in hover_steps
-                        ],
-                        lat=[
-                            origin_position[1]
-                            + (clinic_position[1] - origin_position[1])
-                            * step
-                            / 32
-                            for step in hover_steps
-                        ],
-                        mode="markers",
-                        marker={
-                            "size": 16,
-                            "color": "rgba(0, 0, 0, 0.01)",
-                        },
-                        text=[hover_text] * 31,
-                        hovertemplate="%{text}<extra></extra>",
-                        showlegend=False,
-                    )
-                )
-            clinic_names = list(dict.fromkeys(flow_df["Clinic"]))
-            clinic_locations = [
-                (name, coordinates.get(name))
-                for name in clinic_names
-                if coordinates.get(name) is not None
-            ]
-            if clinic_locations:
-                geographic.add_trace(
-                    go.Scattermap(
-                        lon=[
-                            position[0]
-                            for _, position in clinic_locations
-                        ],
-                        lat=[
-                            position[1]
-                            for _, position in clinic_locations
-                        ],
-                        mode="markers",
-                        marker={"size": 18, "color": "#d62728"},
-                        text=[
-                            f"<b>Clinic</b><br>{name}"
-                            for name, _ in clinic_locations
-                        ],
-                        hovertemplate="%{text}<extra></extra>",
-                        name="Clinics",
-                    )
-                )
-            map_layout = {"style": "open-street-map"}
-            if plotted_longitudes:
-                longitude_span = (
-                    max(plotted_longitudes) - min(plotted_longitudes)
-                )
-                latitude_span = max(plotted_latitudes) - min(
-                    plotted_latitudes
-                )
-                longitude_zoom = (
-                    log2(360 / longitude_span) - 1
-                    if longitude_span
-                    else 12
-                )
-                latitude_zoom = (
-                    log2(170 / latitude_span) - 1
-                    if latitude_span
-                    else 12
-                )
-                map_layout["center"] = {
-                    "lon": (
-                        min(plotted_longitudes) + max(plotted_longitudes)
-                    )
-                    / 2,
-                    "lat": (min(plotted_latitudes) + max(plotted_latitudes))
-                    / 2,
+            longitude = node.long_lat[0] if len(node.long_lat) >= 2 else None
+            latitude = node.long_lat[1] if len(node.long_lat) >= 2 else None
+            rows.append(
+                {
+                    "Node ID": node.id,
+                    "Complete Name": complete_name,
+                    "Display Name": display_name,
+                    "Longitude": longitude,
+                    "Latitude": latitude,
+                    "Is Clinic": int(is_clinic),
                 }
-                map_layout["zoom"] = max(
-                    1,
-                    min(
-                        12,
-                        longitude_zoom,
-                        latitude_zoom,
-                    ),
-                )
-            geographic.update_layout(
-                title="Dialysis Geographic Flows",
-                map=map_layout,
-                margin={"l": 0, "r": 0, "b": 0},
             )
-            self._write_figure(geographic, "geographic_flows")
+        return pd.DataFrame(rows, columns=self.LOCATION_COLUMNS)
 
     def stop_logger(self):
         self.setup_logger()
@@ -757,6 +496,7 @@ class DialysisLogger(LoggerPlugin):
             "dialysis_clinic_step.csv": clinic_df,
             "dialysis_cycle.csv": cycle_df,
             "dialysis_origin_clinic.csv": flow_df,
+            "dialysis_locations.csv": self._locations_dataframe(),
         }
         for filename, dataframe in outputs.items():
             dataframe.to_csv(
@@ -766,8 +506,9 @@ class DialysisLogger(LoggerPlugin):
                 index=False,
             )
 
-        self._generate_plots(
-            events_df, step_df, clinic_df, cycle_df, flow_df
+        generate_dialysis_visualizations(
+            self.base_path,
+            export_png=self.export_png,
         )
 
     def unload_plugin(self):

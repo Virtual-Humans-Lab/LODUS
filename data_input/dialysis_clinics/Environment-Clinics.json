@@ -10,7 +10,7 @@
         {
           "poi_type": "dialysis_clinic",
           "unique_name": "clinic_0",
-          "lng_lat": [-51.2423319, -30.0196724],
+          "lng_lat": [-51.169902, -30.009647],
           "attributes": {
             "water_level": 8.5,
             "enumeration_area": 4314902050,
