@@ -1,0 +1,128 @@
+{
+  "regions": [
+    {
+      "name": "Moinhos de Vento",
+      "lng_lat": [-51.202415370788, -30.0237549822533],
+      "points_of_interest": [
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_0",
+          "lng_lat": [-51.2035232, -30.0194826],
+            "attributes": {
+              "water_level": 10.0,
+            "enumeration_area": 4314902041,
+            "clinic_name": "Centro de Diálise e Transplante (CDT)",
+            "water_source": ["ETA Moinhos de Vento"]
+          }
+        },
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_1",
+          "lng_lat": [-51.208106, -30.0262733],
+          "attributes": {
+            "water_level": 10.0,
+            "enumeration_area": 4314902041,
+            "clinic_name": "Hospital Moinhos de Vento",
+            "water_source": ["ETA Moinhos de Vento"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Centro Histórico",
+      "lng_lat": [-51.2278480810808, -30.031004727877],
+      "points_of_interest": [
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_0",
+          "lng_lat": [-51.2227391, -30.0308743],
+          "attributes": {
+            "water_level": 10.0,
+            "enumeration_area": 4314902036,
+            "clinic_name": "Santa Casa de Porto Alegre - Hospital Santa Clara",
+            "water_source": ["ETA Moinhos de Vento"]
+          }
+        },
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_1",
+          "lng_lat": [-51.219156, -30.028662],
+          "attributes": {
+            "water_level": 10.0,
+            "enumeration_area": 4314902036,
+            "clinic_name": "Vita Rim - hospital Beneficência Portuguesa",
+            "water_source": ["ETA Moinhos de Vento"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Santana",
+      "lng_lat": [-51.2055865687131, -30.046728905517],
+      "points_of_interest": [
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_0",
+          "lng_lat": [-51.2092431, -30.0386758],
+          "attributes": {
+            "water_level": 10.0,
+            "enumeration_area": 4314902007,
+            "clinic_name": "Hospital de Clínicas de Porto Alegre (HCPA)",
+            "water_source": ["ETA Moinhos de Vento"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Azenha",
+      "lng_lat": [-51.2147436812232, -30.0510199525848],
+      "points_of_interest": [
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_0",
+          "lng_lat": [-51.2117024, -30.0474102],
+          "attributes": {
+            "water_level": 7.3,
+            "enumeration_area": 4314902008,
+            "clinic_name": "Hospital Ernesto Dornelles - Centro de Nefrologia e Diálise",
+            "water_source": ["ETA Menino Deus", "ETA Moinhos de Vento"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Santa Cecília",
+      "lng_lat": [-51.201331073605, -30.0408947118911],
+      "points_of_interest": [
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_0",
+          "lng_lat": [-51.2007952, -30.041366],
+          "attributes": {
+            "water_level": 10.0,
+            "enumeration_area": 4314902006,
+            "clinic_name": "Instituto de Doenças Renais - IDR",
+            "water_source": ["ETA Moinhos de Vento"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Praia de Belas",
+      "lng_lat": [-51.230172636, -30.0472881985923],
+      "points_of_interest": [
+        {
+          "poi_type": "dialysis_clinic",
+          "unique_name": "clinic_0",
+          "lng_lat": [-51.2315602, -30.0595253],
+          "attributes": {
+            "water_level": 4.1,
+            "enumeration_area": 4314902002,
+            "clinic_name": "Hospital Mãe de Deus",
+            "water_source": ["ETA Menino Deus", "ETA Moinhos de Vento"]
+          }
+        }
+      ]
+    }
+  ]
+}

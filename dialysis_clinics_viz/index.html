@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Water Networks</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">✣</span>
+        <div>
+          <p class="eyebrow">PORTO ALEGRE · CARE INFRASTRUCTURE</p>
+          <h1>Clinic Water Networks</h1>
+        </div>
+      </div>
+      <nav class="view-switcher" aria-label="Dataset version">
+        <button class="view-button active" data-version="full">Complete network</button>
+        <button class="view-button" data-version="13">13 neighborhoods</button>
+      </nav>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="kicker" id="view-kicker">Complete environment</p>
+        <h2 id="view-title">The city’s dialysis safety net,<br>from source to care.</h2>
+      </div>
+      <p class="intro-copy" id="view-description">Hover a clinic to trace its water dependencies, or hover a water source to see the neighborhoods it supplies.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="map-card">
+        <div class="map-toolbar">
+          <div class="legend">
+            <span><i class="legend-clinic"></i>Clinic</span>
+            <span><i class="legend-water"></i>Water source</span>
+            <span><i class="legend-neighborhood"></i>Covered neighborhood</span>
+          </div>
+          <button id="clear-button" class="clear-button" hidden>Clear selection <span>×</span></button>
+        </div>
+        <div class="map-wrap">
+          <svg id="network-map" role="img" aria-label="Interactive geographic diagram of dialysis clinics and water sources"></svg>
+          <div class="zoom-controls" aria-label="Map zoom controls">
+            <button id="zoom-in" aria-label="Zoom in">+</button>
+            <button id="zoom-out" aria-label="Zoom out">−</button>
+            <button id="zoom-reset" aria-label="Reset map view">⌂</button>
+          </div>
+          <div class="map-label">NORTH <span>↑</span></div>
+          <div class="hover-hint"><span>↗</span> Hover markers · scroll to zoom · drag to pan</div>
+        </div>
+      </div>
+
+      <aside class="detail-panel">
+        <div id="empty-state">
+          <span class="panel-number">01</span>
+          <p class="eyebrow">HOW TO READ</p>
+          <h3>Follow the flow</h3>
+          <p>Clinics reveal their water dependencies. Water sources reveal the neighborhoods they supply.</p>
+          <div class="mini-key">
+            <div><b>01</b><span>Choose a clinic</span></div>
+            <div><b>02</b><span>Trace its water</span></div>
+            <div><b>03</b><span>Hover a source for coverage</span></div>
+          </div>
+        </div>
+        <div id="clinic-detail" hidden>
+          <span class="panel-number" id="detail-type">CLINIC</span>
+          <p class="eyebrow" id="detail-neighborhood"></p>
+          <h3 id="detail-name"></h3>
+          <div class="level-row">
+            <span>Flood safety threshold</span>
+            <strong id="detail-level"></strong>
+          </div>
+          <div class="meter"><i id="detail-meter"></i></div>
+          <p class="section-label" id="detail-list-label">DEPENDENT SOURCES</p>
+          <div id="detail-sources" class="source-list"></div>
+          <div id="coverage-section" hidden>
+            <p class="section-label">SERVICE FOOTPRINT</p>
+            <p class="coverage-count"><strong id="coverage-count"></strong> neighborhoods supplied</p>
+            <div id="detail-coverage" class="coverage-list"></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <p>Data source · LODUS dialysis clinic environments</p>
+      <div class="stats" id="stats"></div>
+    </footer>
+  </main>
+  <div id="tooltip" class="tooltip" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
