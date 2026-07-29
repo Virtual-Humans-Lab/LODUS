@@ -4,7 +4,6 @@ import sys
 sys.path.append('./plugins/')
 import argparse
 import json
-import resource
 import subprocess
 import time
 from datetime import datetime, timezone
@@ -50,6 +49,7 @@ import core.environment
 from core.population import PopulationTemplate
 from util.random_instance import FixedRandom
 from util.data_parse import generate_lodus_simulation, load_experiment_config
+from util.resource_usage import get_peak_memory_kib
 import numpy as np
 
 arg_parser = argparse.ArgumentParser(description="Population Dynamics Simulation.")
@@ -467,9 +467,7 @@ metadata = {
     "started_at_utc": started_at.isoformat(),
     "finished_at_utc": finished_at.isoformat(),
     "runtime_seconds": end_time - start_time,
-    "peak_memory_kib": resource.getrusage(
-        resource.RUSAGE_SELF
-    ).ru_maxrss,
+    "peak_memory_kib": get_peak_memory_kib(),
     "commit_sha": commit_sha,
     "environment_files": lodus_simulation.experiment_config.get(
         "envgraph_inputs_files", {}

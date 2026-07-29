@@ -172,6 +172,8 @@ def main() -> int:
             points="all",
             title=title,
         )
+        if metric == "coverage":
+            figure.update_yaxes(range=[0, 1.1])
         figure.write_html(
             tables / f"{metric}.html", include_plotlyjs=True
         )
