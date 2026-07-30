@@ -525,13 +525,17 @@ class ShelterLogger(LoggerPlugin):
                 }
             shape_path = (
                 Path(__file__).resolve().parents[2]
-                / "data_input/spatial/setores_2022/setores_2022_poa.shp"
+                / (
+                    "data_input/spatial/setores_preliminares_2022/"
+                    "porto_alegre_preliminary_mesh_2022.shp"
+                )
             )
             reader = shapefile.Reader(str(shape_path))
             fields = [field[0] for field in reader.fields[1:]]
             code_index = fields.index("CD_SETOR")
             geometry_ids = {
-                str(record[code_index]) for record in reader.records()
+                str(record[code_index]).removesuffix("P")
+                for record in reader.records()
             }
             unmatched = sorted(sector_ids - geometry_ids)
             return [{

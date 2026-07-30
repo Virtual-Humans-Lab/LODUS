@@ -6,6 +6,7 @@ import argparse
 import csv
 from importlib.util import find_spec
 from pathlib import Path
+import unicodedata
 
 import pandas as pd
 import plotly.express as px
@@ -56,8 +57,19 @@ class ShelterVisualizationGenerator:
 
     def write(self, figure, name: str):
         self.html_path.mkdir(parents=True, exist_ok=True)
+        config = (
+            {"scrollZoom": True, "displayModeBar": True}
+            if name in {
+                "flood_sector_exposure",
+                "flood_neighborhood_exposure_percentage",
+                "geographic_flows",
+            }
+            else None
+        )
         figure.write_html(
-            self.html_path / f"{name}.html", include_plotlyjs=True
+            self.html_path / f"{name}.html",
+            include_plotlyjs=True,
+            config=config,
         )
         if self.png_available:
             self.figure_path.mkdir(parents=True, exist_ok=True)
@@ -87,6 +99,8 @@ class ShelterVisualizationGenerator:
             "origin_shelter_heatmap": self.flow_heatmap(frames),
             "geographic_flows": self.geographic_flows(frames),
             "flood_sector_exposure": self.flood_sector_map(frames),
+            "flood_neighborhood_exposure_percentage":
+                self.flood_neighborhood_percentage_map(frames),
             "travel_distance": self.travel_distance(frames),
             "demographic_equity": self.demographic_equity(frames),
             "data_quality": self.data_quality(frames),
@@ -129,6 +143,7 @@ class ShelterVisualizationGenerator:
         columns = ["Arrivals", "Admissions", "Denials", "Reallocations"]
         return px.bar(
             cycles, x="Cycle", y=columns, barmode="group",
+            labels={"Cycle": "Cycle (Day)"},
             title="Daily shelter outcomes",
         )
 
@@ -151,18 +166,49 @@ class ShelterVisualizationGenerator:
         if constrained.empty:
             return self.empty("Constrained shelter capacity and waitlist")
         totals = constrained.groupby(
-            ["Simulation Step", "Shelter Name"], as_index=False
+            ["Simulation Step", "Shelter Name", "Shelter"], as_index=False
         )[["Capacity", "Sheltered", "Queue"]].max()
-        top = (
-            totals.groupby("Shelter Name")["Queue"].max()
-            .nlargest(12).index
+        totals["Shelter Panel"] = (
+            totals["Shelter Name"] + " (" + totals["Shelter"] + ")"
         )
-        selected = totals[totals["Shelter Name"].isin(top)]
-        return px.line(
+        top = (
+            totals.groupby("Shelter Panel")["Queue"].max()
+            .nlargest(8).index
+        )
+        selected = totals[totals["Shelter Panel"].isin(top)]
+        figure = px.line(
             selected, x="Simulation Step", y=["Sheltered", "Queue"],
-            facet_row="Shelter Name",
+            facet_row="Shelter Panel",
             title="Capacity-constrained shelters: occupancy and queue",
         )
+        figure.update_yaxes(title_text=None)
+
+        y_domains = [
+            tuple(figure.layout[name].domain)
+            for name in figure.layout
+            if name.startswith("yaxis")
+            and getattr(figure.layout[name], "domain", None) is not None
+        ]
+        for annotation in figure.layout.annotations:
+            if not annotation.text.startswith("Shelter Panel="):
+                continue
+            annotation.text = annotation.text.removeprefix("Shelter Panel=")
+            annotation.x = 0
+            annotation.xref = "paper"
+            annotation.xanchor = "left"
+            annotation.textangle = 0
+            matching_domain = next(
+                (
+                    domain for domain in y_domains
+                    if domain[0] <= annotation.y <= domain[1]
+                ),
+                None,
+            )
+            if matching_domain is not None:
+                annotation.y = matching_domain[1]
+                annotation.yanchor = "bottom"
+
+        return figure
 
     def sankey(self, frames):
         flows = frames["flows"]
@@ -172,6 +218,7 @@ class ShelterVisualizationGenerator:
         shelters = list(flows["Shelter"].dropna().unique())
         labels = origins + shelters
         lookup = {label: index for index, label in enumerate(labels)}
+        height = max(700, 28 * max(len(origins), len(shelters)))
         return go.Figure(
             go.Sankey(
                 node={"label": labels},
@@ -181,7 +228,10 @@ class ShelterVisualizationGenerator:
                     "value": flows["Population"],
                 },
             ),
-            layout={"title": "Population origin to shelter flows"},
+            layout={
+                "title": "Population origin to shelter flows",
+                "height": height,
+            },
         )
 
     def flow_heatmap(self, frames):
@@ -209,6 +259,62 @@ class ShelterVisualizationGenerator:
             "Region"
         ).set_index("Region")
         figure = go.Figure()
+
+        import shapefile
+        from pyproj import CRS, Transformer
+        repo = Path(__file__).resolve().parents[3]
+        neighborhood_path = (
+            repo / "data_input/spatial/bairros_vigentes/bairros_vigentes.shp"
+        )
+        projection = neighborhood_path.with_suffix(".prj")
+        transformer = Transformer.from_crs(
+            CRS.from_wkt(projection.read_text(encoding="utf-8")),
+            "EPSG:4326", always_xy=True,
+        )
+        reader = shapefile.Reader(str(neighborhood_path))
+        fields = [field[0] for field in reader.fields[1:]]
+        name_index = fields.index("NOME")
+        neighborhood_features = []
+        neighborhood_ids = []
+        neighborhood_names = []
+        for index, shape_record in enumerate(reader.iterShapeRecords()):
+            neighborhood_id = str(index)
+            geometry = shape_record.shape.__geo_interface__
+            geometry["coordinates"] = self._transform_coordinates(
+                geometry["coordinates"], transformer
+            )
+            neighborhood_features.append({
+                "type": "Feature",
+                "id": neighborhood_id,
+                "properties": {
+                    "name": str(shape_record.record[name_index]),
+                },
+                "geometry": geometry,
+            })
+            neighborhood_ids.append(neighborhood_id)
+            neighborhood_names.append(str(shape_record.record[name_index]))
+        figure.add_trace(go.Choroplethmapbox(
+            geojson={
+                "type": "FeatureCollection",
+                "features": neighborhood_features,
+            },
+            locations=neighborhood_ids,
+            z=[0] * len(neighborhood_ids),
+            text=neighborhood_names,
+            hovertemplate="%{text}<extra>Neighborhood</extra>",
+            colorscale=[
+                [0, "rgba(0,0,0,0)"],
+                [1, "rgba(0,0,0,0)"],
+            ],
+            marker_line_color="rgba(60,60,60,0.65)",
+            marker_line_width=1,
+            showscale=False,
+            name="Neighborhood boundaries",
+            showlegend=False,
+        ))
+        midpoint_lons = []
+        midpoint_lats = []
+        midpoint_hover = []
         for _, flow in flows.nlargest(150, "Population").iterrows():
             origin = flow["Population Origin Region"]
             shelter = flow["Shelter"]
@@ -216,31 +322,64 @@ class ShelterVisualizationGenerator:
                 continue
             source = home_coords.loc[origin]
             target = shelter_coords.loc[shelter]
-            figure.add_trace(go.Scattergeo(
+            figure.add_trace(go.Scattermapbox(
                 lon=[source["Longitude"], target["Longitude"]],
                 lat=[source["Latitude"], target["Latitude"]],
                 mode="lines",
-                line={"width": max(0.5, float(flow["Population"]) ** 0.35 / 3),
+                line={"width": max(0.6, float(flow["Population"]) ** 0.4 / 2.5),
                       "color": "rgba(30,90,180,0.35)"},
                 hovertext=f"{origin} → {shelter}: {flow['Population']}",
                 hoverinfo="text", showlegend=False,
             ))
-        figure.add_trace(go.Scattergeo(
+            source_lon = float(source["Longitude"])
+            source_lat = float(source["Latitude"])
+            target_lon = float(target["Longitude"])
+            target_lat = float(target["Latitude"])
+            hover_text = (
+                f"{origin} → {shelter}<br>Population: {flow['Population']}"
+            )
+            for index in range(1, 21):
+                fraction = index / 21
+                midpoint_lons.append(
+                    source_lon + (target_lon - source_lon) * fraction
+                )
+                midpoint_lats.append(
+                    source_lat + (target_lat - source_lat) * fraction
+                )
+                midpoint_hover.append(hover_text)
+        figure.add_trace(go.Scattermapbox(
+            lon=midpoint_lons,
+            lat=midpoint_lats,
+            text=midpoint_hover,
+            mode="markers",
+            marker={"size": 14, "color": "rgba(0,0,0,0.01)"},
+            hoverinfo="text",
+            showlegend=False,
+        ))
+        figure.add_trace(go.Scattermapbox(
             lon=shelter_coords["Longitude"], lat=shelter_coords["Latitude"],
-            text=shelter_coords["Display Name"], mode="markers",
+            text=shelter_coords["Display Name"],
+            customdata=shelter_coords.index,
+            hovertemplate=(
+                "%{text}<br>Complete name: %{customdata}<extra>Shelter</extra>"
+            ),
+            mode="markers",
             marker={"size": 5, "color": "crimson"}, name="Shelters",
         ))
-        figure.update_geos(fitbounds="locations", visible=False)
-        figure.update_layout(title="Largest geographic shelter flows")
+        figure.update_layout(
+            mapbox={
+                "style": "carto-positron",
+                "zoom": 9.5,
+                "center": {"lat": -30.08, "lon": -51.18},
+            },
+            margin={"l": 0, "r": 0, "t": 55, "b": 0},
+            title="Largest geographic shelter flows",
+        )
         return figure
 
     def flood_sector_map(self, frames):
         audit = frames["audit"]
         coverage = audit[audit["Audit Type"] == "spatial_coverage"]
-        unmatched = (
-            int(pd.to_numeric(coverage["Shortfall"], errors="coerce").fillna(0).max())
-            if not coverage.empty else 0
-        )
         if coverage.empty:
             figure = self.empty("Flood-sector exposure")
             figure.layout.annotations[0].text = (
@@ -252,13 +391,17 @@ class ShelterVisualizationGenerator:
             from pyproj import CRS, Transformer
             repo = Path(__file__).resolve().parents[3]
             csv_path = Path(str(coverage.iloc[0]["Source"]))
-            shape_path = repo / "data_input/spatial/setores_2022/setores_2022_poa.shp"
+            shape_path = repo / (
+                "data_input/spatial/setores_preliminares_2022/"
+                "porto_alegre_preliminary_mesh_2022.shp"
+            )
             projection = shape_path.with_suffix(".prj")
             with csv_path.open(encoding="utf-8-sig", newline="") as stream:
+                rows = list(csv.DictReader(stream))
                 flooded = {
                     str(row["Setores Censitários Preliminares"]).removesuffix("P"):
                     int(float(row["Total de pessoas"]))
-                    for row in csv.DictReader(stream)
+                    for row in rows
                     if str(row["Inundação"]).casefold() == "true"
                 }
             transformer = Transformer.from_crs(
@@ -272,7 +415,9 @@ class ShelterVisualizationGenerator:
             populations = []
             identifiers = []
             for shape_record in reader.iterShapeRecords():
-                sector_id = str(shape_record.record[code_index])
+                sector_id = str(
+                    shape_record.record[code_index]
+                ).removesuffix("P")
                 if sector_id not in flooded:
                     continue
                 geometry = shape_record.shape.__geo_interface__
@@ -291,27 +436,129 @@ class ShelterVisualizationGenerator:
             figure = go.Figure(go.Choroplethmapbox(
                 geojson={"type": "FeatureCollection", "features": features},
                 locations=identifiers, z=populations,
-                colorscale="Blues", marker_opacity=0.65,
-                marker_line_width=0, colorbar_title="Exposed people",
+                colorscale="Reds", marker_opacity=0.65,
+                marker_line_width=0,
+                colorbar_title="Exposed people",
             ))
             figure.update_layout(
                 mapbox_style="carto-positron",
                 mapbox_zoom=9.5,
                 mapbox_center={"lat": -30.08, "lon": -51.18},
                 margin={"l": 0, "r": 0, "t": 55, "b": 0},
-                title=(
-                    "Flood-sector exposure (5.30 m); "
-                    f"{unmatched} census sectors unmatched to geometry"
-                ),
+                title="Flood-sector exposure (5.30 m)",
             )
             return figure
         except Exception as error:
             figure = self.empty("Flood-sector exposure")
             figure.layout.annotations[0].text = (
-                f"Map unavailable: {type(error).__name__}; "
-                f"{unmatched} sectors unmatched to geometry"
+                f"Map unavailable: {type(error).__name__}"
             )
             return figure
+
+    def flood_neighborhood_percentage_map(self, frames):
+        audit = frames["audit"]
+        coverage = audit[audit["Audit Type"] == "spatial_coverage"]
+        title = "Flood-exposed population by neighborhood (5.30 m)"
+        if coverage.empty:
+            figure = self.empty(title)
+            figure.layout.annotations[0].text = (
+                "This experiment uses region-level rather than census-sector exposure"
+            )
+            return figure
+        try:
+            import shapefile
+            from pyproj import CRS, Transformer
+
+            repo = Path(__file__).resolve().parents[3]
+            csv_path = Path(str(coverage.iloc[0]["Source"]))
+            shape_path = repo / (
+                "data_input/spatial/bairros_vigentes/bairros_vigentes.shp"
+            )
+            totals = {}
+            exposed = {}
+            with csv_path.open(encoding="utf-8-sig", newline="") as stream:
+                for row in csv.DictReader(stream):
+                    neighborhood = self._normalize_spatial_name(row["Bairro"])
+                    population = int(float(row["Total de pessoas"]))
+                    totals[neighborhood] = totals.get(neighborhood, 0) + population
+                    if str(row["Inundação"]).casefold() == "true":
+                        exposed[neighborhood] = (
+                            exposed.get(neighborhood, 0) + population
+                        )
+
+            projection = shape_path.with_suffix(".prj")
+            transformer = Transformer.from_crs(
+                CRS.from_wkt(projection.read_text(encoding="utf-8")),
+                "EPSG:4326", always_xy=True,
+            )
+            reader = shapefile.Reader(str(shape_path))
+            fields = [field[0] for field in reader.fields[1:]]
+            name_index = fields.index("NOME")
+            features = []
+            identifiers = []
+            percentages = []
+            names = []
+            for index, shape_record in enumerate(reader.iterShapeRecords()):
+                name = str(shape_record.record[name_index])
+                normalized = self._normalize_spatial_name(name)
+                total = totals.get(normalized, 0)
+                geometry = shape_record.shape.__geo_interface__
+                geometry["coordinates"] = self._transform_coordinates(
+                    geometry["coordinates"], transformer
+                )
+                identifier = str(index)
+                features.append({
+                    "type": "Feature",
+                    "id": identifier,
+                    "properties": {"neighborhood": name},
+                    "geometry": geometry,
+                })
+                identifiers.append(identifier)
+                names.append(name)
+                percentages.append(
+                    100 * exposed.get(normalized, 0) / total if total else 0
+                )
+
+            figure = go.Figure(go.Choroplethmapbox(
+                geojson={"type": "FeatureCollection", "features": features},
+                locations=identifiers,
+                z=percentages,
+                text=names,
+                colorscale="Reds",
+                marker_opacity=0.65,
+                marker_line_color="rgba(70,70,70,0.65)",
+                marker_line_width=1,
+                colorbar_title="Exposed population (%)",
+                zmin=0,
+                zmax=100,
+                hovertemplate=(
+                    "%{text}<br>Exposed population: %{z:.1f}%<extra></extra>"
+                ),
+            ))
+            figure.update_layout(
+                mapbox_style="carto-positron",
+                mapbox_zoom=9.5,
+                mapbox_center={"lat": -30.08, "lon": -51.18},
+                margin={"l": 0, "r": 0, "t": 55, "b": 0},
+                title=title,
+            )
+            return figure
+        except Exception as error:
+            figure = self.empty(title)
+            figure.layout.annotations[0].text = (
+                f"Map unavailable: {type(error).__name__}"
+            )
+            return figure
+
+    @staticmethod
+    def _normalize_spatial_name(value):
+        decomposed = unicodedata.normalize("NFKD", str(value))
+        without_accents = "".join(
+            character
+            for character in decomposed
+            if not unicodedata.combining(character)
+        )
+        return " ".join(without_accents.casefold().split())
 
     @classmethod
     def _transform_coordinates(cls, coordinates, transformer):
@@ -328,12 +575,15 @@ class ShelterVisualizationGenerator:
         flows = frames["flows"]
         if flows.empty:
             return self.empty("Shelter travel distance")
-        return px.scatter(
+        figure = px.scatter(
             flows, x="Mean Distance Km", y="Population",
             color="Shelter Region", size="Population",
+            size_max=35,
             hover_name="Population Origin Region", log_y=True,
             title="Travel distance and population by origin-shelter flow",
         )
+        figure.update_traces(marker={"sizemin": 5})
+        return figure
 
     def demographic_equity(self, frames):
         groups = frames["groups"]
