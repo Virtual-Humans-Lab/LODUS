@@ -2,9 +2,14 @@
     "experiment_description": "Segund test with shelters. Loading shelters from file and adding to env.",
     "envgraph_inputs_files": {
         "__comment1__": "Files will be loaded from the 'data_input' folder",
-        "environment_file": "Environment-PortoAlegre94RegionsDefault.json",
-        "population_file": "Population-PortoAlegre94RegionsDefault.json",
+        "environment_file": "Environment-PortoAlegre94RegionsDefaultRefactored.json",
+        "population_file": "Population-PortoAlegre94RegionsDefaultRefactored.json",
         "routine_file": "shelters/Routine-ShelterDaily1Percent.json"
+    },
+    "simulation_parameters": {
+        "total_cycles": 3,
+        "cycle_length": 24,
+        "random_seed": 0
     },
     "levy_walk_plugin": {
         "__comment1__": "distance type: 1 = LongLat, 2 = Metres_Geopy, 3 = Metres_Pyproj",

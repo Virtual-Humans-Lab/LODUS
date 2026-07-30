@@ -364,9 +364,11 @@ class EnvRegion():
 
     def get_node_by_unique_name(self, unique_name: str) -> EnvNode:
         """Gets an EnvNode by name."""
-        if unique_name not in self.node_dict:
+        complete_name = f"{self.name}//{unique_name}"
+        key = unique_name if unique_name in self.node_dict else complete_name
+        if key not in self.node_dict:
             raise ValueError(f"Node {unique_name} not found in region {self.name}")
-        return self.node_dict[unique_name]
+        return self.node_dict[key]
     
     def get_nodes_by_type(self, node_type: str) -> list[EnvNode]:
         """Gets a list of EnvNodes by type."""
@@ -775,6 +777,52 @@ class EnvironmentGraph():
         self.region_dict[region_template.region_name] = new_region        
         self.region_list.append(new_region)
         self.region_id_dict[new_region.id] = new_region
+
+    def add_envnode(self, region_name: str, node: EnvNode) -> EnvNode:
+        """Atomically register an existing node in a region and this graph.
+
+        Dynamic topology plugins should use this method instead of mutating the
+        region and graph indexes independently.
+        """
+        if not isinstance(region_name, str) or not region_name:
+            raise ValueError("region_name must be a non-empty string")
+        if region_name not in self.region_dict:
+            raise ValueError(f"Region {region_name} not found in region_dict")
+        if not isinstance(node, EnvNode):
+            raise ValueError("node must be of type EnvNode")
+        if not isinstance(node.node_type, str) or not node.node_type:
+            raise ValueError("node.node_type must be a non-empty string")
+        if not isinstance(node.unique_name, str) or not node.unique_name:
+            raise ValueError("node.unique_name must be a non-empty string")
+        if "//" in node.unique_name:
+            raise ValueError("node.unique_name cannot contain '//'")
+        if not isinstance(node.id, int) or node.id < 0:
+            raise ValueError("node.id must be a nonnegative integer")
+        if (
+            node.containing_region_name
+            and node.containing_region_name != region_name
+        ):
+            raise ValueError(
+                f"Node belongs to region {node.containing_region_name}, "
+                f"not {region_name}"
+            )
+
+        region = self.region_dict[region_name]
+        complete_name = f"{region_name}//{node.unique_name}"
+        if not complete_name.startswith(f"{region_name}//"):
+            raise ValueError("node complete name is invalid")
+        if complete_name in self.node_dict or complete_name in region.node_dict:
+            raise ValueError(f"Node {complete_name} already exists")
+        if node.id in self.node_id_dict:
+            raise ValueError(f"Node id {node.id} already exists")
+
+        if node.routine is None:
+            node.routine = Routine()
+        region.add_envnode(node)
+        self.node_list.append(node)
+        self.node_dict[complete_name] = node
+        self.node_id_dict[node.id] = node
+        return node
 
     def add_edge(self, region1, region2, _type):
         self.edge_table[region1][region2] = _type

@@ -1,4 +1,8 @@
 # LODUS
+
+Current shelter simulation setup, data, batch runs, logging, and research
+scenarios are documented in
+[`docs/shelter_simulations.md`](docs/shelter_simulations.md).
  
 Instructions!
 

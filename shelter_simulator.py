@@ -1,228 +1,250 @@
-#encoding: utf-8
-import sys
-sys.path.append('./plugins/')
+"""Dedicated runner for capacity-constrained shelter simulations."""
+
+from __future__ import annotations
 
 import argparse
-import time
+from datetime import datetime, timezone
+import json
 from pathlib import Path
+import subprocess
+import time
+
+from core.population import PopulationTemplate
+from plugins.loggers.blob_count_logger import (
+    BlobCountLogger,
+    BlobCountRecordKey,
+)
+from plugins.loggers.movement_displacement_logger import (
+    MovementDisplacementLogger,
+)
+from plugins.loggers.population_count_logger import (
+    PopulationCountLogger,
+    PopulationCountRecordKey,
+)
+from plugins.loggers.shelter_logger import ShelterLogger
+from plugins.time_actions.gather_population_plugin import (
+    GatherPopulationPlugin,
+)
+from plugins.time_actions.levy_walk_plugin import LevyWalkPlugin
+from plugins.time_actions.move_population_plugin import MovePopulationPlugin
+from plugins.time_actions.send_population_back_plugin import (
+    SendPopulationBackPlugin,
+)
+from plugins.time_actions.shelter_plugin import ShelterPlugin
+from util.data_parse import generate_lodus_simulation, load_experiment_config
+from util.random_instance import FixedRandom
+from util.resource_usage import get_peak_memory_kib
 
 
-from loggers.blob_count_logger import BlobCountLogger, BlobCountRecordKey
-from loggers.characteristic_change_logger import CharacteristicChangeLogger
-from loggers.movement_displacement_logger import MovementDisplacementLogger
-from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
-from loggers.population_count_logger import (PopulationCountLogger,
-                                             PopulationCountRecordKey)
-
-from time_actions.move_population_plugin import MovePopulationPlugin
-from time_actions.gather_population_plugin import GatherPopulationPlugin
-from time_actions.shelter_plugin import ShelterPlugin
-from time_actions.levy_walk_plugin import LevyWalkPlugin
-
-
-import environment
-import population
-from data_parse_util import *
-from random_inst import FixedRandom
-from util import *
-import numpy as np
-
-
-arg_parser = argparse.ArgumentParser(description="Shelter Simulation.")
-arg_parser.add_argument('--f', metavar="F", type=str, default = '', help='Simulation file.')
-arg_parser.add_argument('--e', metavar="E", type=str, default = None, help='Experiment Configuration File.')
-arg_parser.add_argument('--r', metavar="R", type=float, default = 0, help='R')
-arg_parser.add_argument('--n', metavar="N", type=str, default = None, help='Experiment Name.')
-# arg_parser.add_argument('--c', metavar="C", type=str, default = ".\\DataInput\\CustomTimeActions.json", help='Custom Time Actions Configuration File (.json)')
-# arg_parser.add_argument('--d', metavar="D", type=str, default = ".\\DataInput\\NodeDensities.json", help='Node Densities Configuration File (.json)')
-# arg_parser.add_argument('--v', metavar="V", type=str, default = ".\\DataInput\\VaccinePluginSetup.json", help='Vaccine Plugin Configuration File (.json)')
-# arg_parser.add_argument('--i', metavar="I", type=str, default = ".\\DataInput\\SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
-args = vars(arg_parser.parse_args())
-
-FixedRandom(random_seed=0, numpy_seed=0)
-
-output_str = ""
-
-'''
-Data Loading
-'''
-data_input_file_path = args['f']
-experiment_configuration_file = args['e']
-if ".json" in args['f']: 
-    raise Exception("please use the new format of inputs (experiment config)")
-env_graph = Generate_EnvironmentGraph(experiment_configuration_file)
-'''
-Parameters
-'''
-# How many steps each cycle has. Ex: a day (cycle) with 24 hours (length)
-cycles:int = 3
-cycle_length:int = 24
-env_graph.routine_cycle_length = cycle_length
-simulation_steps = cycles * cycle_length
-
-env_graph.experiment_name = args["n"] if args["n"] is not None else args["e"]
-print("Creating experiment:", env_graph.experiment_name)
-print(f'Experiment description: {env_graph.experiment_config.get("experiment_description", "No description provided")}',)
-print("EnvNode Count", len(env_graph.node_list))
-
-'''
-TimeAction Plugins
-'''
-
-move_population_plugin = MovePopulationPlugin(env_graph)
-env_graph.load_time_action_plugin(move_population_plugin)
-
-gather_pop = None
-if 'gather_population_plugin' in env_graph.experiment_config:
-    gather_pop = GatherPopulationPlugin(env_graph)
-    env_graph.load_time_action_plugin(gather_pop)
-
-levy_walk = None
-if 'levy_walk_plugin' in env_graph.experiment_config:
-    levy_walk = LevyWalkPlugin(env_graph)
-    env_graph.load_time_action_plugin(levy_walk)
-
-shelter_plugin = None
-if 'shelter_plugin' in env_graph.experiment_config:
-    shelter_plugin = ShelterPlugin(env_graph)
-    env_graph.load_time_action_plugin(shelter_plugin)
-
-'''
-Logging
-'''
-pop_count_logger = PopulationCountLogger(f'{env_graph.experiment_name}', env_graph, cycle_length)
-pop_count_logger.data_to_record = {PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
-                                   PopulationCountRecordKey.POPULATION_COUNT_REGION,
-                                   PopulationCountRecordKey.POPULATION_COUNT_NODE}
-
-pop_count_logger.global_custom_templates["Safe"] = PopulationTemplate(traceable_characteristics={"flooding_status": "safe"})
-pop_count_logger.global_custom_templates["In Danger"] = PopulationTemplate(traceable_characteristics={"flooding_status": "in_danger"})
-pop_count_logger.global_custom_templates["Sheltered"] = PopulationTemplate(traceable_characteristics={"flooding_status": "sheltered"})
-pop_count_logger.region_custom_templates["Safe"] = PopulationTemplate(traceable_characteristics={"flooding_status": "safe"})
-pop_count_logger.region_custom_templates["In Danger"] = PopulationTemplate(traceable_characteristics={"flooding_status": "in_danger"})
-pop_count_logger.region_custom_templates["Sheltered"] = PopulationTemplate(traceable_characteristics={"flooding_status": "sheltered"})
-pop_count_logger.node_custom_templates["Safe"] = PopulationTemplate(traceable_characteristics={"flooding_status": "safe"})
-pop_count_logger.node_custom_templates["In Danger"] = PopulationTemplate(traceable_characteristics={"flooding_status": "in_danger"})
-pop_count_logger.node_custom_templates["Sheltered"] = PopulationTemplate(traceable_characteristics={"flooding_status": "sheltered"})
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Run a focused LODUS shelter simulation."
+    )
+    parser.add_argument(
+        "--e", required=True, help="Experiment path relative to experiments/"
+    )
+    parser.add_argument("--n", help="Output run name")
+    parser.add_argument(
+        "--seed", type=int,
+        help="Override simulation_parameters.random_seed",
+    )
+    parser.add_argument(
+        "--no-shelter-png", action="store_true",
+        help="Generate shelter HTML visualizations without PNG export",
+    )
+    parser.add_argument(
+        "--overrides-json",
+        help="Research-only JSON object or path merged into the experiment",
+    )
+    return parser.parse_args()
 
 
-blob_count_logger = BlobCountLogger(f'{env_graph.experiment_name}')
-blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
-                                    BlobCountRecordKey.BLOB_COUNT_REGION,
-                                    BlobCountRecordKey.BLOB_COUNT_NODE}
-
-pop_temp = PopulationTemplate()
-#pop_temp.set_property('age', 'adults')
-pop_count_logger.pop_template = pop_temp
-
-# CharacteristicChange logger
-traceable_logger = CharacteristicChangeLogger(f'{env_graph.experiment_name}')
-
-# OD-Matrix logger
-od_logger = ODMatrixLogger(f'{env_graph.experiment_name}')
-od_logger.data_to_record = {ODMovementRecordKey.REGION_TO_REGION}
-# od_logger.data_to_record = [ODMovementRecordKey.REGION_TO_REGION,
-#                             ODMovementRecordKey.NODE_TO_NODE]
-
-# Age tracking
-od_logger.region_custom_templates["age: [children]"] = PopulationTemplate(sampled_characteristics={"age": "children"})
-#od_logger.region_custom_templates["age: [youngs]"] = PopTemplate(sampled_properties={"age": "youngs"})
-od_logger.region_custom_templates["age: [adults]"] = PopulationTemplate(sampled_characteristics={"age": "adults"})
-od_logger.region_custom_templates["age: [elders]"] = PopulationTemplate(sampled_characteristics={"age": "elders"})
-
-# Occupation tracking
-#od_logger.region_custom_templates["occupation: [other]"] = PopTemplate(sampled_properties={"occupation": "other"})
-od_logger.region_custom_templates["occupation: [student]"] = PopulationTemplate(sampled_characteristics={"occupation": "student"})
-od_logger.region_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": "worker"})
-od_logger.node_custom_templates["occupation: [worker]"] = PopulationTemplate(sampled_characteristics={"occupation": "worker"})
-#----------------------------
-
-# Movement Displacement Logger
-displacement_logger = MovementDisplacementLogger(f'{env_graph.experiment_name}')
+def configured_seed(experiment: str, override: int | None) -> int:
+    if override is not None:
+        return override
+    config = load_experiment_config(experiment)
+    return int(
+        config.get("simulation_parameters", {}).get(
+            "random_seed", config.get("random_seed", 0)
+        )
+    )
 
 
-output_str += "Population per Age:\n"
-output_str += "Children:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "children"}))) + "\n"
-output_str += "Youngs:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "youngs"}))) + "\n"
-output_str += "Adults:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "adults"}))) + "\n"
-output_str += "Elders:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"age": "elders"}))) + "\n"
-output_str += "Population per Occupation:\n"
-output_str += "Worker:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": "worker"}))) + "\n"
-output_str += "Student:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": "student"}))) + "\n"
-output_str += "Other:" + str(env_graph.get_population_size(PopulationTemplate(sampled_characteristics={"occupation": "other"}))) + "\n"
-print(output_str)
-'''
-Simulation
-'''
-
-env_graph.LoadLoggerPlugin(pop_count_logger)
-# env_graph.LoadLoggerPlugin(od_logger)
-env_graph.LoadLoggerPlugin(blob_count_logger)
-# # env_graph.LoadLoggerPlugin(traceable_logger)
-# # env_graph.LoadLoggerPlugin(vacc_logger)
-env_graph.LoadLoggerPlugin(displacement_logger)
-# if levy_sample_logger is not None: env_graph.LoadLoggerPlugin(levy_sample_logger)
-# if infection_sum_logger is not None: env_graph.LoadLoggerPlugin(infection_sum_logger)
-#print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
-#print("Loaded Logger Plugins: " + str([type(lp) for lp in env_graph.loaded_logger_plugins]))
-env_graph.start_logging()
-
-start_time = time.perf_counter()
-for i in range(simulation_steps):
-    print(i, end='\r')
-        
-    #infection_plugin.update_time_step(i % day_duration, i)
-
-    #if i % day_duration == 0:
-    #    vaccine_plugin.update_time_step(i % day_duration, i)
-
-    # Routine/Repeating Global Action Invoke example
-
-    # Updates Node Routines and Repeating Global Actions
-    # These are defined in the input environment descriptor
-    env_graph.update_time_step(i % cycle_length, i)
-
-    # Log current simulation step
-    env_graph.log_simulation_step()
-    
-    #if len(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs) > 0:
-    #    print(env_graph.region_dict["Azenha"].get_node_by_name("pharmacy").contained_blobs[0].traceable_properties)
-    
-
-#logger.compute_composite_data(env_graph, simulation_steps)
-
-#logger.stop_logging(show_figures=False, export_figures=False, export_html=True)
-# od_logger.stop_logging()
-
-end_time = time.perf_counter()
-env_graph.stop_logging()
-
-#print("TimeAction Plugins execution times")
-if levy_walk is not None: output_str += levy_walk.print_execution_time_data()
-# if infection is not None: output_str += infection.print_execution_time_data()
-# if vaccine is not None: output_str += vaccine.print_execution_time_data()
-# if gather_pop is not None: output_str += gather_pop.print_execution_time_data()
-# if return_pop_home is not None: output_str += return_pop_home.print_execution_time_data()
-# if send_pop_back is not None: output_str += send_pop_back.print_execution_time_data()
-# if return_to_previous is not None: output_str += return_to_previous.print_execution_time_data()
-if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
-if shelter_plugin is not None: output_str += shelter_plugin.print_execution_time_data()
-
-output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
-output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"
-output_str += "Loaded TimeAction Keys: " + str(env_graph.time_action_map.keys()) + "\n"
-
-print("Total Simulation time")
-print(end_time - start_time)
-print("Average Cycle time")
-print((end_time - start_time)/cycles)
-
-print("Loaded TimeAction Keys: ", env_graph.time_action_map.keys())
-print("writing Output File")
-text_file = open(f"output_logs/{env_graph.experiment_name}/output.txt", "w")
-text_file.write(output_str)
-text_file.close()
-exit(0)
+def git_commit() -> str | None:
+    try:
+        return subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).parent,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
 
 
-# python .\TOMACS_simulation.py --e large_scale_event/Baseline
+def deep_merge(target: dict, source: dict):
+    for key, value in source.items():
+        if isinstance(value, dict) and isinstance(target.get(key), dict):
+            deep_merge(target[key], value)
+        else:
+            target[key] = value
+
+
+def load_overrides(value: str | None) -> dict:
+    if not value:
+        return {}
+    stripped = value.lstrip()
+    if stripped.startswith("{"):
+        loaded = json.loads(value)
+    else:
+        candidate = Path(value)
+        loaded = json.loads(
+            candidate.read_text(encoding="utf-8")
+            if candidate.is_file()
+            else value
+        )
+    if not isinstance(loaded, dict):
+        raise ValueError("--overrides-json must contain a JSON object")
+    return loaded
+
+
+def configure_population_logger() -> PopulationCountLogger:
+    logger = PopulationCountLogger()
+    logger.data_to_record = {
+        PopulationCountRecordKey.POPULATION_COUNT_GLOBAL,
+        PopulationCountRecordKey.POPULATION_COUNT_REGION,
+    }
+    templates = {
+        "Safe": PopulationTemplate(
+            traceable_characteristics={"flooding_status": "safe"}
+        ),
+        "In Danger": PopulationTemplate(
+            traceable_characteristics={"flooding_status": "in_danger"}
+        ),
+        "Sheltered": PopulationTemplate(
+            traceable_characteristics={"flooding_status": "sheltered"}
+        ),
+    }
+    logger.global_custom_templates.update(templates)
+    logger.region_custom_templates.update(templates)
+    logger.pop_template = PopulationTemplate()
+    return logger
+
+
+def run(args) -> Path:
+    seed = configured_seed(args.e, args.seed)
+    FixedRandom(random_seed=seed, numpy_seed=seed)
+    started_at = datetime.now(timezone.utc)
+    simulation = generate_lodus_simulation(args.e)
+    overrides = load_overrides(getattr(args, "overrides_json", None))
+    deep_merge(simulation.experiment_config, overrides)
+    parameters = simulation.experiment_config.get("simulation_parameters", {})
+    simulation.set_total_cycles(
+        int(parameters.get("total_cycles", simulation.time_status.total_cycles))
+    )
+    simulation.set_cycle_length(
+        int(parameters.get("cycle_length", simulation.time_status.cycle_length))
+    )
+    simulation.experiment_config.setdefault(
+        "simulation_parameters", {}
+    )["random_seed"] = seed
+    simulation.experiment_name = (
+        args.n
+        if args.n
+        else f"{Path(args.e).name}-seed{seed}"
+    )
+
+    action_plugins = [
+        MovePopulationPlugin(),
+        GatherPopulationPlugin(),
+        LevyWalkPlugin(),
+        ShelterPlugin(),
+    ]
+    if "send_population_back_plugin" in simulation.experiment_config:
+        action_plugins.insert(3, SendPopulationBackPlugin())
+    for plugin in action_plugins:
+        simulation.load_plugin(plugin)
+
+    population_logger = configure_population_logger()
+    blob_logger = BlobCountLogger()
+    blob_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL}
+    loggers = [
+        population_logger,
+        blob_logger,
+        MovementDisplacementLogger(),
+        ShelterLogger(export_png=not args.no_shelter_png),
+    ]
+    for logger in loggers:
+        simulation.load_plugin(logger)
+
+    simulation.setup_logging()
+    started = time.perf_counter()
+    while not simulation.time_status.is_final_step:
+        simulation.update_time_step()
+        simulation.log_simulation_step()
+    runtime = time.perf_counter() - started
+    simulation.stop_logging()
+    finished_at = datetime.now(timezone.utc)
+
+    output_path = Path("output_logs") / simulation.experiment_name
+    output_path.mkdir(parents=True, exist_ok=True)
+    shelter = simulation.get_first_plugin(ShelterPlugin)
+    summary = {
+        "experiment": args.e,
+        "run_name": simulation.experiment_name,
+        "seed": seed,
+        "cycles": simulation.time_status.total_cycles,
+        "cycle_length": simulation.time_status.cycle_length,
+        "simulation_steps": simulation.time_status.simulation_step + 1,
+        "regions": len(simulation.env_graph.region_list),
+        "nodes": len(simulation.env_graph.node_list),
+        "shelters": len(shelter.shelters),
+        "mapped_exposure": sum(shelter.exposure_by_region.values()),
+        "shelter_capacity": sum(
+            int(node.get_attribute("capacity")) for node in shelter.shelters
+        ),
+        "sheltered_final": simulation.env_graph.get_population_size(
+            shelter.sheltered_template
+        ),
+        "unresolved_final": simulation.env_graph.get_population_size(
+            shelter.in_danger_template
+        ),
+        "runtime_seconds": runtime,
+        "peak_memory_kib": get_peak_memory_kib(),
+    }
+    output_text = "\n".join(
+        f"{key}: {value}" for key, value in summary.items()
+    ) + "\n"
+    (output_path / "output.txt").write_text(output_text, encoding="utf-8")
+    metadata = {
+        "status": "complete",
+        **summary,
+        "numpy_seed": seed,
+        "started_at_utc": started_at.isoformat(),
+        "finished_at_utc": finished_at.isoformat(),
+        "commit_sha": git_commit(),
+        "input_files": simulation.experiment_config.get(
+            "envgraph_inputs_files", {}
+        ),
+        "simulation_parameters": {
+            "total_cycles": simulation.time_status.total_cycles,
+            "cycle_length": simulation.time_status.cycle_length,
+            "random_seed": seed,
+        },
+        "resolved_config": simulation.experiment_config,
+    }
+    (output_path / "run_metadata.json").write_text(
+        json.dumps(metadata, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    print(output_text, end="")
+    return output_path
+
+
+def main():
+    run(parse_args())
+
+
+if __name__ == "__main__":
+    main()

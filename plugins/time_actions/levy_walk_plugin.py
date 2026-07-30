@@ -158,7 +158,8 @@ class LevyWalkPlugin(ActionPlugin):
         if "target_node_type" in values:
             distances = self.filter_target_node_types(buckets_dict=distances,
                                                       target_nodes=values["target_node_type"],
-                                                      target_node_contains=values.get("target_node_type_contains", False))
+                                                      target_node_contains=values.get("target_node_type_contains", False),
+                                                      enabled_only=values.get("target_enabled_only", False))
         # print(len(distances))
         # for dist in distances:
         #    print(distances[dist])
@@ -206,7 +207,9 @@ class LevyWalkPlugin(ActionPlugin):
                                                 values = new_action_values)
             # print(new_action)
             sub_list.append(new_action)
-        self.add_execution_time(time.perf_counter() - start_time)
+        self.add_execution_time(
+            "levy_walk_direct", time.perf_counter() - start_time
+        )
         self.sublist_count.append(len(sub_list))
         # if acting_region.name == "Sarandi":
         #     print(f"\tTrying to move: {int(len(sub_list) * _pop_group_size)}")
@@ -262,7 +265,9 @@ class LevyWalkPlugin(ActionPlugin):
         
         if "target_node_type" in values:
             distances = self.filter_target_node_types(buckets_dict=distances,
-                                                      target_nodes=values["target_node_type"])
+                                                      target_nodes=values["target_node_type"],
+                                                      target_node_contains=values.get("target_node_type_contains", False),
+                                                      enabled_only=values.get("target_enabled_only", False))
 
         # if 'node_type' in values and 'home' in values['node_type']:
         #     print(distances)
@@ -358,22 +363,33 @@ class LevyWalkPlugin(ActionPlugin):
         
         return self.dist_buckets[unique_name].copy()
 
-    def filter_target_node_types(self, buckets_dict:dict, target_nodes:list[str], target_node_contains: bool = False):
+    def filter_target_node_types(
+        self,
+        buckets_dict,
+        target_nodes: list[str],
+        target_node_contains: bool = False,
+        enabled_only: bool = False,
+    ):
         ''' 
         Filters a distance bucket dict to only include entries where the node type is is 'target_nodes'
         Raises an exception if the plugin shouldn't be using buckets
         '''
-        __filtered = {}
-        if not self.use_buckets:
-            raise Exception("Error in filter_target_node_types - Levy Walk Plugin")
-        for bucket in buckets_dict:
-            if target_node_contains:
-                __filtered[bucket] = [dist for dist in buckets_dict[bucket] if
-                                      any(s in (str(dist[0]).split("//")[1]) for s in target_nodes)]
-            else:
-                __filtered[bucket] = [dist for dist in buckets_dict[bucket] if 
-                                    re.sub(r'[0-9]+', '', str(dist[0]).split("//")[1]) in target_nodes]
-        return __filtered
+        def matches(distance_entry):
+            complete_name = str(distance_entry[0])
+            node = self.env_graph.get_node_by_complete_name(complete_name)
+            type_matches = (
+                any(value in node.node_type for value in target_nodes)
+                if target_node_contains
+                else node.node_type in target_nodes
+            )
+            return type_matches and (not enabled_only or node.is_enabled())
+
+        if isinstance(buckets_dict, dict):
+            return {
+                bucket: [entry for entry in entries if matches(entry)]
+                for bucket, entries in buckets_dict.items()
+            }
+        return [entry for entry in buckets_dict if matches(entry)]
 
     def levy_sample(self, location:Optional[float] = None,
                     scale:Optional[float] = None):

@@ -11,6 +11,7 @@
         "sampled_characteristics": {}
       },
       "values": {
+        "node_type": ["home"],
         "population_percentage_to_move": 0.01,
         "__comment1__": "mode: 0 = initial in danger, 1 = current in danger",
         "mode": 0
@@ -20,6 +21,7 @@
     "cycle_step": [
       9
     ],
+    "execution_scope": "once",
     "action": {
       "name": "reallocate_population_from_shelter_waitlist",
       "type": "reallocate_shelter_waitlist",
@@ -41,7 +43,9 @@
         "traceable_characteristics": {},
         "sampled_characteristics": {}
       },
-      "values": {}
+      "values": {
+        "node_type": ["shelter"]
+      }
     }
   }],
   "routines": {}

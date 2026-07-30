@@ -1,7 +1,7 @@
 {
   "global_routine": [{
     "cycle_step": [
-      8
+      7
     ],
     "action": {
       "name": "move_population_in_danger_to_shelters",
@@ -11,6 +11,7 @@
         "sampled_characteristics": {}
       },
       "values": {
+        "node_type": ["home"],
         "population_percentage_to_move": 0.01,
         "__comment1__": "mode: 0 = initial in danger, 1 = current in danger",
         "mode": 0
@@ -28,7 +29,9 @@
         "traceable_characteristics": {},
         "sampled_characteristics": {}
       },
-      "values": {}
+      "values": {
+        "node_type": ["shelter"]
+      }
     }
   }],
   "routines": {}

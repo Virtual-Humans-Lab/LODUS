@@ -144,7 +144,7 @@ class TestEnvNodeFactory:
         
         assert env_node.contained_blobs[0].sampled_characteristics.characteristics["economic_profile"].categories == {'unemployed': 30, 'worker': 70}
 
-class TestEnvNode:     
+class TestEnvNode:
     def test_initialization(self, env_node: EnvNode):
         assert env_node.node_type == "test_type"
         assert env_node.unique_name == "test_name"
@@ -207,6 +207,7 @@ class TestEnvNode:
         assert env_node.get_population_size() == 100
         with pytest.raises(ValueError, match="BLOB ALREADY HERE"):
             env_node.add_blob(blob)
+
 
     def test_remove_blob(self, env_node: EnvNode, blob_factory: BlobFactory):
         blob = blob_factory.generate_blob_rand(0, 0, 100)
@@ -345,6 +346,65 @@ class TestEnvNode:
         assert sum(blob.get_population_size() for blob in env_node.contained_blobs) == 100
         assert blob.get_population_size()== 99
         assert modified_blob.get_population_size() == 1
+
+
+class TestEnvironmentGraphDynamicNodes:
+    def _graph(self):
+        graph = EnvironmentGraph()
+        region = EnvRegion("Region", [0.0, 0.0])
+        graph.region_list.append(region)
+        graph.region_dict[region.name] = region
+        graph.region_id_dict[region.id] = region
+        return graph, region
+
+    def test_add_envnode_registers_all_indexes_and_routine(self):
+        graph, region = self._graph()
+        node = EnvNode("shelter", "shelter_1")
+
+        result = graph.add_envnode(region.name, node)
+
+        assert result is node
+        assert node.routine is not None
+        assert node.containing_region_name == region.name
+        assert node in region.node_list
+        assert region.node_dict[node.get_complete_name()] is node
+        assert node in graph.node_list
+        assert graph.node_dict[node.get_complete_name()] is node
+        assert graph.node_id_dict[node.id] is node
+
+    def test_add_envnode_rejects_duplicate_without_partial_mutation(self):
+        graph, region = self._graph()
+        first = graph.add_envnode(
+            region.name, EnvNode("shelter", "shelter_1")
+        )
+        duplicate = EnvNode("shelter", first.unique_name)
+
+        with pytest.raises(ValueError, match="already exists"):
+            graph.add_envnode(region.name, duplicate)
+
+        assert duplicate not in region.node_list
+        assert duplicate not in graph.node_list
+        assert duplicate.id not in graph.node_id_dict
+
+    def test_add_envnode_rejects_unknown_or_conflicting_region(self):
+        graph, region = self._graph()
+        node = EnvNode("shelter", "shelter_1")
+        with pytest.raises(ValueError, match="not found"):
+            graph.add_envnode("Missing", node)
+
+        node.containing_region_name = "Other"
+        with pytest.raises(ValueError, match="belongs to region"):
+            graph.add_envnode(region.name, node)
+
+    def test_add_envnode_validates_identity_before_mutation(self):
+        graph, region = self._graph()
+        node = EnvNode("shelter", "invalid//name")
+        node.id = -1
+        with pytest.raises(ValueError):
+            graph.add_envnode(region.name, node)
+        assert node not in region.node_list
+        assert node not in graph.node_list
+
 
 class TestEnvNodeDistances:
     def test_initialization(self):
