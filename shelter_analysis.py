@@ -138,10 +138,10 @@ def write_figures(
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--input", default="output_logs/shelter_batch_summary.csv"
+        "--input", default="results/shelter/summary.csv"
     )
     parser.add_argument(
-        "--output", default="output_logs/shelter_analysis"
+        "--output", default="results/shelter/analysis"
     )
     parser.add_argument("--reference", default="v3_reference")
     parser.add_argument("--bootstrap-samples", type=int, default=10000)

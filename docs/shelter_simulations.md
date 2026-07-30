@@ -65,6 +65,11 @@ To run or resume all compatibility configurations:
   --seeds 0
 ```
 
+Batch runs are staged in `output_logs/shelter_batch/` and moved after
+completion to `results/shelter/<scenario>/seed_<seed>/`. The batch summary is
+written to `results/shelter/summary.csv`. Direct `shelter_simulator.py` runs
+continue to write to `output_logs/<run-name>/`.
+
 The daily routines move at step 7, admit at step 8, reallocate once globally
 at step 9, and admit reallocated people at step 10.
 
@@ -125,8 +130,10 @@ Analyze the resulting batch with:
 
 ```bash
 ./.venv/bin/python shelter_analysis.py \
-  --input output_logs/shelter_batch_summary.csv
+  --input results/shelter/summary.csv
 ```
+
+Analysis output is written to `results/shelter/analysis/`.
 
 The analysis reports coverage, unresolved demand, peak waitlist,
 waiting-person-steps, utilization, mean/P95 distance, equity gaps, runtime,

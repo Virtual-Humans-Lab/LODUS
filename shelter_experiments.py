@@ -4,14 +4,17 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 
 import pandas as pd
 
 
+REPO_ROOT = Path(__file__).resolve().parent
 COMPATIBILITY_EXPERIMENTS = [
     "initial_test",
     "load_shelters_test",
@@ -108,8 +111,8 @@ def parse_seed_spec(value: str) -> list[int]:
     return sorted(set(seeds))
 
 
-def completed(run_name: str) -> bool:
-    metadata = Path("output_logs") / run_name / "run_metadata.json"
+def completed(run_path: Path) -> bool:
+    metadata = run_path / "run_metadata.json"
     if not metadata.is_file():
         return False
     try:
@@ -120,22 +123,37 @@ def completed(run_name: str) -> bool:
         return False
 
 
+def preserve_partial_run(run_path: Path) -> None:
+    if not run_path.exists():
+        return
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    run_path.rename(
+        run_path.with_name(f"{run_path.name}.partial-{timestamp}")
+    )
+
+
 def run_one(
     scenario: str,
     experiment: str,
     overrides: dict,
     seed: int,
     force: bool,
+    results_root: Path,
 ) -> dict:
     run_name = f"shelter-{scenario}-seed{seed}"
-    if completed(run_name) and not force:
+    run_path = results_root / scenario / f"seed_{seed:03d}"
+    if completed(run_path) and not force:
         status = "resumed"
     else:
+        preserve_partial_run(run_path)
+        temporary_name = f"shelter_batch/{scenario}/seed_{seed:03d}"
+        temporary_path = REPO_ROOT / "output_logs" / temporary_name
+        preserve_partial_run(temporary_path)
         command = [
             sys.executable,
-            "shelter_simulator.py",
+            str(REPO_ROOT / "shelter_simulator.py"),
             "--e", experiment,
-            "--n", run_name,
+            "--n", temporary_name,
             "--seed", str(seed),
             "--no-shelter-png",
         ]
@@ -144,24 +162,38 @@ def run_one(
                 "--overrides-json",
                 json.dumps(overrides, ensure_ascii=False),
             ])
-        result = subprocess.run(command, text=True, capture_output=True)
-        status = "complete" if result.returncode == 0 else "failed"
-        if result.returncode:
+        result = subprocess.run(
+            command, cwd=REPO_ROOT, text=True, capture_output=True
+        )
+        run_path.parent.mkdir(parents=True, exist_ok=True)
+        if result.returncode == 0 and completed(temporary_path):
+            shutil.move(str(temporary_path), str(run_path))
+            status = "complete"
+        else:
+            if temporary_path.exists():
+                shutil.move(str(temporary_path), str(run_path))
+            else:
+                run_path.mkdir(parents=True, exist_ok=True)
+            (run_path / "run.log").write_text(
+                result.stdout + "\n--- STDERR ---\n" + result.stderr,
+                encoding="utf-8",
+            )
             return {
                 "Scenario": scenario, "Seed": seed, "Run Name": run_name,
-                "Status": status, "Error": result.stderr[-2000:],
+                "Status": "failed", "Path": str(run_path),
+                "Error": result.stderr[-2000:],
             }
     return {
         "Scenario": scenario,
         "Seed": seed,
         "Run Name": run_name,
         "Status": status,
-        **summarize_run(run_name),
+        "Path": str(run_path),
+        **summarize_run(run_path),
     }
 
 
-def summarize_run(run_name: str) -> dict:
-    run_path = Path("output_logs") / run_name
+def summarize_run(run_path: Path) -> dict:
     data_path = run_path / "data_frames"
     metadata = json.loads(
         (run_path / "run_metadata.json").read_text(encoding="utf-8")
@@ -233,8 +265,9 @@ def main():
     parser.add_argument("--jobs", type=int, default=1)
     parser.add_argument("--force", action="store_true")
     parser.add_argument(
-        "--summary", default="output_logs/shelter_batch_summary.csv"
+        "--results-root", type=Path, default=Path("results/shelter")
     )
+    parser.add_argument("--summary", type=Path, default=None)
     args = parser.parse_args()
     seeds = (
         list(range(30)) if args.confirmed
@@ -243,11 +276,14 @@ def main():
         else ([0] if args.catalog == "compatibility" else list(range(5)))
     )
     tasks = [
-        (scenario, experiment, overrides, seed, args.force)
+        (
+            scenario, experiment, overrides, seed, args.force,
+            args.results_root,
+        )
         for scenario, (experiment, overrides) in selected_catalog(args).items()
         for seed in seeds
     ]
-    summary = Path(args.summary)
+    summary = args.summary or args.results_root / "summary.csv"
     existing = (
         pd.read_csv(summary).to_dict("records")
         if summary.is_file()
