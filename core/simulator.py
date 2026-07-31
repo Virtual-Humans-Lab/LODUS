@@ -408,13 +408,15 @@ class LodusSimulation:
     def process_regular_and_end_of_step_actions(
         self, cycle_step: int, simulation_step: int
     ):
-        actions = (
-            self.routine_controller.generate_regular_action_list(cycle_step)
-            + self.routine_controller.generate_end_of_step_action_list(
-                cycle_step, simulation_step
-            )
+        regular_actions = self.routine_controller.generate_regular_action_list(
+            cycle_step
         )
-        self._consume_actions(actions, cycle_step, simulation_step)
+        self._consume_actions(regular_actions, cycle_step, simulation_step)
+
+        end_of_step_actions = self.routine_controller.generate_end_of_step_action_list(
+            cycle_step, simulation_step
+        )
+        self._consume_actions(end_of_step_actions, cycle_step, simulation_step)
 
     def _consume_actions(
         self,

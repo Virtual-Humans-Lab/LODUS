@@ -27,6 +27,7 @@ from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
 from time_actions.gather_population_plugin import GatherPopulationPlugin
 from time_actions.popular_times_plugin import PopularTimesPlugin
+from time_actions.popular_times_v2_plugin import PopularTimesV2Plugin
 from time_actions.infection_plugin import InfectionPlugin
 from time_actions.levy_walk_plugin import LevyWalkPlugin
 from time_actions.move_population_plugin import MovePopulationPlugin
@@ -170,6 +171,11 @@ if 'popular_times_plugin' in lodus_simulation.experiment_config:
         )
     popular_times = PopularTimesPlugin()
     lodus_simulation.load_plugin(popular_times)
+
+popular_times_v2 = None
+if 'popular_times_v2_plugin' in lodus_simulation.experiment_config:
+    popular_times_v2 = PopularTimesV2Plugin()
+    lodus_simulation.load_plugin(popular_times_v2)
 
 return_pop_home = None
 if 'return_population_home_plugin' in lodus_simulation.experiment_config:

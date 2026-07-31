@@ -79,6 +79,8 @@ class LevyWalkPlugin(ActionPlugin):
         self.population_group_size:int = self.config.get("population_group_size", 50)
         self.movement_probability:float = self.config.get("movement_probability", 0.05)
         self.distribution_location:float = self.config.get("distribution_location", 0.0)
+        self.acting_enabled_only:bool = self.config.get("acting_enabled_only", False)
+        self.target_enabled_only:bool = self.config.get("target_enabled_only", False)
 
         if self.distance_type == DistanceType.LONG_LAT:
             self.bucket_size:float = self.config.get("distance_bucket_size", 0.005)
@@ -121,6 +123,9 @@ class LevyWalkPlugin(ActionPlugin):
         acting_node = acting_region.get_node_by_unique_name(values['node'])
         sub_list = [] 
 
+        if values.get("acting_enabled_only", self.acting_enabled_only) and not acting_node.is_enabled():
+            return sub_list
+
         if "ignore_acting_node_type" in values and acting_node.unique_name in values["ignore_acting_node_type"]:
             return sub_list
 
@@ -155,11 +160,17 @@ class LevyWalkPlugin(ActionPlugin):
         else:
             distances = self.get_node_distance(acting_node, self.env_graph)
         
-        if "target_node_type" in values:
+        target_types = self._get_target_node_types(values)
+        target_enabled_only = values.get(
+            "target_enabled_only", self.target_enabled_only
+        )
+        if target_types is not None or target_enabled_only:
             distances = self.filter_target_node_types(buckets_dict=distances,
-                                                      target_nodes=values["target_node_type"],
+                                                      target_nodes=target_types,
                                                       target_node_contains=values.get("target_node_type_contains", False),
-                                                      enabled_only=values.get("target_enabled_only", False))
+                                                      enabled_only=target_enabled_only)
+        if not self._has_distance_targets(distances):
+            return sub_list
         # print(len(distances))
         # for dist in distances:
         #    print(distances[dist])
@@ -231,6 +242,8 @@ class LevyWalkPlugin(ActionPlugin):
         assert acting_node is not None, f"Node {values['node']} not found in region {values['region']}"
         
         sub_list = []
+        if values.get("acting_enabled_only", self.acting_enabled_only) and not acting_node.is_enabled():
+            return sub_list
         if acting_node.node_type not in values.get("acting_node_types", [acting_node.node_type]):
             return sub_list
         # if "ignore_acting_node_type" in values and acting_node.node_type in values["ignore_acting_node_type"]:
@@ -263,11 +276,17 @@ class LevyWalkPlugin(ActionPlugin):
         else:
             distances = self.get_node_distance(acting_node, self.env_graph)
         
-        if "target_node_type" in values:
+        target_types = self._get_target_node_types(values)
+        target_enabled_only = values.get(
+            "target_enabled_only", self.target_enabled_only
+        )
+        if target_types is not None or target_enabled_only:
             distances = self.filter_target_node_types(buckets_dict=distances,
-                                                      target_nodes=values["target_node_type"],
+                                                      target_nodes=target_types,
                                                       target_node_contains=values.get("target_node_type_contains", False),
-                                                      enabled_only=values.get("target_enabled_only", False))
+                                                      enabled_only=target_enabled_only)
+        if not self._has_distance_targets(distances):
+            return sub_list
 
         # if 'node_type' in values and 'home' in values['node_type']:
         #     print(distances)
@@ -366,7 +385,7 @@ class LevyWalkPlugin(ActionPlugin):
     def filter_target_node_types(
         self,
         buckets_dict,
-        target_nodes: list[str],
+        target_nodes: list[str] | None,
         target_node_contains: bool = False,
         enabled_only: bool = False,
     ):
@@ -377,7 +396,7 @@ class LevyWalkPlugin(ActionPlugin):
         def matches(distance_entry):
             complete_name = str(distance_entry[0])
             node = self.env_graph.get_node_by_complete_name(complete_name)
-            type_matches = (
+            type_matches = target_nodes is None or (
                 any(value in node.node_type for value in target_nodes)
                 if target_node_contains
                 else node.node_type in target_nodes
@@ -390,6 +409,17 @@ class LevyWalkPlugin(ActionPlugin):
                 for bucket, entries in buckets_dict.items()
             }
         return [entry for entry in buckets_dict if matches(entry)]
+
+    @staticmethod
+    def _get_target_node_types(values: dict) -> list[str] | None:
+        """Accept the documented plural key and the historical singular alias."""
+        return values.get("target_node_types", values.get("target_node_type"))
+
+    @staticmethod
+    def _has_distance_targets(distances) -> bool:
+        if isinstance(distances, dict):
+            return any(distances.values())
+        return bool(distances)
 
     def levy_sample(self, location:Optional[float] = None,
                     scale:Optional[float] = None):
