@@ -1,0 +1,25 @@
+{
+  "global_routine": [
+    {
+      "cycle_step": [18],
+      "execution_scope": "per_node",
+      "action": {
+        "name": "popular_times_poi_global_routine",
+        "type": "popular_times",
+        "population_template": {
+          "traceable_characteristics": {},
+          "sampled_characteristics": {}
+        },
+        "values": {
+          "node_type": [
+            "restaurant",
+            "marketplace",
+            "pharmacy"
+          ],
+          "different_node_name": true
+        }
+      }
+    }
+  ],
+  "routines": {}
+}

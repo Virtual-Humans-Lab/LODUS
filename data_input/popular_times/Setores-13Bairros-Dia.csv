@@ -1,0 +1,436 @@
+local,multiplicador
+Azenha//home_0,0.4057142857142857
+Azenha//home_1,0.3871428571428571
+Azenha//home_2,0.6485714285714286
+Azenha//home_3,0.2885714285714286
+Azenha//home_4,0.40285714285714286
+Azenha//home_5,0.6357142857142858
+Azenha//home_6,0.25142857142857145
+Azenha//home_7,0.43857142857142856
+Azenha//home_8,0.29714285714285715
+Azenha//home_9,0.3628571428571429
+Azenha//home_10,0.6157142857142857
+Azenha//home_11,0.29857142857142854
+Azenha//home_12,0.9142857142857144
+Azenha//home_13,0.5528571428571428
+Azenha//home_14,0.5757142857142857
+Azenha//home_15,0.4571428571428572
+Azenha//home_16,0.89
+Azenha//home_17,0.8971428571428571
+Azenha//home_18,0.21428571428571427
+Azenha//home_19,0.5471428571428572
+Azenha//home_20,0.6371428571428571
+Azenha//home_21,0.37714285714285717
+Azenha//home_22,0.35714285714285715
+Azenha//home_23,0.8614285714285714
+Azenha//home_24,0.6314285714285715
+Azenha//home_25,0.1142857142857143
+Azenha//home_26,0.6471428571428571
+Azenha//home_27,0.51
+Azenha//home_28,0.6614285714285714
+Azenha//home_29,0.6214285714285713
+Azenha//home_30,0.8085714285714286
+Azenha//home_31,0.47285714285714286
+Azenha//home_32,0.45285714285714285
+Bom Fim//home_0,0.21
+Bom Fim//home_1,0.6528571428571429
+Bom Fim//home_2,0.6157142857142857
+Bom Fim//home_3,0.5942857142857143
+Bom Fim//home_4,0.42714285714285716
+Bom Fim//home_5,0.5385714285714286
+Bom Fim//home_6,0.5914285714285714
+Bom Fim//home_7,0.6314285714285715
+Bom Fim//home_8,0.35000000000000003
+Bom Fim//home_9,0.6828571428571429
+Bom Fim//home_10,0.48714285714285716
+Bom Fim//home_11,0.6799999999999999
+Bom Fim//home_12,0.5528571428571428
+Bom Fim//home_13,0.7357142857142858
+Bom Fim//home_14,0.2757142857142857
+Bom Fim//home_15,0.6071428571428571
+Bom Fim//home_16,0.6585714285714286
+Bom Fim//home_17,0.6328571428571428
+Bom Fim//home_18,0.5985714285714286
+Bom Fim//home_19,0.79
+Bom Fim//home_20,0.7314285714285714
+Bom Fim//home_21,0.7485714285714286
+Bom Fim//home_22,0.6557142857142857
+Bom Fim//home_23,0.43714285714285717
+Bom Fim//home_24,0.32
+Bom Fim//home_25,0.3085714285714286
+Centro Histórico//home_0,0.31142857142857144
+Centro Histórico//home_1,0.19
+Centro Histórico//home_2,0.64
+Centro Histórico//home_3,0.34285714285714286
+Centro Histórico//home_4,0.6214285714285713
+Centro Histórico//home_5,0.4828571428571428
+Centro Histórico//home_6,0.4342857142857143
+Centro Histórico//home_7,0.2914285714285714
+Centro Histórico//home_8,0.37285714285714283
+Centro Histórico//home_9,0.3257142857142857
+Centro Histórico//home_10,0.3257142857142857
+Centro Histórico//home_11,0.6385714285714286
+Centro Histórico//home_12,0.4542857142857143
+Centro Histórico//home_13,0.3485714285714286
+Centro Histórico//home_14,0.6171428571428572
+Centro Histórico//home_15,0.5042857142857142
+Centro Histórico//home_16,0.7757142857142857
+Centro Histórico//home_17,0.2857142857142857
+Centro Histórico//home_18,0.27999999999999997
+Centro Histórico//home_19,0.71
+Centro Histórico//home_20,0.5671428571428572
+Centro Histórico//home_21,0.4257142857142857
+Centro Histórico//home_22,0.6071428571428571
+Centro Histórico//home_23,0.8028571428571428
+Centro Histórico//home_24,0.43571428571428567
+Centro Histórico//home_25,0.2885714285714286
+Centro Histórico//home_26,0.4714285714285714
+Centro Histórico//home_27,0.45142857142857146
+Centro Histórico//home_28,0.4014285714285714
+Centro Histórico//home_29,0.48714285714285716
+Centro Histórico//home_30,0.41000000000000003
+Centro Histórico//home_31,0.6371428571428571
+Centro Histórico//home_32,0.3457142857142857
+Centro Histórico//home_33,0.3685714285714286
+Centro Histórico//home_34,0.27999999999999997
+Centro Histórico//home_35,0.4557142857142857
+Centro Histórico//home_36,0.38571428571428573
+Centro Histórico//home_37,0.4114285714285714
+Centro Histórico//home_38,0.3657142857142857
+Centro Histórico//home_39,0.4428571428571429
+Centro Histórico//home_40,0.48142857142857143
+Centro Histórico//home_41,0.7414285714285714
+Centro Histórico//home_42,0.4842857142857143
+Centro Histórico//home_43,0.6542857142857142
+Centro Histórico//home_44,0.33428571428571424
+Centro Histórico//home_45,0.3742857142857143
+Centro Histórico//home_46,0.8785714285714287
+Centro Histórico//home_47,0.6442857142857142
+Centro Histórico//home_48,0.5457142857142857
+Centro Histórico//home_49,0.3657142857142857
+Centro Histórico//home_50,0.37714285714285717
+Centro Histórico//home_51,0.35000000000000003
+Centro Histórico//home_52,0.35285714285714287
+Centro Histórico//home_53,0.6085714285714285
+Centro Histórico//home_54,0.39999999999999997
+Centro Histórico//home_55,0.6057142857142858
+Centro Histórico//home_56,0.6014285714285714
+Centro Histórico//home_57,0.6142857142857142
+Centro Histórico//home_58,0.6657142857142857
+Centro Histórico//home_59,0.5914285714285714
+Centro Histórico//home_60,0.6385714285714286
+Centro Histórico//home_61,0.5028571428571429
+Centro Histórico//home_62,0.30428571428571427
+Centro Histórico//home_63,0.4185714285714286
+Centro Histórico//home_64,0.42714285714285716
+Centro Histórico//home_65,0.39714285714285713
+Centro Histórico//home_66,0.47000000000000003
+Centro Histórico//home_67,0.42
+Centro Histórico//home_68,0.7685714285714286
+Centro Histórico//home_69,0.5185714285714286
+Centro Histórico//home_70,0.4685714285714285
+Centro Histórico//home_71,0.2842857142857143
+Centro Histórico//home_72,0.5314285714285715
+Centro Histórico//home_73,0.4957142857142857
+Centro Histórico//home_74,0.39285714285714285
+Centro Histórico//home_75,0.41000000000000003
+Centro Histórico//home_76,0.4585714285714286
+Centro Histórico//home_77,0.34142857142857147
+Centro Histórico//home_78,0.16999999999999998
+Centro Histórico//home_79,0.41285714285714287
+Centro Histórico//home_80,0.31714285714285717
+Centro Histórico//home_81,0.3671428571428571
+Centro Histórico//home_82,0.5071428571428571
+Centro Histórico//home_83,0.5614285714285715
+Centro Histórico//home_84,0.5514285714285714
+Centro Histórico//home_85,0.49142857142857144
+Centro Histórico//home_86,0.39999999999999997
+Centro Histórico//home_87,0.44
+Centro Histórico//home_88,0.44571428571428573
+Centro Histórico//home_89,0.21142857142857144
+Centro Histórico//home_90,0.45285714285714285
+Centro Histórico//home_91,0.35285714285714287
+Centro Histórico//home_92,0.17857142857142858
+Centro Histórico//home_93,0.5457142857142857
+Centro Histórico//home_94,0.35000000000000003
+Cidade Baixa//home_0,0.64
+Cidade Baixa//home_1,0.6814285714285714
+Cidade Baixa//home_2,0.6314285714285715
+Cidade Baixa//home_3,0.43857142857142856
+Cidade Baixa//home_4,0.5871428571428572
+Cidade Baixa//home_5,0.34714285714285714
+Cidade Baixa//home_6,0.41285714285714287
+Cidade Baixa//home_7,0.5385714285714286
+Cidade Baixa//home_8,0.21571428571428572
+Cidade Baixa//home_9,0.4642857142857143
+Cidade Baixa//home_10,0.5399999999999999
+Cidade Baixa//home_11,0.2785714285714286
+Cidade Baixa//home_12,0.5942857142857143
+Cidade Baixa//home_13,0.3514285714285714
+Cidade Baixa//home_14,0.7471428571428572
+Cidade Baixa//home_15,0.37857142857142856
+Cidade Baixa//home_16,0.32285714285714284
+Cidade Baixa//home_17,0.5357142857142857
+Cidade Baixa//home_18,0.46714285714285714
+Cidade Baixa//home_19,0.37857142857142856
+Cidade Baixa//home_20,0.43571428571428567
+Cidade Baixa//home_21,0.9657142857142856
+Cidade Baixa//home_22,0.6114285714285714
+Cidade Baixa//home_23,0.44571428571428573
+Cidade Baixa//home_24,0.2914285714285714
+Cidade Baixa//home_25,0.5814285714285715
+Cidade Baixa//home_26,0.5557142857142857
+Cidade Baixa//home_27,0.3757142857142857
+Cidade Baixa//home_28,0.3157142857142857
+Cidade Baixa//home_29,0.5885714285714286
+Cidade Baixa//home_30,0.4857142857142857
+Cidade Baixa//home_31,0.4842857142857143
+Cidade Baixa//home_32,0.3742857142857143
+Cidade Baixa//home_33,0.18285714285714286
+Cidade Baixa//home_34,0.25142857142857145
+Cidade Baixa//home_35,0.37
+Cidade Baixa//home_36,0.6585714285714286
+Cidade Baixa//home_37,0.6314285714285715
+Cidade Baixa//home_38,0.4342857142857143
+Farroupilha//home_0,0.6214285714285713
+Farroupilha//home_1,0.4842857142857143
+Floresta//home_0,1.374285714285714
+Floresta//home_1,0.014285714285714287
+Floresta//home_2,0.45
+Floresta//home_3,0.7042857142857143
+Floresta//home_4,0.41285714285714287
+Floresta//home_5,0.4842857142857143
+Floresta//home_6,0.45
+Floresta//home_7,0.7514285714285714
+Floresta//home_8,0.3685714285714286
+Floresta//home_9,0.4057142857142857
+Floresta//home_10,0.8314285714285715
+Floresta//home_11,0.3
+Floresta//home_12,0.4042857142857143
+Floresta//home_13,0.78
+Floresta//home_14,0.64
+Floresta//home_15,0.33428571428571424
+Floresta//home_16,0.45285714285714285
+Floresta//home_17,0.5742857142857142
+Floresta//home_18,0.7471428571428572
+Floresta//home_19,0.5214285714285715
+Floresta//home_20,0.4657142857142857
+Floresta//home_21,0.55
+Floresta//home_22,0.5514285714285714
+Independência//home_0,0.6642857142857144
+Independência//home_1,0.39571428571428574
+Independência//home_2,0.2814285714285714
+Independência//home_3,0.2557142857142857
+Independência//home_4,0.7000000000000001
+Independência//home_5,0.4685714285714285
+Independência//home_6,0.36428571428571427
+Independência//home_7,0.47000000000000003
+Independência//home_8,0.6742857142857143
+Independência//home_9,0.41285714285714287
+Independência//home_10,0.5857142857142856
+Independência//home_11,0.5985714285714286
+Independência//home_12,0.2557142857142857
+Independência//home_13,0.7000000000000001
+Independência//home_14,0.31142857142857144
+Independência//home_15,0.5642857142857143
+Independência//home_16,0.40714285714285714
+Independência//home_17,0.6328571428571428
+Independência//home_18,0.35857142857142854
+Independência//home_19,0.3385714285714286
+Independência//home_20,0.15142857142857144
+Independência//home_21,0.24428571428571427
+Menino-Deus//home_0,0.4471428571428571
+Menino-Deus//home_1,0.43
+Menino-Deus//home_2,0.43285714285714283
+Menino-Deus//home_3,0.40285714285714286
+Menino-Deus//home_4,0.35857142857142854
+Menino-Deus//home_5,0.4257142857142857
+Menino-Deus//home_6,0.26857142857142857
+Menino-Deus//home_7,0.4342857142857143
+Menino-Deus//home_8,0.8285714285714285
+Menino-Deus//home_9,0.4928571428571429
+Menino-Deus//home_10,0.79
+Menino-Deus//home_11,0.7000000000000001
+Menino-Deus//home_12,0.8185714285714286
+Menino-Deus//home_13,0.4414285714285714
+Menino-Deus//home_14,0.72
+Menino-Deus//home_15,0.3842857142857143
+Menino-Deus//home_16,0.5514285714285714
+Menino-Deus//home_17,0.5128571428571428
+Menino-Deus//home_18,0.7814285714285714
+Menino-Deus//home_19,0.4014285714285714
+Menino-Deus//home_20,0.3242857142857143
+Menino-Deus//home_21,0.40285714285714286
+Menino-Deus//home_22,0.5
+Menino-Deus//home_23,0.5742857142857142
+Menino-Deus//home_24,0.5785714285714285
+Menino-Deus//home_25,0.4842857142857143
+Menino-Deus//home_26,0.6385714285714286
+Menino-Deus//home_27,0.5742857142857142
+Menino-Deus//home_28,0.7385714285714285
+Menino-Deus//home_29,0.4785714285714286
+Menino-Deus//home_30,0.5557142857142857
+Menino-Deus//home_31,0.6857142857142857
+Menino-Deus//home_32,0.8728571428571429
+Menino-Deus//home_33,0.5257142857142857
+Menino-Deus//home_34,0.3871428571428571
+Menino-Deus//home_35,1.0257142857142856
+Menino-Deus//home_36,0.5542857142857143
+Menino-Deus//home_37,0.5700000000000001
+Menino-Deus//home_38,0.8085714285714286
+Menino-Deus//home_39,0.6314285714285715
+Menino-Deus//home_40,0.5771428571428572
+Menino-Deus//home_41,0.7928571428571428
+Menino-Deus//home_42,0.4757142857142857
+Menino-Deus//home_43,0.5857142857142856
+Menino-Deus//home_44,0.8542857142857143
+Menino-Deus//home_45,0.8942857142857142
+Menino-Deus//home_46,0.6471428571428571
+Menino-Deus//home_47,0.6471428571428571
+Menino-Deus//home_48,0.62
+Menino-Deus//home_49,0.3257142857142857
+Menino-Deus//home_50,0.5485714285714286
+Menino-Deus//home_51,0.6485714285714286
+Menino-Deus//home_52,0.6157142857142857
+Menino-Deus//home_53,0.5257142857142857
+Menino-Deus//home_54,0.9257142857142858
+Menino-Deus//home_55,1.3057142857142858
+Menino-Deus//home_56,0.5728571428571428
+Menino-Deus//home_57,0.42142857142857143
+Menino-Deus//home_58,0.5
+Menino-Deus//home_59,0.74
+Menino-Deus//home_60,0.5657142857142857
+Menino-Deus//home_61,0.5857142857142856
+Menino-Deus//home_62,0.6328571428571428
+Menino-Deus//home_63,0.39285714285714285
+Menino-Deus//home_64,0.31142857142857144
+Menino-Deus//home_65,0.5185714285714286
+Menino-Deus//home_66,1.1785714285714286
+Moinhos de Vento//home_0,0.51
+Moinhos de Vento//home_1,0.5214285714285715
+Moinhos de Vento//home_2,0.29
+Moinhos de Vento//home_3,0.53
+Moinhos de Vento//home_4,1.1257142857142857
+Moinhos de Vento//home_5,0.4842857142857143
+Moinhos de Vento//home_6,0.35428571428571426
+Moinhos de Vento//home_7,0.4657142857142857
+Moinhos de Vento//home_8,0.6385714285714286
+Moinhos de Vento//home_9,0.39428571428571424
+Moinhos de Vento//home_10,0.21857142857142858
+Moinhos de Vento//home_11,0.39428571428571424
+Moinhos de Vento//home_12,0.8014285714285715
+Moinhos de Vento//home_13,0.8042857142857143
+Moinhos de Vento//home_14,0.3085714285714286
+Moinhos de Vento//home_15,0.74
+Moinhos de Vento//home_16,0.7271428571428571
+Moinhos de Vento//home_17,0.6814285714285714
+Moinhos de Vento//home_18,0.4642857142857143
+Moinhos de Vento//home_19,0.7157142857142856
+Moinhos de Vento//home_20,0.4585714285714286
+Moinhos de Vento//home_21,0.3871428571428571
+Moinhos de Vento//home_22,0.5457142857142857
+Moinhos de Vento//home_23,0.51
+Moinhos de Vento//home_24,0.7742857142857142
+Moinhos de Vento//home_25,0.43285714285714283
+Praia de Belas//home_0,0.19999999999999998
+Praia de Belas//home_1,0.51
+Praia de Belas//home_2,0.19571428571428573
+Praia de Belas//home_3,0.4114285714285714
+Praia de Belas//home_4,0.34142857142857147
+Praia de Belas//home_5,0.008571428571428572
+Praia de Belas//home_6,0.5071428571428571
+Rio Branco//home_0,0.4414285714285714
+Rio Branco//home_1,0.29857142857142854
+Rio Branco//home_2,0.2742857142857143
+Rio Branco//home_3,0.7185714285714286
+Rio Branco//home_4,0.5214285714285715
+Rio Branco//home_5,0.3885714285714286
+Rio Branco//home_6,0.4642857142857143
+Rio Branco//home_7,0.4571428571428572
+Rio Branco//home_8,0.39285714285714285
+Rio Branco//home_9,0.48
+Rio Branco//home_10,0.2542857142857143
+Rio Branco//home_11,0.6957142857142857
+Rio Branco//home_12,0.4785714285714286
+Rio Branco//home_13,0.41714285714285715
+Rio Branco//home_14,0.6328571428571428
+Rio Branco//home_15,0.5757142857142857
+Rio Branco//home_16,1.31
+Rio Branco//home_17,0.22
+Rio Branco//home_18,0.8857142857142858
+Rio Branco//home_19,0.937142857142857
+Rio Branco//home_20,0.21857142857142858
+Rio Branco//home_21,0.37
+Rio Branco//home_22,0.7728571428571429
+Rio Branco//home_23,0.5985714285714286
+Rio Branco//home_24,0.8628571428571429
+Rio Branco//home_25,0.9842857142857142
+Rio Branco//home_26,0.5757142857142857
+Rio Branco//home_27,0.59
+Rio Branco//home_28,0.72
+Rio Branco//home_29,1.0171428571428571
+Rio Branco//home_30,0.16999999999999998
+Rio Branco//home_31,0.5042857142857142
+Rio Branco//home_32,0.3657142857142857
+Rio Branco//home_33,0.3814285714285714
+Rio Branco//home_34,0.6428571428571429
+Rio Branco//home_35,0.7528571428571428
+Rio Branco//home_36,0.6314285714285715
+Rio Branco//home_37,0.86
+Rio Branco//home_38,0.58
+Santa Cecília//home_0,0.6814285714285714
+Santa Cecília//home_1,0.44
+Santa Cecília//home_2,0.7742857142857142
+Santa Cecília//home_3,0.41428571428571426
+Santa Cecília//home_4,0.7728571428571429
+Santa Cecília//home_5,0.4928571428571429
+Santa Cecília//home_6,0.6342857142857143
+Santa Cecília//home_7,0.5757142857142857
+Santa Cecília//home_8,0.8428571428571429
+Santa Cecília//home_9,0.5457142857142857
+Santa Cecília//home_10,0.4542857142857143
+Santana//home_0,0.5457142857142857
+Santana//home_1,0.33
+Santana//home_2,0.2785714285714286
+Santana//home_3,0.3842857142857143
+Santana//home_4,0.6985714285714285
+Santana//home_5,0.5957142857142858
+Santana//home_6,0.687142857142857
+Santana//home_7,0.49714285714285716
+Santana//home_8,0.7214285714285714
+Santana//home_9,0.47000000000000003
+Santana//home_10,0.3814285714285714
+Santana//home_11,0.4342857142857143
+Santana//home_12,0.6957142857142857
+Santana//home_13,0.4628571428571429
+Santana//home_14,0.6071428571428571
+Santana//home_15,0.4414285714285714
+Santana//home_16,0.3442857142857143
+Santana//home_17,0.2742857142857143
+Santana//home_18,0.37714285714285717
+Santana//home_19,0.5828571428571429
+Santana//home_20,0.6685714285714285
+Santana//home_21,0.6128571428571429
+Santana//home_22,0.5728571428571428
+Santana//home_23,0.5428571428571428
+Santana//home_24,0.6557142857142857
+Santana//home_25,0.4714285714285714
+Santana//home_26,0.7128571428571429
+Santana//home_27,0.45
+Santana//home_28,0.39571428571428574
+Santana//home_29,0.6042857142857143
+Santana//home_30,0.9285714285714286
+Santana//home_31,0.25
+Santana//home_32,0.8228571428571428
+Santana//home_33,1.1842857142857142
+Santana//home_34,0.5842857142857143
+Santana//home_35,0.7985714285714286
+Santana//home_36,0.2785714285714286
+Santana//home_37,0.8428571428571429
+Santana//home_38,0.2814285714285714
+Santana//home_39,0.7914285714285715
+Santana//home_40,0.6257142857142857
+Santana//home_41,0.7685714285714286
+Santana//home_42,0.5814285714285715
+Santana//home_43,0.6357142857142858
+Santana//home_44,0.5485714285714286
