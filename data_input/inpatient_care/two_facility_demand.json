@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "origin_region": "Teresópolis",
+      "preferred_hospital": "HEPA",
+      "specialty": "Psiquiatria",
+      "bed_type": "Outras Especialidades",
+      "total_admissions": 1320,
+      "sus_admissions": 795,
+      "los_min_steps": 1,
+      "los_max_steps": 4
+    },
+    {
+      "origin_region": "Teresópolis",
+      "preferred_hospital": "Hospital Santa Ana",
+      "specialty": "Psiquiatria",
+      "bed_type": "Outras Especialidades",
+      "total_admissions": 1320,
+      "sus_admissions": 795,
+      "los_min_steps": 1,
+      "los_max_steps": 4
+    }
+  ]
+}

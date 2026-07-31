@@ -1,0 +1,7 @@
+origin_region,request_step,cid,quantity,sus_quantity,los_min_steps,los_max_steps
+Teresópolis,0,F200,40,30,1,4
+Santana,1,F320,35,35,1,4
+Jardim Botânico,2,F201,50,40,2,4
+Independência,3,F321,30,30,1,3
+Vila Nova,4,F202,45,45,2,4
+Santa Cecília,5,F322,25,25,1,2

@@ -1,0 +1,9 @@
+{
+  "adapter": "cid_counts",
+  "file": "inpatient_care/legacy_cid_counts.csv",
+  "cid_mapping_file": "inpatient_care/legacy_cid_mapping.compatibility.csv",
+  "sus_share": 1.0,
+  "region_aliases": {
+    "Jardim Botânico Avenida Ipiranga - de 2581 a 6699 - lado ímpar": "Jardim Botânico"
+  }
+}

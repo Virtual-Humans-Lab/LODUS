@@ -1,0 +1,23 @@
+{
+  "envgraph_inputs_files": {
+    "environment_file": [
+      "enumeration_area/Environment-POA-EnumArea.json",
+      "inpatient_care/Environment-Hospitals-POA.json"
+    ],
+    "population_file": "enumeration_area/Population-POA-EnumArea.json"
+  },
+  "simulation_parameters": {
+    "total_cycles": 3,
+    "cycle_length": 4,
+    "random_seed": 0
+  },
+  "inpatient_care_plugin": {
+    "capacity_file": "inpatient_care/inpatient_capacity.csv",
+    "capacity_overrides": [],
+    "demand_sources": [],
+    "capacity_policy": "overflow",
+    "allow_hospital_change": false,
+    "hospital_node_type": "hospital",
+    "patient_origin_node_type": "home"
+  }
+}

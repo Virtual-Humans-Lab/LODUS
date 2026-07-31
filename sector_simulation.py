@@ -21,6 +21,7 @@ from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
 from loggers.infection_sum_logger import InfectionSumLogger
 from loggers.vaccine_level_logger import VaccineLevelLogger
 from loggers.dialysis_logger import DialysisLogger
+from loggers.inpatient_care_logger import InpatientCareLogger
 
 from routines.off_cycle_routine_plugin import OffCycleRoutinePlugin
 from time_actions.custom_time_action_plugin import CustomTimeActionPlugin
@@ -39,6 +40,7 @@ from time_actions.reverse_social_isolation_plugin import \
 from time_actions.send_population_back_plugin import SendPopulationBackPlugin
 from time_actions.vaccine_plugin import VaccinePlugin
 from time_actions.dialysis_plugin import DialysisPlugin
+from time_actions.inpatient_care_plugin import InpatientCarePlugin
 
 from time_actions.change_enabled_state_plugin import ChangeEnabledStatePlugin
 from data.global_isolation_data_plugin import GlobalIsolationDataPlugin
@@ -63,6 +65,8 @@ arg_parser.add_argument('--v', metavar="V", type=str, default = "./data_input/Va
 arg_parser.add_argument('--i', metavar="I", type=str, default = "./data_input/SIRPluginSetup.json", help='SIR Plugin Configuration File (.json)')
 arg_parser.add_argument('--seed', type=int, default=None, help='Random seed. Overrides simulation_parameters.random_seed.')
 arg_parser.add_argument('--no-dialysis-png', action='store_true', help='Generate dialysis HTML outputs without PNG export.')
+arg_parser.add_argument('--no-inpatient-care-png', action='store_true', help='Generate inpatient care HTML outputs without PNG export.')
+arg_parser.add_argument('--no-inpatient-care-plots', action='store_true', help='Skip inpatient care HTML and PNG plot generation.')
 args = vars(arg_parser.parse_args())
 
 configured_seed = None
@@ -197,6 +201,11 @@ if 'dialysis_plugin' in lodus_simulation.experiment_config:
     dialysis = DialysisPlugin()
     lodus_simulation.load_plugin(dialysis)
 
+inpatient_care = None
+if 'inpatient_care_plugin' in lodus_simulation.experiment_config:
+    inpatient_care = InpatientCarePlugin()
+    lodus_simulation.load_plugin(inpatient_care)
+
 
 
 '''
@@ -241,7 +250,7 @@ if vaccine:
     # pop_count_logger.region_custom_templates["VaccineLevel:1"] = PopTemplate(traceable_properties={"vaccine_level": 1})
     # pop_count_logger.region_custom_templates["VaccineLevel:2"] = PopTemplate(traceable_properties={"vaccine_level": 2})
     # pop_count_logger.region_custom_templates["VaccineLevel:3"] = PopTemplate(traceable_properties={"vaccine_level": 3})
-#logger.set_to_record('neighbourhood_disserta')
+#logger.set_to_record('neighbourhood_study')
 #logger.set_to_record('metrics')
 #logger.set_to_record('positions')
 
@@ -249,6 +258,13 @@ dialysis_logger = None
 if dialysis:
     dialysis_logger = DialysisLogger(
         export_png=not args["no_dialysis_png"]
+    )
+
+inpatient_care_logger = None
+if inpatient_care:
+    inpatient_care_logger = InpatientCareLogger(
+        export_png=not args["no_inpatient_care_png"],
+        generate_plots=not args["no_inpatient_care_plots"],
     )
 
 blob_count_logger = BlobCountLogger()
@@ -368,6 +384,8 @@ lodus_simulation.load_plugin(displacement_logger)
 lodus_simulation.load_plugin(envnode_state_logger)
 if dialysis_logger is not None:
     lodus_simulation.load_plugin(dialysis_logger)
+if inpatient_care_logger is not None:
+    lodus_simulation.load_plugin(inpatient_care_logger)
 # if levy_sample_logger is not None: lodus_simulation.load_plugin(levy_sample_logger)
 if infection_sum_logger is not None: lodus_simulation.load_plugin(infection_sum_logger)
 #print("Loaded TimeAction Plugins: " + str([type(tap) for tap in env_graph.loaded_logger_plugins]))
@@ -433,6 +451,7 @@ if return_to_previous is not None: output_str += return_to_previous.print_execut
 if move_population_plugin is not None: output_str += move_population_plugin.print_execution_time_data()
 if change_enabled_state is not None: output_str += change_enabled_state.print_execution_time_data()
 if dialysis is not None: output_str += dialysis.print_execution_time_data()
+if inpatient_care is not None: output_str += inpatient_care.print_execution_time_data()
 
 output_str += "Total Simulation Time: " + str(end_time - start_time) + "\n"
 output_str += "Average Cycle Time: " + str((end_time - start_time)/cycles) + "\n"

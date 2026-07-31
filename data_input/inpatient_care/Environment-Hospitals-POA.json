@@ -1,0 +1,450 @@
+{
+  "regions": [
+    {
+      "name": "Agronomia",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_independencia",
+          "lng_lat": [
+            -51.1503044,
+            -30.0613951
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Independência",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auxiliadora",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_militar_de_area_de_porto_alegre",
+          "lng_lat": [
+            -51.195396,
+            -30.0185252
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Militar de Área de Porto Alegre",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Azenha",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_ernesto_dornelles",
+          "lng_lat": [
+            -51.2147465,
+            -30.0477777
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Ernesto Dornelles",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bom Fim",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hps",
+          "lng_lat": [
+            -51.2114172,
+            -30.0362194
+          ],
+          "attributes": {
+            "hospital_name": "HPS",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Centro Histórico",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_irmandade_da_santa_casa_de_misericordia_de_porto_alegre",
+          "lng_lat": [
+            -51.2217197,
+            -30.0301294
+          ],
+          "attributes": {
+            "hospital_name": "Irmandade da Santa Casa de Misericórdia de Porto Alegre",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cristo Redentor",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_cristo_redentor",
+          "lng_lat": [
+            -51.1599997,
+            -30.0099721
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Cristo Redentor",
+            "capacity_source": "CNES January 2024"
+          }
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_nossa_senhora_da_conceicao",
+          "lng_lat": [
+            -51.1633281,
+            -30.0160754
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Nossa Senhora da Conceição",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Glória",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_divina_providencia",
+          "lng_lat": [
+            -51.188816,
+            -30.0851342
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Divina Providência",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Higienópolis",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_day_hospital_sao_pietro",
+          "lng_lat": [
+            -51.1892465,
+            -30.0192161
+          ],
+          "attributes": {
+            "hospital_name": "Day Hospital São Pietro",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Independência",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_humaniza",
+          "lng_lat": [
+            -51.2124233,
+            -30.0248614
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Humaniza",
+            "capacity_source": "CNES January 2024"
+          }
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_materno_infantil_presidente_vargas",
+          "lng_lat": [
+            -51.2174568,
+            -30.0295465
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Materno Infantil Presidente Vargas",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jardim Botânico",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_sao_lucas_da_pucrs",
+          "lng_lat": [
+            -51.1759716,
+            -30.0552646
+          ],
+          "attributes": {
+            "hospital_name": "Hospital São Lucas da PUCRS",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menino-Deus",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_mae_de_deus",
+          "lng_lat": [
+            -51.2316227,
+            -30.0591926
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Mãe de Deus",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Moinhos de Vento",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_moinhos_de_vento",
+          "lng_lat": [
+            -51.2111042,
+            -30.024954
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Moinhos de Vento",
+            "capacity_source": "CNES January 2024"
+          }
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_porto_alegre_absm",
+          "lng_lat": [
+            -51.2108879,
+            -30.0247051
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Porto Alegre ABSM",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Partenon",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_psiquiatrico_sao_pedro",
+          "lng_lat": [
+            -51.1926463,
+            -30.0608419
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Psiquiátrico São Pedro",
+            "capacity_source": "CNES January 2024"
+          }
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_sanatorio_partenon",
+          "lng_lat": [
+            -51.181423,
+            -30.0632822
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Sanatório Partenon",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Petrópolis",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_mae_de_deus_carlos_gomes",
+          "lng_lat": [
+            -51.1806652,
+            -30.0326248
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Mãe de Deus - Carlos Gomes",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Restinga",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_restinga_e_extremo_sul",
+          "lng_lat": [
+            -51.1313177,
+            -30.1426278
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Restinga e Extremo-Sul",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rio Branco",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_femina",
+          "lng_lat": [
+            -51.2093418,
+            -30.0293513
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Fêmina",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Santa Cecília",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_de_clinicas",
+          "lng_lat": [
+            -51.2092274,
+            -30.0387902
+          ],
+          "attributes": {
+            "hospital_name": "Hospital de Clínicas",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Santana",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_blanc_hospital",
+          "lng_lat": [
+            -51.2105084,
+            -30.0458046
+          ],
+          "attributes": {
+            "hospital_name": "Blanc Hospital",
+            "capacity_source": "CNES January 2024"
+          }
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_instituto_de_cardiologia",
+          "lng_lat": [
+            -51.2115909,
+            -30.0491281
+          ],
+          "attributes": {
+            "hospital_name": "Instituto de Cardiologia",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teresópolis",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hepa",
+          "lng_lat": [
+            -51.2089115,
+            -30.0871043
+          ],
+          "attributes": {
+            "hospital_name": "HEPA",
+            "capacity_source": "CNES January 2024"
+          }
+        },
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_santa_ana",
+          "lng_lat": [
+            -51.2095088,
+            -30.0866803
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Santa Ana",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vila Assunção",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hbmpa",
+          "lng_lat": [
+            -51.2536893,
+            -30.0979289
+          ],
+          "attributes": {
+            "hospital_name": "HBMPA",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vila Ipiranga",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_hospital_banco_de_olhos",
+          "lng_lat": [
+            -51.1566647,
+            -30.0223563
+          ],
+          "attributes": {
+            "hospital_name": "Hospital Banco de Olhos",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vila Nova",
+      "points_of_interest": [
+        {
+          "poi_type": "hospital",
+          "unique_name": "hospital_associacao_hospitalar_vila_nova",
+          "lng_lat": [
+            -51.2122291,
+            -30.1194333
+          ],
+          "attributes": {
+            "hospital_name": "Associação Hospitalar Vila Nova",
+            "capacity_source": "CNES January 2024"
+          }
+        }
+      ]
+    }
+  ]
+}

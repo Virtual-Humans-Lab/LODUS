@@ -1,0 +1,11 @@
+{
+  "extends": "inpatient_care/Base",
+  "inpatient_care_plugin": {
+    "demand_sources": [
+      {
+        "adapter": "specialty_totals",
+        "file": "inpatient_care/reference_demand.json"
+      }
+    ]
+  }
+}

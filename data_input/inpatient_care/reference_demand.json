@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "origin_region": "Teresópolis",
+      "preferred_hospital": "HEPA",
+      "specialty": "Psiquiatria",
+      "bed_type": "Outras Especialidades",
+      "total_admissions": 500,
+      "sus_admissions": 300,
+      "los_min_steps": 1,
+      "los_max_steps": 4
+    },
+    {
+      "origin_region": "Teresópolis",
+      "preferred_hospital": "HEPA",
+      "specialty": "Saúde Mental",
+      "bed_type": "Hospital Dia",
+      "total_admissions": 50,
+      "sus_admissions": 50,
+      "los_min_steps": 1,
+      "los_max_steps": 4
+    }
+  ]
+}

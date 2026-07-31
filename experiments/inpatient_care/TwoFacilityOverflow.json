@@ -1,0 +1,24 @@
+{
+  "extends": "inpatient_care/Base",
+  "inpatient_care_plugin": {
+    "capacity_overrides": [
+      {
+        "hospital": "Hospital Santa Ana",
+        "region": "Teresópolis",
+        "longitude": -51.2095088,
+        "latitude": -30.0866803,
+        "specialty": "Psiquiatria",
+        "bed_type": "Outras Especialidades",
+        "total_beds": 264,
+        "sus_beds": 159,
+        "synthetic": true
+      }
+    ],
+    "demand_sources": [
+      {
+        "adapter": "specialty_totals",
+        "file": "inpatient_care/two_facility_demand.json"
+      }
+    ]
+  }
+}

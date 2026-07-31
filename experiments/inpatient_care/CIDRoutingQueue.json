@@ -1,0 +1,15 @@
+{
+  "extends": "inpatient_care/Base",
+  "inpatient_care_plugin": {
+    "capacity_policy": "queue",
+    "allow_hospital_change": true,
+    "demand_sources": [
+      {
+        "adapter": "cid_counts",
+        "file": "inpatient_care/synthetic_psychiatric_cid_counts.csv",
+        "cid_mapping_file": "inpatient_care/synthetic_psychiatric_cid_mapping.csv",
+        "one_based_steps": false
+      }
+    ]
+  }
+}

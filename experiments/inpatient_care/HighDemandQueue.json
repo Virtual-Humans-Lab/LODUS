@@ -1,0 +1,6 @@
+{
+  "extends": "inpatient_care/HighDemandOverflow",
+  "inpatient_care_plugin": {
+    "capacity_policy": "queue"
+  }
+}
