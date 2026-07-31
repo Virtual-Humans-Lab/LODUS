@@ -42,6 +42,7 @@ SCENARIOS = {
         "policy": "queue",
     },
 }
+SCENARIO_ORDER = list(SCENARIOS)
 POLICY_PAIRS = {
     "ReferenceDemand": (
         "ReferenceDemandOverflow",
@@ -1149,6 +1150,7 @@ def _write_plots(
             color="policy",
             points="all",
             title=title,
+            category_orders={"scenario": SCENARIO_ORDER},
         )
         figure.write_html(
             plots_path / f"{metric}.html", include_plotlyjs="cdn"
@@ -1196,6 +1198,7 @@ def _write_plots(
             markers=True,
             title=title,
             labels={"mean": label, "simulation_step": "Simulation step"},
+            category_orders={"scenario": SCENARIO_ORDER},
         )
         figure.for_each_annotation(
             lambda annotation: annotation.update(
@@ -1212,6 +1215,7 @@ def _write_plots(
             facet_row="specialty",
             points=False,
             title="Peak Bed-Pool Utilization by Specialty and Payer",
+            category_orders={"scenario": SCENARIO_ORDER},
         )
         figure.write_html(
             plots_path / "bed_pool_utilization.html",
