@@ -1,0 +1,44 @@
+{
+  "source_environment": "Environment-POA-EnumArea.json",
+  "source_population": "Population-POA-EnumArea.json",
+  "derived_environment": "Environment-POA-EnumArea-PopularTimes.json",
+  "derived_population": "Population-POA-EnumArea-PopularTimes.json",
+  "poi_offset_source": "Environment-13-EnumArea.json",
+  "poi_offset_method": "SHA-256 deterministic selection from empirical type-specific offset vectors",
+  "offset_sample_counts": {
+    "marketplace": 435,
+    "restaurant": 435,
+    "pharmacy": 435
+  },
+  "excluded_population": [
+    {
+      "home": "Chapéu do Sol//home_9",
+      "population": 1023,
+      "reason": "Population entry has no matching environment home node"
+    },
+    {
+      "home": "Hípica//home_40",
+      "population": 408,
+      "reason": "Population entry has no matching environment home node"
+    }
+  ],
+  "source_population_total": 1332845,
+  "excluded_population_total": 1431,
+  "excluded_population_percent": 0.107364,
+  "validation": {
+    "region_count": 94,
+    "node_count": 16266,
+    "node_type_counts": {
+      "home": 2711,
+      "marketplace": 2711,
+      "pharmacy": 2711,
+      "restaurant": 2711,
+      "school": 2711,
+      "work": 2711
+    },
+    "population_home_count": 2711,
+    "total_population": 1331414,
+    "pairing_valid": true,
+    "water_threshold_count": 0
+  }
+}

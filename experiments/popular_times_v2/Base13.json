@@ -1,0 +1,25 @@
+{
+  "envgraph_inputs_files": {
+    "environment_file": "enumeration_area/Environment-13-EnumArea.json",
+    "population_file": "enumeration_area/Population-13-EnumArea.json"
+  },
+  "simulation_parameters": {
+    "total_cycles": 56,
+    "cycle_length": 24
+  },
+  "popular_times_v2_plugin": {
+    "weekly_visit_rates": {
+      "marketplace": 1.0,
+      "restaurant": 1.0,
+      "pharmacy": 0.25
+    },
+    "demand_basis": "initial_population",
+    "return_mode": "prior_node",
+    "distance_type": 3
+  },
+  "off_cycle_routine_plugin": {
+    "end_of_step_routine_files": [
+      "popular_times/Routine-PopularTimesV2.json"
+    ]
+  }
+}

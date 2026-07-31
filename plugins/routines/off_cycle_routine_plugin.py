@@ -54,8 +54,8 @@ class OffCycleRoutinePlugin(RoutinePlugin):
         data_path =  Path(__file__).parent.parent.parent / "data_input"
 
         for sf in self.start_files:
-            _content = open(data_path / sf, 'r', encoding='utf8')
-            _data = json.load(_content)
+            with open(data_path / sf, 'r', encoding='utf8') as content:
+                _data = json.load(content)
             self.start_of_step_global_actions.extend(parse_global_routines(_data))
             self.start_of_step_actions.extend(parse_local_routines(_data))
             print("Start of step actions:", self.start_of_step_actions)
@@ -64,8 +64,8 @@ class OffCycleRoutinePlugin(RoutinePlugin):
             #self.start_of_step_actions.extend(_actions)
 
         for ef in self.end_files:
-            _content = open(data_path / ef, 'r', encoding='utf8')
-            _data = json.load(_content)
+            with open(data_path / ef, 'r', encoding='utf8') as content:
+                _data = json.load(content)
             self.end_of_step_global_actions.extend(parse_global_routines(_data))
             #_global_actions, _actions = parse_routines(_data)
             #self.end_of_step_global_actions.extend(_global_actions)

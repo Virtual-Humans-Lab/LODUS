@@ -1,0 +1,12 @@
+{
+  "extends": "popular_times_v2/Base13",
+  "water_level_data_plugin": {
+    "data_file": "water_level/flood_time_step.csv",
+    "target_node_types": [
+      "home",
+      "marketplace",
+      "restaurant",
+      "pharmacy"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "extends": "popular_times_v2/Base13",
+  "envgraph_inputs_files": {
+    "routine_file": "enumeration_area/Routine-POA-EnumArea.json"
+  },
+  "levy_walk_plugin": {
+    "distance_type": 3,
+    "population_group_size": 250,
+    "movement_probability": 0.05,
+    "distribution_location": 0.0,
+    "distribution_scale": 1000,
+    "use_buckets": true,
+    "distance_bucket_size": 500,
+    "acting_enabled_only": true,
+    "target_enabled_only": true
+  },
+  "send_population_back_plugin": {}
+}
