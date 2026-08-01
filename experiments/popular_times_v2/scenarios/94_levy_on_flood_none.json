@@ -1,0 +1,5 @@
+{
+  "extends": "popular_times_v2/Levy94",
+  "simulation_parameters": {"random_seed": 0, "total_cycles": 5},
+  "popular_times_v2_study": {"environment": "94", "levy": true, "flood": "none"}
+}

@@ -6,11 +6,13 @@ from core.routine import Action
 from core.plugin import ActionPlugin
 from core.simulator import LodusSimulation
 from util.random_instance import FixedRandom
-from util.math import DistanceType
+from util.math import DistanceType, geopy_distance_metre
 
 sys.path.append('../')
 
 import time
+import numpy as np
+from pyproj import Geod
 
 from scipy.stats import levy as scipy_levy
 from core.environment import EnvironmentGraph, EnvNode
@@ -90,7 +92,14 @@ class LevyWalkPlugin(ActionPlugin):
             self.distribution_scale:float = self.config.get("distribution_scale", 200.0)
 
         # Distaces buckets from one EnvNode to others
-        self.dist_buckets:dict[int, list[tuple[float,str]]] = {}
+        self.dist_buckets:dict[tuple, dict[int, np.ndarray]] = {}
+        self.distance_lists:dict[tuple, list[tuple[str, float]]] = {}
+        self._target_node_cache: dict[tuple, list[EnvNode]] = {}
+        self._enabled_node_ids = np.ones(
+            max(self.env_graph.node_id_dict, default=-1) + 1, dtype=bool
+        )
+        self._enabled_mask_step = -2
+        self._geod = Geod(ellps="WGS84")
 
         # Performance log for quantity of sub-actions
         self.sublist_count = []
@@ -102,7 +111,15 @@ class LevyWalkPlugin(ActionPlugin):
         return super().setup_logger()
     
     def update_time_step(self, cycle_step, simulation_step):
-        return super().update_time_step(cycle_step, simulation_step)
+        self._refresh_enabled_node_ids(simulation_step)
+
+    def _refresh_enabled_node_ids(self, simulation_step: int):
+        if self._enabled_mask_step == simulation_step:
+            return
+        self._enabled_node_ids[:] = False
+        for node in self.env_graph.node_list:
+            self._enabled_node_ids[node.id] = node.is_enabled()
+        self._enabled_mask_step = simulation_step
     
     def log_simulation_step(self, logger):
         return super().log_simulation_step(logger)
@@ -155,19 +172,25 @@ class LevyWalkPlugin(ActionPlugin):
             return sub_list
         
 
-        if _use_buckets:
-            distances = self.get_node_distance_bucket(acting_node, self.env_graph)
-        else:
-            distances = self.get_node_distance(acting_node, self.env_graph)
-        
         target_types = self._get_target_node_types(values)
+        target_contains = values.get("target_node_type_contains", False)
+        if _use_buckets:
+            distances = self.get_node_distance_bucket(
+                acting_node, self.env_graph, target_types, target_contains
+            )
+        else:
+            distances = self.get_node_distance(
+                acting_node, self.env_graph, target_types, target_contains
+            )
+
         target_enabled_only = values.get(
             "target_enabled_only", self.target_enabled_only
         )
-        if target_types is not None or target_enabled_only:
+        if target_enabled_only:
+            self._refresh_enabled_node_ids(sim_step)
             distances = self.filter_target_node_types(buckets_dict=distances,
-                                                      target_nodes=target_types,
-                                                      target_node_contains=values.get("target_node_type_contains", False),
+                                                      target_nodes=None,
+                                                      target_node_contains=False,
                                                       enabled_only=target_enabled_only)
         if not self._has_distance_targets(distances):
             return sub_list
@@ -271,19 +294,25 @@ class LevyWalkPlugin(ActionPlugin):
         if node_population == 0:
             return sub_list
 
-        if _use_buckets:
-            distances = self.get_node_distance_bucket(acting_node, self.env_graph)
-        else:
-            distances = self.get_node_distance(acting_node, self.env_graph)
-        
         target_types = self._get_target_node_types(values)
+        target_contains = values.get("target_node_type_contains", False)
+        if _use_buckets:
+            distances = self.get_node_distance_bucket(
+                acting_node, self.env_graph, target_types, target_contains
+            )
+        else:
+            distances = self.get_node_distance(
+                acting_node, self.env_graph, target_types, target_contains
+            )
+
         target_enabled_only = values.get(
             "target_enabled_only", self.target_enabled_only
         )
-        if target_types is not None or target_enabled_only:
+        if target_enabled_only:
+            self._refresh_enabled_node_ids(sim_step)
             distances = self.filter_target_node_types(buckets_dict=distances,
-                                                      target_nodes=target_types,
-                                                      target_node_contains=values.get("target_node_type_contains", False),
+                                                      target_nodes=None,
+                                                      target_node_contains=False,
                                                       enabled_only=target_enabled_only)
         if not self._has_distance_targets(distances):
             return sub_list
@@ -362,25 +391,133 @@ class LevyWalkPlugin(ActionPlugin):
         self.sampled_distances.append(sampled_dist)
         return target_unique_name
     
-    def get_node_distance_bucket(self, target_node:EnvNode, graph:EnvironmentGraph):
+    def get_node_distance_bucket(
+        self,
+        target_node: EnvNode,
+        graph: EnvironmentGraph,
+        target_types: list[str] | None = None,
+        target_contains: bool = False,
+    ):
         '''Gets distances in buckets (based on overall distance)'''
-        unique_name = target_node.get_complete_name()
+        cache_key = self._distance_cache_key(
+            target_node, target_types, target_contains
+        )
         
         # Checks if the distance was calculated previously
-        if unique_name in self.dist_buckets:
-            return self.dist_buckets[unique_name].copy()
+        if cache_key in self.dist_buckets:
+            return self.dist_buckets[cache_key].copy()
         
-        # Gets distances in buckets (based on overall distance)
-        distance_list = self.env_graph.get_node_distances(target_node, self.distance_type).get_sorted_distance_to_others()
-        max_bucket = int(distance_list[-1][1] // self.bucket_size)
-        self.dist_buckets[unique_name] = {}
-        for i in range(max_bucket+1):
-            self.dist_buckets[unique_name][i] = []
-        for d in distance_list:
-            bucket = d[1] // self.bucket_size
-            self.dist_buckets[unique_name][bucket] += [d]
+        targets = self._target_nodes(graph, target_types, target_contains)
+        targets = [node for node in targets if node.id != target_node.id]
+        if not targets:
+            self.dist_buckets[cache_key] = {}
+            return {}
+        values = self._distance_values(target_node, targets)
+        node_ids = np.fromiter(
+            (node.id for node in targets), dtype=np.int32, count=len(targets)
+        )
+        bucket_ids = np.floor(values / self.bucket_size).astype(np.int32)
+        compact = {
+            int(bucket): node_ids[bucket_ids == bucket]
+            for bucket in np.unique(bucket_ids)
+        }
+        self.dist_buckets[cache_key] = compact
         
-        return self.dist_buckets[unique_name].copy()
+        return self.dist_buckets[cache_key].copy()
+
+    def get_node_distance(
+        self,
+        target_node: EnvNode,
+        graph: EnvironmentGraph,
+        target_types: list[str] | None = None,
+        target_contains: bool = False,
+    ) -> list[tuple[str, float]]:
+        cache_key = self._distance_cache_key(
+            target_node, target_types, target_contains
+        )
+        if cache_key in self.distance_lists:
+            return self.distance_lists[cache_key].copy()
+        targets = [
+            node
+            for node in self._target_nodes(graph, target_types, target_contains)
+            if node.id != target_node.id
+        ]
+        if not targets:
+            self.distance_lists[cache_key] = []
+            return []
+        values = self._distance_values(target_node, targets)
+        result = sorted(
+            (
+                (node.get_complete_name(), float(distance))
+                for node, distance in zip(targets, values)
+            ),
+            key=lambda item: item[1],
+        )
+        self.distance_lists[cache_key] = result
+        return result.copy()
+
+    def _target_nodes(
+        self,
+        graph: EnvironmentGraph,
+        target_types: list[str] | None,
+        target_contains: bool,
+    ) -> list[EnvNode]:
+        key = (
+            tuple(sorted(target_types)) if target_types is not None else None,
+            target_contains,
+        )
+        if key not in self._target_node_cache:
+            self._target_node_cache[key] = [
+                node
+                for node in graph.node_list
+                if target_types is None
+                or (
+                    any(value in node.node_type for value in target_types)
+                    if target_contains
+                    else node.node_type in target_types
+                )
+            ]
+        return self._target_node_cache[key]
+
+    def _distance_values(
+        self, target_node: EnvNode, targets: list[EnvNode]
+    ) -> np.ndarray:
+        positions = np.asarray([node.long_lat for node in targets], dtype=float)
+        source = target_node.long_lat
+        if self.distance_type == DistanceType.LONG_LAT:
+            return np.hypot(
+                positions[:, 0] - source[0], positions[:, 1] - source[1]
+            )
+        elif self.distance_type == DistanceType.METRES_PYPROJ:
+            if len(targets) == 1:
+                return np.asarray([
+                    self._geod.inv(source[0], source[1], positions[0, 0], positions[0, 1])[2]
+                ])
+            else:
+                _, _, values = self._geod.inv(
+                    np.full(len(targets), source[0]),
+                    np.full(len(targets), source[1]),
+                    positions[:, 0],
+                    positions[:, 1],
+                )
+                return np.asarray(values)
+        else:
+            return np.asarray([
+                geopy_distance_metre(source, node.long_lat)
+                for node in targets
+            ])
+
+    @staticmethod
+    def _distance_cache_key(
+        target_node: EnvNode,
+        target_types: list[str] | None,
+        target_contains: bool,
+    ) -> tuple:
+        return (
+            target_node.id,
+            tuple(sorted(target_types)) if target_types is not None else None,
+            target_contains,
+        )
 
     def filter_target_node_types(
         self,
@@ -394,8 +531,12 @@ class LevyWalkPlugin(ActionPlugin):
         Raises an exception if the plugin shouldn't be using buckets
         '''
         def matches(distance_entry):
-            complete_name = str(distance_entry[0])
-            node = self.env_graph.get_node_by_complete_name(complete_name)
+            if isinstance(distance_entry, (int, np.integer)):
+                node = self.env_graph.get_node_by_id(int(distance_entry))
+            else:
+                node = self.env_graph.get_node_by_complete_name(
+                    str(distance_entry[0])
+                )
             type_matches = target_nodes is None or (
                 any(value in node.node_type for value in target_nodes)
                 if target_node_contains
@@ -404,10 +545,19 @@ class LevyWalkPlugin(ActionPlugin):
             return type_matches and (not enabled_only or node.is_enabled())
 
         if isinstance(buckets_dict, dict):
-            return {
-                bucket: [entry for entry in entries if matches(entry)]
-                for bucket, entries in buckets_dict.items()
-            }
+            result = {}
+            for bucket, entries in buckets_dict.items():
+                if isinstance(entries, np.ndarray) and target_nodes is None:
+                    selected = (
+                        entries[self._enabled_node_ids[entries]]
+                        if enabled_only
+                        else entries
+                    )
+                else:
+                    selected = [entry for entry in entries if matches(entry)]
+                if len(selected):
+                    result[bucket] = selected
+            return result
         return [entry for entry in buckets_dict if matches(entry)]
 
     @staticmethod
@@ -418,7 +568,7 @@ class LevyWalkPlugin(ActionPlugin):
     @staticmethod
     def _has_distance_targets(distances) -> bool:
         if isinstance(distances, dict):
-            return any(distances.values())
+            return any(len(entries) > 0 for entries in distances.values())
         return bool(distances)
 
     def levy_sample(self, location:Optional[float] = None,
@@ -466,7 +616,13 @@ class LevyWalkPlugin(ActionPlugin):
 
         # Gets a random valid entry in the target bucket and returns it
         random_index = self.random.randint(0, len(target_bucket)-1)
-        return target_bucket[random_index]
+        selected = target_bucket[random_index]
+        if isinstance(selected, (int, np.integer)):
+            return (
+                self.env_graph.get_node_by_id(int(selected)).get_complete_name(),
+                0.0,
+            )
+        return selected
     
     def binary_search(self, distances_dict:list[tuple[float, str]], distance: float) -> int:
         '''
@@ -483,7 +639,7 @@ class LevyWalkPlugin(ActionPlugin):
         Return -1 if the distance input is lower than the lowest distances
         '''
         # Target distance is lower than minimun distance
-        if distances_dict[0][0] > distance:
+        if distances_dict[0][1] > distance:
             return -1
         
         # Standard binary search
@@ -492,7 +648,7 @@ class LevyWalkPlugin(ActionPlugin):
 
         while _lower < _upper and _lower != (_upper-1):
             _middle = (_lower + _upper) // 2
-            v2 = distances_dict[_middle][0]
+            v2 = distances_dict[_middle][1]
             if v2 > distance:
                 _upper = _middle
             else:

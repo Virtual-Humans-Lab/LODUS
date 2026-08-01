@@ -15,7 +15,11 @@
     },
     "demand_basis": "initial_population",
     "return_mode": "prior_node",
-    "distance_type": 3
+    "distance_type": 3,
+    "source_candidate_limit": 16
+  },
+  "popular_times_v2_logger": {
+    "raw_demand_scope": "positive_requests"
   },
   "off_cycle_routine_plugin": {
     "end_of_step_routine_files": [

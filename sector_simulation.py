@@ -14,6 +14,7 @@ from loggers.movement_displacement_logger import MovementDisplacementLogger
 from loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLogger
 from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from loggers.envnode_state_logger import EnvNodeStateLogger
+from loggers.popular_times_v2_logger import PopularTimesV2Logger
 from loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
@@ -365,6 +366,14 @@ displacement_logger = MovementDisplacementLogger()
 # EnvNode Enabled/Disabled Snapshot Logger
 envnode_state_logger = EnvNodeStateLogger()
 
+popular_times_v2_logger = None
+if 'popular_times_v2_logger' in lodus_simulation.experiment_config:
+    if popular_times_v2 is None:
+        raise ValueError(
+            "popular_times_v2_logger requires popular_times_v2_plugin"
+        )
+    popular_times_v2_logger = PopularTimesV2Logger()
+
 # Levy Sample Logger
 levy_sample_logger = None
 if levy_walk is not None:
@@ -398,6 +407,8 @@ lodus_simulation.load_plugin(blob_count_logger)
 # # env_graph.LoadLoggerPlugin(vacc_logger)
 lodus_simulation.load_plugin(displacement_logger)
 lodus_simulation.load_plugin(envnode_state_logger)
+if popular_times_v2_logger is not None:
+    lodus_simulation.load_plugin(popular_times_v2_logger)
 if dialysis_logger is not None:
     lodus_simulation.load_plugin(dialysis_logger)
 if inpatient_care_logger is not None:

@@ -5,9 +5,15 @@ sys.path.append("/../../")
 from core.environment import EnvironmentGraph, EnvNode
 from core.plugin import LoggerPlugin
 from core.population import Blob, PopulationTemplate
+from util.math import (
+    DistanceType,
+    distance2D,
+    geopy_distance_metre,
+)
 
 # Graphic and data libraries
 import pandas as pd
+from pyproj import Geod
 pd.options.plotting.backend = "plotly"
 
 from pathlib import Path
@@ -15,6 +21,7 @@ from pathlib import Path
 class MovementDisplacementLogger(LoggerPlugin):
 
     def __init__(self):
+        self._geod = Geod(ellps="WGS84")
         # Movement dicts 
         self.movement_counter = {}
         self.group_movement_counter = {}
@@ -57,8 +64,18 @@ class MovementDisplacementLogger(LoggerPlugin):
     def log_od_movement(self, _ori:EnvNode, _dest:EnvNode, _blobs:list[Blob]):
         # Total population in all Blobs
         total = sum([b.get_population_size() for b in _blobs])
-        node_distances = self.env_graph.get_node_distances(target_node=_ori, dist_type=self.env_graph.default_distance_type)
-        distance = node_distances.distance_to_others[_dest.get_complete_name()]
+        distance_type = DistanceType(self.env_graph.default_distance_type)
+        if distance_type == DistanceType.LONG_LAT:
+            distance = distance2D(_ori.long_lat, _dest.long_lat)
+        elif distance_type == DistanceType.METRES_GEOPY:
+            distance = geopy_distance_metre(_ori.long_lat, _dest.long_lat)
+        else:
+            distance = self._geod.inv(
+                _ori.long_lat[0],
+                _ori.long_lat[1],
+                _dest.long_lat[0],
+                _dest.long_lat[1],
+            )[2]
         
         self.movement_counter[distance] = self.movement_counter.get(distance,0) + total
         self.group_movement_counter[distance] = self.group_movement_counter.get(distance,0) + len(_blobs)

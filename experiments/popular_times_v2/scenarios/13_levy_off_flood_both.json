@@ -1,0 +1,5 @@
+{
+  "extends": "popular_times_v2/FloodBoth13",
+  "simulation_parameters": {"random_seed": 0},
+  "popular_times_v2_study": {"environment": "13", "levy": false, "flood": "both"}
+}

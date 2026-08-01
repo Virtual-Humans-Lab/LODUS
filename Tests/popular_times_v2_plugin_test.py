@@ -144,6 +144,27 @@ class PopularTimesV2Test(unittest.TestCase):
         self.assertEqual(plugin.demand_records[-1]["reason"], "disabled_destination")
         self.assertEqual(plugin.demand_records[-1]["unmet"], 75)
 
+    def test_visit_is_suppressed_if_poi_will_flood_before_expiry(self):
+        _, plugin, homes, marketplace, _ = self._simulation(
+            config={"suppress_if_flooded_before_expiry": True}
+        )
+        marketplace.attributes["water_level"] = 1.0
+        plugin.env_graph.data_action_map["water_level_for_step"] = (
+            lambda cycle_step, simulation_step: 2.0
+        )
+        plugin.popular_times_v2_action(
+            PopulationTemplate(),
+            {"region": "Region", "node": "marketplace_0"},
+            cycle_step=12,
+            simulation_step=0,
+        )
+        self.assertEqual(marketplace.get_population_size(), 0)
+        self.assertEqual(homes[0].get_population_size(), 100)
+        self.assertEqual(
+            plugin.demand_records[-1]["reason"], "disabled_destination"
+        )
+        self.assertTrue(plugin.demand_records[-1]["anticipated_disable"])
+
     def test_multiplier_csv_can_replace_initial_population_basis(self):
         with (self.data_path / "multipliers.csv").open(
             "w", encoding="utf8", newline=""

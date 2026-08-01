@@ -4,11 +4,18 @@ import csv
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+from pyproj import Geod
+
 from core.environment import EnvNode
 from core.plugin import ActionPlugin
 from core.population import PopulationTemplate
 from core.simulator import LodusSimulation
-from util.math import DistanceType, distribute_ints_from_weights_with_limit
+from util.math import (
+    DistanceType,
+    distance2D,
+    geopy_distance_metre,
+)
 
 
 class PopularTimesV2Plugin(ActionPlugin):
@@ -56,6 +63,11 @@ class PopularTimesV2Plugin(ActionPlugin):
         self._visit_sequence = 0
         self.demand_records: list[dict[str, Any]] = []
         self.visit_records: list[dict[str, Any]] = []
+        self._home_nodes: list[EnvNode] = []
+        self._source_candidate_cache: dict[
+            tuple[int, str], list[tuple[EnvNode, float]]
+        ] = {}
+        self._geod = Geod(ellps="WGS84")
 
     def load_plugin(self, simulation: LodusSimulation):
         self.simulation = simulation
@@ -72,6 +84,9 @@ class PopularTimesV2Plugin(ActionPlugin):
 
         for key, value in self.TRACEABLE_DEFAULTS.items():
             self.env_graph.add_blobs_traceable_property(key, value)
+        self._home_nodes = [
+            node for node in self.env_graph.node_list if node.node_type == "home"
+        ]
 
         simulation.add_action_type_to_function(
             self.ACTION_TYPE, self.popular_times_v2_action, True
@@ -257,37 +272,162 @@ class PopularTimesV2Plugin(ActionPlugin):
         quantity: int,
         pop_template: PopulationTemplate,
     ) -> list[tuple[EnvNode, int]]:
-        candidates: list[EnvNode] = []
-        availability: list[int] = []
-        weights: list[float] = []
+        if quantity <= 0:
+            return []
+
+        # Rank a bounded candidate set after considering every home.  Runtime
+        # allocations are then a deterministic weighted greedy selection.  This
+        # preserves inverse-distance x availability weighting without splitting
+        # small hourly requests into one-person blobs across hundreds of homes.
+        candidates = self._source_candidates(destination, pop_template)
+        allocations = self._weighted_greedy_allocations(
+            candidates, quantity, pop_template
+        )
+        fulfilled = sum(amount for _, amount in allocations)
+        if fulfilled >= quantity:
+            return allocations
+
+        selected_ids = {node.id for node, _ in allocations}
+        fallback = [
+            (node, self._distance_between(destination, node))
+            for node in self._home_nodes
+            if node.id not in selected_ids
+        ]
+        allocations.extend(
+            self._weighted_greedy_allocations(
+                fallback, quantity - fulfilled, pop_template
+            )
+        )
+        return allocations
+
+    def _source_candidates(
+        self, destination: EnvNode, pop_template: PopulationTemplate
+    ) -> list[tuple[EnvNode, float]]:
+        key = (destination.id, str(pop_template))
+        if key in self._source_candidate_cache:
+            return self._source_candidate_cache[key]
+
+        distances = self._home_distances(destination)
         distance_type = DistanceType(
             self.config.get("distance_type", DistanceType.METRES_PYPROJ.value)
         )
-        distances = self.env_graph.get_node_distances(destination, distance_type)
+        distance_floor = 0.000001 if distance_type == DistanceType.LONG_LAT else 1.0
+        upper_availability = np.fromiter(
+            (
+                node.original_node_population.get_population_size(pop_template)
+                if node.original_node_population is not None
+                else node.get_population_size(pop_template)
+                for node in self._home_nodes
+            ),
+            dtype=float,
+            count=len(self._home_nodes),
+        )
+        weights = upper_availability / np.maximum(distances, distance_floor)
+        limit = min(
+            max(1, int(self.config.get("source_candidate_limit", 64))),
+            len(self._home_nodes),
+        )
+        if limit == len(self._home_nodes):
+            indices = np.argsort(weights)[::-1]
+        else:
+            unordered = np.argpartition(weights, -limit)[-limit:]
+            indices = unordered[np.argsort(weights[unordered])[::-1]]
+        candidates = [
+            (self._home_nodes[int(index)], float(distances[int(index)]))
+            for index in indices
+            if weights[int(index)] > 0
+        ]
+        self._source_candidate_cache[key] = candidates
+        return candidates
 
-        for node in self.env_graph.node_list:
-            if node.node_type != "home" or not node.is_enabled():
+    def _home_distances(self, destination: EnvNode) -> np.ndarray:
+        if not self._home_nodes:
+            return np.array([], dtype=float)
+        destination_position = destination.long_lat
+        home_positions = np.asarray(
+            [node.long_lat for node in self._home_nodes], dtype=float
+        )
+        distance_type = DistanceType(
+            self.config.get("distance_type", DistanceType.METRES_PYPROJ.value)
+        )
+        if distance_type == DistanceType.LONG_LAT:
+            return np.hypot(
+                home_positions[:, 0] - destination_position[0],
+                home_positions[:, 1] - destination_position[1],
+            )
+        if distance_type == DistanceType.METRES_PYPROJ:
+            if len(home_positions) == 1:
+                return np.asarray(
+                    [
+                        self._geod.inv(
+                            destination_position[0],
+                            destination_position[1],
+                            home_positions[0][0],
+                            home_positions[0][1],
+                        )[2]
+                    ],
+                    dtype=float,
+                )
+            _, _, distances = self._geod.inv(
+                np.full(len(home_positions), destination_position[0]),
+                np.full(len(home_positions), destination_position[1]),
+                home_positions[:, 0],
+                home_positions[:, 1],
+            )
+            return np.asarray(distances, dtype=float)
+        return np.asarray(
+            [
+                geopy_distance_metre(destination_position, position)
+                for position in home_positions
+            ],
+            dtype=float,
+        )
+
+    def _weighted_greedy_allocations(
+        self,
+        candidates: list[tuple[EnvNode, float]],
+        quantity: int,
+        pop_template: PopulationTemplate,
+    ) -> list[tuple[EnvNode, int]]:
+        distance_type = DistanceType(
+            self.config.get("distance_type", DistanceType.METRES_PYPROJ.value)
+        )
+        distance_floor = 0.000001 if distance_type == DistanceType.LONG_LAT else 1.0
+        ranked = []
+        for node, distance in candidates:
+            if not node.is_enabled():
                 continue
             available = node.get_population_size(pop_template)
             if available <= 0:
                 continue
-            distance = distances.distance_to_others.get(node.get_complete_name(), 0.0)
-            distance_floor = 0.000001 if distance_type == DistanceType.LONG_LAT else 1.0
-            candidates.append(node)
-            availability.append(available)
-            weights.append(available / max(distance, distance_floor))
+            ranked.append((available / max(distance, distance_floor), node, available))
+        ranked.sort(key=lambda item: (-item[0], item[1].id))
 
-        if not candidates or quantity <= 0:
-            return []
-        fulfilled = min(quantity, sum(availability))
-        allocated = distribute_ints_from_weights_with_limit(
-            fulfilled, weights, availability
+        remaining = quantity
+        result = []
+        for _, node, available in ranked:
+            moved = min(available, remaining)
+            if moved > 0:
+                result.append((node, moved))
+                remaining -= moved
+            if remaining == 0:
+                break
+        return result
+
+    def _distance_between(self, first: EnvNode, second: EnvNode) -> float:
+        distance_type = DistanceType(
+            self.config.get("distance_type", DistanceType.METRES_PYPROJ.value)
         )
-        return [
-            (node, int(amount))
-            for node, amount in zip(candidates, allocated)
-            if amount > 0
-        ]
+        if distance_type == DistanceType.LONG_LAT:
+            return distance2D(first.long_lat, second.long_lat)
+        if distance_type == DistanceType.METRES_GEOPY:
+            return geopy_distance_metre(first.long_lat, second.long_lat)
+        return self._geod.inv(
+            first.long_lat[0],
+            first.long_lat[1],
+            second.long_lat[0],
+            second.long_lat[1],
+        )[2]
 
     def popular_times_v2_action(
         self,
@@ -310,8 +450,12 @@ class PopularTimesV2Plugin(ActionPlugin):
         record = {
             "simulation_step": simulation_step,
             "cycle_step": cycle_step,
+            "weekday": (simulation_step // self.simulation.time_status.cycle_length) % 7,
+            "region": destination.containing_region_name,
             "destination": destination.get_complete_name(),
             "node_type": destination.node_type,
+            "paired_home": self.paired_home_name(region_name, unique_name),
+            "destination_enabled": destination.is_enabled(),
             "requested": requested,
             "fulfilled": 0,
             "unmet": requested,
@@ -320,8 +464,11 @@ class PopularTimesV2Plugin(ActionPlugin):
         if requested == 0:
             self.demand_records.append(record)
             return
-        if not destination.is_enabled():
+        if not destination.is_enabled() or self._will_flood_before_expiry(
+            destination, simulation_step
+        ):
             record["reason"] = "disabled_destination"
+            record["anticipated_disable"] = destination.is_enabled()
             self.demand_records.append(record)
             return
 
@@ -330,7 +477,11 @@ class PopularTimesV2Plugin(ActionPlugin):
         )
         allocations = self._source_allocations(destination, requested, pop_template)
         if not allocations:
-            record["reason"] = "no_enabled_origins"
+            record["reason"] = (
+                "no_enabled_origins"
+                if not any(node.is_enabled() for node in self._home_nodes)
+                else "insufficient_population"
+            )
             self.demand_records.append(record)
             return
 
@@ -352,6 +503,42 @@ class PopularTimesV2Plugin(ActionPlugin):
             record["reason"] = "insufficient_population"
         self.demand_records.append(record)
 
+    def _will_flood_before_expiry(
+        self, destination: EnvNode, simulation_step: int
+    ) -> bool:
+        if not self.config.get("suppress_if_flooded_before_expiry", False):
+            return False
+        water_config = self.simulation.experiment_config.get(
+            "water_level_data_plugin",
+            self.simulation.experiment_config.get("water_level_plugin", {}),
+        )
+        target_types = water_config.get("target_node_types")
+        if isinstance(target_types, str):
+            target_types = [target_types]
+        if target_types is not None and destination.node_type not in target_types:
+            return False
+        target_regions = water_config.get("target_regions")
+        if isinstance(target_regions, str):
+            target_regions = [target_regions]
+        if (
+            target_regions is not None
+            and destination.containing_region_name not in target_regions
+        ):
+            return False
+        threshold = destination.attributes.get("water_level")
+        water_for_step = self.env_graph.data_action_map.get(
+            "water_level_for_step"
+        )
+        if threshold is None or water_for_step is None:
+            return False
+        next_step = simulation_step + 1
+        cycle_length = self.simulation.time_status.cycle_length
+        future_level = water_for_step(next_step % cycle_length, next_step)
+        return (
+            future_level is not None
+            and float(future_level) >= float(threshold)
+        )
+
     def _start_visit(
         self,
         origin: EnvNode,
@@ -365,11 +552,12 @@ class PopularTimesV2Plugin(ActionPlugin):
         if not blobs:
             return 0
         self._visit_sequence += 1
+        visit_id = self._visit_sequence
         expiry = simulation_step + 1
         moved = 0
         for blob in blobs:
             blob.set_traceable_characteristic(self.ACTIVE, True)
-            blob.set_traceable_characteristic(self.VISIT_ID, self._visit_sequence)
+            blob.set_traceable_characteristic(self.VISIT_ID, visit_id)
             blob.set_traceable_characteristic(self.RETURN_NODE, origin.id)
             blob.set_traceable_characteristic(self.PAIRED_HOME, paired_home.id)
             blob.set_traceable_characteristic(self.EXPIRY_STEP, expiry)
@@ -382,11 +570,17 @@ class PopularTimesV2Plugin(ActionPlugin):
         self.visit_records.append(
             {
                 "event": "start",
+                "visit_id": visit_id,
                 "simulation_step": simulation_step,
+                "expiry_step": expiry,
                 "origin": origin.get_complete_name(),
                 "destination": destination.get_complete_name(),
+                "paired_home": paired_home.get_complete_name(),
+                "poi_type": destination.node_type,
                 "quantity": moved,
+                "distance": self._distance_between(origin, destination),
                 "rerouted": False,
+                "reroute_reason": "",
             }
         )
         return moved
@@ -406,6 +600,10 @@ class PopularTimesV2Plugin(ActionPlugin):
             self._release_visit(origin, blob, cycle_step, simulation_step)
 
     def _release_visit(self, origin: EnvNode, blob, cycle_step: int, simulation_step: int):
+        visit_id = blob.get_traceable_characteristic(self.VISIT_ID)
+        expiry_step = blob.get_traceable_characteristic(self.EXPIRY_STEP)
+        paired_home_id = blob.get_traceable_characteristic(self.PAIRED_HOME)
+        poi_type = blob.get_traceable_characteristic(self.POI_TYPE)
         return_mode = self.config.get("return_mode", "prior_node")
         target_id = (
             blob.get_traceable_characteristic(self.RETURN_NODE)
@@ -414,42 +612,64 @@ class PopularTimesV2Plugin(ActionPlugin):
         )
         destination = self._enabled_node_by_id(target_id)
         rerouted = False
+        reroute_reason = ""
         if destination is None:
             destination = self._enabled_node_by_id(blob.node_of_origin)
             rerouted = destination is not None
+            reroute_reason = "permanent_home" if rerouted else ""
         if destination is None:
             destination = self._nearest_enabled_home(origin)
             rerouted = destination is not None
+            reroute_reason = "nearest_enabled_home" if rerouted else ""
         if destination is None:
             self.visit_records.append(
                 {
                     "event": "release_blocked",
+                    "visit_id": visit_id,
                     "simulation_step": simulation_step,
+                    "expiry_step": expiry_step,
                     "origin": origin.get_complete_name(),
                     "destination": "",
+                    "paired_home": self.env_graph.get_node_by_id(
+                        paired_home_id
+                    ).get_complete_name(),
+                    "poi_type": poi_type,
                     "quantity": blob.get_population_size(),
+                    "distance": 0.0,
                     "rerouted": False,
+                    "reroute_reason": "no_enabled_home",
                 }
             )
             return
 
         origin.remove_blob(blob)
         quantity = blob.get_population_size()
+        # Movement observers must see that this is an expiring Popular Times
+        # visit, including when flooding disabled the POI immediately before
+        # the mandatory one-hour release.
+        self.env_graph.log_blob_movement(origin, destination, [blob])
         for key, value in self.TRACEABLE_DEFAULTS.items():
             blob.set_traceable_characteristic(key, value)
         blob.previous_node = origin.id
         blob.frame_origin_node = origin.id
-        self.env_graph.log_blob_movement(origin, destination, [blob])
         destination.add_blob(blob)
         self.visit_records.append(
             {
                 "event": "release",
+                "visit_id": visit_id,
                 "simulation_step": simulation_step,
+                "expiry_step": expiry_step,
                 "cycle_step": cycle_step,
                 "origin": origin.get_complete_name(),
                 "destination": destination.get_complete_name(),
+                "paired_home": self.env_graph.get_node_by_id(
+                    paired_home_id
+                ).get_complete_name(),
+                "poi_type": poi_type,
                 "quantity": quantity,
+                "distance": self._distance_between(origin, destination),
                 "rerouted": rerouted,
+                "reroute_reason": reroute_reason,
             }
         )
 

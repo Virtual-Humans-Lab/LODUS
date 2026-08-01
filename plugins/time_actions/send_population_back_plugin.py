@@ -32,6 +32,15 @@ class SendPopulationBackPlugin(ActionPlugin):
 
     def load_plugin(self, simulation: LodusSimulation):    
         self.env_graph = simulation.env_graph
+        self.config = simulation.experiment_config.get(
+            "send_population_back_plugin", {}
+        )
+        self.acting_enabled_only = self.config.get(
+            "acting_enabled_only", False
+        )
+        self.destination_enabled_only = self.config.get(
+            "destination_enabled_only", False
+        )
         simulation.add_action_type_to_function('send_population_back', self.send_population_back, False)
 
         if "send_population_back_plugin" not in simulation.experiment_config:
@@ -67,8 +76,21 @@ class SendPopulationBackPlugin(ActionPlugin):
         acting_node = acting_region.get_first_node_with_name(values['node'])
 
         sub_list = []
+        if (
+            values.get("acting_enabled_only", self.acting_enabled_only)
+            and not acting_node.is_enabled()
+        ):
+            return sub_list
         for b in acting_node.contained_blobs:
             destination_node = self.env_graph.get_node_by_id(b.node_of_origin)
+            if (
+                values.get(
+                    "destination_enabled_only",
+                    self.destination_enabled_only,
+                )
+                and not destination_node.is_enabled()
+            ):
+                continue
             destination_region = self.env_graph.get_region_by_name(destination_node.containing_region_name)
            
             if destination_node.get_complete_name() == acting_node.get_complete_name():
