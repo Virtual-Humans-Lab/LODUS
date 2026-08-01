@@ -1,0 +1,13 @@
+{
+  "extends": "popular_times_v2/scenarios/13_levy_off_flood_both",
+  "simulation_parameters": {"total_cycles": 56},
+  "popular_times_v2_plugin": {
+    "reroute_disabled_destinations": true
+  },
+  "popular_times_v2_stage5": {
+    "environment": "13",
+    "levy": false,
+    "flood": "both",
+    "adaptation": "reroute"
+  }
+}

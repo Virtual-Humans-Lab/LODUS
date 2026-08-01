@@ -24,6 +24,8 @@ class PopularTimesV2Logger(LoggerPlugin):
         "weekday",
         "region",
         "destination",
+        "requested_destination",
+        "receiving_destination",
         "node_type",
         "paired_home",
         "destination_enabled",
@@ -31,6 +33,10 @@ class PopularTimesV2Logger(LoggerPlugin):
         "fulfilled",
         "unmet",
         "reason",
+        "destination_rerouted",
+        "reroute_reason",
+        "reroute_distance",
+        "receiving_load",
         "destination_occupancy",
     ]
     VISIT_COLUMNS = [
@@ -43,12 +49,16 @@ class PopularTimesV2Logger(LoggerPlugin):
         "expiry_step",
         "origin",
         "destination",
+        "requested_destination",
+        "receiving_destination",
         "paired_home",
         "poi_type",
         "quantity",
         "distance",
         "rerouted",
         "reroute_reason",
+        "reroute_distance",
+        "destination_was_rerouted",
     ]
     STEP_COLUMNS = [
         "simulation_step",
@@ -72,6 +82,29 @@ class PopularTimesV2Logger(LoggerPlugin):
         "occupied_destinations",
         "destination_occupancy",
         "travel_distance",
+        "reroute_events",
+        "rerouted_requested",
+        "rerouted_fulfilled",
+        "rerouted_unmet",
+        "reroute_traveler_distance",
+    ]
+    REROUTING_COLUMNS = [
+        "simulation_step",
+        "cycle_step",
+        "cycle",
+        "week",
+        "weekday",
+        "node_type",
+        "requested_destination",
+        "receiving_destination",
+        "reroute_reason",
+        "requested",
+        "fulfilled",
+        "unmet",
+        "reroute_distance",
+        "reroute_traveler_distance",
+        "receiving_load",
+        "destination_occupancy",
     ]
     MOVEMENT_VIOLATION_COLUMNS = [
         "simulation_step",
@@ -108,6 +141,10 @@ class PopularTimesV2Logger(LoggerPlugin):
         )
         self._visit_starts: dict[int, dict[str, int]] = {}
         self._visit_duration_errors: list[dict[str, int]] = []
+        self._reroute_errors: list[dict[str, Any]] = []
+        self._rerouting_summary: dict[
+            tuple[str, str, str], dict[str, float]
+        ] = defaultdict(lambda: defaultdict(float))
         self._closed_request_errors = 0
         self._unmet_reason_errors = 0
         self._movement_violation_count = 0
@@ -151,6 +188,11 @@ class PopularTimesV2Logger(LoggerPlugin):
             "popular_times_disabled_movement.csv",
             self.MOVEMENT_VIOLATION_COLUMNS,
         )
+        self._open_writer(
+            "rerouting",
+            "popular_times_rerouting.csv",
+            self.REROUTING_COLUMNS,
+        )
 
     def _open_writer(self, key: str, filename: str, columns: list[str]):
         stream = (self.data_path / filename).open(
@@ -179,12 +221,15 @@ class PopularTimesV2Logger(LoggerPlugin):
         self.plugin.visit_records = []
 
         demand_by_type: dict[str, list[dict[str, Any]]] = defaultdict(list)
-        destinations: dict[str, dict[str, Any]] = {}
+        destinations: dict[str, str] = {}
         for record in demand_records:
             self._demand_record_count += 1
             node_type = record["node_type"]
             demand_by_type[node_type].append(record)
-            destinations[record["destination"]] = record
+            receiving_destination = record.get(
+                "receiving_destination", record["destination"]
+            )
+            destinations[receiving_destination] = node_type
             week = record["simulation_step"] // (7 * self.cycle_length)
             self._weekly_requested[(week, node_type)] += record["requested"]
             self._hourly_requested[
@@ -202,10 +247,40 @@ class PopularTimesV2Logger(LoggerPlugin):
                 summary["disabled_destination_count"] += 1
             if record["unmet"] > 0 and record["reason"] not in {
                 "disabled_destination",
+                "no_enabled_alternative",
                 "no_enabled_origins",
                 "insufficient_population",
             }:
                 self._unmet_reason_errors += 1
+            if record.get("destination_rerouted", False):
+                summary["reroute_events"] += 1
+                summary["rerouted_requested"] += record["requested"]
+                summary["rerouted_fulfilled"] += record["fulfilled"]
+                summary["rerouted_unmet"] += record["unmet"]
+                summary["reroute_traveler_distance"] += (
+                    record["fulfilled"] * float(record["reroute_distance"])
+                )
+                requested_node = self.env_graph.get_node_by_complete_name(
+                    record["requested_destination"]
+                )
+                receiving_node = self.env_graph.get_node_by_complete_name(
+                    receiving_destination
+                )
+                if (
+                    requested_node.id == receiving_node.id
+                    or requested_node.node_type != receiving_node.node_type
+                    or not receiving_node.is_enabled()
+                    or not record.get("reroute_reason")
+                ):
+                    self._reroute_errors.append(
+                        {
+                            "simulation_step": record["simulation_step"],
+                            "requested_destination": record[
+                                "requested_destination"
+                            ],
+                            "receiving_destination": receiving_destination,
+                        }
+                    )
 
         visit_by_type: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for record in visit_records:
@@ -299,24 +374,54 @@ class PopularTimesV2Logger(LoggerPlugin):
                     for r in visits
                     if r["event"] == "start"
                 ),
+                "reroute_events": sum(
+                    bool(r.get("destination_rerouted", False)) for r in demands
+                ),
+                "rerouted_requested": sum(
+                    r["requested"]
+                    for r in demands
+                    if r.get("destination_rerouted", False)
+                ),
+                "rerouted_fulfilled": sum(
+                    r["fulfilled"]
+                    for r in demands
+                    if r.get("destination_rerouted", False)
+                ),
+                "rerouted_unmet": sum(
+                    r["unmet"]
+                    for r in demands
+                    if r.get("destination_rerouted", False)
+                ),
+                "reroute_traveler_distance": sum(
+                    r["fulfilled"] * float(r.get("reroute_distance", 0.0))
+                    for r in demands
+                    if r.get("destination_rerouted", False)
+                ),
             }
             self._step_rows.append(aggregate)
 
         active_template = PopulationTemplate(
             traceable_characteristics={self.plugin.ACTIVE: True}
         )
-        for destination_name, record in destinations.items():
+        occupancy_by_destination = {}
+        for destination_name, node_type in destinations.items():
             destination = self.env_graph.get_node_by_complete_name(destination_name)
             occupancy = destination.get_population_size(active_template)
+            occupancy_by_destination[destination_name] = occupancy
             if occupancy:
                 row = next(
                     item
                     for item in reversed(self._step_rows)
                     if item["simulation_step"] == self.sim_step
-                    and item["node_type"] == record["node_type"]
+                    and item["node_type"] == node_type
                 )
                 row["occupied_destinations"] += 1
                 row["destination_occupancy"] += occupancy
+        for record in demand_records:
+            receiving_destination = record.get(
+                "receiving_destination", record["destination"]
+            )
+            occupancy = occupancy_by_destination[receiving_destination]
             if record["requested"] > 0 or record["unmet"] > 0:
                 raw = dict(record)
                 raw["cycle"] = record["simulation_step"] // self.cycle_length
@@ -326,6 +431,37 @@ class PopularTimesV2Logger(LoggerPlugin):
                     {column: raw.get(column, "") for column in self.DEMAND_COLUMNS}
                 )
                 self._raw_demand_record_count += 1
+                if record.get("destination_rerouted", False):
+                    reroute = {
+                        **raw,
+                        "reroute_traveler_distance": (
+                            record["fulfilled"]
+                            * float(record["reroute_distance"])
+                        ),
+                    }
+                    self._writers["rerouting"].writerow(
+                        {
+                            column: reroute.get(column, "")
+                            for column in self.REROUTING_COLUMNS
+                        }
+                    )
+                    key = (
+                        record["requested_destination"],
+                        record["receiving_destination"],
+                        record["node_type"],
+                    )
+                    values = self._rerouting_summary[key]
+                    values["reroute_events"] += 1
+                    values["requested"] += record["requested"]
+                    values["fulfilled"] += record["fulfilled"]
+                    values["unmet"] += record["unmet"]
+                    values["reroute_traveler_distance"] += reroute[
+                        "reroute_traveler_distance"
+                    ]
+                    values["peak_receiving_load"] = max(
+                        values["peak_receiving_load"],
+                        float(record.get("receiving_load", occupancy)),
+                    )
 
     def _audit_movement(self, origin, destination, blobs):
         if origin.is_enabled() and destination.is_enabled():
@@ -385,6 +521,12 @@ class PopularTimesV2Logger(LoggerPlugin):
             "release_blocked",
             "travel_distance",
             "mean_distance_per_traveler",
+            "reroute_events",
+            "rerouted_requested",
+            "rerouted_fulfilled",
+            "rerouted_unmet",
+            "reroute_traveler_distance",
+            "mean_reroute_distance_per_traveler",
         ]
         summary_rows = []
         for node_type, values in sorted(self._summary.items()):
@@ -393,9 +535,10 @@ class PopularTimesV2Logger(LoggerPlugin):
             summary_rows.append(
                 {
                     "node_type": node_type,
-                    **{key: values[key] for key in summary_columns[1:] if key not in {"fulfillment_rate", "mean_distance_per_traveler"}},
+                    **{key: values[key] for key in summary_columns[1:] if key not in {"fulfillment_rate", "mean_distance_per_traveler", "mean_reroute_distance_per_traveler"}},
                     "fulfillment_rate": values["fulfilled"] / requested if requested else 1.0,
                     "mean_distance_per_traveler": values["travel_distance"] / travelers if travelers else 0.0,
+                    "mean_reroute_distance_per_traveler": values["reroute_traveler_distance"] / values["rerouted_fulfilled"] if values["rerouted_fulfilled"] else 0.0,
                 }
             )
         self._write_rows(
@@ -423,6 +566,41 @@ class PopularTimesV2Logger(LoggerPlugin):
                 }
             )
         self._write_rows("popular_times_od.csv", od_columns, od_rows)
+
+        rerouting_columns = [
+            "requested_destination",
+            "receiving_destination",
+            "node_type",
+            "reroute_events",
+            "requested",
+            "fulfilled",
+            "unmet",
+            "reroute_traveler_distance",
+            "mean_reroute_distance_per_traveler",
+            "peak_receiving_load",
+        ]
+        rerouting_rows = []
+        for (requested_destination, receiving_destination, node_type), values in sorted(
+            self._rerouting_summary.items()
+        ):
+            rerouting_rows.append(
+                {
+                    "requested_destination": requested_destination,
+                    "receiving_destination": receiving_destination,
+                    "node_type": node_type,
+                    **values,
+                    "mean_reroute_distance_per_traveler": (
+                        values["reroute_traveler_distance"] / values["fulfilled"]
+                        if values["fulfilled"]
+                        else 0.0
+                    ),
+                }
+            )
+        self._write_rows(
+            "popular_times_rerouting_summary.csv",
+            rerouting_columns,
+            rerouting_rows,
+        )
 
         validation = self._validation_results()
         (self.data_path / "popular_times_validation.json").write_text(
@@ -502,6 +680,7 @@ class PopularTimesV2Logger(LoggerPlugin):
             "hourly_peaks_match_profiles": all(item["passed"] for item in peak_checks),
             "disabled_nodes_do_not_move": self._movement_violation_count == 0,
             "all_unmet_requests_have_reason": self._unmet_reason_errors == 0,
+            "rerouted_destinations_valid": not self._reroute_errors,
         }
         return {
             "passed": all(checks.values()),
@@ -520,6 +699,7 @@ class PopularTimesV2Logger(LoggerPlugin):
             "weekly_demand": weekly_checks,
             "weekly_requested_totals_applicable": weeks > 0,
             "peak_checks": peak_checks,
+            "reroute_errors": self._reroute_errors[:100],
         }
 
     def _expected_weekly_demand(self) -> dict[str, int]:

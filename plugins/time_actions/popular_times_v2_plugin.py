@@ -30,6 +30,9 @@ class PopularTimesV2Plugin(ActionPlugin):
     PAIRED_HOME = "popular_times_v2_paired_home"
     EXPIRY_STEP = "popular_times_v2_expiry_step"
     POI_TYPE = "popular_times_v2_poi_type"
+    REQUESTED_DESTINATION = "popular_times_v2_requested_destination"
+    DESTINATION_REROUTED = "popular_times_v2_destination_rerouted"
+    DESTINATION_REROUTE_DISTANCE = "popular_times_v2_destination_reroute_distance"
 
     DEFAULT_PROFILE_FILES = {
         "marketplace": "marketplace.csv",
@@ -48,6 +51,9 @@ class PopularTimesV2Plugin(ActionPlugin):
         PAIRED_HOME: -1,
         EXPIRY_STEP: -1,
         POI_TYPE: "",
+        REQUESTED_DESTINATION: -1,
+        DESTINATION_REROUTED: False,
+        DESTINATION_REROUTE_DISTANCE: 0.0,
     }
 
     def __init__(self):
@@ -67,6 +73,7 @@ class PopularTimesV2Plugin(ActionPlugin):
         self._source_candidate_cache: dict[
             tuple[int, str], list[tuple[EnvNode, float]]
         ] = {}
+        self._reroute_candidate_cache: dict[int, list[tuple[EnvNode, float]]] = {}
         self._geod = Geod(ellps="WGS84")
 
     def load_plugin(self, simulation: LodusSimulation):
@@ -115,6 +122,11 @@ class PopularTimesV2Plugin(ActionPlugin):
         for node_type, rate in self.weekly_rates.items():
             if not isinstance(rate, (int, float)) or rate < 0:
                 raise ValueError(f"Weekly visit rate for {node_type} must be non-negative")
+        reroute = self.config.get("reroute_disabled_destinations", False)
+        if not isinstance(reroute, bool):
+            raise ValueError(
+                "popular_times_v2_plugin.reroute_disabled_destinations must be a boolean"
+            )
 
     def _load_profiles(self) -> None:
         configured = self.config.get("profile_files", {})
@@ -453,6 +465,8 @@ class PopularTimesV2Plugin(ActionPlugin):
             "weekday": (simulation_step // self.simulation.time_status.cycle_length) % 7,
             "region": destination.containing_region_name,
             "destination": destination.get_complete_name(),
+            "requested_destination": destination.get_complete_name(),
+            "receiving_destination": destination.get_complete_name(),
             "node_type": destination.node_type,
             "paired_home": self.paired_home_name(region_name, unique_name),
             "destination_enabled": destination.is_enabled(),
@@ -460,22 +474,47 @@ class PopularTimesV2Plugin(ActionPlugin):
             "fulfilled": 0,
             "unmet": requested,
             "reason": "closed" if requested == 0 else "",
+            "destination_rerouted": False,
+            "reroute_reason": "",
+            "reroute_distance": 0.0,
+            "receiving_load": 0,
         }
         if requested == 0:
             self.demand_records.append(record)
             return
-        if not destination.is_enabled() or self._will_flood_before_expiry(
-            destination, simulation_step
-        ):
-            record["reason"] = "disabled_destination"
-            record["anticipated_disable"] = destination.is_enabled()
-            self.demand_records.append(record)
-            return
+        destination_unavailable = (
+            not destination.is_enabled()
+            or self._will_flood_before_expiry(destination, simulation_step)
+        )
+        receiving_destination = destination
+        if destination_unavailable:
+            anticipated_disable = destination.is_enabled()
+            record["anticipated_disable"] = anticipated_disable
+            if not self.config.get("reroute_disabled_destinations", False):
+                record["reason"] = "disabled_destination"
+                self.demand_records.append(record)
+                return
+            alternative = self._nearest_available_poi(destination, simulation_step)
+            if alternative is None:
+                record["reason"] = "no_enabled_alternative"
+                self.demand_records.append(record)
+                return
+            receiving_destination, displacement = alternative
+            record["receiving_destination"] = (
+                receiving_destination.get_complete_name()
+            )
+            record["destination_rerouted"] = True
+            record["reroute_reason"] = (
+                "anticipated_disable" if anticipated_disable else "disabled_destination"
+            )
+            record["reroute_distance"] = displacement
 
         paired_home = self.env_graph.get_node_by_complete_name(
             self.paired_home_name(region_name, unique_name)
         )
-        allocations = self._source_allocations(destination, requested, pop_template)
+        allocations = self._source_allocations(
+            receiving_destination, requested, pop_template
+        )
         if not allocations:
             record["reason"] = (
                 "no_enabled_origins"
@@ -489,11 +528,13 @@ class PopularTimesV2Plugin(ActionPlugin):
         for origin, allocation in allocations:
             moved = self._start_visit(
                 origin,
-                destination,
+                receiving_destination,
                 paired_home,
                 allocation,
                 pop_template,
                 simulation_step,
+                requested_destination=destination,
+                reroute_distance=float(record["reroute_distance"]),
             )
             fulfilled += moved
 
@@ -501,7 +542,40 @@ class PopularTimesV2Plugin(ActionPlugin):
         record["unmet"] = requested - fulfilled
         if fulfilled < requested:
             record["reason"] = "insufficient_population"
+        active_template = PopulationTemplate(
+            traceable_characteristics={self.ACTIVE: True}
+        )
+        record["receiving_load"] = receiving_destination.get_population_size(
+            active_template
+        )
         self.demand_records.append(record)
+
+    def _nearest_available_poi(
+        self, destination: EnvNode, simulation_step: int
+    ) -> tuple[EnvNode, float] | None:
+        if destination.id not in self._reroute_candidate_cache:
+            candidates = [
+                node
+                for node in self.env_graph.node_list
+                if node.id != destination.id and node.node_type == destination.node_type
+            ]
+            ranked = [
+                (node, self._distance_between(destination, node))
+                for node in candidates
+            ]
+            ranked.sort(
+                key=lambda item: (item[1], item[0].get_complete_name())
+            )
+            self._reroute_candidate_cache[destination.id] = ranked
+        return next(
+            (
+                (node, distance)
+                for node, distance in self._reroute_candidate_cache[destination.id]
+                if node.is_enabled()
+                and not self._will_flood_before_expiry(node, simulation_step)
+            ),
+            None,
+        )
 
     def _will_flood_before_expiry(
         self, destination: EnvNode, simulation_step: int
@@ -547,6 +621,8 @@ class PopularTimesV2Plugin(ActionPlugin):
         quantity: int,
         pop_template: PopulationTemplate,
         simulation_step: int,
+        requested_destination: EnvNode | None = None,
+        reroute_distance: float = 0.0,
     ) -> int:
         blobs = origin.grab_population(quantity, pop_template)
         if not blobs:
@@ -554,6 +630,8 @@ class PopularTimesV2Plugin(ActionPlugin):
         self._visit_sequence += 1
         visit_id = self._visit_sequence
         expiry = simulation_step + 1
+        requested_destination = requested_destination or destination
+        destination_rerouted = requested_destination.id != destination.id
         moved = 0
         for blob in blobs:
             blob.set_traceable_characteristic(self.ACTIVE, True)
@@ -562,6 +640,15 @@ class PopularTimesV2Plugin(ActionPlugin):
             blob.set_traceable_characteristic(self.PAIRED_HOME, paired_home.id)
             blob.set_traceable_characteristic(self.EXPIRY_STEP, expiry)
             blob.set_traceable_characteristic(self.POI_TYPE, destination.node_type)
+            blob.set_traceable_characteristic(
+                self.REQUESTED_DESTINATION, requested_destination.id
+            )
+            blob.set_traceable_characteristic(
+                self.DESTINATION_REROUTED, destination_rerouted
+            )
+            blob.set_traceable_characteristic(
+                self.DESTINATION_REROUTE_DISTANCE, reroute_distance
+            )
             blob.previous_node = origin.id
             blob.frame_origin_node = origin.id
             moved += blob.get_population_size()
@@ -575,12 +662,17 @@ class PopularTimesV2Plugin(ActionPlugin):
                 "expiry_step": expiry,
                 "origin": origin.get_complete_name(),
                 "destination": destination.get_complete_name(),
+                "requested_destination": requested_destination.get_complete_name(),
+                "receiving_destination": destination.get_complete_name(),
                 "paired_home": paired_home.get_complete_name(),
                 "poi_type": destination.node_type,
                 "quantity": moved,
                 "distance": self._distance_between(origin, destination),
-                "rerouted": False,
-                "reroute_reason": "",
+                "rerouted": destination_rerouted,
+                "reroute_reason": (
+                    "disabled_destination" if destination_rerouted else ""
+                ),
+                "reroute_distance": reroute_distance,
             }
         )
         return moved
@@ -604,6 +696,18 @@ class PopularTimesV2Plugin(ActionPlugin):
         expiry_step = blob.get_traceable_characteristic(self.EXPIRY_STEP)
         paired_home_id = blob.get_traceable_characteristic(self.PAIRED_HOME)
         poi_type = blob.get_traceable_characteristic(self.POI_TYPE)
+        requested_destination_id = blob.get_traceable_characteristic(
+            self.REQUESTED_DESTINATION
+        )
+        destination_rerouted = bool(
+            blob.get_traceable_characteristic(self.DESTINATION_REROUTED)
+        )
+        destination_reroute_distance = float(
+            blob.get_traceable_characteristic(self.DESTINATION_REROUTE_DISTANCE)
+        )
+        requested_destination = self.env_graph.get_node_by_id(
+            requested_destination_id
+        ).get_complete_name()
         return_mode = self.config.get("return_mode", "prior_node")
         target_id = (
             blob.get_traceable_characteristic(self.RETURN_NODE)
@@ -630,6 +734,8 @@ class PopularTimesV2Plugin(ActionPlugin):
                     "expiry_step": expiry_step,
                     "origin": origin.get_complete_name(),
                     "destination": "",
+                    "requested_destination": requested_destination,
+                    "receiving_destination": origin.get_complete_name(),
                     "paired_home": self.env_graph.get_node_by_id(
                         paired_home_id
                     ).get_complete_name(),
@@ -638,6 +744,7 @@ class PopularTimesV2Plugin(ActionPlugin):
                     "distance": 0.0,
                     "rerouted": False,
                     "reroute_reason": "no_enabled_home",
+                    "reroute_distance": destination_reroute_distance,
                 }
             )
             return
@@ -662,6 +769,8 @@ class PopularTimesV2Plugin(ActionPlugin):
                 "cycle_step": cycle_step,
                 "origin": origin.get_complete_name(),
                 "destination": destination.get_complete_name(),
+                "requested_destination": requested_destination,
+                "receiving_destination": origin.get_complete_name(),
                 "paired_home": self.env_graph.get_node_by_id(
                     paired_home_id
                 ).get_complete_name(),
@@ -670,6 +779,8 @@ class PopularTimesV2Plugin(ActionPlugin):
                 "distance": self._distance_between(origin, destination),
                 "rerouted": rerouted,
                 "reroute_reason": reroute_reason,
+                "reroute_distance": destination_reroute_distance,
+                "destination_was_rerouted": destination_rerouted,
             }
         )
 

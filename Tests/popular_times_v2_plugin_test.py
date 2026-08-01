@@ -33,7 +33,7 @@ class PopularTimesV2Test(unittest.TestCase):
             writer.writerow(["ciclo", "hora", "quantidade"])
             writer.writerows(rows)
 
-    def _simulation(self, homes=(100,), config=None):
+    def _simulation(self, homes=(100,), config=None, extra_pois=()):
         characteristics = CharacteristicsFactory()
         characteristics.add_sampled_characteristic("group", ["resident"])
         factory = BlobFactory(characteristics)
@@ -58,6 +58,14 @@ class PopularTimesV2Test(unittest.TestCase):
         restaurant = EnvNode("restaurant", "restaurant_0")
         restaurant.set_long_lat_position(0.00001, 0.0)
         graph.add_envnode("Region", restaurant)
+        for region_name, node_type, unique_name, longitude, latitude in extra_pois:
+            if region_name not in graph.region_dict:
+                graph.add_region(
+                    EnvRegionTemplate(region_name, [longitude, latitude]), factory
+                )
+            node = EnvNode(node_type, unique_name)
+            node.set_long_lat_position(longitude, latitude)
+            graph.add_envnode(region_name, node)
         graph.set_original_populations()
 
         simulation = LodusSimulation(graph)
@@ -143,6 +151,121 @@ class PopularTimesV2Test(unittest.TestCase):
         self.assertEqual(homes[0].get_population_size(), 100)
         self.assertEqual(plugin.demand_records[-1]["reason"], "disabled_destination")
         self.assertEqual(plugin.demand_records[-1]["unmet"], 75)
+
+    def test_disabled_destination_reroutes_to_nearest_same_type_across_regions(self):
+        simulation, plugin, homes, marketplace, _ = self._simulation(
+            config={"reroute_disabled_destinations": True},
+            extra_pois=(
+                ("Region", "pharmacy", "pharmacy_near", 0.00002, 0.0),
+                ("Region", "marketplace", "marketplace_far", 0.1, 0.0),
+                ("Other", "marketplace", "marketplace_near", 0.001, 0.0),
+            ),
+        )
+        receiving = simulation.env_graph.get_node_by_complete_name(
+            "Other//marketplace_near"
+        )
+        marketplace.disable("flood")
+
+        plugin.popular_times_v2_action(
+            PopulationTemplate(),
+            {"region": "Region", "node": "marketplace_0"},
+            cycle_step=12,
+            simulation_step=0,
+        )
+
+        record = plugin.demand_records[-1]
+        self.assertEqual(75, record["requested"])
+        self.assertEqual(75, record["fulfilled"])
+        self.assertEqual("Region//marketplace_0", record["requested_destination"])
+        self.assertEqual("Other//marketplace_near", record["receiving_destination"])
+        self.assertEqual("Region//home_0", record["paired_home"])
+        self.assertTrue(record["destination_rerouted"])
+        self.assertGreater(record["reroute_distance"], 0)
+        self.assertEqual(75, receiving.get_population_size())
+        self.assertEqual(25, homes[0].get_population_size())
+        self.assertEqual(
+            "Region//marketplace_0",
+            plugin.visit_records[-1]["requested_destination"],
+        )
+        plugin.update_time_step(cycle_step=13, simulation_step=1)
+        self.assertEqual(0, receiving.get_population_size())
+        self.assertEqual(100, homes[0].get_population_size())
+
+    def test_reroute_distance_ties_use_complete_node_name(self):
+        simulation, plugin, _, marketplace, _ = self._simulation(
+            config={"reroute_disabled_destinations": True},
+            extra_pois=(
+                ("Region", "marketplace", "marketplace_b", 0.01, 0.0),
+                ("Region", "marketplace", "marketplace_a", 0.01, 0.0),
+            ),
+        )
+        marketplace.disable("flood")
+        plugin.popular_times_v2_action(
+            PopulationTemplate(),
+            {"region": "Region", "node": "marketplace_0"},
+            cycle_step=12,
+            simulation_step=0,
+        )
+        self.assertEqual(
+            "Region//marketplace_a",
+            plugin.demand_records[-1]["receiving_destination"],
+        )
+        self.assertEqual(
+            75,
+            simulation.env_graph.get_node_by_complete_name(
+                "Region//marketplace_a"
+            ).get_population_size(),
+        )
+
+    def test_reroute_excludes_alternative_that_will_flood_before_expiry(self):
+        simulation, plugin, _, marketplace, _ = self._simulation(
+            config={
+                "reroute_disabled_destinations": True,
+                "suppress_if_flooded_before_expiry": True,
+            },
+            extra_pois=(
+                ("Region", "marketplace", "marketplace_near", 0.001, 0.0),
+                ("Region", "marketplace", "marketplace_safe", 0.01, 0.0),
+            ),
+        )
+        near = simulation.env_graph.get_node_by_complete_name(
+            "Region//marketplace_near"
+        )
+        marketplace.attributes["water_level"] = 1.0
+        near.attributes["water_level"] = 1.0
+        plugin.env_graph.data_action_map["water_level_for_step"] = (
+            lambda cycle_step, simulation_step: 2.0
+        )
+
+        plugin.popular_times_v2_action(
+            PopulationTemplate(),
+            {"region": "Region", "node": "marketplace_0"},
+            cycle_step=12,
+            simulation_step=0,
+        )
+
+        record = plugin.demand_records[-1]
+        self.assertEqual("anticipated_disable", record["reroute_reason"])
+        self.assertEqual(
+            "Region//marketplace_safe", record["receiving_destination"]
+        )
+
+    def test_reroute_without_alternative_is_auditable_unmet_demand(self):
+        _, plugin, homes, marketplace, _ = self._simulation(
+            config={"reroute_disabled_destinations": True}
+        )
+        marketplace.disable("flood")
+        plugin.popular_times_v2_action(
+            PopulationTemplate(),
+            {"region": "Region", "node": "marketplace_0"},
+            cycle_step=12,
+            simulation_step=0,
+        )
+        record = plugin.demand_records[-1]
+        self.assertEqual("no_enabled_alternative", record["reason"])
+        self.assertEqual(75, record["unmet"])
+        self.assertFalse(record["destination_rerouted"])
+        self.assertEqual(100, homes[0].get_population_size())
 
     def test_visit_is_suppressed_if_poi_will_flood_before_expiry(self):
         _, plugin, homes, marketplace, _ = self._simulation(

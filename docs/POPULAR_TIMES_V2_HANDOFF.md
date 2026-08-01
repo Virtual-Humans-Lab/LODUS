@@ -4,13 +4,13 @@
 
 - Branch: `refactoring`
 - Stage 4 implementation commit: `2cae9365151e95c6d28fc08ea6c38510b38dc902`.
-- Work is intentionally stopped at Gate 4 for review.
-- Stage 4 is complete; Stage 5 has not started.
+- Gate 4 was approved and Stage 5 is complete.
+- Work is intentionally stopped at Gate 5 for review.
 - The full approved study specification is in `docs/PLAN.md`.
 
-Stages 1–4 are committed on the branch. The portable Stage 4 evidence is tracked
-under `docs/results/popular_times_v2_stage4/`; the 14 GiB raw run tree remains under
-ignored `output_logs/` on the machine that executed the matrix.
+Stages 1–4 are committed on the branch. Portable Stage 4 and Stage 5 evidence is
+stored under `docs/results/`. The raw run trees remain under ignored `output_logs/`
+on the machine that executed the matrices.
 
 ## Decisions carried forward
 
@@ -257,5 +257,44 @@ Principal findings:
 - The 94-region Levy interval uses five seeds and must be interpreted as less
   precise than the 30-seed 13-region intervals.
 
-The complete core matrix is ready for Gate 4 review. Do not implement Stage 5
-rerouting until Gate 4 is explicitly approved.
+This was the Gate 4 review boundary. Stage 5 began only after Gate 4 was explicitly
+approved.
+
+## Stage 5 completion (2026-08-01)
+
+Gate 4 was explicitly approved before Stage 5 began. Stage 5 adds destination
+adaptation behind `popular_times_v2_plugin.reroute_disabled_destinations`, which
+defaults to `false`. When enabled, a disabled POI—or one known to flood before the
+one-hour visit expires—redirects its original demand to the nearest currently safe
+POI of the same type. Candidate selection spans all regions and resolves distance
+ties by complete node name. Demand continues to use the original POI's paired home.
+
+The logger now records the requested and receiving POIs, reroute reason, POI
+displacement, receiving load, fulfilled rerouted demand, and remaining unmet demand.
+It also validates that every receiving POI differs from the requested POI, has the
+same type, and is enabled when movement occurs.
+
+The 31-run matrix contains one deterministic Levy-off run and Levy-on seeds 0–29,
+all using the 13-region homes-and-POIs flood scenario for 56 cycles x 24 hours. All
+31 runs completed and passed every invariant.
+
+Key results:
+
+- All 83,445 visits suppressed by POI flooding in the matching Stage 4 scenario
+  were rerouted successfully in every Stage 5 run.
+- Fulfillment increased from 96.49% to 100%, with zero remaining rerouted unmet
+  demand.
+- Mean POI-to-POI displacement was 297.89 metres per rerouted traveler.
+- The maximum observed receiving-POI load was 92 Popular Times travelers.
+- Relative to Stage 4 suppression, distance per requested visit increased by 5.04
+  metres without Levy and by a mean 4.84 metres with Levy.
+- Population conservation, one-hour visits, weekly demand, enabled-node movement,
+  unmet-reason, and rerouted-destination checks all passed.
+
+The losslessly compressed Stage 5 raw tree occupies approximately 3 GiB under
+`output_logs/popular_times_v2_stage5/`. The portable report, aggregate CSVs,
+receiving-POI flows, paired effects, and plots are under
+`docs/results/popular_times_v2_stage5/`.
+
+The complete adaptation matrix is ready for Gate 5 review. No further adaptation
+work is approved beyond this boundary.

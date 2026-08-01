@@ -6,3 +6,5 @@ Logs/
 .vscode/
 output_logs/
 results/
+!docs/results/
+!docs/results/**

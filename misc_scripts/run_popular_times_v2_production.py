@@ -53,6 +53,7 @@ METRICS = (
 COMPRESSED_RAW_FILES = (
     "data_frames/popular_times_demand.csv",
     "data_frames/popular_times_visits.csv",
+    "data_frames/popular_times_rerouting.csv",
     "data_frames/od_matrix_enumeration_area_step.csv",
     "data_frames/od_matrix_enumeration_area_cycle.csv",
 )
