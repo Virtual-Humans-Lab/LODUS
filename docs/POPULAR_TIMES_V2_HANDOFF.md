@@ -192,7 +192,53 @@ Do not start Stage 4 without fresh approval. On the next machine:
 4. Read `docs/PLAN.md` and this handoff.
 5. Confirm whether Stage 4's 94-region production runs remain at 56 cycles or should
    also use a shorter horizon.
-6. Implement a resumable/parallel production runner for the 155-run Stage 4 matrix;
-   the current runner is a seed-0 pilot runner only.
+6. Implement a resumable/parallel production runner for the originally planned
+   155-run Stage 4 matrix; this was subsequently revised to 130 runs in the Stage 4
+   continuation below.
 7. Stop again at Gate 4 before implementing Stage 5 rerouting adaptation.
 
+## Stage 4 continuation (2026-08-01)
+
+Stage 4 has now started on the newer machine. The pilot scenarios remain unchanged:
+the two 94-region pilot configurations still run for five cycles. Separate production
+configurations under `experiments/popular_times_v2/production/` explicitly restore
+all ten scenario families, including both 94-region families, to the approved 56
+cycles x 24 hours.
+
+`misc_scripts/run_popular_times_v2_production.py` now provides:
+
+- the revised 130-run matrix (five deterministic Levy-off runs, 120 13-region
+  Levy-on runs using seeds 0–29, and five 94-region Levy-on runs using seeds 0–4);
+- matched Levy seeds across the four 13-region flood variants;
+- resumability based on matching experiment, seed, 56-cycle metadata, and invariant
+  artifacts;
+- configurable process parallelism and seed/scenario batching;
+- a continuously updated production manifest;
+- lossless `.csv.gz` archival of the largest raw files after each validated run;
+- run, POI-type, destination-region, and region-OD aggregates;
+- paired Levy, flood, flood-interaction, and Levy-by-flood contrasts;
+- means and 95% t intervals for stochastic scenarios, with no artificial intervals
+  on deterministic values;
+- plots and an interim/final `REPORT.md` that only declares Gate 4 ready when all
+  130 runs exist and pass validation.
+
+The first real production run, `13_levy_off_flood_none-seed0`, completed in 210.10
+seconds with 213.5 MiB peak memory and passed every invariant. Its losslessly
+compressed run folder is about 50 MiB, down from roughly 326 MiB uncompressed. Like
+the pilot artifacts, this output is under ignored `output_logs/` and will not travel
+with Git.
+
+Run or resume the complete matrix conservatively with:
+
+```bash
+MPLCONFIGDIR=/tmp/lodus-matplotlib .venv/bin/python \
+  misc_scripts/run_popular_times_v2_production.py --workers 4
+```
+
+The machine observed during continuation has 12 logical CPUs, 15 GiB RAM, about
+6.8 GiB available memory, and 240 GiB free disk. Four workers leave ample memory
+headroom relative to the Stage 3 peak measurements. For explicit batches, combine
+`--only` with `--seeds-13` or `--seeds-94`; completed runs are skipped automatically.
+Rebuild analysis without launching simulations with `--skip-runs`.
+
+The targeted Stage 1–4 suite currently passes 29 tests. Stage 5 has not started.

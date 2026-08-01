@@ -1,0 +1,4 @@
+{
+  "extends": "popular_times_v2/scenarios/94_levy_on_flood_none",
+  "simulation_parameters": {"total_cycles": 56}
+}
