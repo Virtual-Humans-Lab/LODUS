@@ -74,3 +74,35 @@ Levy Walk accepts two backward-compatible, opt-in settings:
 
 The plural `target_node_types` action value is supported along with the
 historical `target_node_type` alias.
+
+## Flood-state visualization
+
+Generate one interactive visualization for each scenario in the 13-region
+production matrix with:
+
+```bash
+.venv/bin/python misc_scripts/visualize_envnode_states.py \
+  --scenario-root output_logs/popular_times_v2_stage4_production \
+  --environment 13 \
+  --output-dir output_logs/popular_times_v2_visualizations
+```
+
+The batch command discovers the Levy on/off and none/homes/POIs/both flood
+matrix, verifies that each scenario's node-state and water-level timelines are
+identical across seeds, and writes eight scenario-named HTML files. Seed 0 is
+used as the representative input when available, but seed identifiers are not
+part of the output names.
+
+The visualization always excludes the unused `p8` and `p9` node types. Work
+and school nodes appear only in Levy-enabled scenarios. Map playback is linked
+to the water-level plot, enabled/disabled totals, and the simulation day and
+hour. The HTML data is embedded, while Plotly and OpenStreetMap tiles require
+internet access when the file is viewed.
+
+For single-run debugging, retain the existing form:
+
+```bash
+.venv/bin/python misc_scripts/visualize_envnode_states.py \
+  --experiment-name popular_times_v2_stage4_production/13_levy_on_flood_both-seed0 \
+  --output-html output_logs/one_run_visualization.html
+```
