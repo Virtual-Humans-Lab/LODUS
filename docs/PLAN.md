@@ -89,16 +89,17 @@ Implementation proceeds through five approval gates. Work stops after every stag
 - Run deterministic Levy-off scenarios once:
   - Four 13-region flood conditions.
   - One 94-region no-flood condition.
-- Run every Levy-on scenario with seeds `0–29`:
-  - Four 13-region flood conditions = 120 runs.
-  - One 94-region condition = 30 runs.
+- Run the Levy-on scenarios with the approved environment-specific seed counts:
+  - Seeds `0–29` for four 13-region flood conditions = 120 runs.
+  - Seeds `0–4` for the 94-region condition = 5 runs.
 - Reuse matching Levy seeds across flood variants for paired comparisons.
-- Produce 155 production runs in total.
+- Produce 130 production runs in total.
 - Report:
   - Demand fulfillment and flood-related suppression.
   - Trips, travelers, distance, OD flows, and POI occupancy.
   - Differences caused by Levy, each flood target, their interaction, and geographic aggregation.
-  - Means and 95% intervals for stochastic scenarios.
+  - Means and 95% intervals for stochastic scenarios, noting the five-seed
+    limitation for the 94-region interval.
   - Deterministic values without artificial confidence intervals.
 
 **Gate 4:** Present and review the complete core-matrix results. Stop before adaptation work.

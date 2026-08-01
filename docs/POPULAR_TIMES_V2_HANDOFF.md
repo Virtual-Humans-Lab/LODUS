@@ -3,15 +3,14 @@
 ## Repository state
 
 - Branch: `refactoring`
-- HEAD when this handoff was written: `27a3f8196036e38c6c3135e995dd7b354f0e2620`
-- Work is intentionally stopped after Gate 3.
-- Stage 4 and Stage 5 have not started.
+- Stage 4 implementation commit: `2cae9365151e95c6d28fc08ea6c38510b38dc902`.
+- Work is intentionally stopped at Gate 4 for review.
+- Stage 4 is complete; Stage 5 has not started.
 - The full approved study specification is in `docs/PLAN.md`.
-- No Stage 3 changes have been committed by Codex.
 
-The Stage 1 and Stage 2 implementation is already part of the branch baseline. The
-working tree contains the uncommitted Stage 3 implementation listed below. Preserve
-unrelated user changes when committing.
+Stages 1–4 are committed on the branch. The portable Stage 4 evidence is tracked
+under `docs/results/popular_times_v2_stage4/`; the 14 GiB raw run tree remains under
+ignored `output_logs/` on the machine that executed the matrix.
 
 ## Decisions carried forward
 
@@ -182,9 +181,9 @@ Added:
 `docs/PLAN.md` is also currently untracked and contains the original approved plan.
 Review and include it deliberately when committing.
 
-## Resume point
+## Historical Stage 3 resume point
 
-Do not start Stage 4 without fresh approval. On the next machine:
+The following was the resume point before Stage 4 began:
 
 1. Check out the committed `refactoring` branch.
 2. Install `requirements.txt` dependencies if needed.
@@ -222,11 +221,9 @@ cycles x 24 hours.
 - plots and an interim/final `REPORT.md` that only declares Gate 4 ready when all
   130 runs exist and pass validation.
 
-The first real production run, `13_levy_off_flood_none-seed0`, completed in 210.10
-seconds with 213.5 MiB peak memory and passed every invariant. Its losslessly
-compressed run folder is about 50 MiB, down from roughly 326 MiB uncompressed. Like
-the pilot artifacts, this output is under ignored `output_logs/` and will not travel
-with Git.
+All 130 production runs completed and passed every invariant. The final losslessly
+compressed raw run tree occupies about 14 GiB. It remains under ignored
+`output_logs/` and will not travel with Git.
 
 Run or resume the complete matrix conservatively with:
 
@@ -242,3 +239,23 @@ headroom relative to the Stage 3 peak measurements. For explicit batches, combin
 Rebuild analysis without launching simulations with `--skip-runs`.
 
 The targeted Stage 1–4 suite currently passes 29 tests. Stage 5 has not started.
+
+## Gate 4 findings and preservation
+
+The portable report, aggregate CSVs, regional and region-OD outputs, and plots are
+tracked under `docs/results/popular_times_v2_stage4/`. The package is approximately
+3 MiB and contains enough evidence to review the matrix without the ignored raw
+logs.
+
+Principal findings:
+
+- POI flooding suppressed 3.51% of requested visits, reducing fulfillment from
+  100% to 96.49%.
+- Home-only flooding preserved fulfillment but increased mean sourcing distance.
+- Levy changed sourcing distance without changing fulfillment or occupancy per
+  requested visit.
+- The 94-region Levy interval uses five seeds and must be interpreted as less
+  precise than the 30-seed 13-region intervals.
+
+The complete core matrix is ready for Gate 4 review. Do not implement Stage 5
+rerouting until Gate 4 is explicitly approved.
