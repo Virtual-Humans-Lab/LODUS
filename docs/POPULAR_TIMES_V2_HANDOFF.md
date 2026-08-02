@@ -298,3 +298,42 @@ receiving-POI flows, paired effects, and plots are under
 
 The complete adaptation matrix is ready for Gate 5 review. No further adaptation
 work is approved beyond this boundary.
+
+## Stage 6 implementation and execution (2026-08-01)
+
+Gate 5 was followed by an explicitly approved Levy Walk V2 stage. The new
+`LevyWalkV2Plugin` and `levy_walk_v2` action are isolated from the legacy Levy
+implementation. Legacy routines, packet-flooring behavior, configurations,
+runners, and Stage 4/5 artifacts remain unchanged.
+
+Levy V2 calculates an exact global attendance target every cycle from original
+worker/student population, then allocates it deterministically to homes and
+normalized hourly profiles by largest remainders. Workers use attendance rate
+`0.9812322015` and an eight-hour stay; students use rate `0.9375`, the combined
+08:00/13:00/19:00 profile, and a four-hour stay. Outbound demand uses packets of
+at most 50 and retains the last partial packet.
+
+The V2 lifecycle suppresses disabled origins, disabled or imminently flooded
+destinations, and unavailable population with explicit reasons. Optional nearest
+enabled same-type destination routing is available across regions with complete
+node-name tie breaking, although production work/school demand uses suppression.
+Returns preserve original-home provenance, use the nearest enabled home when
+necessary, retry blocked returns, and automatically repatriate temporary residents
+when their original home reopens.
+
+The resumable runner is:
+
+```bash
+.venv/bin/python misc_scripts/run_popular_times_v2_stage6.py --workers 4
+```
+
+Use `--smoke` for the five seed-0 scenarios or `--skip-runs` to rebuild analysis.
+The full matrix has five 13-region families x seeds 0–29 = 150 runs, each using 56
+cycles. Both `popular_times_validation.json` and `levy_v2_validation.json` must
+pass before a run is considered complete. Large demand, movement, and OD files are
+gzip-compressed after validation. Raw outputs stay under ignored
+`output_logs/popular_times_v2_stage6/`; portable Gate 6 outputs are copied to
+`docs/results/popular_times_v2_stage6/` after execution.
+
+Stage 6 stops at Gate 6. Stage 4 and Stage 5 outputs must not be removed or
+replaced.

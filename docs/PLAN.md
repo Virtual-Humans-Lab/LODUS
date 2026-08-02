@@ -118,9 +118,35 @@ Implementation proceeds through five approval gates. Work stops after every stag
 
 **Gate 5:** Present adaptation results and final validation for approval.
 
+## Stage 6 — Levy Walk V2
+
+- Preserve the legacy Levy plugin, routines, experiment configurations, runners,
+  and Stage 4/5 results without behavioral changes.
+- Add `LevyWalkV2Plugin` and `levy_walk_v2` with exact cycle-level worker and
+  student attendance allocated deterministically across homes and hours.
+- Normalize the historical worker profile to one cycle and use the combined
+  student profile at 08:00, 13:00, and 19:00.
+- Split demand into packets of at most 50, including every final partial packet.
+- Make commute origins, destinations, anticipated destination flooding, returns,
+  temporary homes, and repatriation flood-aware and auditable.
+- Run five 13-region families with paired seeds 0–29: no flooding, destination
+  flooding including work/school, home flooding, all-node flooding, and all-node
+  flooding with Popular Times POI rerouting.
+- Validate both mobility models independently and compare each flood condition to
+  the new no-flood baseline with paired 95% t intervals.
+- Treat comparisons with matching Stage 4/5 runs as combined model revisions,
+  because work/school flood exposure and commute behavior both change.
+- Keep raw outputs outside Git and preserve the portable report, aggregates, and
+  plots under `docs/results/popular_times_v2_stage6/`.
+
+**Gate 6:** Present all 150 validated runs and stop for review. Do not replace or
+delete Stage 4/5 artifacts.
+
 ## Interfaces and Compatibility
 
 - New action: `popular_times_v2`.
+- New action: `levy_walk_v2`; legacy `levy_walk` remains unchanged.
+- New configuration: `levy_walk_v2_plugin`.
 - New configuration: `popular_times_v2_plugin`.
 - Return policy: `prior_node` by default; `paired_home` optional.
 - Demand basis: `initial_population` by default; legacy multiplier CSV optional.

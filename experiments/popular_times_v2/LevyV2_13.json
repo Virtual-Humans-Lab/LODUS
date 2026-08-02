@@ -1,0 +1,49 @@
+{
+  "extends": "popular_times_v2/Base13",
+  "envgraph_inputs_files": {
+    "routine_file": "enumeration_area/Routine-POA-EnumArea-PopularTimes-LevyV2.json"
+  },
+  "levy_walk_v2_plugin": {
+    "packet_size": 50,
+    "demand_basis": "original_population",
+    "groups": {
+      "worker": {
+        "population_template": {"occupation": ["worker"]},
+        "target_node_type": "work",
+        "cycle_attendance_rate": 0.9812322015,
+        "stay_duration_steps": 8,
+        "hourly_weights": {
+          "0": 0.025, "1": 0.025, "2": 0.025, "3": 0.025,
+          "4": 0.025, "5": 0.025, "6": 0.1, "7": 0.25,
+          "8": 0.4, "9": 0.4, "10": 0.4, "11": 0.1,
+          "12": 0.35, "13": 0.1, "14": 0.1, "15": 0.1,
+          "16": 0.35, "17": 0.1, "18": 0.1, "19": 0.1,
+          "20": 0.2, "21": 0.025, "22": 0.025, "23": 0.025
+        }
+      },
+      "student": {
+        "population_template": {"occupation": ["student"]},
+        "target_node_type": "school",
+        "cycle_attendance_rate": 0.9375,
+        "stay_duration_steps": 4,
+        "hourly_weights": {
+          "8": 0.39285714285714285,
+          "13": 0.39285714285714285,
+          "19": 0.21428571428571427
+        }
+      }
+    },
+    "disabled_origin_policy": "suppress",
+    "disabled_destination_policy": "suppress",
+    "suppress_if_disabled_before_return": true,
+    "return_home_policy": "nearest_enabled_home",
+    "repatriate_on_reenable": true,
+    "distance_type": 3,
+    "distribution_location": 0.0,
+    "distribution_scale": 1000,
+    "use_buckets": true,
+    "distance_bucket_size": 500
+  },
+  "levy_walk_v2_logger": {},
+  "default_loggers_enabled": false
+}

@@ -1,0 +1,17 @@
+{
+  "extends": "popular_times_v2/LevyV2_13",
+  "simulation_parameters": {"total_cycles": 56, "random_seed": 0},
+  "popular_times_v2_plugin": {
+    "suppress_if_flooded_before_expiry": true
+  },
+  "water_level_data_plugin": {
+    "data_file": "water_level/flood_time_step.csv",
+    "target_node_types": ["marketplace", "restaurant", "pharmacy", "work", "school"]
+  },
+  "popular_times_v2_stage6": {
+    "environment": "13",
+    "levy_model": "v2",
+    "flood": "destinations",
+    "adaptation": "suppression"
+  }
+}

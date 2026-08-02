@@ -15,6 +15,7 @@ from loggers.enumeration_area_od_matrix_logger import EnumerationAreaODMatrixLog
 from loggers.od_matrix_logger import ODMatrixLogger, ODMovementRecordKey
 from loggers.envnode_state_logger import EnvNodeStateLogger
 from loggers.popular_times_v2_logger import PopularTimesV2Logger
+from loggers.levy_walk_v2_logger import LevyWalkV2Logger
 from loggers.population_count_logger import (PopulationCountLogger,
                                              PopulationCountRecordKey)
 from loggers.levy_walk_sample_logger import LevyWalkSampleLogger
@@ -31,6 +32,7 @@ from time_actions.popular_times_plugin import PopularTimesPlugin
 from time_actions.popular_times_v2_plugin import PopularTimesV2Plugin
 from time_actions.infection_plugin import InfectionPlugin
 from time_actions.levy_walk_plugin import LevyWalkPlugin
+from time_actions.levy_walk_v2_plugin import LevyWalkV2Plugin
 from time_actions.move_population_plugin import MovePopulationPlugin
 from time_actions.new_infection_plugin import NewInfectionPlugin
 from data.node_density_data_plugin import NodeDensityDataPlugin
@@ -197,6 +199,11 @@ levy_walk = None
 if 'levy_walk_plugin' in lodus_simulation.experiment_config:
     levy_walk = LevyWalkPlugin()
     lodus_simulation.load_plugin(levy_walk)
+
+levy_walk_v2 = None
+if 'levy_walk_v2_plugin' in lodus_simulation.experiment_config:
+    levy_walk_v2 = LevyWalkV2Plugin()
+    lodus_simulation.load_plugin(levy_walk_v2)
 
 vaccine = None
 if 'vaccine_plugin' in lodus_simulation.experiment_config:
@@ -374,6 +381,12 @@ if 'popular_times_v2_logger' in lodus_simulation.experiment_config:
         )
     popular_times_v2_logger = PopularTimesV2Logger()
 
+levy_walk_v2_logger = None
+if 'levy_walk_v2_logger' in lodus_simulation.experiment_config:
+    if levy_walk_v2 is None:
+        raise ValueError("levy_walk_v2_logger requires levy_walk_v2_plugin")
+    levy_walk_v2_logger = LevyWalkV2Logger()
+
 # Levy Sample Logger
 levy_sample_logger = None
 if levy_walk is not None:
@@ -399,16 +412,19 @@ print(output_str)
 Simulation
 '''
 
-lodus_simulation.load_plugin(pop_count_logger)
-lodus_simulation.load_plugin(od_logger)
-lodus_simulation.load_plugin(enum_area_logger)
-lodus_simulation.load_plugin(blob_count_logger)
-# # env_graph.LoadLoggerPlugin(traceable_logger)
-# # env_graph.LoadLoggerPlugin(vacc_logger)
-lodus_simulation.load_plugin(displacement_logger)
-lodus_simulation.load_plugin(envnode_state_logger)
+if lodus_simulation.experiment_config.get("default_loggers_enabled", True):
+    lodus_simulation.load_plugin(pop_count_logger)
+    lodus_simulation.load_plugin(od_logger)
+    lodus_simulation.load_plugin(enum_area_logger)
+    lodus_simulation.load_plugin(blob_count_logger)
+    # # env_graph.LoadLoggerPlugin(traceable_logger)
+    # # env_graph.LoadLoggerPlugin(vacc_logger)
+    lodus_simulation.load_plugin(displacement_logger)
+    lodus_simulation.load_plugin(envnode_state_logger)
 if popular_times_v2_logger is not None:
     lodus_simulation.load_plugin(popular_times_v2_logger)
+if levy_walk_v2_logger is not None:
+    lodus_simulation.load_plugin(levy_walk_v2_logger)
 if dialysis_logger is not None:
     lodus_simulation.load_plugin(dialysis_logger)
 if inpatient_care_logger is not None:

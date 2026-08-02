@@ -1,0 +1,12 @@
+{
+  "extends": "popular_times_v2/stage6/13_levy_v2_flood_all",
+  "popular_times_v2_plugin": {
+    "reroute_disabled_destinations": true
+  },
+  "popular_times_v2_stage6": {
+    "environment": "13",
+    "levy_model": "v2",
+    "flood": "all",
+    "adaptation": "popular_times_reroute"
+  }
+}
