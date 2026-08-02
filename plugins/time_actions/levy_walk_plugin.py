@@ -83,6 +83,9 @@ class LevyWalkPlugin(ActionPlugin):
         self.distribution_location:float = self.config.get("distribution_location", 0.0)
         self.acting_enabled_only:bool = self.config.get("acting_enabled_only", False)
         self.target_enabled_only:bool = self.config.get("target_enabled_only", False)
+        self.max_target_sampling_attempts:int = self.config.get(
+            "max_target_sampling_attempts", 10_000
+        )
 
         if self.distance_type == DistanceType.LONG_LAT:
             self.bucket_size:float = self.config.get("distance_bucket_size", 0.005)
@@ -116,6 +119,11 @@ class LevyWalkPlugin(ActionPlugin):
     def _refresh_enabled_node_ids(self, simulation_step: int):
         if self._enabled_mask_step == simulation_step:
             return
+        required_size = max(
+            (node.id for node in self.env_graph.node_list), default=-1
+        ) + 1
+        if required_size != len(self._enabled_node_ids):
+            self._enabled_node_ids = np.zeros(required_size, dtype=bool)
         self._enabled_node_ids[:] = False
         for node in self.env_graph.node_list:
             self._enabled_node_ids[node.id] = node.is_enabled()
@@ -217,10 +225,12 @@ class LevyWalkPlugin(ActionPlugin):
             if _mov_probability < _random_number:
                 continue
 
-            target_node_u_name = self.select_valid_target(location=_dist_location, 
+            target_node_u_name = self.select_valid_target(location=_dist_location,
                                                           scale=_dist_scale,
                                                           use_buckets=_use_buckets,
                                                           distances=distances)
+            if target_node_u_name is None:
+                continue
             
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.env_graph.get_region_by_name(target_region)
@@ -337,10 +347,12 @@ class LevyWalkPlugin(ActionPlugin):
             if _mov_probability < _random_number:
                 continue
 
-            target_node_u_name = self.select_valid_target(location=_dist_location, 
+            target_node_u_name = self.select_valid_target(location=_dist_location,
                                                           scale=_dist_scale,
                                                           use_buckets=_use_buckets,
                                                           distances=distances)
+            if target_node_u_name is None:
+                continue
             
             target_region, target_node = target_node_u_name.split('//')
             target_region = self.env_graph.get_region_by_name(target_region)
@@ -368,16 +380,22 @@ class LevyWalkPlugin(ActionPlugin):
         #     print(values)
         return sub_list
     
-    def select_valid_target(self, location:float, scale:float, use_buckets:bool, distances) -> str:
+    def select_valid_target(
+        self, location: float, scale: float, use_buckets: bool, distances
+    ) -> Optional[str]:
         target_unique_name = ''
         count = 0
         sampled_dist = 0.0
         while target_unique_name == '':
             sampled_dist = self.levy_sample(location=location, scale=scale)
             count += 1
-            if count > 100:
-                print("Levy Walk Plugin: could not find valid target in 100 tries")
-                exit()
+            if count >= self.max_target_sampling_attempts:
+                print(
+                    "Levy Walk Plugin: could not find a valid target in "
+                    f"{self.max_target_sampling_attempts:,} tries; skipping "
+                    "this movement packet"
+                )
+                return None
             if use_buckets:
                 selected = self.bucket_search(distances, sampled_dist)
                 if selected == None:

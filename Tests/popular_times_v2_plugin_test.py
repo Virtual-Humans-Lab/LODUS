@@ -409,6 +409,31 @@ class LevyEnabledStateTest(unittest.TestCase):
         )
         self.assertEqual(actions, [])
 
+    def test_enabled_node_cache_resizes_when_a_plugin_adds_nodes(self):
+        plugin, _, _ = self._plugin()
+        shelter = plugin.env_graph.add_envnode(
+            "Region", EnvNode("shelter", "shelter_0")
+        )
+
+        plugin.update_time_step(cycle_step=0, simulation_step=0)
+
+        self.assertGreater(len(plugin._enabled_node_ids), shelter.id)
+        self.assertTrue(plugin._enabled_node_ids[shelter.id])
+
+    def test_invalid_levy_samples_skip_one_packet_instead_of_exiting(self):
+        plugin, _, work = self._plugin()
+        plugin.max_target_sampling_attempts = 2
+        plugin.levy_sample = lambda location, scale: 1_000_000_000.0
+
+        target = plugin.select_valid_target(
+            location=0.0,
+            scale=500.0,
+            use_buckets=True,
+            distances={0: [work.id]},
+        )
+
+        self.assertIsNone(target)
+
     def test_plural_target_node_types_key_is_supported(self):
         self.assertEqual(
             LevyWalkPlugin._get_target_node_types({"target_node_types": ["work"]}),
