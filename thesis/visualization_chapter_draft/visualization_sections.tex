@@ -1,0 +1,168 @@
+% Standalone thesis fragment: visualization chapter draft.
+% Required packages in the parent document:
+%   graphicx, subfig, tabularx, booktabs
+% Figure paths are resolved through \vizfigpath. Before \input, redefine it
+% if this directory is not the compilation working directory, for example:
+%   \newcommand{\vizfigpath}{../../visualization_chapter_draft/figures}
+\providecommand{\vizfigpath}{figures}
+
+\section{Visualization and Exploratory Analysis}
+\label{sec:visualization}
+
+Simulation output is only useful when its spatial, temporal, and population dimensions can be inspected without obscuring the assumptions that generated it. LodusPop produces several complementary forms of output: node occupancy and population state over time, movement events between origins and destinations, effective node availability and its direct or dependency-derived causes, and domain-specific records such as admissions, queues, unmet demand, and rerouted visits. These records can support visual analysis at different levels of aggregation, but a visualization does not validate the simulation that produced them. It provides an interface for examining results, detecting anomalies, comparing scenarios, and communicating patterns that must still be interpreted with reference to the model, data provenance, and validation evidence.
+
+This chapter examines two visualization approaches developed in connection with LODUS and LodusPop. The first uses immersive virtual reality to place temporal occupancy and displacement data in a three-dimensional urban environment~\citep{teixeira2024visualization}. The second is a browser-based tool for exploring aggregate origin--destination flows at multiple geographic levels~\citep{silva2026geospatial}. They operate on related movement data but answer different analytical questions. The immersive application emphasizes temporal inspection and interaction with places of interest; the geographic-flow tool emphasizes relationships between territorial units, multiscale aggregation, demographic filtering, and coordinated statistical views.
+
+\subsection{Historical Context: Legacy Multi-Resolution Views}
+\label{visualization:legacy}
+
+The original LodusPop discussion used Unity renderings to illustrate how the same simulated environment could be viewed at different spatial levels. Figure~\ref{fig:legacy_multiresolution} shows a detailed urban representation with one area highlighted and a broader view in which abstract population blobs are distributed across the city. These images remain useful as historical context: they communicate the intended relationship between geographic detail and abstract population state. They should not, however, be presented as an evaluation of either visualization system discussed below. They predate the current visualization studies, do not expose an analytical task or evaluation protocol, and are not screenshots of the immersive prototype described by Teixeira et al.~\citep{teixeira2024visualization} or of the geographic-flow tool~\citep{silva2026geospatial}.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[Detailed urban representation with a region of interest highlighted.]{
+        \includegraphics[width=0.48\linewidth]{\vizfigpath/legacy_lodus_region.png}
+    }
+    \hfill
+    \subfloat[Abstract population blobs shown across a broader urban environment.]{
+        \includegraphics[width=0.48\linewidth]{\vizfigpath/legacy_lodus_blobs.png}
+    }
+    \caption{Legacy Unity renderings used in the original LodusPop multi-resolution discussion. The images illustrate alternative spatial views of a simulated environment; they are contextual illustrations rather than evidence of visualization effectiveness.}
+    \label{fig:legacy_multiresolution}
+\end{figure}
+
+For this reason, the legacy material is retained as a single transitional figure rather than as a separate experimental result. The substantive evidence and limitations of the two visualization artifacts are reported in the following sections.
+
+\subsection{Immersive Virtual-Reality Visualization}
+\label{visualization:vr}
+
+\subsubsection{Purpose and Data Pipeline}
+
+Teixeira et al.~\citep{teixeira2024visualization} developed an immersive prototype for inspecting crowd-contamination simulations in an urban environment. The application was implemented in Unity3D for the Meta Quest~2. Its objective was to examine whether simulation records describing occupancy, capacity, and population displacement could be placed in an interactive three-dimensional map rather than being restricted to a desktop dashboard.
+
+The prototype separates the geographic environment from the simulation events. It receives three inputs: an OpenStreetMap file describing roads and buildings; a node file identifying the regions or establishments to be monitored, including their coordinates, type, and configured capacity; and a formatted simulation-event file describing population states and displacement events over discrete frames. This separation allows a subset of locations to be selected for visualization without regenerating the underlying simulation. Routes between origins and destinations are requested through the Open Source Routing Machine and retained for subsequent events. Figure~\ref{fig:vr_pipeline} summarizes this pipeline and the resulting immersive interface.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.98\linewidth]{\vizfigpath/vr_application_overview.jpg}
+    % TODO: confirm the publisher-required IEEE copyright credit line before final submission.
+    \caption{Overview of the immersive application: map, monitored-node, and formatted simulation data are combined in a Unity application in which the user controls time, interacts with places of interest, and inspects population summaries. Reproduced from Teixeira et al.~\citep{teixeira2024visualization}.}
+    \label{fig:vr_pipeline}
+\end{figure}
+
+This input design is compatible with the general structure of LodusPop output, but it is not identical to the current logger interfaces. A recent simulation would require an export step that maps point-of-interest identifiers, coordinates, occupancy, population states, and movement events to the prototype's files. Effective availability, disable causes, queues, and rerouting events would require additional visual encodings because they were not part of the published prototype.
+
+\subsubsection{Visual Encodings and Interaction}
+
+The application reconstructs roads, buildings, and green areas from OpenStreetMap data and instantiates a distinct three-dimensional model for each monitored establishment. A circular indicator communicates the relation between current occupancy and configured capacity; a warning is shown when the capacity is reached, and the building model increases in size as occupancy grows. These encodings make changes at monitored locations visible in their geographic context, although model size and the capacity warning are interface conventions rather than physical properties of the simulated facility.
+
+Users navigate the discrete simulation frames through a clock-shaped controller that supports forward and backward movement. A two-dimensional control panel starts the visualization, changes animation speed, and can hide establishments that are not part of the monitored set. A line chart displays occupancy over time for selected buildings, while a monitor reports their current population. Locations can be selected individually with the controller or collectively with a three-dimensional selection volume. Figure~\ref{fig:vr_scene} identifies the principal components of the immersive scene.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.72\linewidth]{\vizfigpath/vr_scene_elements.jpg}
+    % TODO: confirm the publisher-required IEEE copyright credit line before final submission.
+    \caption{Principal elements of the immersive scene: the three-dimensional map and monitored establishments, simulation controls, temporal chart, and spatial selection tool. Reproduced from Teixeira et al.~\citep{teixeira2024visualization}.}
+    \label{fig:vr_scene}
+\end{figure}
+
+Displacement events are animated as groups of cylinders moving between the source and destination. Green cylinders represent healthy population and red cylinders represent infected population. The paper explicitly treats this movement as illustrative: cylinder speed is randomized, and the animation communicates that a transfer occurred rather than reconstructing the trajectories of simulated individuals. This distinction is important for LodusPop, whose movement records generally connect points of interest but do not necessarily describe a path through the street network.
+
+\subsubsection{Prototype Demonstration and Limits of the Evidence}
+
+The published demonstration used 13 regions of interest in the Independ\^encia neighborhood of Porto Alegre, seven simulation frames, and randomly generated displacement and infection events. It showed that the prototype could load the files, construct the scene, animate transfers, select establishments, and update occupancy summaries. The demonstration therefore provides evidence of technical feasibility and data-format compatibility for that configuration.
+
+It does not validate a hospital-demand process, infection model, capacity policy, or emergency intervention. The population, displacement, and contamination events were synthetic, and the study did not compare the displayed values with observed clinical or mobility data. No controlled user study measured whether immersive interaction improved analytical accuracy, task completion time, insight generation, or usability relative to a desktop alternative. The authors identify such evaluation as future work. Accordingly, this thesis treats the prototype as a visualization contribution and a possible inspection interface, not as validation of LodusPop or as evidence that immersive presentation improves decisions.
+
+\subsection{Interactive Geographic Flow Visualization}
+\label{visualization:od}
+
+\subsubsection{Data Model and Browser Architecture}
+
+The geographic-flow tool developed by Silva~\citep{silva2026geospatial} addresses a different unit of analysis: aggregate flows between territorial units. Its minimum input is an origin--destination matrix containing an origin code, destination code, and movement count. Optional names and demographic tables improve labeling and filtering. Geographic boundaries, representative points or centroids, and lookup tables connect base units to more aggregated territorial levels. The preprocessing pipeline standardizes the inputs, converts boundaries to WGS~84, produces GeoJSON and centroid files, and stores flow tables in the columnar Parquet format.
+
+The application is implemented with React and TypeScript, uses MapLibre for interactive geographic layers, and executes analytical queries in the browser through DuckDB-WASM. Dataset-specific JSON profiles define file locations, geographic levels, labels, demographic dimensions, filters, and available charts. IndexedDB provides local persistence for auxiliary data, profiles, and imported simulations. Separating the data artifacts, configuration, and interface logic allows the same application to be reused without encoding one city's names or geographic hierarchy directly in its components.
+
+The browser architecture reduces dependence on a dedicated database server, but it does not remove resource limits. Query and rendering cost depend on the number of flow records, aggregations, and visible lines, while WebAssembly and browser memory constrain the size of datasets that can be processed locally. Large or dense matrices may require partitioning, pre-aggregation, column reduction, or server-side processing.
+
+\subsubsection{Interactive and Multiscale Exploration}
+
+The interface is centered on a map in which flows are drawn as lines between representative points of the origin and destination areas. Color and thickness encode flow magnitude. The user selects a territorial unit and then explores incoming or outgoing connections rather than displaying the entire matrix at once. Controls limit the maximum number of visible lines and suppress connections below a chosen count, reducing visual clutter without altering the underlying records.
+
+The interface combines six functional areas: selection of the active dataset; definition of the geographic level, selected area, direction, and demographic filters; a summary of the current selection; density controls; the geographic map; and a coordinated analytical panel. The panel reports quantities such as leading connections, demographic composition, origin--destination heat maps, and directional balance. Selections in charts can filter the other views, supporting coordinated exploration of spatial and demographic patterns. Figure~\ref{fig:od_interface} presents the main interface.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.98\linewidth]{\vizfigpath/od_interface_overview.png}
+    \caption{Interactive geographic-flow interface, including dataset and area selection, summary and density controls, the flow map, and coordinated analytical views. Reproduced from the student-led geographic-flow study~\citep{silva2026geospatial}.}
+    \label{fig:od_interface}
+\end{figure}
+
+Multiscale exploration is implemented by mapping base units to an aggregated geography. In the principal dataset, the base units are Middle Layer Super Output Areas (MSOAs), which can be aggregated to Lower Tier Local Authorities (LTLAs). In the Porto Alegre configuration, census sectors are the base units and neighborhoods are the aggregate units. Figure~\ref{fig:od_multiscale} illustrates the trade-off. The detailed MSOA view exposes local structure but produces a denser display; the LTLA view emphasizes broader regional connections with less visual clutter. Aggregation changes the analytical unit and can hide within-area variation, so the two views should be interpreted as complementary rather than interchangeable.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[Incoming flows at the more detailed MSOA level.]{
+        \includegraphics[width=0.48\linewidth]{\vizfigpath/od_flows_msoa.png}
+    }
+    \hfill
+    \subfloat[The corresponding type of exploration at the aggregated LTLA level.]{
+        \includegraphics[width=0.48\linewidth]{\vizfigpath/od_flows_ltla.png}
+    }
+    \caption{Origin--destination flows at two geographic levels. The detailed view preserves more local relations, while aggregation supports recognition of regional patterns. Reproduced from Silva~\citep{silva2026geospatial}.}
+    \label{fig:od_multiscale}
+\end{figure}
+
+The flow lines connect representative points and do not show the roads or routes actually traveled. They should therefore be read as spatial relationships between areas. An apparent line across the map is not evidence that a traveler followed that geometry, and overlapping lines may conceal variation when an area has many connections. The intensity map and analytical charts offer complementary summaries when pairwise lines become too dense.
+
+\subsubsection{Evaluation, Reuse, and Limitations}
+
+The principal evaluation uses official 2021 census commuting data for England and Wales, including social-class and age dimensions. A simulated Porto Alegre matrix uses census sectors and neighborhoods with age and occupation categories. The Porto Alegre values are synthetic and serve to test adaptation to another geography and configuration; they are not evidence about observed mobility in the city.
+
+The performance evaluation is exploratory. Twenty LTLA selections produced an overall median latency of 373~ms, a minimum observed value of 150~ms, and a final recorded value of 543~ms. Nine queries classified as DuckDB-WASM without a warmed cache had a median of 180~ms, whereas eleven queries classified as using a warmed cache had a median of 586~ms. Because these groups did not repeat the same areas, filters, directions, and connection counts, the difference cannot be interpreted as evidence that caching increases latency. A controlled evaluation would repeat equivalent queries before and after cache warming and separately measure data access, aggregation, geographic conversion, and rendering.
+
+The tool also supports the interactive application of a replacement origin--destination matrix to an already configured geography. The user maps origin, destination, and count columns, may attach demographic dimensions, and can apply, save, or restore the matrix. Figure~\ref{fig:od_custom_matrix} shows this workflow. It is directly relevant to simulation reuse because a new LodusPop result can be inspected without redefining boundaries and centroids when the geographic identifiers already match a configured dataset.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{\vizfigpath/od_custom_matrix.png}
+    \caption{Interface for applying a custom origin--destination matrix: base-flow upload and column mapping, optional demographic dimensions, and actions for applying, saving, or restoring the matrix. Reproduced from Silva~\citep{silva2026geospatial}.}
+    \label{fig:od_custom_matrix}
+\end{figure}
+
+The study demonstrates a functional pipeline, multiscale interaction, configurable reuse, and initial browser performance. It does not include a controlled user study, comparison with alternative flow visualizations, or a completed analytical evaluation using the recent dialysis, inpatient, Popular Times, or commuting batches. Its strongest supported claim is therefore that the application can ingest and interactively explore compatible aggregate flow data across more than one geographic configuration.
+
+\subsection{Relationship to the Recent LodusPop Experiments}
+\label{visualization:recent}
+
+The recent experiments produce several relationships that can be transformed into origin--destination matrices: home--clinic admissions in dialysis, origin--hospital admissions in inpatient care, home--POI activity visits in Popular Times, and home--work or home--school movements in Levy Walk V2. Scenario, seed, time, population category, destination state, and movement outcome can be retained as dimensions or used to generate separate matrices. The geographic-flow tool is therefore well suited to questions such as which origins lose access after a disruption, which facilities receive displaced demand, and whether rerouting concentrates additional load in a small number of destinations.
+
+That integration has not yet been evaluated as part of the reported experiment batches. Producing a compatible matrix is technically supported by the movement and domain loggers, and the custom-matrix interface supports reuse of an existing geography, but a complete study would still need an explicit export specification, reproducible transformation scripts, analytical tasks, and verification that filtered totals agree with the source logs. Temporal changes may require matrices per interval or a time dimension not emphasized in the current OD evaluation.
+
+The immersive prototype could represent the same transfers as animated events and could associate occupancy or capacity values with hospitals and clinics. Current LodusPop outputs would nevertheless require an adapter, and new visual encodings would be necessary for effective availability, independent disable causes, dependency failure, queues, unmet demand, and rerouting. Until such an integration is implemented and evaluated, these uses remain prospective.
+
+\subsection{Interpretive Role and Author Contributions}
+\label{visualization:contribution}
+
+The two artifacts complement rather than replace the numerical analyses. Immersive views preserve a sense of urban context and temporal change at selected establishments. Geographic-flow views support comparison of origins, destinations, territorial scales, demographic categories, and redistributed demand. Both can expose anomalies or suggest follow-up questions, but neither determines whether the simulated behavior is realistic. A visually coherent flow can still originate from a synthetic demand assumption, and an apparently plausible animation does not provide calibration evidence.
+
+The immersive prototype is collaborative published work by Teixeira, the thesis author, and their coauthors~\citep{teixeira2024visualization}. The geographic-flow application and manuscript are student-led work developed by Gustavo Willian Martins da Silva under the thesis author's supervision~\citep{silva2026geospatial}. The contribution of this thesis chapter is to relate these artifacts to the LodusPop output model, distinguish demonstrated functionality from prospective integration, and define the evidential limits under which their visualizations should be interpreted.
+
+Future evaluation should use representative tasks and intended users. Measures should include accuracy, completion time, insight quality, confidence, and usability. Comparisons should isolate immersion from interaction design and compare multiscale flow views with appropriate tabular or geographic baselines. Visual evaluation should remain separate from simulation validation.
+
+\begin{table}[ht]
+    \centering
+    \footnotesize
+    \caption{Complementary roles of the visualization artifacts.}
+    \label{tbl:visualization_comparison}
+    \begin{tabularx}{\linewidth}{@{}lXX@{}}
+        \toprule
+        \textbf{Dimension} & \textbf{Immersive VR prototype} & \textbf{Geographic-flow tool} \\ \midrule
+        Primary representation & Three-dimensional urban scene, monitored establishments, temporal occupancy, and animated transfers & Aggregate origin--destination relations, territorial boundaries, intensity layers, and coordinated charts \\ \midrule
+        Principal interaction & Timeline control, pointing, individual or volume-based location selection, and occupancy inspection & Area and dataset selection, incoming/outgoing direction, geographic aggregation, demographic filters, and density controls \\ \midrule
+        Published demonstration & 13 monitored locations, seven frames, and synthetic displacement and infection events & England and Wales census commuting as the principal dataset; simulated Porto Alegre data as a portability case \\ \midrule
+        Strongest supported claim & Feasibility of loading and interactively presenting the prototype's simulation format in VR & Feasibility of configurable, browser-based, multiscale exploration of compatible aggregate flows \\ \midrule
+        Main limitation & No controlled user study or behavioral/clinical validation; movement animation is illustrative & Centroid lines are not routes; performance study is exploratory; no controlled user study \\ \midrule
+        Status for recent experiments & Prospective; requires an export adapter and additional state encodings & Compatible export is supported, but the recent batches have not been formally evaluated in the tool \\ \bottomrule
+    \end{tabularx}
+\end{table}
