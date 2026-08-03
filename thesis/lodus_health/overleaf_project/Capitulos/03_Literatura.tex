@@ -1,0 +1,128 @@
+\chapter{Trabalhos Relacionados} \label{cpt:lit}
+%SO: Vaz: nesta seção, ajuste as frases para que não fique "No trabalho de [1]..." isso é muito deselegante... coloque o nome do autor. (GV: corrigido)
+Neste capítulo, discutimos a metodologia empregada no processo de seleção dos trabalhos da literatura, abordando as fontes de busca, os parâmetros utilizados para inclusão e exclusão, os critérios de seleção de materiais, os trabalhos selecionados e uma breve discussão sobre os resultados obtidos.
+
+\section{\label{sec:fontes_busca}Fontes de Busca}
+As fontes utilizadas para encontrar trabalhos relacionados a esta pesquisa foram classificadas em, nível 1 (alta credibilidade) e nível 2 (moderada credibilidade). Fontes classificadas como nível 3 (baixa credibilidade) não foram incluídas na busca. Abaixo está a lista das fontes selecionadas, todas classificadas como níveis 1 e 2.
+
+\begin{itemize}
+    \item Biblioteca Digital do IEEE (http://ieeexplore.ieee.org/Xplore/) - Nível 1
+    \item Biblioteca Digital da ACM (http://portal.acm.org/) - Nível 1
+    \item arXiv: (http://https://arxiv.org/) - Nível 2
+\end{itemize}
+
+A seguinte \textit{string} de busca foi utilizada para encontrar trabalhos relacionados à área na literatura. Essa \textit{string} de busca foi elaborada considerando termos-chave relevantes no contexto da pesquisa.
+
+\begin{center}
+((``\textit{simulating environment}'' OR ``\textit{simulated environment}'' OR ``\textit{crowd simulation}'') AND (\textit{population} OR \textit{hospital} OR ``\textit{hospital bed}'' OR ``\textit{admission}'' OR ``\textit{public}'')) OR (\textit{hospital} AND (\textit{bed} OR \textit{admission}))
+\end{center}
+
+\section{\label{sec:criterios}Critérios de Inclusão e Exclusão}
+Na Tabela~\ref{table:1} a seguir, são apresentados os critérios de inclusão e os critérios de exclusão utilizados com o objetivo de assegurar a relevância dos estudos na seleção de trabalhos relacionados e filtrar os resultados encontrados nas bases de dados apresentados na Seção~\ref{sec:fontes_busca}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |m{15em}|m{15em}| } 
+ \hline
+ Critérios de inclusão & Critérios de exclusão \\ 
+ \hline
+ Soluções para ocupação de leitos hospitalares. & Publicado antes do ano de 2020.\\[0.5cm]
+ Aplicações de simulação de multidão em ambientes públicos.  & Não apresentem soluções tecnológicas.\\[0.5cm]
+& Materiais com acesso pago.\\[0.5cm]
+ & Escrita em idiomas diferentes de inglês ou português.\\
+ \hline
+\end{tabular}
+\caption{Critérios de inclusão e exclusão.}
+\label{table:1}
+\end{table}
+
+\section{\label{sec:processo_selecao}Processo de Seleção de Materiais}
+Para a seleção dos materiais, realizou-se uma busca nas fontes mencionadas na Seção~\ref{sec:fontes_busca}, utilizando a \textit{string} de busca também fornecida na mesma seção. A pesquisa resultou em 3.205 trabalhos, distribuídos em 1.261 do IEEE, 2.401 da ACM e 145 do arXiv. Após a aplicação dos critérios de inclusão e exclusão, restaram 69 trabalhos, sendo 17 do IEEE, 15 da ACM e 27 do arXiv. Posteriormente, após a leitura dos resumos e avaliação, foram selecionados 8 trabalhos, sendo 4 da IEEE, 2 da ACM e 2 do arXiv. Na Tabela~\ref{table:2} abaixo estão listados os resultados da seleção de materiais.
+
+\begin{itemize}
+    \item F1: Número de trabalhos encontradas na busca; 
+    \item F2: Número de trabalhos selecionados com base nos critérios de inclusão e exclusão;
+    \item F3: Número de trabalhos selecionados.
+\end{itemize}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ Fonte & F1 & F2 & F3 \\ 
+ \hline
+ IEEE & 1.261 & 17 & 4\\ 
+ ACM & 2.401 & 15 & 2\\ 
+ arXiv & 145 & 37 & 2\\ 
+ \hline
+\end{tabular}
+\caption{Número de trabalhos selecionados por fonte de busca.}
+\label{table:2}
+\end{table}
+
+\section{\label{sec:trabalhos_selecao}Trabalhos Selecionados}
+No trabalho de El-Bouri, R. et al.~\cite{9103941}, os autores apresentam a implementação de um modelo de aprendizado profundo com o objetivo de prever a área de internação de pacientes na emergência de um hospital após a triagem no departamento de emergência (DE). Essa previsão visa facilitar a preparação dos espaços de leitos hospitalares para atender e internar os pacientes de forma oportuna, além de alocar recursos para os departamentos relevantes, especialmente durante períodos de aumento de demanda causados por picos sazonais de infecções. O problema foi abordado pelos autores como uma questão de classificação multiclasse em sete tipos de enfermarias. Foi desenvolvida uma estratégia de treinamento de aprendizado profundo que combina a aprendizagem por meio de currículo e o \textit{Multi-armed bandit} para explorar esse currículo de treinamento pós-inicial. Como resultado, foi previsto com sucesso o local inicial de internação hospitalar, com a área sob a curva ROC (AUC) variando entre 0,60 e 0,78 para as enfermarias individuais e uma precisão máxima geral de 52\%, quando a chance aleatória corresponde a 14\% para esse ambiente de sete classes. A rede proposta foi capaz de interpretar quais recursos impulsionaram as previsões, utilizando um termo de "saliência de rede" adicionado à função de perda da rede. Os autores demonstraram que é possível prever o local de internação hospitalar para pacientes de emergência utilizando informações da triagem no DE, mostrando também que certos testes reveladores indicam qual espaço do hospital um paciente utilizará. Eles esperam que este preditor seja valioso para as instituições de saúde, permitindo o planejamento de recursos e leitos antes da necessidade. Isso, por sua vez, deverá agilizar a prestação de cuidados ao paciente e permitir o fluxo de pacientes para fora do DE, melhorando assim o fluxo de pacientes e a qualidade dos cuidados para os pacientes restantes dentro do DE.
+
+% An Intelligent Scheduling of Non-Critical Patients Admission for Emergency Department
+E. Bruballa et al.~\cite{8945359} discutem que o aumento da taxa de envelhecimento da população, juntamente com o aumento da expectativa de vida e da prevalência de doenças crônicas, contribuem para a crescente demanda por cuidados médicos. Eles destacam o problema da sobrecarga nos departamentos de emergência (DE), atribuindo-o, em parte, à internação de pacientes não urgentes, que representam uma parcela significativa dos casos atendidos nos DEs. Como solução proposta, os autores apresentam o uso de um Modelo Baseado em Agentes (ABM) para agendar o acesso de pacientes não críticos aos DEs. Supõe-se que realocar esses pacientes não críticos dentro do padrão de entrada esperado, inicialmente fornecido pelos registros históricos, poderá reduzir o tempo de espera de todos os pacientes, resultando em uma melhoria na qualidade do serviço e evitando longos tempos de espera. Esta pesquisa oferece \textit{insights} relevantes para os gestores do Serviço de Urgência, auxiliando-os a tomar decisões para melhorar a qualidade do serviço, prevendo a crescente demanda que se espera em um futuro próximo. Concluiu-se que a implementação do modelo no simulador de DE e os resultados da análise dos dados da simulação validam a eficácia do modelo, melhorando globalmente o tempo de espera dos pacientes no sistema e, consequentemente, a qualidade dos cuidados de saúde. É importante mencionar que a eficiência da implementação do modelo em um serviço real de DE dependerá da capacidade do sistema de agendamento proposto em gerenciar a entrada real de pacientes, o que está sujeito às decisões dos pacientes ou usuários dos serviços de saúde.
+
+% Bed Allocation Optimization Based on Survival Analysis, Treatment Trajectory and Costs Estimations
+O trabalho de Karbouband, K. et al.~\cite{10078258} discute a importância das unidades de terapia intensiva no fluxo de pacientes, destacando desafios como alta demanda, capacidade insuficiente e distribuição injusta de recursos. Os autores propõem uma abordagem inovadora para resolver problemas de alocação de leitos de pacientes, restritos por metas na estimativa da função de sobrevivência, na estimativa de custos e na estimativa da trajetória de tratamento possível para pacientes com doenças cardiovasculares. Para estimativas da função de sobrevivência, foi utilizado o estimador "nave" e Kaplan-Meier, e para estimativas do efeito do tratamento, utilizou-se regressão logística e T-learning. As estimativas dos três componentes são usadas como pesos em um algoritmo genético. Essa técnica permite a consideração de várias restrições, o que, ao contrário de outras técnicas, permite a seleção de soluções dominantes como soluções que satisfazem restrições dominantes. Além disso, foi demonstrado a robustez da abordagem utilizando os algoritmos com múltiplas classes de pacientes, testando múltiplos conjuntos de parâmetros e comparando os resultados com vários estudos de pesquisa semelhantes, mostrando o valor agregado de trabalhar nesse eixo de gestão em hospitais usando a nova abordagem para alocação de leitos.
+
+% Solving the Emergency Care Patient Pathway by a New Integrated Simulation-Optimisation Approach
+Em Allihaibi, W. G. et al.~\cite{9481128}, os autores abordam um dos objetivos mais críticos do sistema de saúde, que é maximizar o fluxo de pacientes no atendimento de emergência. A análise do fluxo de emergência do paciente indica que o cronograma de movimentação de um paciente de uma atividade para outra através do departamento de emergência (DE) é fundamental para o tratamento dos pacientes. Quaisquer atividades atrasadas no fluxo de pacientes reduzem o nível de serviço de saúde. Para enfrentar esses desafios, os autores apresentam o desenvolvimento de uma abordagem estocástica de simulação-otimização de DE, considerando variáveis estocásticas, como tempos entre chegadas de pacientes e tempos de tratamento, usando distribuições estatísticas. Este tipo de distribuição depende de dois elementos principais: turnos diurnos e categorias de pacientes. Um algoritmo evolutivo híbrido é integrado à simulação para encontrar uma solução satisfatória para este problema de otimização estocástica em tempo real. Experimentos computacionais mostram que a abordagem proposta pode atender mais pacientes em janelas de tempo específicas ou fornecer a mesma qualidade de serviço com o uso de menos recursos médicos.
+
+% Fair Healthcare Rationing to Maximize Dynamic Utilities
+Ganesh, A. et al.~\cite{ganesh2023fair} descrevem um problema relacionado à alocação de recursos de saúde em uma sociedade moderna, especialmente sob condições de recursos logísticos e infraestruturais limitados. Eles propõem um modelo que aborda a alocação de recursos, como vacinas para pessoas ou leitos hospitalares para pacientes, de forma online, considerando a chegada de recursos diariamente, diferentes categorias de agentes, possíveis indisponibilidades de agentes em determinados dias e a utilidade associada a cada alocação, variando ao longo do tempo. O modelo proposto prioriza as diferentes categorias com base na utilidade dos agentes e oferece algoritmos online e offline para calcular alocações que respeitem a elegibilidade dos agentes em diferentes categorias, incentivando-os a não esconder sua elegibilidade. O algoritmo offline oferece uma alocação ótima, enquanto o algoritmo online fornece uma aproximação da alocação ótima em termos de utilidade total. Os algoritmos são eficientes e mantêm a equidade entre as diferentes categorias de agentes. O modelo tem aplicações em áreas como assentamento de refugiados e alocação de vistos. A performance dos algoritmos é avaliada em conjuntos de dados reais e sintéticos, demonstrando que o algoritmo online é rápido e supera a cotação teórica em termos de utilidade total, e confirmando que o modelo baseado em utilidade captura corretamente as prioridades das categorias.
+
+% LODUS: A Multi-Level Framework for Simulating Environment and Population -- A Contagion Experiment on a Pandemic World
+Em Silva, G. F. et al.~\cite{9239083}, os autores discorrem sobre a significativa carga de trabalho imposta repentinamente aos gestores urbanos devido à pandemia causada pelo Covid-19, o que os levou a enfrentar o desafio de desenvolver estratégias para conter a propagação da pandemia. Os autores destacam que os ambientes urbanos devem ser dinâmicos e que os gestores precisam tomar decisões rápidas ao lidar com situações de crise. No estudo, é apresentado o LODUS, um \textit{framework} capaz de simular ambientes urbanos por meio de uma abordagem multinível, combinando informações de macro e micro simulação para fornecer \textit{insights} precisos sobre a dinâmica populacional. Além disso, o \textit{framework} LODUS representa uma ferramenta poderosa para conduzir estudos de viabilidade urbana, uma vez que os resultados da simulação têm a capacidade de identificar e prever pontos críticos antes da construção de um ambiente urbano.
+
+% Interactive Simulation of Disease Contagion in Dynamic Crowds
+Flor, A. et al.~\cite{10.1145/3487983.3488298}, propõem uma formulação de contágio-imunidade de agente para agente que pode simular a propagação detalhada da COVID-19 dentro de multidões em movimento. Especificamente, os autores desenvolveram um modelo de contágio de doenças baseado em difusão para sistemas discretos que considera o efeito de intervenções de saúde, como distanciamento social, imunidade e vacinação. Integrando sua formulação de contágio-imunidade com as equações governantes de movimento para dinâmica de multidões, eles investigaram a distribuição da doença em multidões com diferentes números de pessoas. Para a mesma simulação de multidão, seu modelo pode simular interativamente a propagação do vírus para diferentes distribuições iniciais de pessoas infectadas. Seus resultados numéricos para o número de pessoas infectadas em multidões densas e não protegidas concordam com o modelo SIS, enquanto seu modelo fornece informações mais ricas sobre a propagação da doença e mostra que a vacinação é a melhor intervenção de saúde para prevenir a infecção.
+
+% Hospital Selection in Emergency Medical Services: A Discrete Event Simulation Approach to Test Different Policies
+O trabalho de Tedesco, D. et al.~\cite{10.1145/3587889.3587893} tem como objetivo desenvolver um modelo de simulação para testar e comparar diferentes políticas de seleção de hospitais com o propósito de melhorar a gestão dos sistemas de Serviço Médico de Emergência (EMS, na sigla em inglês). A análise da literatura revelou que a atribuição de pacientes aos departamentos de emergência (EDs) pode ser baseada em diferentes políticas, mesmo que a predominante seja a proximidade (ou seja, minimização da distância entre o local do pedido de emergência e o ED). De fato, estudos atuais são principalmente baseados em ambulâncias, com foco nas fases do EMS relacionadas ao serviço de ambulância, negligenciando assim questões relacionadas ao ED, que são vistas como parte de um processo separado. O objetivo desta pesquisa é mostrar os benefícios de tomar a decisão de seleção de hospital também considerando informações relacionadas à variedade de casos no ED, os tempos esperados de atendimento e a capacidade operacional do ED. Para isso, foi desenvolvido e implementado um modelo de Simulação de Eventos Discretos no AnyLogic para testar diferentes políticas de atribuição. O melhor critério para atribuir pacientes aos EDs foi a minimização do Tempo Até o Provedor (TTP), considerado como o tempo desde o início da jornada da ambulância até o início da avaliação clínica no ED. De fato, esse critério permite reduzir significativamente os tempos de atendimento e situações de superlotação nos EDs. Os resultados desta pesquisa poderiam apoiar os tomadores de decisão na melhoria do desempenho do EMS, introduzindo políticas mais eficazes para o problema de seleção de hospitais.
+
+A Tabela~\ref{table:3} a seguir apresenta os trabalhos selecionados, descrevendo brevemente suas principais características, com o objetivo de facilitar a comparação entre eles.
+
+%%aqui tabela de comparacao
+\begin{longtable}{ |c|c|c|p{8.5cm}| } 
+% \centering
+% \begin{tabular}{ |c|p{10cm}| } 
+ \hline
+ Trabalho & Ano & Autores & Principais características \\ 
+ \hline
+ ~\cite{9103941} & 2021 & El-Bouri, R. et al. & Visam facilitar a preparação dos espaços de leitos hospitalares através do treinamento de um modelo de aprendizado profundo que combina aprendizagem por meio de currículo e o \textit{Multi-armed bandit}.\\
+ \hline
+ ~\cite{8945359} & 2020 & Bruballa, E. et al. & Objetivam agendar o acesso de pacientes não críticos aos DEs, visando reduzir o tempo de espera de todos os pacientes e melhorar a qualidade do serviço, com a implementação de um Modelo Baseado em Agentes (ABM) no simulador de DE.\\
+ \hline
+ ~\cite{10078258} & 2023 & Karbouband, K. et al. & Descrevem uma abordagem para resolver problemas de alocação de leitos de pacientes nas UTIs, baseada em estimativas da função de sobrevivência, custos e trajetória de tratamento para pacientes com doenças cardiovasculares. Utilizam estimadores para a função de sobrevivência, regressão logística e T-learning para estimativas do efeito do tratamento, incorporando-os como pesos em um algoritmo genético.\\
+ \hline
+ ~\cite{9481128} & 2021 & Allihaibi, W. G. et al. & Desenvolvem uma abordagem estocástica de simulação-otimização de DE para maximizar o fluxo de pacientes no atendimento de emergência, utilizando distribuições estatísticas para modelar variáveis como tempos entre chegadas de pacientes e tempos de tratamento. Integraram um algoritmo evolutivo híbrido à simulação para encontrar soluções para o problema de otimização em tempo real.\\
+ \hline
+ ~\cite{ganesh2023fair} & 2023 & Ganesh, A. et al. & Propõem um modelo que aborda a alocação de recursos, como vacinas e leitos hospitalares, de forma online, considerando a chegada diária de recursos. Priorizam diferentes categorias com base na utilidade dos agentes e oferecem algoritmos online e offline para calcular alocações que respeitem a elegibilidade dos agentes.\\
+ \hline
+ ~\cite{9239083} & 2020 & Silva, G. F. et al. & Apresentam o LODUS, um \textit{framework} capaz de simular ambientes urbanos usando uma abordagem multinível. Ele combina informações de macro e micro simulação para fornecer \textit{insights} precisos sobre a dinâmica populacional e oferecer informações cruciais para a tomada de decisões dos gestores urbanos.\\
+ \hline
+ ~\cite{10.1145/3487983.3488298} & 2021 & Flor, A. et al. & Desenvolvem um modelo de contágio de doenças baseado em difusão para sistemas discretos, considerando intervenções de saúde, como distanciamento social, imunidade e vacinação. Integraram a formulação de contágio-imunidade com as equações governantes de movimento para a dinâmica de multidões.\\
+ \hline
+ ~\cite{10.1145/3587889.3587893} & 2023 & Tedesco, D. et al. & Propõem considerar informações relacionadas à variedade de casos no DE, os tempos esperados de atendimento e a capacidade operacional do DE ao tomar a decisão de seleção de hospital. Desenvolvem um modelo de Simulação de Eventos Discretos no AnyLogic para testar diferentes políticas de atribuição de pacientes aos DEs.\\
+ \hline
+% \end{tabular}
+\caption{Características dos trabalhos selecionados.}
+\label{table:3}
+\end{longtable}
+
+\section{\label{sec:trabalhos_discussao}Discussão}
+Após revisar os estudos selecionados, é possível observar uma diversidade de abordagens e soluções propostas para lidar com desafios relacionados ao atendimento hospitalar e à gestão de sistemas de saúde. Nesta seção, discute-se os principais resultados e implicações desses estudos, bem como as contribuições significativas para o desenvolvimento e a pesquisa nessa área.
+
+Vários estudos exploram o uso da inteligencia artificial para melhorar a eficiência e a qualidade dos cuidados de saúde. No trabalho de~\cite{9103941}, por exemplo, mostrou como modelos de aprendizado profundo podem ser utilizados para prever a área de internação de pacientes na emergência de um hospital, facilitando o planejamento de recursos e alocando os pacientes de forma mais eficaz. Essa abordagem promete agilizar o fluxo de pacientes, melhorando assim a qualidade dos cuidados e reduzindo o congestionamento nos departamentos de emergência.
+
+Outros trabalhos se concentraram na modelagem e simulação de sistemas de saúde para otimizar o uso de recursos e melhorar a gestão de filas e tempos de espera. O trabalho~\cite{9481128}, por exemplo, desenvolveu uma abordagem estocástica de simulação-otimização para analisar o fluxo de pacientes em departamentos de emergência, demonstrando como essa técnica pode aumentar a capacidade de atendimento e melhorar a eficiência do sistema de saúde.
+
+Alguns estudos abordaram desafios específicos enfrentados pelos gestores hospitalares e propuseram soluções inovadoras para lidar com esses problemas. O trabalho~\cite{10.1145/3587889.3587893}, por exemplo, examinou diferentes políticas de seleção de hospitais para pacientes de emergência, demonstrando como a minimização do tempo até o provedor pode reduzir os tempos de espera e melhorar o acesso aos cuidados de saúde.
+
+O trabalho~\cite{9239083} destacou os desafios enfrentados pelos gestores urbanos durante a pandemia COVID-19 e apresentou o LODUS, um \textit{framework} para simular ambientes urbanos e fornecer \textit{insights} sobre a dinâmica populacional. Essa abordagem pode ser útil para prever e mitigar futuras crises de saúde pública, fornecendo informações valiosas para os planejadores urbanos e autoridades de saúde.
+
+De maneira geral, os estudos revisados destacam a importância de abordagens inovadoras e o uso de tecnologias na gestão hospitalar e no planejamento de sistemas de saúde. Essas soluções têm o potencial de melhorar significativamente a qualidade dos cuidados de saúde, otimizar o uso de recursos e garantir um acesso mais equitativo aos serviços de saúde. Esse pesquisa visa apresentar uma outra abordagem a ser utilizada como tecnologia na gestão hospitalar, utilizando o \textit{framework} LODUS de~\cite{9239083} no contexto de fluxo de internações, possibilitando que outros trabalhos possam validar seus resultados em um ambiente simulado.

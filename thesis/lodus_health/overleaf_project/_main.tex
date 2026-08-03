@@ -1,0 +1,78 @@
+\documentclass[portuguese,oneside]{pucrs-ppgcc}
+
+\input{_includes}
+\input{_macros}
+
+\author{Gabriel Vaz de Souza}
+
+\title{LODUS-Health: Uma ferramenta para simulação do fluxo de pacientes nos leitos dos hospitais de Porto Alegre.}
+      {LODUS-Health: A tool for simulating the flow of patients in hospital beds in Porto Alegre.}
+
+% \tipotrabalho{\pep}         % Plano de estudo e pesquisa (Research plan)
+\tipotrabalho{\dissertacao} % Dissertação (Master Thesis)
+
+\versaovolume{\banca}         % Avaliação Banca
+% \versaovolume{\final}  % Volume Final para Homologação e Publicação
+
+\grau{\mestre}
+
+\generoori{\orientadora}
+\orientador{Soraia Raupp Musse}
+
+% \fichacatalografica{src/ficha_catalografica.png}
+
+% \dataaprovacao{00}{March}{2024}
+% \avaliadorum{Prof.1}{PPGCC/PUCRS}
+% \avaliadordois{Prof.2}{PPGC/UFRGS}
+
+\begin{document}
+
+\dedicatoria{
+Dedico este trabalho à minha família: meus pais, Nelso e Maria de Fátima; meus irmãos, Samuel e Daniel; e minha esposa, Emely. Agradeço pelo amor, apoio e incentivo ao longo desses anos de estudo. Vocês foram minha base, fonte de força e inspiração nessa jornada.
+
+Dedico este trabalho também aos meus orientadores, Prof\textsuperscript{a}. Soraia R. Musse e Prof. Rafael H. Bordini, pela orientação, paciência e crença na minha capacidade ao longo dessa jornada. Suas contribuições foram fundamentais para o desenvolvimento deste estudo e me ajudaram a compreender a importância do que é ser um pesquisador
+
+Dedico aos meus colegas Davide, Gabriel, Marina e Nathalia. Vocês foram essenciais para o desenvolvimento desse estudo; suas dicas, conhecimentos e empenho em me ajudar fizeram com que esse estudo fosse possível.
+
+Por fim, dedico aos meus amigos que compartilharam comigo momentos de alegria e tristeza durante essa jornada.
+}
+
+\begin{agradecimentos}
+O presente trabalho foi realizado com apoio da Coordenação de Aperfeiçoamento de Pessoal de Nível Superior – Brasil (CAPES) – Código de Financiamento 001.
+
+Esta dissertação foi apoiada pelo Ministério da Ciência, Tecnologia e Inovações, com recursos da Lei no 8.248, de 23 de outubro de 1991, no âmbito do PPI-SOFTEX, coordenado pela Softex e publicado Residência em TIC 02 - Aditivo, DOU 01245.012095/2020-56.
+\end{agradecimentos}
+
+\begin{resumo}{Gerenciamento Hospitalar, Ocupação de Leitos Hospitalares, Simulação Urbana, Geração de Dados, Visualização de Dados}
+% Contextualização
+A área da saúde no Brasil enfrenta diversos desafios decorrentes da escassez de recursos nos hospitais do país~\cite{ORCAMENTOSAUDEBR}. Explorar técnicas que ajudem a mitigar o uso inadequado de recursos e prever cenários de alta demanda no futuro pode ser de grande auxílio para os gestores municipais na alocação eficiente desses recursos.
+% Objetivos
+Este trabalho visa apresentar o desenvolvimento do LODUS-Health, uma ferramenta que simula o fluxo de pacientes nos leitos dos hospitais de Porto Alegre, possibilitando a configuração dos parâmetros do modelo de simulação pela interação com uma interface gráfica, além de permitir a visualização dos resultados e a geração de textos médicos de evolução de pacientes internados.
+% Metodologia
+Para isso, criou-se um conjunto de dados a partir das informações do CNES disponibilizadas pelo DATASUS e coordenadas geográficas obtidas no Google Maps. Além disso, foi desenvolvida uma interface gráfica com ferramentas de desenvolvimento web, como o Flask. Utilizou-se o \textit{framework} LODUS como ferramenta central para o deslocamento dos pacientes em um ambiente de simulação virtual. Por fim, foi utilizada a API da OpenAI para geração dos textos médicos.
+% Resultados
+Os resultados obtidos demonstram que o modelo se comporta conforme o esperado em diferentes configurações de simulação, e a geração de dados mostra-se coerente com a tarefa delimitada.
+% Conclusões
+Conclui-se que a ferramenta pode ser utilizada para a prevenção da escassez de recursos e gestão hospitalar. No entanto, ressalta-se a importância da utilização um profissional da área para garantir a eficácia dos resultados.
+\end{resumo}
+
+\begin{abstract}{Hospital Management, Hospital Bed Occupancy, Urban Simulation, Data Generation, Data Visualization}
+The healthcare sector in Brazil faces several challenges due to the scarcity of resources in the country's hospitals~\cite{ORCAMENTOSAUDEBR}. Exploring techniques that help mitigate the inappropriate use of resources and forecast scenarios of high demand in the future can greatly assist municipal managers in efficiently allocating these resources. This work aims to present the development of LODUS-Health, a tool that simulates the flow of patients in the beds of hospitals in Porto Alegre, allowing for the configuration of simulation model parameters through interaction with a graphical interface, as well as enabling the visualization of results and the generation of medical texts documenting the evolution of hospitalized patients. To achieve this, a dataset was created from information provided by CNES available through DATASUS and geographical coordinates obtained from Google Maps. Additionally, a graphical interface was developed using web development tools such as Flask. The LODUS framework was employed as the central tool for patient displacement in a virtual simulation environment. Finally, the OpenAI API was used for the generation of medical texts. The results obtained demonstrate that the model behaves as expected under different simulation configurations, and the data generation is consistent with the defined task. It is concluded that the tool can be used for preventing resource scarcity and hospital management. However, it is emphasized the importance of involving a professional in the field to ensure the effectiveness of the results.
+\end{abstract}
+
+\tableofcontents
+
+\input{Capitulos/01_Introducao}
+\input{Capitulos/02_Fundamentacao_Teorica}
+\input{Capitulos/03_Literatura}
+\input{Capitulos/04_Modelo_Proposto}
+\input{Capitulos/05_Resultados_Experimentais}
+\input{Capitulos/06_Discussao}
+\input{Capitulos/07_Conclusao}
+
+\bibliographystyle{ppgcc-num}
+\bibliography{referencias}
+
+\contracapa
+
+\end{document}

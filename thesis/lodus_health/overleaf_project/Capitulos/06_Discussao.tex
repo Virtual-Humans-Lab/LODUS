@@ -1,0 +1,25 @@
+\chapter{Considerações Finais} \label{cpt:discus}
+Este capítulo resume nossas contribuições para o desenvolvimento de pesquisa no uso de tecnologias para a área da saúde, as limitações da abordagem proposta e nossos planos futuros para continuidade da pesquisa.
+
+\section{Contribuições}
+Neste trabalho desenvolvemos um conjunto de dados com informações reais de quantidade de leitos hospitalares separados por especialidade e tipo nos hospitais de Porto Alegre, em complemento também adicionamos informações geográficas de latitude e longitude de cada hospital. Os dados coletados foram provenientes do Cadastro Nacional de Estabelecimentos de Saúde (CNES) disponibilizado pelo DATASUS e as informações geográficas coletadas no Google Maps. O conjunto de dados gerado pode ser utilizado em outras aplicações voltadas para a área da saúde ou gerenciamento urbano ou hospitalar. 
+
+Além do conjunto de dados, também foi proposta uma ferramenta de simulação de ocupação de leitos hospitalares na cidade de Porto Alegre chamado de LODUS-Health. Foi disponibilizado uma interface gráfica para facilitar a interação dos usuários com o modelo de simulação, permitindo parametrizações customizadas e integração dos dados do conjunto de dados criado inicialmente, além da possibilidade de geração de dados médicos para uma determinada especialidade de leito a partir da seleção do usuário na interface. Analisando os resultados, conclui-se que ferramenta desenvolvida pode ser utilizada por gestores de hospitais do município na destinação de recursos para cada hospital ou ate mesmo simular a inclusão de um novo hospital em um determinado bairro.
+
+Visto que o LODUS-Health é um módulo do LODUS, cada vez que um paciente chega ao hospital, ele saiu de casa, se transportou de alguma maneira e foi ao hospital. Isso dá outra perspectiva à simulação urbana que permite fechar-se, abrir-se novos hospitais, e as pessoas se dirigirem aos estabelecimentos.
+
+\section{Limitações}
+O modelo de simulação desenvolvido e apresentado nesse trabalho está limitado a um contexto onde espera-se que o usuário da ferramenta possua conhecimento prévio sobre o fluxo de ocupação de leitos hospitalares para que consiga configurar de forma mais realista os parâmetros da simulação. %Além disso, em casos de superlotação dos leitos hospitalares, não há uma diferenciação entre os pacientes que estão nos leitos e os que estão esperando por vagas, apenas sabe se da quantidade de pacientes requisitados para aquele leito. 
+Outra limitação da pesquisa é a necessidade da coleta de dados sobre os leitos dos hospitais precisarem ser feitas de forma recorrente devido a atualização dessas informações no CNESNet. Isso é relevante para manter os dados atualizados com a cidade que se deseja simular. Apesar disso, é importante mencionar que a quantidade de leitos não muda bruscamente de uma atualização para a outra, logo atualizações são necessárias, mas a hipótese é de que não sejam tão frequentes. %, logo a liié necessário essa coleta para que a simulação tenha os dados o mais próximo da realidade atual.
+
+\section{Trabalhos Futuros}
+A abordagem utilizada no desenvolvimento gerou uma gama de possíveis trabalhos futuros como complemento dessa pesquisa e desenvolvimento da área. Algumas sugestões para trabalhos futuros incluem: \textit{i)} Prover uma visualização relevante das movimentações dos pacientes na cidade e nos hospitais, \textit{ii)} Permitir que o gestor escolha dentre os pacientes, aquele que se deseja ver o texto médico gerado,  \textit{iii)} Aprimorar o controle da fila do hospital para permitir troca de leitos, pessoas que são transferidas para outro hospital, \textit{iv)} associar um CID especifico a um paciente para geração de texto dessa doença e etc.
+
+
+% coletar dados reais de internacao
+
+% permitir a troca de pacientes entre hospitais
+
+% permitir interacao entre outros tipos de pontos de interesse
+
+% pacientes individuais

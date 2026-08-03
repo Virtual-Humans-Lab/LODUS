@@ -1,0 +1,45 @@
+%% Create a pair of images on the same row
+\newcounter{imagePair}[figure]
+
+\newcommand{\imagePair}[3][0.2]{
+    \refstepcounter{imagePair}
+    {\small \textbf{\alph{imagePair}.}}\hfill
+    \begin{tabular}{@{}c@{}}
+        \includegraphics[width=#1\textwidth]{#2}\\
+        % {\small \textbf{a.} }
+    \end{tabular}
+    \hfill
+    \begin{tabular}{@{}c@{}}
+        \includegraphics[width=#1\textwidth]{#3}\\
+        % {\small \textbf{a.} }
+    \end{tabular}
+    \hfill
+}
+%%
+
+%% For Changing table lines' width
+\newcommand{\thinline}[0]{\specialrule{.05em}{0em}{0em}}
+
+\newcommand{\thickerTableLines}[0]{\setlength{\arrayrulewidth}{.1em}}
+\newcommand{\defaultTableLines}[0]{\setlength{\arrayrulewidth}{.05em}}
+%%
+
+%% For Table Spacing
+\newcommand{\stretchTableCells}[0]{\renewcommand{\arraystretch}{1.5}}
+\newcommand{\defaultTableCells}[0]{\renewcommand{\arraystretch}{1}}
+%%
+
+%% For Cell Highlighting
+\newcommand{\hlCell}[0]{\cellcolor{blue!25}}
+%%
+
+%% Create a Blank Page
+\newcommand{\blankpage}[0]{\afterpage{\null\newpage}}
+%
+
+
+%% Mention a Dataset ID
+\newcommand{\citData}[1]{%
+    \hyperref[tab:datasets]{[D0#1]}%
+}
+%
