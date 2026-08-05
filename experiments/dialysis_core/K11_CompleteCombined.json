@@ -2,7 +2,7 @@
   "extends": "dialysis_core/CompleteBase",
   "water_level_data_plugin": {
     "data_file": "dialysis_experiments/sudden_9_3m.csv",
-    "target_node_types": ["water_source"]
+    "target_node_types": ["water_source", "dialysis_clinic"]
   },
   "off_cycle_routine_plugin": {
     "start_of_step_routine_files": [
