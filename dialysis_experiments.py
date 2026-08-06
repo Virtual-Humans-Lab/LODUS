@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import csv
 from datetime import datetime, timezone
 import json
@@ -282,7 +283,15 @@ def main() -> int:
         default=sys.executable,
         help="Python executable used for sector_simulation.py.",
     )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help="Number of scenario subprocesses to run concurrently.",
+    )
     args = parser.parse_args()
+    if args.jobs < 1:
+        parser.error("--jobs must be at least 1")
     if args.scenarios is None:
         args.scenarios = {
             "core": CORE_SCENARIOS,
@@ -290,9 +299,14 @@ def main() -> int:
             "all": list(dict.fromkeys(CORE_SCENARIOS + DEMAND_SCENARIOS)),
         }[args.catalog]
     seeds = parse_seeds(args.seeds)
+    tasks = [
+        (scenario, seed)
+        for scenario in args.scenarios
+        for seed in seeds
+    ]
     records = []
-    for scenario in args.scenarios:
-        for seed in seeds:
+    if args.jobs == 1:
+        for scenario, seed in tasks:
             record = run_one(
                 scenario,
                 seed,
@@ -300,11 +314,32 @@ def main() -> int:
                 args.python,
             )
             records.append(record)
-            write_summary(args.results_root, records)
             print(
                 f"{record['scenario_id']} seed={seed}: "
                 f"{record['status']}"
             )
+    else:
+        with ThreadPoolExecutor(max_workers=args.jobs) as executor:
+            futures = {
+                executor.submit(
+                    run_one,
+                    scenario,
+                    seed,
+                    args.results_root,
+                    args.python,
+                ): (scenario, seed)
+                for scenario, seed in tasks
+            }
+            for future in as_completed(futures):
+                scenario, seed = futures[future]
+                record = future.result()
+                records.append(record)
+                print(
+                    f"{record['scenario_id']} seed={seed}: "
+                    f"{record['status']}"
+                )
+    records.sort(key=lambda row: (row["scenario"], row["seed"]))
+    write_summary(args.results_root, records)
     manifest = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "scenarios": args.scenarios,

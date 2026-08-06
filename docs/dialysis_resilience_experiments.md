@@ -15,6 +15,16 @@ PYTHONPATH=. .venv/bin/pytest -q Tests tests
 .venv/bin/python dialysis_analysis.py
 ```
 
+Use `--jobs` to run independent scenario/seed subprocesses concurrently. For
+example, `--jobs 4` runs up to four simulations at once:
+
+```bash
+.venv/bin/python dialysis_experiments.py --catalog core --seeds 0-29 --jobs 4
+```
+
+The default is `--jobs 1`. Each worker needs memory for a complete simulation,
+so choose the value according to the machine's available CPU and RAM.
+
 Use `--catalog demand` for the 0.25, 0.50, approximately 0.90, 1.00, and
 1.25 demand-to-capacity sweeps in both environments. A quick deterministic
 check can be run with:
