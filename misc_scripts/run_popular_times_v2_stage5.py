@@ -35,10 +35,12 @@ STAGE4_RESULTS = (
     / "popular_times_v2_stage4"
     / "production_runs.csv"
 )
-EXPECTED_RUNS = 31
+EXPECTED_RUNS = 37
 SCENARIOS = (
     "13_levy_off_flood_both_reroute",
     "13_levy_on_flood_both_reroute",
+    "94_levy_off_flood_both_reroute",
+    "94_levy_on_flood_both_reroute",
 )
 CORE_METRICS = (
     "requested",
@@ -84,12 +86,22 @@ class RunSpec:
     def levy(self) -> bool:
         return "_levy_on_" in self.scenario
 
+    @property
+    def environment(self) -> str:
+        return self.scenario.split("_", 1)[0]
 
-def stage5_specs(seeds: Iterable[int] = range(30)) -> list[RunSpec]:
-    levy_seeds = sorted(set(seeds))
-    return [RunSpec(SCENARIOS[0], 0)] + [
-        RunSpec(SCENARIOS[1], seed) for seed in levy_seeds
-    ]
+
+def stage5_specs(
+    seeds_13: Iterable[int] = range(30),
+    seeds_94: Iterable[int] = range(5),
+) -> list[RunSpec]:
+    seeds = {"13": sorted(set(seeds_13)), "94": sorted(set(seeds_94))}
+    specs = []
+    for scenario in SCENARIOS:
+        spec = RunSpec(scenario, 0)
+        scenario_seeds = seeds[spec.environment] if spec.levy else [0]
+        specs.extend(RunSpec(scenario, seed) for seed in scenario_seeds)
+    return specs
 
 
 def _utc_now() -> str:
@@ -418,23 +430,27 @@ def adaptation_effects(run_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     baselines = {}
     for row in _read_csv(STAGE4_RESULTS):
         if row["scenario"] in {
-            "13_levy_off_flood_both", "13_levy_on_flood_both"
+            "13_levy_off_flood_both", "13_levy_on_flood_both",
+            "94_levy_off_flood_both", "94_levy_on_flood_both",
         }:
             baselines[(row["scenario"], int(row["seed"]))] = row
     grouped: dict[str, list[tuple[dict[str, Any], dict[str, str]]]] = defaultdict(list)
     for row in run_rows:
         baseline_scenario = (
-            "13_levy_on_flood_both" if row["levy"]
-            else "13_levy_off_flood_both"
+            f"{row['environment']}_levy_"
+            f"{'on' if row['levy'] else 'off'}_flood_both"
         )
         baseline = baselines.get((baseline_scenario, int(row["seed"])))
         if baseline is not None:
-            grouped["levy_on" if row["levy"] else "levy_off"].append(
+            grouped[
+                f"{row['environment']}_levy_"
+                f"{'on' if row['levy'] else 'off'}"
+            ].append(
                 (row, baseline)
             )
     results = []
     for stratum, pairs in sorted(grouped.items()):
-        inferential = stratum == "levy_on"
+        inferential = stratum.endswith("levy_on")
         for metric in CORE_METRICS:
             values = [
                 float(adaptation[metric]) - float(baseline[metric])
@@ -466,7 +482,12 @@ def make_plots(
     }
     labels, suppression, rerouting = [], [], []
     for levy, label in ((False, "Levy off"), (True, "Levy on")):
-        rows = [row for row in run_rows if bool(row["levy"]) == levy]
+        # The portable Stage 4 baseline currently contains the original
+        # 13-region matrix. Keep this paired plot scoped to available baselines.
+        rows = [
+            row for row in run_rows
+            if row["environment"] == "13" and bool(row["levy"]) == levy
+        ]
         if not rows:
             continue
         baseline_scenario = (
@@ -618,7 +639,14 @@ def main() -> None:
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--workers", type=int, default=1)
-    parser.add_argument("--seeds", type=int, nargs="*", default=list(range(30)))
+    parser.add_argument(
+        "--seeds", type=int, nargs="*", default=list(range(30)),
+        help="13-region Levy seeds",
+    )
+    parser.add_argument(
+        "--seeds-94", type=int, nargs="*", default=list(range(5)),
+        help="94-region Levy seeds",
+    )
     parser.add_argument("--only", nargs="*", choices=SCENARIOS)
     parser.add_argument("--skip-runs", action="store_true")
     parser.add_argument("--no-analysis", action="store_true")
@@ -630,11 +658,13 @@ def main() -> None:
         parser.error("--workers must be at least 1")
     if any(seed < 0 or seed > 29 for seed in args.seeds):
         parser.error("--seeds must be between 0 and 29")
+    if any(seed < 0 or seed > 29 for seed in args.seeds_94):
+        parser.error("--seeds-94 must be between 0 and 29")
 
     output_root = args.output.resolve()
     _relative_experiment_name(output_root / "path-check")
     output_root.mkdir(parents=True, exist_ok=True)
-    selected = stage5_specs(args.seeds)
+    selected = stage5_specs(args.seeds, args.seeds_94)
     if args.only:
         allowed = set(args.only)
         selected = [spec for spec in selected if spec.scenario in allowed]

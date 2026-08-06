@@ -18,16 +18,30 @@ from util.random_instance import FixedRandom
 
 
 class LevyWalkV2ConfigurationTest(unittest.TestCase):
-    def test_matrix_has_five_families_and_150_paired_runs(self):
+    def test_matrix_has_ten_families_and_175_paired_runs(self):
         specs = stage6_specs()
-        self.assertEqual(150, len(specs))
-        self.assertEqual(150, len({spec.run_name for spec in specs}))
+        self.assertEqual(175, len(specs))
+        self.assertEqual(175, len({spec.run_name for spec in specs}))
         for scenario in {spec.scenario for spec in specs}:
+            expected = set(range(30)) if scenario.startswith("13_") else set(range(5))
             self.assertEqual(
-                set(range(30)), {spec.seed for spec in specs if spec.scenario == scenario}
+                expected, {spec.seed for spec in specs if spec.scenario == scenario}
             )
 
     def test_five_13_region_families_resolve_without_legacy_levy(self):
+        targets_by_flood = {
+            "none": None,
+            "destinations": {
+                "marketplace", "restaurant", "pharmacy", "work", "school"
+            },
+            "homes": {"home"},
+            "all": {
+                "home", "marketplace", "restaurant", "pharmacy", "work", "school"
+            },
+            "all_pt_reroute": {
+                "home", "marketplace", "restaurant", "pharmacy", "work", "school"
+            },
+        }
         scenarios = {
             "13_levy_v2_flood_none": None,
             "13_levy_v2_flood_destinations": {
@@ -41,6 +55,10 @@ class LevyWalkV2ConfigurationTest(unittest.TestCase):
                 "home", "marketplace", "restaurant", "pharmacy", "work", "school"
             },
         }
+        scenarios.update({
+            f"94_levy_v2_flood_{flood}": targets
+            for flood, targets in targets_by_flood.items()
+        })
         for scenario, targets in scenarios.items():
             with self.subTest(scenario=scenario):
                 config = load_experiment_config(

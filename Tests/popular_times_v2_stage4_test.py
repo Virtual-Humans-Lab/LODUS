@@ -16,13 +16,13 @@ from util.data_parse import load_experiment_config
 
 
 class PopularTimesStage4MatrixTest(unittest.TestCase):
-    def test_matrix_has_five_deterministic_and_125_stochastic_runs(self):
+    def test_matrix_has_eight_deterministic_and_140_stochastic_runs(self):
         specs = production_specs()
 
-        self.assertEqual(130, len(specs))
-        self.assertEqual(130, len({spec.run_name for spec in specs}))
-        self.assertEqual(5, sum(not spec.levy for spec in specs))
-        self.assertEqual(125, sum(spec.levy for spec in specs))
+        self.assertEqual(148, len(specs))
+        self.assertEqual(148, len({spec.run_name for spec in specs}))
+        self.assertEqual(8, sum(not spec.levy for spec in specs))
+        self.assertEqual(140, sum(spec.levy for spec in specs))
         self.assertEqual(
             set(range(30)),
             {spec.seed for spec in specs if spec.levy and spec.scenario.startswith("13_")},

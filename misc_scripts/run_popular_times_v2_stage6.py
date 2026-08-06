@@ -37,13 +37,18 @@ STAGE4_RESULTS = (
 STAGE5_RESULTS = (
     PROJECT_ROOT / "docs" / "results" / "popular_times_v2_stage5" / "stage5_runs.csv"
 )
-EXPECTED_RUNS = 150
+EXPECTED_RUNS = 175
 SCENARIOS = (
     "13_levy_v2_flood_none",
     "13_levy_v2_flood_destinations",
     "13_levy_v2_flood_homes",
     "13_levy_v2_flood_all",
     "13_levy_v2_flood_all_pt_reroute",
+    "94_levy_v2_flood_none",
+    "94_levy_v2_flood_destinations",
+    "94_levy_v2_flood_homes",
+    "94_levy_v2_flood_all",
+    "94_levy_v2_flood_all_pt_reroute",
 )
 RAW_V2_FILES = (
     "data_frames/levy_v2_demand.csv",
@@ -80,6 +85,13 @@ LEGACY_MATCH = {
     "13_levy_v2_flood_all_pt_reroute": (
         "stage5", "13_levy_on_flood_both_reroute"
     ),
+    "94_levy_v2_flood_none": ("stage4", "94_levy_on_flood_none"),
+    "94_levy_v2_flood_destinations": ("stage4", "94_levy_on_flood_pois"),
+    "94_levy_v2_flood_homes": ("stage4", "94_levy_on_flood_homes"),
+    "94_levy_v2_flood_all": ("stage4", "94_levy_on_flood_both"),
+    "94_levy_v2_flood_all_pt_reroute": (
+        "stage5", "94_levy_on_flood_both_reroute"
+    ),
 }
 
 
@@ -97,9 +109,16 @@ class RunSpec:
         return f"popular_times_v2/stage6/{self.scenario}"
 
 
-def stage6_specs(seeds: Iterable[int] = range(30)) -> list[RunSpec]:
-    selected = sorted(set(seeds))
-    return [RunSpec(scenario, seed) for scenario in SCENARIOS for seed in selected]
+def stage6_specs(
+    seeds_13: Iterable[int] = range(30),
+    seeds_94: Iterable[int] = range(5),
+) -> list[RunSpec]:
+    seeds = {"13": sorted(set(seeds_13)), "94": sorted(set(seeds_94))}
+    return [
+        RunSpec(scenario, seed)
+        for scenario in SCENARIOS
+        for seed in seeds[scenario.split("_", 1)[0]]
+    ]
 
 
 def _utc_now() -> str:
@@ -128,7 +147,7 @@ def completion_state(spec: RunSpec, output_root: Path) -> tuple[str, str]:
         and int(metadata.get("seed", -1)) == spec.seed
         and int(metadata.get("simulation_parameters", {}).get("total_cycles", -1))
         == TOTAL_CYCLES
-        and study.get("environment") == "13"
+        and study.get("environment") == spec.scenario.split("_", 1)[0]
         and study.get("levy_model") == "v2"
         and "levy_walk_plugin" not in resolved
         and "send_population_back_plugin" not in resolved
@@ -436,19 +455,23 @@ def scenario_statistics(run_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def baseline_effects(run_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     indexed = {(row["scenario"], int(row["seed"])): row for row in run_rows}
     results = []
-    baseline = SCENARIOS[0]
-    for scenario in SCENARIOS[1:]:
-        pairs = [
-            (indexed[(scenario, seed)], indexed[(baseline, seed)])
-            for seed in range(30)
-            if (scenario, seed) in indexed and (baseline, seed) in indexed
-        ]
-        for metric in RUN_METRICS:
-            values = [float(flood[metric]) - float(none[metric]) for flood, none in pairs]
-            results.append(
-                {"contrast": f"{scenario}_minus_{baseline}", "metric": metric,
-                 **_interval(values, True)}
-            )
+    for environment in ("13", "94"):
+        family = [s for s in SCENARIOS if s.startswith(f"{environment}_")]
+        baseline = f"{environment}_levy_v2_flood_none"
+        for scenario in family:
+            if scenario == baseline:
+                continue
+            pairs = [
+                (indexed[(scenario, seed)], indexed[(baseline, seed)])
+                for seed in range(30)
+                if (scenario, seed) in indexed and (baseline, seed) in indexed
+            ]
+            for metric in RUN_METRICS:
+                values = [float(flood[metric]) - float(none[metric]) for flood, none in pairs]
+                results.append(
+                    {"contrast": f"{scenario}_minus_{baseline}", "metric": metric,
+                     **_interval(values, True)}
+                )
     return results
 
 
@@ -495,36 +518,30 @@ def make_plots(output_root: Path, statistics_rows: list[dict[str, Any]]):
     plots.mkdir(parents=True, exist_ok=True)
     indexed = {(row["scenario"], row["metric"]): row for row in statistics_rows}
     labels = ["No flood", "Destinations", "Homes", "All", "All + PT reroute"]
-    for metric, title, ylabel, filename in (
-        ("levy_fulfillment_rate", "Levy V2 commute fulfillment", "Fulfillment rate", "levy_fulfillment.png"),
-        ("pt_fulfillment_rate", "Popular Times fulfillment", "Fulfillment rate", "popular_times_fulfillment.png"),
-        ("levy_mean_outbound_distance", "Levy V2 outbound sourcing distance", "Metres / traveler", "levy_distance.png"),
-    ):
-        rows = [indexed.get((scenario, metric)) for scenario in SCENARIOS]
-        if not all(rows):
-            continue
-        means = [float(row["mean"]) for row in rows]
-        errors = [
-            [
-                mean - float(row["ci95_lower"])
-                if row["ci95_lower"] != "" else 0.0
-                for mean, row in zip(means, rows)
-            ],
-            [
-                float(row["ci95_upper"]) - mean
-                if row["ci95_upper"] != "" else 0.0
-                for mean, row in zip(means, rows)
-            ],
-        ]
-        figure, axis = plt.subplots(figsize=(9, 5))
-        axis.bar(range(len(labels)), means, yerr=errors, capsize=3, color="#3478bf")
-        axis.set_xticks(range(len(labels)), labels, rotation=15, ha="right")
-        axis.set_ylabel(ylabel)
-        axis.set_title(title)
-        axis.grid(axis="y", alpha=0.25)
-        figure.tight_layout()
-        figure.savefig(plots / filename, dpi=160)
-        plt.close(figure)
+    for environment in ("13", "94"):
+        scenarios = [s for s in SCENARIOS if s.startswith(f"{environment}_")]
+        for metric, title, ylabel, filename in (
+            ("levy_fulfillment_rate", "Levy V2 commute fulfillment", "Fulfillment rate", "levy_fulfillment.png"),
+            ("pt_fulfillment_rate", "Popular Times fulfillment", "Fulfillment rate", "popular_times_fulfillment.png"),
+            ("levy_mean_outbound_distance", "Levy V2 outbound sourcing distance", "Metres / traveler", "levy_distance.png"),
+        ):
+            rows = [indexed.get((scenario, metric)) for scenario in scenarios]
+            if not all(rows):
+                continue
+            means = [float(row["mean"]) for row in rows]
+            errors = [
+                [mean - float(row["ci95_lower"]) if row["ci95_lower"] != "" else 0.0 for mean, row in zip(means, rows)],
+                [float(row["ci95_upper"]) - mean if row["ci95_upper"] != "" else 0.0 for mean, row in zip(means, rows)],
+            ]
+            figure, axis = plt.subplots(figsize=(9, 5))
+            axis.bar(range(len(labels)), means, yerr=errors, capsize=3, color="#3478bf")
+            axis.set_xticks(range(len(labels)), labels, rotation=15, ha="right")
+            axis.set_ylabel(ylabel)
+            axis.set_title(f"{title} ({environment} regions)")
+            axis.grid(axis="y", alpha=0.25)
+            figure.tight_layout()
+            figure.savefig(plots / f"{Path(filename).stem}_{environment}.png", dpi=160)
+            plt.close(figure)
 
 
 def _display(row: dict[str, Any] | None, digits: int = 4) -> str:
@@ -557,7 +574,7 @@ def write_report(
         "",
         f"{'COMPLETE' if complete else 'IN PROGRESS'}: {len(run_rows)} of {EXPECTED_RUNS} runs are preserved; all preserved runs pass both Popular Times and Levy V2 invariants.",
         "",
-        "All scenarios use the 13-region environment, 56 daily cycles, paired seeds 0–29, a maximum packet size of 50, exact cycle-level worker/student attendance, and flood-aware commute lifecycles. Intervals are paired or scenario-level 95% t intervals.",
+        "All scenarios use 56 daily cycles and flood-aware commute lifecycles. The 13-region families use paired seeds 0–29; the 94-region families use paired seeds 0–4. Levy V2 uses a maximum packet size of 50 and exact cycle-level worker/student attendance. Intervals are paired or scenario-level 95% t intervals.",
         "",
         "| Scenario | n | Levy fulfillment | Levy unmet | Moved population | Mean commute distance (m) | PT fulfillment |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -645,9 +662,10 @@ def main():
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--workers", type=int, default=1)
-    parser.add_argument("--seeds", type=int, nargs="*", default=list(range(30)))
+    parser.add_argument("--seeds", type=int, nargs="*", default=list(range(30)), help="13-region seeds")
+    parser.add_argument("--seeds-94", type=int, nargs="*", default=list(range(5)), help="94-region seeds")
     parser.add_argument("--only", nargs="*", choices=SCENARIOS)
-    parser.add_argument("--smoke", action="store_true", help="Run seed 0 for all five scenarios")
+    parser.add_argument("--smoke", action="store_true", help="Run seed 0 for all ten scenarios")
     parser.add_argument("--skip-runs", action="store_true")
     parser.add_argument("--no-analysis", action="store_true")
     parser.add_argument("--rerun-invalid", action="store_true")
@@ -658,11 +676,14 @@ def main():
         parser.error("--workers must be at least 1")
     if any(seed < 0 or seed > 29 for seed in args.seeds):
         parser.error("--seeds must be between 0 and 29")
+    if any(seed < 0 or seed > 29 for seed in args.seeds_94):
+        parser.error("--seeds-94 must be between 0 and 29")
     output_root = args.output.resolve()
     _relative_experiment_name(output_root / "path-check")
     output_root.mkdir(parents=True, exist_ok=True)
-    seeds = [0] if args.smoke else args.seeds
-    selected = stage6_specs(seeds)
+    seeds_13 = [0] if args.smoke else args.seeds
+    seeds_94 = [0] if args.smoke else args.seeds_94
+    selected = stage6_specs(seeds_13, seeds_94)
     if args.only:
         selected = [spec for spec in selected if spec.scenario in set(args.only)]
     if args.dry_run:

@@ -19,19 +19,26 @@ from util.random_instance import FixedRandom
 
 
 class PopularTimesStage5ConfigurationTest(unittest.TestCase):
-    def test_matrix_has_one_deterministic_and_30_matched_levy_runs(self):
+    def test_matrix_includes_13_and_94_region_rerouting_runs(self):
         specs = stage5_specs()
-        self.assertEqual(31, len(specs))
-        self.assertEqual(31, len({spec.run_name for spec in specs}))
-        self.assertEqual([0], [spec.seed for spec in specs if not spec.levy])
+        self.assertEqual(37, len(specs))
+        self.assertEqual(37, len({spec.run_name for spec in specs}))
+        self.assertEqual([0, 0], [spec.seed for spec in specs if not spec.levy])
         self.assertEqual(
-            set(range(30)), {spec.seed for spec in specs if spec.levy}
+            set(range(30)),
+            {spec.seed for spec in specs if spec.levy and spec.environment == "13"},
+        )
+        self.assertEqual(
+            set(range(5)),
+            {spec.seed for spec in specs if spec.levy and spec.environment == "94"},
         )
 
     def test_stage5_configs_enable_rerouting_and_resolve_to_56_cycles(self):
         for scenario in {
             "13_levy_off_flood_both_reroute",
             "13_levy_on_flood_both_reroute",
+            "94_levy_off_flood_both_reroute",
+            "94_levy_on_flood_both_reroute",
         }:
             with self.subTest(scenario=scenario):
                 config = load_experiment_config(

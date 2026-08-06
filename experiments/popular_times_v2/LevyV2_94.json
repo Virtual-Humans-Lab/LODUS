@@ -1,0 +1,8 @@
+{
+  "extends": "popular_times_v2/LevyV2_13",
+  "envgraph_inputs_files": {
+    "environment_file": "enumeration_area/Environment-POA-EnumArea-PopularTimes.json",
+    "population_file": "enumeration_area/Population-POA-EnumArea-PopularTimes.json",
+    "routine_file": "enumeration_area/Routine-POA-EnumArea-PopularTimes-LevyV2.json"
+  }
+}

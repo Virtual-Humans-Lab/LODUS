@@ -22,7 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_LOGS = PROJECT_ROOT / "output_logs"
 DEFAULT_OUTPUT = OUTPUT_LOGS / "popular_times_v2_stage4_production"
 TOTAL_CYCLES = 56
-EXPECTED_RUNS = 130
+EXPECTED_RUNS = 148
 SCENARIOS = (
     "13_levy_off_flood_none",
     "13_levy_off_flood_pois",
@@ -33,7 +33,13 @@ SCENARIOS = (
     "13_levy_on_flood_homes",
     "13_levy_on_flood_both",
     "94_levy_off_flood_none",
+    "94_levy_off_flood_pois",
+    "94_levy_off_flood_homes",
+    "94_levy_off_flood_both",
     "94_levy_on_flood_none",
+    "94_levy_on_flood_pois",
+    "94_levy_on_flood_homes",
+    "94_levy_on_flood_both",
 )
 METRICS = (
     "requested",
@@ -658,7 +664,7 @@ def write_report(
         "",
         f"{'COMPLETE' if complete else 'IN PROGRESS'}: {len(run_rows)} of {expected} runs have completion artifacts; {valid} completed runs pass every invariant.",
         "",
-        "All production configurations use 56 daily cycles of 24 hourly steps. Levy-off scenarios are deterministic and run once. The 13-region Levy-on scenarios use matched seeds 0–29; the 94-region Levy-on scenario uses seeds 0–4. Where applicable, 95% t intervals are calculated across paired stochastic runs. Deterministic results are reported without artificial confidence intervals.",
+        "All production configurations use 56 daily cycles of 24 hourly steps. Levy-off scenarios are deterministic and run once. The 13-region Levy-on scenarios use matched seeds 0–29; the 94-region Levy-on scenarios use seeds 0–4. Where applicable, 95% t intervals are calculated across paired stochastic runs. Deterministic results are reported without artificial confidence intervals.",
         "",
         "| Scenario | n | Fulfillment (95% CI) | Travelers/capita (95% CI) | Distance/request (95% CI) | Occupancy/request (95% CI) |",
         "|---|---:|---:|---:|---:|---:|",

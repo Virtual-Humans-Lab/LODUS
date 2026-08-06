@@ -1,0 +1,10 @@
+{
+  "extends": "popular_times_v2/production/94_levy_on_flood_both",
+  "popular_times_v2_plugin": {"reroute_disabled_destinations": true},
+  "popular_times_v2_stage5": {
+    "environment": "94",
+    "levy": true,
+    "flood": "both",
+    "adaptation": "reroute"
+  }
+}
