@@ -26,7 +26,7 @@ SCENARIO_FILES = {
 }
 REGION_ALIASES = {
     "Centro": "Centro Histórico",
-    "Menino Deus": "Menino-Deus",
+    "Menino-Deus": "Menino Deus",
 }
 
 

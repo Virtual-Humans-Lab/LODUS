@@ -25,6 +25,14 @@ DATA_ROOT = ROOT / "data_input"
 
 
 class PopularTimesStage2DataTest(unittest.TestCase):
+    def _canonical_region_names(self):
+        environment = json.loads(
+            (DATA_ROOT / "Environment-PortoAlegre94RegionsDefault.json").read_text(
+                encoding="utf8"
+            )
+        )
+        return {region["name"] for region in environment["regions"]}
+
     def test_generator_is_reproducible_and_matches_audit(self):
         first = build_outputs(DATA_ROOT)
         second = build_outputs(DATA_ROOT)
@@ -42,7 +50,7 @@ class PopularTimesStage2DataTest(unittest.TestCase):
         self.assertEqual(validation["node_count"], 16266)
         self.assertEqual(validation["population_home_count"], 2711)
         self.assertEqual(validation["total_population"], 1331414)
-        self.assertEqual(validation["water_threshold_count"], 0)
+        self.assertEqual(validation["water_threshold_count"], 16266)
         self.assertTrue(validation["pairing_valid"])
         for node_type in ("home", "work", "school", *POI_TYPES):
             self.assertEqual(validation["node_type_counts"][node_type], 2711)
@@ -55,6 +63,21 @@ class PopularTimesStage2DataTest(unittest.TestCase):
         )
         self.assertEqual(len(population["initial_population"]), 2711)
         self.assertEqual(len(environment["regions"]), 94)
+        self.assertTrue(
+            all(
+                "water_level" in node.get("attributes", {})
+                for region in environment["regions"]
+                for node in region["points_of_interest"]
+            )
+        )
+        self.assertEqual(
+            audit["water_threshold_source"],
+            "Environment-POA-EnumArea-WaterLevels_Filled3.csv",
+        )
+        self.assertEqual(
+            {region["name"] for region in environment["regions"]},
+            self._canonical_region_names(),
+        )
 
     def test_source_environments_remain_unmodified(self):
         source_94 = json.loads(
@@ -79,6 +102,24 @@ class PopularTimesStage2DataTest(unittest.TestCase):
             sum(len(region["points_of_interest"]) for region in source_13["regions"]),
             3480,
         )
+        self.assertEqual(
+            {region["name"] for region in source_94["regions"]},
+            self._canonical_region_names(),
+        )
+
+    def test_census_overlays_use_canonical_region_names(self):
+        canonical = self._canonical_region_names()
+        overlay_paths = (
+            "dialysis_clinics/Environment-Clinics.json",
+            "dialysis_clinics/Environment-ETAs.json",
+            "inpatient_care/Environment-Hospitals-POA.json",
+        )
+        for relative_path in overlay_paths:
+            overlay = json.loads(
+                (DATA_ROOT / relative_path).read_text(encoding="utf8")
+            )
+            names = {region["name"] for region in overlay["regions"]}
+            self.assertLessEqual(names, canonical, relative_path)
 
     def test_hourly_end_of_step_routine_covers_the_full_day(self):
         routine_data = json.loads(
@@ -173,6 +214,11 @@ class PopularTimesStage2ConfigurationTest(unittest.TestCase):
         simulation = generate_lodus_simulation("popular_times_v2/FloodBoth13")
         water = WaterLevelDataPlugin()
         simulation.load_plugin(water)
+        self.assertEqual(simulation.env_graph.get_population_size(), 159886)
+        self.assertEqual(
+            simulation.env_graph.get_region_by_name("Menino Deus").get_population_size(),
+            27961,
+        )
         self.assertEqual(simulation.time_status.total_cycles, 56)
         self.assertEqual(simulation.time_status.cycle_length, 24)
         self.assertEqual(

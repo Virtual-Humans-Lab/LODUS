@@ -1,0 +1,181 @@
+\section{Routine Mobility}
+\label{sec:results_routine_mobility}
+
+Routine mobility provides a useful baseline for evaluating whether LodusPop can represent recurring urban activity before occasional events, service constraints, or environmental disruptions are introduced. Daily trips to work and school and weekly visits to marketplaces, restaurants, and pharmacies generate movements at different temporal and spatial scales. Reproducing these patterns in a common environment tests whether the framework can combine stochastic movement, scheduled demand, population characteristics, and return behavior while conserving the represented population.
+
+The experiments in this section also establish the reference behavior used by later case studies. They progress through three mobility representations. First, the original published L\'evy Walk experiment disperses workers and students between neighborhood-level points of interest. Second, Popular Times V2 introduces hourly activity demand from census-sector homes. Finally, Popular Times V2 is combined with L\'evy Walk V2, which replaces opportunistic work and school movement with explicit attendance targets and auditable trip lifecycles. These models are complementary rather than successive estimates of the same behavior: each answers a different mobility question and uses different assumptions about destinations and demand.
+
+\subsection{Mobility Plugins}
+\label{sec:routine_mobility_plugins}
+
+\subsubsection{Original L\'evy Walk Plugin}
+
+The original \textit{L\'evy Walk Plugin} adds the \texttt{levy\_walk} action used in the published LodusPop evaluation. The action divides the eligible population at an origin into fixed-size packets. Each packet moves with a configurable probability. For a moving packet, the plugin samples a distance from a L\'evy distribution and selects a destination point of interest from the corresponding distance interval. The resulting heavy-tailed movement contains many short displacements and progressively fewer long ones, a pattern motivated by empirical observations of recurrent human mobility~\citep{gonzalez2008understanding}.
+
+Population templates restrict each action to a relevant group. Worker actions match residents whose occupation is \textit{worker} and select work nodes as destinations, while student actions match the corresponding student age groups and select school nodes. The movement probabilities vary by hour to represent morning, daytime, and evening demand. A blob's traceable region of origin is retained after movement, allowing workers and students to be returned to their respective home nodes later in the daily routine.
+
+The plugin exposes the L\'evy distribution location and scale, the movement probability, population-packet size, destination type, and distance-bucket width as experiment parameters. In the published scale experiment, destinations were grouped into 500~m intervals and packets contained 250 people. The published notation reports the distribution scale relative to this interval; consequently, the selected \texttt{levy\_scale} value of 2 corresponds to a stored distribution scale of 1,000~m with 500~m buckets. The optional \texttt{Restriction} factor proportionally reduces the population moved by an action and was used in the original sensitivity experiment.
+
+\subsubsection{Popular Times V2 Plugin}
+
+The \textit{Popular Times V2 Plugin} models one-hour visits to marketplaces, restaurants, and pharmacies. Each point-of-interest type has a fixed seven-day hourly profile. Positive hourly weights are normalized over the week and multiplied by a configured visit rate and the initial population associated with the destination's paired home. Largest-remainder allocation converts this demand into integer hourly requests while preserving the weekly total.
+
+In the baseline configuration, each resident generates one marketplace visit and one restaurant visit per week, and the population collectively generates 0.25 pharmacy visits per resident per week. For every request, the plugin selects travelers from census-sector home nodes using a deterministic priority that combines available matching population with inverse distance to the destination. Travelers are tagged with their source, destination, and visit-expiry step, occupy the activity node for one hour, and then return to the node from which they were selected. The logger records requested and fulfilled demand, source--destination flows, traveler distance, occupancy, and the visit lifecycle.
+
+\subsubsection{L\'evy Walk V2 Plugin}
+
+The \textit{L\'evy Walk V2 Plugin} retains L\'evy-based destination sampling but changes the demand semantics. Instead of independently applying a movement probability to every available packet, it calculates an exact daily attendance target from the original worker and student populations. The target is first allocated among census-sector homes and then among departure hours through largest-remainder allocation. Movements use packets of at most 50 people, including the final partial packet, and each person is restricted to one attendance episode per simulated day.
+
+Workers have a configured daily attendance rate of 0.9812322015 and remain at work for eight hours. Students have a rate of 0.9375, depart according to profiles centered on 08:00, 13:00, and 19:00, and remain at school for four hours. Each movement retains the original home, requested and receiving destination, departure cycle, and expiry step. These traceable characteristics support separate accounting of requested, fulfilled, and unmet attendance and ensure that returns can be audited. When composed with Popular Times V2, commuting is processed before the activity requests at the end of each hourly step, giving the two plugins an explicit and repeatable execution order.
+
+\subsection{Simulation Setup}
+\label{sec:routine_mobility_setup}
+
+All scenarios use 24 hourly steps per simulated day and represent Porto Alegre, Brazil. Table~\ref{tbl:routine_mobility_scenarios} summarizes the three experiment families. The original experiment uses the published neighborhood-level representation, with one home node per neighborhood. The newer experiments use census-sector home nodes, allowing multiple origins to coexist within the same region without changing the definitions of regions, points of interest, or population blobs.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Baseline routine-mobility scenarios. Replications refer to each stochastic configuration; deterministic Popular Times-only configurations were run once.}
+\label{tbl:routine_mobility_scenarios}
+\begin{tabularx}{\linewidth}{@{}lrrrrX@{}}
+\toprule
+\textbf{Scenario family} &
+\textbf{Regions} &
+\shortstack{\textbf{Home}\\\textbf{nodes}} &
+\textbf{Population} &
+\shortstack{\textbf{Simulated}\\\textbf{days}} &
+\textbf{Configurations and replications} \\
+\midrule
+Original L\'evy Walk
+    & 94 & 94 & 1,409,351 & 1
+    & Five distribution scales; one published run per configuration. \\
+Popular Times V2, reduced
+    & 13 & 435 & 131,925 & 56
+    & Popular Times only ($n=1$) and with the original L\'evy Walk ($n=30$). \\
+Popular Times V2, complete
+    & 94 & 2,711 & 1,331,414 & 56
+    & Popular Times only ($n=1$) and with the original L\'evy Walk ($n=5$). \\
+Popular Times V2 and L\'evy Walk V2
+    & 13 & 435 & 131,925 & 56
+    & Combined activity and commute baseline with matched seeds 0--29 ($n=30$). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The original environment contains 504 points of interest across the 94 neighborhoods and initializes the full modeled population at neighborhood home nodes. Sampled characteristics identify age and occupation, and the traceable region-of-origin characteristic distinguishes otherwise compatible blobs. The scale experiment holds the 250-person packet and 500~m distance interval constant while comparing published \texttt{levy\_scale} values of 0.5, 1, 2, 5, and 10. Worker and student routines execute at configured hours, followed by return actions.
+
+The Popular Times scenarios use one home, work, school, marketplace, restaurant, and pharmacy node per represented census sector. The reduced environment therefore contains 435 nodes of each type, while the complete environment contains 2,711 of each type. All Popular Times simulations cover eight complete weeks. The deterministic configurations isolate scheduled activity visits; the original-L\'evy configurations add stochastic work and school movement and use repeated seeds. The complete-city stochastic result uses five seeds and is consequently less precise than the 30-seed reduced result.
+
+The combined Popular Times and L\'evy Walk V2 scenario uses the reduced environment and 30 matched seeds. Across seeds, the sampled population contains a mean of 72,161.4 workers and 28,474.6 students. Their configured attendance rates produce a mean target of 70,807.2 workers and 26,694.9 students per day. All recent runs were checked for population conservation, demand accounting, one-hour Popular Times visits, valid return lifecycles, and consistency between requested, fulfilled, and unmet movement. Every baseline run passed its applicable validation checks.
+
+\subsection{Results}
+\label{sec:routine_mobility_results}
+
+\subsubsection{Original L\'evy Walk Results}
+
+Figure~\ref{fig:routine_levy_distributions} reproduces the published displacement result. A displacement denotes the movement of one person between an origin and a destination as part of a L\'evy action; consequently, moving one 250-person packet contributes 250 displacements. Increasing \texttt{levy\_scale} spreads the displacement distribution over a wider range. All configurations retain the expected heavy-tailed form: short movements dominate, while long movements become progressively less frequent.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/Levy_Distributions.png}
+    \caption{Published L\'evy Walk displacement results. Distances are grouped into 500~m intervals; each simulation represents 1,409,351 residents and uses 250-person movement packets. Larger scale values produce broader displacement distributions.}
+    \label{fig:routine_levy_distributions}
+\end{figure}
+
+The published baseline adopts \texttt{levy\_scale}$=2$. Under this configuration, approximately 50\% of all displacements occur within 2~km of their origin. This empirical selection provides a mixture of movements within a neighborhood or between neighboring areas while preserving a smaller number of longer trips. It is a scenario parameter rather than a fitted estimate of Porto Alegre's mobility distribution and can be changed when a different spatial scale is required.
+
+The original restriction experiment, reproduced in Figure~\ref{fig:routine_levy_restriction}, confirms that the movement-volume control behaves monotonically. Increasing \texttt{Restriction} reduces the number of displacements generated by the same scale-2 routine, while leaving the underlying distance-sampling mechanism unchanged. Thus, the two parameters govern distinct aspects of mobility: scale affects where moving packets travel, whereas restriction affects how many eligible packets move.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.98\linewidth]{Figures/MovementRestriction.png}
+    \caption{Published sensitivity of L\'evy Walk displacement to the \texttt{Restriction} parameter. All configurations use \texttt{levy\_scale}$=2$; higher restriction values reduce the population moved by the routine.}
+    \label{fig:routine_levy_restriction}
+\end{figure}
+
+\subsubsection{Popular Times Baseline Results}
+
+Table~\ref{tbl:popular_times_baseline} reports the baseline Popular Times outcomes. Fulfillment is the fraction of requested activity visits completed. Travelers per capita is the number of fulfilled one-hour visits divided by the initial population over the 56-day horizon. Mean source distance measures the distance between the home node from which a traveler was selected and the requested activity destination; it is not a commuting-distance measure.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Popular Times V2 baseline outcomes. Brackets contain 95\% $t$ intervals for repeated stochastic configurations.}
+\label{tbl:popular_times_baseline}
+\begin{tabularx}{\linewidth}{@{}llrrrr@{}}
+\toprule
+\textbf{Environment} &
+\textbf{Routine composition} &
+\shortstack{\textbf{Requested}\\\textbf{visits}} &
+\shortstack{\textbf{Fulfillment}\\\textbf{(\%)}} &
+\shortstack{\textbf{Travelers}\\\textbf{/capita}} &
+\shortstack{\textbf{Mean source}\\\textbf{distance (m)}} \\
+\midrule
+13 regions & Popular Times only
+    & 2,374,616 & 100.00 & 17.9997 & 86.7901 \\
+13 regions & Popular Times + original L\'evy
+    & 2,374,616 & 100.00 & 17.9997 & 81.9953 [81.9928--81.9977] \\
+94 regions & Popular Times only
+    & 23,965,416 & 100.00 & 18.0000 & 89.8840 \\
+94 regions & Popular Times + original L\'evy
+    & 23,965,416 & 100.00 & 18.0000 & 84.0157 [83.9998--84.0316] \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Every requested baseline visit is fulfilled in both spatial representations. In the reduced environment, the 2,374,616 requests comprise 1,055,400 marketplace visits, 1,055,400 restaurant visits, and 263,816 pharmacy visits. Because visits last one hour, fulfilled demand and occupancy person-hours are numerically equal. The complete environment scales the same profiles to more than 23.9 million visits without changing fulfillment.
+
+The per-capita totals also confirm the intended interpretation of the weekly rates. Eight marketplace visits and eight restaurant visits are requested per resident over eight weeks, while the pharmacy profile contributes approximately two visits per resident. Their sum produces approximately 18 activity visits per capita. Small deviations from exactly 18 in the reduced environment arise from integer allocation of the pharmacy demand across home nodes and hourly profiles, not from unmet demand.
+
+Adding the original L\'evy routine does not change requested demand, visit fulfillment, travelers per capita, or occupancy per request. It changes which home nodes contain eligible population when an activity request is evaluated and therefore changes the source-distance measure. Relative to Popular Times alone, the mean distance decreases by 4.7948~m in the 13-region environment and 5.8683~m in the complete environment. These differences demonstrate composition between independent routines; they do not show that the L\'evy configuration is a more accurate source-choice model.
+
+\subsubsection{Popular Times and L\'evy Walk V2 Results}
+
+Table~\ref{tbl:levy_v2_baseline} summarizes the 30-seed combined baseline. The Popular Times plugin again fulfills every one of the 2,374,616 activity requests in every run. L\'evy Walk V2 requests a mean of 5,460,117.6 worker and student trips over the 56 simulated days and fulfills 5,460,115.6. The resulting mean commute fulfillment is 0.9999996, which rounds to 100.00\% at the precision used in the summary table.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Popular Times V2 and L\'evy Walk V2 baseline outcomes over 30 matched seeds. Brackets contain 95\% $t$ intervals.}
+\label{tbl:levy_v2_baseline}
+\begin{tabularx}{\linewidth}{@{}lrrX@{}}
+\toprule
+\textbf{Outcome} & \textbf{Mean} & \textbf{95\% interval} & \textbf{Interpretation} \\
+\midrule
+Activity-visit fulfillment
+    & 1.0000 & [1.0000--1.0000]
+    & All Popular Times requests completed. \\
+Activity source distance
+    & 86.7817~m & [86.7781--86.7853]
+    & Home source to activity destination. \\
+Commute fulfillment
+    & 0.9999996 & [0.9999995--0.9999997]
+    & Requested worker and student attendance completed. \\
+Unmet commute demand
+    & 2.0 & [1.4--2.6]
+    & Mean people not moved over 5.46 million requests. \\
+Population moved to work or school
+    & 5,460,115.6 & [5,459,957.3--5,460,273.9]
+    & Fulfilled outbound commute demand. \\
+Mean commute distance
+    & 1,393.53~m & [1,392.87--1,394.19]
+    & Home-to-work or home-to-school movement. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The average unmet commute demand of two people is recorded as insufficient population at the requested origin and is concentrated primarily in student requests. Although nonzero, it represents approximately $3.66\times10^{-7}$ of the mean requested attendance. Worker trips have a mean distance of 1,408.48~m, compared with 1,353.90~m for student trips. No temporary home returns, blocked returns, or repatriations occur in the baseline, as expected, and all return-lifecycle validation checks pass.
+
+The difference between the two distance measures in Table~\ref{tbl:levy_v2_baseline} is intentional. Popular Times typically selects a source home close to a marketplace, restaurant, or pharmacy, producing a mean source distance of 86.78~m. L\'evy Walk V2 instead samples work and school destinations through the configured heavy-tailed distance process, producing a mean commute distance of approximately 1.39~km. Reporting the measures separately prevents short activity-sourcing movements from obscuring the longer work and school trips.
+
+Compared with the original-L\'evy Popular Times baseline, L\'evy Walk V2 preserves identical activity demand and fulfillment but increases the mean Popular Times source distance by 4.7864~m. This is a combined change in commute demand, packet handling, attendance, and lifecycle semantics; it should not be interpreted as an isolated algorithmic improvement. Its contribution is that the quantity requested and the reasons for any unmet attendance are now explicit and auditable.
+
+\subsection{Remarks}
+
+The experiments establish three complementary forms of routine mobility within the same population framework. The original L\'evy action produces configurable heavy-tailed displacement from neighborhood aggregates. Popular Times V2 converts weekly hourly profiles into conserved activity demand from census-sector homes. L\'evy Walk V2 adds explicit daily worker and student attendance without interfering with the fulfillment of the baseline activity visits. Across these changes in resolution and behavior, LodusPop continues to use the same region, point-of-interest, population-blob, template, and action abstractions.
+
+The results also clarify what each baseline validates. Complete fulfillment verifies that the configured demand can be executed with the available modeled population and that the plugin lifecycles compose correctly. It does not validate the weekly rates, departure profiles, destination choices, or attendance rates against observed behavior. Likewise, the narrow intervals in the repeated runs describe variability due to the implemented random sampling; they do not capture uncertainty in census inputs or mobility assumptions.
+
+Finally, the mobility measures should not be collapsed into a single indicator. Displacement distributions describe the spatial reach of stochastic packets, activity fulfillment describes whether scheduled visits occur, source distance describes where activity travelers are obtained, and commute fulfillment and distance describe work and school attendance. Keeping these quantities separate provides a clearer baseline for later scenarios while avoiding claims that one routine is behaviorally superior to another.

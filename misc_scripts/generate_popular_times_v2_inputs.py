@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 from collections import Counter
@@ -10,6 +11,18 @@ from typing import Any
 
 
 POI_TYPES = ("marketplace", "restaurant", "pharmacy")
+LEGACY_OFFSET_REGION_NAMES = {
+    "Cel. Aparício Borges": "Coronel Aparício Borges",
+    "Jardim Itú": "Jardim Itu",
+    "Menino Deus": "Menino-Deus",
+    "Mont'Serrat": "Mont’Serrat",
+    "Passo D'Areia": "Passo da Areia",
+    "São José": "Vila São José",
+}
+WATER_REGION_ALIASES = {
+    legacy_name: canonical_name
+    for canonical_name, legacy_name in LEGACY_OFFSET_REGION_NAMES.items()
+}
 EXPECTED_UNMATCHED_HOMES = {
     "Chapéu do Sol//home_9",
     "Hípica//home_40",
@@ -18,6 +31,32 @@ EXPECTED_UNMATCHED_HOMES = {
 
 def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf8"))
+
+
+def load_water_thresholds(path: Path) -> dict[str, float]:
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        rows = csv.DictReader(stream, delimiter=";")
+        if rows.fieldnames != ["node_name", "lat", "long", "wather_lvl"]:
+            raise ValueError(f"Unexpected water-threshold columns in {path}")
+        thresholds = {}
+        for row in rows:
+            region_name, node_name = row["node_name"].split("//", 1)
+            # This CSV was exported with UTF-8 names interpreted as Mac Roman.
+            # Recover those names while accepting already-corrected rows too.
+            try:
+                region_name = region_name.encode("mac_roman").decode("utf8")
+            except (UnicodeEncodeError, UnicodeDecodeError):
+                pass
+            region_name = WATER_REGION_ALIASES.get(region_name, region_name)
+            full_name = f"{region_name}//{node_name}"
+            if full_name in thresholds:
+                raise ValueError(f"Duplicate water threshold for {full_name}")
+            thresholds[full_name] = float(row["wather_lvl"].strip())
+    if len(thresholds) != 16266:
+        raise ValueError(
+            f"Expected 16266 water thresholds in {path}, found {len(thresholds)}"
+        )
+    return thresholds
 
 
 def _paired_nodes(environment: dict[str, Any], node_type: str):
@@ -63,9 +102,13 @@ def _deterministic_offset(
 def build_complete_environment(
     source_environment: dict[str, Any],
     empirical_offsets: dict[str, list[tuple[float, float]]],
+    water_thresholds: dict[str, float],
 ) -> dict[str, Any]:
     result = deepcopy(source_environment)
     for region in result["regions"]:
+        offset_region_name = LEGACY_OFFSET_REGION_NAMES.get(
+            region["name"], region["name"]
+        )
         original_nodes = list(region["points_of_interest"])
         existing_names = {node["unique_name"] for node in original_nodes}
         generated_nodes = []
@@ -82,7 +125,7 @@ def build_complete_environment(
                     )
                 dx, dy = _deterministic_offset(
                     empirical_offsets[node_type],
-                    f"{region['name']}//{home['unique_name']}",
+                    f"{offset_region_name}//{home['unique_name']}",
                     node_type,
                 )
                 attributes = {}
@@ -101,6 +144,24 @@ def build_complete_environment(
                 )
                 existing_names.add(unique_name)
         region["points_of_interest"].extend(generated_nodes)
+
+    generated_names = {
+        f"{region['name']}//{node['unique_name']}"
+        for region in result["regions"]
+        for node in region["points_of_interest"]
+    }
+    if generated_names != set(water_thresholds):
+        missing = sorted(generated_names - set(water_thresholds))
+        extra = sorted(set(water_thresholds) - generated_names)
+        raise ValueError(
+            "Water thresholds do not match the generated environment: "
+            f"missing={missing[:5]}, extra={extra[:5]}"
+        )
+    for region in result["regions"]:
+        for node in region["points_of_interest"]:
+            node.setdefault("attributes", {})["water_level"] = water_thresholds[
+                f"{region['name']}//{node['unique_name']}"
+            ]
     return result
 
 
@@ -191,8 +252,10 @@ def validate_outputs(
     water_threshold_count = sum(
         "water_level" in node.get("attributes", {}) for node in nodes
     )
-    if water_threshold_count:
-        raise ValueError("94-region output must not contain synthetic water thresholds")
+    if water_threshold_count != len(nodes):
+        raise ValueError(
+            "Every node in the 94-region output must have a water threshold"
+        )
     return {
         "region_count": len(regions),
         "node_count": len(nodes),
@@ -215,8 +278,14 @@ def build_outputs(data_root: Path):
     source_population = _load_json(
         enumeration_root / "Population-POA-EnumArea.json"
     )
+    water_threshold_path = (
+        enumeration_root / "Environment-POA-EnumArea-WaterLevels_Filled3.csv"
+    )
+    water_thresholds = load_water_thresholds(water_threshold_path)
     offsets = collect_empirical_offsets(reference_environment)
-    environment = build_complete_environment(source_environment, offsets)
+    environment = build_complete_environment(
+        source_environment, offsets, water_thresholds
+    )
     population, exclusions = clean_population(source_population, source_environment)
     validation = validate_outputs(environment, population)
     source_population_total = sum(
@@ -232,6 +301,8 @@ def build_outputs(data_root: Path):
         "derived_population": "Population-POA-EnumArea-PopularTimes.json",
         "poi_offset_source": "Environment-13-EnumArea.json",
         "poi_offset_method": "SHA-256 deterministic selection from empirical type-specific offset vectors",
+        "water_threshold_source": water_threshold_path.name,
+        "offset_seed_region_aliases": LEGACY_OFFSET_REGION_NAMES,
         "offset_sample_counts": {
             node_type: len(values) for node_type, values in offsets.items()
         },

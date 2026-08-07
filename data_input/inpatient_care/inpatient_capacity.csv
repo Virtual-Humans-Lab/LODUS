@@ -2,7 +2,7 @@ hospital,region,longitude,latitude,specialty,bed_type,total_beds,sus_beds
 Hospital Cristo Redentor,Cristo Redentor,-51.1599997,-30.0099721,Buco Maxilo Facial,Cirúrgico,7,7
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Buco Maxilo Facial,Cirúrgico,1,1
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Cardiologia,Cirúrgico,6,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Cardiologia,Cirúrgico,46,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Cardiologia,Cirúrgico,46,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Cardiologia,Cirúrgico,19,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Cardiologia,Cirúrgico,48,48
 Instituto de Cardiologia,Santana,-51.2115909,-30.0491281,Cardiologia,Cirúrgico,158,51
@@ -16,7 +16,7 @@ Hospital de Clínicas,Santa Cecília,-51.2092274,-30.0387902,Cirurgia Geral,Cir�
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Cirurgia Geral,Cirúrgico,6,0
 Hospital Ernesto Dornelles,Azenha,-51.2147465,-30.0477777,Cirurgia Geral,Cirúrgico,100,0
 Hospital Fêmina,Rio Branco,-51.2093418,-30.0293513,Cirurgia Geral,Cirúrgico,2,2
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Cirurgia Geral,Cirúrgico,16,1
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Cirurgia Geral,Cirúrgico,16,1
 Hospital Materno Infantil Presidente Vargas,Independência,-51.2174568,-30.0295465,Cirurgia Geral,Cirúrgico,1,1
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Cirurgia Geral,Cirúrgico,84,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Cirurgia Geral,Cirúrgico,69,69
@@ -25,10 +25,10 @@ Hospital Restinga e Extremo-Sul,Restinga,-51.1313177,-30.1426278,Cirurgia Geral,
 Hospital São Lucas da PUCRS,Jardim Botânico,-51.1759716,-30.0552646,Cirurgia Geral,Cirúrgico,130,42
 HPS,Bom Fim,-51.2114172,-30.0362194,Cirurgia Geral,Cirúrgico,21,21
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Cirurgia Geral,Cirúrgico,49,19
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Endocrinologia,Cirúrgico,1,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Endocrinologia,Cirúrgico,1,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Endocrinologia,Cirúrgico,1,1
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Gastroenterologia,Cirúrgico,6,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Gastroenterologia,Cirúrgico,4,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Gastroenterologia,Cirúrgico,4,0
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Ginecologia,Cirúrgico,2,0
 Hospital Fêmina,Rio Branco,-51.2093418,-30.0293513,Ginecologia,Cirúrgico,17,17
 Hospital Materno Infantil Presidente Vargas,Independência,-51.2174568,-30.0295465,Ginecologia,Cirúrgico,8,8
@@ -36,13 +36,13 @@ Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Ginecologia,Ci
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Ginecologia,Cirúrgico,14,14
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Ginecologia,Cirúrgico,1,1
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Nefrologiaurologia,Cirúrgico,2,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Nefrologiaurologia,Cirúrgico,13,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Nefrologiaurologia,Cirúrgico,13,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Nefrologiaurologia,Cirúrgico,4,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Nefrologiaurologia,Cirúrgico,26,26
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Nefrologiaurologia,Cirúrgico,8,8
 Hospital Cristo Redentor,Cristo Redentor,-51.1599997,-30.0099721,Neurocirurgia,Cirúrgico,64,64
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Neurocirurgia,Cirúrgico,4,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Neurocirurgia,Cirúrgico,9,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Neurocirurgia,Cirúrgico,9,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Neurocirurgia,Cirúrgico,19,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Neurocirurgia,Cirúrgico,1,1
 HPS,Bom Fim,-51.2114172,-30.0362194,Neurocirurgia,Cirúrgico,15,15
@@ -50,30 +50,30 @@ Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2
 Hospital Banco de Olhos,Vila Ipiranga,-51.1566647,-30.0223563,Oftalmologia,Cirúrgico,20,12
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Oftalmologia,Cirúrgico,1,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Oftalmologia,Cirúrgico,1,1
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Oncologia,Cirúrgico,5,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Oncologia,Cirúrgico,5,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Oncologia,Cirúrgico,10,10
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Oncologia,Cirúrgico,79,30
 Hospital Cristo Redentor,Cristo Redentor,-51.1599997,-30.0099721,Ortopediatraumatologia,Cirúrgico,85,85
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Ortopediatraumatologia,Cirúrgico,8,0
 Hospital Independência,Agronomia,-51.1503044,-30.0613951,Ortopediatraumatologia,Cirúrgico,119,119
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Ortopediatraumatologia,Cirúrgico,19,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Ortopediatraumatologia,Cirúrgico,19,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Ortopediatraumatologia,Cirúrgico,25,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Ortopediatraumatologia,Cirúrgico,1,1
 HPS,Bom Fim,-51.2114172,-30.0362194,Ortopediatraumatologia,Cirúrgico,22,22
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Ortopediatraumatologia,Cirúrgico,10,8
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Otorrinolaringologia,Cirúrgico,1,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Otorrinolaringologia,Cirúrgico,2,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Otorrinolaringologia,Cirúrgico,2,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Otorrinolaringologia,Cirúrgico,1,1
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Otorrinolaringologia,Cirúrgico,2,2
 Hospital Cristo Redentor,Cristo Redentor,-51.1599997,-30.0099721,Plastica,Cirúrgico,17,17
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Plastica,Cirúrgico,1,0
 Hospital Fêmina,Rio Branco,-51.2093418,-30.0293513,Plastica,Cirúrgico,1,1
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Plastica,Cirúrgico,1,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Plastica,Cirúrgico,1,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Plastica,Cirúrgico,2,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Plastica,Cirúrgico,1,1
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Plastica,Cirúrgico,2,1
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Torácica,Cirúrgico,1,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Torácica,Cirúrgico,2,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Torácica,Cirúrgico,2,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Torácica,Cirúrgico,2,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Torácica,Cirúrgico,19,19
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Torácica,Cirúrgico,37,14
@@ -96,7 +96,7 @@ Hospital Divina Providência,Glória,-51.188816,-30.0851342,Clínica Geral,Clín
 Hospital Ernesto Dornelles,Azenha,-51.2147465,-30.0477777,Clínica Geral,Clínico,163,0
 Hospital Humaniza,Independência,-51.2124233,-30.0248614,Clínica Geral,Clínico,50,0
 Hospital Independência,Agronomia,-51.1503044,-30.0613951,Clínica Geral,Clínico,5,5
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Clínica Geral,Clínico,54,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Clínica Geral,Clínico,54,0
 Hospital Materno Infantil Presidente Vargas,Independência,-51.2174568,-30.0295465,Clínica Geral,Clínico,1,1
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Clínica Geral,Clínico,36,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Clínica Geral,Clínico,222,222
@@ -106,26 +106,26 @@ Hospital São Lucas da PUCRS,Jardim Botânico,-51.1759716,-30.0552646,Clínica G
 HPS,Bom Fim,-51.2114172,-30.0362194,Clínica Geral,Clínico,10,10
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Clínica Geral,Clínico,159,50
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Dermatologia,Clínico,1,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Geriatria,Clínico,2,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Hematologia,Clínico,11,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Geriatria,Clínico,2,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Hematologia,Clínico,11,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Hematologia,Clínico,8,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Hematologia,Clínico,20,20
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Nefrourologia,Clínico,6,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Nefrourologia,Clínico,4,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Neonatologia,Clínico,10,0
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Neurologia,Clínico,8,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Neurologia,Clínico,20,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Neurologia,Clínico,20,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Neurologia,Clínico,10,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Neurologia,Clínico,19,19
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Neurologia,Clínico,32,16
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Oncologia,Clínico,5,0
 Hospital Fêmina,Rio Branco,-51.2093418,-30.0293513,Oncologia,Clínico,44,44
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Oncologia,Clínico,18,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Oncologia,Clínico,18,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Oncologia,Clínico,28,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Oncologia,Clínico,22,22
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Oncologia,Clínico,97,23
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Pneumologia,Clínico,5,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Pneumologia,Clínico,1,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Pneumologia,Clínico,1,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Pneumologia,Clínico,28,28
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,Pneumologia,Clínico,36,0
 Hospital Santa Ana,Teresópolis,-51.2095088,-30.0866803,Saúde Mental,Clínico,60,60
@@ -135,7 +135,7 @@ Hospital de Clínicas,Santa Cecília,-51.2092274,-30.0387902,Obstetrícia Cirúr
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,Obstetrícia Cirúrgica,Obstétrico,26,0
 Hospital Fêmina,Rio Branco,-51.2093418,-30.0293513,Obstetrícia Cirúrgica,Obstétrico,14,14
 Hospital Militar de Área de Porto Alegre,Auxiliadora,-51.195396,-30.0185252,Obstetrícia Cirúrgica,Obstétrico,5,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,Obstetrícia Cirúrgica,Obstétrico,18,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,Obstetrícia Cirúrgica,Obstétrico,18,0
 Hospital Materno Infantil Presidente Vargas,Independência,-51.2174568,-30.0295465,Obstetrícia Cirúrgica,Obstétrico,26,26
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,Obstetrícia Cirúrgica,Obstétrico,30,0
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,Obstetrícia Cirúrgica,Obstétrico,21,21
@@ -213,7 +213,7 @@ Hospital de Clínicas,Santa Cecília,-51.2092274,-30.0387902,UTI Adulto - Tipo I
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,UTI Adulto - Tipo III,Complementar,26,0
 Hospital Ernesto Dornelles,Azenha,-51.2147465,-30.0477777,UTI Adulto - Tipo III,Complementar,40,0
 Hospital Militar de Área de Porto Alegre,Auxiliadora,-51.195396,-30.0185252,UTI Adulto - Tipo III,Complementar,10,0
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,UTI Adulto - Tipo III,Complementar,60,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,UTI Adulto - Tipo III,Complementar,60,0
 Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,UTI Adulto - Tipo III,Complementar,76,1
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,UTI Adulto - Tipo III,Complementar,59,59
 Hospital São Lucas da PUCRS,Jardim Botânico,-51.1759716,-30.0552646,UTI Adulto - Tipo III,Complementar,69,35
@@ -226,7 +226,7 @@ Hospital Moinhos de Vento,Moinhos de Vento,-51.2111042,-30.024954,UTI Pediátric
 HPS,Bom Fim,-51.2114172,-30.0362194,UTI Pediátrica - Tipo III,Complementar,8,8
 Instituto de Cardiologia,Santana,-51.2115909,-30.0491281,UTI Pediátrica - Tipo III,Complementar,14,9
 Irmandade da Santa Casa de Misericórdia de Porto Alegre,Centro Histórico,-51.2217197,-30.0301294,UTI Pediátrica - Tipo III,Complementar,40,24
-Hospital Mãe de Deus,Menino-Deus,-51.2316227,-30.0591926,UTI Neonatal - Tipo I,Complementar,10,0
+Hospital Mãe de Deus,Menino Deus,-51.2316227,-30.0591926,UTI Neonatal - Tipo I,Complementar,10,0
 Hospital Divina Providência,Glória,-51.188816,-30.0851342,UTI Neonatal - Tipo II,Complementar,8,0
 Hospital Materno Infantil Presidente Vargas,Independência,-51.2174568,-30.0295465,UTI Neonatal - Tipo II,Complementar,20,10
 Hospital Nossa Senhora da Conceição,Cristo Redentor,-51.1633281,-30.0160754,UTI Neonatal - Tipo II,Complementar,30,30

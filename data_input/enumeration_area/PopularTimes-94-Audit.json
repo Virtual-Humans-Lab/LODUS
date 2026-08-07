@@ -5,6 +5,15 @@
   "derived_population": "Population-POA-EnumArea-PopularTimes.json",
   "poi_offset_source": "Environment-13-EnumArea.json",
   "poi_offset_method": "SHA-256 deterministic selection from empirical type-specific offset vectors",
+  "water_threshold_source": "Environment-POA-EnumArea-WaterLevels_Filled3.csv",
+  "offset_seed_region_aliases": {
+    "Cel. Aparício Borges": "Coronel Aparício Borges",
+    "Jardim Itú": "Jardim Itu",
+    "Menino Deus": "Menino-Deus",
+    "Mont'Serrat": "Mont’Serrat",
+    "Passo D'Areia": "Passo da Areia",
+    "São José": "Vila São José"
+  },
   "offset_sample_counts": {
     "marketplace": 435,
     "restaurant": 435,
@@ -39,6 +48,6 @@
     "population_home_count": 2711,
     "total_population": 1331414,
     "pairing_valid": true,
-    "water_threshold_count": 0
+    "water_threshold_count": 16266
   }
 }

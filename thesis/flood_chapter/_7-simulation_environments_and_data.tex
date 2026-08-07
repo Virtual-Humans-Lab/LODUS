@@ -1,0 +1,188 @@
+\section{Simulation Environments and Input Data}
+\label{sec:simulation_environments_and_data}
+
+The experiments presented in the following sections do not use a single, uniform representation of Porto Alegre. Instead, they combine three principal environments with additional datasets selected for the spatial and operational requirements of each use case. The original environment represents the city through its 94 neighborhoods and supports the published mobility, large-event, epidemic, and vaccination experiments. The newer environments retain neighborhoods as simulation regions but place homes and other points of interest at the finer resolution of census sectors. A reduced census-sector environment covers 13 central neighborhoods, whereas a complete version covers all 94 neighborhoods. Service, flood, shelter, and behavioral inputs are then overlaid on the appropriate base environment.
+
+This section documents those shared inputs before presenting their experimental use. It distinguishes three kinds of information: observed or externally sourced data, derived data produced by spatial or statistical preprocessing, and configured values introduced specifically to define a simulation scenario. This distinction is important because the results are comparisons under the modeled inputs; they are not forecasts of observed mobility, flood impact, health-service demand, or epidemic evolution.
+
+\subsection{Spatial and Population Environments}
+\label{sec:spatial_population_environments}
+
+\subsubsection{Original 94-Neighborhood Environment}
+
+The original Porto Alegre model follows the environment described in the published LodusPop manuscript. Each of the city's 94 neighborhoods is represented as a region. Neighborhood boundaries were obtained from the digital cartographic data published by Porto Alegre City Hall\footnote{Porto Alegre City Hall digital maps, including the neighborhood boundary layer: \url{https://prefeitura.poa.br/carta-de-servicos/mapas-digitais-da-smamus}.}, and OpenStreetMap was used to obtain coordinates for urban amenities that could act as points of interest\footnote{OpenStreetMap: \url{https://www.openstreetmap.org/}.}. Each region contains one home, work, school, marketplace, pharmacy, and gas-station node. Selected regions also contain hospitals, shopping malls, or stadiums used by the corresponding experiments.
+
+Population totals, citywide occupation proportions, and the citywide age distribution were obtained from the Brazilian Institute of Geography and Statistics (IBGE)\footnote{IBGE city profile for Porto Alegre: \url{https://cidades.ibge.gov.br/brasil/rs/porto-alegre/panorama}.}. Neighborhood population and age distributions were complemented with municipal information published by ObservaPOA and PROCEMPA\footnote{ObservaPOA: \url{http://www.observapoa.com.br/}. PROCEMPA's Porto Alegre em An\'alise portal: \url{https://portoalegreemanalise.procempa.com.br/}.}. One initial population blob is placed at the home node of each neighborhood. Age is divided into children, young people, adults, and elders, while occupation is divided into students, workers, and others. Because neighborhood-level occupation distributions were unavailable, the same citywide occupation proportions were applied to every neighborhood.
+
+The published manuscript reports 504 points of interest and 1,409,351 residents. The current repository input contains 598 points of interest and 1,409,464 residents: 94 nodes for each of the six common node types, 17 hospitals, 15 shopping malls, and two stadiums. The published result sections retain the published values when reproducing those experiments, whereas the shelter simulations report the values loaded from the current repository input.
+
+{\color{red}\textbf{TODO (version reconciliation):} identify and archive the exact environment and population files used to produce the published 504-node, 1,409,351-person results. Document when the additional points of interest and the 113-person population difference were introduced.}
+
+\subsubsection{Census-Sector Environments}
+
+The newer environments use census sectors---also referred to as enumeration areas in the input filenames---as the unit at which residential population is initialized. Neighborhoods remain the simulation regions, preserving compatibility with region-level routines and outputs, but each neighborhood can contain many sector-specific home, work, school, and activity nodes. The repository contains both preliminary and definitive 2022 census-sector geometries for Porto Alegre. The official sector aggregates and geographic files are distributed by IBGE\footnote{IBGE 2022 Census sector aggregates: \url{https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html?edicao=39499&t=resultados}. Definitive 2022 sector geometries: \url{https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_de_setores_censitarios__divisoes_intramunicipais/censo_2022/setores/shp/BR/}.}.
+
+The reduced environment covers 13 neighborhoods: Azenha, Bom Fim, Centro Hist\'orico, Cidade Baixa, Farroupilha, Floresta, Independ\^encia, Menino Deus, Moinhos de Vento, Praia de Belas, Rio Branco, Santa Cec\'ilia, and Santana. It contains 435 census-sector homes. The stored environment has eight nodes per sector, totaling 3,480 nodes: home, work, school, marketplace, pharmacy, restaurant, and two unused placeholder types. The mobility analyses use the six named functional types, corresponding to 2,610 analytically active nodes.
+
+The reduced population file stores 159,886 people. However, its 67 population keys for Menino Deus use the region spelling \texttt{Menino-Deus}, while the environment uses \texttt{Menino Deus}. These unmatched keys contain 27,961 people and are not loaded, leaving the effective simulation population of 131,925 reported in the recent result sections.
+
+{\color{red}\textbf{TODO (input correction):} resolve the \texttt{Menino Deus}/\texttt{Menino-Deus} mismatch and decide whether the reduced experiments should be reproduced with 159,886 residents or retained as a documented 131,925-person compatibility dataset.}
+
+The complete census-sector environment covers all 94 neighborhoods. Its base form contains 2,711 home, 2,711 work, and 2,711 school nodes, for 8,133 nodes. The population file contains 2,713 home entries and 1,332,845 people, but two entries have no matching home node: \texttt{Chap\'eu do Sol//home\_9}, containing 1,023 people, and \texttt{H\'ipica//home\_40}, containing 408. Excluding these records gives an effective population of 1,331,414.
+
+For the complete Popular Times experiments, the base environment was extended with one marketplace, restaurant, and pharmacy for every census-sector home. These generated points were placed using deterministic, node-type-specific offset vectors sampled from the observed layouts in the 13-neighborhood environment. The resulting environment has 16,266 nodes, comprising 2,711 nodes of each of the six functional types, and uses a cleaned 1,331,414-person population file. This complete derived environment was used for baseline mobility comparisons, not for the citywide flood scenarios, because empirically supported exposure thresholds were not available for all generated activity points.
+
+{\color{red}\textbf{TODO (census lineage):} document the complete preprocessing pipeline that produced the 2,711 modeled census sectors, including the census release used, geometry filters, neighborhood joins, population allocation, centroid or point placement, and the difference from the 2,649 preliminary and 2,744 definitive sector geometries stored in the repository. Also identify the source and derivation of the census-sector age and occupation distributions.}
+
+Table~\ref{tbl:shared_simulation_environments} summarizes the environment versions. Here, effective population means the population attached to a home key that is present in the corresponding environment; it is not necessarily the sum stored in the uncleaned population file.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Shared Porto Alegre environments used by the result sections. Published and repository values are both retained where their versions differ.}
+\label{tbl:shared_simulation_environments}
+\begin{tabularx}{\linewidth}{@{}p{2.6cm}rrrrX@{}}
+\toprule
+\textbf{Environment} &
+\textbf{Regions} &
+\textbf{Homes} &
+\textbf{Stored nodes} &
+\textbf{Effective population} &
+\textbf{Principal uses} \\
+\midrule
+Original neighborhood, published
+    & 94 & 94 & 504 & 1,409,351
+    & Published L\'evy Walk, large-scale events, epidemic contagion, and vaccination. \\
+Original neighborhood, current
+    & 94 & 94 & 598 & 1,409,464
+    & Shelter and compatibility simulations. \\
+Census sector, reduced
+    & 13 & 435 & 3,480
+    & 131,925
+    & Popular Times, L\'evy Walk V2, reduced dialysis, and flood-aware mobility. \\
+Census sector, complete base
+    & 94 & 2,711 & 8,133
+    & 1,331,414
+    & Complete dialysis and service overlays. \\
+Census sector, complete Popular Times
+    & 94 & 2,711 & 16,266
+    & 1,331,414
+    & Complete-city routine-mobility baselines without flooding. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Flood Exposure and Water-Level Data}
+\label{sec:flood_water_input_data}
+
+Flood exposure is represented through a node attribute named \texttt{water\_level}. The spatial thresholds were collected using the simulated ``Water Level'' maps provided by Climate Central's Coastal Risk Screening Tool\footnote{Climate Central Coastal Risk Screening Tool: \url{https://coastal.climatecentral.org/map/}.}. For a modeled coordinate, the map was inspected across water-level settings and the level at which the location was considered inundated was recorded. The resulting environment files contain thresholds from 3.0~m to 10.0~m. During a simulation, the water-level plugin compares the current forcing value with this threshold and disables exposed nodes. This converts a spatial map into a compact per-node vulnerability attribute while allowing one set of coordinates to be tested against different temporal water-level scenarios.
+
+{\color{red}\textbf{TODO (Climate Central extraction):} record the access date, map layer and vertical datum, selected protection and connectivity settings, tested level interval, and whether each coordinate was classified manually or by an automated spatial procedure. Clarify whether 10.0~m denotes first exposure at 10.0~m or an upper-bound/default value for locations not exposed within the tested range.}
+
+Three forms of water input are used by the experiments:
+
+\begin{itemize}
+    \item The 13-neighborhood mobility and dialysis environments store a threshold for every modeled node. These attributes allow homes, activity destinations, work and school nodes, ETAs, and clinics to be disabled using the same water-level mechanism.
+    \item The hourly flood input spans simulation cycles 0--58. The routine-mobility experiments use cycles 0--55, corresponding to their 56-day horizon. A repository backup contains 15-minute records from May and June 2024, while the simulation input contains the processed hourly sequence. It reproduces the rise and recession of the flood hydrograph rather than assigning a separate arbitrary flood day to each node.
+    \item The dialysis sensitivity experiments also use synthetic sudden-rise sequences, including transitions to 9.3~m and 10.1~m at day 3, 06:00. These are deliberately configured stress scenarios and should not be interpreted as observed hydrographs.
+\end{itemize}
+
+{\color{red}\textbf{TODO (water time series):} identify the monitoring authority, station, variable, datum, download URL, and collection date for the May--June 2024 records, and document how the 15-minute source was converted to the hourly simulation series and how missing hourly cells were interpreted.}
+
+The shelter experiments use a related but static exposure overlay. Census sectors intersecting the modeled 5.30~m flood extent define 438 exposed sectors containing 186,522 residents in the source table. When these requests are mapped into the current neighborhood population, regional population caps allow 182,936 people to be represented, leaving a documented 3,586-person shortfall. The preliminary spatial input has 2,649 sector identifiers; 2,557 match the bundled geometry and 92 remain unmatched. These limitations affect map completeness and are retained in the shelter input audit.
+
+{\color{red}\textbf{TODO (shelter flood map):} document the GIS workflow used to produce the 5.30~m census-sector overlay, including the Climate Central settings, intersection rule, population-allocation method, and treatment of the 92 unmatched sector identifiers.}
+
+\subsection{Water, Health, and Shelter Infrastructure}
+\label{sec:infrastructure_input_data}
+
+\subsubsection{Water-Treatment Stations and Dialysis Clinics}
+
+The dialysis environments add Porto Alegre water-treatment stations (Esta\c{c}\~oes de Tratamento de \`Agua, ETAs) as water-source nodes and dialysis facilities as clinic nodes. The complete overlay contains six ETAs and 12 clinics. The reduced 13-neighborhood overlay contains the two ETAs and eight clinics located within that study area. Each record stores coordinates, neighborhood, census-sector identifier, and water-exposure threshold. ETA records also contain their served neighborhoods, while each clinic lists one or more supplying ETAs. These relations allow a clinic to become unavailable because it is directly flooded, because all its modeled water sources are unavailable, or because both conditions occur.
+
+The ETA names and service areas are consistent with municipal descriptions of Porto Alegre's water-supply system, including the service areas published by the Municipal Department of Water and Sewage (DMAE)\footnote{Example DMAE description of operating ETAs and their served neighborhoods during the 2024 flood: \url{https://prefeitura.poa.br/dmae/noticias/estacao-de-tratamento-de-agua-belem-novo-e-unica-em-operacao}.}. The precise source lineage for the coordinates, final service-area lists, and water thresholds is not preserved with the input files.
+
+{\color{red}\textbf{TODO (ETA provenance):} cite the authoritative DMAE dataset or pages used for every ETA coordinate and service area, and document how neighborhood service lists were converted into clinic dependencies.}
+
+The repository records clinic names and coordinates, but it does not identify the health-registry, municipal directory, or manual search used to assemble the list. Clinic opening times and per-step treatment capacities are configuration parameters used to test queueing and recovery behavior; they are not presently documented as observed operational capacities.
+
+{\color{red}\textbf{TODO (dialysis provenance):} identify the source, reference date, inclusion criteria, and geocoding method for the 12 dialysis clinics. Confirm the source of clinic-to-ETA dependencies and replace or justify the configured opening hours and treatment capacities if observed values are available.}
+
+\subsubsection{Hospitals and Bed Capacity}
+
+The inpatient-care experiments overlay the complete census-sector environment with a normalized January 2024 extract from the Brazilian National Registry of Health Establishments (CNES)\footnote{Cadastro Nacional de Estabelecimentos de Sa\'ude (CNES): \url{https://cnes.datasus.gov.br/}.}. The normalized dataset contains 253 hospital--specialty--bed-type rows for 28 hospitals in 22 Porto Alegre neighborhoods. It reports 7,529 beds in total, including 4,689 beds assigned to the Unified Health System (SUS). Hospital coordinates were added to the original LODUS-Health dataset through geographic lookup. The recent experiments preserve observed bed pools separately from their configured admission demand, length of stay, payer, routing, overflow, and queue policies.
+
+One capacity value is explicitly synthetic: the two-facility scenario assigns Hospital Santa Ana a Psychiatry/Other Specialties pool of 264 total beds, including 159 SUS beds, although this pool is absent from the CNES extract. Likewise, the CID demand and CID-to-specialty mappings used in demonstration scenarios are experimental inputs rather than clinical recommendations. The original random seed and generated per-step admission arrays from the LODUS-Health configurations were not preserved, so the recent runs reconstruct totals and processes but do not claim byte-identical reproduction.
+
+{\color{red}\textbf{TODO (hospital geocoding):} preserve the exact CNES extraction query or file identifier and document the source and verification procedure for hospital coordinates.}
+
+\subsubsection{Shelter Locations and Capacities}
+
+The current shelter input begins with 128 tabular records containing names, addresses, coordinates, neighborhoods, capacity, occupancy, and free-text observations. After the configured validation, filtering, and missing-data treatment, version~3 loads 104 shelters with 12,519 places and an initial occupancy of 10,963 people. The experiments treat capacity and initial occupancy separately: capacity limits admissions, while the initial occupancy reduces the space available to newly displaced residents. Earlier input versions are retained for compatibility but are not the reference for the reported research matrix.
+
+{\color{red}\textbf{TODO (shelter provenance):} identify the agency or public list from which shelter locations, capacities, and occupancies were collected; add the collection and occupancy reference dates; document geocoding, excluded records, and every capacity or occupancy imputation rule.}
+
+\subsection{Behavioral, Event, and Public-Health Inputs}
+\label{sec:behavioral_policy_input_data}
+
+The Popular Times routines use three seven-day hourly profiles, one each for marketplaces, restaurants, and pharmacies. Positive hourly values are normalized to distribute a configured weekly demand. The baseline scenarios request one marketplace visit, one restaurant visit, and 0.25 pharmacy visits per resident per week; every fulfilled visit lasts one hour. The profiles are fixed across compared scenarios so that differences arise from mobility, exposure, or adaptation rather than resampling the temporal demand. The 94-neighborhood census-sector version reuses the same profiles and the deterministic generated POI positions described above.
+
+{\color{red}\textbf{TODO (Popular Times provenance):} identify how the three hourly profiles were collected or aggregated, including the original service or dataset, sampled establishments, locations, dates, time zone, normalization, and any cleaning. If the profiles are synthetic or manually designed, label them explicitly as such.}
+
+The original L\'evy Walk and L\'evy Walk V2 configurations add behavioral parameters rather than observed trajectories. These include the heavy-tailed distance scale, packet size, restriction factor, worker attendance rate, student attendance rate, departure-hour profiles, and visit durations. Their role is to define internally consistent baseline behaviors and controlled comparisons. Unless supported by a cited calibration dataset, they should not be interpreted as estimates of Porto Alegre's realized commuting patterns.
+
+The large-scale event destinations use existing modeled points of interest whose coordinates originate from the OpenStreetMap-based environment. The request of 500,000 attendees per event and the event times are scenario-defined stress inputs, not observed attendance records. Similarly, epidemic initialization, homogeneous infection and removal parameters, vaccine effectiveness values, dose-start days, and restriction levels define comparative scenarios. The three reported $R_0$ values are based on studies of COVID-19 transmission in Brazil~\citep{dutra2020covidR0,deSouza2020covirR0,dutra2021covidR0}, while the daily vaccination quantities follow the 546-value Porto Alegre series collected from the Rio Grande do Sul vaccination dashboard\footnote{Rio Grande do Sul COVID-19 vaccination dashboard: \url{https://vacina.saude.rs.gov.br/}.}. Daily quantities are distributed among modeled regions in proportion to their populations.
+
+{\color{red}\textbf{TODO (vaccination series):} record the extraction date, date range, field definition, treatment of missing days, and whether the values represent doses administered, reported, or accumulated before conversion to daily simulation demand.}
+
+\subsection{Provenance Summary and Interpretation}
+\label{sec:input_provenance_summary}
+
+Table~\ref{tbl:simulation_data_provenance} consolidates the role and provenance status of the principal data families. Visible TODO flags are retained where the repository contains a usable input but not enough metadata to reconstruct its collection or transformation. Resolving these flags is necessary for full data reproducibility, but it does not change the distinction between empirical inputs and explicitly configured scenario assumptions.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Provenance status of the principal environment and scenario-input families.}
+\label{tbl:simulation_data_provenance}
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}p{3.2cm}X@{}}
+\toprule
+\textbf{Data family} & \textbf{Documented basis} & \textbf{Outstanding limitation} \\
+\midrule
+Neighborhood geometry and POIs
+    & City Hall boundaries and OpenStreetMap amenities
+    & Exact published input version must be archived. \\
+Neighborhood population
+    & IBGE, ObservaPOA, and PROCEMPA
+    & Published and current totals differ by 113 people. \\
+Census-sector environments
+    & IBGE 2022 geometries and aggregates
+    & The 2,711-sector construction and demographic preprocessing are not documented end to end. \\
+Flood thresholds and exposure
+    & Climate Central simulated water-level maps
+    & Extraction settings, datum, and spatial-overlay procedure are incomplete. \\
+Water-level forcing
+    & May--June 2024 records plus synthetic stress sequences
+    & Monitoring source and hourly preprocessing are not identified. \\
+ETAs and dialysis clinics
+    & Municipal service descriptions and compiled facility tables
+    & Coordinate, inclusion, dependency, and capacity lineage is incomplete. \\
+Hospital beds
+    & January 2024 CNES extract
+    & Exact extraction identifier and coordinate verification remain to be recorded. \\
+Shelters
+    & Compiled location, capacity, and occupancy table
+    & Original publisher, dates, filters, and imputations are not documented. \\
+Popular Times profiles
+    & Stored weekly hourly profiles
+    & Original data source and aggregation procedure are unknown. \\
+Vaccination quantities
+    & Rio Grande do Sul vaccination dashboard
+    & Extraction metadata and daily-value semantics require confirmation. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Across all following results, externally sourced coordinates, population quantities, and capacities provide geographic and operational context, while routines, demand volumes, failures, thresholds, and policy responses define the comparisons being tested. Consequently, uncertainty in source data and uncertainty due to stochastic simulation are different. Repeated seeds quantify variation caused by implemented random sampling; they do not quantify uncertainty in census counts, flood maps, facility data, behavioral profiles, or configured policy assumptions.

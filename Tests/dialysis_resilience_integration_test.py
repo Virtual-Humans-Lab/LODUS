@@ -164,6 +164,8 @@ def test_complete_environment_ignores_missing_water_thresholds(tmp_path):
     water = WaterLevelDataPlugin()
     simulation.load_plugin(water)
 
+    assert len(simulation.env_graph.region_list) == 94
+
     water.update_time_step(0, 0)
 
     assert water.current_water_level == 2.0

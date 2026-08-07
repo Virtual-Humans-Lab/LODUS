@@ -20,8 +20,8 @@ used by the modern experiments. They came from LODUS-Health commit `78946ad0`:
 `config-simulacao1.json`, `config-10abril20242.json`, and
 `config-HAHAHA.json`.
 
-The source region labels `Centro` and `Menino Deus` are normalized to the
-current environment's `Centro Histórico` and `Menino-Deus`.
+The source region label `Centro` is normalized to `Centro Histórico`, while
+`Menino Deus` is retained to match the original 94-region environment.
 
 The original random seed and generated per-step admission arrays were not
 preserved. Consequently, the modern runs reconstruct the configured totals
