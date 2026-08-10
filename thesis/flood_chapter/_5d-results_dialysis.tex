@@ -1,0 +1,169 @@
+\section{Dialysis Case Study}
+\label{sec:results_dialysis}
+
+Dialysis offers a useful case study for evaluating whether LodusPop can represent access to a recurring, capacity-constrained service whose availability depends on supporting urban infrastructure. It is the first experiment in this chapter to exercise explicitly the dependency component $D_i$ of the POI definition introduced in Section~\ref{sec:environment}. Unlike an occasional hospital admission, hemodialysis must be repeated according to a prescribed schedule. A temporary interruption may create a backlog that persists after a clinic becomes available again. The service is also spatially constrained: patients must travel from their residence POIs to a suitable clinic, and the loss of one facility can redirect demand toward more distant alternatives.
+
+
+The experiment illustrates how a domain-specific service can be added without changing the definitions of regions, POIs, or population blobs. Residences, dialysis clinics, and water-treatment facilities are represented as typed POIs: $\tau_i$ distinguishes their roles, $\bm{\alpha}_i$ stores identifiers and experiment-specific data, $C_i(t)$ records direct unavailability causes, and $D_i$ encodes clinic--water dependencies. Dialysis patients remain part of the census-sector population and are distinguished through traceable characteristics that record their treatment status, next due day, residence origin, and current treatment step. The resulting model combines the existing population and movement abstractions with service-specific scheduling, capacity, and infrastructure-dependency rules.
+
+\subsection{Dialysis and Dependency Plugins}
+\label{sec:dialysis_plugin}
+
+The experiment composes four plugins with the core model. Table~\ref{tab:dialysis_plugin_contracts} summarizes their roles using the plugin contract $\Pi=(\bm{\theta},\Delta\Sigma,\mathcal{R},\mathcal{F},\mathcal{H})$ defined in Section~\ref{sec:plugins}. This decomposition keeps environment availability, treatment logic, and disruption drivers distinct while allowing them to interact through registered actions and hooks.
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \caption{Plugin contracts used in the dialysis case study. Empty components are omitted.}
+    \label{tab:dialysis_plugin_contracts}
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}X}
+        \toprule
+        \textbf{Plugin role} & \textbf{Contract components} & \textbf{Experiment-specific contribution} \\
+        \midrule
+        Dialysis demand & \shortstack[l]{$\bm{\theta}_{\mathrm{dia}},\Delta\Sigma_{\mathrm{dia}},$\\$\mathcal{F}_{\mathrm{dia}},\mathcal{H}_{\mathrm{dia}}$} & Configures patients, schedules, and capacity; declares traceable treatment states; registers the dialysis action; and invokes it at every simulation step. \\
+        Dependency mapping & \shortstack[l]{$\bm{\theta}_{\mathrm{dep}},\Delta\Sigma_{\mathrm{dep}},$\\$\mathcal{H}_{\mathrm{dep}}$} & Interprets POI types and attributes and constructs clinic dependency rules $D_i$ when the environment is loaded. \\
+        Scheduled availability & \shortstack[l]{$\bm{\theta}_{\mathrm{state}},\mathcal{R}_{\mathrm{state}},$\\$\mathcal{F}_{\mathrm{state}}$} & Schedules availability-change actions and adds or removes the direct cause \texttt{off\_cycle} from $C_i(t)$. \\
+        Water-level disruption & \shortstack[l]{$\bm{\theta}_{\mathrm{water}},\Delta\Sigma_{\mathrm{water}},$\\$\mathcal{H}_{\mathrm{water}}$} & Reuses the flood extension from the preceding case study to add or remove the direct cause \texttt{flood} according to the water-level time series. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Dialysis Plugin}
+
+The dialysis plugin adds recurring treatment demand to the existing population representation. Its configuration $\bm{\theta}_{\mathrm{dia}}$ specifies the number of patients, the interval between treatments, the maximum number selected at any residence, and the POI types used as residences and clinics. It also provides a default clinic opening interval and admission capacity per simulation step. An optional clinic-specific mapping overrides these defaults with one or more service intervals, allowing heterogeneous schedules and capacities without changing plugin behavior. The scenario design below reports the values used in the experiments.
+
+During simulation initialization, the state extension $\Delta\Sigma_{\mathrm{dia}}$ adds traceable characteristics that record whether an individual requires dialysis, treatment frequency, next due day, treatment status, residence origin, and current treatment step. Because these characteristics are part of the blob traceable state, the existing merge and split rules preserve distinctions relevant to treatment. Initial due dates are distributed across the configured treatment interval so that the entire patient population does not request treatment on the same day.
+ 
+
+The handler set $\mathcal{F}_{\mathrm{dia}}$ registers the \texttt{dialysis} action, which is invoked by $\mathcal{H}_{\mathrm{dia}}$ once per simulation step with an unrestricted population template. Its handler first completes treatments initiated in the preceding step and returns those patients to their stored origin POIs; it then selects patients whose next session is due. Among eligible clinics, it chooses the geographically nearest, transfers the corresponding population blob, and completes the treatment one step later. Patients who cannot be admitted remain due and are reconsidered during subsequent steps. Events emitted by the handler record admissions, completions, delays, origins, destinations, and travel distances, allowing treatment coverage, overdue demand, waiting exposure, and geographic redistribution to be calculated.
+
+A clinic is eligible only if it is available under $C_i(t)$ and $D_i$, open according to its configured service interval, and has unused treatment capacity in the current step. These tests represent different concepts: a closed or full clinic remains an available POI but cannot accept that session, whereas a clinic with a direct cause or an unsatisfied dependency is unavailable to all actions.
+
+\subsubsection{Dependency and Availability Plugins}
+
+The dependency-mapping plugin uses $\bm{\theta}_{\mathrm{dep}}$ to select clinic POIs as targets, water-source POIs as dependencies, attribute matching as the association mechanism, and a minimum-of-one aggregation rule. Its vocabulary extension $\Delta\Sigma_{\mathrm{dep}}$ establishes the clinic attribute \texttt{water\_source} and the water-source attribute \texttt{eta\_name} as the identifiers used by this rule. When the environment is loaded, $\mathcal{H}_{\mathrm{dep}}$ matches each clinic's configured water sources to the corresponding water-source POIs and adds a rule to $D_i$ requiring at least one matched source to remain available. Other configuration values could require multiple redundant sources or an all-of relation. The generic dependency mechanism evaluates the resulting rules and propagates availability changes, so the mapping plugin does not reimplement that behavior.
+
+Direct disruptions are represented separately by $C_i(t)$. The scheduled-availability extension contributes actions through $\mathcal{R}_{\mathrm{state}}$ and uses $\mathcal{F}_{\mathrm{state}}$ to add or remove \texttt{off\_}\allowbreak\texttt{cycle} at the configured steps. The water-level extension uses $\mathcal{H}_{\mathrm{water}}$ to add \texttt{flood} when a location exceeds its threshold and to remove that cause when the water recedes. A POI is available only when it has no direct cause and its rule $D_i$ is satisfied. Dependencies do not erase or replace direct causes. Removing \texttt{off\_}\allowbreak\texttt{cycle} does not restore a flooded POI, and restoring one water source does not restore a clinic whose own $C_i(t)$ remains non-empty. This separation allows the same dialysis plugin to be combined with different environmental hazards, service schedules, and infrastructure configurations.
+
+\subsection{Scenario Design}
+
+The experimental scenarios use the parameters introduced in Section~\ref{sec:dialysis_plugin}. All scenarios cover ten simulated days, with 24 hourly steps per day. Treatment is required every three days, and the initial treatment phases are distributed across this interval. Patients are selected from residence POIs, with at most 20 selected from any single origin. By default, clinics operate from 06:00 to 18:00 and admit at most two patients per hour. The exceptions are Centro de Diálise e Transplante and Hospital Moinhos de Vento, which operate until 22:00 and have hourly capacities of eight and six patients, respectively.
+
+Two neighborhood-level representations of Porto Alegre, described in the preceding chapter, were used. The \textit{reduced environment} contains 13 regions, 435 census-sector residence POIs, 8 dialysis-clinic POIs, and 2 water-source POIs. The \textit{complete environment} contains 94 regions, 2,711 census-sector residence POIs, 12 clinics, and 6 water sources. The principal control scenarios contain 552 patients in the reduced environment and 696 patients in the complete environment, representing 50\% of the aggregate nominal treatment capacity available across all clinics during each three-day treatment interval.
+
+Each clinic's $D_i$ requires at least one available water-treatment facility---an ETA, from the Portuguese \textit{Estação de Tratamento de Água}---whose configured \texttt{eta\_name} matches the clinic's \texttt{water\_source} attribute. In the reduced environment, six of the eight clinics depend on ETA Moinhos de Vento, while the remaining two are associated with ETA Moinhos de Vento or ETA Menino Deus.
+ 
+
+Figure~\ref{fig:dialysis_network} presents the spatial relationships among the city's neighborhoods, dialysis clinics, and supporting water treatment facilities. An interactive version allows the reduced and complete networks to be inspected separately and displays the clinic-to-water-source dependencies.\footnote{Interactive dialysis network visualization: TODO: \url{DIALYSIS_VISUALIZATION_URL}.}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{fig/viz/dialysis_viz_eta.png}
+    \caption{Dialysis-clinic and water-source POIs in Porto Alegre. Edges identify the water sources associated with each clinic through its dependency rule $D_i$. The interactive version provides separate views of the reduced 13-region and complete 94-region environments.}
+    \label{fig:dialysis_network}
+\end{figure}
+
+
+Table~\ref{tbl:dialysis_scenarios} summarizes scenarios D01--D11. Controlled disruptions begin at simulation step 78, corresponding to 06:00 on the third simulated day.
+
+D01 is the moderate-load reference control.
+D02 and D03 isolate the effect of adding and removing \texttt{off\_cycle} from an ETA's $C_i(t)$.
+D04 assigns flood causes directly to exposed clinic and ETA POIs, whereas D05 assigns them only to ETAs and makes clinics unavailable through $D_i$; D06 combines the flood and scheduled-outage causes.
+D07 tests whether demand alone can lead to incomplete treatment. 
+D08 and D09 hold the nominal loss of treatment capacity constant while changing the spatial distribution of direct clinic outages. 
+Finally, D10 and D11 evaluate whether the larger complete-city network changes the consequences of a combined disruption.
+ 
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Dialysis treatment scenarios and principal parameter changes.}
+\label{tbl:dialysis_scenarios}
+\begin{tabularx}{\linewidth}{@{}llrX@{}}
+\toprule
+\textbf{ID} & \textbf{Environment} &
+\textbf{Patients} & \textbf{Configured condition} \\ \midrule
+D01 & Reduced  & 552  & Moderate-demand control. \\ \midrule
+D02 & Reduced  & 552  & \texttt{off\_cycle} is added to ETA Moinhos de Vento at step 78 and is not removed. \\ \midrule
+D03 & Reduced  & 552  & \texttt{off\_cycle} is added to ETA Moinhos de Vento at step 78 and removed four hours later. \\ \midrule
+D04 & Reduced  & 552  & A historical water-level series adds \texttt{flood} directly to exposed clinic and ETA POIs. \\ \midrule
+D05 & Reduced  & 552  & A synthetic 10.1~m water level affects only ETA POIs; clinic unavailability propagates through $D_i$. \\ \midrule
+D06 & Reduced  & 552  & A scheduled ETA Moinhos outage is combined with a synthetic 9.3~m water-level disruption. \\ \midrule
+D07 & Reduced  & 1,380 & Demand is set to 125\% of the nominal capacity available during a three-day treatment interval, without facility disruption. \\ \midrule
+D08 & Reduced  & 552  & \texttt{off\_cycle} makes one high-capacity clinic unavailable, removing 128 daily treatment slots. \\ \midrule
+D09 & Reduced  & 552  & \texttt{off\_cycle} makes four lower-capacity clinics unavailable, also removing 128 daily treatment slots. \\ \midrule
+D10 & Complete & 696  & Complete-network moderate-demand control. \\ \midrule
+D11 & Complete & 696  & Synthetic 9.3~m exposure adds \texttt{flood} to clinics and water sources and is combined with \texttt{off\_cycle} at ETA Moinhos. \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Results}
+
+Table~\ref{tbl:dialysis_results} summarizes the mean outcomes across 30 simulation runs with matched random seeds. Coverage denotes the percentage of due treatment sessions completed within the simulation horizon. Wait is the accumulated number of due-wait patient-hours, overdue denotes the number of treatment sessions that remain due at the end of the simulation, and distance is the mean distance traveled for admission. Unavailable clinic-hours sum the hours during which individual clinics failed the availability condition because $C_i(t)$ was non-empty or $D_i$ was unsatisfied; closed hours and exhausted capacity are not included.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Mean dialysis outcomes over 30 simulation runs with matched random seeds.}
+\label{tbl:dialysis_results}
+\begin{tabularx}{\linewidth}{
+    @{}
+    l
+    >{\raggedright\arraybackslash}X
+    rrrrr
+    @{}
+}
+\toprule
+\textbf{ID} &
+\textbf{Condition} &
+\shortstack{\textbf{Coverage}\\\textbf{(\%)}} &
+\shortstack{\textbf{Wait}\\\textbf{(patient-h)}} &
+\shortstack{\textbf{Overdue}\\\textbf{(sessions)}} &
+\shortstack{\textbf{Unavailable}\\\textbf{(clinic-h)}} &
+\shortstack{\textbf{Mean distance}\\\textbf{(km)}} \\
+\midrule
+D01 & Reduced moderate load
+    & 100.00 &  16,640 &   0.0 &     0 & 1.836 \\
+D02 & Persistent ETA Moinhos outage
+    &  68.52 &  67,608 & 363.5 &   972 & 2.090 \\
+D03 & Four-hour ETA Moinhos recovery
+    & 100.00 &  17,238 &   0.0 &    24 & 1.838 \\
+D04 & Historical direct flood exposure
+    & 100.00 &  17,144 &   0.0 &   225 & 1.768 \\
+D05 & Synthetic 10.1~m ETA exposure
+    &  50.00 &  84,480 & 552.0 & 1,296 & 1.845 \\
+D06 & ETA Moinhos outage and 9.3~m water level
+    &  50.00 &  84,480 & 552.0 & 1,296 & 1.845 \\
+D07 & Reduced above capacity
+    &  93.02 & 106,416 & 114.2 &     0 & 1.854 \\
+D08 & One high-capacity clinic failure
+    & 100.00 &  18,670 &   0.0 &   162 & 1.768 \\
+D09 & Four low-capacity clinic failures
+    & 100.00 &  18,670 &   0.0 &   648 & 2.037 \\
+D10 & Complete moderate load
+    & 100.00 &  20,700 &   0.0 &     0 & 6.537 \\
+D11 & Complete combined disruption
+    &  65.15 &  89,562 & 505.8 & 1,620 & 7.028 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+D01 and D10 complete all due treatments, establishing that both networks can serve the configured moderate-load demand within the ten-day simulation horizon. However, complete coverage does not imply immediate service: D01 accumulates 16,640 due-wait patient-hours, while D10 accumulates 20,700. This distinction shows why treatment completion and waiting exposure should be reported separately.
+
+The persistent \texttt{off\_cycle} cause at ETA Moinhos de Vento in D02 makes its dependent clinics unavailable through $D_i$, reduces coverage from 100\% to 68.52\%, leaves an average of 363.5 treatment sessions overdue, and increases waiting exposure by 50,968 patient-hours relative to D01. Removing the cause after four hours in D03 restores the ETA and its dependent clinics, provided that their remaining availability conditions are satisfied. This recovers complete coverage and limits waiting exposure to 17,238 patient-hours. Thus, under this configuration, the duration of the outage substantially changes its effect on treatment completion.
+
+The historical flood condition in D04 also maintains complete coverage, although direct \texttt{flood} causes and their propagated effects produce 225 unavailable clinic-hours and 504 additional due-wait patient-hours relative to D01. In contrast, the synthetic water-treatment failure in D05 applies \texttt{flood} only to ETA POIs; the resulting failure of the clinics' $D_i$ rules reduces coverage to 50\%. D06 produces the same aggregate treatment outcomes as D05, indicating that the water-related cascade already dominates the additional scheduled outage in the reduced network. Demand pressure alone also generates incomplete treatment: D07 reaches 93.02\% coverage despite all clinics remaining available and ends with an average of 114.2 treatment sessions overdue.
+
+D08 and D09 demonstrate that an equal aggregate capacity loss does not imply equal spatial consequences. Both scenarios preserve complete coverage and produce the same waiting exposure. However, distributing direct \texttt{off\_cycle} causes across four lower-capacity clinics increases the mean admission distance from 1.768~km to 2.037~km, a paired mean increase of 0.269~km. D09 also produces 648 unavailable clinic-hours, compared with 162 in D08. Therefore, the number and location of unavailable facilities affect the spatial burden even when the removed daily capacity and treatment coverage are matched.
+
+The complete-network combined disruption in D11 reduces coverage from 100\% to 65.15\%, adds 68,862 due-wait patient-hours relative to D10, and leaves an average of 505.8 treatment sessions overdue at the end of the simulation. The mean admission distance increases by 0.491~km relative to the matched control. Although the larger network provides additional facilities, its modeled dependency structure does not eliminate the consequences of a geographically extensive disruption.
+
+
+\subsection{Remarks}
+
+The results demonstrate that LodusPop can combine recurring individual service requirements, facility schedules, hourly capacities, dynamic POI availability, and infrastructure dependencies while retaining the same environment and population abstractions. The case study also makes the division of responsibilities explicit: $C_i(t)$ records direct causes, $D_i$ expresses infrastructure requirements, $\bm{\theta}_{\mathrm{dia}}$ supplies clinic schedules and capacity, and $\Delta\Sigma_{\mathrm{dia}}$ represents patient treatment state. They also show that coverage alone is insufficient to characterize service resilience. Recovery time, accumulated waiting, final overdue demand, travel distance, and the spatial topology of failures capture different consequences of the same nominal capacity loss.
+
+However, these outcomes remain conditional on the implemented assumptions. Patients are assigned to the nearest available, open clinic with unused capacity, treatment occupies one simulation step, and waiting patients are reconsidered during subsequent hours without appointment priorities, clinical deterioration, hospitalization, or mortality. Clinic capacities, disruption schedules, and synthetic water levels are scenario parameters rather than estimates of observed service performance. Consequently, the experiments provide controlled comparisons of model behavior and evidence of framework flexibility; they do not constitute forecasts of dialysis access during a real flood.

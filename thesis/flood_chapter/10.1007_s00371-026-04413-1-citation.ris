@@ -1,0 +1,17 @@
+TY  - JOUR
+AU  - Fonseca Silva, Gabriel
+AU  - da Silva Antonitsch, André
+AU  - Raupp Musse, Soraia
+PY  - 2026
+DA  - 2026/03/30
+TI  - LodusPop: an environment-driven multi-scale simulation framework for urban population dynamics
+JO  - The Visual Computer
+SP  - 232
+VL  - 42
+IS  - 5
+AB  - Urban environments face persistent challenges in managing mobility and public health, creating a growing demand for advanced simulation tools to support decision-making. Existing population-driven frameworks often require detailed individual data, raising privacy concerns and limiting scalability. Moreover, most approaches are constrained to a single modeling scale, making it difficult to capture both individual routines and collective urban dynamics within one framework. This paper introduces LodusPop, a flexible multi-scale simulation framework for urban population dynamics. LodusPop employs an environment-driven paradigm, where environments actively request population movements, reducing dependence on fine-grained, individual behavioral data. Populations are represented as blobs, aggregated groups of arbitrary size with defined characteristics, that can split, merge, and adapt to changing simulation conditions. This abstraction balances computational efficiency with behavioral expressiveness, enabling the study of diverse urban phenomena across scales ranging from neighborhoods to entire cities. We demonstrate LodusPop’s versatility through three case studies in Porto Alegre, Brazil, addressing everyday mobility, large-scale events, and epidemic control with vaccination policies. The results highlight LodusPop as a practical and extensible tool for urban planning, crisis management, and public health interventions, bridging the gap between data availability, computational scalability, and the ability to analyze population dynamics across multiple spatial and temporal scales.
+SN  - 1432-2315
+UR  - https://doi.org/10.1007/s00371-026-04413-1
+DO  - 10.1007/s00371-026-04413-1
+ID  - Fonseca Silva2026
+ER  - 

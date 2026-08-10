@@ -1,0 +1,295 @@
+\section{Large-Scale Events, Epidemic Contagion, and Vaccination}
+\label{sec:results_large_scale_events_epidemics}
+
+Large-scale gatherings and infectious-disease outbreaks provide two complementary tests of population simulation at the city scale. A large event produces a short, concentrated demand for movement that competes with ordinary urban routines and, when several events overlap, with other event destinations. An epidemic instead develops over many days as population movement repeatedly changes which susceptible and infected groups share the same locations. Vaccination and movement restrictions then make it possible to examine how public-health interventions modify this longer-term process.
+
+\begingroup\color{red}
+These use cases are particularly relevant to LodusPop's environment-driven design. Event destinations contribute scheduled requests for attendees rather than requiring individual agents to maintain event preferences, while the Infection Plugin evaluates the populations co-located at each point of interest (POI). This distinction preserves the separation established in Chapter~\ref{chapter:proposed_model}: POIs store location, population, routine, and availability state, whereas plugin handlers define the experiment-specific transitions applied to that state. The same population blobs can consequently be split, relocated, assigned new traceable states, and later merged when they occupy the same POI and agree on every active traceable characteristic. The experiments therefore evaluate the interaction between short-term mobility demands, long-term population-state changes, and policy actions in the neighborhood-level representation of Porto Alegre.
+\endgroup
+
+\subsection{Modeled Plugins}
+\label{sec:large_scale_epidemic_plugins}
+
+\begingroup\color{red}
+Following the reporting template introduced in Section~\ref{sec:plugins}, Table~\ref{tbl:large_scale_epidemic_plugin_contract} identifies the principal nonempty components of the extensions used in this section. The entries describe the composed experimental behavior rather than requiring each implementation class to provide every component independently. The original L\'evy Walk mobility plugin supplies the shared baseline and is described in Section~\ref{sec:results_routine_mobility}.
+
+\begin{table}[ht]
+\color{red}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{\textcolor{red}{Mapping of the large-event and epidemic extensions to the plugin contract.}}
+\label{tbl:large_scale_epidemic_plugin_contract}
+\begin{tabularx}{\linewidth}{@{}p{2.5cm}p{4.0cm}X@{}}
+\toprule
+\textbf{Extension} & \textbf{Nonempty components} & \textbf{Role in the experiments} \\
+\midrule
+Large-scale events
+& $\bm{\theta}_{\mathrm{event}}$, $\mathcal{R}_{\mathrm{event}}$, $\mathcal{F}_{\mathrm{event}}$
+& Configures event time, destination, demand, and distance weighting; contributes start-of-step gathering requests; and registers the composite \texttt{gather\_population} handler. \\
+Infection
+& $\bm{\theta}_{\mathrm{inf}}$, $\Delta\Sigma_{\mathrm{inf}}$, $\mathcal{F}_{\mathrm{inf}}$, $\mathcal{H}_{\mathrm{inf}}$
+& Configures initialization and SIR rates, declares \texttt{sir\_status}, consumes \texttt{infect} actions, and integrates time-step and data-service updates. \\
+Vaccination
+& $\bm{\theta}_{\mathrm{vacc}}$, $\Delta\Sigma_{\mathrm{vacc}}$, $\mathcal{F}_{\mathrm{vacc}}$, $\mathcal{H}_{\mathrm{vacc}}$
+& Configures the dose series, starting days, and effectiveness levels; declares \texttt{vaccine\_level}; and implements allocation, vaccination, state change, and return behavior. \\
+Movement restriction
+& $\bm{\theta}_{\mathrm{res}}$, $\mathcal{H}_{\mathrm{res}}$
+& Exposes the configured restriction value as a data service consumed by the L\'evy Walk handler when it determines movement quantities. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+\endgroup
+
+\subsubsection{Gather-Population Plugin}
+
+\begingroup\color{red}
+The large-event extension combines off-cycle routine contributions with the \textit{Gather-Population Plugin}. Its configuration $\bm{\theta}_{\mathrm{event}}$ contains each event's execution step, destination $P_d$, requested attendance, and weighting policy. The routine contribution $\mathcal{R}_{\mathrm{event}}$ supplies the corresponding start-of-step request, while $\mathcal{F}_{\mathrm{event}}$ registers the \texttt{gather\_population} handler.
+
+A gathering request retains the common action structure $A=(N,T,\bm{V})$. In these experiments, $N=\texttt{gather\_population}$, the destination and weighting options are supplied through $\bm{V}$, and the template has no traceable- or sampled-characteristic predicates. Thus, all population present in candidate origins is eligible. The legacy input serializes the requested quantity in $\bm{V}$; semantically, it plays the role of $T_Q$ and equals 500,000 for every event. The search covers all candidate POIs, assigns inverse-distance weights relative to $P_d$, and limits each origin contribution by the eligible population actually present when the request is consumed.
+
+The handler is composite: after distributing the demand among origins, it emits an ordered sequence of core \texttt{move\_population} actions. Each emitted action transfers its assigned population from one origin POI to the event destination. The requested quantity is therefore a demand rather than a guarantee. Moreover, because emitted actions are consumed before the next scheduled request, a later event observes the population state left by earlier events at the same step. The extension depends on the core movement action and on the off-cycle routine contribution that schedules the requests.
+\endgroup
+
+\subsubsection{Infection Plugin}
+
+\begingroup\color{red}
+The \textit{Infection Plugin} implements the susceptible--infected--removed (SIR) model~\citep{kermack1927contribution}. Through $\Delta\Sigma_{\mathrm{inf}}$, it adds the traceable characteristic \texttt{sir\_status}, with the default value \texttt{susceptible} and the additional values \texttt{infected} and \texttt{removed}. The removed state means only that a person no longer contributes to contagion; the simulation does not distinguish recovery, immunity, and mortality as separate outcomes. Blobs with different SIR states may coexist at the same POI, but they remain separate population units because blobs can merge only when all their active traceable characteristics agree.
+\endgroup
+
+For a point of interest containing a total population $N$, the SIR dynamics are
+
+\begin{equation}
+\label{eq:large_scale_epidemic_delta_s}
+   \frac{dS}{dt}=-\frac{\beta I S}{N},
+\end{equation}
+
+\begin{equation}
+\label{eq:large_scale_epidemic_delta_i}
+   \frac{dI}{dt}=\frac{\beta I S}{N}-\gamma I,
+\end{equation}
+
+\begin{equation}
+\label{eq:large_scale_epidemic_delta_r}
+   \frac{dR}{dt}=\gamma I,
+\end{equation}
+
+\begingroup\color{red}
+where $S$, $I$, and $R$ are the susceptible, infected, and removed populations, respectively. The parameters $\beta$ and $\gamma$ are the infection and removal rates, and the basic reproduction number is $R_0=\beta/\gamma$. The configuration $\bm{\theta}_{\mathrm{inf}}$ supplies these rates and the initial infected population. The registered \texttt{infect} handler in $\mathcal{F}_{\mathrm{inf}}$ evaluates the populations currently sharing each POI. Because the action executes 24 times per simulated day, the daily rates are divided among the hourly evaluations. Fractional changes are carried between evaluations and converted to integer blob populations while preserving $S+I+R=N$. When vaccination is active, the handler obtains the configured vaccine-level effectiveness through plugin data services and applies the POI-level effectiveness factor to the susceptible-to-infected transition.
+\endgroup
+
+\subsubsection{Vaccination and Movement-Restriction Plugins}
+
+\begingroup\color{red}
+Through $\Delta\Sigma_{\mathrm{vacc}}$, the \textit{Vaccine Plugin} adds the traceable characteristic \texttt{vaccine\_level} with a default value of zero. Its configuration $\bm{\theta}_{\mathrm{vacc}}$ specifies the daily dose series, the number of levels, the effectiveness associated with each level, and the day on which each dose becomes available. The registered \texttt{vaccinate} handler is composite: it requests eligible population through \texttt{gather\_population}, increases \texttt{vaccine\_level}, and invokes the return action for the affected blobs. A later dose selects only blobs whose current level records receipt of the preceding dose. The loaded extension set must therefore include gathering and return handlers in addition to the Vaccine Plugin.
+
+At the beginning of each simulated day, the lifecycle hook in $\mathcal{H}_{\mathrm{vacc}}$ reads the applicable quantity from the Porto Alegre vaccination series and distributes it among the 94 regions in proportion to their populations. Requests are directed to POIs whose type $\tau_i$ is \textit{pharmacy}. During infection updates, the effectiveness service supplies the factor used to reduce modeled susceptibility. An effectiveness of 0.4 therefore reduces the contribution associated with that vaccine level by 40\% under the implemented aggregate POI-level calculation.
+
+The epidemic-policy experiments also compose the original L\'evy Walk plugin with a movement restriction data service. Its configuration $\bm{\theta}_{\mathrm{res}}$ takes the values 0, 0.50, or 0.75. The L\'evy Walk handler uses that value to reduce the population quantity moved by affected routine actions: 0.50 retains approximately half of the otherwise moved population, while 0.75 retains approximately one quarter. The restriction applies to the configured routine movements, whether their selected destination is inside or outside the origin region; it does not directly modify the SIR equations.
+\endgroup
+
+\subsection{Simulation Setup}
+\label{sec:large_scale_epidemic_setup}
+
+\subsubsection{Shared 94-Region Environment}
+
+\begingroup\color{red}
+All experiments in this section use the published neighborhood-level representation described in Section~\ref{sec:spatial_population_environments}. It contains 94 neighborhood regions, 504 POIs, and a represented population of 1,409,351. The modeled POI types include \textit{home}, \textit{work}, \textit{school}, \textit{marketplace}, \textit{pharmacy}, and \textit{gas station}, together with the specialized event destinations present in the published environment. Coordinates and other location-specific values belong to the POI attribute mappings $\bm{\alpha}_i$. These scenarios do not introduce POI disable causes or dependency constraints, so $C_i(t)$ remains empty and $D_i$ does not affect their execution.
+
+One initial population blob is placed at the home POI of each neighborhood. Age and occupation are sampled characteristics in $\bm{Sc}$. The Infection and Vaccine Plugins subsequently add \texttt{sir\_status} and \texttt{vaccine\_level} to $\bm{Tc}$ through their schema extensions, while the mobility and return handlers preserve the origin and previous-location metadata needed to return moved blobs.
+
+A simulation cycle contains 24 hourly steps and represents one day. Both application families reuse the published work-and-school routine from Section~\ref{sec:results_routine_mobility}, including 250-person movement packets, 500~m distance buckets, and the scale configuration reported as $\texttt{levy\_scale}=2$. The event experiments add occasional gathering requests to this ordinary mobility, whereas the epidemic experiments add repeated infection and public-health actions. No census-sector or reduced-region environment is used in this section.
+\endgroup
+
+\subsubsection{Large-Scale Event Scenarios}
+
+\begingroup\color{red}
+Four large-scale events were configured at distinct POIs. The destination name in each entry identifies its role in the experiment, while the parenthetical value reports the POI type $\tau_i$ used by the stored environment:
+
+\begin{itemize}
+    \item Event A: a sports event at the stadium in Farrapos ($\tau_i=\textit{stadium}$);
+    \item Event B: a sports event at the stadium in Praia de Belas ($\tau_i=\textit{stadium}$);
+    \item Event C: a commercial event at the marketplace in Centro Hist\'orico ($\tau_i=\textit{marketplace}$); and
+    \item Event D: a cultural event at the university represented by the Partenon school POI ($\tau_i=\textit{school}$).
+\end{itemize}
+
+Each event requests 500,000 attendees. These quantities and times are scenario-defined stress inputs, not observed attendance records. The experiment catalog contains a no-event baseline and every combination of one, two, three, or four simultaneous events. In the simultaneous conditions, all included events occur at cycle step 19, corresponding to 19:00. Requests sharing that step are consumed sequentially in the configured A--B--C--D order, with omitted events simply removed from the sequence. If all four events occur together, their combined request is 2,000,000 people, which exceeds the represented city population; each request therefore operates on the eligible population left by its predecessors.
+
+A final condition retains all four events but schedules Event C at step 9 and Event D at step 14, followed by Events A and B at step 19. Temporal separation reduces competition at any one step and permits population moved by an earlier request to become eligible for a later request. Each scenario covers one 24-step cycle. The preserved published outputs contain one recorded realization per configuration rather than a repeated-seed estimate.
+\endgroup
+
+\subsubsection{Epidemic and Vaccination Scenarios}
+
+\begingroup\color{red}
+The epidemic experiments run for 500 cycles, or 500 simulated days. During plugin initialization, 50 people at the home POI of each of the 94 regions are assigned \texttt{sir\_status=infected}, producing 4,700 initially infected people. No one begins in the removed state, and the remainder of the population retains the default susceptible state. The \texttt{infect} action belongs to the global routine and executes at every hourly cycle step for each POI.
+
+Execution order is fixed within the global routine. At a step containing work or school movement, the applicable L\'evy Walk actions execute before \texttt{infect}; consequently, infection uses the post-movement co-location state. Vaccination requests occur at cycle steps 9, 11, 13, 15, and 17 and execute after infection at those steps. The daily quantity is divided among those requests and among regions, subject to the eligible population available at their pharmacy POIs. These ordering rules are held constant across the epidemic scenarios.
+\endgroup
+
+\begingroup\color{red}
+Three infection-only scenarios vary $R_0$ using values reported in studies of COVID-19 transmission in Brazil~\citep{dutra2020covidR0,deSouza2020covirR0,dutra2021covidR0}. The removal rate is fixed at $\gamma=1/15$, representing an approximately 15-day removal timescale under the homogeneous SIR parameterization, while $\beta$ is set to 0.1733, 0.204, or 0.4. These values produce the reported $R_0$ configurations of 2.6, 3.07, and 6.0, respectively. The $R_0=2.6$ condition is used as the reference for the vaccination and restriction experiments.
+\endgroup
+
+Table~\ref{tbl:vaccine_configuration_94} summarizes the four published vaccination configurations. The starting day indicates when each dose becomes available, and a later dose can be administered only to people who received the preceding dose. Configurations A--C progressively add doses and effectiveness, whereas Configuration D represents an idealized single-dose vaccine with 100\% modeled effectiveness.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{\textcolor{red}{Vaccination configurations in $\bm{\theta}_{\mathrm{vacc}}$ for the 94-region epidemic experiments. Effectiveness values and starting days are listed in dose order.}}
+\label{tbl:vaccine_configuration_94}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Configuration} & \textbf{Dose count} & \textbf{Effectiveness} & \textbf{Starting day} \\
+\midrule
+Vaccination A & 1 & [0.4] & [50] \\
+Vaccination B & 2 & [0.4, 0.7] & [50, 150] \\
+Vaccination C & 3 & [0.4, 0.7, 1.0] & [50, 150, 250] \\
+Vaccination D & 1 & [1.0] & [50] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begingroup\color{red}
+The final policy matrix combines $\bm{\theta}_{\mathrm{res}}\in\{0,0.50,0.75\}$ with either no vaccination or Vaccination C. Vaccination C is used instead of idealized Vaccination D because it represents increasing protection over a multi-dose schedule. This design separates the implemented effects of mobility reduction, vaccination, and their combination under the same $R_0=2.6$ infection setting. As with the large-event catalog, the preserved outcome for each published epidemic configuration is one recorded stochastic realization.
+\endgroup
+
+\subsection{Results}
+\label{sec:large_scale_epidemic_results}
+
+\subsubsection{Large-Scale Event Results}
+
+\begingroup\color{red}
+Table~\ref{tbl:large_scale_event_displacements_94} reports total person-displacements, average displacements per inhabitant, and the increase relative to ordinary mobility in the recorded published runs. A displacement records one person's movement between two POIs; it is not a measure of unique attendees or fulfilled event demand. A single event increases the total displacement count by between 27.64\% and 28.40\%, depending on its destination and the population state available when the gathering request executes. The differences among single-event conditions are small in aggregate, although their distance distributions differ because each destination draws from a different part of the city.
+\endgroup
+
+\begin{table}[ht]
+\footnotesize
+\centering
+\caption{\textcolor{red}{Recorded displacement results for the 94-region large-scale-event simulations. A scenario name lists the events added to the ordinary-mobility baseline; values do not directly report event-attendance fulfillment.}}
+\label{tbl:large_scale_event_displacements_94}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Scenario} & \shortstack{\textbf{Total}\\\textbf{displacements}} & \shortstack{\textbf{Displacements}\\\textbf{per inhabitant}} & \shortstack{\textbf{Increase over}\\\textbf{baseline}} \\
+\midrule
+Baseline               & 2,570,658 & 1.8240 & --- \\
+\midrule
+Baseline+A             & 3,290,469 & 2.3347 & 28.00\% \\
+Baseline+B             & 3,300,782 & 2.3421 & 28.40\% \\
+Baseline+C             & 3,289,002 & 2.3337 & 27.94\% \\
+Baseline+D             & 3,281,102 & 2.3281 & 27.64\% \\
+\midrule
+Baseline+AB            & 3,786,856 & 2.6870 & 47.31\% \\
+Baseline+AC            & 3,748,417 & 2.6597 & 45.82\% \\
+Baseline+AD            & 3,804,017 & 2.6991 & 47.98\% \\
+Baseline+BC            & 3,738,497 & 2.6526 & 45.43\% \\
+Baseline+BD            & 3,839,126 & 2.7240 & 49.34\% \\
+Baseline+CD            & 3,826,094 & 2.7148 & 48.84\% \\
+\midrule
+Baseline+ABC           & 4,042,413 & 2.8683 & 57.25\% \\
+Baseline+ABD           & 4,109,929 & 2.9162 & 59.88\% \\
+Baseline+ACD           & 4,069,223 & 2.8873 & 58.29\% \\
+Baseline+BCD           & 4,081,563 & 2.8961 & 58.78\% \\
+\midrule
+Baseline+ABCD          & 4,235,926 & 3.0056 & 64.78\% \\
+Baseline+ABCD+DiffStep & 4,638,329 & 3.2911 & 80.43\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:large_scale_event_displacements_94} presents the corresponding displacement-distance distributions. The first panel compares the four single-event conditions. The second compares scenarios containing three simultaneous events. The final panel compares four simultaneous events with the staggered four-event condition.
+
+\begin{figure}[!htbp]
+  \centering
+  \subfloat[Baseline and single-event scenarios.]
+  {\includegraphics[width=0.95\linewidth]{Figures/Displacement_SingleEvent.png}
+  \label{fig:large_scale_event_single_94}}\\
+  \subfloat[Baseline and three-event scenarios.]
+  {\includegraphics[width=0.95\linewidth]{Figures/Displacement_ThreeEvents.png}
+  \label{fig:large_scale_event_three_94}}\\
+  \subfloat[Baseline, four simultaneous events, and four events with different starting steps.]
+  {\includegraphics[width=0.95\linewidth]{Figures/Displacement_AllEvents.png}
+  \label{fig:large_scale_event_all_94}}
+  \caption{\textcolor{red}{Recorded population-displacement distributions for the 94-region large-scale-event scenarios. The curves summarize person-movements, rather than unique attendees or event-demand fulfillment.}}
+  \label{fig:large_scale_event_displacements_94}
+\end{figure}
+
+\begingroup\color{red}
+The growth in displacement is sub-additive when events occur together. For example, Events A, B, and C individually increase displacement by 28.00\%, 28.40\%, and 27.94\%, respectively, but the simultaneous ABC scenario increases displacement by 57.25\%, rather than by the sum of the three independent increases. The action semantics explain why additivity is not expected: people may travel directly from work or school to an event without first returning home, and each sequential gathering request can select only the eligible population remaining after previous requests. Because the preserved outputs report movements rather than requested and fulfilled attendance per event, the reduction should be interpreted as consistent with this competition mechanism rather than as a direct measurement of its unfulfilled demand.
+
+Temporal separation changes the recorded outcome. Four simultaneous events produce 4,235,926 displacements, 64.78\% above the baseline. When Events C and D occur earlier in the day, the total rises to 4,638,329, or 80.43\% above baseline. Under the implemented action rules, staggering reduces competition at a single step and permits population moved earlier to become eligible for later requests. This mechanism is consistent with the larger displacement total, although the available output does not identify unique attendees or directly count repeated participation.
+\endgroup
+
+\subsubsection{Epidemic-Contagion Results}
+
+\begingroup\color{red}
+Figure~\ref{fig:epidemic_r0_94} shows cumulative infections under the three basic-reproduction-number settings. The curves include the 4,700 people infected at initialization and every subsequent transition from susceptible to infected. Within the shared mobility, scheduling, and POI-level mixing assumptions, increasing $R_0$ accelerates contagion and increases the cumulative infected population over the simulated period.
+\endgroup
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[width=0.95\linewidth]{Figures/InfectedR0.png}
+ \caption{\textcolor{red}{Cumulative infected population in the recorded 500-day runs for the three $R_0$ configurations in the neighborhood-level environment.}}
+ \label{fig:epidemic_r0_94}
+\end{figure}
+
+\begingroup\color{red}
+The recorded $R_0=2.6$ reference reaches a cumulative total of 875,962 infected people. Cumulative incidence should not be confused with the number simultaneously infected: as Figure~\ref{fig:epidemic_sir_status_94} shows, the active infected population peaks at 81,528 people on day 247, while earlier infections progressively enter the removed state. The result illustrates that the \texttt{sir\_status} introduced through $\Delta\Sigma_{\mathrm{inf}}$ remains attached to mobile blobs across hundreds of daily cycles and supports both cumulative and point-in-time aggregation.
+\endgroup
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[width=0.95\linewidth]{Figures/SIRPopulationStatus.png}
+ \caption{\textcolor{red}{Susceptible, infected, and removed populations over time in the recorded $R_0=2.6$ run.}}
+ \label{fig:epidemic_sir_status_94}
+\end{figure}
+
+\subsubsection{Vaccination and Movement-Restriction Results}
+
+Vaccination substantially reduces cumulative infections relative to the $R_0=2.6$ reference. Table~\ref{tbl:vaccination_results_94} collects the published final totals and their reduction relative to the unvaccinated reference. Even Vaccination A, whose single dose has an effectiveness of 0.4, reduces the cumulative total from 875,962 to 440,569. Adding a second dose in Vaccination B lowers the result to 360,607. Vaccination C reaches 355,124 infections, only modestly below Vaccination B because its third, fully effective dose does not begin until day 250. The idealized Vaccination D produces the lowest vaccination-only total, 170,978.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Final cumulative infected population in the published vaccination scenarios. Reductions are calculated relative to the unvaccinated $R_0=2.6$ reference.}
+\label{tbl:vaccination_results_94}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Scenario} & \textbf{Cumulative infected} & \textbf{Reduction} \\
+\midrule
+Unvaccinated reference & 875,962 & --- \\
+Vaccination A & 440,569 & 49.70\% \\
+Vaccination B & 360,607 & 58.83\% \\
+Vaccination C & 355,124 & 59.46\% \\
+Vaccination D & 170,978 & 80.48\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[width=0.95\linewidth]{Figures/InfectedVaccines.png}
+ \caption{Cumulative infected population for the vaccination configurations in Table~\ref{tbl:vaccine_configuration_94}. All scenarios use $R_0=2.6$.}
+ \label{fig:vaccination_results_94}
+\end{figure}
+
+Movement restriction alone also reduces cumulative infections compared with unrestricted mobility. Across the combined policy matrix, however, Vaccination C produces a larger reduction than movement restriction alone, and the most favorable outcomes occur when both policies are active. The condition combining Vaccination C with a restriction of 0.75 reaches 140,941 cumulative infections, an 83.91\% reduction from the unvaccinated, unrestricted reference. This total is also lower than the 170,978 infections obtained with the idealized Vaccination D alone, illustrating the additional effect produced by combining pharmaceutical and mobility interventions under the modeled assumptions.
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[width=0.95\linewidth]{Figures/InfectedVaccineRestriction.png}
+ \caption{\textcolor{red}{Recorded epidemic scenarios combining no restriction, a 0.50 restriction, or a 0.75 restriction with either no vaccination or Vaccination C. Restriction reduces the population moved by affected L\'evy Walk actions; all scenarios use $R_0=2.6$.}}
+ \label{fig:vaccination_restriction_results_94}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Remarks}
+
+\begingroup\color{red}
+The large-event experiments show how an environment-driven request can produce citywide movement without assigning a detailed event-choice model to every individual. Their central result is not simply that events add trips, but that the recorded displacement outcome depends on request order and timing. Concurrent requests cannot be treated as independent additions to baseline mobility because each consumes the state produced by its predecessors. Staggering changes that state sequence and produces more total displacement than the simultaneous four-event condition. Attendance fulfillment and repeated participation remain plausible mechanisms supplied by the action semantics, but they are not separate metrics in the preserved outputs.
+
+The epidemic experiments extend the same population representation from hourly movement to state evolution over 500 days. SIR status and vaccine level illustrate why plugin-declared traceable characteristics are useful: population groups can split when their state changes, preserve that state while moving, and remain distinct during merging. The vaccination workflow further demonstrates composition among routine contributions, gathering, characteristic changes, returns, and infection data services, while the restriction service modifies contact opportunities indirectly by reducing routine movement.
+
+The numerical outcomes should be interpreted as comparisons among the implemented scenarios rather than forecasts for Porto Alegre. They are preserved single-run outcomes, so they do not quantify variability across random seeds. The SIR process uses homogeneous $\beta$ and $\gamma$ parameters within each configuration and POI-level mixing; vaccine levels modify the aggregate susceptibility factor used by the Infection Plugin; daily vaccination demand follows the supplied series; and event gathering is driven by eligible population and inverse distance rather than individual preferences. Within those assumptions, the results reproduce the published comparisons: event timing changes the displacement outcome, higher $R_0$ accelerates epidemic growth, vaccination reduces cumulative infection, and vaccination combined with movement restriction produces the lowest infection total among the reported policy configurations.
+\endgroup
