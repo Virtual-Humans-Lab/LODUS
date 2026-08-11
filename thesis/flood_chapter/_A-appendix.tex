@@ -1,0 +1,481 @@
+\chapter{Input and Simulation Setup}
+\label{app:input}
+
+This appendix illustrates how the elements defined in
+Chapter~\ref{chapter:proposed_model} are represented in the current LodusPop
+implementation. A simulation setup comprises:
+\begin{itemize}
+    \item \textit{i)} JSON input files describing the environment, initial
+    population, and routines (Sections~\ref{app:input_environment},
+    \ref{app:input_population}, and~\ref{app:input_routine});
+    \item \textit{ii)} an experiment configuration that selects the input
+    files, simulation horizon, plugins, and plugin parameters
+    (Section~\ref{app:experiment_configuration});
+    \item \textit{iii)} Python plugins that extend the model vocabulary,
+    routines, action registry, lifecycle services, or observations
+    (Section~\ref{app:plugin}); and
+    \item \textit{iv)} a Python simulator script that loads these components
+    and advances the simulation (Section~\ref{app:simulator}).
+\end{itemize}
+
+The listings are deliberately small, but together they form one consistent
+example. Separating structural inputs from experiment and plugin configuration
+keeps the common definitions of points of interest, blobs, templates, routines,
+and actions stable while making capacity, disruption, dependencies, and
+adaptation explicit scenario choices.
+
+
+\section{Environment Input Files}
+\label{app:input_environment}
+
+The environment input represents the regions $R$ and points of interest $P$
+defined in Section~\ref{sec:environment}. A region has a \textit{name}, a
+reference coordinate in \textit{lng\_lat}, and a collection of
+\textit{points\_of\_interest}. Each point of interest has a
+\textit{unique\_name}, a semantic \textit{poi\_type} corresponding to
+$\tau_i$, a coordinate, and an optional \textit{attributes} mapping
+corresponding to $\bm{\alpha}_i$. Complete POI identifiers use the form
+\textit{Region//unique\_name}; for example,
+\textit{ExampleRegion//pharmacy\_0}.
+
+Listing~\ref{lst:environment_description} contains a home, a school, a
+pharmacy, and the infrastructure POIs used in the dependency example below.
+The keys in \textit{attributes} have no universal behavior merely because they
+appear in the environment file. For example, \textit{capacity} and
+\textit{water\_level} acquire meaning only when a loaded plugin interprets
+them. This distinction implements the separation between the POI attribute
+mapping and domain policy established in Section~\ref{sec:plugins}.
+
+\begin{lstlisting}[language={Python},
+caption={Example of an environment input file with typed POIs and attributes.},
+captionpos=b, label={lst:environment_description}, basicstyle=\scriptsize]
+{
+  "regions": [
+    {
+      "name": "ExampleRegion",
+      "lng_lat": [-51.19757, -30.15647],
+      "points_of_interest": [
+        {
+          "poi_type": "home",
+          "unique_name": "home_0",
+          "lng_lat": [-51.19805, -30.15633],
+          "attributes": {"external_id": "H-001"}
+        },
+        {
+          "poi_type": "school",
+          "unique_name": "school_0",
+          "lng_lat": [-51.19750, -30.15621],
+          "attributes": {"capacity": 120}
+        },
+        {
+          "poi_type": "pharmacy",
+          "unique_name": "pharmacy_0",
+          "lng_lat": [-51.19820, -30.15655],
+          "attributes": {"capacity": 40, "water_level": 3.5}
+        },
+        {
+          "poi_type": "power_source",
+          "unique_name": "power_source_0",
+          "lng_lat": [-51.19910, -30.15590]
+        },
+        {
+          "poi_type": "water_source",
+          "unique_name": "water_source_0",
+          "lng_lat": [-51.19940, -30.15560]
+        },
+        {
+          "poi_type": "water_source",
+          "unique_name": "water_source_1",
+          "lng_lat": [-51.19680, -30.15570]
+        }
+      ]
+    }
+  ]
+}
+\end{lstlisting}
+
+The time-dependent direct disable causes $C_i(t)$ are runtime state rather than
+static booleans in this file. A flood, failure, or scheduled-closure plugin adds
+and removes its own named cause, so removing one cause cannot erase another.
+Similarly, dependencies $D_i$ can be supplied through a dependency-data plugin.
+Listing~\ref{lst:dependency_description} specifies that the pharmacy requires
+the power source and at least one of the two water sources. It therefore
+illustrates both $D_i^{\mathrm{all}}$ and a minimum-of group in
+$D_i^{\mathrm{min}}$. Names containing \textit{//} are complete identifiers;
+an unqualified name is valid only when it resolves to exactly one POI.
+
+\begin{lstlisting}[language={Python},
+caption={Example of all-of and minimum-of POI dependency rules.},
+captionpos=b, label={lst:dependency_description}, basicstyle=\scriptsize]
+{
+  "dependency_rules": {
+    "pharmacy_infrastructure": {
+      "all_of": [
+        "ExampleRegion//power_source_0"
+      ],
+      "min_of": [
+        {
+          "minimum_enabled": 1,
+          "nodes": [
+            "ExampleRegion//water_source_0",
+            "ExampleRegion//water_source_1"
+          ]
+        }
+      ]
+    }
+  },
+  "node_dependencies": {
+    "ExampleRegion//pharmacy_0": ["pharmacy_infrastructure"]
+  }
+}
+\end{lstlisting}
+
+The simulator recomputes effective availability after a direct state change
+and propagates dependency effects until the states stabilize. Unavailability
+does not itself move, delete, or queue a blob. The handler consuming an action
+must explicitly decide whether to suppress, retain, redirect, or otherwise
+transform the affected demand.
+
+
+\section{Population Input Files}
+\label{app:input_population}
+
+The population input defines the initial blobs $B=(TP,\bm{Tc},\bm{Sc})$
+described in Section~\ref{sec:population}. The
+\textit{default\_traceable\_characteristics} mapping supplies a default value
+for every declared traceable characteristic. A blob may override a default in
+its own \textit{traceable\_characteristics} mapping. Plugins may subsequently
+extend this schema through $\Delta\Sigma_{\Pi}$; a plugin-provided default must
+be applied to the population before actions use the new characteristic.
+
+The \textit{sampled\_characteristics\_categories} mapping declares the
+categories available for every sampled characteristic. Within each blob, the
+counts for each sampled characteristic must sum to $TP$. These are marginal
+distributions: the input does not assert a joint distribution between, for
+example, age and occupation.
+
+The \textit{initial\_population} mapping associates complete POI identifiers
+with their initial blob collections $\bm{B}_{P}$. POIs with no initial
+population may be omitted. In Listing~\ref{lst:population_description}, blob
+$B_i$ contains 100 unvaccinated individuals because it uses the default
+traceable value. Blob $B_j$ contains 20 vaccinated children and overrides that
+default. Both the age and occupation distributions of each blob independently
+sum to its total population.
+
+\begin{lstlisting}[language={Python},
+caption={Example of a population input file.},
+captionpos=b, label={lst:population_description}, basicstyle=\scriptsize]
+{
+  "default_traceable_characteristics": {
+    "vaccination_status": "unvaccinated"
+  },
+  "sampled_characteristics_categories": {
+    "age": ["children", "youngs", "adults", "elders"],
+    "occupation": ["student", "worker", "other"]
+  },
+  "initial_population": {
+    "ExampleRegion//home_0": [
+      {
+        "total_population": 100,
+        "traceable_characteristics": {},
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 10,
+            "adults": 50,
+            "elders": 20
+          },
+          "occupation": {
+            "student": 30,
+            "worker": 50,
+            "other": 20
+          }
+        }
+      },
+      {
+        "total_population": 20,
+        "traceable_characteristics": {
+          "vaccination_status": "vaccinated"
+        },
+        "sampled_characteristics": {
+          "age": {
+            "children": 20,
+            "youngs": 0,
+            "adults": 0,
+            "elders": 0
+          },
+          "occupation": {
+            "student": 20,
+            "worker": 0,
+            "other": 0
+          }
+        }
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+All active traceable characteristics participate in blob compatibility. Thus,
+blobs at the same POI can merge only when their traceable values agree; the
+sampled category counts of compatible blobs are added during the merge pass.
+
+
+\section{Routine Input Files}
+\label{app:input_routine}
+
+The routine input represents the ordered pairs $(t,A)$ in the local routines
+$Ro_{P_i}$ and the global routine $GRo$ described in
+Section~\ref{sec:routines}. Each action contains a type identifier $N$, a
+\textit{population\_template} encoding the traceable and sampled predicates of
+$T$, and a \textit{values} mapping encoding the parameters $\bm{V}$ required by
+the registered handler. The current JSON interface stores the requested
+quantity $T_Q$ as \textit{values.quantity}; conceptually, that value and the
+two predicate mappings together determine the population selected by the
+action. The optional \textit{name} is an annotation and has no execution
+semantics.
+
+Listing~\ref{lst:routine_description} first schedules a local
+\textit{move\_population} action at $t=8$. It requests up to 20 unvaccinated
+children who are students from the blobs in \textit{home\_0} and moves the
+selected population to \textit{pharmacy\_0}. At $t=10$, the global routine
+invokes the plugin-defined \textit{example\_action} once for the environment;
+the plugin in Listing~\ref{lst:plugin_script} expands it into a movement back
+to \textit{home\_0}. If multiple actions have the same cycle step, their file
+order is significant because later actions observe all earlier state changes.
+
+\begin{lstlisting}[language={Python},
+caption={Example of ordered local and global routine inputs.},
+captionpos=b, label={lst:routine_description}, basicstyle=\scriptsize]
+{
+  "global_routine": [
+    {
+      "cycle_step": [10],
+      "execution_scope": "once",
+      "action": {
+        "name": "return_pharmacy_visitors",
+        "type": "example_action",
+        "population_template": {
+          "traceable_characteristics": {
+            "vaccination_status": "unvaccinated"
+          },
+          "sampled_characteristics": {}
+        },
+        "values": {
+          "region": "ExampleRegion",
+          "node": "pharmacy_0",
+          "quantity": 20
+        }
+      }
+    }
+  ],
+  "routines": {
+    "ExampleRegion//home_0": [
+      {
+        "cycle_step": 8,
+        "action": {
+          "name": "send_students_to_pharmacy",
+          "type": "move_population",
+          "population_template": {
+            "traceable_characteristics": {
+              "vaccination_status": "unvaccinated"
+            },
+            "sampled_characteristics": {
+              "age": ["children"],
+              "occupation": ["student"]
+            }
+          },
+          "values": {
+            "origin_region": "ExampleRegion",
+            "origin_node": "home_0",
+            "destination_region": "ExampleRegion",
+            "destination_node": "pharmacy_0",
+            "quantity": 20
+          }
+        }
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+A global action with \textit{execution\_scope=once} is generated once whenever
+its cycle-step condition is satisfied. The alternative
+\textit{execution\_scope=per\_node} expands the action once for each matching
+POI and supplies that POI's region, type, name, and identifier to the action
+values. Local and global routines are followed by any plugin-contributed
+end-of-step actions and then by a single merge pass.
+
+
+\section{Experiment Configuration}
+\label{app:experiment_configuration}
+
+The experiment configuration connects the structural inputs to the selected
+extension set $\mathbb{P}$. It names the environment, population, and optional
+routine files; defines the cycle length and number of cycles; and supplies the
+parameter mapping $\bm{\theta}_{\Pi}$ for each plugin. A file entry may also be
+a list, allowing several environment or population sources to be combined.
+
+Listing~\ref{lst:experiment_configuration} selects the preceding files,
+activates the dependency input from
+Listing~\ref{lst:dependency_description}, and supplies the default destination
+and quantity used by the example plugin. Naming a plugin configuration does
+not instantiate its Python class by itself; the simulator script loads the
+corresponding implementation explicitly.
+
+\begin{lstlisting}[language={Python},
+caption={Example of an experiment configuration file.},
+captionpos=b, label={lst:experiment_configuration}, basicstyle=\scriptsize]
+{
+  "envgraph_inputs_files": {
+    "environment_file": "Example-Environment.json",
+    "population_file": "Example-Population.json",
+    "routine_file": "Example-Routine.json"
+  },
+  "simulation_parameters": {
+    "total_cycles": 3,
+    "cycle_length": 24,
+    "random_seed": 0
+  },
+  "node_dependency_data_plugin": {
+    "dependency_files": ["Example-Dependencies.json"]
+  },
+  "example_plugin": {
+    "destination_node": "home_0",
+    "default_quantity": 20
+  }
+}
+\end{lstlisting}
+
+
+\section{Plugins}
+\label{app:plugin}
+
+Plugins implement the extension contract $\Pi=(\bm{\theta}_{\Pi},
+\Delta\Sigma_{\Pi},\mathcal{R}_{\Pi},\mathcal{F}_{\Pi},
+\mathcal{H}_{\Pi})$ defined in Section~\ref{sec:plugins}. A plugin may use only
+the components required for its role. Listing~\ref{lst:plugin_script} uses
+four of them: it reads $\bm{\theta}_{\Pi}$ from the experiment configuration,
+adds an \textit{example\_state} traceable characteristic through
+$\Delta\Sigma_{\Pi}$, and registers the pair
+$(\textit{example\_action},f_{\textit{example}})$ in
+$\mathcal{F}_{\Pi}$. Its time-step method is an empty lifecycle hook in
+$\mathcal{H}_{\Pi}$, and it contributes no routine through
+$\mathcal{R}_{\Pi}$.
+
+The handler is composite: instead of changing the population directly, it
+returns an ordered list containing a \textit{move\_population} action. That
+action retains the original population template and is recursively dispatched
+through the common $A=(N,T,\bm{V})$ contract. Consequently, the loaded plugin
+set must also provide the \textit{move\_population} handler.
+
+\begin{lstlisting}[language={Python},
+caption={Example of a configured composite action plugin.},
+captionpos=b, label={lst:plugin_script}, basicstyle=\scriptsize]
+from core.plugin import ActionPlugin
+from core.routine import Action
+
+
+class ExamplePlugin(ActionPlugin):
+
+    def load_plugin(self, simulation):
+        self.simulation = simulation
+        self.graph = simulation.env_graph
+        self.config = simulation.experiment_config.get(
+            "example_plugin", {}
+        )
+
+        # Delta Sigma: extend every blob with a default value.
+        simulation.original_block_template.add_traceable_characteristic(
+            "example_state", "idle"
+        )
+        self.graph.add_blobs_traceable_property(
+            "example_state", "idle"
+        )
+
+        # F: register a composite action handler.
+        simulation.add_action_type_to_function(
+            "example_action", self.consume_example_action, False
+        )
+
+    def consume_example_action(
+        self, pop_template, values, cycle_step, simulation_step
+    ):
+        destination = self.config.get(
+            "destination_node", "home_0"
+        )
+        quantity = values.get(
+            "quantity", self.config.get("default_quantity", 20)
+        )
+
+        move_values = {
+            "origin_region": values["region"],
+            "origin_node": values["node"],
+            "destination_region": values["region"],
+            "destination_node": destination,
+            "quantity": quantity
+        }
+        return [Action("move_population", pop_template, move_values)]
+
+    def update_time_step(self, cycle_step, simulation_step):
+        pass
+
+    def unload_plugin(self):
+        pass
+\end{lstlisting}
+
+Primitive handlers may instead modify $\mathcal{S}(s)$ directly and return no
+further actions. Routine plugins can generate start-of-step or end-of-step
+actions, data plugins can expose shared services, and logger plugins can
+observe state without adding domain fields to the core model. Regardless of
+role, plugin requirements and shared action identifiers must be compatible
+within the loaded extension set.
+
+
+\section{Simulator Script}
+\label{app:simulator}
+
+The simulator script parses the experiment and its input files, loads the
+selected plugins, and advances the lifecycle. In
+Listing~\ref{lst:simulator}, the dependency-data plugin is loaded before any
+plugin can change POI availability, the primitive movement handler is loaded
+before the composite example is used, and the simulation then advances for the
+horizon defined in the experiment configuration.
+
+Each call to \textit{update\_time\_step} advances the absolute step $s$ and
+derives its cycle step $t$. The simulator updates the applicable step-boundary
+hooks and consumes actions in start-of-step, ordered global and local routine,
+and end-of-step phases before finally merging compatible blobs. Direct or
+queued action invocation remains available for programmatic scenarios, but it
+uses the same action representation and dispatcher.
+
+\begin{lstlisting}[language={Python},
+caption={Example of a simulator script using the revised lifecycle.},
+captionpos=b, label={lst:simulator}, basicstyle=\scriptsize]
+from plugins.data.node_dependency_data_plugin import (
+    NodeDependencyDataPlugin
+)
+from plugins.time_actions.move_population_plugin import (
+    MovePopulationPlugin
+)
+from util.data_parse import generate_lodus_simulation
+
+from example_plugin import ExamplePlugin
+
+
+# Parse experiments/ExampleExperiment.json and its input files.
+simulation = generate_lodus_simulation("ExampleExperiment")
+
+# Load the extension set required by the configured actions.
+simulation.load_plugin(NodeDependencyDataPlugin())
+simulation.load_plugin(MovePopulationPlugin())
+simulation.load_plugin(ExamplePlugin())
+
+# Advance all cycles. The simulation object manages t and s.
+number_of_steps = (
+    simulation.time_status.total_cycles
+    * simulation.time_status.cycle_length
+)
+for _ in range(number_of_steps):
+    simulation.update_time_step()
+\end{lstlisting}

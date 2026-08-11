@@ -45,7 +45,7 @@ class LevyWalkV2Plugin(LevyWalkPlugin):
         "worker": {
             "population_template": {"occupation": ["worker"]},
             "target_node_type": "work",
-            "cycle_attendance_rate": 0.9812322015,
+            "cycle_attendance_rate": 1.0,
             "stay_duration_steps": 8,
             "hourly_weights": {
                 "0": 0.025,
@@ -77,7 +77,7 @@ class LevyWalkV2Plugin(LevyWalkPlugin):
         "student": {
             "population_template": {"occupation": ["student"]},
             "target_node_type": "school",
-            "cycle_attendance_rate": 0.9375,
+            "cycle_attendance_rate": 1.0,
             "stay_duration_steps": 4,
             "hourly_weights": {"8": 1.65, "13": 1.65, "19": 0.9},
         },

@@ -309,7 +309,7 @@ runners, and Stage 4/5 artifacts remain unchanged.
 Levy V2 calculates an exact global attendance target every cycle from original
 worker/student population, then allocates it deterministically to homes and
 normalized hourly profiles by largest remainders. Workers use attendance rate
-`0.9812322015` and an eight-hour stay; students use rate `0.9375`, the combined
+`1.0` and an eight-hour stay; students use rate `1.0`, the combined
 08:00/13:00/19:00 profile, and a four-hour stay. Outbound demand uses packets of
 at most 50 and retains the last partial packet.
 

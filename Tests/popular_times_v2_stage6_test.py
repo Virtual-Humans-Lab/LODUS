@@ -79,10 +79,10 @@ class LevyWalkV2ConfigurationTest(unittest.TestCase):
         ]
         self.assertEqual(50, config["packet_size"])
         self.assertAlmostEqual(
-            0.9812322015, config["groups"]["worker"]["cycle_attendance_rate"]
+            1.0, config["groups"]["worker"]["cycle_attendance_rate"]
         )
         self.assertAlmostEqual(
-            0.9375, config["groups"]["student"]["cycle_attendance_rate"]
+            1.0, config["groups"]["student"]["cycle_attendance_rate"]
         )
         student = config["groups"]["student"]["hourly_weights"]
         self.assertAlmostEqual(1.0, sum(student.values()))
@@ -100,7 +100,12 @@ class LevyWalkV2ConfigurationTest(unittest.TestCase):
                 "seed": spec.seed,
                 "simulation_parameters": {"total_cycles": 56},
                 "resolved_config": {
-                    "levy_walk_v2_plugin": {},
+                    "levy_walk_v2_plugin": {
+                        "groups": {
+                            "worker": {"cycle_attendance_rate": 1.0},
+                            "student": {"cycle_attendance_rate": 1.0},
+                        }
+                    },
                     "popular_times_v2_stage6": {
                         "environment": "13", "levy_model": "v2"
                     },

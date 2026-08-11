@@ -10,7 +10,7 @@
       "worker": {
         "population_template": {"occupation": ["worker"]},
         "target_node_type": "work",
-        "cycle_attendance_rate": 0.9812322015,
+        "cycle_attendance_rate": 1.0,
         "stay_duration_steps": 8,
         "hourly_weights": {
           "0": 0.025, "1": 0.025, "2": 0.025, "3": 0.025,
@@ -24,7 +24,7 @@
       "student": {
         "population_template": {"occupation": ["student"]},
         "target_node_type": "school",
-        "cycle_attendance_rate": 0.9375,
+        "cycle_attendance_rate": 1.0,
         "stay_duration_steps": 4,
         "hourly_weights": {
           "8": 0.39285714285714285,

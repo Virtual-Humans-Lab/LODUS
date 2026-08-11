@@ -3,7 +3,7 @@
 
 Environmental disruptions are a useful test of whether an urban population model can distinguish a change in point-of-interest (POI) state from the behavioral response to that change. A POI may become unavailable, but this state alone does not determine what the population should do. A routine visit may be cancelled or redirected, a work or school trip may remain unmet because its destination is not substitutable, and a resident exposed at home may seek protection in a capacity-constrained shelter. These responses require different policies even when they originate from the same environmental observation.
 
-The experiments in this section extend the routine-mobility baselines from Section~\ref{sec:results_routine_mobility} along two complementary paths. The first path applies a time-varying water-level series to home, activity, work, and school POIs, then evaluates trip suppression, destination substitution, and flood-aware commuting. The second path maps a static 5.30~m exposure estimate to the full-city population and evaluates evacuation toward shelters under capacity, response-rate, occupancy, distance, reallocation, and facility-failure variations. Together, the studies examine both disruption of ordinary movement and movement initiated specifically in response to exposure.
+The experiments in this section extend the routine-mobility baselines from Section~\ref{sec:results_routine_mobility} along two complementary paths. The first path applies a time-varying water-level series to home, activity, work, and school POIs, then evaluates trip suppression, destination substitution, and flood-aware commuting. The second path maps a static 5.30~m exposure estimate to the full-city population and evaluates evacuation toward shelters under capacity, response-rate, reallocation, and facility-failure variations. Together, the studies examine both disruption of ordinary movement and movement initiated specifically in response to exposure.
 
 Following the distinction established in Chapter~\ref{chapter:proposed_model}, the water-level condition is represented as environment state, whereas suppression, substitution, evacuation, admission, and reallocation are plugin policies. More specifically, flood thresholds are stored in the POI attribute mappings $\bm{\alpha}_i$, the active flood condition is represented as a named cause in $C_i(t)$, and the response to an unavailable POI is determined by the handler that consumes the affected action. This separation allows the same environmental state change to produce different responses without assigning a universal flood behavior to the core environment.
 
@@ -94,11 +94,11 @@ The core Popular Times matrix exposes only home and activity POIs. Its destinati
 
 \subsubsection{Shelter Scenarios}
 
-The shelter experiments use the full 94-region environment. It contains 598 base POIs and 104 added shelter POIs, for 702 POIs in total, and represents 1,409,464 people. The 5.30~m exposure input identifies 186,522 people in 438 census sectors. Region-level population caps allow 182,936 of them to be mapped to available home populations, leaving an audited shortfall of 3,586. The shelter input provides 12,519 places and a configured initial occupancy of 10,963.
+The shelter experiments use the full 94-region environment. It contains 598 base POIs and 104 added shelter POIs, for 702 POIs in total, and represents 1,409,464 people. The 5.30~m exposure input identifies 186,522 people in 438 census sectors. Region-level population caps allow 182,936 of them to be mapped to available home populations, leaving an audited shortfall of 3,586. The shelter input provides 12,519 places.
 
 The spatial input audit contains 2,649 census-sector identifiers, of which 2,557 match the bundled geometry and 92 do not. These unmatched geometries limit the completeness of sector-level maps; exposure quantities are still resolved through their configured region mappings. Region names use normalized exact matching followed by a versioned alias table, and unresolved names stop execution rather than being matched fuzzily.
 
-Each research scenario covers 14 days with 24 hourly steps. Evacuation requests occur at 07:00, initial admission at 08:00, optional global waitlist reallocation at 09:00, and admission of reallocated residents at 10:00. The reference response requests 1\% of the initially exposed population per day and uses a 1,000~m L\'evy distribution scale. Table~\ref{tbl:shelter_scenario_families} presents the screening catalog. Each of its 28 configurations was run with seeds 0--4, producing 140 completed or validly resumed runs. The conservation difference was zero at every recorded step in all 140 runs.
+Each research scenario covers 14 days with 24 hourly steps. Evacuation requests occur at 07:00, initial admission at 08:00, optional global waitlist reallocation at 09:00, and admission of reallocated residents at 10:00. The reference daily response rate is 1\%. Table~\ref{tbl:shelter_scenario_families} presents the screening catalog. Each of its 18 configurations was run with seeds 0--4, producing 90 completed or validly resumed runs. The conservation difference was zero at every recorded step in all 90 runs.
 
 \begin{table}[ht]
 \centering
@@ -110,18 +110,15 @@ Each research scenario covers 14 days with 24 hourly steps. Evacuation requests 
 \textbf{Family} & \textbf{Configurations} & \textbf{Values} & \textbf{Question} \\
 \midrule
 Reference and reallocation & 2 & Off; on & Does moving waitlists between shelters use spare capacity more efficiently? \\
-Evacuation demand basis & 2 & Fixed initial; remaining demand & Is each day's request based on initial exposure or currently unresolved exposure? \\
 Daily response rate & 4 & 0.5\%, 1\%, 2\%, 5\% & How quickly is evacuation demand introduced? \\
 Exposure magnitude & 3 & 0.25, 0.5, 1.0 times & How does demand relative to fixed capacity affect protection? \\
 Shelter capacity & 5 & 0.5, 1, 2, 5, 15 times & When does capacity cease to be the binding constraint? \\
-Initial occupancy & 3 & Empty; half; configured & How does pre-existing occupancy affect waiting and travel? \\
-L\'evy scale & 3 & 500, 1,000, 3,000~m & How does destination sampling affect travel distance? \\
-Shelter failure & 6 & Three failures, reallocation off/on & How do failure topology and reallocation change outcomes? \\
+Shelter failure & 4 & Two failures, reallocation off/on & How do failure topology and reallocation change outcomes? \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Shelter coverage is the final \texttt{sheltered} population divided by mapped exposure. It includes the configured initial occupancy and therefore should not be read as the number of new admissions. Unresolved demand is the final \texttt{in\_danger} population. The peak waitlist and accumulated waiting-person-hours describe congestion after arrival, while mean and 95th-percentile distance describe the origin-to-shelter movements that occurred. Reported shelter values are five-seed means; the preserved analysis uses bootstrap intervals, although outcomes determined exactly by fixed exposure and capacity have no across-seed variation.
+Shelter coverage is the final \texttt{sheltered} population divided by mapped exposure. Unresolved demand is the final \texttt{in\_danger} population. The peak waitlist and accumulated waiting-person-hours describe congestion after arrival, while mean and 95th-percentile distance describe the origin-to-shelter movements that occurred. Reported shelter values are five-seed means; the preserved analysis uses bootstrap intervals, although outcomes determined exactly by fixed exposure and capacity have no across-seed variation.
 
 \subsection{Results}
 \label{sec:environment_disruption_results}
@@ -199,9 +196,9 @@ The shorter mean commute distances under destination and combined exposure again
 
 Activity rerouting in the combined condition restores Popular Times fulfillment to 100\% but does not restore work or school attendance. Commute fulfillment remains approximately 89\% and is slightly lower than in the matching activity-suppression condition. This composed result is consistent with the two plugins drawing from the same represented population while retaining different destination semantics: Popular Times can substitute another POI with the same type $\tau_i$, while L\'evy Walk continues to report the unavailable workplace or school as unmet.
 
-\subsubsection{Shelter Reference and Reallocation Results}
+\subsubsection{Shelter Simulations}
 
-Table~\ref{tbl:shelter_reference_results} presents the principal shelter references. At initialization, 10,963 of the 12,519 configured places are occupied, leaving 1,556 immediately free. The reference evacuation fills the remaining capacity and ends with 12,519 sheltered people, or 6.84\% of the 182,936 mapped exposed population. The remaining 170,417 people retain an \texttt{in\_danger} status. Coverage is identical across seeds because the fixed capacity is fully used.
+Table~\ref{tbl:shelter_reference_results} presents the principal shelter references. At the end of the reference run, all 12,519 configured places are in use, corresponding to 6.84\% of the 182,936 mapped exposed population. The remaining 170,417 people retain an \texttt{in\_danger} status. Coverage is identical across seeds because the fixed capacity is fully used.
 
 \begin{table}[ht]
 \centering
@@ -217,21 +214,17 @@ Table~\ref{tbl:shelter_reference_results} presents the principal shelter referen
 \shortstack{\textbf{Waiting}\\\textbf{(million person-h)}} &
 \textbf{Mean distance} \\
 \midrule
-Fixed-initial demand; no reallocation
+No reallocation
     & 6.843 & 170,417 & 24,195 & 3.998 & 5.511~km \\
-Fixed-initial demand; reallocation
+Reallocation
     & 6.843 & 170,417 & 24,195 & 3.950 & 5.537~km \\
-Remaining-demand basis; reallocation
-    & 6.843 & 170,417 & 21,227 & 3.523 & 5.607~km \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Reallocation does not change final coverage or peak waitlist in the reference because the network has no unused capacity once all shelters are full. It does reduce accumulated waiting by 47,813 person-hours, a 1.20\% reduction, while increasing mean travel distance by 0.0267~km. Basing each daily request on remaining rather than initial exposure further reduces the peak waitlist by 2,968 and accumulated waiting by 427,240 person-hours relative to the reallocation reference. This change reduces repeated demand pressure but cannot increase final protection after the same capacity has been exhausted.
+Reallocation does not change final coverage or peak waitlist in the reference because the network has no unused capacity once all shelters are full. It does reduce accumulated waiting by 47,813 person-hours, a 1.20\% reduction, while increasing mean travel distance by 0.0267~km.
 
-\subsubsection{Shelter Capacity, Exposure, and Response Rate}
-
-Table~\ref{tbl:shelter_capacity_response} separates the quantity of shelter space from the rate at which exposed residents attempt to use it. Halving capacity reduces final coverage to 3.42\%. Doubling it raises coverage to 13.69\%, and multiplying it by five raises coverage to approximately 20.07\%. Increasing capacity from five to fifteen times the reference produces essentially no additional protection within 14 days. At this point, capacity is no longer binding: the 1\%-per-day fixed-initial response schedule limits how much of the exposed population reaches shelters during the simulated horizon.
+Table~\ref{tbl:shelter_capacity_response} separates the quantity of shelter space from the rate at which exposed residents attempt to use it. Halving capacity reduces final coverage to 3.42\%. Doubling it raises coverage to 13.69\%, and multiplying it by five raises coverage to approximately 20.07\%. Increasing capacity from five to fifteen times the reference produces essentially no additional protection within 14 days. At this point, capacity is no longer binding: the 1\%-per-day response schedule limits how much of the exposed population reaches shelters during the simulated horizon.
 
 \begin{table}[ht]
 \centering
@@ -264,17 +257,13 @@ Changing the response rate alone does not change final coverage because even the
 
 Exposure scaling produces the corresponding demand-side effect. With 25\% of the reference exposure, coverage reaches 26.85\%, unresolved demand falls to 34,111, and accumulated waiting is 0.643 million person-hours. At 50\% exposure, coverage is 13.42\%, unresolved demand is 80,742, and waiting is 1.721 million person-hours. The 100\% reference returns to 6.84\% coverage and 3.950 million waiting person-hours.
 
-Initial occupancy changes who can be newly admitted and how quickly queues develop, even when every scenario ends with the same 12,519 sheltered people. Empty, half-capacity, and configured-occupancy shelters produce peak waitlists of 13,339, 19,559, and 24,195, respectively. Their accumulated waiting rises from 1.250 to 2.604 and 3.950 million person-hours. The empty condition also increases mean travel distance to 6.124~km, compared with 5.537~km under configured occupancy, because a different set of exposed residents uses the newly available places.
-
-\subsubsection{Shelter Distance and Failure Topology}
-
-The L\'evy-scale sensitivity in Table~\ref{tbl:shelter_spatial_failures} changes where evacuees are sent without changing aggregate capacity. Coverage, unresolved demand, and peak waitlist are identical at 500, 1,000, and 3,000~m. Mean travel distance increases from 5.277 to 6.394~km across this range, and the 95th-percentile distance increases from 17.577 to 18.382~km. Thus, destination sampling changes the geographic burden while the fixed admission limit continues to determine protection.
+Table~\ref{tbl:shelter_failures} reports the reference and the two retained shelter-failure scenarios with waitlist reallocation enabled.
 
 \begin{table}[ht]
 \centering
 \footnotesize
-\caption{Mean shelter distance and failure outcomes over five seeds. Failure rows use waitlist reallocation.}
-\label{tbl:shelter_spatial_failures}
+\caption{Mean shelter failure outcomes over five seeds. All rows use waitlist reallocation.}
+\label{tbl:shelter_failures}
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}Xrrrrl@{}}
 \toprule
 \textbf{Condition} &
@@ -284,19 +273,14 @@ The L\'evy-scale sensitivity in Table~\ref{tbl:shelter_spatial_failures} changes
 \shortstack{\textbf{P95 distance}\\\textbf{(km)}} &
 \textbf{Capacity removed} \\
 \midrule
-L\'evy scale 500~m   & 6.843 & 170,417 & 5.277 & 17.577 & None \\
-L\'evy scale 1,000~m & 6.843 & 170,417 & 5.537 & 17.699 & None \\
-L\'evy scale 3,000~m & 6.843 & 170,417 & 6.394 & 18.382 & None \\
-\addlinespace
 No shelter failure        & 6.843 & 170,417 & 5.537 & 17.699 & None \\
 Largest shelter disabled  & 6.573 & 170,912 & 5.522 & 17.714 & 495 places \\
 Highest-capacity 10\% of shelters disabled & 4.675 & 174,384 & 5.731 & 17.917 & 3,967 places \\
-Humait\'a regional failure & 6.843 & 170,417 & 5.537 & 17.699 & 0 places \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Disabling the single largest shelter adds \texttt{shelter\_failure} to its cause set, removes 495 available places, and reduces coverage by 0.271 percentage points. Applying the same cause to the 11 highest-capacity shelters---10\% of the 104-POI shelter network after rounding---removes 3,967 places and reduces coverage by 2.169 percentage points. The configured Humait\'a failure selects no shelter POI in the stored input and consequently removes no capacity or changes no outcome. This null result is informative about scenario topology: naming an affected region has no shelter-service effect when the modeled network contains no shelter in that region.
+Disabling the single largest shelter adds \texttt{shelter\_failure} to its cause set, removes 495 available places, and reduces coverage by 0.271 percentage points. Applying the same cause to the 11 highest-capacity shelters---10\% of the 104-POI shelter network after rounding---removes 3,967 places and reduces coverage by 2.169 percentage points.
 
 Reallocation again changes waiting rather than final coverage in the failure scenarios. It reduces accumulated waiting by 46,546 person-hours after the largest-shelter failure and by 35,265 person-hours after failure of the 11 highest-capacity shelters, while adding approximately 0.027 and 0.030~km to mean travel distance, respectively. Once every remaining enabled shelter is full, no reallocation policy can recover the protection lost with disabled capacity.
 
@@ -308,4 +292,4 @@ Destination substitution is effective only for the demand to which it is applied
 
 The shelter sensitivity results further show that capacity and response speed are joint constraints. Under reference capacity, faster evacuation requests mainly create longer queues. Under sufficiently expanded capacity, the 14-day response schedule limits final protection. Failure consequences depend on how much capacity is removed and where shelters exist, rather than solely on the number of affected regions.
 
-These results remain conditional on the implemented assumptions. Water thresholds in $\bm{\alpha}_i$, plugin parameters in $\bm{\theta}_{\Pi}$, hourly activity profiles, same-type nearest substitution, commute attendance rates, exposure multipliers, shelter capacities, response rates, and failure selections are experiment inputs. Mobility uses geographic rather than transport-network distance. The shelter workflow models static initial exposure, simple capacity admission, and no demographic priority, recovery, or return-home decision. Its five-seed catalog is a screening analysis of stochastic destination sampling, not an exhaustive uncertainty analysis or a forecast of observed evacuation behavior. Because $D_i$ is empty for the POIs in this section, the experiments evaluate direct disable causes and plugin responses; dependency propagation is evaluated separately by the subsequent dialysis experiments.
+These results remain conditional on the implemented assumptions. Water thresholds in $\bm{\alpha}_i$, plugin parameters in $\bm{\theta}_{\Pi}$, hourly activity profiles, same-type nearest substitution, commute attendance rates, exposure multipliers, shelter capacities, response rates, and failure selections are experiment inputs. Mobility uses geographic rather than transport-network distance. The shelter workflow models static initial exposure, simple capacity admission, and no demographic priority, recovery, or return-home decision. Its five-seed catalog is a screening analysis of stochastic evacuation outcomes, not an exhaustive uncertainty analysis or a forecast of observed evacuation behavior. Because $D_i$ is empty for the POIs in this section, the experiments evaluate direct disable causes and plugin responses; dependency propagation is evaluated separately by the subsequent dialysis experiments.

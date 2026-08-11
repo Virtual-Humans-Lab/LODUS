@@ -1,0 +1,78 @@
+\chapter{Introduction}
+\label{chapter:introduction}
+
+\section{Motivation and Context}
+\label{sec:introduction_motivation}
+
+Urban systems concentrate people, infrastructure, and essential services in spaces whose conditions vary over time. Routine commuting, occasional large-scale events, infectious-disease outbreaks, health-service demand, and floods can all alter where people need to go and whether the destinations on which they depend remain accessible. Public authorities and service providers must often compare possible interventions before their consequences can be observed directly. Population simulation offers a controlled way to conduct such comparisons, examine the assumptions that produce an outcome, and identify where capacity, access, or mobility may become constrained~\cite{eid1980,tekouabou2022MLinUrbanPlanning,haraguchi2022mobilityDataReview,serana2023multilevelmodeling}.
+
+The COVID-19 pandemic made this need particularly visible. Cities had to reason about population movement, social-distancing measures, vaccination, and access to public spaces and health services under rapidly changing conditions~\cite{shafiri2020covidImpact,kang2021hybridCovid,bouchnita2021mathModelCovid}. Comparable modeling demands arise during large gatherings and environmental emergencies. In each case, the question is not only how many people are present in a city, but how heterogeneous population groups move among homes, workplaces, schools, services, and temporary destinations as schedules, policies, and environmental conditions change.
+
+Representing these processes in a common model is difficult. Microscopic approaches can express individual decisions and local interactions, but typically require detailed behavioral inputs and become costly when applied to large urban populations~\cite{helbing1995social,cao2021competitiveCooperative,khan2024heterogeneousSurvey,ruprecht2024adaptiveMovement}. Macroscopic approaches improve scalability by representing aggregate densities or flows, although aggregation can conceal population heterogeneity~\cite{hughes2002continuum,treuille2006continuum,thalmann2007crowd}. Hybrid methods combine levels of detail, but integrating spatial structures, mobility processes, and data available at different scales remains an open modeling challenge~\cite{xiong2010hybrid,ijaz2015hybridSurvey,antonitsch2019bioclouds,dang2023multilevelCrowd,cogo2019integrability,alessandretti2020nature}.
+
+This thesis focuses on macro- and meso-scale urban population dynamics rather than collision avoidance or high-fidelity pedestrian trajectories. Its intended use is the comparison of explicit scenarios: for example, how a scheduled event changes citywide occupancy, how service capacity affects unmet demand, or how a flood-induced destination closure changes trip fulfillment. This scope permits the model to retain population characteristics relevant to an experiment without requiring a permanent simulated individual for every resident.
+
+\section{Research Problem}
+\label{sec:introduction_problem}
+
+Two limitations motivate the original LodusPop model. First, population and urban data are not uniformly available at one spatial or temporal resolution. A study may have neighborhood totals, census-sector population estimates, point locations for services, and hourly activity profiles, but no complete set of individual trajectories. A useful framework must therefore adapt its representation to the data that exist without silently implying a finer degree of knowledge. Second, many population-driven models place movement decisions within individual agents. That design is appropriate when calibrated individual behavior is central to the research question, but it can impose unnecessary data and computational requirements when the available evidence describes aggregate demand, schedules, or environmental attraction instead.
+
+LodusPop addresses these limitations through an environment-driven model~\cite{silva2026lodusPop}. Locations and routines request population movements, while the population is represented by \emph{blobs}: heterogeneous groups of arbitrary size that can split, merge, move, and change state. A blob may represent many people who currently share the characteristics relevant to an experiment. When only part of the group satisfies a request or undergoes a state transition, that part can be separated; compatible groups can subsequently merge. The same abstractions can therefore support representations ranging from neighborhoods to census-sector homes while preserving aggregate population accounting.
+
+The broader set of scenarios considered in this thesis exposes a further problem. Urban environments do not remain passive or continuously available. A facility may close because of a direct failure, a point of interest (POI) may become inaccessible when water exceeds a local threshold, and a clinic may become unavailable because supporting infrastructure has failed. Even when two destinations share the same unavailable state, the appropriate population response may differ. An activity visit may be cancelled or redirected, a workplace may have no modeled substitute, a patient may wait for capacity at another facility, and a resident exposed at home may seek a shelter.
+
+Embedding every such behavior in the core simulator would couple a general population representation to particular domains and policies. Conversely, treating all failures as scenario-specific code would make availability difficult to represent consistently and would obscure the causes of cascading disruption. The research problem is therefore to combine a stable, reusable population model with explicit representations of environmental state and composable domain behavior. In this thesis, direct and dependency-induced availability are properties of the environment; admission, queueing, evacuation, trip suppression, destination substitution, contagion, and vaccination remain plugin policies. This boundary is central to the interpretation and reuse of the framework.
+
+\section{Research Questions and Objectives}
+\label{sec:introduction_questions}
+
+The general objective of this thesis is to develop and evaluate an extensible, environment-driven framework for modeling heterogeneous urban populations under routine conditions, policy interventions, service constraints, and environmental disruption. Four research questions guide the work:
+
+\begin{description}
+    \item[RQ1:] How can an environment-driven, blob-based representation express heterogeneous population dynamics at neighborhood and census-sector spatial resolutions?
+    \item[RQ2:] How can plugins, dynamic POI availability, and dependency constraints represent domain-specific capacity, disruption, and adaptation while preserving a stable core population model?
+    \item[RQ3:] What does the application of the same framework to routine mobility, large-scale events, public health, essential services, and flood scenarios demonstrate about its versatility and practical limits?
+    \item[RQ4:] Which provenance, replication, validation, and visualization practices are required to interpret the generated outcomes as auditable scenario comparisons rather than forecasts?
+\end{description}
+
+To answer these questions, the thesis pursues the following specific objectives:
+
+\begin{itemize}
+    \item define a multi-scale urban environment composed of regions and typed POIs;
+    \item represent heterogeneous populations as divisible and mergeable blobs with sampled and traceable characteristics;
+    \item specify routines and actions through which the environment requests population movement and state changes;
+    \item define a plugin contract that extends schemas, routines, action handlers, and simulation lifecycle behavior without changing the core abstractions for each application domain;
+    \item represent time-varying POI availability, independent disable causes, recovery, and dependencies among urban services;
+    \item evaluate the framework in Porto Alegre using multiple spatial representations and scenarios involving recurring mobility, large-scale events, contagion and vaccination, environmental disruption, evacuation and shelters, and dialysis access; and
+    \item document input provenance, experimental assumptions, repeated or matched runs, conservation checks, domain-specific metrics, and the limits of visual and quantitative evidence.
+\end{itemize}
+
+The evaluation is not intended to prove that one parameterization reproduces all aspects of human behavior in Porto Alegre. Instead, it asks whether the framework can express materially different urban processes through a common set of population and environment abstractions, whether the resulting state transitions remain traceable, and whether comparisons between named configurations can be reproduced and interpreted within their stated assumptions.
+
+\section{Thesis Contributions}
+\label{sec:introduction_contributions}
+
+The main contributions of this thesis are:
+
+\begin{itemize}
+    \item \textbf{An environment-driven population-modeling paradigm.} Movement demand can originate in locations and routines rather than in a complete set of individual decision models. This supports aggregate urban analyses when detailed trajectories or behavioral profiles are unavailable.
+
+    \item \textbf{A scalable representation of heterogeneous populations.} The blob abstraction preserves experiment-relevant characteristics while allowing groups to split and merge as movements and state transitions occur. Simulation granularity can consequently follow both the research question and the available data.
+
+    \item \textbf{A unified multi-scale framework.} LodusPop combines regions, typed POIs, population blobs, routines, and actions in environments ranging from a neighborhood-level representation of Porto Alegre to complete and reduced census-sector representations.
+
+    \item \textbf{Explicit and extensible disruption semantics.} Cause-aware POI availability and dependency constraints distinguish direct failures from cascading unavailability. A formal plugin contract keeps capacities, queues, disease processes, flood responses, and adaptation policies outside the stable core while making their effects on simulation state explicit.
+
+    \item \textbf{A cumulative, cross-domain evaluation.} The original mobility, large-event, contagion, and vaccination studies are extended with routine-activity profiles, flood-aware movement, destination substitution, evacuation and shelter allocation, and recurring dialysis demand under facility and infrastructure disruptions. The experiments show which mechanisms can be reused and which assumptions must remain domain-specific.
+
+    \item \textbf{An auditable interpretation of simulation evidence.} The thesis separates externally sourced data, derived inputs, and configured scenario values; uses population-conservation and domain-integrity checks; and treats maps, origin--destination views, and immersive visualization as tools for exploration rather than as behavioral validation~\cite{teixeira2024visualization,silva2026geospatial}.
+\end{itemize}
+
+Together, these contributions position LodusPop as a reusable platform for comparative urban population studies. The contribution is not a universal behavioral model or a forecasting system. Results such as coverage, fulfillment, delay, displacement, infection, or receiving load are outcomes of explicit input data and plugin policies. Their value lies in exposing the consequences of those assumptions consistently across scenarios.
+
+\section{Scope and Thesis Organization}
+\label{sec:introduction_organization}
+
+The thesis develops cumulatively from the original LodusPop manuscript~\cite{silva2026lodusPop}. It preserves the environment-driven and blob-based foundations and the original Porto Alegre experiments, then extends the model and evaluation to capacity-constrained services, infrastructure dependencies, and environmental disruption. The health-service experiments also draw on the modeling lineage of LODUS-Health~\cite{souza2026lodushealth}, while the recent experiment batches, analyses, and cross-domain synthesis are reported separately in this thesis.
+
+The next chapter reviews the literature on crowd and population-mobility simulation, urban service accessibility and resilience, flood-aware mobility, and simulation visualization. Chapter~\ref{chapter:proposed_model} defines the environment, population, routine, action, availability, dependency, and plugin abstractions. Chapter~\ref{sec:simulation_environments_and_data} describes the Porto Alegre representations and distinguishes externally sourced, derived, and scenario-configured inputs. Chapter~\ref{sec:experimental_results} presents the experiments, beginning with routine mobility and continuing through large-scale events, epidemic processes, environmental disruption, evacuation, and dialysis-service continuity. The remaining chapters synthesize the cross-study evidence, discuss threats to validity and reproducibility, situate visualization as an exploratory aid, and conclude by answering the research questions and identifying directions for calibration, sensitivity analysis, and further framework development.

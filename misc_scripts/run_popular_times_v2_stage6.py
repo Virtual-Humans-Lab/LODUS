@@ -28,6 +28,7 @@ from misc_scripts.run_popular_times_v2_production import (
     _write_csv,
     compress_raw_outputs,
 )
+from util.data_parse import load_experiment_config
 
 
 DEFAULT_OUTPUT = OUTPUT_LOGS / "popular_times_v2_stage6"
@@ -141,6 +142,15 @@ def completion_state(spec: RunSpec, output_root: Path) -> tuple[str, str]:
         return "pending", f"completion artifacts are unreadable: {error}"
     resolved = metadata.get("resolved_config", {})
     study = resolved.get("popular_times_v2_stage6", {})
+    actual_groups = resolved.get("levy_walk_v2_plugin", {}).get("groups", {})
+    expected_groups = load_experiment_config(spec.experiment)[
+        "levy_walk_v2_plugin"
+    ]["groups"]
+    attendance_rates_match = all(
+        actual_groups.get(group, {}).get("cycle_attendance_rate")
+        == config["cycle_attendance_rate"]
+        for group, config in expected_groups.items()
+    )
     expected = (
         metadata.get("status") == "complete"
         and metadata.get("experiment") == spec.experiment
@@ -149,6 +159,7 @@ def completion_state(spec: RunSpec, output_root: Path) -> tuple[str, str]:
         == TOTAL_CYCLES
         and study.get("environment") == spec.scenario.split("_", 1)[0]
         and study.get("levy_model") == "v2"
+        and attendance_rates_match
         and "levy_walk_plugin" not in resolved
         and "send_population_back_plugin" not in resolved
     )
