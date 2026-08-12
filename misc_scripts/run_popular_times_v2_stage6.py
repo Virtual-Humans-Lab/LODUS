@@ -38,7 +38,7 @@ STAGE4_RESULTS = (
 STAGE5_RESULTS = (
     PROJECT_ROOT / "docs" / "results" / "popular_times_v2_stage5" / "stage5_runs.csv"
 )
-EXPECTED_RUNS = 175
+EXPECTED_RUNS = 50
 SCENARIOS = (
     "13_levy_v2_flood_none",
     "13_levy_v2_flood_destinations",
@@ -111,7 +111,7 @@ class RunSpec:
 
 
 def stage6_specs(
-    seeds_13: Iterable[int] = range(30),
+    seeds_13: Iterable[int] = range(5),
     seeds_94: Iterable[int] = range(5),
 ) -> list[RunSpec]:
     seeds = {"13": sorted(set(seeds_13)), "94": sorted(set(seeds_94))}
@@ -474,7 +474,7 @@ def baseline_effects(run_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 continue
             pairs = [
                 (indexed[(scenario, seed)], indexed[(baseline, seed)])
-                for seed in range(30)
+                for seed in range(5)
                 if (scenario, seed) in indexed and (baseline, seed) in indexed
             ]
             for metric in RUN_METRICS:
@@ -585,7 +585,7 @@ def write_report(
         "",
         f"{'COMPLETE' if complete else 'IN PROGRESS'}: {len(run_rows)} of {EXPECTED_RUNS} runs are preserved; all preserved runs pass both Popular Times and Levy V2 invariants.",
         "",
-        "All scenarios use 56 daily cycles and flood-aware commute lifecycles. The 13-region families use paired seeds 0–29; the 94-region families use paired seeds 0–4. Levy V2 uses a maximum packet size of 50 and exact cycle-level worker/student attendance. Intervals are paired or scenario-level 95% t intervals.",
+        "All scenarios use 56 daily cycles and flood-aware commute lifecycles. The 13- and 94-region families use paired seeds 0–4. Levy V2 uses a maximum packet size of 50 and exact cycle-level worker/student attendance. Intervals are paired or scenario-level 95% t intervals.",
         "",
         "| Scenario | n | Levy fulfillment | Levy unmet | Moved population | Mean commute distance (m) | PT fulfillment |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -673,7 +673,7 @@ def main():
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--workers", type=int, default=1)
-    parser.add_argument("--seeds", type=int, nargs="*", default=list(range(30)), help="13-region seeds")
+    parser.add_argument("--seeds", type=int, nargs="*", default=list(range(5)), help="13-region seeds")
     parser.add_argument("--seeds-94", type=int, nargs="*", default=list(range(5)), help="94-region seeds")
     parser.add_argument("--only", nargs="*", choices=SCENARIOS)
     parser.add_argument("--smoke", action="store_true", help="Run seed 0 for all ten scenarios")
@@ -685,10 +685,10 @@ def main():
     args = parser.parse_args()
     if args.workers < 1:
         parser.error("--workers must be at least 1")
-    if any(seed < 0 or seed > 29 for seed in args.seeds):
-        parser.error("--seeds must be between 0 and 29")
-    if any(seed < 0 or seed > 29 for seed in args.seeds_94):
-        parser.error("--seeds-94 must be between 0 and 29")
+    if any(seed < 0 or seed > 4 for seed in args.seeds):
+        parser.error("--seeds must be between 0 and 4")
+    if any(seed < 0 or seed > 4 for seed in args.seeds_94):
+        parser.error("--seeds-94 must be between 0 and 4")
     output_root = args.output.resolve()
     _relative_experiment_name(output_root / "path-check")
     output_root.mkdir(parents=True, exist_ok=True)

@@ -111,10 +111,10 @@ Implementation proceeds through five approval gates. Work stops after every stag
   - Redirect its original demand to the nearest enabled POI of the same type.
   - Retain demand scaling from the original POI’s paired home.
   - Record displacement distance, receiving-node load, and remaining unmet demand.
-- Run two 13-region, homes-and-POIs-flooded scenarios:
-  - Levy off: one deterministic run.
-  - Levy on: 30 seeded runs.
-- Compare these 31 runs with their demand-suppression counterparts and add the findings to the report.
+- Run the 13- and 94-region homes-and-POIs-flooded scenarios:
+  - Levy off: one deterministic domain run per environment.
+  - Levy on: matched seeds `0–4` per environment.
+- Compare these 12 runs with their demand-suppression counterparts and add the findings to the report.
 
 **Gate 5:** Present adaptation results and final validation for approval.
 
@@ -129,7 +129,7 @@ Implementation proceeds through five approval gates. Work stops after every stag
 - Split demand into packets of at most 50, including every final partial packet.
 - Make commute origins, destinations, anticipated destination flooding, returns,
   temporary homes, and repatriation flood-aware and auditable.
-- Run five 13-region families with paired seeds 0–29: no flooding, destination
+- Run ten 13- and 94-region families with paired seeds 0–4: no flooding, destination
   flooding including work/school, home flooding, all-node flooding, and all-node
   flooding with Popular Times POI rerouting.
 - Validate both mobility models independently and compare each flood condition to
@@ -139,7 +139,7 @@ Implementation proceeds through five approval gates. Work stops after every stag
 - Keep raw outputs outside Git and preserve the portable report, aggregates, and
   plots under `docs/results/popular_times_v2_stage6/`.
 
-**Gate 6:** Present all 150 validated runs and stop for review. Do not replace or
+**Gate 6:** Present all 50 validated runs and stop for review. Do not replace or
 delete Stage 4/5 artifacts.
 
 ## Interfaces and Compatibility

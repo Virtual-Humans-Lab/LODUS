@@ -1,7 +1,7 @@
 # Popular Times V2 Stage 5 Results
 
 This directory is the portable Gate 5 evidence package for the completed flood
-adaptation sensitivity. All 31 simulations ran for 56 daily cycles and passed every
+adaptation sensitivity. All 12 simulations ran for 56 daily cycles and passed every
 legacy and rerouting-specific invariant.
 
 ## Method and findings
@@ -10,7 +10,9 @@ Disabled or imminently flooded POIs redirect their original demand to the neares
 safe POI of the same type. Demand remains scaled by the original POI's paired home;
 receiving POIs have no capacity limit.
 
-- All 83,445 visits suppressed in the matching Stage 4 scenario were recovered.
+- In the 13-region comparison, all 83,445 visits suppressed in the matching
+  Stage 4 scenario were recovered; the 94-region comparison likewise recovered
+  all suppressed demand.
 - Fulfillment increased from 96.49% to 100%.
 - Remaining rerouted unmet demand was zero.
 - Mean POI displacement was 297.89 metres per rerouted traveler.

@@ -1,0 +1,245 @@
+\section{Quantitative Performance Evaluation}
+\label{sec:quantitative_performance}
+
+This section separates the previously reported benchmark from a new controlled
+performance matrix for the restructured experiments.  The legacy measurements
+are retained because they document the computational behavior of the original
+case studies.  The new measurements use a uniform protocol and are reported in
+separate tables so that concurrent production-batch timings are not presented as
+controlled benchmark observations.
+
+\subsection{Legacy Benchmarks}
+
+The numerical values in Table~\ref{tab:quantitative-performance-legacy} are
+retained unchanged from the original submission.  Each configuration was run
+five times in the 94-region Porto Alegre model, and the table reports the maximum
+blob count, simulated cycles, mean runtime, runtime per cycle, and two historical
+memory measurements.  MemProfile measured the peak resident memory of the
+Python process, whereas TraceMalloc measured traced Python allocations.  The
+references in the case-study column have been updated to the restructured
+results in Sections~\ref{sec:results_routine_mobility} and
+\ref{sec:results_large_scale_events_epidemics}.
+
+The random-walk configuration with $levy\_scale=2$ is the legacy baseline.  It
+completed its single simulated cycle in 5.211~s on average.  Movement
+restrictions in Figure~\ref{fig:routine_levy_restriction} reduced the runtime per
+cycle to 4.795~s at a restriction of 0.75 while leaving peak memory nearly
+unchanged.  Large-scale gatherings in
+Figure~\ref{fig:large_scale_event_displacements_94} increased runtime as more
+gather actions drew population from multiple regions.  The epidemic and
+vaccination experiments in Figures~\ref{fig:epidemic_r0_94},
+\ref{fig:vaccination_results_94}, and
+\ref{fig:vaccination_restriction_results_94} were more demanding because added
+traceable states produced additional population splitting and fewer merge
+opportunities.  The largest legacy blob count, 23,355, occurred in VaccC and
+coincided with the largest runtime per cycle, 33.455~s.
+
+All legacy and new benchmarks describe the current machine: an AMD Ryzen 5
+5600X CPU, an NVIDIA GeForce RTX 2060 GPU, 16~GB DDR4-2666 CL19 memory, and a
+KINGSTON SNV3S1000G SSD, using Python 3.13.6 on Microsoft Windows 11 Education
+(version 10.0.26200).  The corrected Windows version is reported here; the
+original text contained an additional zero.
+
+\begin{table}[htbp]
+\footnotesize
+\centering
+\caption{Retained legacy quantitative performance evaluation.  Numerical values
+are unchanged from the original submission.  Each row reports the maximum blob
+count, cycles, mean runtime over five runs, runtime per cycle, peak process RSS,
+and peak traced Python allocation.}
+\label{tab:quantitative-performance-legacy}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}clrrrrrr@{}}
+\toprule
+Case study & Configuration & Max blobs & Cycles & Mean runtime (s) & s/cycle & MemProfile (MiB) & TraceMalloc (MiB) \\
+\midrule
+Baseline random walk (Section~\ref{sec:results_routine_mobility})
+  & $levy\_scale=2$ & 2857 & 1 & 5.211 & 5.211 & 234.912 & 58.565 \\
+\midrule
+\multirow{3}{*}{Movement restriction (Figure~\ref{fig:routine_levy_restriction})}
+  & Restriction $=0.25$ & 2871 & 1 & 5.074 & 5.074 & 234.957 & 58.577 \\
+  & Restriction $=0.50$ & 2864 & 1 & 4.958 & 4.958 & 234.935 & 58.527 \\
+  & Restriction $=0.75$ & 2883 & 1 & 4.795 & 4.795 & 235.234 & 58.516 \\
+\midrule
+\multirow{5}{*}{Large-scale events (Table~\ref{tbl:large_scale_event_displacements_94})}
+  & Average of 1 event & 2671 & 1 & 6.144 & 6.144 & 235.355 & 58.767 \\
+  & Average of 2 events & 2651 & 1 & 7.986 & 7.986 & 235.297 & 58.892 \\
+  & Average of 3 events & 2651 & 1 & 9.910 & 9.910 & 235.530 & 59.061 \\
+  & 4 events & 2651 & 1 & 12.172 & 12.172 & 235.825 & 59.217 \\
+  & 4 events at different times & 2079 & 1 & 11.153 & 11.153 & 235.355 & 59.146 \\
+\midrule
+\multirow{3}{*}{Infection (Figure~\ref{fig:epidemic_r0_94})}
+  & $R_0=2.6$ & 8840 & 500 & 5826.840 & 11.654 & 1798.114 & 1554.886 \\
+  & $R_0=3.07$ & 8830 & 500 & 5630.155 & 11.260 & 1741.606 & 1520.793 \\
+  & $R_0=6.0$ & 8818 & 500 & 4949.313 & 9.899 & 1718.252 & 1480.354 \\
+\midrule
+\multirow{4}{*}{Vaccination (Table~\ref{tbl:vaccine_configuration_94})}
+  & VaccA & 16495 & 500 & 8991.828 & 17.984 & 2246.849 & 2057.299 \\
+  & VaccB & 20840 & 500 & 11346.181 & 22.692 & 2250.278 & 2318.228 \\
+  & VaccC & 23355 & 500 & 16727.571 & 33.455 & 2862.153 & 2512.703 \\
+  & VaccD & 12542 & 500 & 7620.026 & 15.240 & 1750.923 & 1883.745 \\
+\midrule
+\multirow{4}{*}{Vaccination and restriction (Figure~\ref{fig:vaccination_restriction_results_94})}
+  & $R_0=2.6$; restriction $=0.50$ & 9011 & 500 & 4008.347 & 8.017 & 1983.816 & 1743.626 \\
+  & $R_0=2.6$; restriction $=0.75$ & 8320 & 500 & 4566.876 & 9.134 & 1681.857 & 1472.081 \\
+  & VaccC; restriction $=0.50$ & 16722 & 500 & 9279.227 & 18.558 & 2628.414 & 2313.595 \\
+  & VaccC; restriction $=0.75$ & 15429 & 500 & 8139.657 & 16.279 & 2540.851 & 2240.514 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Controlled Benchmarks for the Restructured Results}
+
+The controlled matrix contains 48 configurations: six routine-mobility
+baselines, ten Popular Times suppression or Stage~5 adaptation configurations,
+eight Stage~6 flood-aware commuting disruptions, thirteen shelter
+configurations, and eleven dialysis configurations (D01--D11, corresponding to
+K01--K11 in Table~\ref{tbl:dialysis_results}).  Inpatient-care simulations are
+excluded.  The two Stage~6 no-flood configurations are included with routine
+mobility rather than duplicated in the disruption table.
+
+Every configuration is executed serially for repetitions 0--4 on the machine
+described above and on one repository commit, giving 240 controlled runs.  This
+five-repetition rule also applies to configurations whose scenario outcomes are
+deterministic: repeating them does not create domain uncertainty, but it does
+measure runtime and memory variation.  Runtime is measured with a monotonic
+high-resolution clock around the simulation loop.  Peak working set is the
+maximum resident memory reported for the process by Windows, converted to MiB.
+Maximum blob count is calculated from the global blob-count series written for
+every simulation.  Region- and node-level blob series are deliberately omitted
+to avoid very large logging outputs.  TraceMalloc is not collected for the new
+results.
+
+The generated tables below are refreshed only from complete controlled runs.
+A run is complete only when its metadata, domain validation artifacts, global
+blob-count series, runtime, peak working set, and maximum blob count are all
+present and mutually consistent.  Missing observations remain explicit rather
+than being filled with runtimes from the concurrent production batches.  The
+exact commit and individual-run measurements are retained in the accompanying
+compact CSV summaries.
+
+% BEGIN GENERATED PERFORMANCE TABLES
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{2.6pt}
+\begin{table}[htbp]
+\centering
+\caption{Controlled performance for routine mobility.}
+\label{tab:quantitative-performance-routine}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrrrrrr@{}}
+\toprule
+Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
+\midrule
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R01 scenario stage4\_13\_levy\_off\_flood\_none (popular\_times\_v2/production/13\_levy\_off\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R02 scenario stage4\_13\_levy\_on\_flood\_none (popular\_times\_v2/production/13\_levy\_on\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R03 scenario stage6\_13\_levy\_v2\_flood\_none (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R04 scenario stage4\_94\_levy\_off\_flood\_none (popular\_times\_v2/production/94\_levy\_off\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R05 scenario stage4\_94\_levy\_on\_flood\_none (popular\_times\_v2/production/94\_levy\_on\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R06 scenario stage6\_94\_levy\_v2\_flood\_none (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Controlled performance for popular times suppression and stage 5 adaptation.}
+\label{tab:quantitative-performance-adaptation}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrrrrrr@{}}
+\toprule
+Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
+\midrule
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A01 scenario stage4\_13\_levy\_on\_flood\_pois (popular\_times\_v2/production/13\_levy\_on\_flood\_pois) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A02 scenario stage4\_13\_levy\_on\_flood\_homes (popular\_times\_v2/production/13\_levy\_on\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A03 scenario stage4\_13\_levy\_on\_flood\_both (popular\_times\_v2/production/13\_levy\_on\_flood\_both) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A04 scenario stage5\_13\_levy\_off\_flood\_both\_reroute (popular\_times\_v2/stage5/13\_levy\_off\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A05 scenario stage5\_13\_levy\_on\_flood\_both\_reroute (popular\_times\_v2/stage5/13\_levy\_on\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A06 scenario stage4\_94\_levy\_on\_flood\_pois (popular\_times\_v2/production/94\_levy\_on\_flood\_pois) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A07 scenario stage4\_94\_levy\_on\_flood\_homes (popular\_times\_v2/production/94\_levy\_on\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A08 scenario stage4\_94\_levy\_on\_flood\_both (popular\_times\_v2/production/94\_levy\_on\_flood\_both) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A09 scenario stage5\_94\_levy\_off\_flood\_both\_reroute (popular\_times\_v2/stage5/94\_levy\_off\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A10 scenario stage5\_94\_levy\_on\_flood\_both\_reroute (popular\_times\_v2/stage5/94\_levy\_on\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Controlled performance for stage 6 flood-aware commuting.}
+\label{tab:quantitative-performance-disruption}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrrrrrr@{}}
+\toprule
+Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
+\midrule
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F01 scenario stage6\_13\_levy\_v2\_flood\_destinations (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_destinations) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F02 scenario stage6\_13\_levy\_v2\_flood\_homes (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F03 scenario stage6\_13\_levy\_v2\_flood\_all (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_all) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F04 scenario stage6\_13\_levy\_v2\_flood\_all\_pt\_reroute (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_all\_pt\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F05 scenario stage6\_94\_levy\_v2\_flood\_destinations (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_destinations) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F06 scenario stage6\_94\_levy\_v2\_flood\_homes (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F07 scenario stage6\_94\_levy\_v2\_flood\_all (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_all) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F08 scenario stage6\_94\_levy\_v2\_flood\_all\_pt\_reroute (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_all\_pt\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Controlled performance for shelter simulations.}
+\label{tab:quantitative-performance-shelter}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrrrrrr@{}}
+\toprule
+Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
+\midrule
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S01 scenario v3\_reference (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S02 scenario v3\_reference\_reallocate (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S03 scenario capacity\_0.5x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S04 scenario capacity\_2x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S05 scenario capacity\_5x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S06 scenario capacity\_15x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S07 scenario response\_0.005 (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S08 scenario response\_0.02 (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S09 scenario response\_0.05 (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S10 scenario demand\_0.25x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S11 scenario demand\_0.5x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S12 scenario failure\_largest\_with\_reallocation (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S13 scenario failure\_top\_10\_percent\_capacity\_with\_reallocation (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Controlled performance for dialysis simulations.}
+\label{tab:quantitative-performance-dialysis}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrrrrrr@{}}
+\toprule
+Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
+\midrule
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D01 scenario K01\_ReducedModerate (dialysis\_core/K01\_ReducedModerate) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D02 scenario K02\_MoinhosNoRecovery (dialysis\_core/K02\_MoinhosNoRecovery) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D03 scenario K03\_MoinhosFastRecovery (dialysis\_core/K03\_MoinhosFastRecovery) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D04 scenario K04\_HistoricalClinicFlood (dialysis\_core/K04\_HistoricalClinicFlood) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D05 scenario K05\_SyntheticETAFlood (dialysis\_core/K05\_SyntheticETAFlood) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D06 scenario K06\_CombinedMoinhosMenino (dialysis\_core/K06\_CombinedMoinhosMenino) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D07 scenario K07\_ReducedAboveCapacity (dialysis\_core/K07\_ReducedAboveCapacity) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D08 scenario K08\_HighCapacityClinicFailure (dialysis\_core/K08\_HighCapacityClinicFailure) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D09 scenario K09\_MatchedLowCapacityFailures (dialysis\_core/K09\_MatchedLowCapacityFailures) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D10 scenario K10\_CompleteModerate (dialysis\_core/K10\_CompleteModerate) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D11 scenario K11\_CompleteCombined (dialysis\_core/K11\_CompleteCombined) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\endgroup
+% END GENERATED PERFORMANCE TABLES
+
+\subsection{Interpretation and Limitations}
+
+The legacy and controlled tables should be interpreted separately because the
+simulator, logging lifecycle, and measurement protocol changed between them.
+Both sets of measurements are hardware-dependent and evaluate the case studies
+implemented in LODUS; they are not a head-to-head comparison with other
+simulation frameworks.  Five controlled repetitions characterize computational
+repeatability on the stated machine, not empirical uncertainty in mobility,
+flood exposure, shelter demand, or health-service behavior.

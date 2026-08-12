@@ -167,8 +167,9 @@ def run(args) -> Path:
         simulation.load_plugin(plugin)
 
     population_logger = configure_population_logger()
-    blob_logger = BlobCountLogger()
-    blob_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL}
+    blob_logger = BlobCountLogger(
+        {BlobCountRecordKey.BLOB_COUNT_GLOBAL}
+    )
     loggers = [
         population_logger,
         blob_logger,
@@ -212,6 +213,7 @@ def run(args) -> Path:
         ),
         "runtime_seconds": runtime,
         "peak_memory_kib": get_peak_memory_kib(),
+        "max_blob_count": blob_logger.get_max_global_blob_count(),
     }
     output_text = "\n".join(
         f"{key}: {value}" for key, value in summary.items()
@@ -234,6 +236,7 @@ def run(args) -> Path:
         },
         "resolved_config": simulation.experiment_config,
     }
+    blob_logger.add_max_blob_count_to_metadata(metadata)
     (output_path / "run_metadata.json").write_text(
         json.dumps(metadata, indent=2, ensure_ascii=False),
         encoding="utf-8",

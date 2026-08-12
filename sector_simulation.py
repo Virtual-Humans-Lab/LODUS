@@ -291,10 +291,9 @@ if inpatient_care:
         generate_plots=not args["no_inpatient_care_plots"],
     )
 
-blob_count_logger = BlobCountLogger()
-blob_count_logger.data_to_record = {BlobCountRecordKey.BLOB_COUNT_GLOBAL,
-                                    BlobCountRecordKey.BLOB_COUNT_REGION,
-                                    BlobCountRecordKey.BLOB_COUNT_NODE}
+blob_count_logger = BlobCountLogger(
+    {BlobCountRecordKey.BLOB_COUNT_GLOBAL}
+)
 
 
 pop_temp = core.population.PopulationTemplate()
@@ -540,6 +539,7 @@ metadata = {
     },
     "resolved_config": lodus_simulation.experiment_config,
 }
+blob_count_logger.add_max_blob_count_to_metadata(metadata)
 (output_path / "run_metadata.json").write_text(
     json.dumps(metadata, indent=2, ensure_ascii=False),
     encoding="utf8",

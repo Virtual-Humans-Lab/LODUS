@@ -21,11 +21,11 @@ from util.random_instance import FixedRandom
 class PopularTimesStage5ConfigurationTest(unittest.TestCase):
     def test_matrix_includes_13_and_94_region_rerouting_runs(self):
         specs = stage5_specs()
-        self.assertEqual(37, len(specs))
-        self.assertEqual(37, len({spec.run_name for spec in specs}))
+        self.assertEqual(12, len(specs))
+        self.assertEqual(12, len({spec.run_name for spec in specs}))
         self.assertEqual([0, 0], [spec.seed for spec in specs if not spec.levy])
         self.assertEqual(
-            set(range(30)),
+            set(range(5)),
             {spec.seed for spec in specs if spec.levy and spec.environment == "13"},
         )
         self.assertEqual(

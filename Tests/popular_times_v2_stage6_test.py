@@ -18,12 +18,12 @@ from util.random_instance import FixedRandom
 
 
 class LevyWalkV2ConfigurationTest(unittest.TestCase):
-    def test_matrix_has_ten_families_and_175_paired_runs(self):
+    def test_matrix_has_ten_families_and_50_paired_runs(self):
         specs = stage6_specs()
-        self.assertEqual(175, len(specs))
-        self.assertEqual(175, len({spec.run_name for spec in specs}))
+        self.assertEqual(50, len(specs))
+        self.assertEqual(50, len({spec.run_name for spec in specs}))
         for scenario in {spec.scenario for spec in specs}:
-            expected = set(range(30)) if scenario.startswith("13_") else set(range(5))
+            expected = set(range(5))
             self.assertEqual(
                 expected, {spec.seed for spec in specs if spec.scenario == scenario}
             )

@@ -35,7 +35,7 @@ STAGE4_RESULTS = (
     / "popular_times_v2_stage4"
     / "production_runs.csv"
 )
-EXPECTED_RUNS = 37
+EXPECTED_RUNS = 12
 SCENARIOS = (
     "13_levy_off_flood_both_reroute",
     "13_levy_on_flood_both_reroute",
@@ -92,7 +92,7 @@ class RunSpec:
 
 
 def stage5_specs(
-    seeds_13: Iterable[int] = range(30),
+    seeds_13: Iterable[int] = range(5),
     seeds_94: Iterable[int] = range(5),
 ) -> list[RunSpec]:
     seeds = {"13": sorted(set(seeds_13)), "94": sorted(set(seeds_94))}
@@ -560,7 +560,7 @@ def write_report(
         "",
         f"{'COMPLETE' if complete else 'IN PROGRESS'}: {len(run_rows)} of {EXPECTED_RUNS} runs have completion artifacts; {valid} pass every invariant.",
         "",
-        "The 13-region homes-and-POIs flood scenario is evaluated with nearest enabled same-type POI rerouting. Levy off is deterministic; Levy on uses matched seeds 0–29. All runs use 56 daily cycles of 24 hourly steps. Confidence intervals are 95% t intervals, while the deterministic result has no artificial interval.",
+        "The 13- and 94-region homes-and-POIs flood scenarios are evaluated with nearest enabled same-type POI rerouting. Levy off is deterministic; Levy on uses matched seeds 0–4. All runs use 56 daily cycles of 24 hourly steps. Confidence intervals are 95% t intervals, while the deterministic result has no artificial interval.",
         "",
         "| Scenario | n | Fulfillment | Rerouted fulfilled | Remaining rerouted unmet | POI displacement/traveler (m) | Peak receiving load |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -640,7 +640,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument(
-        "--seeds", type=int, nargs="*", default=list(range(30)),
+        "--seeds", type=int, nargs="*", default=list(range(5)),
         help="13-region Levy seeds",
     )
     parser.add_argument(
@@ -656,10 +656,10 @@ def main() -> None:
     args = parser.parse_args()
     if args.workers < 1:
         parser.error("--workers must be at least 1")
-    if any(seed < 0 or seed > 29 for seed in args.seeds):
-        parser.error("--seeds must be between 0 and 29")
-    if any(seed < 0 or seed > 29 for seed in args.seeds_94):
-        parser.error("--seeds-94 must be between 0 and 29")
+    if any(seed < 0 or seed > 4 for seed in args.seeds):
+        parser.error("--seeds must be between 0 and 4")
+    if any(seed < 0 or seed > 4 for seed in args.seeds_94):
+        parser.error("--seeds-94 must be between 0 and 4")
 
     output_root = args.output.resolve()
     _relative_experiment_name(output_root / "path-check")

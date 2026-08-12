@@ -21,8 +21,12 @@ class BlobCountRecordKey(Enum):
 
 class BlobCountLogger(LoggerPlugin):
     
-    def __init__(self):
-        pass
+    def __init__(self, data_to_record=None):
+        # Recording is selected by the caller before the plugin is loaded.
+        # Keep that selection separate from the environment-dependent buffers.
+        self.data_to_record: set[BlobCountRecordKey] = set(
+            data_to_record or ()
+        )
 
     def load_plugin(self, simulation: LodusSimulation):
         # Attaches itself to the EnvGraph
@@ -40,14 +44,6 @@ class BlobCountLogger(LoggerPlugin):
         self.base_path = 'output_logs/' + simulation.experiment_name + '/'
         self.data_frames_path = self.base_path + "/data_frames/"
         
-        # Which data is being recorded
-        self.data_to_record:set[BlobCountRecordKey] = set()
-               
-        # Blob Count Logging
-        self.blob_global_count = []
-        self.blob_region_count = {}
-        self.blob_node_count = {}
-
     def setup_logger(self):
         Path(self.base_path).mkdir(parents=True, exist_ok=True)
         Path(self.data_frames_path).mkdir(parents=True, exist_ok=True)
@@ -78,6 +74,15 @@ class BlobCountLogger(LoggerPlugin):
             df = pd.DataFrame(self.blob_node_count)
             df = df.rename_axis('Simulation Frame').rename_axis('Node', axis=1)
             df.to_csv(self.data_frames_path + 'blob_count_node.csv', sep = ';', encoding="utf-8-sig")
+
+    def get_max_global_blob_count(self):
+        """Return the largest recorded global blob count, if one exists."""
+        return max(self.blob_global_count, default=None)
+
+    def add_max_blob_count_to_metadata(self, metadata):
+        """Persist the recorded maximum in a run-metadata mapping."""
+        metadata["max_blob_count"] = self.get_max_global_blob_count()
+        return metadata
 
     def unload_plugin(self):
         return super().unload_plugin()

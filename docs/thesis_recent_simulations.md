@@ -16,8 +16,8 @@ common simulation structure.
 | Dialysis resilience | Twelve reference, demand, clinic-failure, recovery, and flood scenarios (K00--K11), evaluated primarily with 30 matched seeds | 361 completed records, including one additional K03 run | Service remained complete under moderate demand and short disruptions, but persistent or widespread failures reduced treatment coverage to 50--71% in the most severe scenarios. |
 | Inpatient care | Seven demand-and-routing scenarios under unconstrained overflow and capacity-constrained queue policies, with 30 seeds per scenario | 210 | Reference demand was almost fully served; high demand reduced queue-policy coverage to 52.1%, while distributing psychiatric demand across two facilities increased coverage to 97.1%. |
 | Popular Times V2: core matrix (Stage 4) | Thirteen- and 94-region mobility models; Levy movement on/off; no flood, flooded homes, flooded points of interest (POIs), or both | 130 | Flooded POIs reduced visit fulfillment from 100% to 96.49%; flooded homes changed travel distance but did not reduce fulfillment. |
-| Popular Times V2: destination adaptation (Stage 5) | Thirteen-region combined home-and-POI flood scenario, comparing suppressed visits with nearest-safe, same-type POI rerouting | 31 | All 83,445 previously suppressed visits were rerouted, restoring 100% fulfillment at a mean POI displacement of 297.89 m. |
-| Popular Times V2 and Levy Walk V2 (Stage 6) | Five 13-region flood/adaptation families, each evaluated with 30 matched seeds for 56 simulated days | 150 | Commute fulfillment fell from approximately 100% without flooding to 89.15% when all node types were exposed; POI rerouting restored activity-visit fulfillment but not disrupted work and school trips. |
+| Popular Times V2: destination adaptation (Stage 5) | Thirteen- and 94-region combined home-and-POI flood scenarios, comparing suppressed visits with nearest-safe, same-type POI rerouting | 12 | All previously suppressed visits were rerouted in the evaluated scenarios, restoring 100% fulfillment. |
+| Popular Times V2 and Levy Walk V2 (Stage 6) | Ten flood/adaptation families across the 13- and 94-region environments, each evaluated with five matched seeds for 56 simulated days | 50 | Commute fulfillment fell under flooding; POI rerouting restored activity-visit fulfillment but not disrupted work and school trips. |
 
 ## Dialysis-service resilience
 
@@ -82,7 +82,7 @@ occupancy per requested visit.
 
 The subsequent adaptation batch allowed demand assigned to a disabled or
 imminently flooded POI to be redirected to the nearest safe POI of the same
-type. Across 31 runs, all 83,445 suppressed visits were successfully rerouted,
+type. Across the 12-run final design, all suppressed visits were successfully rerouted,
 raising fulfillment from 96.49% to 100%. The additional destination
 displacement averaged 297.89 m per rerouted traveler, and the largest receiving
 load was 92 travelers.
@@ -98,7 +98,7 @@ temporary return homes, blocked returns, and later repatriation. Five scenario
 families represented no flood, destination flooding, home flooding, flooding
 of all node types, and all-node flooding with Popular Times rerouting.
 
-The 150 runs passed both the Popular Times and Levy Walk V2 validation checks.
+The 50 runs passed both the Popular Times and Levy Walk V2 validation checks.
 Mean commute fulfillment was approximately 100% without flooding, 93.54% with
 destination flooding, 94.06% with home flooding, and 89.15% with all-node
 flooding. In the all-node adaptation scenario, POI visit fulfillment returned
