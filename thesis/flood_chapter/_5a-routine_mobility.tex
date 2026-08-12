@@ -159,6 +159,8 @@ Every requested baseline visit is fulfilled in both spatial representations. In 
 
 The per-capita totals also confirm the intended interpretation of the weekly rates. Eight marketplace visits and eight restaurant visits are requested per resident over eight weeks, while the pharmacy profile contributes approximately two visits per resident. Their sum produces approximately 18 activity visits per capita. In the reduced environment, rounding the weekly pharmacy demand separately at each home POI produces 60 fewer requests than global rounding, yielding 17.9996 rather than exactly 18 visits per capita; this is a demand-generation rounding effect, not unmet demand.
 
+Sunday demand appears more concentrated around midday because the configured restaurant profile assigns Sunday visits only between 11:00 and 14:00, while pharmacies generate no Sunday demand. This concentration does not indicate greater overall activity: total Sunday demand is lower than on the other days of the week.
+
 Adding the probabilistic-packet L\'evy Walk configuration does not change requested demand, visit fulfillment, travelers per capita, or occupancy per request.
 
 
