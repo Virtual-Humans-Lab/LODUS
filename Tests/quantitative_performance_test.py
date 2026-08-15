@@ -6,20 +6,52 @@ import unittest
 
 from misc_scripts.run_quantitative_performance import (
     BEGIN_MARKER,
+    DEFAULT_WORKERS,
     END_MARKER,
     EXPECTED_CONFIGURATIONS,
     EXPECTED_RUNS,
     REPETITIONS,
+    RESULTS_DIR,
+    RunnerAlreadyActive,
     TEX_PATH,
     build_catalog,
+    compact_completed_run,
+    compact_partial_run,
     expand_runs,
     inspect_run,
+    parse_args,
     render_generated_tables,
     replace_generated_block,
+    runner_lock,
 )
 
 
 class QuantitativePerformanceCatalogTest(unittest.TestCase):
+    def test_default_command_uses_four_workers(self):
+        self.assertEqual(4, DEFAULT_WORKERS)
+        self.assertEqual(4, parse_args([]).workers)
+        self.assertEqual(2, parse_args(["--workers", "2"]).workers)
+
+    def test_sector_always_loads_required_blob_logger(self):
+        source = (TEX_PATH.parents[2] / "sector_simulation.py").read_text(
+            encoding="utf-8"
+        )
+        load = "lodus_simulation.load_plugin(blob_count_logger)"
+        optional_bundle = (
+            'if lodus_simulation.experiment_config.get('
+            '"default_loggers_enabled", True):'
+        )
+        self.assertEqual(1, source.count(load))
+        self.assertLess(source.index(load), source.index(optional_bundle))
+
+    def test_single_instance_lock_rejects_a_second_orchestrator(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            with runner_lock(output):
+                with self.assertRaises(RunnerAlreadyActive):
+                    with runner_lock(output):
+                        pass
+
     def test_catalog_has_48_configurations_and_240_runs_without_inpatient(self):
         catalog = build_catalog()
         self.assertEqual(EXPECTED_CONFIGURATIONS, len(catalog))
@@ -90,6 +122,73 @@ class QuantitativePerformanceCatalogTest(unittest.TestCase):
             self.assertEqual("pending", pending.status)
             self.assertIn("blob_count_global.csv", pending.detail)
 
+    def test_compaction_retains_only_required_resumable_artifacts(self):
+        config = next(item for item in build_catalog() if item.code == "R01")
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            path = output / config.table_group / config.key / "seed_000"
+            data = path / "data_frames"
+            data.mkdir(parents=True)
+            (path / "run_metadata.json").write_text(
+                json.dumps(
+                    {
+                        "status": "complete",
+                        "experiment": config.experiment,
+                        "seed": 0,
+                        "runtime_seconds": 12.5,
+                        "peak_memory_kib": 2048,
+                        "max_blob_count": 9,
+                        "commit_sha": "test-commit",
+                        "simulation_parameters": {
+                            "total_cycles": config.cycles
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (data / "popular_times_validation.json").write_text(
+                '{"passed": true}', encoding="utf-8"
+            )
+            (data / "blob_count_global.csv").write_text(
+                "Simulation Frame;Blob Count\n0;9\n", encoding="utf-8"
+            )
+            (data / "popular_times_visits.csv").write_text(
+                "large,redundant,output\n", encoding="utf-8"
+            )
+            (path / "orchestrator.log").write_text(
+                "verbose output\n", encoding="utf-8"
+            )
+            removed, _ = compact_completed_run(
+                config, 0, output, "test-commit"
+            )
+            self.assertEqual(2, removed)
+            self.assertFalse((data / "popular_times_visits.csv").exists())
+            self.assertFalse((path / "orchestrator.log").exists())
+            self.assertEqual(
+                "complete",
+                inspect_run(config, 0, output, "test-commit").status,
+            )
+
+    def test_partial_compaction_keeps_failure_and_log_tail(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            partial = Path(temporary) / "seed_000.partial-test"
+            data = partial / "data_frames"
+            data.mkdir(parents=True)
+            (data / "large.csv").write_text("raw\n" * 100, encoding="utf-8")
+            (partial / "orchestrator.log").write_text(
+                "diagnostic tail\n", encoding="utf-8"
+            )
+            (partial / "orchestrator_failure.json").write_text(
+                '{"return_code": 1}', encoding="utf-8"
+            )
+            compact_partial_run(partial)
+            self.assertFalse((data / "large.csv").exists())
+            self.assertTrue((partial / "orchestrator.log").is_file())
+            self.assertTrue(
+                (partial / "orchestrator_failure.json").is_file()
+            )
+            self.assertTrue((partial / "partial_cleanup.json").is_file())
+
     def test_generated_block_names_missing_scenario_and_repetitions(self):
         row = {
             "code": "R01",
@@ -138,7 +237,15 @@ class QuantitativePerformanceCatalogTest(unittest.TestCase):
         ]
         self.assertEqual(len(labels), len(set(labels)))
         generated = content.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
-        self.assertEqual(EXPECTED_CONFIGURATIONS, generated.count("MISSING DATA"))
+        with (RESULTS_DIR / "performance_scenarios.csv").open(
+            encoding="utf-8", newline=""
+        ) as stream:
+            scenarios = list(csv.DictReader(stream))
+        incomplete = sum(
+            int(row["completed_repetitions"]) < len(REPETITIONS)
+            for row in scenarios
+        )
+        self.assertEqual(incomplete, generated.count("MISSING DATA"))
         self.assertNotIn("10.0.262000", content)
         self.assertIn("10.0.26200", content)
 

@@ -1,18 +1,21 @@
 """Run and report the controlled quantitative-performance benchmark matrix.
 
 The default command repairs the two known incomplete shelter domain runs, then
-executes the benchmark catalog serially.  The controlled output tree is kept
-separate from production batches and every run is safe to resume.
+executes the benchmark catalog with up to four workers.  The controlled output
+tree is kept separate from production batches and every run is safe to resume.
 """
 
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import contextmanager
 import csv
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import io
 import json
+import os
 from pathlib import Path
 import statistics
 import subprocess
@@ -37,6 +40,8 @@ END_MARKER = "% END GENERATED PERFORMANCE TABLES"
 REPETITIONS = tuple(range(5))
 EXPECTED_CONFIGURATIONS = 48
 EXPECTED_RUNS = EXPECTED_CONFIGURATIONS * len(REPETITIONS)
+DEFAULT_WORKERS = 4
+PARTIAL_LOG_TAIL_BYTES = 256 * 1024
 SHELTER_DOMAIN_REPAIRS = (
     ("demand_0.5x", 2),
     ("response_0.05", 4),
@@ -67,6 +72,10 @@ class RunInspection:
     peak_memory_mib: float | None = None
     max_blob_count: int | None = None
     commit_sha: str | None = None
+
+
+class RunnerAlreadyActive(RuntimeError):
+    """Raised when another orchestrator owns the selected output tree."""
 
 
 def _stage_config(
@@ -376,6 +385,61 @@ def _atomic_write(path: Path, content: str) -> None:
     temporary.replace(path)
 
 
+@contextmanager
+def runner_lock(output_root: Path):
+    """Hold a process-level lock for one orchestrator per output tree."""
+    output_root.mkdir(parents=True, exist_ok=True)
+    lock_path = output_root / "orchestrator.lock"
+    stream = lock_path.open("a+", encoding="utf-8")
+    if lock_path.stat().st_size == 0:
+        stream.write(" ")
+        stream.flush()
+    stream.seek(0)
+    try:
+        if os.name == "nt":
+            import msvcrt
+
+            try:
+                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError as error:
+                raise RunnerAlreadyActive(
+                    f"another orchestrator is using {output_root}"
+                ) from error
+        else:
+            import fcntl
+
+            try:
+                fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError as error:
+                raise RunnerAlreadyActive(
+                    f"another orchestrator is using {output_root}"
+                ) from error
+        stream.seek(0)
+        stream.truncate()
+        stream.write(
+            json.dumps(
+                {"pid": os.getpid(), "started_at_utc": _utc_now()},
+                ensure_ascii=False,
+            )
+        )
+        stream.flush()
+        yield lock_path
+    finally:
+        try:
+            stream.seek(0)
+            if os.name == "nt":
+                import msvcrt
+
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+        except OSError:
+            pass
+        stream.close()
+
+
 def preserve_partial(path: Path) -> Path | None:
     if not path.exists():
         return None
@@ -386,7 +450,114 @@ def preserve_partial(path: Path) -> Path | None:
         candidate = path.with_name(f"{path.name}.partial-{timestamp}-{suffix}")
         suffix += 1
     path.rename(candidate)
+    compact_partial_run(candidate)
     return candidate
+
+
+def required_run_artifacts(
+    config: PerformanceConfig, path: Path
+) -> set[Path]:
+    data_path = path / "data_frames"
+    return {
+        path / "run_metadata.json",
+        data_path / "blob_count_global.csv",
+        *(data_path / name for name in config.validation_json),
+        *(data_path / name for name in config.required_csv),
+    }
+
+
+def _remove_empty_directories(path: Path) -> None:
+    directories = sorted(
+        (item for item in path.rglob("*") if item.is_dir()),
+        key=lambda item: len(item.parts),
+        reverse=True,
+    )
+    for directory in directories:
+        try:
+            directory.rmdir()
+        except OSError:
+            pass
+
+
+def compact_completed_run(
+    config: PerformanceConfig,
+    repetition: int,
+    output_root: Path,
+    expected_commit: str | None,
+) -> tuple[int, int]:
+    """Delete redundant output only after strict completion validation."""
+    inspection = inspect_run(
+        config, repetition, output_root, expected_commit
+    )
+    if inspection.status != "complete":
+        raise ValueError(
+            f"cannot compact incomplete run {config.code}/{repetition}: "
+            f"{inspection.detail}"
+        )
+    required = required_run_artifacts(config, inspection.path)
+    removed_files = 0
+    removed_bytes = 0
+    for artifact in inspection.path.rglob("*"):
+        if artifact.is_file() and artifact not in required:
+            removed_bytes += artifact.stat().st_size
+            artifact.unlink()
+            removed_files += 1
+    _remove_empty_directories(inspection.path)
+    # Prove that compaction retained a resumable run.
+    validated = inspect_run(
+        config, repetition, output_root, expected_commit
+    )
+    if validated.status != "complete":
+        raise RuntimeError(
+            f"compaction damaged {config.code}/{repetition}: "
+            f"{validated.detail}"
+        )
+    return removed_files, removed_bytes
+
+
+def _log_tail(path: Path) -> str:
+    if not path.is_file():
+        return ""
+    with path.open("rb") as stream:
+        stream.seek(0, os.SEEK_END)
+        length = stream.tell()
+        stream.seek(max(0, length - PARTIAL_LOG_TAIL_BYTES))
+        content = stream.read().decode("utf-8", errors="replace")
+    if length > PARTIAL_LOG_TAIL_BYTES:
+        content = "[earlier output removed during compaction]\n" + content
+    return content
+
+
+def compact_partial_run(path: Path) -> tuple[int, int]:
+    """Retain only compact diagnostics from a failed/interrupted run."""
+    log_path = path / "orchestrator.log"
+    log_tail = _log_tail(log_path)
+    keep = {path / "orchestrator_failure.json"}
+    removed_files = 0
+    removed_bytes = 0
+    for artifact in path.rglob("*"):
+        if artifact.is_file() and artifact not in keep:
+            removed_bytes += artifact.stat().st_size
+            artifact.unlink()
+            removed_files += 1
+    if log_tail:
+        log_path.write_text(log_tail, encoding="utf-8", newline="\n")
+    summary = {
+        "compacted_at_utc": _utc_now(),
+        "removed_files": removed_files,
+        "removed_bytes": removed_bytes,
+        "retained": [
+            name
+            for name in ("orchestrator_failure.json", "orchestrator.log")
+            if (path / name).is_file()
+        ],
+    }
+    _atomic_write(
+        path / "partial_cleanup.json",
+        json.dumps(summary, indent=2, ensure_ascii=False) + "\n",
+    )
+    _remove_empty_directories(path)
+    return removed_files, removed_bytes
 
 
 def _relative_run_name(path: Path) -> str:
@@ -421,21 +592,17 @@ def _command(config: PerformanceConfig, repetition: int, path: Path) -> list[str
 def _run_streaming(command: list[str], log_path: Path) -> int:
     log_path.parent.mkdir(parents=True, exist_ok=True)
     with log_path.open("w", encoding="utf-8", newline="\n") as log:
-        process = subprocess.Popen(
+        process = subprocess.run(
             command,
             cwd=PROJECT_ROOT,
-            stdout=subprocess.PIPE,
+            stdout=log,
             stderr=subprocess.STDOUT,
             text=True,
             encoding="utf-8",
             errors="replace",
-            bufsize=1,
+            check=False,
         )
-        assert process.stdout is not None
-        for line in process.stdout:
-            print(line, end="", flush=True)
-            log.write(line)
-        return process.wait()
+        return process.returncode
 
 
 def execute_run(
@@ -465,7 +632,87 @@ def execute_run(
             existing.path / "orchestrator_failure.json",
             json.dumps(failure, indent=2, ensure_ascii=False) + "\n",
         )
+    else:
+        removed_files, removed_bytes = compact_completed_run(
+            config, repetition, output_root, expected_commit
+        )
+        print(
+            f"Compacted {config.code} repetition {repetition}: removed "
+            f"{removed_files} redundant files "
+            f"({removed_bytes / 2**20:.1f} MiB).",
+            flush=True,
+        )
     return inspected
+
+
+def execute_runs(
+    runs: tuple[tuple[PerformanceConfig, int], ...],
+    output_root: Path,
+    expected_commit: str | None,
+    workers: int,
+) -> list[tuple[PerformanceConfig, int, RunInspection]]:
+    """Execute missing catalog runs with bounded independent workers."""
+    pending: list[tuple[int, PerformanceConfig, int]] = []
+    results: list[tuple[PerformanceConfig, int, RunInspection]] = []
+    for index, (config, repetition) in enumerate(runs, start=1):
+        current = inspect_run(config, repetition, output_root, expected_commit)
+        if current.status == "complete":
+            removed_files, removed_bytes = compact_completed_run(
+                config, repetition, output_root, expected_commit
+            )
+            print(
+                f"[{index}/{EXPECTED_RUNS}] {config.code} repetition "
+                f"{repetition}: complete; skipping"
+                + (
+                    f"; compacted {removed_bytes / 2**20:.1f} MiB"
+                    if removed_files
+                    else ""
+                )
+            )
+            results.append((config, repetition, current))
+        else:
+            pending.append((index, config, repetition))
+
+    if not pending:
+        return results
+    print(
+        f"Starting {len(pending)} missing runs with up to {workers} workers.",
+        flush=True,
+    )
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {}
+        for index, config, repetition in pending:
+            print(
+                f"[{index}/{EXPECTED_RUNS}] {config.code} repetition "
+                f"{repetition}: queued",
+                flush=True,
+            )
+            future = executor.submit(
+                execute_run,
+                config,
+                repetition,
+                output_root,
+                expected_commit,
+            )
+            futures[future] = (index, config, repetition)
+        for future in as_completed(futures):
+            index, config, repetition = futures[future]
+            try:
+                result = future.result()
+            except Exception as error:
+                result = RunInspection(
+                    "invalid",
+                    f"orchestrator worker failed: {error}",
+                    run_path(output_root, config, repetition),
+                )
+            results.append((config, repetition, result))
+            outcome = "complete" if result.status == "complete" else "FAILED"
+            print(
+                f"[{index}/{EXPECTED_RUNS}] {config.code} repetition "
+                f"{repetition}: {outcome} ({result.detail})",
+                flush=True,
+            )
+    return results
 
 
 def shelter_domain_repair_state() -> list[tuple[str, int, bool]]:
@@ -505,7 +752,7 @@ def repair_shelter_domain_runs() -> bool:
         "--scenario",
         "response_0.05",
     ]
-    print("Repairing the two selected shelter domain scenarios serially.", flush=True)
+    print("Repairing the two selected shelter domain scenarios.", flush=True)
     completed = subprocess.run(command, cwd=PROJECT_ROOT, check=False)
     return completed.returncode == 0 and all(
         row[2] for row in shelter_domain_repair_state()
@@ -523,6 +770,45 @@ def collect_inspections(
         )
         for config, repetition in expand_runs(catalog)
     }
+
+
+def compact_existing_outputs(
+    catalog: tuple[PerformanceConfig, ...],
+    output_root: Path,
+    expected_commit: str | None,
+) -> dict[str, int]:
+    """Compact validated runs and all obsolete `.partial-*` directories."""
+    totals = {
+        "completed_runs": 0,
+        "partial_runs": 0,
+        "removed_files": 0,
+        "removed_bytes": 0,
+    }
+    for config, repetition in expand_runs(catalog):
+        inspection = inspect_run(
+            config, repetition, output_root, expected_commit
+        )
+        if inspection.status != "complete":
+            continue
+        files, size = compact_completed_run(
+            config, repetition, output_root, expected_commit
+        )
+        totals["completed_runs"] += 1
+        totals["removed_files"] += files
+        totals["removed_bytes"] += size
+    partials = sorted(
+        {
+            path
+            for path in output_root.rglob("*.partial-*")
+            if path.is_dir()
+        }
+    )
+    for partial in partials:
+        files, size = compact_partial_run(partial)
+        totals["partial_runs"] += 1
+        totals["removed_files"] += files
+        totals["removed_bytes"] += size
+    return totals
 
 
 def scenario_summaries(
@@ -588,6 +874,7 @@ def write_aggregates(
     catalog: tuple[PerformanceConfig, ...],
     inspections: dict[tuple[str, int], RunInspection],
     summaries: list[dict[str, Any]],
+    workers: int = DEFAULT_WORKERS,
 ) -> None:
     run_rows: list[dict[str, Any]] = []
     for config, repetition in expand_runs(catalog):
@@ -626,12 +913,14 @@ def write_aggregates(
             "",
             f"Updated: {_utc_now()}",
             "",
-            f"- Catalog: {len(catalog)} configurations, {len(run_rows)} serial runs.",
+            f"- Catalog: {len(catalog)} configurations, {len(run_rows)} runs.",
+            f"- Execution concurrency: up to {workers} simulations.",
             f"- Complete runs: {complete_runs}/{EXPECTED_RUNS}.",
             f"- Complete configurations: {complete_scenarios}/{EXPECTED_CONFIGURATIONS}.",
             "- Repetitions: matched seeds 0–4 for computational performance.",
             "- Metrics: runtime, runtime per cycle, peak process working set, and maximum global blob count.",
             "- Exclusions: inpatient care and TraceMalloc.",
+            "- Storage: completed runs retain only the artifacts required for validation, resume detection, and aggregation.",
             "",
             "Run or resume the full matrix from the repository root:",
             "",
@@ -743,9 +1032,9 @@ def replace_generated_block(tex_path: Path, generated: str) -> None:
     _atomic_write(tex_path, replacement)
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run the 48-scenario controlled performance matrix serially"
+        description="Run the 48-scenario controlled performance matrix"
     )
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument(
@@ -758,8 +1047,25 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="print the audit without running simulations or writing files",
     )
+    mode.add_argument(
+        "--compact-only",
+        action="store_true",
+        help=(
+            "validate and aggregate completed runs, then remove redundant "
+            "raw outputs and compact obsolete partial runs"
+        ),
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    return parser.parse_args()
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=DEFAULT_WORKERS,
+        help=f"maximum concurrent simulations (default: {DEFAULT_WORKERS})",
+    )
+    args = parser.parse_args(argv)
+    if args.workers < 1:
+        parser.error("--workers must be at least 1")
+    return args
 
 
 def main() -> int:
@@ -769,19 +1075,26 @@ def main() -> int:
     catalog = build_catalog()
     runs = expand_runs(catalog)
     commit = git_commit()
-    inspections = collect_inspections(catalog, output_root, commit)
-    missing = [
-        (config, repetition, inspections[(config.key, repetition)])
-        for config, repetition in runs
-        if inspections[(config.key, repetition)].status != "complete"
-    ]
-    domain_missing = [row for row in shelter_domain_repair_state() if not row[2]]
-    print(
-        f"Catalog: {len(catalog)} configurations, {len(runs)} runs; "
-        f"{len(missing)} controlled runs and {len(domain_missing)} selected "
-        "shelter domain runs are missing.",
-        flush=True,
-    )
+
+    def audit_state():
+        inspections = collect_inspections(catalog, output_root, commit)
+        missing = [
+            (config, repetition, inspections[(config.key, repetition)])
+            for config, repetition in runs
+            if inspections[(config.key, repetition)].status != "complete"
+        ]
+        domain_missing = [
+            row for row in shelter_domain_repair_state() if not row[2]
+        ]
+        print(
+            f"Catalog: {len(catalog)} configurations, {len(runs)} runs; "
+            f"{len(missing)} controlled runs and {len(domain_missing)} selected "
+            "shelter domain runs are missing.",
+            flush=True,
+        )
+        return inspections, missing, domain_missing
+
+    inspections, missing, domain_missing = audit_state()
     if args.dry_run:
         for scenario, seed, _ in domain_missing:
             print(f"DOMAIN MISSING: {scenario}/seed_{seed:03d}")
@@ -792,32 +1105,56 @@ def main() -> int:
             )
         return 0
 
-    domain_ok = True
-    if not args.audit:
-        domain_ok = repair_shelter_domain_runs()
-        for index, (config, repetition) in enumerate(runs, start=1):
-            current = inspect_run(config, repetition, output_root, commit)
-            if current.status == "complete":
-                print(f"[{index}/{EXPECTED_RUNS}] {config.code} repetition {repetition}: complete; skipping")
-                continue
-            print(f"[{index}/{EXPECTED_RUNS}] {config.code} repetition {repetition}: running", flush=True)
-            result = execute_run(config, repetition, output_root, commit)
-            if result.status != "complete":
-                print(f"FAILED: {config.code} repetition {repetition}: {result.detail}", flush=True)
+    try:
+        with runner_lock(output_root):
+            # Re-audit after acquiring the lock in case another orchestrator
+            # completed a run while this process was starting.
+            inspections, _, _ = audit_state()
+            domain_ok = True
+            if args.compact_only:
+                summaries = scenario_summaries(catalog, inspections)
+                write_aggregates(
+                    catalog, inspections, summaries, workers=args.workers
+                )
+                replace_generated_block(
+                    TEX_PATH, render_generated_tables(summaries)
+                )
+                totals = compact_existing_outputs(
+                    catalog, output_root, commit
+                )
+                print(
+                    "Compaction complete: validated "
+                    f"{totals['completed_runs']} completed runs, compacted "
+                    f"{totals['partial_runs']} partial runs, and removed "
+                    f"{totals['removed_files']} files "
+                    f"({totals['removed_bytes'] / 2**30:.2f} GiB).",
+                    flush=True,
+                )
+            elif not args.audit:
+                domain_ok = repair_shelter_domain_runs()
+                execute_runs(runs, output_root, commit, args.workers)
 
-    inspections = collect_inspections(catalog, output_root, commit)
-    summaries = scenario_summaries(catalog, inspections)
-    write_aggregates(catalog, inspections, summaries)
-    replace_generated_block(TEX_PATH, render_generated_tables(summaries))
-    remaining = sum(run.status != "complete" for run in inspections.values())
-    print(
-        f"Controlled performance status: {EXPECTED_RUNS - remaining}/{EXPECTED_RUNS} "
-        "runs complete; summaries and TeX tables refreshed.",
-        flush=True,
-    )
-    if args.audit:
-        return 0
-    return 0 if domain_ok and remaining == 0 else 1
+            inspections = collect_inspections(catalog, output_root, commit)
+            summaries = scenario_summaries(catalog, inspections)
+            write_aggregates(
+                catalog, inspections, summaries, workers=args.workers
+            )
+            replace_generated_block(TEX_PATH, render_generated_tables(summaries))
+            remaining = sum(
+                run.status != "complete" for run in inspections.values()
+            )
+            print(
+                f"Controlled performance status: "
+                f"{EXPECTED_RUNS - remaining}/{EXPECTED_RUNS} runs complete; "
+                "summaries and TeX tables refreshed.",
+                flush=True,
+            )
+            if args.audit or args.compact_only:
+                return 0
+            return 0 if domain_ok and remaining == 0 else 1
+    except RunnerAlreadyActive as error:
+        print(f"ERROR: {error}", file=sys.stderr, flush=True)
+        return 2
 
 
 if __name__ == "__main__":

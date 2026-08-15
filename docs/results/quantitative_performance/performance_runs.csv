@@ -1,241 +1,241 @@
 code,table_group,scenario,experiment,repetition,status,detail,runtime_seconds,runtime_seconds_per_cycle,peak_working_set_mib,max_blob_count,commit_sha
-R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,0,pending,run_metadata.json is missing,,,,,
-R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,1,pending,run_metadata.json is missing,,,,,
-R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,2,pending,run_metadata.json is missing,,,,,
-R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,3,pending,run_metadata.json is missing,,,,,
-R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,4,pending,run_metadata.json is missing,,,,,
-R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,0,pending,run_metadata.json is missing,,,,,
-R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,1,pending,run_metadata.json is missing,,,,,
-R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,2,pending,run_metadata.json is missing,,,,,
-R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,3,pending,run_metadata.json is missing,,,,,
-R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,4,pending,run_metadata.json is missing,,,,,
-R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,0,pending,run_metadata.json is missing,,,,,
-R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,1,pending,run_metadata.json is missing,,,,,
-R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,2,pending,run_metadata.json is missing,,,,,
-R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,3,pending,run_metadata.json is missing,,,,,
-R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,4,pending,run_metadata.json is missing,,,,,
-R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,0,pending,run_metadata.json is missing,,,,,
-R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,1,pending,run_metadata.json is missing,,,,,
-R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,2,pending,run_metadata.json is missing,,,,,
-R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,3,pending,run_metadata.json is missing,,,,,
-R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,4,pending,run_metadata.json is missing,,,,,
-R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,0,pending,run_metadata.json is missing,,,,,
-R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,1,pending,run_metadata.json is missing,,,,,
-R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,2,pending,run_metadata.json is missing,,,,,
-R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,3,pending,run_metadata.json is missing,,,,,
-R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,4,pending,run_metadata.json is missing,,,,,
-R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,0,pending,run_metadata.json is missing,,,,,
-R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,1,pending,run_metadata.json is missing,,,,,
-R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,2,pending,run_metadata.json is missing,,,,,
-R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,3,pending,run_metadata.json is missing,,,,,
-R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,4,pending,run_metadata.json is missing,,,,,
-A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,0,pending,run_metadata.json is missing,,,,,
-A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,1,pending,run_metadata.json is missing,,,,,
-A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,2,pending,run_metadata.json is missing,,,,,
-A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,3,pending,run_metadata.json is missing,,,,,
-A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,4,pending,run_metadata.json is missing,,,,,
-A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,0,pending,run_metadata.json is missing,,,,,
-A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,1,pending,run_metadata.json is missing,,,,,
-A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,2,pending,run_metadata.json is missing,,,,,
-A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,3,pending,run_metadata.json is missing,,,,,
-A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,4,pending,run_metadata.json is missing,,,,,
-A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,0,pending,run_metadata.json is missing,,,,,
-A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,1,pending,run_metadata.json is missing,,,,,
-A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,2,pending,run_metadata.json is missing,,,,,
-A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,3,pending,run_metadata.json is missing,,,,,
-A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,4,pending,run_metadata.json is missing,,,,,
-A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,0,pending,run_metadata.json is missing,,,,,
-A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,1,pending,run_metadata.json is missing,,,,,
-A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,2,pending,run_metadata.json is missing,,,,,
-A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,3,pending,run_metadata.json is missing,,,,,
-A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,4,pending,run_metadata.json is missing,,,,,
-A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,0,pending,run_metadata.json is missing,,,,,
-A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,1,pending,run_metadata.json is missing,,,,,
-A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,2,pending,run_metadata.json is missing,,,,,
-A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,3,pending,run_metadata.json is missing,,,,,
-A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,4,pending,run_metadata.json is missing,,,,,
-A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,0,pending,run_metadata.json is missing,,,,,
-A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,1,pending,run_metadata.json is missing,,,,,
-A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,2,pending,run_metadata.json is missing,,,,,
-A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,3,pending,run_metadata.json is missing,,,,,
-A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,4,pending,run_metadata.json is missing,,,,,
-A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,0,pending,run_metadata.json is missing,,,,,
-A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,1,pending,run_metadata.json is missing,,,,,
-A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,2,pending,run_metadata.json is missing,,,,,
-A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,3,pending,run_metadata.json is missing,,,,,
-A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,4,pending,run_metadata.json is missing,,,,,
-A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,0,pending,run_metadata.json is missing,,,,,
-A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,1,pending,run_metadata.json is missing,,,,,
-A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,2,pending,run_metadata.json is missing,,,,,
-A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,3,pending,run_metadata.json is missing,,,,,
-A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,4,pending,run_metadata.json is missing,,,,,
-A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,0,pending,run_metadata.json is missing,,,,,
-A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,1,pending,run_metadata.json is missing,,,,,
-A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,2,pending,run_metadata.json is missing,,,,,
-A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,3,pending,run_metadata.json is missing,,,,,
-A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,4,pending,run_metadata.json is missing,,,,,
-A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,0,pending,run_metadata.json is missing,,,,,
-A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,1,pending,run_metadata.json is missing,,,,,
-A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,2,pending,run_metadata.json is missing,,,,,
-A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,3,pending,run_metadata.json is missing,,,,,
-A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,4,pending,run_metadata.json is missing,,,,,
-F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,0,pending,run_metadata.json is missing,,,,,
-F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,1,pending,run_metadata.json is missing,,,,,
-F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,2,pending,run_metadata.json is missing,,,,,
-F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,3,pending,run_metadata.json is missing,,,,,
-F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,4,pending,run_metadata.json is missing,,,,,
-F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,0,pending,run_metadata.json is missing,,,,,
-F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,1,pending,run_metadata.json is missing,,,,,
-F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,2,pending,run_metadata.json is missing,,,,,
-F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,3,pending,run_metadata.json is missing,,,,,
-F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,4,pending,run_metadata.json is missing,,,,,
-F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,0,pending,run_metadata.json is missing,,,,,
-F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,1,pending,run_metadata.json is missing,,,,,
-F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,2,pending,run_metadata.json is missing,,,,,
-F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,3,pending,run_metadata.json is missing,,,,,
-F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,4,pending,run_metadata.json is missing,,,,,
-F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,0,pending,run_metadata.json is missing,,,,,
-F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,1,pending,run_metadata.json is missing,,,,,
-F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,2,pending,run_metadata.json is missing,,,,,
-F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,3,pending,run_metadata.json is missing,,,,,
-F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,4,pending,run_metadata.json is missing,,,,,
-F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,0,pending,run_metadata.json is missing,,,,,
-F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,1,pending,run_metadata.json is missing,,,,,
-F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,2,pending,run_metadata.json is missing,,,,,
-F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,3,pending,run_metadata.json is missing,,,,,
-F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,4,pending,run_metadata.json is missing,,,,,
-F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,0,pending,run_metadata.json is missing,,,,,
-F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,1,pending,run_metadata.json is missing,,,,,
-F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,2,pending,run_metadata.json is missing,,,,,
-F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,3,pending,run_metadata.json is missing,,,,,
-F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,4,pending,run_metadata.json is missing,,,,,
-F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,0,pending,run_metadata.json is missing,,,,,
-F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,1,pending,run_metadata.json is missing,,,,,
-F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,2,pending,run_metadata.json is missing,,,,,
-F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,3,pending,run_metadata.json is missing,,,,,
-F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,4,pending,run_metadata.json is missing,,,,,
-F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,0,pending,run_metadata.json is missing,,,,,
-F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,1,pending,run_metadata.json is missing,,,,,
-F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,2,pending,run_metadata.json is missing,,,,,
-F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,3,pending,run_metadata.json is missing,,,,,
-F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,4,pending,run_metadata.json is missing,,,,,
-S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,0,pending,run_metadata.json is missing,,,,,
-S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,1,pending,run_metadata.json is missing,,,,,
-S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,2,pending,run_metadata.json is missing,,,,,
-S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,3,pending,run_metadata.json is missing,,,,,
-S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,4,pending,run_metadata.json is missing,,,,,
-S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,pending,run_metadata.json is missing,,,,,
-S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,pending,run_metadata.json is missing,,,,,
-S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,pending,run_metadata.json is missing,,,,,
-S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,pending,run_metadata.json is missing,,,,,
-S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,pending,run_metadata.json is missing,,,,,
-D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,0,pending,run_metadata.json is missing,,,,,
-D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,1,pending,run_metadata.json is missing,,,,,
-D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,2,pending,run_metadata.json is missing,,,,,
-D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,3,pending,run_metadata.json is missing,,,,,
-D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,4,pending,run_metadata.json is missing,,,,,
-D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,0,pending,run_metadata.json is missing,,,,,
-D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,1,pending,run_metadata.json is missing,,,,,
-D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,2,pending,run_metadata.json is missing,,,,,
-D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,3,pending,run_metadata.json is missing,,,,,
-D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,4,pending,run_metadata.json is missing,,,,,
-D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,0,pending,run_metadata.json is missing,,,,,
-D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,1,pending,run_metadata.json is missing,,,,,
-D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,2,pending,run_metadata.json is missing,,,,,
-D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,3,pending,run_metadata.json is missing,,,,,
-D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,4,pending,run_metadata.json is missing,,,,,
-D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,0,pending,run_metadata.json is missing,,,,,
-D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,1,pending,run_metadata.json is missing,,,,,
-D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,2,pending,run_metadata.json is missing,,,,,
-D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,3,pending,run_metadata.json is missing,,,,,
-D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,4,pending,run_metadata.json is missing,,,,,
-D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,0,pending,run_metadata.json is missing,,,,,
-D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,1,pending,run_metadata.json is missing,,,,,
-D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,2,pending,run_metadata.json is missing,,,,,
-D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,3,pending,run_metadata.json is missing,,,,,
-D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,4,pending,run_metadata.json is missing,,,,,
-D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,0,pending,run_metadata.json is missing,,,,,
-D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,1,pending,run_metadata.json is missing,,,,,
-D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,2,pending,run_metadata.json is missing,,,,,
-D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,3,pending,run_metadata.json is missing,,,,,
-D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,4,pending,run_metadata.json is missing,,,,,
-D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,0,pending,run_metadata.json is missing,,,,,
-D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,1,pending,run_metadata.json is missing,,,,,
-D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,2,pending,run_metadata.json is missing,,,,,
-D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,3,pending,run_metadata.json is missing,,,,,
-D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,4,pending,run_metadata.json is missing,,,,,
-D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,0,pending,run_metadata.json is missing,,,,,
-D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,1,pending,run_metadata.json is missing,,,,,
-D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,2,pending,run_metadata.json is missing,,,,,
-D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,3,pending,run_metadata.json is missing,,,,,
-D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,4,pending,run_metadata.json is missing,,,,,
-D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,0,pending,run_metadata.json is missing,,,,,
-D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,1,pending,run_metadata.json is missing,,,,,
-D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,2,pending,run_metadata.json is missing,,,,,
-D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,3,pending,run_metadata.json is missing,,,,,
-D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,4,pending,run_metadata.json is missing,,,,,
-D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,0,pending,run_metadata.json is missing,,,,,
-D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,1,pending,run_metadata.json is missing,,,,,
-D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,2,pending,run_metadata.json is missing,,,,,
-D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,3,pending,run_metadata.json is missing,,,,,
-D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,4,pending,run_metadata.json is missing,,,,,
-D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,0,pending,run_metadata.json is missing,,,,,
-D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,1,pending,run_metadata.json is missing,,,,,
-D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,2,pending,run_metadata.json is missing,,,,,
-D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,3,pending,run_metadata.json is missing,,,,,
-D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,4,pending,run_metadata.json is missing,,,,,
+R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,0,complete,all controlled performance artifacts are complete,240.39195349998772,4.292713455356924,218.12109375,1738,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,1,complete,all controlled performance artifacts are complete,232.08425180002814,4.144361639286217,218.125,1738,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,2,complete,all controlled performance artifacts are complete,234.31303569994634,4.1841613517847565,218.203125,1738,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,3,complete,all controlled performance artifacts are complete,234.24961110000731,4.183028769642988,217.15625,1738,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R01,routine,stage4_13_levy_off_flood_none,popular_times_v2/production/13_levy_off_flood_none,4,complete,all controlled performance artifacts are complete,232.6399085999583,4.154284082142112,218.3515625,1738,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,0,complete,all controlled performance artifacts are complete,285.45214710000437,5.097359769642935,257.45703125,1833,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,1,complete,all controlled performance artifacts are complete,284.68465720000677,5.083654592857264,257.9765625,1831,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,2,complete,all controlled performance artifacts are complete,287.82060430001,5.139653648214464,255.1015625,1832,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,3,complete,all controlled performance artifacts are complete,286.5419294000021,5.11682016785718,256.72265625,1832,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R02,routine,stage4_13_levy_on_flood_none,popular_times_v2/production/13_levy_on_flood_none,4,complete,all controlled performance artifacts are complete,287.36198960000183,5.1314641000000325,257.0234375,1833,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,0,complete,all controlled performance artifacts are complete,449.90853519999655,8.034080985714224,407.09765625,6962,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,1,complete,all controlled performance artifacts are complete,455.4963076999993,8.133862637499988,407.2421875,6963,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,2,complete,all controlled performance artifacts are complete,454.3118416000507,8.112711457143762,406.89453125,6963,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,3,complete,all controlled performance artifacts are complete,453.85335350001696,8.10452416964316,407.66796875,6962,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R03,routine,stage6_13_levy_v2_flood_none,popular_times_v2/stage6/13_levy_v2_flood_none,4,complete,all controlled performance artifacts are complete,456.5317308999947,8.152352337499906,407.06640625,6963,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,0,complete,all controlled performance artifacts are complete,1893.3276651999913,33.80942259285699,623.06640625,10814,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,1,complete,all controlled performance artifacts are complete,1891.744045200001,33.78114366428573,622.8671875,10814,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,2,complete,all controlled performance artifacts are complete,1891.0882553999545,33.76943313214205,623.5234375,10814,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,3,complete,all controlled performance artifacts are complete,1890.6987975999946,33.76247852857133,623.296875,10814,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R04,routine,stage4_94_levy_off_flood_none,popular_times_v2/production/94_levy_off_flood_none,4,complete,all controlled performance artifacts are complete,1901.269279,33.951237125,623.4296875,10814,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,0,complete,all controlled performance artifacts are complete,2903.726954700018,51.85226704821461,941.609375,12301,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,1,complete,all controlled performance artifacts are complete,2901.297372000001,51.80888164285716,942.41796875,12323,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,2,complete,all controlled performance artifacts are complete,2902.6146942999912,51.83240525535699,943.8828125,12327,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,3,complete,all controlled performance artifacts are complete,2897.0354068999877,51.73277512321407,942.796875,12303,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R05,routine,stage4_94_levy_on_flood_none,popular_times_v2/production/94_levy_on_flood_none,4,complete,all controlled performance artifacts are complete,2975.7656524999766,53.13867236607101,943.65625,12321,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,0,complete,all controlled performance artifacts are complete,3433.8754620000254,61.319204678571886,1831.546875,44583,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,1,complete,all controlled performance artifacts are complete,3450.083222299989,61.60862896964266,1814.41796875,44583,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,2,complete,all controlled performance artifacts are complete,3416.931676599954,61.01663708214203,1830.41796875,44579,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,3,complete,all controlled performance artifacts are complete,3431.3863136,61.2747556,1829.5234375,44578,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R06,routine,stage6_94_levy_v2_flood_none,popular_times_v2/stage6/94_levy_v2_flood_none,4,complete,all controlled performance artifacts are complete,3430.1743699000217,61.25311374821467,1817.3125,44580,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,0,complete,all controlled performance artifacts are complete,279.4462344000349,4.990111328572051,256.08984375,1833,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,1,complete,all controlled performance artifacts are complete,278.792472000001,4.978437000000018,256.359375,1831,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,2,complete,all controlled performance artifacts are complete,276.64858169999206,4.940153244642715,254.24609375,1831,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,3,complete,all controlled performance artifacts are complete,277.25984829996014,4.951068719642145,256.16796875,1832,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A01,adaptation,stage4_13_levy_on_flood_pois,popular_times_v2/production/13_levy_on_flood_pois,4,complete,all controlled performance artifacts are complete,274.83473689999664,4.907763158928511,257.05078125,1833,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,0,complete,all controlled performance artifacts are complete,297.3985975999967,5.310689242857085,356.94140625,1863,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,1,complete,all controlled performance artifacts are complete,298.43570460000774,5.329209010714424,367.73046875,1871,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,2,complete,all controlled performance artifacts are complete,298.17835729999933,5.324613523214274,365.265625,1872,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,3,complete,all controlled performance artifacts are complete,297.4312349000247,5.311272051786156,356.8984375,1873,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A02,adaptation,stage4_13_levy_on_flood_homes,popular_times_v2/production/13_levy_on_flood_homes,4,complete,all controlled performance artifacts are complete,297.1704464999493,5.306615116070524,366.5859375,1875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,0,complete,all controlled performance artifacts are complete,281.13080829998944,5.020193005356954,302.5234375,1838,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,1,complete,all controlled performance artifacts are complete,275.51024390000384,4.91982578392864,297.06640625,1836,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,2,complete,all controlled performance artifacts are complete,276.9474829999963,4.945490767857076,300.7109375,1837,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,3,complete,all controlled performance artifacts are complete,280.9996050000191,5.017850089286055,302.3203125,1837,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A03,adaptation,stage4_13_levy_on_flood_both,popular_times_v2/production/13_levy_on_flood_both,4,complete,all controlled performance artifacts are complete,276.8052076000022,4.942950135714325,300.83984375,1837,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,0,complete,all controlled performance artifacts are complete,240.8164512999938,4.300293773214174,272.3125,1743,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,1,complete,all controlled performance artifacts are complete,241.87071769998875,4.31911995892837,275.05078125,1743,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,2,complete,all controlled performance artifacts are complete,242.83874279999873,4.336406121428548,275.22265625,1743,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,3,complete,all controlled performance artifacts are complete,243.14203369995812,4.341822030356395,270.69140625,1743,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A04,adaptation,stage5_13_levy_off_flood_both_reroute,popular_times_v2/stage5/13_levy_off_flood_both_reroute,4,complete,all controlled performance artifacts are complete,240.80181549995905,4.300032419642126,274.82421875,1743,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,0,complete,all controlled performance artifacts are complete,294.4976603999967,5.2588867928570835,314.4921875,1838,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,1,complete,all controlled performance artifacts are complete,292.92484679998597,5.230800835714035,315.16015625,1837,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,2,complete,all controlled performance artifacts are complete,295.06929820001824,5.269094610714611,312.5,1837,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,3,complete,all controlled performance artifacts are complete,294.4572814999847,5.258165741071155,315.90234375,1839,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A05,adaptation,stage5_13_levy_on_flood_both_reroute,popular_times_v2/stage5/13_levy_on_flood_both_reroute,4,complete,all controlled performance artifacts are complete,293.9274465999915,5.248704403571277,315.9140625,1839,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,0,complete,all controlled performance artifacts are complete,2876.877242000017,51.372807892857445,936.203125,12301,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,1,complete,all controlled performance artifacts are complete,2866.959074100014,51.195697751785964,937.21484375,12321,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,2,complete,all controlled performance artifacts are complete,2862.46378250001,51.11542468750018,938.0625,12328,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,3,complete,all controlled performance artifacts are complete,3234.9504651000025,57.76697259107147,936.2421875,12307,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A06,adaptation,stage4_94_levy_on_flood_pois,popular_times_v2/production/94_levy_on_flood_pois,4,complete,all controlled performance artifacts are complete,3117.5036757999915,55.66970849642842,911.82421875,12326,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,0,complete,all controlled performance artifacts are complete,4594.113262699975,82.03773683392812,2250.5625,12591,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,1,complete,all controlled performance artifacts are complete,5205.061446299951,92.94752582678484,2132.234375,12548,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,2,complete,all controlled performance artifacts are complete,5211.73449469998,93.06668740535679,2144.4765625,12613,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,3,complete,all controlled performance artifacts are complete,5208.883524400007,93.0157772214287,2140.72265625,12589,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A07,adaptation,stage4_94_levy_on_flood_homes,popular_times_v2/production/94_levy_on_flood_homes,4,complete,all controlled performance artifacts are complete,5224.435274299991,93.29348704107126,2148.69921875,12612,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,0,complete,all controlled performance artifacts are complete,3358.265826900024,59.969032623214716,1203.3984375,12322,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,1,complete,all controlled performance artifacts are complete,3336.067463900021,59.572633283928944,1351.00390625,12342,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,2,complete,all controlled performance artifacts are complete,3350.895606199978,59.83742153928532,1393.2265625,12350,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,3,complete,all controlled performance artifacts are complete,3347.0383506999933,59.76854197678559,1394.9453125,12335,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A08,adaptation,stage4_94_levy_on_flood_both,popular_times_v2/production/94_levy_on_flood_both,4,complete,all controlled performance artifacts are complete,3343.779041600006,59.71034002857154,1394.9921875,12342,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,0,complete,all controlled performance artifacts are complete,2385.7330794999725,42.60237641964237,1369.43359375,10873,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,1,complete,all controlled performance artifacts are complete,2365.150773399975,42.23483523928527,1366.375,10873,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,2,complete,all controlled performance artifacts are complete,2371.2375787000055,42.34352819107153,1366.578125,10873,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,3,complete,all controlled performance artifacts are complete,2370.8338399999775,42.33631857142817,1367.12890625,10873,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A09,adaptation,stage5_94_levy_off_flood_both_reroute,popular_times_v2/stage5/94_levy_off_flood_both_reroute,4,complete,all controlled performance artifacts are complete,2369.943761900009,42.32042431964302,1367.33984375,10873,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,0,complete,all controlled performance artifacts are complete,3435.4372653000173,61.347094023214595,1698.796875,12381,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,1,complete,all controlled performance artifacts are complete,3440.0198888999876,61.42892658749978,1699.25390625,12397,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,2,complete,all controlled performance artifacts are complete,3437.893192300049,61.390949862500875,1697.109375,12401,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,3,complete,all controlled performance artifacts are complete,3432.9108807999874,61.30198001428549,1707.87109375,12385,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A10,adaptation,stage5_94_levy_on_flood_both_reroute,popular_times_v2/stage5/94_levy_on_flood_both_reroute,4,complete,all controlled performance artifacts are complete,3437.0687894999865,61.37622838392833,1702.22265625,12401,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,0,complete,all controlled performance artifacts are complete,425.4899856999982,7.59803545892854,400.7421875,6962,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,1,complete,all controlled performance artifacts are complete,425.18576169997687,7.592602887499587,394.70703125,6963,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,2,complete,all controlled performance artifacts are complete,425.62875690002693,7.600513516071909,398.78515625,6963,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,3,complete,all controlled performance artifacts are complete,423.4948185000103,7.56240747321447,400.6015625,6962,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F01,disruption,stage6_13_levy_v2_flood_destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,4,complete,all controlled performance artifacts are complete,421.38807570002973,7.524787066071959,400.78125,6963,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,0,complete,all controlled performance artifacts are complete,504.06588859995827,9.001176582142111,499.83203125,8553,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,1,complete,all controlled performance artifacts are complete,511.397727500007,9.13210227678584,499.1796875,8668,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,2,complete,all controlled performance artifacts are complete,506.59208060003584,9.046287153572068,497.3984375,8546,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,3,complete,all controlled performance artifacts are complete,502.7836415999918,8.978279314285569,506.5703125,8504,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F02,disruption,stage6_13_levy_v2_flood_homes,popular_times_v2/stage6/13_levy_v2_flood_homes,4,complete,all controlled performance artifacts are complete,505.4184388999711,9.025329266070912,507.328125,8646,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,0,complete,all controlled performance artifacts are complete,453.0163494000444,8.089577667857936,435.41015625,8220,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,1,complete,all controlled performance artifacts are complete,456.4441819000058,8.150788962500103,430.63671875,8251,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,2,complete,all controlled performance artifacts are complete,454.02574599999934,8.107602607142846,428.9296875,8195,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,3,complete,all controlled performance artifacts are complete,454.1817865000339,8.110389044643464,429.86328125,8157,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F03,disruption,stage6_13_levy_v2_flood_all,popular_times_v2/stage6/13_levy_v2_flood_all,4,complete,all controlled performance artifacts are complete,455.8027321000118,8.139334501785925,433.0234375,8133,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,0,complete,all controlled performance artifacts are complete,476.76855550002074,8.513724205357514,446.98046875,8181,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,1,complete,all controlled performance artifacts are complete,479.87591239996254,8.569212721427903,445.01953125,8241,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,2,complete,all controlled performance artifacts are complete,475.5739581999951,8.492392110714198,447.140625,8178,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,3,complete,all controlled performance artifacts are complete,481.0448925999808,8.5900873678568,446.4375,8092,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,4,complete,all controlled performance artifacts are complete,473.08603519998724,8.447964914285487,450.09375,8151,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,0,complete,all controlled performance artifacts are complete,3719.4813014999963,66.41930895535708,1767.26171875,44582,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,1,complete,all controlled performance artifacts are complete,3340.9311951000127,59.659485626785944,1708.48046875,44581,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,2,complete,all controlled performance artifacts are complete,3352.8981221999857,59.87318075357117,1770.0234375,44578,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,3,complete,all controlled performance artifacts are complete,3352.527570999984,59.86656376785686,1768.27734375,44578,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F05,disruption,stage6_94_levy_v2_flood_destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,4,complete,all controlled performance artifacts are complete,3360.7932132999995,60.014164523214276,1775.32421875,44579,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,0,complete,all controlled performance artifacts are complete,7244.43221649999,129.3648610089284,2112.8203125,51502,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,1,complete,all controlled performance artifacts are complete,7239.011687999999,129.26806585714283,2125.80859375,51662,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,2,complete,all controlled performance artifacts are complete,7187.212622000021,128.34308253571467,2122.1640625,51687,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,3,complete,all controlled performance artifacts are complete,7206.628537200042,128.6897953071436,2140.375,51481,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F06,disruption,stage6_94_levy_v2_flood_homes,popular_times_v2/stage6/94_levy_v2_flood_homes,4,complete,all controlled performance artifacts are complete,7299.750179600029,130.35268177857193,2267.9765625,51611,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,0,complete,all controlled performance artifacts are complete,4708.274385299999,84.07632830892855,1776.76171875,50090,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,1,complete,all controlled performance artifacts are complete,4688.267472399981,83.71906200714251,1623.89453125,50313,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,2,complete,all controlled performance artifacts are complete,4716.224935000006,84.21830241071439,1794.81640625,50388,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,3,complete,all controlled performance artifacts are complete,4690.087551000004,83.75156341071435,1499.546875,50294,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F07,disruption,stage6_94_levy_v2_flood_all,popular_times_v2/stage6/94_levy_v2_flood_all,4,complete,all controlled performance artifacts are complete,4712.30352419999,84.14827721785696,1743.3671875,50285,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,0,complete,all controlled performance artifacts are complete,5181.659988800064,92.529642657144,1853.6171875,50090,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,1,complete,all controlled performance artifacts are complete,5209.694006799953,93.03025012142773,1911.96484375,50375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,2,complete,all controlled performance artifacts are complete,5178.348412500054,92.4705073660724,1713.34375,50346,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,3,complete,all controlled performance artifacts are complete,5165.947211299965,92.24905734464222,1617.56640625,50265,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,4,complete,all controlled performance artifacts are complete,5207.706587799999,92.99476049642855,2073.1875,50296,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,0,complete,all controlled performance artifacts are complete,202.4817553999601,14.462982528568578,511.12890625,3276,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,1,complete,all controlled performance artifacts are complete,203.51051280007232,14.536465200005166,510.83203125,3314,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,2,complete,all controlled performance artifacts are complete,196.82860739994794,14.059186242853425,511.046875,3308,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,3,complete,all controlled performance artifacts are complete,195.35219469992444,13.953728192851745,511.0859375,3295,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S01,shelter,v3_reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,4,complete,all controlled performance artifacts are complete,186.56886690005194,13.326347635717996,510.39453125,3282,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,208.37111770000774,14.883651264286268,512.80859375,3315,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,206.6246375000337,14.758902678573836,513.84765625,3331,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,201.97053310007323,14.42646665000523,514.1015625,3381,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,211.52541269990616,15.108958049993296,513.69921875,3387,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S02,shelter,v3_reference_reallocate,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,202.8356140999822,14.488258149998728,514.21484375,3353,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,195.2496215000283,13.946401535716307,512.91796875,2972,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,202.30042270000558,14.450030192857541,512.6796875,2973,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,198.33297629992012,14.166641164280009,513.30859375,3029,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,197.08212110004388,14.077294364288848,510.5859375,3006,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S03,shelter,capacity_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,194.0996159000788,13.864258278577056,508.5703125,3001,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,227.8190281999996,16.272787728571398,516.5546875,4462,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,228.43134389992338,16.31652456428024,517.9921875,4438,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,219.205697300029,15.657549807144928,517.7109375,4426,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,227.11212820000947,16.22229487142925,519.29296875,4500,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S04,shelter,capacity_2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,219.87475299998187,15.705339499998704,517.859375,4416,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,196.27585750003345,14.019704107145246,514.30859375,3558,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,202.35994770005345,14.454281978575247,513.2109375,3575,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,191.58331379992887,13.684522414280634,513.39453125,3564,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,184.5584256000584,13.182744685718458,514.0859375,3557,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S05,shelter,capacity_5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,190.12515130010433,13.580367950007453,513.21484375,3572,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,181.90128589991946,12.99294899285139,512.171875,3537,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,185.22668150009122,13.230477250006516,512.71484375,3540,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,176.33932799997274,12.595666285712339,511.9453125,3562,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,176.79356110002846,12.62811150714489,510.2265625,3543,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S06,shelter,capacity_15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,178.59986560000107,12.757133257142934,513.62109375,3551,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,118.9580557999434,8.497003985710242,496.85546875,2836,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,119.53656480007339,8.5383260571481,497.74609375,2844,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,118.60880669998005,8.472057621427146,497.26953125,2889,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,118.54892649990506,8.467780464278933,498.25,2869,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S07,shelter,response_0.005,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,119.8102337999735,8.55787384285525,498.42578125,2865,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,467.4213665999705,33.387240471426466,544.80859375,3694,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,470.6299762999406,33.61642687856719,545.1953125,3627,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,477.40507550002076,34.10036253571577,545.41015625,3665,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,463.55659060005564,33.111185042861116,545.30078125,3657,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S08,shelter,response_0.02,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,464.56991680001374,33.18356548571527,545.703125,3671,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,1142.5995983999455,81.61425702856754,641.46875,3841,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,1164.0734345000237,83.1481024642874,636.2578125,3853,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,1149.660785599961,82.11862754285436,642.41015625,3847,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,1160.307585499948,82.87911324999628,641.5703125,3803,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S09,shelter,response_0.05,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,1156.1363273999887,82.58116624285633,642.7109375,3788,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,75.46866420004517,5.390618871431798,487.5078125,2146,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,76.88072069990449,5.491480049993178,487.77734375,2192,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,76.17579090001527,5.441127921429662,487.44140625,2167,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,76.41252469993196,5.458037478566569,487.73046875,2194,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S10,shelter,demand_0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,75.8069106999319,5.414779335709421,487.4453125,2158,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,121.03872179996688,8.64562298571192,495.5859375,2777,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,121.1388227000134,8.652773050000958,495.42578125,2724,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,119.53261609992478,8.538044007137485,496.3046875,2724,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,118.61052720004227,8.472180514288734,495.51171875,2732,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S11,shelter,demand_0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,119.15864229993895,8.511331592852782,495.80859375,2735,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,215.22083849995397,15.372917035710998,513.4375,3298,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,205.97748340002727,14.712677385716233,513.7265625,3319,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,199.04433239996433,14.217452314283166,513.84765625,3344,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,200.74768639996182,14.33912045714013,513.79296875,3324,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S12,shelter,failure_largest_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,197.04081450006925,14.074343892862089,513.8046875,3300,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,0,complete,all controlled performance artifacts are complete,200.42739369999617,14.316242407142584,512.6640625,3151,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,1,complete,all controlled performance artifacts are complete,197.09224230004475,14.078017307146053,512.97265625,3147,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,2,complete,all controlled performance artifacts are complete,199.2169309000019,14.229780778571564,512.8671875,3129,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,3,complete,all controlled performance artifacts are complete,192.56943829997908,13.754959878569935,513.0859375,3180,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S13,shelter,failure_top_10_percent_capacity_with_reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,4,complete,all controlled performance artifacts are complete,195.65237539994996,13.975169671424997,512.72265625,3137,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,0,complete,all controlled performance artifacts are complete,5.277232399908826,0.5277232399908826,459.58203125,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,1,complete,all controlled performance artifacts are complete,5.202829400077462,0.5202829400077462,459.28125,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,2,complete,all controlled performance artifacts are complete,5.21979610004928,0.521979610004928,459.86328125,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,3,complete,all controlled performance artifacts are complete,5.283299200003967,0.5283299200003967,459.7265625,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D01,dialysis,K01_ReducedModerate,dialysis_core/K01_ReducedModerate,4,complete,all controlled performance artifacts are complete,5.350449999910779,0.5350449999910779,459.81640625,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,0,complete,all controlled performance artifacts are complete,5.3457975999917835,0.5345797599991784,458.35546875,533,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,1,complete,all controlled performance artifacts are complete,5.092348900041543,0.5092348900041543,457.72265625,527,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,2,complete,all controlled performance artifacts are complete,5.011632699985057,0.5011632699985057,458.359375,530,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,3,complete,all controlled performance artifacts are complete,5.159312100033276,0.5159312100033275,457.3125,521,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D02,dialysis,K02_MoinhosNoRecovery,dialysis_core/K02_MoinhosNoRecovery,4,complete,all controlled performance artifacts are complete,5.403639899916016,0.5403639899916015,457.50390625,528,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,0,complete,all controlled performance artifacts are complete,5.261837600031868,0.5261837600031868,460.3125,478,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,1,complete,all controlled performance artifacts are complete,5.166913500055671,0.5166913500055671,460.41796875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,2,complete,all controlled performance artifacts are complete,5.088087399955839,0.5088087399955838,460.421875,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,3,complete,all controlled performance artifacts are complete,5.285140399937518,0.5285140399937518,460.1484375,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D03,dialysis,K03_MoinhosFastRecovery,dialysis_core/K03_MoinhosFastRecovery,4,complete,all controlled performance artifacts are complete,5.194950900040567,0.5194950900040567,460.171875,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,0,complete,all controlled performance artifacts are complete,5.458244999987073,0.5458244999987073,459.94921875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,1,complete,all controlled performance artifacts are complete,5.331301799975336,0.5331301799975335,458.5390625,475,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,2,complete,all controlled performance artifacts are complete,5.242866900051013,0.5242866900051013,458.3046875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,3,complete,all controlled performance artifacts are complete,5.329171000048518,0.5329171000048518,457.98046875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D04,dialysis,K04_HistoricalClinicFlood,dialysis_core/K04_HistoricalClinicFlood,4,complete,all controlled performance artifacts are complete,5.413404299993999,0.5413404299993999,458.9140625,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,0,complete,all controlled performance artifacts are complete,5.2716745000798255,0.5271674500079826,455.03125,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,1,complete,all controlled performance artifacts are complete,4.98506459989585,0.498506459989585,454.671875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,2,complete,all controlled performance artifacts are complete,5.000744999968447,0.5000744999968447,455.4921875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,3,complete,all controlled performance artifacts are complete,4.998767699929886,0.4998767699929886,455.96484375,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D05,dialysis,K05_SyntheticETAFlood,dialysis_core/K05_SyntheticETAFlood,4,complete,all controlled performance artifacts are complete,5.034203399904072,0.5034203399904073,455.84375,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,0,complete,all controlled performance artifacts are complete,4.950678699999116,0.49506786999991165,455.75,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,1,complete,all controlled performance artifacts are complete,4.887466800049879,0.4887466800049879,455.2734375,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,2,complete,all controlled performance artifacts are complete,4.934111699927598,0.4934111699927598,455.32421875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,3,complete,all controlled performance artifacts are complete,4.9531360999681056,0.49531360999681057,456.015625,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D06,dialysis,K06_CombinedMoinhosMenino,dialysis_core/K06_CombinedMoinhosMenino,4,complete,all controlled performance artifacts are complete,4.882457599975169,0.48824575999751685,455.375,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,0,complete,all controlled performance artifacts are complete,5.996717300033197,0.5996717300033196,485.44140625,577,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,1,complete,all controlled performance artifacts are complete,5.747852899949066,0.5747852899949066,485.8359375,573,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,2,complete,all controlled performance artifacts are complete,5.785565799917094,0.5785565799917094,485.08984375,573,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,3,complete,all controlled performance artifacts are complete,5.833626199979335,0.5833626199979335,485.1796875,570,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D07,dialysis,K07_ReducedAboveCapacity,dialysis_core/K07_ReducedAboveCapacity,4,complete,all controlled performance artifacts are complete,5.686320399981923,0.5686320399981923,485.59765625,573,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,0,complete,all controlled performance artifacts are complete,5.364125599968247,0.5364125599968247,461.1953125,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,1,complete,all controlled performance artifacts are complete,5.186556900036521,0.5186556900036521,461.01171875,479,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,2,complete,all controlled performance artifacts are complete,5.225875400006771,0.5225875400006771,461.140625,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,3,complete,all controlled performance artifacts are complete,5.242240399937145,0.5242240399937146,461.42578125,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D08,dialysis,K08_HighCapacityClinicFailure,dialysis_core/K08_HighCapacityClinicFailure,4,complete,all controlled performance artifacts are complete,5.144913699943572,0.5144913699943572,461.390625,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,0,complete,all controlled performance artifacts are complete,5.324873900040984,0.5324873900040984,458.2734375,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,1,complete,all controlled performance artifacts are complete,5.015062099904753,0.5015062099904753,458.75,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,2,complete,all controlled performance artifacts are complete,4.989484700025059,0.4989484700025059,458.0390625,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,3,complete,all controlled performance artifacts are complete,5.087286400026642,0.5087286400026642,458.26171875,476,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D09,dialysis,K09_MatchedLowCapacityFailures,dialysis_core/K09_MatchedLowCapacityFailures,4,complete,all controlled performance artifacts are complete,5.119131600018591,0.511913160001859,458.66796875,477,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,0,complete,all controlled performance artifacts are complete,17.337909699999727,1.7337909699999727,491.68359375,2763,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,1,complete,all controlled performance artifacts are complete,16.864816899993457,1.6864816899993458,490.78125,2763,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,2,complete,all controlled performance artifacts are complete,17.280441400012933,1.7280441400012934,488.6640625,2764,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,3,complete,all controlled performance artifacts are complete,16.63705760007724,1.663705760007724,489.3671875,2764,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D10,dialysis,K10_CompleteModerate,dialysis_core/K10_CompleteModerate,4,complete,all controlled performance artifacts are complete,16.68622230004985,1.6686222300049849,490.68359375,2763,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,0,complete,all controlled performance artifacts are complete,18.213034999906085,1.8213034999906086,484.25390625,2821,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,1,complete,all controlled performance artifacts are complete,17.639795499970205,1.7639795499970206,483.20703125,2823,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,2,complete,all controlled performance artifacts are complete,17.718990300083533,1.7718990300083532,483.23046875,2819,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,3,complete,all controlled performance artifacts are complete,17.666963699972257,1.7666963699972258,484.87890625,2818,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D11,dialysis,K11_CompleteCombined,dialysis_core/K11_CompleteCombined,4,complete,all controlled performance artifacts are complete,17.722169999964535,1.7722169999964534,482.3984375,2820,48b2e244f7329c368e46d286002bbc4de7bd81a3

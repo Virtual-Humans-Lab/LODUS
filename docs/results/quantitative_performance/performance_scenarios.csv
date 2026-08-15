@@ -1,49 +1,49 @@
 code,table_group,scenario,description,experiment,regions,cycles,required_repetitions,completed_repetitions,missing_repetitions,mean_max_blob_count,mean_runtime_seconds,runtime_seconds_per_cycle,mean_peak_working_set_mib,commit_sha
-R01,routine,stage4_13_levy_off_flood_none,Popular Times only,popular_times_v2/production/13_levy_off_flood_none,13,56,5,0,"0,1,2,3,4",,,,,
-R02,routine,stage4_13_levy_on_flood_none,Popular Times + probabilistic Lévy,popular_times_v2/production/13_levy_on_flood_none,13,56,5,0,"0,1,2,3,4",,,,,
-R03,routine,stage6_13_levy_v2_flood_none,Popular Times + attendance Lévy V2,popular_times_v2/stage6/13_levy_v2_flood_none,13,56,5,0,"0,1,2,3,4",,,,,
-R04,routine,stage4_94_levy_off_flood_none,Popular Times only,popular_times_v2/production/94_levy_off_flood_none,94,56,5,0,"0,1,2,3,4",,,,,
-R05,routine,stage4_94_levy_on_flood_none,Popular Times + probabilistic Lévy,popular_times_v2/production/94_levy_on_flood_none,94,56,5,0,"0,1,2,3,4",,,,,
-R06,routine,stage6_94_levy_v2_flood_none,Popular Times + attendance Lévy V2,popular_times_v2/stage6/94_levy_v2_flood_none,94,56,5,0,"0,1,2,3,4",,,,,
-A01,adaptation,stage4_13_levy_on_flood_pois,POI flood; demand suppression,popular_times_v2/production/13_levy_on_flood_pois,13,56,5,0,"0,1,2,3,4",,,,,
-A02,adaptation,stage4_13_levy_on_flood_homes,Home flood; demand suppression,popular_times_v2/production/13_levy_on_flood_homes,13,56,5,0,"0,1,2,3,4",,,,,
-A03,adaptation,stage4_13_levy_on_flood_both,Home + POI flood; demand suppression,popular_times_v2/production/13_levy_on_flood_both,13,56,5,0,"0,1,2,3,4",,,,,
-A04,adaptation,stage5_13_levy_off_flood_both_reroute,Home + POI flood; nearest-POI adaptation,popular_times_v2/stage5/13_levy_off_flood_both_reroute,13,56,5,0,"0,1,2,3,4",,,,,
-A05,adaptation,stage5_13_levy_on_flood_both_reroute,Home + POI flood; Lévy + nearest-POI adaptation,popular_times_v2/stage5/13_levy_on_flood_both_reroute,13,56,5,0,"0,1,2,3,4",,,,,
-A06,adaptation,stage4_94_levy_on_flood_pois,POI flood; demand suppression,popular_times_v2/production/94_levy_on_flood_pois,94,56,5,0,"0,1,2,3,4",,,,,
-A07,adaptation,stage4_94_levy_on_flood_homes,Home flood; demand suppression,popular_times_v2/production/94_levy_on_flood_homes,94,56,5,0,"0,1,2,3,4",,,,,
-A08,adaptation,stage4_94_levy_on_flood_both,Home + POI flood; demand suppression,popular_times_v2/production/94_levy_on_flood_both,94,56,5,0,"0,1,2,3,4",,,,,
-A09,adaptation,stage5_94_levy_off_flood_both_reroute,Home + POI flood; nearest-POI adaptation,popular_times_v2/stage5/94_levy_off_flood_both_reroute,94,56,5,0,"0,1,2,3,4",,,,,
-A10,adaptation,stage5_94_levy_on_flood_both_reroute,Home + POI flood; Lévy + nearest-POI adaptation,popular_times_v2/stage5/94_levy_on_flood_both_reroute,94,56,5,0,"0,1,2,3,4",,,,,
-F01,disruption,stage6_13_levy_v2_flood_destinations,Flooded activity and commute destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,13,56,5,0,"0,1,2,3,4",,,,,
-F02,disruption,stage6_13_levy_v2_flood_homes,Flooded homes,popular_times_v2/stage6/13_levy_v2_flood_homes,13,56,5,0,"0,1,2,3,4",,,,,
-F03,disruption,stage6_13_levy_v2_flood_all,Flooded homes and destinations,popular_times_v2/stage6/13_levy_v2_flood_all,13,56,5,0,"0,1,2,3,4",,,,,
-F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,All-node flood + nearest-POI adaptation,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,13,56,5,0,"0,1,2,3,4",,,,,
-F05,disruption,stage6_94_levy_v2_flood_destinations,Flooded activity and commute destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,94,56,5,0,"0,1,2,3,4",,,,,
-F06,disruption,stage6_94_levy_v2_flood_homes,Flooded homes,popular_times_v2/stage6/94_levy_v2_flood_homes,94,56,5,0,"0,1,2,3,4",,,,,
-F07,disruption,stage6_94_levy_v2_flood_all,Flooded homes and destinations,popular_times_v2/stage6/94_levy_v2_flood_all,94,56,5,0,"0,1,2,3,4",,,,,
-F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,All-node flood + nearest-POI adaptation,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,94,56,5,0,"0,1,2,3,4",,,,,
-S01,shelter,v3_reference,Reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,94,14,5,0,"0,1,2,3,4",,,,,
-S02,shelter,v3_reference_reallocate,Reference with reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S03,shelter,capacity_0.5x,Capacity 0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S04,shelter,capacity_2x,Capacity 2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S05,shelter,capacity_5x,Capacity 5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S06,shelter,capacity_15x,Capacity 15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S07,shelter,response_0.005,Daily response 0.5%,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S08,shelter,response_0.02,Daily response 2%,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S09,shelter,response_0.05,Daily response 5%,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S10,shelter,demand_0.25x,Exposure demand 0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S11,shelter,demand_0.5x,Exposure demand 0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S12,shelter,failure_largest_with_reallocation,Largest-shelter failure,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-S13,shelter,failure_top_10_percent_capacity_with_reallocation,Top-10% capacity failures,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,0,"0,1,2,3,4",,,,,
-D01,dialysis,K01_ReducedModerate,Reduced moderate (K01),dialysis_core/K01_ReducedModerate,13,10,5,0,"0,1,2,3,4",,,,,
-D02,dialysis,K02_MoinhosNoRecovery,Moinhos persistent outage (K02),dialysis_core/K02_MoinhosNoRecovery,13,10,5,0,"0,1,2,3,4",,,,,
-D03,dialysis,K03_MoinhosFastRecovery,Moinhos rapid recovery (K03),dialysis_core/K03_MoinhosFastRecovery,13,10,5,0,"0,1,2,3,4",,,,,
-D04,dialysis,K04_HistoricalClinicFlood,Historical clinic flood (K04),dialysis_core/K04_HistoricalClinicFlood,13,10,5,0,"0,1,2,3,4",,,,,
-D05,dialysis,K05_SyntheticETAFlood,Synthetic water-source flood (K05),dialysis_core/K05_SyntheticETAFlood,13,10,5,0,"0,1,2,3,4",,,,,
-D06,dialysis,K06_CombinedMoinhosMenino,Combined reduced disruption (K06),dialysis_core/K06_CombinedMoinhosMenino,13,10,5,0,"0,1,2,3,4",,,,,
-D07,dialysis,K07_ReducedAboveCapacity,Reduced above capacity (K07),dialysis_core/K07_ReducedAboveCapacity,13,10,5,0,"0,1,2,3,4",,,,,
-D08,dialysis,K08_HighCapacityClinicFailure,One high-capacity failure (K08),dialysis_core/K08_HighCapacityClinicFailure,13,10,5,0,"0,1,2,3,4",,,,,
-D09,dialysis,K09_MatchedLowCapacityFailures,Matched small failures (K09),dialysis_core/K09_MatchedLowCapacityFailures,13,10,5,0,"0,1,2,3,4",,,,,
-D10,dialysis,K10_CompleteModerate,Complete-network moderate (K10),dialysis_core/K10_CompleteModerate,94,10,5,0,"0,1,2,3,4",,,,,
-D11,dialysis,K11_CompleteCombined,Complete-network combined (K11),dialysis_core/K11_CompleteCombined,94,10,5,0,"0,1,2,3,4",,,,,
+R01,routine,stage4_13_levy_off_flood_none,Popular Times only,popular_times_v2/production/13_levy_off_flood_none,13,56,5,5,,1738.0,234.73575213998555,4.191709859642599,217.99140625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R02,routine,stage4_13_levy_on_flood_none,Popular Times + probabilistic Lévy,popular_times_v2/production/13_levy_on_flood_none,13,56,5,5,,1832.2,286.37226552000504,5.113790455714375,256.85625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R03,routine,stage6_13_levy_v2_flood_none,Popular Times + attendance Lévy V2,popular_times_v2/stage6/13_levy_v2_flood_none,13,56,5,5,,6962.6,454.02035378001165,8.107506317500208,407.19375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R04,routine,stage4_94_levy_off_flood_none,Popular Times only,popular_times_v2/production/94_levy_off_flood_none,94,56,5,5,,10814.0,1893.6256084799884,33.81474300857122,623.23671875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R05,routine,stage4_94_levy_on_flood_none,Popular Times + probabilistic Lévy,popular_times_v2/production/94_levy_on_flood_none,94,56,5,5,,12315.0,2916.0880160799948,52.07300028714276,942.87265625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+R06,routine,stage6_94_levy_v2_flood_none,Popular Times + attendance Lévy V2,popular_times_v2/stage6/94_levy_v2_flood_none,94,56,5,5,,44580.6,3432.490208879998,61.29446801571425,1824.64375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A01,adaptation,stage4_13_levy_on_flood_pois,POI flood; demand suppression,popular_times_v2/production/13_levy_on_flood_pois,13,56,5,5,,1832.0,277.3963746599969,4.953506690357088,255.9828125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A02,adaptation,stage4_13_levy_on_flood_homes,Home flood; demand suppression,popular_times_v2/production/13_levy_on_flood_homes,13,56,5,5,,1870.8,297.72286817999554,5.316479788928492,362.684375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A03,adaptation,stage4_13_levy_on_flood_both,Home + POI flood; demand suppression,popular_times_v2/production/13_levy_on_flood_both,13,56,5,5,,1837.0,278.2786695600022,4.9692619564286105,300.6921875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A04,adaptation,stage5_13_levy_off_flood_both_reroute,Home + POI flood; nearest-POI adaptation,popular_times_v2/stage5/13_levy_off_flood_both_reroute,13,56,5,5,,1743.0,241.89395219997968,4.319534860713923,273.6203125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A05,adaptation,stage5_13_levy_on_flood_both_reroute,Home + POI flood; Lévy + nearest-POI adaptation,popular_times_v2/stage5/13_levy_on_flood_both_reroute,13,56,5,5,,1838.0,294.1753066999954,5.253130476785633,314.79375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A06,adaptation,stage4_94_levy_on_flood_pois,POI flood; demand suppression,popular_times_v2/production/94_levy_on_flood_pois,94,56,5,5,,12316.6,2991.750847900007,53.424122283928696,931.909375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A07,adaptation,stage4_94_levy_on_flood_homes,Home flood; demand suppression,popular_times_v2/production/94_levy_on_flood_homes,94,56,5,5,,12590.6,5088.845600479981,90.87224286571394,2163.3390625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A08,adaptation,stage4_94_levy_on_flood_both,Home + POI flood; demand suppression,popular_times_v2/production/94_levy_on_flood_both,94,56,5,5,,12338.2,3347.2092578600045,59.771593890357224,1347.51328125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A09,adaptation,stage5_94_levy_off_flood_both_reroute,Home + POI flood; nearest-POI adaptation,popular_times_v2/stage5/94_levy_off_flood_both_reroute,94,56,5,5,,10873.0,2372.579806699988,42.36749654821407,1367.37109375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+A10,adaptation,stage5_94_levy_on_flood_both_reroute,Home + POI flood; Lévy + nearest-POI adaptation,popular_times_v2/stage5/94_levy_on_flood_both_reroute,94,56,5,5,,12393.0,3436.6660033600056,61.36903577428581,1701.05078125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F01,disruption,stage6_13_levy_v2_flood_destinations,Flooded activity and commute destinations,popular_times_v2/stage6/13_levy_v2_flood_destinations,13,56,5,5,,6962.6,424.2374797000084,7.575669280357293,399.1234375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F02,disruption,stage6_13_levy_v2_flood_homes,Flooded homes,popular_times_v2/stage6/13_levy_v2_flood_homes,13,56,5,5,,8583.4,506.0515554399928,9.0366349185713,502.06171875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F03,disruption,stage6_13_levy_v2_flood_all,Flooded homes and destinations,popular_times_v2/stage6/13_levy_v2_flood_all,13,56,5,5,,8191.2,454.694159180019,8.119538556786054,431.57265625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F04,disruption,stage6_13_levy_v2_flood_all_pt_reroute,All-node flood + nearest-POI adaptation,popular_times_v2/stage6/13_levy_v2_flood_all_pt_reroute,13,56,5,5,,8168.6,477.2698707799893,8.52267626392838,447.134375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F05,disruption,stage6_94_levy_v2_flood_destinations,Flooded activity and commute destinations,popular_times_v2/stage6/94_levy_v2_flood_destinations,94,56,5,5,,44579.6,3425.3262806199955,61.16654072535706,1757.8734375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F06,disruption,stage6_94_levy_v2_flood_homes,Flooded homes,popular_times_v2/stage6/94_levy_v2_flood_homes,94,56,5,5,,51588.6,7235.407048660016,129.20369729750027,2153.82890625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F07,disruption,stage6_94_levy_v2_flood_all,Flooded homes and destinations,popular_times_v2/stage6/94_levy_v2_flood_all,94,56,5,5,,50274.0,4703.031573579996,83.98270667107136,1687.67734375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+F08,disruption,stage6_94_levy_v2_flood_all_pt_reroute,All-node flood + nearest-POI adaptation,popular_times_v2/stage6/94_levy_v2_flood_all_pt_reroute,94,56,5,5,,50274.4,5188.671241440007,92.65484359714299,1833.9359375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S01,shelter,v3_reference,Reference,shelter_tests/census_5m30_shelters_v3_daily_1%_test,94,14,5,5,,3295.0,196.94838743999134,14.067741959999381,510.89765625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S02,shelter,v3_reference_reallocate,Reference with reallocation,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3353.4,206.2654630200006,14.733247358571472,513.734375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S03,shelter,capacity_0.5x,Capacity 0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,2996.2,197.41295150001534,14.100925107143953,511.6125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S04,shelter,capacity_2x,Capacity 2x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,4448.4,224.48859011998866,16.034899294284905,517.88203125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S05,shelter,capacity_5x,Capacity 5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3565.2,192.9805391800357,13.784324227145406,513.64296875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S06,shelter,capacity_15x,Capacity 15x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3546.6,179.77214442000258,12.840867458571612,512.1359375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S07,shelter,response_0.005,Daily response 0.5%,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,2860.6,119.09251751997508,8.506608394283933,497.709375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S08,shelter,response_0.02,Daily response 2%,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3662.8,468.71658516000025,33.47975608285716,545.28359375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S09,shelter,response_0.05,Daily response 5%,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3826.4,1154.5555462799734,82.4682533057124,640.88359375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S10,shelter,demand_0.25x,Exposure demand 0.25x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,2171.4,76.14892223996576,5.439208731426126,487.58046875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S11,shelter,demand_0.5x,Exposure demand 0.5x,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,2738.4,119.89586601997726,8.563990429998375,495.72734375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S12,shelter,failure_largest_with_reallocation,Largest-shelter failure,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3317.0,203.60623103999532,14.543302217142523,513.721875,48b2e244f7329c368e46d286002bbc4de7bd81a3
+S13,shelter,failure_top_10_percent_capacity_with_reallocation,Top-10% capacity failures,shelter_tests/census_5m30_shelters_v3_daily_1%_reallocate_test,94,14,5,5,,3148.8,196.99167611999437,14.070834008571026,512.8625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D01,dialysis,K01_ReducedModerate,Reduced moderate (K01),dialysis_core/K01_ReducedModerate,13,10,5,5,,476.6,5.266721419990063,0.5266721419990062,459.65390625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D02,dialysis,K02_MoinhosNoRecovery,Moinhos persistent outage (K02),dialysis_core/K02_MoinhosNoRecovery,13,10,5,5,,527.8,5.202546239993535,0.5202546239993535,457.85078125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D03,dialysis,K03_MoinhosFastRecovery,Moinhos rapid recovery (K03),dialysis_core/K03_MoinhosFastRecovery,13,10,5,5,,477.0,5.199385960004292,0.5199385960004292,460.29453125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D04,dialysis,K04_HistoricalClinicFlood,Historical clinic flood (K04),dialysis_core/K04_HistoricalClinicFlood,13,10,5,5,,475.8,5.354997800011188,0.5354997800011188,458.7375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D05,dialysis,K05_SyntheticETAFlood,Synthetic water-source flood (K05),dialysis_core/K05_SyntheticETAFlood,13,10,5,5,,476.2,5.058091039955616,0.5058091039955616,455.40078125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D06,dialysis,K06_CombinedMoinhosMenino,Combined reduced disruption (K06),dialysis_core/K06_CombinedMoinhosMenino,13,10,5,5,,476.2,4.9215701799839735,0.49215701799839734,455.54765625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D07,dialysis,K07_ReducedAboveCapacity,Reduced above capacity (K07),dialysis_core/K07_ReducedAboveCapacity,13,10,5,5,,573.2,5.810016519972123,0.5810016519972123,485.42890625,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D08,dialysis,K08_HighCapacityClinicFailure,One high-capacity failure (K08),dialysis_core/K08_HighCapacityClinicFailure,13,10,5,5,,477.2,5.232742399978451,0.5232742399978452,461.2328125,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D09,dialysis,K09_MatchedLowCapacityFailures,Matched small failures (K09),dialysis_core/K09_MatchedLowCapacityFailures,13,10,5,5,,476.2,5.107167740003206,0.5107167740003206,458.3984375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D10,dialysis,K10_CompleteModerate,Complete-network moderate (K10),dialysis_core/K10_CompleteModerate,94,10,5,5,,2763.4,16.96128958002664,1.6961289580026642,490.2359375,48b2e244f7329c368e46d286002bbc4de7bd81a3
+D11,dialysis,K11_CompleteCombined,Complete-network combined (K11),dialysis_core/K11_CompleteCombined,94,10,5,5,,2820.2,17.792190899979325,1.7792190899979325,483.59375,48b2e244f7329c368e46d286002bbc4de7bd81a3

@@ -411,11 +411,13 @@ print(output_str)
 Simulation
 '''
 
+# Global blob counts are required run artifacts even when an experiment disables
+# the high-volume default logger bundle (as the Levy V2 configurations do).
+lodus_simulation.load_plugin(blob_count_logger)
 if lodus_simulation.experiment_config.get("default_loggers_enabled", True):
     lodus_simulation.load_plugin(pop_count_logger)
     lodus_simulation.load_plugin(od_logger)
     lodus_simulation.load_plugin(enum_area_logger)
-    lodus_simulation.load_plugin(blob_count_logger)
     # # env_graph.LoadLoggerPlugin(traceable_logger)
     # # env_graph.LoadLoggerPlugin(vacc_logger)
     lodus_simulation.load_plugin(displacement_logger)

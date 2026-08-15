@@ -99,13 +99,17 @@ K01--K11 in Table~\ref{tbl:dialysis_results}).  Inpatient-care simulations are
 excluded.  The two Stage~6 no-flood configurations are included with routine
 mobility rather than duplicated in the disruption table.
 
-Every configuration is executed serially for repetitions 0--4 on the machine
-described above and on one repository commit, giving 240 controlled runs.  This
-five-repetition rule also applies to configurations whose scenario outcomes are
-deterministic: repeating them does not create domain uncertainty, but it does
-measure runtime and memory variation.  Runtime is measured with a monotonic
-high-resolution clock around the simulation loop.  Peak working set is the
-maximum resident memory reported for the process by Windows, converted to MiB.
+Every configuration is executed for repetitions 0--4 on the machine described
+above and on one repository commit, giving 240 controlled runs.  The runner
+schedules up to four independent simulations concurrently.  This five-repetition
+rule also applies to configurations whose scenario outcomes are deterministic:
+repeating them does not create domain uncertainty, but it does measure runtime
+and memory variation under the shared-machine batch workload.  Runtime is
+measured with a monotonic high-resolution clock around each simulation loop.
+Peak working set is the maximum resident memory reported for each process by
+Windows, converted to MiB.  Accordingly, the new timings include CPU, memory,
+and storage contention among concurrently executing simulations and should not
+be interpreted as isolated single-process runtimes.
 Maximum blob count is calculated from the global blob-count series written for
 every simulation.  Region- and node-level blob series are deliberately omitted
 to avoid very large logging outputs.  TraceMalloc is not collected for the new
@@ -117,7 +121,12 @@ blob-count series, runtime, peak working set, and maximum blob count are all
 present and mutually consistent.  Missing observations remain explicit rather
 than being filled with runtimes from the concurrent production batches.  The
 exact commit and individual-run measurements are retained in the accompanying
-compact CSV summaries.
+compact CSV summaries.  After validation and aggregation, the dedicated
+performance runs retain only metadata, the global blob-count series, validation
+reports, and the small domain tables required by the resume checks.  Redundant
+per-step mobility, demand, and OD files are removed because the controlled batch
+is used for computational measurements rather than as a replacement for the
+separately preserved domain-result batches.
 
 % BEGIN GENERATED PERFORMANCE TABLES
 \begingroup
@@ -131,12 +140,12 @@ compact CSV summaries.
 \toprule
 Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
 \midrule
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R01 scenario stage4\_13\_levy\_off\_flood\_none (popular\_times\_v2/production/13\_levy\_off\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R02 scenario stage4\_13\_levy\_on\_flood\_none (popular\_times\_v2/production/13\_levy\_on\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R03 scenario stage6\_13\_levy\_v2\_flood\_none (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R04 scenario stage4\_94\_levy\_off\_flood\_none (popular\_times\_v2/production/94\_levy\_off\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R05 scenario stage4\_94\_levy\_on\_flood\_none (popular\_times\_v2/production/94\_levy\_on\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: R06 scenario stage6\_94\_levy\_v2\_flood\_none (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_none) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+R01 Popular Times only & 13 & 56 & 5 & 1738.0 & 234.736 & 4.1917 & 218.0 \\
+R02 Popular Times + probabilistic Lévy & 13 & 56 & 5 & 1832.2 & 286.372 & 5.1138 & 256.9 \\
+R03 Popular Times + attendance Lévy V2 & 13 & 56 & 5 & 6962.6 & 454.020 & 8.1075 & 407.2 \\
+R04 Popular Times only & 94 & 56 & 5 & 10814.0 & 1893.626 & 33.8147 & 623.2 \\
+R05 Popular Times + probabilistic Lévy & 94 & 56 & 5 & 12315.0 & 2916.088 & 52.0730 & 942.9 \\
+R06 Popular Times + attendance Lévy V2 & 94 & 56 & 5 & 44580.6 & 3432.490 & 61.2945 & 1824.6 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -149,16 +158,16 @@ Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\
 \toprule
 Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
 \midrule
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A01 scenario stage4\_13\_levy\_on\_flood\_pois (popular\_times\_v2/production/13\_levy\_on\_flood\_pois) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A02 scenario stage4\_13\_levy\_on\_flood\_homes (popular\_times\_v2/production/13\_levy\_on\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A03 scenario stage4\_13\_levy\_on\_flood\_both (popular\_times\_v2/production/13\_levy\_on\_flood\_both) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A04 scenario stage5\_13\_levy\_off\_flood\_both\_reroute (popular\_times\_v2/stage5/13\_levy\_off\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A05 scenario stage5\_13\_levy\_on\_flood\_both\_reroute (popular\_times\_v2/stage5/13\_levy\_on\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A06 scenario stage4\_94\_levy\_on\_flood\_pois (popular\_times\_v2/production/94\_levy\_on\_flood\_pois) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A07 scenario stage4\_94\_levy\_on\_flood\_homes (popular\_times\_v2/production/94\_levy\_on\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A08 scenario stage4\_94\_levy\_on\_flood\_both (popular\_times\_v2/production/94\_levy\_on\_flood\_both) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A09 scenario stage5\_94\_levy\_off\_flood\_both\_reroute (popular\_times\_v2/stage5/94\_levy\_off\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: A10 scenario stage5\_94\_levy\_on\_flood\_both\_reroute (popular\_times\_v2/stage5/94\_levy\_on\_flood\_both\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+A01 POI flood; demand suppression & 13 & 56 & 5 & 1832.0 & 277.396 & 4.9535 & 256.0 \\
+A02 Home flood; demand suppression & 13 & 56 & 5 & 1870.8 & 297.723 & 5.3165 & 362.7 \\
+A03 Home + POI flood; demand suppression & 13 & 56 & 5 & 1837.0 & 278.279 & 4.9693 & 300.7 \\
+A04 Home + POI flood; nearest-POI adaptation & 13 & 56 & 5 & 1743.0 & 241.894 & 4.3195 & 273.6 \\
+A05 Home + POI flood; Lévy + nearest-POI adaptation & 13 & 56 & 5 & 1838.0 & 294.175 & 5.2531 & 314.8 \\
+A06 POI flood; demand suppression & 94 & 56 & 5 & 12316.6 & 2991.751 & 53.4241 & 931.9 \\
+A07 Home flood; demand suppression & 94 & 56 & 5 & 12590.6 & 5088.846 & 90.8722 & 2163.3 \\
+A08 Home + POI flood; demand suppression & 94 & 56 & 5 & 12338.2 & 3347.209 & 59.7716 & 1347.5 \\
+A09 Home + POI flood; nearest-POI adaptation & 94 & 56 & 5 & 10873.0 & 2372.580 & 42.3675 & 1367.4 \\
+A10 Home + POI flood; Lévy + nearest-POI adaptation & 94 & 56 & 5 & 12393.0 & 3436.666 & 61.3690 & 1701.1 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -171,14 +180,14 @@ Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\
 \toprule
 Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
 \midrule
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F01 scenario stage6\_13\_levy\_v2\_flood\_destinations (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_destinations) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F02 scenario stage6\_13\_levy\_v2\_flood\_homes (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F03 scenario stage6\_13\_levy\_v2\_flood\_all (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_all) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F04 scenario stage6\_13\_levy\_v2\_flood\_all\_pt\_reroute (popular\_times\_v2/stage6/13\_levy\_v2\_flood\_all\_pt\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F05 scenario stage6\_94\_levy\_v2\_flood\_destinations (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_destinations) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F06 scenario stage6\_94\_levy\_v2\_flood\_homes (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_homes) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F07 scenario stage6\_94\_levy\_v2\_flood\_all (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_all) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: F08 scenario stage6\_94\_levy\_v2\_flood\_all\_pt\_reroute (popular\_times\_v2/stage6/94\_levy\_v2\_flood\_all\_pt\_reroute) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+F01 Flooded activity and commute destinations & 13 & 56 & 5 & 6962.6 & 424.237 & 7.5757 & 399.1 \\
+F02 Flooded homes & 13 & 56 & 5 & 8583.4 & 506.052 & 9.0366 & 502.1 \\
+F03 Flooded homes and destinations & 13 & 56 & 5 & 8191.2 & 454.694 & 8.1195 & 431.6 \\
+F04 All-node flood + nearest-POI adaptation & 13 & 56 & 5 & 8168.6 & 477.270 & 8.5227 & 447.1 \\
+F05 Flooded activity and commute destinations & 94 & 56 & 5 & 44579.6 & 3425.326 & 61.1665 & 1757.9 \\
+F06 Flooded homes & 94 & 56 & 5 & 51588.6 & 7235.407 & 129.2037 & 2153.8 \\
+F07 Flooded homes and destinations & 94 & 56 & 5 & 50274.0 & 4703.032 & 83.9827 & 1687.7 \\
+F08 All-node flood + nearest-POI adaptation & 94 & 56 & 5 & 50274.4 & 5188.671 & 92.6548 & 1833.9 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -191,19 +200,19 @@ Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\
 \toprule
 Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
 \midrule
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S01 scenario v3\_reference (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S02 scenario v3\_reference\_reallocate (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S03 scenario capacity\_0.5x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S04 scenario capacity\_2x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S05 scenario capacity\_5x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S06 scenario capacity\_15x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S07 scenario response\_0.005 (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S08 scenario response\_0.02 (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S09 scenario response\_0.05 (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S10 scenario demand\_0.25x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S11 scenario demand\_0.5x (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S12 scenario failure\_largest\_with\_reallocation (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: S13 scenario failure\_top\_10\_percent\_capacity\_with\_reallocation (shelter\_tests/census\_5m30\_shelters\_v3\_daily\_1\%\_reallocate\_test) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+S01 Reference & 94 & 14 & 5 & 3295.0 & 196.948 & 14.0677 & 510.9 \\
+S02 Reference with reallocation & 94 & 14 & 5 & 3353.4 & 206.265 & 14.7332 & 513.7 \\
+S03 Capacity 0.5x & 94 & 14 & 5 & 2996.2 & 197.413 & 14.1009 & 511.6 \\
+S04 Capacity 2x & 94 & 14 & 5 & 4448.4 & 224.489 & 16.0349 & 517.9 \\
+S05 Capacity 5x & 94 & 14 & 5 & 3565.2 & 192.981 & 13.7843 & 513.6 \\
+S06 Capacity 15x & 94 & 14 & 5 & 3546.6 & 179.772 & 12.8409 & 512.1 \\
+S07 Daily response 0.5\% & 94 & 14 & 5 & 2860.6 & 119.093 & 8.5066 & 497.7 \\
+S08 Daily response 2\% & 94 & 14 & 5 & 3662.8 & 468.717 & 33.4798 & 545.3 \\
+S09 Daily response 5\% & 94 & 14 & 5 & 3826.4 & 1154.556 & 82.4683 & 640.9 \\
+S10 Exposure demand 0.25x & 94 & 14 & 5 & 2171.4 & 76.149 & 5.4392 & 487.6 \\
+S11 Exposure demand 0.5x & 94 & 14 & 5 & 2738.4 & 119.896 & 8.5640 & 495.7 \\
+S12 Largest-shelter failure & 94 & 14 & 5 & 3317.0 & 203.606 & 14.5433 & 513.7 \\
+S13 Top-10\% capacity failures & 94 & 14 & 5 & 3148.8 & 196.992 & 14.0708 & 512.9 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -216,17 +225,17 @@ Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\
 \toprule
 Configuration & Regions & Cycles & Reps. & \begin{tabular}[c]{@{}c@{}}Mean max.\\blobs\end{tabular} & \begin{tabular}[c]{@{}c@{}}Mean runtime\\(s)\end{tabular} & s/cycle & \begin{tabular}[c]{@{}c@{}}Mean peak\\working set\\(MiB)\end{tabular} \\
 \midrule
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D01 scenario K01\_ReducedModerate (dialysis\_core/K01\_ReducedModerate) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D02 scenario K02\_MoinhosNoRecovery (dialysis\_core/K02\_MoinhosNoRecovery) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D03 scenario K03\_MoinhosFastRecovery (dialysis\_core/K03\_MoinhosFastRecovery) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D04 scenario K04\_HistoricalClinicFlood (dialysis\_core/K04\_HistoricalClinicFlood) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D05 scenario K05\_SyntheticETAFlood (dialysis\_core/K05\_SyntheticETAFlood) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D06 scenario K06\_CombinedMoinhosMenino (dialysis\_core/K06\_CombinedMoinhosMenino) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D07 scenario K07\_ReducedAboveCapacity (dialysis\_core/K07\_ReducedAboveCapacity) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D08 scenario K08\_HighCapacityClinicFailure (dialysis\_core/K08\_HighCapacityClinicFailure) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D09 scenario K09\_MatchedLowCapacityFailures (dialysis\_core/K09\_MatchedLowCapacityFailures) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D10 scenario K10\_CompleteModerate (dialysis\_core/K10\_CompleteModerate) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
-\multicolumn{8}{p{0.96\textwidth}}{\textcolor{red}{\textbf{MISSING DATA: D11 scenario K11\_CompleteCombined (dialysis\_core/K11\_CompleteCombined) requires repetitions 0--4; missing repetitions: 0,1,2,3,4.}}} \\
+D01 Reduced moderate (K01) & 13 & 10 & 5 & 476.6 & 5.267 & 0.5267 & 459.7 \\
+D02 Moinhos persistent outage (K02) & 13 & 10 & 5 & 527.8 & 5.203 & 0.5203 & 457.9 \\
+D03 Moinhos rapid recovery (K03) & 13 & 10 & 5 & 477.0 & 5.199 & 0.5199 & 460.3 \\
+D04 Historical clinic flood (K04) & 13 & 10 & 5 & 475.8 & 5.355 & 0.5355 & 458.7 \\
+D05 Synthetic water-source flood (K05) & 13 & 10 & 5 & 476.2 & 5.058 & 0.5058 & 455.4 \\
+D06 Combined reduced disruption (K06) & 13 & 10 & 5 & 476.2 & 4.922 & 0.4922 & 455.5 \\
+D07 Reduced above capacity (K07) & 13 & 10 & 5 & 573.2 & 5.810 & 0.5810 & 485.4 \\
+D08 One high-capacity failure (K08) & 13 & 10 & 5 & 477.2 & 5.233 & 0.5233 & 461.2 \\
+D09 Matched small failures (K09) & 13 & 10 & 5 & 476.2 & 5.107 & 0.5107 & 458.4 \\
+D10 Complete-network moderate (K10) & 94 & 10 & 5 & 2763.4 & 16.961 & 1.6961 & 490.2 \\
+D11 Complete-network combined (K11) & 94 & 10 & 5 & 2820.2 & 17.792 & 1.7792 & 483.6 \\
 \bottomrule
 \end{tabularx}
 \end{table}

@@ -21,5 +21,5 @@ Raw run folders remain outside Git under
 .\.venv\Scripts\python.exe .\misc_scripts\run_popular_times_v2_stage6.py
 ```
 
-The separate controlled performance matrix always uses serial repetitions and
-is managed by `misc_scripts/run_quantitative_performance.py`.
+The separate controlled performance matrix uses up to four concurrent workers
+and is managed by `misc_scripts/run_quantitative_performance.py`.
