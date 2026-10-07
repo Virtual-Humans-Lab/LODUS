@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "timestamp": "2026-09-25T18:38:22.380Z",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "viewport": [974, 648],
+  "devicePixelRatio": 1,
+  "entities": 50000,
+  "visibleEntities": 50000,
+  "durationSeconds": 19.999199999999952,
+  "renderedFrames": 3300,
+  "fps": 165.00660026401096,
+  "p50Ms": 6.099999999860302,
+  "p95Ms": 6.5,
+  "p99Ms": 8.100000000093132,
+  "framesOver20Ms": 0,
+  "targetMet": true,
+  "rafP50Ms": 6.099999999976717,
+  "rafP95Ms": 6.199999999953434,
+  "idleRafP50Ms": 6.099999999976717,
+  "notes": [
+    "Completed Deck renders after warmup; target = mean >=58 FPS and p95 <=20ms.",
+    "50,000 weighted stream samples; all filters, origin colors, center/POI/corridor density and boundaries on.",
+    "Full route extent in viewport; GPU time is not independently measured."
+  ]
+}

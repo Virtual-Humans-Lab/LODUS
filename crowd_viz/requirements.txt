@@ -1,0 +1,4 @@
+numpy>=1.24,<3
+osmnx>=2.0,<3
+networkx>=3.0,<4
+shapely>=2.0,<3
