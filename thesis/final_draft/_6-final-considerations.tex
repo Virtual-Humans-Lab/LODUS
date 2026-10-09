@@ -1,0 +1,359 @@
+\chapter{Final Considerations}
+\label{chapter:final_considerations}
+
+%GA: resumo geral
+This thesis presented LODUS, an extensible multi-scale framework for simulating heterogeneous urban populations interacting with dynamic environments. The proposed model combines an aggregated population representation with semantically defined regions and points of interest, routines and actions for changing the simulation state, and an extension mechanism through which application-specific processes can be incorporated without redefining the underlying population and environment abstractions.
+
+%GA: tentei puxar da research question
+The central research question of this thesis concerned how an extensible simulation framework could represent heterogeneous urban population dynamics at different spatial scales while supporting changes in population state, behavior, and environment availability within the same underlying model. The results indicate that LODUS provides a core representation through which these requirements can be addressed across the different application scenarios evaluated in this work. %The limitations presented in this chapter define the current scope of this representation and its experimental evaluation.
+
+
+
+\section{Main Achievements}
+\label{sec:final_discussion}
+
+
+The results presented throughout this thesis support three main achievements:
+the definition of an aggregated and multi-scale representation of urban populations,
+the development of an extension mechanism that allows this representation to support
+different population processes, and the demonstration of these capabilities across
+substantially different application scenarios.
+
+The aggregated population model represents heterogeneous populations associated
+with semantically meaningful urban locations and evolving through actions and
+routines. Population characteristics may either be sampled during operations or
+preserved when distinctions must remain traceable throughout a simulation. This
+provides a flexible compromise between representing population heterogeneity and
+avoiding the computational and modeling requirements of maintaining every inhabitant
+as an independent agent.
+
+The experiments also demonstrate that the same simulation abstractions can be
+instantiated at different spatial scales. Porto Alegre was represented at both
+neighborhood and census-sector levels, including reduced and city-scale
+census-sector environments. Although these representations differ substantially in
+spatial resolution, number of locations, and represented population, they rely on
+the same concepts of regions, points of interest, populations, actions, and routines.
+This shows that increasing spatial detail does not require replacing the underlying
+simulation structure.
+
+The extension mechanism constitutes another central achievement of the framework.
+Domain-specific plugins can introduce additional population states, points of
+interest, actions, routines, dependencies, and simulation-step behavior while
+preserving the underlying population and environment representation. The plugins
+developed in this thesis cover routine mobility, large-scale events, environmental
+disruptions, shelter demand, epidemic contagion, vaccination, and recurring dialysis
+treatment. Some extensions also interact with one another, allowing, for example,
+environmental conditions to affect mobility and service availability, vaccination to
+modify infection dynamics, and infrastructure failures to affect access to healthcare
+services.
+
+The experimental results demonstrate the usefulness of this architecture across
+substantially different population processes. The mobility experiments show that the
+framework can reproduce configured recurring activity and commute patterns and
+represent their spatial and temporal characteristics at different scales. Event and
+flood experiments demonstrate how external conditions can alter these baseline
+patterns, producing displacement, destination substitution, unmet demand, and changes
+in access to urban locations. Shelter experiments further show how population
+exposure can be combined with facility capacity and allocation policies to study
+evacuation demand and accommodation constraints.
+
+The health-related experiments extend the same representation beyond mobility
+outcomes. Epidemic scenarios combine population movement with evolving
+epidemiological states and interventions, while the dialysis scenarios combine
+recurring treatment demand with clinic capacity, environmental disruption, and
+infrastructure dependencies. These applications demonstrate that population movement
+can serve as part of broader simulation processes in which population state and
+urban-service availability evolve together.
+
+An important achievement is also the modeling space covered by LODUS. As discussed
+in Chapter~2, existing approaches address different parts of this problem through
+crowd simulation, transportation simulation, human mobility models, multi-level
+population representations, or general-purpose agent-based environments. However,
+within the literature reviewed in this thesis, we did not identify another framework
+that combines, within the same simulation architecture, dynamically aggregated
+heterogeneous populations, semantically defined urban locations, multiple spatial
+resolutions, changing environmental and service conditions, and extensible
+domain-specific population processes. The originality of LODUS therefore lies not
+in replacing these established approaches, but in integrating these capabilities
+within a single population-level simulation framework.
+
+Taken together, the experiments show that the same core abstractions can support
+different spatial representations, mobility configurations, disruptions, and
+application domains, while plugins define the processes acting upon the represented
+population. This separation enables questions ranging from routine mobility and
+environmental disruption to public health and access to essential services to be
+investigated without requiring a different population simulation architecture for
+each application.
+
+Beyond the individual scenarios evaluated in this thesis, the architecture also
+provides a basis for studying interactions among urban processes. Because extensions
+operate over the same population and environment representation, conditions
+introduced by one process can influence another. This capability is particularly
+relevant to cascading scenarios in which, for example, an environmental event
+simultaneously affects population mobility, shelter demand, infrastructure
+availability, and access to healthcare services. The experiments presented in this
+thesis therefore demonstrate not only the applicability of the implemented
+extensions, but also the potential of LODUS as a foundation for integrated
+population-level urban simulation.
+
+
+\begin{comment}
+%SO: texto do Gab
+%GA: ideia de ser generalista/extensivel
+The principal objective of LODUS is not to provide a specialized simulation model for a single urban phenomenon, but a common representation through which different population processes can be constructed. The experiments presented in this thesis address substantially different applications, including recurring mobility, exceptional events, environmental disruptions, evacuation, epidemic processes, and recurring healthcare services. Nevertheless, these scenarios were represented using the same underlying concepts of population blobs, points of interest, population templates, routines, actions, and environmental availability.
+
+The population and environment abstractions provide the main basis for this reuse. Populations are represented as dynamically structured groups that can split when only part of a population is affected and merge again when their distinction is no longer required. This allows application-specific population states to be introduced without requiring every inhabitant to be represented independently. At the same time, points of interest represent more than spatial destinations: their semantic roles, attributes, availability, capacities, and dependencies can influence the population processes occurring in the simulation. Domain-specific plugins extend these common abstractions with the information and behavior required by each application rather than replacing the underlying model.
+
+The evaluation also demonstrates the framework's multi-scale character. The same population and environment abstractions were instantiated using both neighborhood-level and census-sector-level representations of Porto Alegre. These environments differ considerably in spatial resolution and number of represented locations, but do not require distinct simulation models. The resolution can therefore be selected according to the available data and the objectives of a particular experiment while preserving the same underlying representation.
+
+Taken together, the experiments support the central thesis claim that a common, environment-oriented, dynamically aggregated representation can be reused across different urban population phenomena without constructing an independent model for each application. The contribution of LODUS therefore lies primarily in this common representation and its extension mechanism, rather than in any individual mobility, epidemic, flood, evacuation, or healthcare model implemented for the evaluation.
+\end{comment}
+
+\section{Limitations}
+\label{sec:limitations}
+
+The proposed framework and its current implementation present limitations that
+define the scope of the results reported in this thesis and identify directions for
+continued development. Some of these limitations arise from deliberate modeling
+choices associated with the population-level and extensible nature of LODUS, whereas
+others concern capabilities that are not yet available in the current implementation.
+
+A first limitation concerns the usability of the current implementation. LODUS
+has been developed primarily as a research framework rather than as an end-user
+simulation tool. Developing a new plugin currently requires programming knowledge
+and familiarity with the main simulation abstractions, including populations, actions,
+routines, and points of interest. Extensibility should therefore be understood primarily
+as a modeling and implementation capability. Once an extension has been developed,
+however, many aspects of a simulation can be configured without modifying its
+implementation. The experiments presented in this thesis vary capacities, schedules,
+population quantities, environmental conditions, dependencies, and behavioral
+parameters through such configurations. A user-oriented authoring environment could
+further separate plugin development from scenario configuration and facilitate the use
+of existing extensions by non-developer users.
+
+A second limitation concerns the representation of movement. A move action
+currently transfers a population blob directly from one point of interest to another.
+Distance can influence destination selection and can be recorded as an outcome, but
+travel duration is not explicitly represented in the core model. Consequently, a
+movement requiring several hours does not correspond to a population remaining in
+transit during intermediate simulation steps. Travel time can be approximated through
+domain-specific extensions, but explicit support for in-transit populations would provide
+a more general solution.
+
+Relatedly, LODUS does not aim to reproduce pedestrian locomotion, route selection,
+collision avoidance, or detailed vehicle movement. Points of interest are connected at
+an abstract level rather than through an explicit transportation network. This is
+consistent with the intended modeling scale of LODUS, which focuses on population
+distribution, demand, state changes, and movement among semantically meaningful
+urban locations rather than on the detailed trajectories followed between them.
+Applications requiring such detail could complement LODUS with specialized mobility
+or transportation models.
+
+The aggregated population representation introduces a related trade-off. Sampled
+characteristics describe marginal distributions within a blob and do not necessarily
+preserve complete joint relationships among characteristics. For example, age and
+occupation distributions may both be represented without identifying how occupation
+categories are distributed within each age group. Traceable characteristics allow
+distinctions required by a particular simulation to be maintained, but relationships
+that are absent from the input data cannot be reconstructed by the framework.
+Similarly, aggregation does not preserve persistent individual identities or complete
+person-level trajectories. These characteristics limit analyses that depend on individual
+histories, repeated person-specific choices, or social relationships, but are consistent
+with the population-level abstraction adopted by LODUS and allow large populations
+to be represented without maintaining every inhabitant as an independent agent.
+
+The empirical interpretation of the experiments must also consider the abstract and
+configurable nature of the framework. LODUS itself does not define a single predictive
+model for a particular urban phenomenon; rather, it provides population and environment
+abstractions through which different domain-specific processes can be implemented.
+Consequently, a single direct empirical validation of the framework against a real-world
+ground truth is not generally applicable. The degree to which a particular LODUS
+simulation reproduces real-world behavior depends on the empirical data and
+domain-specific assumptions used to configure that application. In the experiments
+presented in this thesis, observed and derived data were incorporated whenever
+available, including population and geographic information, shelter locations and
+capacities, dialysis facilities and infrastructure dependencies, and parameters associated
+with epidemic processes. Other parameters were intentionally defined as experimental
+conditions to enable controlled comparisons rather than calibrated predictions.
+
+Accordingly, the results should primarily be interpreted as evaluations of whether
+the framework responds consistently to the population, environmental, capacity, and
+service conditions represented in each experiment. For example, the shelter experiments
+evaluate how the population requiring accommodation is affected by available shelter
+capacity and facility disruption, while the dialysis experiments examine how treatment
+demand responds to clinic capacity and supporting-infrastructure failures. Such
+experiments illustrate how LODUS can be used to explore potential consequences of
+urban conditions and interventions. With sufficiently representative local data and
+appropriately calibrated domain-specific extensions, the same mechanisms could support
+scenario analysis and prospective studies of real-world situations. The dialysis case,
+for example, illustrates how the framework can be used to investigate hypothetical
+service disruptions and alternative conditions that may be difficult or undesirable to
+observe experimentally in the real system.
+
+Some application-specific extensions deliberately simplify their respective domains.
+The epidemic experiments use an aggregate SIR formulation, the shelter experiments
+abstract evacuation and accommodation behavior through configurable policies, and
+the dialysis experiments do not model clinical consequences of delayed treatment.
+These simplifications reflect the objective of evaluating the framework across distinct
+population processes rather than providing fully calibrated domain-specific simulators.
+More detailed applications would require corresponding domain models, data, and
+validation procedures, which can be incorporated through the extension mechanism.
+
+A further limitation is that the experimental evaluation does not include a systematic quantitative analysis of the computational performance or scalability of the framework. The experiments demonstrate LODUS with populations and environments of substantially different sizes, including city-scale census-sector representations, but execution time, memory consumption, and scaling behavior were not evaluated as experimental outcomes. Consequently, the results support the applicability of the proposed abstractions at the evaluated scales, but do not establish quantitative performance bounds or characterize how computational requirements evolve with population complexity, spatial resolution, number of points of interest, or extension behavior.
+
+The experimental evaluation is centered on Porto Alegre and therefore does not by
+itself demonstrate empirical transferability to cities with different spatial structures,
+mobility patterns, service organizations, or data availability. Nevertheless, the core
+LODUS representation is not specific to Porto Alegre. Regions, points of interest,
+population characteristics, routines, capacities, dependencies, and environmental
+conditions are instantiated from input data rather than being defined specifically for
+the evaluated city. Applying LODUS to another urban environment would therefore
+primarily require suitable local data and, when necessary, adaptations of
+domain-specific plugins and parameters. In principle, the same framework construction
+and simulation mechanisms evaluated in this thesis should remain applicable, although
+their empirical adequacy would need to be assessed for the data and processes of each
+new location.
+
+Finally, the evaluation does not include a direct quantitative comparison with another
+simulation framework providing the same combination of modeling capabilities. As
+discussed in Chapter~2, existing approaches address different subsets of the problem,
+including detailed crowd movement, transportation, human mobility, multi-level
+population representation, or general-purpose agent-based simulation. We are not aware
+of an existing model that provides a directly equivalent combination of dynamically
+aggregated heterogeneous populations, semantically defined urban locations, multiple
+spatial resolutions, dynamic environmental conditions, and extensible domain-specific
+population processes. This makes a controlled state-of-the-art comparison difficult,
+since differences in results would also reflect fundamentally different population,
+environment, and process representations. The evaluation therefore focuses on
+demonstrating the behavior, consistency, and applicability of the proposed representation
+across substantially different urban population processes rather than on benchmarking
+LODUS against a non-equivalent simulation model.
+
+\begin{comment}
+\section{Limitations}
+\label{sec:final_limitations}
+
+The proposed framework and its current implementation present limitations that define both the interpretation of the experiments and opportunities for continued development.
+
+%GA: limitação de usuário
+A first limitation concerns the usability of the current implementation. LODUS has been developed primarily as a research framework and is not yet intended for general end users. Developing a new plugin requires programming knowledge and familiarity with parts of the simulation model, including populations, actions, routines, and points of interest. Extensibility in the current version should therefore be understood primarily as a modeling and implementation capability rather than as an end-user authoring capability.
+%GA: existe uma maneira de configurar simulações sem modelar coisas novas, mas ainda é uma limitação
+There is, however, a distinction between \textit{developing} an extension and \textit{configuring} an existing one. Many of the experiments in this thesis vary capacities, schedules, population quantities, environmental conditions, dependencies, and behavioral parameters without modifying plugin behavior. Existing plugins can therefore support configurable simulation setups, although this configuration process has not yet been consolidated into a user-oriented authoring environment.
+
+%GA: blobs "teleportam"
+A second limitation concerns the representation of movement. A move action currently transfers a population blob directly from one point of interest to another. Distance can influence destination selection and be recorded as an outcome, but travel duration is not explicitly represented. A movement requiring several hours therefore does not correspond to a population remaining in transit during those intermediate simulation steps. Travel time could be approximated through domain-specific extensions, but explicit support for in-transit populations is not currently part of the core model.
+
+%GA: cola com crowds
+Relatedly, LODUS does not represent pedestrian locomotion, route selection, collision avoidance, or detailed vehicle movement. Points of interest are connected at an abstract level rather than through an explicit transportation network. The framework is therefore more appropriate for studying population distribution and movement among urban locations than for reproducing detailed trajectories between them.
+
+%GA: limitação de joint relationships, sugerida pelo revisor do pape
+The aggregated population representation also introduces limitations. Sampled characteristics describe marginal distributions within a blob and do not preserve complete joint relationships among characteristics. For example, age and occupation distributions may both be represented without identifying how occupation categories are distributed within each age group. Traceable characteristics can preserve distinctions required by a simulation, but the framework cannot reconstruct relationships that are absent from the input data.
+
+%GA: não temos informação do individuo, o que faz parte do modelo, mas é uma limitação
+Aggregation also means that LODUS does not preserve persistent individual identities or complete person-level trajectories. This is consistent with the population-level scope of the work, but limits analyses that depend on individual histories, repeated person-specific choices, social relationships, or other explicitly individual behavior.
+
+%GA: limitação dos dados empiricos e sintéticos
+A further limitation concerns parameterization and empirical validation. The experiments combine observed data, derived inputs, historical snapshots, and scenario-defined parameters. Several mobility configurations, event requests, shelter response rates, treatment capacities, disruption conditions, and interventions were selected for controlled comparisons rather than calibrated from observed behavior. Consequently, the results demonstrate the behavior of the implemented models and configurations but should not be interpreted as predictive estimates of the corresponding real-world processes.
+
+%GA: talvez tirar abaixo
+Some application-specific extensions also deliberately simplify their respective domains. The epidemic experiments use an aggregate SIR formulation, the shelter experiments abstract evacuation and accommodation behavior through configurable policies, and the dialysis experiments do not model clinical consequences of delayed treatment. These simplifications are appropriate for evaluating the framework but would require further domain-specific development for more detailed applications.
+
+%GA: atualmente, apenas uma cidade
+Finally, the evaluation is centered on Porto Alegre. The neighborhood- and census-sector-level environments demonstrate the use of different spatial representations of the same city, but do not establish transferability to cities with different spatial structures, datasets, mobility patterns, or service organizations.
+\end{comment}
+
+
+\section{Future Work}
+\label{sec:future_work}
+
+The limitations identified above provide several directions for future development of LODUS.
+
+An immediate direction is a more accessible simulation-authoring process. Since existing plugins can already be configured through data and parameters, including the simulation inputs summarized in Appendix~\ref{app:input}, a user-oriented layer could expose these options through reusable simulation setups, supporting the selection of environments and extensions and the configuration of schedules, capacities, population demand, disruptions, and other scenario parameters without requiring source-code modifications.
+
+A second direction is to extend mobility with explicit travel duration. Movements could represent populations as being in transit until a scheduled arrival determined by distance, transportation mode, a travel-time model, or routing information. This representation could subsequently support transportation networks, alternative transportation modes, and disruptions occurring between origins and destinations.
+
+%GA: zoom
+This extension also provides a possible connection with more detailed mobility and crowd models. Future work could investigate coupling LODUS with pedestrian, traffic, or agent-based simulators when selected locations or periods require greater detail. Populations could remain aggregated at the urban scale while more detailed representations are used only where required by the simulation.
+
+%The population representation could also be extended with joint or conditional distributions when suitable data are available, preserving relationships among characteristics such as age, occupation, health status, or transportation mode.
+
+Further work should also address empirical calibration and validation. Mobility behavior could be compared with origin--destination surveys, transportation records, or other observational datasets, while domain-specific extensions could be evaluated against corresponding service or population data. Applying the framework to additional cities would also help evaluate how well the core abstractions transfer to different urban structures and data sources.
+
+The environmental representation provides additional opportunities for studying interconnected urban services. The dependency mechanism evaluated with dialysis clinics and water-treatment facilities could be expanded to include electricity, transportation, communications, healthcare, shelters, and other infrastructure, supporting scenarios in which disruptions propagate through multiple services.
+
+Domain-specific extensions may similarly incorporate additional detail when required, while keeping such behavior within the corresponding plugins rather than introducing it as a requirement of the core model.
+
+%GA: ideia de digital shadow
+Finally, future work could investigate stronger integration with dynamic and data-driven inputs. Environmental observations could update simulation conditions during execution, while statistically calibrated or learned models could provide destination choices, activity demand, service use, or responses to disruptions. LODUS would continue to provide the core population and environment representation through which these processes interact.
+
+
+\section{Published Papers}
+\label{sec:published_papers}
+
+During the doctoral period, the author participated in publications addressing crowd simulation, virtual humans, simulation authoring and visualization, generative models, and urban population simulation. Table~\ref{tbl:thesis_publications} summarizes these publications and their main research topics. Among them, the LodusPop publication~\cite{silva2026lodusPop} is directly associated with the framework developed and evaluated in this thesis.
+
+\begin{table}[ht]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \caption{Publications produced during the doctoral period.}
+    \label{tbl:thesis_publications}
+    \begin{tabularx}{\linewidth}{@{}p{4.9cm}p{2.6cm}p{0.8cm}X@{}}
+        \toprule
+        \textbf{Publication} &
+        \textbf{Venue} &
+        \textbf{Year} &
+        \textbf{Topic} \\
+        \midrule
+
+        \textit{Perception of Personality Traits in Crowds of Virtual Humans}~\cite{nardino2021perception}
+        & SBGames
+        & 2021
+        & Perception of personality traits and behavioral differences in crowds of virtual humans. \\
+
+        \textit{WebCrowds: An Authoring Tool for Crowd Simulation}~\cite{silva2022webcrowds}
+        & SBGames
+        & 2022
+        & Authoring and configuration of crowd-simulation scenarios through an interactive tool. \\
+
+        \textit{Evaluating and Comparing Crowd Simulations: Perspectives from a Crowd Authoring Tool}~\cite{silva2024evaluating}
+        & Graphical Models
+        & 2024
+        & Evaluation and comparison of crowd-simulation configurations using quantitative measures and visualization. \\
+
+        \textit{Exploring Foundation Models for Synthetic Medical Imaging: A Study on Chest X-Rays and Fine-Tuning Techniques}~\cite{dasilva2024foundation}
+        & SIBGRAPI
+        & 2024
+        & Use of foundation and generative models for synthetic medical imaging and chest X-ray generation. \\
+
+        \textit{Visualization of Crowd Contamination Simulations Using Immersive Virtual Reality}~\cite{teixeira2024visualization}
+        & IEEE COMPSAC
+        & 2024
+        & Immersive visualization and exploration of crowd-contamination simulation results. \\
+
+        \textit{Surveying the Evolution of Virtual Humans Expressiveness toward Real Humans}~\cite{knob2024surveying}
+        & Computers \& Graphics
+        & 2024
+        & Survey of the evolution of expressiveness and realism in virtual humans. \\
+
+        \textit{Evaluating the Gender Label in Virtual Babies Using an Interactive Environment}~\cite{araujo2025gender}
+        & ACM IVA
+        & 2025
+        & Perception of gender labels and visual characteristics in interactive virtual-human representations. \\
+
+        \textit{LodusPop: an Environment-Driven Multi-Scale Simulation Framework for Urban Population Dynamics}~\cite{silva2026lodusPop}
+        & The Visual Computer
+        & 2026
+        & Environment-driven and multi-scale simulation of urban population dynamics. This publication is directly associated with the framework developed in this thesis. \\
+
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+
+\section{Closing Remarks}
+\label{sec:final_closing}
+
+Urban population dynamics emerge from the interaction of populations with locations, services, infrastructure, and changing environmental conditions. Representing these processes does not always require maintaining every inhabitant independently, particularly when available data and the questions being investigated concern population-level behavior.
+
+LODUS provides a core representation for studying these interactions through heterogeneous aggregated populations and dynamic urban environments. The experiments presented in this thesis demonstrate that this representation can be instantiated at different spatial resolutions and extended to address distinct population processes without redefining its underlying model. The limitations and future directions identified in this chapter provide opportunities to further expand its accessibility, mobility representation, population description, empirical validation, and application to other urban environments.

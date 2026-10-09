@@ -1,0 +1,264 @@
+\chapter{Experimental Results}
+\label{chapter:experimental_results}
+
+This chapter evaluates LODUS through experiments covering routine urban mobility, mobility under disruptions, and domain-specific applications. The results progress from the characterization of normal-life population movement to scenarios in which mobility, infrastructure, or service availability is altered.
+
+The first section examines the spatial and temporal characteristics of normal-life mobility. The second evaluates population behavior under disruptions. Finally, epidemic-contagion and dialysis simulations demonstrate the use of the framework in application-specific scenarios involving additional population, infrastructure, and service dynamics. Detailed motivations, configurations, and analysis objectives are introduced within their respective sections.
+
+%GA: Antiga intro do capítulo
+%This chapter evaluates how the LodusPop abstractions support experiments with progressively different sources of population demand and state change. The experiments begin with recurring mobility, which provides the reference behavior for ordinary work, school, and activity visits, and then introduce large gatherings, epidemic processes, and environmental disruptions. The disruption scenarios are followed by shelter and dialysis simulations, which examine population displacement and the continuity of essential services when access, capacity, and infrastructure availability are constrained. Across these use cases, the emphasis is on controlled comparisons among explicit scenario configurations rather than on forecasting observed behavior in Porto Alegre.
+
+\section{Normal-Life Mobility}
+
+Normal-life mobility provides the reference condition for the experiments presented in this chapter. It represents recurring population movements performed under ordinary conditions, before the introduction of exceptional events, environmental disruptions or epidemic processes. Following the terminology introduced in Section~\ref{sec:normal_life}, these movements comprise \textit{commutes}, associated with work and school, and \textit{activities}, such as visits to marketplaces, restaurants, and pharmacies.
+
+The experiments examine complementary spatial and temporal characteristics of normal-life mobility across the spatial representations introduced in Chapter~\ref{sec:simulation_environments_and_data}. They consider both the distribution of movements across space and the temporal organization of recurring demand, including the interaction between activity-related movement and regular work and school commutes.
+
+Accordingly, this section addresses three main questions: (i) how normal-life movements are distributed spatially; (ii) how activity and commute demand varies over time; and (iii) whether these forms of mobility can operate concurrently while preserving their configured demand. These results establish the normal-life baseline used to interpret the additional population demands and disruptions introduced in the subsequent experiments.
+
+
+\subsection{Experimental Overview}
+\label{sec:routine_mobility_overview}
+
+The experiments are organized into three sets. First, the neighborhood-level Lévy Walk experiments evaluate different mobility configurations. Second, the census-sector experiments examine recurring demand for marketplaces, restaurants, and pharmacies in the reduced and complete spatial representations. Third, the reduced census-sector environment combines these activities with explicit daily work and school commutes, allowing both forms of mobility to be evaluated within the same population.
+
+
+All experiments use 24 simulation steps per cycle; in these experiments, one cycle represents one simulated day and each step represents one hour. The neighborhood-level experiments cover a single simulated day and focus on controlled changes to the Lévy Walk parameters. The census-sector experiments cover 56 days, corresponding to eight complete weeks, preserving complete weekly activity-demand cycles. Table~\ref{tbl:routine_mobility_scenarios} summarizes the principal configurations and comparisons.
+
+% TODO: RESULTS-REFRESH: verify census-sector populations against
+% thesis/normal_life/data/routine_mobility_summary.csv after rerunning.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Normal-life mobility experiments and their principal comparisons.}
+\label{tbl:routine_mobility_scenarios}
+\begin{tabularx}{\linewidth}{@{}p{3.1cm}p{3.1cm}p{1.8cm}X@{}}
+\toprule
+\textbf{Experiment} &
+\textbf{Environment} &
+\textbf{Duration} &
+\textbf{Principal comparison} \\
+\midrule
+
+Neighborhood-level Lévy Walk
+& 94 neighborhoods; 94 home POIs; population 1,409,351
+& 1 day
+& Lévy scale values of 0.5, 1, 2, 5, and 10 are compared to examine spatial reach. A separate experiment holds the scale at 2 and varies movement restriction to examine changes in movement volume. \\
+
+Activity baseline (reduced)
+& Reduced census-sector; 13 regions; 435 home POIs; population 159,886
+& 56 days
+& Recurring marketplace, restaurant, and pharmacy activities are evaluated to characterize their spatial and temporal baseline in the reduced environment. \\ \\
+
+Activity baseline (complete)
+& Complete census-sector; 94 regions; 2,711 home POIs; population 1,331,414
+& 56 days
+& The same activity configuration is evaluated over the complete city representation, allowing comparison with the reduced environment. \\
+
+Combined activities and attendance-controlled commutes
+& Reduced census-sector; 13 regions; 435 home POIs; population 159,886
+& 56 days
+& Recurring activities are combined with explicit worker and student attendance demand to examine commute fulfillment and the spatial and temporal characteristics of both forms of mobility. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Because the reduced and complete census-sector environments represent different populations and spatial extents, comparisons between them emphasize normalized measures such as visits per resident, fulfillment, and travel distance rather than raw movement totals.
+
+Together, these experiments provide the basis for examining normal-life mobility from three perspectives: the spatial distribution of movement, its temporal organization, and the interaction between recurring activities and work or school commutes.
+
+\subsection{Spatial Characteristics of Normal-Life Mobility}
+\label{sec:result_spatial_normal_life}
+
+The spatial characteristics of normal-life mobility are examined at two complementary resolutions. The neighborhood-level experiments first evaluate how the configured Lévy Walk parameters affect the distance and volume of population movement across the city. The census-sector experiments then provide a finer representation in which the distances associated with recurring activities and work or school commutes can be analyzed separately.
+
+This progression allows the spatial results to address two related questions. First, the neighborhood-level experiments examine how changes in mobility parameters modify the spatial reach of the generated movements. Second, the census-sector experiments characterize the distances produced by the different forms of normal-life mobility under the configurations adopted for activities and commutes. The former therefore provides a controlled analysis of the Lévy Walk configuration, while the latter examines the spatial patterns produced by the normal-life baseline used in the subsequent experiments.
+
+\subsubsection{Neighborhood-Level Mobility}
+\label{sec:routine_mobility_neighborhood}
+
+The neighborhood-level experiments report the Lévy Walk analysis originally introduced with the published manuscript~\cite{silva2026lodusPop}. The full neighborhood representation of Porto Alegre is used, comprising 94 regions, 94 home POIs, and a population of 1,409,351. Population movements are generated in groups of 250 people, while travel distances are grouped into 500~m intervals. The experiments vary the Lévy scale while maintaining these remaining conditions unchanged, allowing its effect on the spatial reach of movement to be examined independently.
+
+Figure~\ref{fig:routine_levy_distributions} presents the resulting displacement distributions for Lévy scale values of 0.5, 1, 2, 5, and 10. A displacement represents the movement of one person from an origin to a destination; consequently, a movement involving a group of 250 people contributes 250 displacements to the corresponding distance interval. Across the evaluated configurations, shorter movements are more frequent and progressively fewer movements occur at larger distances. Increasing the Lévy scale broadens this distribution, increasing the relative occurrence of longer-distance movements.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.98\linewidth]{fig/res-normal-life/Levy_Distributions.png}
+\caption{Distribution of population displacements under different Lévy scale values in the neighborhood-level environment. Distances are grouped into 500~m intervals and movements are generated in groups of 250 people. Increasing the scale broadens the spatial distribution of movement.}
+\label{fig:routine_levy_distributions}
+\end{figure}
+
+The configuration with a Lévy scale of 2 was adopted as the reference configuration for the subsequent neighborhood-level experiments. Under this configuration, approximately half of the generated displacements occur within 2~km of their origin, while the remaining movements extend over progressively larger distances. The resulting distribution therefore combines predominantly shorter movements with a smaller proportion of longer trips. The selected value represents a controlled mobility configuration rather than a calibration against observed travel distances in Porto Alegre.
+
+A second experiment examines movement volume while maintaining the Lévy scale at 2. Figure~\ref{fig:routine_levy_restriction} compares the unrestricted condition with restriction values of 0.25, 0.50, and 0.75, corresponding to progressively stronger reductions in the population eligible to move. Unlike the Lévy scale, which changes the spatial distribution of destinations, movement restriction reduces the quantity of population participating in the routine while preserving the underlying distance configuration. As the restriction increases, the total displacement volume decreases accordingly.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.98\linewidth]{fig/res-normal-life/MovementRestriction.png}
+    \caption{Population displacement under different movement-restriction configurations in the neighborhood-level environment. The unrestricted condition is compared with restriction values of 0.25, 0.50, and 0.75, while the Lévy scale is held at 2.}
+    \label{fig:routine_levy_restriction}
+\end{figure}
+
+Together, the experiments distinguish two dimensions of neighborhood-level normal-life mobility. The Lévy scale controls the spatial reach of the generated movements, whereas movement restriction controls their volume. The scale-2 configuration therefore provides the spatial reference adopted in the subsequent neighborhood-level experiments, while restriction allows the amount of population movement to be varied without changing the configured distance pattern.
+
+
+\subsubsection{Census-Sector Mobility}
+\label{sec:routine_mobility_census_sector}
+
+The census-sector environments provide a finer spatial representation of normal-life mobility by distributing the population among multiple home POIs within each neighborhood. In these experiments, spatial movement can therefore be examined separately for \textit{activities}, corresponding to visits to marketplaces, restaurants, and pharmacies, and for \textit{commutes}, corresponding to work and school attendance. Unlike the neighborhood-level experiments, which evaluate how changes in the Lévy configuration affect spatial reach, the analysis here characterizes the distances produced by the normal-life configurations used in the census-sector environments.
+
+Figure~\ref{fig:routine_mobility_distance_distribution} presents the distribution of travel distances for activities and commutes. Activity distance is measured between the source home from which population is selected and the corresponding activity destination, whereas commute distance is measured between the population's home and its work or school destination. These quantities therefore characterize different forms of movement and are analyzed separately.
+
+Because individual movement records may represent population groups of different sizes, the distance distributions and summary statistics reported in this subsection are weighted by the number of people represented in each movement. Thus, a movement representing 50 people contributes proportionally more to the resulting distribution than a movement representing five people.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{fig/res-normal-life/routine_mobility_distance_ecdf.png}
+    \caption{Cumulative distributions of travel distances, weighted by the population represented in each movement considering 5 simulation runs of the reduced census-sector normal-life mobility experiment. (a) Activity distances between source homes and marketplace, restaurant, and pharmacy destinations. (b) Commute distances between homes and work or school destinations.}
+    \label{fig:routine_mobility_distance_distribution}
+\end{figure}
+
+% TODO: RESULTS-REFRESH
+In the reduced census-sector environment, activities are predominantly local relative to work and school commutes. In the combined normal-life mobility configuration, the mean activity distance is 86.53~m, whereas the mean commute distance is 1,411.15~m. Worker commutes are slightly longer on average, reaching 1,424.07~m, compared with 1,378.41~m for students. These results show that the two forms of normal-life mobility operate at different spatial scales under the evaluated configurations: recurring activities tend to draw population from nearby homes, while work and school attendance generates movement over a broader portion of the environment.
+
+This difference is also visible beyond the means. Half of the population moved for activities travels no more than 70.75~m, and 90\% travels no more than 158.55~m. For worker commutes, the corresponding distances are 1,020.81~m and 3,188.05~m, while for student commutes they are 997.14~m and 3,069.00~m. Table~\ref{tbl:routine_mobility_distance_summary} summarizes these distributions, including the three activity destination types represented in Figure~\ref{fig:routine_mobility_distance_distribution}.
+
+\begin{table}[ht]
+\centering
+\caption{Travel-distance statistics weighted by the population represented in each movement over 5 simulation runs of the combined normal-life mobility configuration in the reduced census-sector environment.}
+\label{tbl:routine_mobility_distance_summary}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Movement type} &
+\textbf{Mean (m)} &
+\textbf{Median (m)} &
+\textbf{P90 (m)} \\
+\midrule
+All activities & 86.53 & 70.75 & 158.55 \\
+\quad Marketplace & 89.08 & 72.00 & 159.59 \\
+\quad Restaurant & 84.90 & 69.31 & 158.68 \\
+\quad Pharmacy & 82.79 & 72.69 & 148.42 \\
+Worker commutes & 1,424.07 & 1,020.81 & 3,188.05 \\
+Student commutes & 1,378.41 & 997.14 & 3,069.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The short activity distances are consistent with the spatial-selection configuration adopted for these visits, in which nearby eligible population is preferentially selected to satisfy demand at marketplace, restaurant, and pharmacy destinations. Commute destinations, in contrast, are distributed according to the configured distance-based movement process, producing a substantially wider distance distribution. The comparison should therefore be interpreted as a characteristic of the two normal-life mobility configurations rather than as an empirical estimate of travel behavior in Porto Alegre.
+
+The three activity types have broadly similar distance distributions. Restaurants have the shortest median distance, at 69.31~m, while marketplaces have the broadest upper tail, with a 90th percentile of 159.59~m. Pharmacy visits have a slightly higher median of 72.69~m but the smallest 90th percentile, at 148.42~m. These relatively small differences indicate that the local sourcing pattern is shared across the three destination types.
+
+The activity experiments are also executed in both the reduced and complete census-sector environments. Because these representations differ substantially in population and spatial extent, their raw movement totals are not directly comparable. The spatial comparison instead considers normalized measures and distance distributions to determine whether increasing the modeled extent of the city changes the characteristics of activity mobility.
+
+In the activities-only baseline, the reduced environment produces a mean activity distance of 86.51~m, a median of 70.75~m, and a 90th percentile of 158.55~m. In the complete environment, these values increase to 89.88~m, 70.73~m, and 169.90~m, respectively. Thus, although the complete representation has a substantially larger population and spatial extent, activity sourcing remains predominantly local.
+
+Overall, the census-sector results complement the neighborhood-level analysis by showing the spatial characteristics of the movements generated under the normal-life baseline itself. Activities and commutes occupy clearly different spatial scales, while the finer representation makes it possible to distinguish differences among destination types and between worker and student travel. These spatial patterns provide the basis for the temporal analysis presented next and, later, for evaluating how disruptions alter otherwise recurring mobility.
+
+
+\subsection{Temporal Characteristics of Normal-Life Mobility}
+\label{sec:routine_mobility_temporal}
+
+In addition to operating at different spatial scales, activities and commutes follow different temporal patterns. Activity demand varies according to both the day of the week and the hour of the day, reflecting the temporal profiles associated with marketplaces, restaurants, and pharmacies. Work and school commutes instead follow daily attendance schedules, with different departure periods and durations for workers and students.
+
+The census-sector experiments cover 56 simulated days, corresponding to eight complete weeks. This interval allows the weekly activity patterns to repeat eight times while also providing repeated daily commute cycles. The analysis therefore considers both when population movement is requested and, for commutes, how the population remains distributed at work and school before returning home.
+
+\subsubsection{Activity Demand}
+\label{sec:routine_mobility_activity_temporal}
+
+The activity configuration produces recurring visits to marketplaces, restaurants, and pharmacies according to the weekly temporal profiles described in Section~\ref{sec:normal_life}. Over the eight simulated weeks, each resident is configured to generate one marketplace visit and one restaurant visit per week, together with 0.25 pharmacy visits per week. This corresponds to 18 requested activity visits per resident over the 56-day period.
+
+% TODO: RESULTS-REFRESH
+In the reduced census-sector environment, this configuration generates 2,877,888 activity requests: 1,279,088 marketplace visits, 1,279,088 restaurant visits, and 319,712 pharmacy visits. All requests are fulfilled under the normal-life baseline. The total corresponds to 17.9996 requested visits per resident, as defined by the configured weekly activity rates. %The small difference from exactly 18 results from allocating integer-valued demand among locations and hourly periods.
+
+The aggregate totals, however, do not describe when these movements occur. Figure~\ref{fig:routine_activity_temporal_profiles} presents the distribution of requested activity visits according to weekday and hour for each destination type. The profiles produce distinct periods of higher and lower demand over the week, illustrating that normal-life activity movement is not distributed uniformly across simulation steps.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{fig/res-normal-life/routine_activity_weekday_hour.png}
+\caption{Temporal distribution of normal-life activity demand in the activities-only reduced census-sector baseline. Each cell reports its share of the corresponding activity type's requested visits over the eight-week simulation: (a) marketplaces, (b) restaurants, and (c) pharmacies. Normalizing within activity type makes the temporal shapes comparable despite their different total visit rates.}
+\label{fig:routine_activity_temporal_profiles}
+\end{figure}
+
+Marketplace demand is distributed broadly from the morning into the evening on every day, with its largest weekday--hour value on Monday at 19:00. Restaurant demand has a more pronounced midday component and reaches its maximum on Sunday at 13:00. Pharmacy demand occurs from Monday through Saturday, is absent on Sunday in the configured profile, and reaches its maximum on Monday at 18:00. The heatmaps therefore show distinct weekly and hourly patterns even though all three activity types use the same local population-selection process.
+
+The same temporal profiles are used in the reduced and complete census-sector environments. Their absolute request totals differ because the environments represent different populations, but the configured per-capita activity rates remain the same. %SO: acrescentei abaixo %GA: ok
+In the complete environment, the 56-day simulation generates 23,965,416 requested activity visits, corresponding to 18 visits per resident (eight marketplace, eight restaurant, and two pharmacy visits), and all requests are likewise fulfilled.% In the complete environment, the 56-day simulation generates 23,965,416 requested activity visits, corresponding to 18 visits per resident, and all requests are likewise fulfilled. %Consequently, the temporal comparison between environments concerns the scale of demand rather than a change in the configured per-capita schedule.
+
+These results establish the temporal activity demand of the normal-life baseline. Under conditions without disruptions or additional service constraints, the configured weekly demand is fully represented in both census-sector environments, while the weekday and hourly profiles determine when this population movement occurs.
+
+\subsubsection{Work and School Commutes}
+\label{sec:routine_mobility_commute_temporal}
+
+% TODO: RESULTS-REFRESH
+Work and school commutes introduce a different temporal structure. Across 5 simulation runs in the reduced census-sector environment, the occupation assignment produces a mean of 87,461.20 workers and 34,502.20 students. %Daily attendance is configured at 100\% for workers and students, producing mean daily demands of 87,461.20 worker commutes and 34,502.20 student commutes. 
+The timing and duration of these movements differ between the two groups.
+
+Worker departures are distributed across the configured daily departure profile, and workers remain at their destination for eight hours before returning home. Student departures are concentrated around three periods, at 08:00, 13:00, and 19:00, with students remaining at school for four hours. Figure~\ref{fig:routine_commute_temporal_behavior} presents these departure patterns together with the corresponding population occupying work and school destinations over the course of the day.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{fig/res-normal-life/routine_commute_temporal_behavior.png}
+\caption{Temporal characteristics of work and school commutes across 5 simulation runs in the reduced census-sector environment. (a) Mean daily requested commute population by departure hour. (b) Mean population occupying work and school destinations by hour, reflecting the departure schedules and respective eight-hour and four-hour stay durations.}
+\label{fig:routine_commute_temporal_behavior}
+\end{figure}
+
+The departure and occupancy profiles describe complementary aspects of commute behavior. Mean departure demand is highest at 08:00 for both groups, reaching 10,399.20 requested workers and 13,621.40 requested students per day. Because workers remain away for eight hours and departures occur throughout the day, work occupancy accumulates into a broad daytime period and reaches its maximum at 13:00, when a mean of 54,590.20 workers are at work. School occupancy instead forms three four-hour periods beginning at 08:00, 13:00, and 19:00. Their mean occupancies are 13,621.40, 13,486.00, and 7,394.80 students, respectively, with the morning period producing the maximum.
+
+%Across the 56 simulated days, the combined attendance configuration produces a mean of approximately 6.83 million commute requests per simulation run, of which only a mean of 2.80 people remains unmet. 
+Across the 56 simulated days, the combined attendance configuration produces a mean of approximately 6.83 million requested commute movements per simulation run. Of the population associated with these requests, a mean of only 2.80 people per run remains unmet.
+Across all 5 runs, the total unmet population is 14 people: 14 workers and no students. In each case, the corresponding origin did not contain enough eligible population to provide the complete requested group when the commute was processed. Thus, commute demand is almost completely fulfilled under normal-life conditions, although worker fulfillment is not strictly complete.
+
+Overall, the temporal results distinguish the two principal forms of normal-life mobility. Activity demand follows recurring weekly patterns that vary by destination type, whereas work and school mobility is organized around daily attendance schedules and different periods spent away from home. These patterns complement the spatial differences identified in the previous subsection and provide the temporal reference against which later changes in population mobility can be evaluated.
+
+
+
+\subsection{Combined Normal-Life Mobility}
+\label{sec:routine_mobility_combined}
+
+The previous analyses consider the spatial and temporal characteristics of activities and commutes separately. The final normal-life experiment examines these movements together in the reduced census-sector environment. In this configuration, recurring visits to marketplaces, restaurants, and pharmacies occur over the same represented population that performs daily work and school commutes. The objective is to determine whether both forms of mobility can coexist while preserving their configured demand and return patterns.
+
+% RESULTS-REFRESH: update fulfillment values and Table~\ref{tbl:routine_mobility_fulfillment_summary}
+% from thesis_result_table.csv after rerunning.
+The addition of work and school commutes does not reduce the configured activity demand under the normal-life baseline. In each 56-day run, the activity configuration generates 2,877,888 requests, all of which are fulfilled. This corresponds to 17.9996 visits per resident, the same rate observed in the activities-only baseline.
+
+At the same time, work and school attendance is almost completely fulfilled. Across the 5 attendance-controlled runs, mean requested commute demand is approximately 6.83 million people per run, with a mean unmet demand of only 2.80 people. As summarized in Table~\ref{tbl:routine_mobility_fulfillment_summary}, unmet demand is concentrated among workers, with a mean of 2.80 unmet people per run, while students account for 0.00 per run.
+
+\begin{table}[ht] 
+    \centering 
+    \caption{Movement demand and fulfillment in the combined reduced-environment normal-life configuration. Activity values are constant totals per 56-day run; commute values are means across 5 runs.} 
+    \label{tbl:routine_mobility_fulfillment_summary} 
+    \begin{tabular}{@{}lrrr@{}} 
+    \toprule 
+    \textbf{Movement type} & \textbf{Requested} & \textbf{Fulfilled} & \textbf{Unmet} \\ \midrule 
+    Activities & 2,877,888.00 & 2,877,888.00 & 0.00 \\ 
+    Worker commutes & 4,897,827.20 & 4,897,824.40 & 2.80 \\ 
+    Student commutes & 1,932,123.20 & 1,932,123.20 & 0.00 \\ 
+    All commutes & 6,829,950.40 & 6,829,947.60 & 2.80 \\ \bottomrule 
+    \end{tabular}
+\end{table}
+
+Thus, the simultaneous presence of activities and commutes does not produce a meaningful reduction in either form of normal-life demand under the evaluated conditions. This is relevant because both processes draw from the same represented population: people attending work or school may be away from their home locations when activity demand occurs, while activity visits temporarily remove additional population from available origins. Nevertheless, the normal-life configuration retains sufficient eligible population to satisfy essentially all requested movement.
+
+% TODO: RESULTS-REFRESH
+The spatial sourcing of activity visitors also remains effectively unchanged when attendance-controlled commutes are introduced. The mean activity distance changes from 86.51~m in the activities-only baseline to 86.53~m in the combined configuration, while both have a median of 70.75~m and a 90th percentile of 158.55~m. Thus, introducing daily work and school commutes does not meaningfully alter either the fulfillment or the spatial characteristics of recurring activity demand under the evaluated normal-life conditions.
+
+The combined experiment therefore establishes a normal-life condition in which recurring activities and daily commutes coexist within the same population representation. Their distinct spatial and temporal characteristics are retained while their requested movements remain almost entirely satisfied. This condition provides the reference against which subsequent experiments can examine how exceptional demand, environmental disruptions, and service constraints alter population mobility.
+
+\subsection{Main Findings}
+\label{sec:routine_mobility_findings}
+
+The normal-life experiments establish a reference pattern of recurring population movement before additional events or disruptions are introduced. At the neighborhood level, changes to the Lévy scale alter the spatial reach of movement, while movement restriction independently controls the volume of population displaced. The adopted scale-2 configuration favors comparatively short movements relative to the range of distances represented in the neighborhood-level environment while retaining a smaller proportion of longer trips.
+
+At census-sector resolution, activities and commutes exhibit distinct spatial characteristics. Half of activity movements occur within 70.75~m, compared with 1,020.81~m for workers and 997.14~m for students. Worker and student mobility also differ temporally, with their configured departure periods and stay durations producing different daily patterns of destination occupancy.
+
+Activity demand additionally follows recurring weekday and hourly patterns that differ among marketplaces, restaurants, and pharmacies. Work and school movement instead follows daily attendance schedules, generating temporal patterns associated with departures, time spent at destinations, and returns. Together, these results show that normal-life mobility is not represented by a single homogeneous movement process, but by forms of recurring mobility operating at different spatial and temporal scales.
+
+Finally, the combined baseline shows that these movements can occur concurrently without materially reducing their fulfillment under the evaluated conditions. Activity demand remains fully satisfied, while only a mean of 2.80 people remains unmet among approximately 6.83 million commute requests per run.
+
+These results establish the spatial distribution, temporal organization, and demand fulfillment of the normal-life mobility used as a reference throughout the remaining experiments. The following sections depart from this condition by introducing additional population demand and changes in the availability or operation of modeled locations, allowing their effects to be interpreted relative to the recurring mobility characterized here.
+
+%GA: TODO trecho da Soraia
+The quantitative results reported in these experiments should be interpreted as outcomes of the configured mobility models rather than as empirical estimates of mobility behavior in Porto Alegre. While the modeled population and spatial environment are derived from real-world data, activity frequencies, attendance schedules, destination-selection mechanisms, and other behavioral parameters reflect modeling assumptions adopted for the experiments. Therefore, quantities such as the number of requested visits, commute demand, and travel distances are not expected to reproduce observed mobility statistics directly. Nevertheless, the resulting values provide a plausibility check on the simulated scenarios, ensuring that the generated mobility remains within reasonable orders of magnitude for the represented population while preserving the behavioral patterns defined by each configuration.

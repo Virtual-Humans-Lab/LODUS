@@ -1,0 +1,382 @@
+%----------------------------------------------------------------------------------
+% Exemplo do uso da classe pucrs-ppgcc.cls.
+%----------------------------------------------------------------------------------
+
+% Seleção de idioma da monografia. Por enquanto as únicas opções
+% suportadas são 'portuguese' e 'english'
+% Para impressão em frente e verso, use a opção 'twoside'. Da
+% mesma forma, use 'oneside' para impressão em um lado apenas.
+%\documentclass[portuguese,oneside]{pucrs-ppgcc}
+\documentclass[english,twoside]{pucrs-ppgcc}
+
+%---------------------------------------------------------
+% 05/04/2021 - Para utilizar o formato de referências APALIKE:
+% por ex.: (Nagamochi and Abe, 2007)
+% Fazer uso do pacote 'natbib'. Descomentar a linha 70.
+%----------------------------------------------------------------
+% Coloque seus pacotes abaixo.
+%
+% Obs.: muitos pacotes de uso comum do LaTeX, como amsmath,
+% geometry e url já são automaticamente incluídos pela classe
+% (veja o arquivo .cls). Isso torna obrigatória a presença destes
+% no sistema para o uso desta classe, mas ao mesmo tempo o uso se
+% torna mais simples.  Recomendo a instalação da versão mais
+% recente da distribuição TeXLive (para Windows e UNIXes):
+% www.tug.org/texlive/
+%
+% Pacotes e opções já incluídas automaticamente:
+%
+% \RequirePackage[T1]{fontenc}[2005/09/27]
+% \RequirePackage[utf8x]{inputenc}[2008/03/30]
+% \RequirePackage[english,brazil]{babel}[2008/07/06]
+% \RequirePackage[a4paper]{geometry}[2010/09/12]
+% \RequirePackage{textcomp}[2005/09/27]
+% \RequirePackage{lmodern}[2009/10/30]
+% \RequirePackage{indentfirst}[1995/11/23]
+% \RequirePackage{setspace}[2000/12/01]
+% \RequirePackage{textcase}[2004/10/07]
+% \RequirePackage{float}[2001/11/08]
+% \RequirePackage{amsmath}[2000/07/18]
+% \RequirePackage{amssymb}[2009/06/22]
+% \RequirePackage{amsfonts}[2009/06/22]
+% \RequirePackage{url}
+% \RequirePackage[table]{xcolor}[2007/01/21]
+%\RequirePackage{array}[2008/09/09]
+%\RequirePackage{longtable}
+%----------------------------------------------------------------
+\usepackage{bera}
+% Para inserção de figuras.
+%\usepackage{graphicx}
+% Utilize a opção 'pdftex' se você estiver usando o pdflatex (que
+% permite figuras em formatos como .jpg ou .png)
+%\usepackage[pdftex]{graphicx}
+
+% Para tabelas com elementos ocupando mais de uma linha
+%\usepackage{multirow}
+% Para frações na mesma linha (ex. ⅓).
+
+\usepackage{nicefrac}
+% Para inserir figuras lado a lado.
+%\usepackage{subfigure}
+% Para formatar algoritmos.
+% A opção [algo2e] é necessária para evitar conflitos
+% com as definições da classe.
+%\usepackage[algo2e]{algorithm2e}
+%\usepackage{algorithmic}
+% Um float do tipo algoritmo. No momento
+% este pacote é incompatível com a classe.
+%\usepackage{algorithm}
+%\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{svg}
+\usepackage{enumitem}
+\usepackage[english]{babel}
+
+% Meus pacotes to Paper TVC
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{bm}% for bold math symbols
+%\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+\lstset{upquote=false,basicstyle=\fontencoding{T1}\selectfont}
+\usepackage{tabularx}
+%\usepackage[caption=false]{subfig}
+%\usepackage[hidelinks]{hyperref}
+\usepackage{comment}
+\usepackage{placeins}
+
+\newcommand{\red}[1]{#1}
+\newcommand{\change}[1]{{\color{red}#1}}
+
+
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\scriptsize,
+    string=[s]{"}{"},
+    stringstyle=\color{black},
+    comment=[l]{//},
+    commentstyle=\color{gray},
+    morecomment=[s]{/*}{*/},
+    showstringspaces=false,
+    breaklines=true
+}
+%\usepackage[noclofdepth]{tocloft}
+
+%----------------------------------------------------------------
+% Utilizar o pacote 'natbib', SOMENTE se fizer uso do estilo APALIKE:
+%\usepackage{natbib}
+
+%================================================================
+% Autor (OBRIGATÓRIO)
+%----------------------------------------------------------------
+\author{Gabriel Fonseca Silva}
+
+%================================================================
+% Título (OBRIGATÓRIO). Devem ser passados DOIS parâmetros,
+% o título em português E o inglês, não importando o idioma
+% escolhido. Os títulos são utilizados para a montagem da capa,
+% resumo e abstract mais tarde.
+%----------------------------------------------------------------
+\title{LODUS: Um Framework Extensível e Multiescala para a Simulação de Dinâmicas Populacionais Urbanas em Ambientes Dinâmicos}
+      {LODUS: An Extensible Multi-Scale Framework for Simulating Urban Population Dynamics in Dynamic Environments}
+      
+%================================================================
+% Subtítulo (OPCIONAL). Devem ser passados DOIS parâmetros,
+% o subtítulo em português E o em inglês, não importando o idioma
+% escolhido. Os títulos são utilizados para a montagem da capa,
+% resumo e abstract mais tarde.
+% Se não houver, deixar comentado.
+%----------------------------------------------------------------
+%\subtitle{Seu SUBTÍTULO em português aqui}
+%         {Your SUBTITLE in english here}
+
+%================================================================
+% Opções para o tipo de trabalho (OBRIGATÓRIO)
+% Quando for "Dissertação OU Tese", descomentar a linha no final 
+% deste documento que consta o "\replacecontracapa".
+%----------------------------------------------------------------
+%\tipotrabalho{\monografia}  % Monografias em geral (e de "bônus": TCCs)
+%\tipotrabalho{\pep}         % Plano de estudo e pesquisa (Research plan)
+%\tipotrabalho{\dissertacao} % Dissertação (Master Thesis)
+%\tipotrabalho{\ptese}       % Proposta de tese (Doctoral Thesis proposal)
+\tipotrabalho{\tese}        % Tese (Doctoral Thesis)
+
+%Template para Seminário de Andamento: https://github.com/ppgcc/SA-LaTeX
+
+%================================================================
+% Status Volume (OBRIGATÓRIO quando "\dissertacao" OU "\tese"):
+% Caso seja Dissertação ou Tese e o volume seja apenas para enviar 
+% à banca avaliadora, deixe "\versaovolume{\banca}". Desta forma, o 
+% volume NÃO apresentará a Ficha Catalográfica e nem o Termo de 
+% Apresentação. Mas se caso seja a versão final para Homologação, 
+% deixe: \versaovolume{\final}
+%----------------------------------------------------------------
+\versaovolume{\banca}         % Avaliação Banca
+%\versaovolume{\final}  % Volume Final para Homologação e Publicação
+
+%================================================================
+% Seleção do curso ("este trabalho é um requisito parcial para
+% obtenção do grau de (mestre(a) ou doutor(a)) em Ciência da Computação").
+% Necessário somente para o tipo 'monografia'.
+%----------------------------------------------------------------
+%\grau{\bacharela} % Este é "bônus"
+%\grau{\bacharel} % Este é "bônus"
+%\grau{\mestra}
+%\grau{\mestre}
+%\grau{\doutora}
+\grau{\doutor}
+
+%================================================================
+% Informar o gênero do Orientador(a) e Co-orientador(a) 
+% Apenas um para cada.
+%----------------------------------------------------------------
+%\generoori{\orientador}
+\generoori{\orientadora}
+%\generocoori{\coorientador}
+%\generocoori{\coorientadora}
+
+%================================================================
+% Orientador(a) (e Co-orientador(a), caso haja um/uma). 
+% É OBRIGATÓRIO informar pelo menos o(a) orientador(a).
+% Havendo Co-orientador(a), informar a sua respectiva instituição.
+% NÃO alterar os nomes das tags. Apenas insera os nomes dos professores(as) 
+% dentro dos `{}', indiferente dos gêneros pré-definidos anteriormente.
+%----------------------------------------------------------------
+\orientador{Soraia Raupp Musse}
+%\coorientador{Maire-Paule Cani}{LIX, École Polytechnique de Paris}
+
+%================================================================
+% A Ficha e o Termo de Apresentação são obrigatórios somente na
+% versão final da Dissertação e da Tese 
+% (PEP e Proposta de Tese eles não aparecem!)
+
+%================================================================
+% Ficha Catalográfica
+% - Gerar a Ficha no site da Biblioteca Central da PUCRS:
+% https://biblioteca.pucrs.br/apoio-a-pesquisa/ficha-catalografica/
+% A Capa e a Contra Capa da Biblioteca NÃO são contabilizadas na
+% quantidade total de páginas a serem informadas na geração da Ficha!
+% ==
+%----------------------------------------------------------------
+%\fichacatalografica{src/ficha.png}
+
+%================================================================
+% Termo de Apresentação
+% Quando o volume estiver em inglês, formato de data em inglês
+% O template está habilitado para ATÉ quatro avaliadores, 
+% mais Orientador(a) e Co-orientador(a).
+% Informar o nome do(a) avaliador(a) e a sua respectiva instituição.
+% Formato em português: "01 Janeiro, 2021"
+% Formato em inglês: "January 1st, 2021"
+%----------------------------------------------------------------
+%\dataaprovacao{01}{Janeiro}{2021}
+%\avaliadorum{Prof. Dr. Avaliador(a) UM}{PPGCC/PUCRS}
+%\avaliadordois{Prof\textsuperscript{a}. Dr\textsuperscript{a}. Avaliador(a) DOIS}{PPGCC/PUCRS}
+%\avaliadortres{Prof. Avaliador(a) TRÊS}{PPGCC/PUCRS}
+%\avaliadorquatro{Prof\textsuperscript{a}. Dr\textsuperscript{a}. Avaliador(a) QUATRO}{PPGCC/PUCRS}
+
+%================================================================
+% A capa é inserida automaticamente. Por isso não é necessário
+% chamar \maketitle
+%----------------------------------------------------------------
+\begin{document}
+
+%================================================================
+% Depois da capa vem a dedicatória e a epígrafe. (OPCIONAL):
+% (Aparece quando for Dissertação ou Tese)
+%----------------------------------------------------------------
+%\dedicatoria{Dedico este trabalho a meus pais.} 
+
+%\epigrafe{The art of simplicity is a puzzle of complexity.}{Douglas Horton}
+
+%----------------------------------------------------------------
+% Também dá para fazer as duas na mesma página:
+%----------------------------------------------------------------
+%\dedigrafe{Dedico este trabalho a meus pais.}
+%          {The art of simplicity is a puzzle of complexity.}
+%          {Douglas Horton}
+
+%================================================================
+% A seguir, a página de AGRADDECIMENTOS (OPCIONAL):
+% Se deixar descomentado, irá aparecer em qualquer momento.
+%----------------------------------------------------------------
+\begin{agradecimentos}
+%This project was funded by the CAPES Insitutional Program of Internationalization (PrInt) grant (nº 88887.840444/2023-00) and CNPq.
+%An exchange period was partly funded by Marie-Paule Cani’s fellowship on Creative AI from Hi!Paris.
+%We would like to thank Polyana Graf Finamor Correia for modeling and rigging the 3D virtual character used in part of this work. 
+This study was partly financed by the Coordenação de Aperfeiçoamento de Pessoal de Nivel Superior – Brasil (CAPES) – Finance Code 001;
+by the Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brasil (CNPq) - Process Number 309228/2021-2;
+and by the Instituto Nacional de Ciência e Tecnologia em Simulação e Monitoramento para Assistência Individual em Eventos Climáticos Extremos (INCT-SiM-AI) - Process Number 408330/2024-4.
+
+
+\end{agradecimentos}
+
+%================================================================
+% Resumo, com as palavras-chave passadas por parâmetro
+% (OBRIGATÓRIO, ao menos para teses e dissertações)
+%----------------------------------------------------------------
+\begin{resumo}{Simulação de populações urbanas, Simulação orientada pelo ambiente, Simulação multiescala, Mobilidade humana, Ambientes dinâmicos, Modelagem agregada de populações.}
+Simulações de populações urbanas podem precisar representar grandes populações heterogêneas, diferentes resoluções espaciais, mobilidade recorrente e mudanças em locais e serviços urbanos.
+Esta tese apresenta o LODUS, um framework extensível e multiescala para a simulação de dinâmicas de populações urbanas em ambientes dinâmicos. O LODUS representa populações como grupos de tamanho variável que preservam características heterogêneas selecionadas e podem ser divididos e combinados à medida que subconjuntos da população se deslocam ou mudam de estado.
+O ambiente é representado por meio de regiões semanticamente definidas e pontos de interesse cujos atributos, disponibilidade, capacidades e dependências de infraestrutura podem influenciar as dinâmicas populacionais.
+Rotinas e ações modificam o estado da simulação, enquanto um mecanismo de extensão incorpora processos específicos de domínio sem redefinir as abstrações subjacentes de população e ambiente.
+O framework é avaliado utilizando diferentes representações de Porto Alegre, Brasil, em cenários envolvendo mobilidade em condições normais, eventos de grande escala, disrupções causadas por inundações, evacuação e demanda por abrigos, contágio epidêmico e vacinação, e serviços recorrentes de diálise.
+Os resultados mostram que a mesma representação central pode dar suporte a diferentes padrões espaciais e temporais de mobilidade, mudanças no estado da população, disrupções ambientais, serviços sujeitos a restrições de capacidade e dependências de infraestrutura em diferentes resoluções espaciais.
+De modo geral, os experimentos demonstram a aplicabilidade de uma representação central, orientada pelo ambiente e dinamicamente agregada, a diferentes processos de populações urbanas. Os cenários avaliados fornecem comparações controladas do comportamento do framework, em vez de previsões calibradas das condições de Porto Alegre.
+\end{resumo}
+
+%================================================================
+% Abstract, com as palavras-chave passadas por parâmetro
+% (OBRIGATÓRIO, ao menos para teses e dissertações)
+%----------------------------------------------------------------
+\begin{abstract}{Urban population simulation, Environment-driven simulation, Multi-scale simulation, Human mobility, Dynamic environments, Aggregated population modeling.}
+Urban population simulations may need to represent large heterogeneous populations, different spatial resolutions, recurring mobility, and changes in urban locations and services. 
+This thesis presents LODUS, an extensible multi-scale framework for simulating urban population dynamics in dynamic environments. LODUS represents populations as variable-sized groups that preserve selected heterogeneous characteristics and can split and merge as subsets move or change state. 
+The environment is represented through semantically defined regions and points of interest whose attributes, availability, capacities, and infrastructure dependencies can influence population dynamics. 
+Routines and actions modify the simulation state, while an extension mechanism incorporates domain-specific processes without redefining the underlying population and environment abstractions. 
+The framework is evaluated using different representations of Porto Alegre, Brazil, in scenarios involving normal-life mobility, large-scale events, flood-induced disruptions, evacuation and shelter demand, epidemic contagion and vaccination, and recurring dialysis services. 
+The results show that the same core representation can support different spatial and temporal mobility patterns, population-state changes, environmental disruptions, capacity-constrained services, and infrastructure dependencies across different spatial resolutions. 
+Overall, the experiments demonstrate the applicability of a core environment-oriented and dynamically aggregated representation to distinct urban population processes. The evaluated scenarios provide controlled comparisons of framework behavior rather than calibrated predictions of conditions in Porto Alegre.
+\end{abstract}
+
+%================================================================
+% Listas e sumário, nessa ordem. Somente o sumário é obrigatório,
+% portanto, comente as outras listas, caso sejam desnecessárias.
+%----------------------------------------------------------------
+\listoffigures       % Lista de figuras      (OPCIONAL)
+\listoftables        % Lista de tabelas      (OPCIONAL)
+%\listofalgorithms    % Lista de algoritmos   (OPCIONAL)
+%\listofacronyms      % Lista de siglas       (OPCIONAL)
+%\listofabbreviations % Lista de abreviaturas (OPCIONAL)
+%\listofsymbols       % Lista de símbolos     (OPCIONAL)
+\tableofcontents     % Sumário               (OBRIGATÓRIO)
+
+%================================================================
+% Aqui começa o desenvolvimento do trabalho. Para uma melhor
+% organização do documento, separe-o em arquivos,
+% um para cada capítulo. Para isso, utilize o comando \include,
+% como mostrado abaixo.
+%----------------------------------------------------------------
+\include{_1-introduction}
+\include{_2-related-work}
+\include{_3-proposed_model}
+\include{_4-data-sources}
+\include{_5a-normal-life}
+\input{_5b-exceptional-events-disruptions}
+\input{_5c-health-services}
+\include{_6-final-considerations}
+%\include{_5c-environment-disruptions}
+%\include{_5d-results_dialysis}
+%\include{_9-vizualizations}
+%================================================================
+% Aqui vai a bibliografia. Existem três estilos de citação: use
+% 'ppgcc-alpha' para citações do tipo [Abc+] ou [XYZ] (em ordem
+% alfabética na bibliografia), 'ppgcc-num' para citações
+% numéricas do tipo [1], [20], etc., por ordem de citação, OU
+% 'ppgcc-apalike' para citações do tipo "(Silva F., 2019) e 
+% Silva F., (2019)".
+%
+%----------------------------------------------------------------
+% NUMÉRICO:
+\bibliographystyle{ppgcc-num}
+%----------------------------------------------------------------
+% ALPHA:
+%\bibliographystyle{ppgcc-alpha}
+%----------------------------------------------------------------
+% APALIKE: 
+% !!! Lembrar de fazer uso do pacote 'natbib'. Linha 70 !!!
+% Funcionando em ambos os modos 'portuguese' e 'english'.
+% Prefira esse (ppgcc-apalike) no lugar de somente 'apalike':
+%\bibliographystyle{ppgcc-apalike}
+%----------------------------------------------------------------
+% !!! DICA APALIKE !!!:
+% "Recomendamos o uso de dois estilos diferentes de citações para
+% o APALIKE: 'citep' e 'citet'. O \citep traz os nomes dos autores 
+% e também o ano para a referência, tudo entre parênteses 
+% (utilizado nos finais de parágrafos). Enquanto que o '\citet' 
+% atua como uma referência interna ao texto, por exemplo: 
+% "De acordo com~\citet{borges:2020} o tema..." (deixando apenas 
+% o ano entre parênteses e o nome dos autores fora dos parênteses). % E para as fontes de livros, os números das páginas 
+% (opcionalmente) podem ser exibidos usando colchetes, com números 
+% de páginas, como neste exemplo: 
+% ~\citep[10-100]{CORMEMALGORITHMS01}."
+
+%================================================================
+% Arquivo que consta as referências (.BIB)
+\bibliography{bib}
+
+%================================================================
+% Após \appendix, se iniciam os capítulos de Apêndice, com
+% numeração alfabética.
+%----------------------------------------------------------------
+\appendix
+\include{_A-appendix}
+%\chapter{Meu primeiro apêndice}
+%\chapter{My second appendix}
+
+%================================================================
+% Aqui vão os "capítulos" de anexos. Cada anexo deve
+% ser considerado um capítulo.
+%----------------------------------------------------------------
+%\anexos
+%\chapter{Meu primeiro anexo}
+%\chapter{My second attachment}
+
+%================================================================
+% CONTRA CAPA DA BIBLIOTECA já está sendo inserida ao final do volume 
+% AUTOMATICAMENTE quando configurado para Dissertação ou Tese.
+%----------------------------------------------------------------
+\contracapa
+%================================================================
+
+% E aqui (para a felicidade de todos) termina o documento.
+\end{document}

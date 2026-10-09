@@ -1,0 +1,391 @@
+\chapter{Experimental Results}
+\label{chapter:results}
+
+This section presents a series of experiments designed to evaluate the key aspects and capabilities of our proposed model, LodusPop. These experiments demonstrate the model's versatility and effectiveness in simulating population dynamics under various scenarios, highlighting its ability to manage complex interactions between the environment and the population. Each experiment highlights specific features of the model:
+\begin{enumerate}
+    \item \textbf{Random walk behavior} simulates daily routines based on the population's profile (i.e., sampled characteristics) and the proximity of points of interest. For instance, students can be modeled to attend schools during the day, while adults visit nearby pharmacies or supermarkets (Section~\ref{sec:random_walk});
+    \item \textbf{Large-scale events} illustrate how disruptions to daily routines impact mobility and how multiple events can compete for the available population  (Section~\ref{sec:large_scale});
+    \item \textbf{Infectious disease simulation and vaccination scenarios} model population behavior over extended periods, illustrating how traceable characteristics evolve and how the spread of a disease impacts the population. These scenarios also enable the analysis of dynamic population attributes, demonstrating how public health policies, such as vaccinations or lockdowns, influence disease transmission and population behavior (Section~\ref{sec:contagion}).
+\end{enumerate}
+
+All experiments extend the basic functionalities of LodusPop by incorporating plugins that introduce additional action types and traceable characteristics, enabling precise tracking of population evolution throughout the simulations.
+Additionally, these experiments demonstrate the model’s capability to represent populations as abstract blobs of varying sizes, from coarse city-wide aggregates down to blobs that represent very small groups or even single individuals. Macro-scale dynamics are evident when large groups participate in large-scale events across the environment, resulting in changes to mobility patterns (Section~\ref{sec:large_scale}), while finer-grained effects appear when a small subset of the population at a specific location is affected, such as during a disease outbreak (Section~\ref{sec:contagion}).
+The blob sizes are dynamically adjusted during simulations, ranging from entire neighborhood populations to single individuals. 
+Together, these case studies validate the model’s performance and highlight its potential for practical applications in urban planning and public health.
+
+\section{Case-Scenario: Porto Alegre, Brazil}
+\label{sec:case_scenario}
+
+LodusPop, designed to work with real-world data, was tested to model the population behavior of Porto Alegre, Brazil. Following our proposed definitions for the environment (Section~\ref{sec:environment}), we modeled each neighborhood of the city as a region ($R$) that contains a set of points of interest ($P$). 
+Environmental data representing the boundaries of each neighborhood was obtained through a dataset made available by Porto Alegre's city hall\footnote{Neighborhood boundaries Shapefile are available at (under ``Bairros (LC 12.112/16)'': \url{https://prefeitura.poa.br/carta-de-servicos/mapas-digitais-da-smamus}}.
+Figure~\ref{fig4:city_view} presents the neighborhoods of Porto Alegre. All 94 neighborhoods of the city are included in our experiments. Four specific neighborhoods are highlighted for their additional routines, which are utilized in our large-scale experiments (Section~\ref{sec:large_scale}).
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.8\textwidth]{fig/results/CityViewNeighborhoods.png}
+  \caption{The 94 neighborhoods of Porto Alegre, Brazil. All 94 neighborhoods of the city are included in all our experiments, with four specific neighborhoods highlighted for their additional routines, utilized in our large-scale experiments (Section~\ref{sec:large_scale}).} 
+  \label{fig4:city_view}
+\end{figure}
+
+We utilized the OpenStreetMap database~\footnote{OpenStreetMaps is available at: \url{https://www.openstreetmap.org/}} to extract the geographic coordinates (latitude and longitude) of buildings and amenities within Porto Alegre that could serve as points of interest for the population, such as schools and pharmacies.
+These points of interest were distributed across the city's neighborhoods. Each region in the model includes the following $P$s: \textit{home}, \textit{work}, \textit{school}, \textit{marketplace}, \textit{pharmacy}, and \textit{gas\_station}. Additionally, some regions may feature other $P$s, such as \textit{shopping\_malls}, \textit{hospitals}, \textit{universities} or \textit{stadiums}.
+The modeled environment comprises 94 $R$s and a total of 504 $P$s. For the experiments described in this paper, each region contains at most one $P$ of each type, such as one \textit{home} and one \textit{pharmacy} per neighborhood. This setup was dictated by the available data, which provided information on population distribution at the neighborhood level but did not specify finer-grained details within neighborhoods. However, this is not a limitation of the proposed model. When more granular data is available, simulation designers can enhance the environment by adding multiple home $P$s within a single region and allocating neighborhood populations accordingly. Appendix~\ref{app:input_environment} provides an example of the syntax needed to inform data for modeling an environment in our simulations.
+
+To model the population in our simulations, we collect data from governmental sources, including the most recent completed census at the time of this publication\footnote{Census Conducted by the Brazilian Institute of Geography and Statistics (IBGE). The data is available at:  \url{https://cidades.ibge.gov.br/brasil/rs/porto-alegre/panorama}}. Census data provided citywide information on the total population, the number of economically active individuals (i.e., workers), the number of students, and the age distribution of the population. However, this information lacked specificity at the neighborhood level.
+To address this, additional data was gathered from city administration surveys, which included neighborhood-level details on total population and age distribution~\footnote{Surveys conducted by the Observatory of the City of Porto Alegre (ObservaPOA). Data is available at: \url{http://www.observapoa.com.br/}}\footnote{Surveys conducted by the Empresa Pública de Tecnologia da Informação e Comunicação da Prefeitura de Porto Alegre (PROCEMPA). Data is available at: \url{https://portoalegreemanalise.procempa.com.br/}}.
+This information was used to define sampled characteristics for the population, with the following identifiers and categories:
+\begin{itemize}
+    \item $Age$: Child, Young, Adult, and Elder;
+    \item $Occupation$: Student, Worker, and Other.
+\end{itemize}
+
+Porto Alegre's total population is $1,409,351$. Since \textit{occupation} data was only available at the city level, all neighborhoods were assigned the same distribution: \textit{students} comprise approximately $21.575\%$ of the population, \textit{workers} $54.706\%$, and \textit{other} $23.718\%$.
+The \textit{age} distribution was mapped using the age pyramid, with each category representing a specific range: \textit{child} (0–14 years), \textit{young} (15–24 years), \textit{adult} (25–59 years), and \textit{elder} (60+ years). Each neighborhood has its own unique \textit{age} distribution, while the overall population consists of approximately $18.724\%$ \textit{children}, $15.706\%$ \textit{young}, $50.507\%$ \textit{adults}, and $15.061\%$ \textit{elders}. 
+
+For each neighborhood, a blob was initialized at the corresponding \textit{home} $P$, with its total population determined based on the available neighborhood data and its sampled characteristics determined according to the previously described \textit{age} and \textit{occupation} distributions.
+Each blob was also assigned a traceable characteristic, \textit{region of origin}, which indicates where the population resides and begins within the simulation. This traceable characteristic enables the identification of a blob's origin throughout the simulation and ensures that the population returns to their respective residences after completing daily activities. Moreover, blobs originating from different regions cannot be merged, as their traceable characteristics remain distinct, preserving information about their place of origin.
+Appendix~\ref{app:input_population} provides an example of the input data necessary for modeling an initial population in our simulations.
+For all experiments, a \textit{cycle} was defined as 24 \textit{cycle steps}, representing a full day and its hours, respectively. The following sections present results obtained from various simulation scenarios, illustrating the model's capacity to capture population dynamics effectively.
+
+
+\section{Case Study 1: Random Walk}
+\label{sec:random_walk}
+
+Gonzalez et al.~\cite{gonzalez2008understanding} provide valuable insights into the dynamics of urban populations, which serve as a foundation for our abstracted urban mobility model. They highlight two significant observations: first, individuals tend to visit a select few locations repeatedly, and second, there is a certain level of randomness in their daily movements, akin to a Lévy flight random walk.
+A Lévy flight is a random walk pattern characterized by jumps of varying lengths, following a Lévy heavy-tailed probability distribution. In practical terms, this means that the Lévy flight predominantly consists of short jumps, with fewer long jumps.
+
+To simulate this behavior, we have implemented a Lévy plugin, which introduces a new action type called the \textit{levy walk}. Appendix~\ref{app:plugin} presents an example of how new action types can be incorporated into our simulations using plugins. This action involves sampling distances from a Lévy distribution and moving a certain portion of the population from a certain origin $P_i$ to a destination $P_j$ corresponding to the sampled distance.
+For each $P$, we calculate a histogram of distances to other $P$s, grouping them into bins based on a specified distance grouping value. Figure~\ref{fig5:node_distances} illustrates the histogram of distances between $P$s, with each bin representing a range of 500 meters.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.95\textwidth]{fig/results/NodeDistances.png}
+  \caption{ Histogram of distances between points of interest ($P$s). Each bin represents a range of 500 meters.} 
+  \label{fig5:node_distances}
+\end{figure}
+
+When the \textit{levy walk} action is triggered, the population at the origin $P_i$ is uniformly divided into packets to be moved. Upon sampling a distance, the \textit{levy walk} action randomly assigns a population packet to one of the $P$s within that distance group. Since the Lévy distribution is heavy-tailed (see Figure~\ref{fig6:levy_distributions}), it is possible to sample a distance that exceeds the farthest $P$, even if it is not very probable. In such cases, another distance is sampled from the distribution. Similarly, if there are no available $P$s within the sampled distance group, a new distance will be sampled.
+
+A \textit{levy walk} action $A_i$ incorporates additional parameters $\bm{V}_{i}$ (Section~\ref{sec:routines}) to enhance its functionality. These parameters include the scale parameter ($levy\_scale$), which governs the Lévy distribution; the movement probability parameter ($levy\_prob$), which determines the likelihood of a population packet being moved; the packet size parameter ($levy\_pkt$), representing the group size that undergoes the random walk; and an optional label parameter ($levy\_label$), enabling the selection of specific types of $P$s as potential destinations. 
+Additionally, a \textit{levy walk} action $A_i$ requires a population template $T_{i}$ to specify the desired population profile being affected.
+These parameters enable the simulation of random walk behavior across multiple scales: spatial scales, by adjusting the $levy\_scale$ parameter to match the simulated environment, and population scales, by modifying $levy\_pkt$, which allows for the movement of large populations or individual entities (i.e., a blob with a total population of 1).
+
+In our experiments, we design a global routine ($GRo$) that utilizes \textit{levy walk} actions to disperse the working and student populations across the city throughout the day. Actions targeting workers relocate the population from a ``home" $P_h$ to a ``work" $P_w$, utilizing a population template with criteria such as $Occupation = Worker$ and $Age = [Young, Adult, Elder]$. These actions occur at each cycle step, with a higher movement probability ($levy\_prob$) during the morning and afternoon (specifically, steps 7 through 18).
+Actions targeting students relocate the population from a ``home" $P_h$ to a ``school" $P_s$, using a population template with criteria such as $Occupation = Student$ and $Age = [Child, Young, Adult]$. These actions are executed only at specific cycle steps. Furthermore, the simulation routine includes \textit{move population} actions in all ``work" and ``school" $P$s, returning a portion of their current population to their respective ``home" $P$ of each blob they contain. In both cases, the \textit{region of origin} traceable characteristic of each blob allows us to identify the ``home'' $P$s where students and workers originate and return at the end of the day.
+
+Subsequently, we conducted experiments by varying the $levy\_scale$ parameter in all \textit{levy walk} actions to assess the population movements throughout the simulation. We define ``displacement" as the movement of an individual from one $P_i$ to another $P_j$, as part of the levy plugin.
+In the case of a blob $B_i$ with a total population $TP_i = 250$, each movement between points of interest accounts for 250 displacements. All simulations maintain a population packet size of $levy\_pkt = 250$, and the $P$s are grouped based on the distance to an origin $P$, with intervals of 500 meters, as depicted in Figure~\ref{fig5:node_distances}.
+
+The experimental results are illustrated in Figure~\ref{fig6:levy_distributions}. All simulations consider a total population of $1,409,351$. The x-axis represents the distance traveled during each displacement, grouped into 500-meter intervals.
+The y-axis indicates the total number of displacements that occurred at each levy configuration. The graph demonstrates that different values of the $levy\_scale$ parameter produce distinct distributions, where higher values yield more widely dispersed distributions of displacements, as observed in a simulation where $levy\_scale = 10$.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.95\textwidth]{fig/results/Levy_Distributions.png}
+  \caption{ Population displacement experiments. The x-axis represents the distance traveled during a displacement and is grouped in ranges of 500 meters. The y-axis represents the total number of displacements that traveled a certain distance. All simulations consider a total population of $1,409,351$; a population packet size of $levy\_pkt = 250$, which represents the group size that undergoes the random walk; and $P$s grouped by distance in ranges of 500 meters, as presented in Figure~\ref{fig5:node_distances}.} 
+  \label{fig6:levy_distributions}
+\end{figure}
+%python .\movement_displacement_comparison.py --p levy_parameter_tests_94 --b 500 --e WorkSchool94-BW_500-S_250  WorkSchool94-BW_500-S_500 WorkSchool94-BW_500-S_1000  WorkSchool94-BW_500-S_2500 WorkSchool94-BW_500-S_5000 --x 25000 --l "Scale = 0.5" "Scale = 1" "Scale = 2" "Scale = 5" "Scale = 10"
+
+For the remaining experiments in this work, we adopt a scale parameter of $levy\_scale = 2$ (represented by the green line in Figure~\ref{fig6:levy_distributions}). This particular value was determined empirically, as approximately $50\%$ of the displacements observed in simulations using this parameter occurred within a 2km radius of the origin $P$. Such displacements align with typical daily movements within a single neighborhood or between neighboring neighborhoods. However, this value can be adjusted to suit different environments, depending on the needs of the simulation designers. 
+
+Furthermore, we introduce an additional parameter, named $Restriction$, for the \textit{levy walk} action to model movement restrictions.
+This parameter acts as a factor that reduces the total population being moved by each \textit{levy walk} action, e.g., an $Restriction = 0.25$ would cause a \textit{levy walk} action to move only $\approx75\%$ of the population it would without the restriction. It allows for the simulation of varying population flows on different days of the week (e.g., weekends with different flow patterns than weekdays) or the simulation of population lockdown during a pandemic scenario. Figure~\ref{fig7:movement_restriction} illustrates the results obtained by conducting a baseline experiment (without any restriction) and three other experiments involving different levels of movement restrictions. As previously mentioned, all simulations consider a scale parameter of $levy\_scale = 2$.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.98\textwidth]{fig/results/MovementRestriction.png}
+  \caption{Simulation of Movement Restriction with the \textit{levy walk} action. All simulations consider a scale parameter of $levy\_scale = 2$. The $Restriction$ parameter acts as a factor that reduces the total population being moved by each \textit{levy walk} action.} 
+  \label{fig7:movement_restriction}
+\end{figure}
+%python .\movement_displacement_comparison.py --p isolation_tests --b 500 --e Baseline Baseline-Iso_25 Baseline-Iso_50 Baseline-Iso_75 Baseline-Iso_100 --l Baseline "Restriction = 0.25" "Restriction = 0.50" "Restriction = 0.75" "Restriction = 1.00" --x 25000
+
+
+\section{Case Study 2: Large-Scale Events}
+\label{sec:large_scale}
+
+We also investigate the ability to simulate occasional events that disrupt the population's daily routines, such as sports matches or musical concerts that occur on a weekly or monthly basis.
+To evaluate the impact of these large-scale events on mobility patterns, we compare their effects against a baseline scenario with no events. Furthermore, we examine how multiple concurrent events compete for the available population, highlighting the dynamics of population distribution.
+
+To simulate these events, we implemented an additional plugin, which introduces a new action type called \textit{gather population}. This action involves gathering the population from nearby $P$s and relocating them to a designated destination $P_d$. 
+A \textit{gather population} action $A_j$ considers a $gather\_quantity$ additional parameter (in $\bm{V}_{j}$)  to describe the total population to be relocated towards the destination $P_d$. 
+The population quantity to be moved from each nearby $P$ is determined by the population available at the origin $P$ and the distance to the destination.
+Once the population quantity that should be moved from each origin $P$ is determined, the \textit{gather population} action is further broken down into multiple \textit{move population} actions. Each of these \textit{move population} actions is responsible for transferring the population from an origin $P$ to the destination $P_d$, ensuring that each origin $P$ contributes to the movement.
+
+For these experiments, we consider the routines of workers and students as a baseline simulation, utilizing a scale parameter of $levy\_scale = 2$ as described in Section~\ref{sec:random_walk}.
+Furthermore, we incorporate four large-scale events into the simulation, each occurring at a specific cycle step. These events are characterized by a \textit{gather population} action, which requests the movement of 500,000 individuals to a designated destination $P$. The details of the events are specified as follows, considering the regions illustrated in Figure~\ref{fig4:city_view}: 
+
+\begin{itemize}
+    \item Event $(A)$: A sports event taking place at the Farrapos region stadium;
+    \item Event $(B)$: A sports event happening at the Praia de Belas region stadium;
+    \item Event $(C)$: A commercial event held at the marketplace in the Centro Histórico region; and
+    \item Event $(D)$: A cultural event occurring at our University in the Partenon region.
+\end{itemize}
+
+All events are scheduled to occur at cycle step 19, i.e., at 7:00 PM. Given that the city's total population is 1,409,351, and the events require a total of 2,000,000 individuals, the events will compete for the available population if they all occur simultaneously in a single simulation.
+In addition, we model a scenario where some large-scale events take place at different cycle steps. In this alternate scenario, event C occurs at cycle step 9 (i.e., 9:00 AM), while event D occurs at cycle step 14 (i.e., 2:00 PM).
+
+Table~\ref{tbl:results_displacement} provides an overview of the simulation results, including the total population displacements, the average displacement per city inhabitant, and the proportion of total displacements compared to the baseline simulation. Baseline means the ``normal life'' of the city, and the different scenarios in the table indicate the population displacements as a function of the existence of the events. For instance, the ``Baseline+AB'' scenario considers the Baseline in addition to Event A and Event B. In the two last lines of Table~\ref{tbl:results_displacement}, we show the results of the Baseline with the existence of the four large-scale events occurring at the same time and with some occurring at different cycle steps.
+
+
+\begin{table}[ht]
+\centering
+\caption{Results of the large-scale event simulations. Data includes the total population displacements, the average displacement per inhabitant of the city, and a proportion of total displacements compared to the baseline simulation. The ``Baseline+AB'' scenario, for example, considers the Baseline in addition to Event A and Event B.}
+\label{tbl:results_displacement}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Experiment Name        & \begin{tabular}[c]{@{}c@{}}Total\\ Displacements\end{tabular} & \begin{tabular}[c]{@{}c@{}}Average Displacements\\ per inhabitant\end{tabular} & \begin{tabular}[c]{@{}c@{}}Increase over\\ Baseline\end{tabular}  \\ \midrule
+Baseline               & 2,570,658                                                                                                                                                 & 1.8240                                                                                                                                                 & ---             \\ \midrule
+Baseline+A             & 3,290,469                                                                                                                                                 & 2.3347                                                                                                                                                 & 28.00\% \\ %1.2800           \\
+Baseline+B             & 3,300,782                                                                                                                                                 & 2.3421                                                                                                                                                 & 28.40\% \\ %1.2840           \\
+Baseline+C             & 3,289,002                                                                                                                                                 & 2.3337                                                                                                                                                 & 27.94\% \\ %1.2794           \\
+Baseline+D             & 3,281,102                                                                                                                                                 & 2.3281                                                                                                                                                 & 27.64\% \\ \midrule %1.2764           \\ \midrule
+Baseline+AB            & 3,786,856                                                                                                                                                 & 2.6870                                                                                                                                                 & 47.31\% \\ %1.4731           \\
+Baseline+AC            & 3,748,417                                                                                                                                                 & 2.6597                                                                                                                                                 & 45.82\% \\ %1.4582           \\
+Baseline+AD            & 3,804,017                                                                                                                                                 & 2.6991                                                                                                                                                 & 47.98\% \\ %1.4798           \\
+Baseline+BC            & 3,738,497                                                                                                                                                 & 2.6526                                                                                                                                                 & 45.43\% \\ %1.4543           \\
+Baseline+BD            & 3,839,126                                                                                                                                                 & 2.7240                                                                                                                                                 & 49.34\% \\ %1.4934           \\
+Baseline+CD            & 3,826,094                                                                                                                                                 & 2.7148                                                                                                                                                 & 48.84\% \\ \midrule %1.4884           \\ \midrule
+Baseline+ABC           & 4,042,413                                                                                                                                                 & 2.8683                                                                                                                                                 & 57.25\% \\ %1.5725           \\
+Baseline+ABD           & 4,109,929                                                                                                                                                 & 2.9162                                                                                                                                                 & 59.88\% \\ %1.5988           \\
+Baseline+ACD           & 4,069,223                                                                                                                                                 & 2.8873                                                                                                                                                 & 58.29\% \\ %1.5829           \\
+Baseline+BCD           & 4,081,563                                                                                                                                                 & 2.8961                                                                                                                                                 & 58.78\% \\ \midrule %1.5878           \\\midrule
+Baseline+ABCD          & 4,235,926                                                                                                                                                 & 3.0056                                                                                                                                                 & 64.78\% \\ %1.6478           \\ 
+Baseline+ABCD+DiffStep & 4,638,329                                                                                                                                                 & 3.2911                                                                                                                                                 & 80.43\% \\ \bottomrule %1.8043           \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+
+Figure~\ref{fig8:results_displacements} presents the results of the simulation of large-scale events.
+Figure~\ref{fig8a:results_displacement_single} visualizes the results of five simulations: the Baseline simulation (no events), a simulation with only Event A, a simulation with only Event B, only Event C, and only Event D. 
+As indicated by the data in Table~\ref{tbl:results_displacement}, simulations where only a single large-scale event occurs yield a similar number of total displacements. However, the different locations where each event occurred (i.e., different destination $P$s) and the available population nearby cause each simulation to have other total displacement counts for different distances. For example, the ``Baseline+A'' simulation (shown in orange in Figure~\ref{fig8a:results_displacement_single}) presents an increased total displacement count near the $20,000m$ distance.
+
+\begin{figure}[!htbp]
+  \centering
+
+  \begin{subfigure}{0.95\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]
+      {fig/results/Displacement_SingleEvent.png}
+    \caption{Experiments include the Baseline scenario (no events), a scenario
+    with only Event A, only Event B, only Event C, and only Event D.}
+    \label{fig8a:results_displacement_single}
+  \end{subfigure}\\
+  %python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+A_Dist Baseline+B_Dist Baseline+C_Dist Baseline+P_Dist --l Baseline Baseline+A Baseline+B Baseline+C Baseline+D --x 30000
+  \begin{subfigure}{0.95\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]
+      {fig/results/Displacement_ThreeEvents.png}
+    \caption{Experiments include the Baseline scenario and four other scenarios
+    with three events occurring at the same cycle step
+    (i.e., only one event missing in each).}
+    \label{fig8b:results_displacement_three}
+  \end{subfigure}\\
+  %python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+ABC_Dist Baseline+ABP_Dist Baseline+ACP_Dist Baseline+BCP_Dist --l Baseline Baseline+ABC Baseline+ABD Baseline+ACD Baseline+BCD --x 30000
+  \begin{subfigure}{0.95\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]
+      {fig/results/Displacement_AllEvents.png}
+    \caption{Experiments include the Baseline scenario, the Baseline in addition
+    to all four events occurring at the same cycle step, and the Baseline in
+    addition to all four events with some occurring at different cycle steps
+    (DiffStep).}
+    \label{fig8c:results_displacement_all}
+  \end{subfigure}
+  %python .\movement_displacement_comparison.py --p large_scale_event --b 500 --e Baseline Baseline+ABCP_Dist Baseline+DiffStep_ABCP_Dist --l Baseline Baseline+ABCD Baseline+ABCD_DiffStep --x 30000
+  \caption{Simulation of large-scale events.}
+ \label{fig8:results_displacements}
+\end{figure}
+
+Figure~\ref{fig8b:results_displacement_three} illustrates the results of five simulations, starting with the baseline simulation and followed by simulations with three events occurring at the same cycle step (i.e., only one event missing in each). 
+As expected, and as indicated by the data in Table~\ref{tbl:results_displacement}, the inclusion of additional events led to an increase in total displacements compared to the baseline simulation. However, it is important to note that although each event requests the movement of 500,000 individuals, the total displacements of three events do not increase by 1,500,000 compared to the baseline simulation. This is because individuals can move directly from their respective origin $P$s (such as work or school) to the event $P$s. Thus, workers can travel from their ``work" $P$s to the event directly, and students can travel from their ``school" $P$s to the event without the need to return to their ``homes" before going to the events. Moreover, Events A, B, and C separately contribute to $\approx730,000$ additional displacements to the baseline simulation, as shown in ``Baseline+A", ``Baseline+B", and ``Baseline+C" in Table~\ref{tbl:results_displacement}, respectively.
+In simulations where the three events occur simultaneously (i.e., ``Baseline+ABC''), the events will compete for the available population in nearby neighborhoods, resulting in a reduced total population attending each event. Such result is presented in the last column of Table~\ref{tbl:results_displacement}, where the number of displacements increased over the baseline is $57.25\%$ for simulation ``Baseline+ABC''. This is a lower amount than the sum of increased displacements of simulations ``Baseline+A", ``Baseline+B", and ``Baseline+C", which were $28.00\%$, $28.40\%$, and $27.94\%$, respectively.
+
+Figure~\ref{fig8c:results_displacement_all} presents the results of three simulations: the baseline simulation, a simulation with all four events occurring simultaneously, and a simulation with some events taking place at different cycle steps. As demonstrated by the data in Table~\ref{tbl:results_displacement}, the simulation where events occurred at different cycle steps exhibited a significantly higher number of displacements than the simulation with all four events happening simultaneously. This increase in the number of displacements
+can be attributed to two factors. Firstly, there is reduced competition for the available population when events are staggered. Secondly, individuals have the opportunity to attend multiple events throughout the day, increasing their individual displacements.
+
+\section{Case Study 3: Epidemic Contagion and Vaccination}
+\label{sec:contagion}
+
+Next, we explore our model's ability to simulate behaviors observed over extended temporal scales, focusing on their long-term effects on the population. Specifically, we model the spread of an infectious disease as the population moves throughout the city, analyzing its progression over multiple simulation cycles, which represent consecutive days. Additionally, we evaluate the impact of public policies, such as vaccination campaigns and population lockdowns, on mitigating the disease's spread.
+
+To achieve this, we have implemented an additional plugin that introduces an \textit{infection} action type. This action is based on the SIR model~\cite{kermack1927contribution}, which classifies individuals into one of three states: Susceptible, Infected, or Removed. The ``Removed" state includes individuals who can no longer contribute to further contagion, either due to acquiring immunity (recovered) or death. The numerical dynamics of the SIR model are defined by Equations~\ref{eq:deltaS}, \ref{eq:deltaI}, and \ref{eq:deltaR}.
+
+\begin{equation}
+\label{eq:deltaS}
+   { \frac{dS}{dt} } =- { \frac{\beta I S}{N} },
+\end{equation}
+
+\begin{equation}
+\label{eq:deltaI}
+   { \frac{dI}{dt} } = { \frac{\beta I S}{N} } - {\gamma I},
+\end{equation}
+
+\begin{equation}
+\label{eq:deltaR}
+   { \frac{dR}{dt} } = {\gamma I},
+\end{equation}
+where, $\frac{dS}{dt}$, $\frac{dI}{dt}$ and $\frac{dR}{dt}$ represent the rate of change over time for the susceptible, infected, and recovered populations, respectively, in a total population of $N$ individuals. The parameters $\beta$ and $\gamma$ represent the infection and removal rates, respectively. The basic reproduction ratio, denoted as $R_0$, is defined as $R_0 = {\frac{\beta}{\gamma}}$. It is important to note that the total population $N$ remains constant in the SIR model, maintaining equality throughout the simulation.
+
+To monitor the progression of the infection within the population, we introduced a traceable characteristic called \textit{SIR Status} for all blobs in the simulations. This characteristic can take one of three possible values: ``Susceptible", ``Infected", or ``Removed". As outlined in Section~\ref{sec:population}, each blob in the simulation consists of individuals who share the same \textit{SIR Status} value. However, blobs with different \textit{SIR Status} values can coexist within the same $P$, allowing for the simultaneous representation of susceptible, infected, and removed individuals at a given location.
+
+In the context of epidemic simulations, we utilize the routines of workers and students as the baseline, employing a scale parameter of $levy\_scale = 2$ as described in Section~\ref{sec:random_walk}. Additionally, we incorporate the \textit{infection} action into the global routine $GRo$, which occurs at every cycle step. When triggered, the \textit{infection} action identifies the current population with each SIR status in a given $P$ and applies Equations~\ref{eq:deltaS}, \ref{eq:deltaI}, and \ref{eq:deltaR} based on the $\beta$ and $\gamma$ parameters. We conducted experiments considering different values for the basic reproduction ratio ($R_0$), as this value can vary across different countries and cities. We specifically selected $R_0$ values of 2.6, 3.07, and 6.0 based on research conducted on Brazil's COVID-19 data~\cite{dutra2020covidR0, deSouza2020covirR0, dutra2021covidR0}\footnote{Additional research on $R_0$ on Brazilian state capitals available \href{https://www.blogs.unicamp.br/meiodecultura/2022/01/09/covid-19-e-rt-unico/}{HERE}
+}.
+For all experiments, we set $\gamma = {\frac{1}{15}}$, indicating that individuals transition from the ``Infected" to the ``Removed" state over a 15-day period. The values of $\beta$ are defined as 0.1733, 0.204, and 0.4, respectively, to correspond with the $R_0$ values of 2.6, 3.07, and 6.0. 
+
+As part of the simulation setup, we empirically determined that each region of the environment begins with 50 randomly selected individuals classified as ``Infected," 0 individuals classified as ``Removed," and the remaining population classified as ``Susceptible." This equates to a total of 4,700 individuals initially categorized as ``Infected" across all regions.
+The simulations were run for a period of 500 cycles, where each cycle consists of 24 cycle steps representing days and hours of the day, respectively. 
+
+
+Figure~\ref{fig:cumulative_infected} illustrates the results of the simulations conducted with different basic reproduction ratios ($R_0$). The x-axis denotes the simulation cycle (i.e., day), while the y-axis shows the cumulative number of infected individuals up to that point, including those who transitioned from the ``Susceptible" to the ``Infected" state, as well as the initial infected population (4700). As depicted, higher values of $R_0$ directly influence the speed of infection spread and the cumulative number of infected individuals throughout the simulation.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.95\textwidth]{fig/results/InfectedR0.png}
+  \caption{Simulations conducted with different basic reproduction ratios ($R_0$). The x-axis represents the simulation cycle (i.e., day), while the y-axis represents the cumulative infected population up to that point in the simulation.} 
+  \label{fig:cumulative_infected}
+\end{figure}
+%python .\infection_sum_comparison.py --p infection_tests --e R0-2.6 R0-3.07 R0-6.0 --l "R0 = 2.6" "R0 = 3.07" "R0 = 6.0" --s 0 --x "Simulation Cycle (Day)" --y "Cumulative Infected Population"
+
+For the remaining experiments, we will consider a baseline value of $R_0 = 2.6$ for the simulations. Figure~\ref{fig:sir_population_status} displays the total population amount for each possible value of the ``SIR Status" traceable characteristic over time in a simulation with $R_0 = 2.6$. It can be observed that despite reaching a cumulative infected population of 875,962 people (as shown in Figure~\ref{fig:cumulative_infected}), the peak of the infection occurred on day 247, with a total of 81,528 infected individuals at that point.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.95\textwidth]{fig/results/SIRPopulationStatus.png}
+  \caption{ Population count over time for each ``SIR Status" traceable property value in a simulation with $R_0 = 2.6$} 
+  \label{fig:sir_population_status}
+\end{figure}
+%python .\experiment_global_population.py --p infection_tests --e R0-2.6 --c Susceptible Infected Removed --s 0 --x "Simulation Cycle (Day)" --t "SIR Population Status - R0 = 2.6"
+
+Next, we extend the simulation to include additional behaviors related to epidemic contagion, specifically population vaccination as a measure to mitigate the spread of the disease. To facilitate this, we introduce a traceable characteristic called \textit{vaccine level} to all blobs in the simulation. This property is represented by an integer value. Additionally, we implement a new action called \textit{vaccinate}. When this action is triggered, a portion of the population is moved to a nearby ``pharmacy" $P$, which is available in all regions of the environment. At the pharmacies, the population receives a dose of the vaccine, resulting in an increase of their \textit{vaccine level} by 1. This signifies that they have been vaccinated and their resistance to the transmission of the virus has improved. Subsequently, the newly vaccinated population returns to their respective $P$s, such as workers returning to their ``work" $P$.
+
+In our simulations, we explore various vaccination configurations by considering different dose counts, which represent the number of doses available to the population, as well as the effectiveness of each dose. Table~\ref{tbl:vaccine_configuration} summarizes the vaccination settings used in our experiments, where the Dose Count ranges from 1 to 3. The Effectiveness parameter indicates the efficacy of each dose in mitigating the spread of the infection.
+
+All blobs in simulations with vaccinations contain a \textit{vaccine level} corresponding to an Effectiveness value in Table~\ref{tbl:vaccine_configuration}. Whenever a blob with \textit{SIR Status = Susceptible} gets infected, the amount of people that should be infected is defined by Equation~\ref{eq:deltaI}. The Effectiveness works by multiplying the result of Equation~\ref{eq:deltaI} by $1-Effectivess$, i.e., an $Effectivess=0.4$ reduces the amount of people changing from ``Susceptible" to ``Infected" by $40\%$. Starting Day indicates the simulation cycle at which each dose begins to be administered to the population. It is important to note that the second and third doses, if available, can only be administered to individuals who have already received the previous dose. Configurations A through C represent increasing effectiveness as more doses are administered, while Configuration D represents an ideal vaccine with 100\% effectiveness in preventing infection.
+
+Building upon the parameters defined in previous experiments, all vaccination experiments utilize the routines of workers and students as the baseline, employing a scale parameter of $levy\_scale = 2$ and an \textit{infect} action with $R_0 = 2.6$. The global routine $GRo$ also includes the \textit{vaccinate} action, performed at selected cycle steps during the morning and afternoon of each day. To determine the number of individuals to be moved to ``pharmacy" $P$s on each simulation day, we gathered data on the daily number of COVID-19 vaccines administered in Porto Alegre\footnote{Dashboard of Brazilian vaccination data available \href{https://vacina.saude.rs.gov.br/}{HERE} (text in Brazilian Portuguese)}. This data is then proportionally distributed among the regions in the environment based on their respective populations.
+
+\begin{table}[ht]
+\centering
+\caption{Configuration of vaccines for experiments. Dose Count represents the number of doses available for the population. Effectiveness represents how effective each dose is in reducing the spread of the infection. Starting Day represents the day (i.e., simulation cycle) when each dose starts being administered to the population. The second and third doses can only be applied to people who already received the previous dose. While VaccinationA, B, and C state for the doses, VaccinationD simulates a scenario where the effectiveness of the vaccine is 100\%.}
+\label{tbl:vaccine_configuration}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Vaccination Config & \multicolumn{1}{l}{Dose Count} & Effectiveness  & Starting Day  \\ \midrule
+VaccinationA       & 1                              & {[}0.4{]}           & {[}50{]}           \\
+VaccinationB       & 2                              & {[}0.4, 0.7{]}      & {[}50, 150{]}      \\
+VaccinationC       & 3                              & {[}0.4, 0.7, 1.0{]} & {[}50, 150, 250{]} \\
+VaccinationD       & 1                              & {[}1.0{]}           & {[}50{]}           \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:vaccines} showcases the results of the vaccination simulations. Despite the ``VaccinationA" configuration having an effectiveness of only 0.4, a significant impact on the cumulative infected population can be observed compared to the baseline. The baseline simulation resulted in a total of 875,962 infected individuals, whereas the ``VaccinationA" configuration achieved a notably lower count of 440,569 infected individuals. The incorporation of additional doses in the ``VaccinationB" and ``VaccinationC" configurations further decreased the cumulative infected population, resulting in 360,607 and 355,124 infected individuals, respectively. 
+Although ``VaccinationC'' contains an effectiveness of $1.0$, this efficacy is only realized when the population undergoes the third dosage, initiated on day 250 of the simulation. Consequently, ``VaccinationB'' and ``VaccinationC'' are very similar until day 250, at which point the third dosage of ``VaccinationC'' begins to exert its influence, resulting in a small difference in the cumulative infected population of both simulations.
+Notably, the ``VaccinationD" configuration, representing an ideal vaccine, demonstrates the lowest number of infections, with only 170,978 individuals affected.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.95\textwidth]{fig/results/InfectedVaccines.png}
+  \caption{Simulations of different vaccination configurations, as described in Table~\ref{tbl:vaccine_configuration}. All simulations consider a basic reproduction rate of $R_0 = 2.6$.} 
+  \label{fig:vaccines}
+\end{figure}
+
+Finally, we explore the incorporation of movement restrictions in our epidemic contagion experiments to simulate lockdown behavior. The movement restriction is described in Section~\ref{sec:random_walk} and illustrated in Figure~\ref{fig7:movement_restriction}.
+These experiments encompass a combination of three movement restriction values (no restriction, 0.5, and 0.75) that represent percentages of the population who do not leave their living neighborhoods, along with two vaccination scenarios: no vaccination; or ``VaccinationC", which includes three doses. 
+We chose to compare the ``VaccinationC'' configuration rather than ``VaccinationD'' because ``VaccinationC'' exhibits a more realistic behavior. In ``VaccinationC'', the effectiveness of the vaccine increases with the number of doses a person receives. In contrast, ``VaccinationD'' represents an idealized vaccine with a fixed effectiveness of $1.0$ achieved in a single dose.
+
+Figure~\ref{fig:vaccines_restrictions} illustrates the results obtained from our simulations. The imposition of movement restrictions reduces the cumulative infected population compared to the baseline scenario (no restriction and no vaccination). However, including population vaccination (experiment ``VaccC") exhibits more significant effectiveness in reducing the infected population compared to simulations with only movement restrictions. Moreover, the combination of movement restriction and vaccination demonstrates the most favorable outcomes, with the simulation containing a movement restriction of 0.75 and vaccination resulting in only 140,941 infected individuals.
+
+\begin{figure}[ht]
+ \centering
+  \includegraphics[width=0.95\textwidth]{fig/results/InfectedVaccineRestriction.png}
+  \caption{ Simulations of epidemic contagion. Experiments include a combination of three movement restriction values (no restriction, 0.5 and 0.75) to represent a lockdown and two vaccination scenarios (no vaccination or ``VaccinationC"). All simulations consider a basic reproduction rate of $R_0 = 2.6$.} 
+  \label{fig:vaccines_restrictions}
+\end{figure}
+
+
+\section{Quantitative Performance Evaluation}
+\label{sec:quant_perf}
+
+To complement the qualitative case studies, we present a quantitative evaluation of LodusPop’s computational efficiency. All benchmarks use the Porto Alegre city model described in Section~\ref{sec:case_scenario} (94 regions, 504 points of interest, and a total population of $1,409,351$). Each configuration was executed five times, and average values are reported.
+
+Table~\ref{tab:perf} reports quantitative information for each \textit{Case Study} and \textit{Configuration}, as follows: (i) \textit{Max Blob Count}, the maximum number of blobs observed during the run; (ii) \textit{Number of Cycles}, where a cycle corresponds to one simulated day in our setup, with 24 cycle steps; (iii) \textit{Avg Sim Time (s)}, the average total real-time required to complete the run; (iv) \textit{Time Per Cycle (s)}, the average runtime per simulated day; (v) \textit{MemProfile Avg Peak (MiB)}, the average peak resident memory of the Python process\footnote{Calculated with Memory Profiler v0.61.0: \url{https://pypi.org/project/memory-profiler/}}; and (vi) \textit{TraceMalloc Avg Peak (MiB)}, the average peak traced Python allocations\footnote{Calculated with TraceMalloc: \url{https://docs.python.org/3/library/tracemalloc.html}}. We interpret \textit{Max Blob Count} as an indicator of simulator workload: more frequent splits increase the number of population units to process and reduce merge opportunities, typically raising both runtime and memory consumption.
+
+Using the random walk configuration of $levy\_scale=2$ (Section~\ref{sec:random_walk}) as the baseline simulation for the remaining case studies and configurations, the simulator completes a full run in $5.211s$ on average, with \emph{MemProfile Avg Peak} of $234.9$~MiB, and a \textit{TraceMalloc Avg Peak} of $58.565$~MiB. Introducing movement restrictions (Section~\ref{sec:random_walk}) slightly reduces \textit{Time Per Cycle} (down to $4.795s$ at $Restriction =0.75$), while peak memory remains essentially unchanged. This indicates that reduced mobility mainly decreases the number of executed move operations, without substantially changing blob splitting, as expected.
+
+Large-scale events (Section~\ref{sec:large_scale}) increase runtime because they introduce additional gathering actions that relocate populations across distant locations. \textit{Time Per Cycle} rises from $6.144s$ (average simulations with one event) to $12.172s$ (simulation with four simultaneous events). These scenarios tend to produce fewer blobs, as populations aggregate around event locations, yet \textit{MemProfile Avg Peak} and \textit{TraceMalloc Avg Peak} remain close to the baseline ($\approx 235$~MiB and $\approx 59$~MiB, respectively). This indicates that the dominant cost comes from executing the large-scale gathering operations by pulling individuals from multiple regions and points of interest, rather than from an increase in blob count.
+
+Epidemic contagion and vaccination simulations (Section~\ref{sec:contagion}) are more demanding because additional traceable characteristics (e.g., SIR status and vaccine level) increase population heterogeneity, causing more frequent splits and reducing merge opportunities. In our model, blobs can only merge when their traceable attributes match; as the simulation progresses, individuals become distributed across multiple states (susceptible, infected, removed) and vaccination levels, so blobs with different traceable characteristics cannot be merged back together.
+For infection-only experiments, 500-cycle runs require $9.899$--$11.654s$ per cycle, and \textit{MemProfile Avg Peak} increases to roughly $1.72$--$1.80$~GiB. Vaccination scenarios further intensify splitting: VaccinationC reaches a \textit{Max Blob Count} of $23,355$ and requires $33.455s$ per cycle, with \textit{MemProfile Avg Peak} of $2.86$~GiB. Overall, \textit{Time Per Cycle} closely follows increases in \textit{Max Blob Count}, reinforcing that split and merge behaviors are key components of computational cost.
+
+%Limitações das medidas
+These measurements reflect the simulator execution on a single machine and are therefore hardware-dependent. The results are intended as a quantitative evaluation of the presented case studies, providing direct support for the efficiency and scalability claims within their scope, rather than as a head-to-head comparison with other simulation frameworks. 
+All experiments were run on a machine with an AMD Ryzen 5 5600X CPU, an NVIDIA GeForce RTX 2060 GPU, 16GB DDR4 2666MHz (CL19) RAM, and a KINGSTON SNV3S1000G SSD, using Python v3.13.6 on Microsoft Windows 11 Education (Version 10.0.262000).
+
+\begin{table}[ht]
+\footnotesize
+\centering
+\caption{Quantitative performance evaluation of LodusPop. We use the Random Walk mobility configuration (Lévy-flight simulation with $levy\_scale=2$; Section~\ref{sec:random_walk}) as the baseline reference for the remaining case studies and configurations. For each case study and configuration, we report the maximum blob count observed during execution, the number of simulated cycles (days), the average total simulation time over five runs, the corresponding time per cycle, and peak memory usage measured via MemProfile (process RSS) and TraceMalloc (Python allocation tracing).}
+\label{tab:perf}
+\begin{tabular}{@{}clllllll@{}}
+\toprule
+Case Study                                                                                                               & \multicolumn{1}{c}{Configuration} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Max Blob\\ Count\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Number\\ of Cycles\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Avg Sim\\ Time (s)\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Time Per\\ Cycle (s)\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}MemProfile\\ Avg Peak\\ (MiB)\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}TraceMalloc\\ Avg Peak\\ (MiB)\end{tabular}} \\ \midrule
+\begin{tabular}[c]{@{}c@{}}Baseline\\ (Random Walk)\\Case Study 1\end{tabular}                                                                                                                & $levy\_scale = 2$                          & 2857                                                                         & 1                                                                              & 5.211                                                                          & 5.211                                                                            & 234.912                                                                                 & 58.565                                                                                   \\ \midrule
+\multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Movement \\Restriction (Fig~\ref{fig7:movement_restriction})\\Case Study 1\end{tabular}}                                         & Restriction = 0.25                & 2871                                                                         & 1                                                                              & 5.074                                                                          & 5.074                                                                            & 234.957                                                                                 & 58.577                                                                                   \\
+                                                                                                                       & Restriction = 0.50                & 2864                                                                         & 1                                                                              & 4.958                                                                          & 4.958                                                                            & 234.935                                                                                 & 58.527                                                                                   \\
+                                                                                                                       & Restriction = 0.75                & 2883                                                                         & 1                                                                              & 4.795                                                                          & 4.795                                                                            & 235.234                                                                                 & 58.516                                                                                   \\ \midrule
+\multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}Large-Scale Events\\ (Fig~\ref{fig8:results_displacements} and Table~\ref{tbl:results_displacement})\\Case Study 2\end{tabular}}                                 & Average of 1 Event                & 2671                                                                         & 1                                                                              & 6.144                                                                          & 6.144                                                                            & 235.355                                                                                 & 58.767                                                                                   \\
+                                                                                                                       & Average of 2 Events               & 2651                                                                         & 1                                                                              & 7.986                                                                          & 7.986                                                                            & 235.297                                                                                 & 58.892                                                                                   \\
+                                                                                                                       & Average of 3 Events               & 2651                                                                         & 1                                                                              & 9.910                                                                          & 9.910                                                                            & 235.530                                                                                 & 59.061                                                                                   \\
+                                                                                                                       & 4 Events                          & 2651                                                                         & 1                                                                              & 12.172                                                                         & 12.172                                                                           & 235.825                                                                                 & 59.217                                                                                   \\
+                                                                                                                       & 4 Events at Different Times       & 2079                                                                         & 1                                                                              & 11.153                                                                         & 11.153                                                                           & 235.355                                                                                 & 59.146                                                                                   \\ \midrule
+\multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Infection (Fig~\ref{fig:cumulative_infected})\\Case Study 3\end{tabular}}                                          & $R_0$ = 2.6                          & 8840                                                                         & 500                                                                            & 5826.840                                                                       & 11.654                                                                           & 1798.114                                                                                & 1554.886                                                                                 \\
+                                                                                                                       & $R_0$ = 3.07                         & 8830                                                                         & 500                                                                            & 5630.155                                                                       & 11.260                                                                           & 1741.606                                                                                & 1520.793                                                                                 \\
+                                                                                                                       & $R_0$ = 6.0                          & 8818                                                                         & 500                                                                            & 4949.313                                                                       & 9.899                                                                            & 1718.252                                                                                & 1480.354                                                                                 \\ \midrule
+\multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}Vaccination\\ (Fig~\ref{fig:vaccines} and Table~\ref{tbl:vaccine_configuration})\\Case Study 3\end{tabular}}                                        & VaccA                             & 16495                                                                        & 500                                                                            & 8991.828                                                                       & 17.984                                                                           & 2246.849                                                                                & 2057.299                                                                                 \\
+                                                                                                                       & VaccB                             & 20840                                                                        & 500                                                                            & 11346.181                                                                      & 22.692                                                                           & 2250.278                                                                                & 2318.228                                                                                 \\
+                                                                                                                       & VaccC                             & 23355                                                                        & 500                                                                            & 16727.571                                                                      & 33.455                                                                           & 2862.153                                                                                & 2512.703                                                                                 \\
+                                                                                                                       & VaccD                             & 12542                                                                        & 500                                                                            & 7620.026                                                                       & 15.240                                                                           & 1750.923                                                                                & 1883.745                                                                                 \\ \midrule
+\multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}Vaccination and\\Restriction (Fig~\ref{fig:vaccines_restrictions})\\Case Study 3\end{tabular}} & $R_0$ = 2.6; Restriction = 0.50      & 9011                                                                         & 500                                                                            & 4008.347                                                                       & 8.017                                                                            & 1983.816                                                                                & 1743.626                                                                                 \\
+                                                                                                                       & $R_0$ = 2.6; Restriction = 0.75      & 8320                                                                         & 500                                                                            & 4566.876                                                                       & 9.134                                                                            & 1681.857                                                                                & 1472.081                                                                                 \\
+                                                                                                                       & VaccC; Restriction = 0.50         & 16722                                                                        & 500                                                                            & 9279.227                                                                       & 18.558                                                                           & 2628.414                                                                                & 2313.595                                                                                 \\
+                                                                                                                       & VaccC; Restriction = 0.75         & 15429                                                                        & 500                                                                            & 8139.657                                                                       & 16.279                                                                           & 2540.851                                                                                & 2240.514                                                                                 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Comments about Multi-resolution Environments}
+\label{sec:comments}
+
+
+Several points are worth noting when discussing multi-resolution environments. First, in our Case-Scenario (Section~\ref{sec:case_scenario}), we defined the points of interest ($P$s) as being associated with specific locations within the city of Porto Alegre; consequently, the population motion occurred in the city, with populations moving between $P$s.
+However, the spatial scope of these $P$s can be adjusted to suit the needs of simulation designers or specific experiments.
+For instance, these $P$s could represent locations in various cities within a state, and distances between cities could then be calculated, enabling the application of navigation models such as Levy walk or alternative movement algorithms. Movement restrictions could also be modeled, as demonstrated in Figure~\ref{fig7:movement_restriction}. 
+Similarly, large-scale events (Section~\ref{sec:large_scale}) could be simulated where individuals travel from one city to another, or regions could be conceptualized as states within a country. This flexibility highlights the adaptability of our population simulation model to operate with different spatial abstractions.
+Regarding the epidemic contagion scenarios presented in Section~\ref{sec:contagion}, parameters related to contagion dynamics may require adjustments to reflect larger distances between individuals, such as when simulating interactions across different states. This capability underscores the framework's scalability and the potential for extending its use to broader contexts.
+
+Finally, our simulation results are effectively visualized within multi-level simulation environments, offering insights into population dynamics across different spatial scales.
+Figure~\ref{fig:multi_level_visualization} illustrates population movements, highlighting interactions between spatial levels.
+Figure~\ref{fig:visualization_region} provides a detailed view of the city environment, incorporating additional visual elements such as roads and buildings to contextualize the simulations. In these visualizations, the red area represents a designated $P$ in the simulation, acting as a focal point for population activities.
+Figure~\ref{fig:visualization_blob} demonstrates populations moving between multiple $P$s, showcasing the framework’s ability to model and track mobility across multiple regions. The visualization was developed using Unity.
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}{0.95\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/results/Lodus1.png}
+    \caption{A detailed representation of the city with roads and
+    buildings. The highlighted red area represents a designated $P$ in the
+    environment.}
+    \label{fig:visualization_region}
+  \end{subfigure}\\
+  \begin{subfigure}{0.95\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/results/Lodus2.png}
+    \caption{Visualization of populations moving between multiple $P$s
+    in the environment.}
+    \label{fig:visualization_blob}
+  \end{subfigure}
+  \caption{Visualization of our simulations in a multi-level environment. (a) present a detailed visualization of the city, and (b) presents the abstract population moving between different $P$s in the environment.}
+  \label{fig:multi_level_visualization}
+\end{figure}

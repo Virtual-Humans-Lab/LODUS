@@ -1,0 +1,92 @@
+\chapter{Introduction}
+\label{chapter:introduction}
+
+%GA: motivação geral de cidades e ambientes urbanos
+Cities are complex systems in which populations continuously interact with the spatial, social, and service structures of the urban environment. Daily activities generate recurring movements between residences, workplaces, schools, commercial establishments, healthcare facilities, and other locations, connecting different parts of a city over time. Simulation provides a means of representing these interactions and investigating how population dynamics emerge under different spatial, behavioral, and environmental conditions~\cite{eid1980,mather2019walkability,Javed2022}.
+
+%GA: mobilidade e diferentes escalas
+Human mobility is characterized by both regularity and variability. Empirical studies have identified recurring destinations, characteristic travel distances, and regular temporal patterns in individual mobility~\cite{brockmann2006scaling,gonzalez2008understanding,natureSong2010exploration}. These patterns also occur across multiple spatial and temporal scales~\cite{natureAlessandretti2017multiScaleSpatioTemporal,alessandretti2020nature}. Consequently, the spatial representation adopted by a simulation influences which population movements and relationships can be expressed, since geographic entities may acquire different meanings depending on the scale of analysis~\cite{naturePaasi2004placeAndRegion,natureBatty2006hierarchy,naturePumain2006hierarchy}.
+
+%GA: simulação (crowds, principalmente)
+Population simulation employs different levels of abstraction according to its objectives. Agent-based and microscopic approaches explicitly represent individuals and local interactions~\cite{macal2010agentBasedTutorial,helbing1995social,van2011reciprocal,de2012simulating}, whereas macroscopic approaches describe populations through aggregate quantities such as densities and flows~\cite{hughes2002continuum,treuille2006continuum}. Hybrid and multi-level approaches combine different representations when parts of a problem require different levels of detail~\cite{xiong2010hybrid,ijaz2015hybridSurvey,antonitsch2019bioclouds,serana2023multilevelmodeling}. These alternatives illustrate a recurring trade-off between maintaining relevant population heterogeneity and reducing the computational and representational cost of explicitly modeling every individual.
+
+%GA: mudança do ambiente 
+The urban environment in which these populations move may also change during the period being simulated. Exceptional events can introduce temporary concentrations of demand, while floods, infrastructure failures, and other disruptions may alter the availability of destinations, services, or supporting infrastructure. 
+Urban-resilience studies highlight the relationship between population mobility and changing infrastructure and service conditions during disruptive events~\cite{haraguchi2022mobilityDataReview,ye2023digitalTwinResiliance}. Evacuation models similarly examine how disruptions affect population movement and access to destinations~\cite{hassannayebi2020hybridEvacuation}, while changes in mobility can also influence processes such as epidemic propagation~\cite{natureKramer2020mobilityCovid,hernandez2021human}. In these contexts, population dynamics depend not only on movement between origins and destinations, but also on population characteristics, the roles performed by locations, and changes in the state of the surrounding environment.
+
+%GA: necessidades gerais da área, 
+Supporting different urban phenomena within a shared simulation representation therefore introduces requirements concerning population representation, spatial resolution, and the processes associated with locations and services. Multilevel approaches address the need to represent population dynamics at different levels of detail~\cite{serana2023multilevelmodeling}, while mobility and resilience studies show that population flows may also depend on changing accessibility, infrastructure, and service conditions~\cite{haraguchi2022mobilityDataReview,ye2023digitalTwinResiliance}. 
+A reusable urban population model may consequently need to preserve demographic, behavioral, or application-specific population characteristics without representing every inhabitant independently; operate over spatial representations appropriate to the available data or experimental objective; and account for locations whose roles, availability, or relationships with other infrastructure may change during the simulation.
+
+%GA: Intro do LODUS
+This thesis presents \textit{LODUS}, an extensible multi-scale framework for simulating urban population dynamics in dynamic environments. LODUS combines an aggregated representation of heterogeneous populations with a spatial environment composed of semantically defined regions and points of interest. Population dynamics are expressed through interactions with this environment, while changes in location availability and dependencies allow disruptions to affect the simulated population over time. Domain-specific processes are incorporated through extensions, allowing the same core abstractions to support different forms of mobility, environmental disruption, and population state change.
+
+%GA: Cola com os trabalhos anteriores
+The framework builds upon concepts introduced in the original LODUS model~\cite{silva2020lodus} and consolidates and extends the population-simulation mechanisms subsequently developed as LodusPop~\cite{silva2026lodusPop}. In this thesis, these concepts are presented as a unified framework keeping the original name \textit{LODUS}.
+
+
+\section{Research Problem and Scope}
+\label{sec:introduction_problem}
+
+Urban population simulations may require different spatial resolutions, population characteristics, behavioral processes, and responses to changes in the environment. Multilevel and hybrid approaches provide mechanisms for combining representations with different levels of detail~\cite{serana2023multilevelmodeling,ijaz2015hybridSurvey,xiong2010hybrid}. However, the applications considered in this thesis additionally require population dynamics to respond to changes in location roles, availability, services, and supporting infrastructure~\cite{haraguchi2022mobilityDataReview,ye2023digitalTwinResiliance}. The central research problem is therefore how to provide a reusable simulation representation that can accommodate these variations without requiring a different underlying model for each application.
+
+This leads to the following research question: \textit{How can an extensible simulation framework represent heterogeneous urban population dynamics at different spatial scales while supporting changes in population state, behavior, and environment availability within the same underlying model?}
+
+%GA: aqui tentei alinhar a ideia de multi-scale e fugir do multi-level que não usamos mais
+In this thesis, \textit{multi-scale} primarily refers to the use of core 
+%SO: porque esse common?
+population and environment abstractions at different spatial resolutions. Human mobility exhibits behavior across multiple spatial scales~\cite{natureAlessandretti2017multiScaleSpatioTemporal,alessandretti2020nature}, and the interpretation of geographic units depends on the scale of analysis~\cite{naturePaasi2004placeAndRegion}. The experimental evaluation therefore considers different spatial representations of the city of Porto Alegre, in Brazil.
+
+The scope of the thesis is population-level simulation rather than the reconstruction of individual trajectories or detailed pedestrian locomotion. The experiments evaluate the behavior and flexibility of the proposed framework using environments derived from real-world geographic, demographic, service, and environmental data, combined with scenario-defined behavioral parameters, capacities, demands, interventions, and disruptions. %The results are therefore interpreted as controlled simulation comparisons rather than calibrated predictions of mobility, evacuation, epidemic progression, or healthcare accessibility.
+
+
+\section{Objectives}
+\label{sec:introduction_objectives}
+
+The main objective of this thesis is to model and evaluate LODUS as an extensible framework for representing urban population dynamics across different spatial resolutions and under changing environmental and application-specific conditions.
+
+The specific objectives are:
+
+\begin{itemize}
+    \item model a core representation for heterogeneous populations and urban environments that can be instantiated at different spatial resolutions and account for changes occurring during a simulation;
+
+    \item enable the representation of different population dynamics and application-specific processes without requiring independent simulation models for each application; and
+
+    \item evaluate the applicability of the proposed framework through scenarios involving normal-life mobility, exceptional events, environmental disruptions, evacuation, epidemic processes, and recurring healthcare services.
+\end{itemize}
+
+
+%GA: acabei fazendo um pouco repetido com os objetivos, mas mantive
+\section{Contributions}
+\label{sec:introduction_contributions}
+
+The principal contribution of this thesis is LODUS, an extensible multi-scale framework for simulating heterogeneous urban populations interacting with dynamic environments. 
+
+The main contributions are:
+
+\begin{itemize}
+    \item \textbf{A unified representation of heterogeneous populations and dynamic urban environments.}
+    The framework combines an aggregated population representation with semantically defined spatial elements whose interpretation, availability, and relationships can vary according to the simulation.
+
+    \item \textbf{An extensible and multi-scale simulation framework.}
+    Core abstractions can be instantiated at different spatial resolutions and extended with application-specific population states and processes, allowing different urban phenomena to be represented without redefining the underlying population and environment models.
+
+    \item \textbf{An evaluation across distinct urban population processes.}
+    The framework is evaluated using different spatial representations and scenarios covering normal-life mobility, exceptional population demand, environmental disruption, evacuation, epidemic processes, and recurring healthcare services.
+\end{itemize}
+
+
+\section{Thesis Organization}
+\label{sec:introduction_organization}
+
+The remainder of this thesis is organized as follows.
+
+Chapter~\ref{chapter:related_work} presents the theoretical background and related work on population and mobility simulation, spatial and multi-scale representations, and simulation approaches relevant to the development of LODUS.
+
+Chapter~\ref{chapter:proposed_model} presents the proposed model, including the environment and population representations, the mechanisms used to express population dynamics, and the extension of the model with application-specific behavior.
+
+Chapter~\ref{sec:simulation_environments_and_data} presents the simulation environments, implemented extensions, and input data used in the experimental evaluation, including the different spatial representations of Porto Alegre.
+
+Chapter~\ref{chapter:experimental_results} evaluates the framework through normal-life mobility, exceptional events and environmental disruptions, and health-related population processes and services.
+
+Finally, Chapter~\ref{chapter:final_considerations} summarizes the findings, discusses the limitations of the proposed framework and experimental evaluation, and identifies directions for future work.
