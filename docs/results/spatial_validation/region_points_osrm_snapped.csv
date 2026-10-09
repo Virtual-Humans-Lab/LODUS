@@ -1,0 +1,95 @@
+﻿region,matched_geometry,original_longitude,original_latitude,snapped_longitude,snapped_latitude,snap_distance_m,osrm_candidate_rank,osrm_road_name,original_within_geometry,snapped_within_geometry
+Aberta dos Morros,Aberta Dos Morros,-51.1975768802765,-30.1564777842068,-51.197587,-30.156472,1.171,1,Avenida Celestino Bertolucci,True,True
+Agronomia,Agronomia,-51.1251443431221,-30.0765791683866,-51.12512,-30.076591,2.669,1,Anel Viário UFRGS Campus do Vale,True,True
+Anchieta,Anchieta,-51.1710672994942,-29.9876687647294,-51.171021,-29.987668,4.441,1,Largo da Vida,True,True
+Arquipélago,Arquipélago,-51.2150073288261,-29.9953102852364,-51.215014,-29.995325,1.795,1,Travessia Régis Bitencourt,True,True
+Auxiliadora,Auxiliadora,-51.1914387184847,-30.0217230293811,-51.191439,-30.021746,2.55,1,Rua 24 de Outubro,True,True
+Azenha,Azenha,-51.2147436812232,-30.0510199525848,-51.214775,-30.051017,3.007,1,Rua 20 de Setembro,True,True
+Bela Vista,Bela Vista,-51.1908984265664,-30.0337919612383,-51.190898,-30.03379,0.222,1,Rua Casemiro de Abreu,True,True
+Belém Novo,Belém Novo,-51.1761378741623,-30.2086566357334,-51.176188,-30.208702,6.932,1,Rua João Vieira de Aguiar Sobrinho,True,True
+Belém Velho,Belém Velho,-51.1770457873857,-30.1152236129312,-51.177028,-30.115195,3.653,1,Estrada Afonso Lourenço Mariante,True,True
+Boa Vista,Boa Vista,-51.1745726986059,-30.0225461039166,-51.174606,-30.022481,7.877,1,Rua Anita Garibaldi,True,True
+Boa Vista do Sul,Boa Vista Do Sul,-51.1285309151451,-30.2139803381475,-51.128564,-30.213971,3.33,1,Avenida Boa Vista,True,True
+Bom Fim,Bom Fim,-51.2104807594223,-30.0330589939714,-51.210481,-30.033063,0.443,1,Rua Henrique Dias,True,True
+Bom Jesus,Bom Jesus,-51.1577957990433,-30.0449931482782,-51.157801,-30.044992,0.495,1,Rua Panamá,True,True
+Camaquã,Camaquã,-51.2376726676268,-30.1043845491444,-51.237732,-30.104403,6.026,1,,True,True
+Campo Novo,Campo Novo,-51.1950480912986,-30.1379242117638,-51.195038,-30.137924,0.964,1,Estrada Cristiano Kraemer,True,True
+Cascata,Cascata,-51.1806328801207,-30.0915442976803,-51.1807,-30.091598,8.807,1,Avenida Professor Oscar Pereira,True,True
+Cavalhada,Cavalhada,-51.2286910107397,-30.1012402995036,-51.228693,-30.101235,0.587,1,Avenida Otto Niemeyer,True,True
+Centro Histórico,Centro Histórico,-51.2278480810808,-30.031004727877,-51.227817,-30.031006,2.992,1,Avenida Borges de Medeiros,True,True
+Chácara das Pedras,Chácara Das Pedras,-51.163276698502,-30.0357931271579,-51.163278,-30.035744,5.433,1,Rua Doutor Jorge Fayet,True,True
+Chapéu do Sol,Chapéu Do Sol,-51.1629759174341,-30.1783214415483,-51.162956,-30.178326,2.004,1,Rua Darcy Pereira Pozzi,True,True
+Cidade Baixa,Cidade Baixa,-51.2224525885919,-30.0404993243547,-51.222489,-30.040527,4.658,1,Rua José do Patrocínio,True,True
+Cel. Aparício Borges,Cel. Aparicio Borges,-51.185133456099,-30.0702984413031,-51.185125,-30.070285,1.635,1,Rua Capitão André Lago Páris,True,True
+Costa e Silva,Costa E Silva,-51.1182597986804,-30.0093278582727,-51.118289,-30.009326,2.806,1,Avenida Dante Ângelo Pilla,True,True
+Cristal,Cristal,-51.2397892751413,-30.0847512289742,-51.23979,-30.084737,1.555,1,Avenida Divisa,True,True
+Cristo Redentor,Cristo Redentor,-51.158022313181,-30.0104082772241,-51.158019,-30.01044,3.559,1,Avenida Assis Brasil,True,True
+Espírito Santo,Espírito Santo,-51.2173615905172,-30.149301452718,-51.217347,-30.14923,8.002,1,Rua dos Carijós,True,True
+Extrema,Extrema,-51.0626153011275,-30.2109093767902,-51.06261,-30.21083,8.771,1,Estrada Extrema,True,True
+Farrapos,Farrapos,-51.1974023529904,-29.9850699991564,-51.197404,-29.985077,0.8,1,Rua General Marcos Kruchin,True,True
+Farroupilha,Farroupilha,-51.2136185372287,-30.038368061923,-51.213627,-30.038358,1.351,1,Avenida José Bonifácio,True,True
+Floresta,Floresta,-51.2120255115732,-30.0218580655156,-51.212012,-30.021868,1.747,1,Avenida Farrapos,True,True
+Glória,Glória,-51.1985906238754,-30.0785891096479,-51.198615,-30.078572,2.984,1,Rua Madre Ana,True,True
+Guarujá,Guarujá,-51.2191885570036,-30.156853443553,-51.219186,-30.156853,0.289,1,Avenida da Serraria,True,True
+Higienópolis,Higienópolis,-51.1814201095827,-30.0146237279222,-51.18142,-30.014641,1.884,1,Rua General Couto de Magalhães,True,True
+Hípica,Hípica,-51.1761044540436,-30.1561358366347,-51.176102,-30.156128,0.908,1,Rua Eliza Ievah,True,True
+Humaitá,Humaitá,-51.1876065448791,-29.9843768763043,-51.187701,-29.984312,11.585,1,Avenida José Aloísio Filho,True,True
+Independência,Independência,-51.2114165227445,-30.0283138642156,-51.211416,-30.028319,0.563,1,Rua André Puente,True,True
+Ipanema,Ipanema,-51.2242015748011,-30.135351867939,-51.224207,-30.135367,1.731,1,Avenida Juca Batista,True,True
+Jardim Botânico,Jardim Botânico,-51.1866150813593,-30.0541730304667,-51.186614,-30.054171,0.242,1,Rua Valparaíso,True,True
+Jardim Carvalho,Jardim Carvalho,-51.1462547180695,-30.0520131347363,-51.146198,-30.052043,6.423,1,Avenida Antônio de Carvalho,True,True
+Jardim do Salso,Jardim Do Salso,-51.1682005959831,-30.0492071284135,-51.1682,-30.049209,0.242,1,Rua Ângelo Crivellaro,True,True
+Jardim Leopoldina,Jardim Leopoldina,-51.1110911832298,-30.0215478036466,-51.111093,-30.021564,1.784,1,Rua Hermeto Bermudez,True,True
+Jardim Europa,Jardim Europa,-51.1601184972897,-30.0228209964289,-51.160117,-30.02284,2.108,1,Avenida Túlio de Rose,True,True
+Jardim Floresta,Jardim Floresta,-51.1594853717086,-30.0008770326953,-51.159479,-30.000882,0.801,1,Rua Doutor Deoclécio Pereira,True,True
+Jardim Isabel,Jardim Isabel,-51.2367285492751,-30.1259771787583,-51.236717,-30.125998,2.599,1,Rua João Mendes Ouriques,True,True
+Jardim Itú,Jardim Itu,-51.138345289989,-30.0211282251709,-51.138343,-30.021151,2.557,1,Rua Heitor Manganelli,True,True
+Jardim Lindóia,Jardim Lindóia,-51.1515796569746,-30.0030091011001,-51.151589,-30.003009,0.868,1,Avenida Panamericana,True,True
+Jardim Sabará,Jardim Sabará,-51.1436646588742,-30.030604478588,-51.143609,-30.030603,5.403,1,Rua Guadalajara,True,True
+Jardim São Pedro,Jardim São Pedro,-51.1651556518396,-30.0065367215187,-51.165153,-30.006556,2.126,1,Rua Catão Roxo,True,True
+Lageado,Lageado,-51.133789013813,-30.189616989235,-51.133807,-30.189637,2.814,1,Avenida Edgar Pires de Castro,True,True
+Lami,Lami,-51.0955285479783,-30.2209883173142,-51.095534,-30.221001,1.519,1,Estrada do Varejão,True,True
+Lomba do Pinheiro,Lomba Do Pinheiro,-51.1261023865233,-30.0985224307081,-51.126106,-30.09851,1.385,1,Estrada Afonso Lourenço Mariante,True,True
+Mário Quintana,Mário Quintana,-51.1064402167177,-30.0308938155853,-51.106441,-30.030896,0.242,1,,True,True
+Medianeira,Medianeira,-51.2108669474596,-30.0647837981581,-51.210881,-30.064826,4.848,1,Rua Oscar Schneider,True,True
+Menino Deus,Menino Deus,-51.222051547168,-30.0529677373194,-51.222159,-30.052957,10.388,1,Avenida Getúlio Vargas,True,True
+Moinhos de Vento,Moinhos De Vento,-51.202415370788,-30.0237549822533,-51.202416,-30.023757,0.242,1,Rua Dinarte Ribeiro,True,True
+Mont'Serrat,Montserrat,-51.1907313259732,-30.0269442926526,-51.190731,-30.026946,0.222,1,Rua Anita Garibaldi,True,True
+Morro Santana,Morro Santana,-51.129110197202,-30.040364313615,-51.129113,-30.040356,0.933,1,Avenida Protásio Alves,True,True
+Navegantes,Navegantes,-51.1986723174991,-30.0031248682091,-51.198679,-30.003143,2.107,1,Rua Arabutã,True,True
+Nonoai,Nonoai,-51.2178406122179,-30.0891731624708,-51.217926,-30.089113,10.555,1,Avenida Nonoai,True,True
+Parque Santa Fé,Parque Santa Fé,-51.1087313515186,-30.0138777573214,-51.108712,-30.013901,3.14,1,Avenida Irene Ruperti,True,True
+Partenon,Partenon,-51.1751631207019,-30.0575959830085,-51.175198,-30.057535,7.557,1,Avenida Ipiranga,True,True
+Passo D'Areia,Passo Da Areia,-51.1717152784613,-30.014395435791,-51.171719,-30.014395,0.386,1,,True,True
+Passo das Pedras,Passo Das Pedras,-51.1265034279473,-30.0188904433147,-51.126504,-30.018923,3.659,1,Rua Bento Manoel Ribeiro,True,True
+Pedra Redonda,Pedra Redonda,-51.2435128333611,-30.1256110371717,-51.243486,-30.125592,3.348,1,Avenida Coronel Marcos,True,True
+Petrópolis,Petrópolis,-51.1834624501667,-30.0433923674216,-51.183454,-30.043427,3.956,1,Avenida Protásio Alves,True,True
+Pitinga,Pitinga,-51.1042679090053,-30.1419030235185,-51.104245,-30.141882,3.214,1,Rua Armando Pedro da Roza,True,True
+Ponta Grossa,Ponta Grossa,-51.1945022293607,-30.1857845444933,-51.194533,-30.185798,3.315,1,Rua Luan Jacoby,True,True
+Praia de Belas,Praia De Belas,-51.230172636,-30.0472881985923,-51.230157,-30.04728,1.78,1,,True,True
+Restinga,Restinga,-51.1393367535089,-30.1549269702203,-51.139353,-30.154878,5.646,1,Estrada João Antônio da Silveira,True,True
+Rio Branco,Rio Branco,-51.2019103556617,-30.0331907998885,-51.201909,-30.033186,0.563,1,Rua Vasco da Gama,True,True
+Rubem Berta,Rubem Berta,-51.1044480063116,-30.0209385301047,-51.104448,-30.020941,0.222,1,Avenida Adelino Ferreira Jardim,True,True
+Santa Cecília,Santa Cecília,-51.201331073605,-30.0408947118911,-51.201327,-30.040874,2.36,1,Rua Dona Eugênia,True,True
+Santa Maria Goretti,Santa Maria Goretti,-51.1755307420072,-30.0058292780705,-51.17553,-30.00586,3.438,1,Rua São Nicolau,True,True
+Santa Rosa de Lima,Santa Rosa De Lima,-51.1077101812265,-30.0006905147282,-51.10772,-30.000694,1.02,1,Avenida Vila Satíssima Trindade,True,True
+Santa Tereza,Santa Tereza,-51.2223411881961,-30.0756585341733,-51.222356,-30.075649,1.822,1,Rua Cruzeiro do Sul,True,True
+Santana,Santana,-51.2055865687131,-30.046728905517,-51.205561,-30.046764,4.62,1,Avenida Princesa Isabel,True,True
+Santo Antônio,Santo Antônio,-51.2034922412774,-30.0581503937635,-51.203487,-30.05808,7.775,1,Rua Paulino Chaves,True,True
+São Caetano,São Caetano,-51.1057829543841,-30.2049260216445,-51.105916,-30.205003,15.388,1,Rua Lineu Barbosa dos Santos,True,True
+São Geraldo,São Geraldo,-51.200194789571,-30.0095047133709,-51.20021,-30.009542,4.349,1,Avenida Polônia,True,True
+São João,São João,-51.1886611352902,-30.0080480610763,-51.188652,-30.00811,6.927,1,Rua Dona Leopoldina Porto Alegre RS,True,True
+São Sebastião,São Sebastião,-51.1459279435762,-30.0023080640551,-51.145932,-30.002308,0.386,1,Avenida Assis Chateaubriand,True,True
+Sarandi,Sarandi,-51.1314013320029,-30.0026489358974,-51.131397,-30.002695,5.114,1,Rua Zeferino Dias,True,True
+Serraria,Serraria,-51.2144874603135,-30.1667067660624,-51.214519,-30.16672,3.402,1,Avenida da Serraria,True,True
+Sétimo Céu,Sétimo Céu,-51.2510435000969,-30.1195984127114,-51.251007,-30.119612,3.889,1,,True,True
+Teresópolis,Teresópolis,-51.209418742318,-30.0799772466779,-51.209502,-30.07993,9.549,1,Avenida Teresópolis,True,True
+Três Figueiras,Três Figueiras,-51.1749180398318,-30.0320173995828,-51.174978,-30.031978,7.224,1,Avenida Luiz Manoel Gonzaga,True,True
+Tristeza,Tristeza,-51.2514556815603,-30.1090465282678,-51.251459,-30.10904,0.828,1,Avenida Otto Niemeyer,True,True
+Vila Assunção,Vila  Assunção,-51.2550204942162,-30.100180146807,-51.255005,-30.100211,3.728,1,Rua Coroados,True,True
+Vila Conceição,Vila Conceição,-51.2585407467141,-30.1211497819494,-51.258611,-30.121161,6.855,1,Rua Apolinário Porto Alegre,True,True
+Vila Ipiranga,Vila Ipiranga,-51.1489673177001,-30.021489930859,-51.148964,-30.021507,1.907,1,Avenida Brasília,True,True
+Vila Jardim,Vila Jardim,-51.1530055820369,-30.0344525915643,-51.153023,-30.034479,3.316,1,Rua Galiléia,True,True
+Vila João Pessoa,Vila João Pessoa,-51.1765277755466,-30.067579722071,-51.176519,-30.067581,0.875,1,Avenida Luiz Moschetti,True,True
+Vila Nova,Vila Nova,-51.2124293380064,-30.1173459931917,-51.212445,-30.117342,1.604,1,Rua Atílio Supertti,True,True
+São José,Vila São José,-51.1661842488243,-30.068548635895,-51.166202,-30.068445,11.659,1,Rua 26 de Dezembro,True,True

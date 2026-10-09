@@ -1,0 +1,31 @@
+﻿origin,destination,stored_distance_m,fresh_distance_m,distance_difference_m,distance_difference_percent,stored_duration_s,fresh_duration_s,duration_difference_s,duration_difference_percent,comparison
+Aberta dos Morros,Centro Histórico,18307.1,18307.1,0.0,0.0,1621.4,1621.4,0.0,0.0,available
+Aberta dos Morros,Sarandi,25945.8,25945.8,0.0,0.0,2260.6,2260.6,0.0,0.0,available
+Aberta dos Morros,Restinga,6913.2,6913.2,0.0,0.0,675.5,675.5,0.0,0.0,available
+Aberta dos Morros,Lomba do Pinheiro,13314.8,13314.8,0.0,0.0,1439.7,1439.7,0.0,0.0,available
+Aberta dos Morros,Anchieta,,24762.9,,,,2106.2,,,missing_from_stored_table
+Centro Histórico,Aberta dos Morros,18751.1,18751.1,0.0,0.0,1658.5,1658.5,0.0,0.0,available
+Centro Histórico,Sarandi,13300.7,13300.7,0.0,0.0,1150.8,1150.8,0.0,0.0,available
+Centro Histórico,Restinga,21616,21616,0,0.0,2049.2,2049.2,0.0,0.0,available
+Centro Histórico,Lomba do Pinheiro,15712.5,15711.1,-1.4,-0.0089,1437,1437,0,0.0,available
+Centro Histórico,Anchieta,,9457,,,,795,,,missing_from_stored_table
+Sarandi,Aberta dos Morros,26463.7,26463.7,0.0,0.0,2320,2320,0,0.0,available
+Sarandi,Centro Histórico,11388.9,11388.9,0.0,0.0,1059.6,1059.6,0.0,0.0,available
+Sarandi,Restinga,23078.3,23078.3,0.0,0.0,2450.1,2450.1,0.0,0.0,available
+Sarandi,Lomba do Pinheiro,13676.3,13674.8,-1.5,-0.011,1358.1,1358.1,0.0,0.0,available
+Sarandi,Anchieta,,5705.2,,,,488.6,,,missing_from_stored_table
+Restinga,Aberta dos Morros,7293.1,7293.1,0.0,0.0,759.3,759.3,0.0,0.0,available
+Restinga,Centro Histórico,19570.5,19570.5,0.0,0.0,2030.4,2030.4,0.0,0.0,available
+Restinga,Sarandi,22751.9,22751.9,0.0,0.0,2423.3,2423.3,0.0,0.0,available
+Restinga,Lomba do Pinheiro,9754.2,9752.8,-1.4,-0.0144,1141.4,1141.4,0.0,0.0,available
+Restinga,Anchieta,,26343.9,,,,2552,,,missing_from_stored_table
+Lomba do Pinheiro,Aberta dos Morros,13543.4,13543.4,0.0,0.0,1489.5,1489.5,0.0,0.0,available
+Lomba do Pinheiro,Centro Histórico,14285.2,14285.2,0.0,0.0,1261.6,1261.6,0.0,0.0,available
+Lomba do Pinheiro,Sarandi,13007.3,13007.3,0.0,0.0,1293.1,1293.1,0.0,0.0,available
+Lomba do Pinheiro,Restinga,10107.7,10107.7,0.0,0.0,1197.2,1197.2,0.0,0.0,available
+Lomba do Pinheiro,Anchieta,,16973.9,,,,1479.7,,,missing_from_stored_table
+Anchieta,Aberta dos Morros,,25318.8,,,,2192.5,,,missing_from_stored_table
+Anchieta,Centro Histórico,,9316.7,,,,768.4,,,missing_from_stored_table
+Anchieta,Sarandi,,5754.7,,,,489.6,,,missing_from_stored_table
+Anchieta,Restinga,,27849.1,,,,2596.6,,,missing_from_stored_table
+Anchieta,Lomba do Pinheiro,,18452.1,,,,1656,,,missing_from_stored_table

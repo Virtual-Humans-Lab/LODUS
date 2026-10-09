@@ -1,0 +1,2523 @@
+{
+  "profile": "driving",
+  "region": "Centro Histórico",
+  "region_input_coordinate": [
+    -51.22998448688874,
+    -30.02924715006643
+  ],
+  "home_count": 95,
+  "inbound": {
+    "code": "Ok",
+    "distances": [
+      [
+        0
+      ],
+      [
+        1566.9
+      ],
+      [
+        806.2
+      ],
+      [
+        54.6
+      ],
+      [
+        1153.3
+      ],
+      [
+        1448.9
+      ],
+      [
+        1476.4
+      ],
+      [
+        1513.7
+      ],
+      [
+        1428.2
+      ],
+      [
+        1201.8
+      ],
+      [
+        1398.1
+      ],
+      [
+        1439.8
+      ],
+      [
+        1439.8
+      ],
+      [
+        1052.3
+      ],
+      [
+        979
+      ],
+      [
+        1311.3
+      ],
+      [
+        2224.7
+      ],
+      [
+        946.3
+      ],
+      [
+        854.8
+      ],
+      [
+        991.2
+      ],
+      [
+        1090.9
+      ],
+      [
+        1281.4
+      ],
+      [
+        772
+      ],
+      [
+        967.9
+      ],
+      [
+        823.5
+      ],
+      [
+        1026.4
+      ],
+      [
+        1312.7
+      ],
+      [
+        1648.9
+      ],
+      [
+        1655.2
+      ],
+      [
+        2853.8
+      ],
+      [
+        1681.7
+      ],
+      [
+        1535.5
+      ],
+      [
+        1799.7
+      ],
+      [
+        2924.3
+      ],
+      [
+        2452.4
+      ],
+      [
+        1368.8
+      ],
+      [
+        2069.6
+      ],
+      [
+        2324
+      ],
+      [
+        2122.2
+      ],
+      [
+        2258.2
+      ],
+      [
+        1910.4
+      ],
+      [
+        2205.8
+      ],
+      [
+        1453.9
+      ],
+      [
+        2144.8
+      ],
+      [
+        1815.8
+      ],
+      [
+        1707.4
+      ],
+      [
+        2101.9
+      ],
+      [
+        1981.1
+      ],
+      [
+        3270.7
+      ],
+      [
+        1950.3
+      ],
+      [
+        3187.8
+      ],
+      [
+        3270.5
+      ],
+      [
+        2741.6
+      ],
+      [
+        4046.4
+      ],
+      [
+        1870.8
+      ],
+      [
+        4163
+      ],
+      [
+        1904.5
+      ],
+      [
+        1853.1
+      ],
+      [
+        1790.4
+      ],
+      [
+        2035.7
+      ],
+      [
+        2069.2
+      ],
+      [
+        1820.1
+      ],
+      [
+        1690.8
+      ],
+      [
+        1916
+      ],
+      [
+        1571.8
+      ],
+      [
+        1246.1
+      ],
+      [
+        971.9
+      ],
+      [
+        1502.9
+      ],
+      [
+        1273
+      ],
+      [
+        1425.9
+      ],
+      [
+        1861.2
+      ],
+      [
+        1758.9
+      ],
+      [
+        1793.1
+      ],
+      [
+        1675.4
+      ],
+      [
+        1656.6
+      ],
+      [
+        1497
+      ],
+      [
+        1581.2
+      ],
+      [
+        1471.2
+      ],
+      [
+        1139.5
+      ],
+      [
+        1162.7
+      ],
+      [
+        1576.7
+      ],
+      [
+        1025.1
+      ],
+      [
+        1302.7
+      ],
+      [
+        1163
+      ],
+      [
+        1380.3
+      ],
+      [
+        1499.7
+      ],
+      [
+        1524.9
+      ],
+      [
+        1299.8
+      ],
+      [
+        1384.6
+      ],
+      [
+        1356.6
+      ],
+      [
+        1906
+      ],
+      [
+        1094.2
+      ],
+      [
+        1296.8
+      ],
+      [
+        3021
+      ],
+      [
+        1932
+      ]
+    ],
+    "destinations": [
+      {
+        "hint": "g8pbg____38AAAAAeQAAAAAAAABRAAAAAAAAAHbsoEIAAAAAqORXQgAAAAB5AAAAAAAAAFEAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAAPwQAAAAAgcpbg____3-SAAAAkgAAAAAAAAAAAAAA_tTCQgAAAAAAAAAAAAAAAJIAAACSAAAAAAAAAAAAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAA_wkAAAAA",
+        "location": [
+          -51.229995,
+          -30.029124
+        ],
+        "name": "Rua 7 de Setembro / Rua General Câmara",
+        "distance": 13.67612726
+      }
+    ],
+    "durations": [
+      [
+        0
+      ],
+      [
+        222
+      ],
+      [
+        101.8
+      ],
+      [
+        8.2
+      ],
+      [
+        155.3
+      ],
+      [
+        189.5
+      ],
+      [
+        195.8
+      ],
+      [
+        199.3
+      ],
+      [
+        197.7
+      ],
+      [
+        157
+      ],
+      [
+        178.2
+      ],
+      [
+        182.9
+      ],
+      [
+        192
+      ],
+      [
+        133.5
+      ],
+      [
+        121.2
+      ],
+      [
+        200.8
+      ],
+      [
+        284.1
+      ],
+      [
+        130.5
+      ],
+      [
+        120
+      ],
+      [
+        142.3
+      ],
+      [
+        161
+      ],
+      [
+        163.7
+      ],
+      [
+        101.6
+      ],
+      [
+        132.8
+      ],
+      [
+        98.5
+      ],
+      [
+        128.9
+      ],
+      [
+        149.5
+      ],
+      [
+        195.3
+      ],
+      [
+        194.3
+      ],
+      [
+        292.9
+      ],
+      [
+        196.1
+      ],
+      [
+        178.8
+      ],
+      [
+        212.3
+      ],
+      [
+        314.6
+      ],
+      [
+        319.1
+      ],
+      [
+        176.7
+      ],
+      [
+        279.6
+      ],
+      [
+        309.5
+      ],
+      [
+        285.5
+      ],
+      [
+        324
+      ],
+      [
+        273.3
+      ],
+      [
+        298.8
+      ],
+      [
+        195.1
+      ],
+      [
+        299.7
+      ],
+      [
+        250.2
+      ],
+      [
+        234.7
+      ],
+      [
+        290.1
+      ],
+      [
+        271.3
+      ],
+      [
+        305.3
+      ],
+      [
+        271.3
+      ],
+      [
+        305
+      ],
+      [
+        312.1
+      ],
+      [
+        261.5
+      ],
+      [
+        381.3
+      ],
+      [
+        258.8
+      ],
+      [
+        396.4
+      ],
+      [
+        244.7
+      ],
+      [
+        241.2
+      ],
+      [
+        237.1
+      ],
+      [
+        277.4
+      ],
+      [
+        281.2
+      ],
+      [
+        250.1
+      ],
+      [
+        227.9
+      ],
+      [
+        260.9
+      ],
+      [
+        207.2
+      ],
+      [
+        183.1
+      ],
+      [
+        140.1
+      ],
+      [
+        204.5
+      ],
+      [
+        169.9
+      ],
+      [
+        188.9
+      ],
+      [
+        227.9
+      ],
+      [
+        219.2
+      ],
+      [
+        224.3
+      ],
+      [
+        214.2
+      ],
+      [
+        199.6
+      ],
+      [
+        188.7
+      ],
+      [
+        205.4
+      ],
+      [
+        192.9
+      ],
+      [
+        142.5
+      ],
+      [
+        146.2
+      ],
+      [
+        200.6
+      ],
+      [
+        128.7
+      ],
+      [
+        161.6
+      ],
+      [
+        144.2
+      ],
+      [
+        170.4
+      ],
+      [
+        189
+      ],
+      [
+        185.4
+      ],
+      [
+        161.3
+      ],
+      [
+        169
+      ],
+      [
+        186
+      ],
+      [
+        262.8
+      ],
+      [
+        149.4
+      ],
+      [
+        132.9
+      ],
+      [
+        286.8
+      ],
+      [
+        266.9
+      ]
+    ],
+    "sources": [
+      {
+        "hint": "g8pbg____38AAAAAeQAAAAAAAABRAAAAAAAAAHbsoEIAAAAAqORXQgAAAAB5AAAAAAAAAFEAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAAPwQAAAAAgcpbg____3-SAAAAkgAAAAAAAAAAAAAA_tTCQgAAAAAAAAAAAAAAAJIAAACSAAAAAAAAAAAAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAA_wkAAAAA",
+        "location": [
+          -51.229995,
+          -30.029124
+        ],
+        "name": "Rua 7 de Setembro / Rua General Câmara",
+        "distance": 13.67612726
+      },
+      {
+        "hint": "q9tOg____39TAAAAuwAAAAAAAAAAAAAA9H1eQiNxiUIAAAAAAAAAAFMAAAC7AAAAAAAAAAAAAADrlgAAs0ry_CrDNf5ES_L8I8M1_gAAPwAAAAAA",
+        "location": [
+          -51.230029,
+          -30.031062
+        ],
+        "name": "Rua General Câmara",
+        "distance": 14.00851066
+      },
+      {
+        "hint": "U4KAg____38YAAAAJwAAAAAAAAAPAAAAIy-vQQwbR0EAAAAAde5RQRgAAAAnAAAAAAAAAA8AAADrlgAAnEvy_DjBNf6cS_L8ZME1_gAA3xAAAAAA",
+        "location": [
+          -51.229796,
+          -30.03156
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 4.877526013
+      },
+      {
+        "hint": "gcpbg____39AAAAAkgAAAAAAAAAAAAAADCkrQvKAWkIAAAAAAAAAAEAAAACSAAAAAAAAAAAAAADrlgAAEEry_IrMNf5LS_L87sw1_gAA_wkAAAAA",
+        "location": [
+          -51.230192,
+          -30.028662
+        ],
+        "name": "Rua General Câmara",
+        "distance": 32.34448438
+      },
+      {
+        "hint": "pdqHg____38NAAAAmQAAAAAAAAAEAAAA7OMSQTCuuUIAAAAA0Vc5QA0AAACZAAAAAAAAAAQAAADrlgAA91fy_MHMNf7yV_L8c8w1_gAA3wUAAAAA",
+        "location": [
+          -51.226633,
+          -30.028607
+        ],
+        "name": "Avenida Otávio Rocha",
+        "distance": 8.659964782
+      },
+      {
+        "hint": "sNqHg____39kAAAAlgAAAAAAAAAAAAAAn-yGQoBFA0IAAAAAAAAAAGQAAACWAAAAAAAAAAAAAADrlgAA913y_NDFNf71XfL8usU1_gAA7wUAAAAA",
+        "location": [
+          -51.225097,
+          -30.030384
+        ],
+        "name": "Rua General Vitorino",
+        "distance": 2.446381969
+      },
+      {
+        "hint": "jtqHg____39DAAAAaQAAAAAAAAAAAAAAtRY0QiT1yEEAAAAAAAAAAEMAAABpAAAAAAAAAAAAAADrlgAA6lry_L_CNf7AW_L8scI1_gAATwAAAAAA",
+        "location": [
+          -51.225878,
+          -30.031169
+        ],
+        "name": "Rua Vigário José Inácio",
+        "distance": 20.7011421
+      },
+      {
+        "hint": "CfnAg____386AAAAmAAAAAAAAAAAAAAASwgbQp-9eUIAAAAAAAAAADoAAACYAAAAAAAAAAAAAADrlgAAd1jy_MTDNf5vWPL8WsM1_gAA3wUAAAAA",
+        "location": [
+          -51.226505,
+          -30.030908
+        ],
+        "name": "Avenida Senador Salgado Filho",
+        "distance": 11.77571654
+      },
+      {
+        "hint": "i9qHg____39rAAAAowAAAAAAAAAAAAAAXamOQpfhFEIAAAAAAAAAAGsAAACjAAAAAAAAAAAAAADrlgAAeVby_Ki-Nf5mV_L8mr41_gAAfwsAAAAA",
+        "location": [
+          -51.227015,
+          -30.032216
+        ],
+        "name": "Rua Marechal Floriano Peixoto",
+        "distance": 22.91413029
+      },
+      {
+        "hint": "lNqHg____39OAAAAbgAAADkAAAAAAAAAabxRQpJRqEEUSBhCAAAAAE4AAABuAAAAOQAAAAAAAADrlgAAs1ry_G3ANf77WfL8fMA1_gIAXwAAAAAA",
+        "location": [
+          -51.225933,
+          -30.031763
+        ],
+        "name": "Rua Vigário José Inácio",
+        "distance": 17.82674206
+      },
+      {
+        "hint": "ldqHg____38LAAAAEQAAAF0AAAAAAAAAFOwfQSKCnkAkCKVCAAAAAAsAAAARAAAAXQAAAAAAAADrlgAAD17y_F69Nf69XfL8_701_gYALwQAAAAA",
+        "location": [
+          -51.225073,
+          -30.032546
+        ],
+        "name": "Rua Jerônimo Coelho",
+        "distance": 19.52160062
+      },
+      {
+        "hint": "ldqHg____385AAAAQwAAAAAAAAArAAAAII5LQrygDEEAAAAAUSUXQjkAAABDAAAAAAAAACsAAADrlgAAbFzy_Cu9Nf5pXPL8-bw1_gAAzwUAAAAA",
+        "location": [
+          -51.225492,
+          -30.032597
+        ],
+        "name": "Rua Jerônimo Coelho",
+        "distance": 5.550192611
+      },
+      {
+        "hint": "cuKfg____38QAAAARwAAAAwAAAAAAAAASNZqQclwQ0Jg1iZBAAAAABAAAABHAAAADAAAAAAAAADrlgAAZVTy_G29Nf5bVPL8srw1_gIAzwUAAAAA",
+        "location": [
+          -51.227547,
+          -30.032531
+        ],
+        "name": "Rua Jerônimo Coelho",
+        "distance": 20.75191714
+      },
+      {
+        "hint": "jNqHg____38eAAAAMAAAAAAAAAAlAAAAFRXYQdTcc0EAAAAAkPoDQh4AAAAwAAAAAAAAACUAAADrlgAAk1Xy_CzBNf6SVfL8jcA1_gAA7xAAAAAA",
+        "location": [
+          -51.227245,
+          -30.031572
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 17.62586932
+      },
+      {
+        "hint": "aeKfg____38TAAAAswAAAAAAAAAKAAAAwgyHQRgXDkMAAAAAwnUMQRMAAACzAAAAAAAAAAoAAADrlgAAm1Ly_DXBNf6aUvL8p8A1_gAA7xAAAAAA",
+        "location": [
+          -51.228005,
+          -30.031563
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 15.74140224
+      },
+      {
+        "hint": "UYKAg____38ZAAAATAAAAAUAAABJAAAAYx2HQROzBkK4XGNA2LVCQhkAAABMAAAABQAAAEkAAADrlgAAZkzy_Bi9Nf6rTPL8FL01_gIAjwsAAAAA",
+        "location": [
+          -51.229594,
+          -30.032616
+        ],
+        "name": "Praça Marechal Deodoro",
+        "distance": 6.670637556
+      },
+      {
+        "hint": "b-Kfg____38xAAAAiAAAAAAAAACoAAAA_XovQl3OmkIAAAAA1MAVQzEAAACIAAAAAAAAAKgAAADrlgAA8lLy_PC7Nf5EUfL8Brw1_gAAfwsAAAAA",
+        "location": [
+          -51.227918,
+          -30.032912
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 41.55032969
+      },
+      {
+        "hint": "jNtOg____382AAAASQAAAAAAAAAKAAAAjZMQQmWWSUEAAAAA2t7WQDYAAABJAAAAAAAAAAoAAADrlgAArUvy_OO9Nf6iS_L8f701_gAA_wUAAAAA",
+        "location": [
+          -51.229779,
+          -30.032413
+        ],
+        "name": "Praça Marechal Deodoro",
+        "distance": 11.135954
+      },
+      {
+        "hint": "WJGphv___39EAAAAdAAAAAAAAAAFAAAAM190QnaOJ0IAAAAAa5qCQEQAAAB0AAAAAAAAAAUAAADrlgAAu0Dy_Mu-Nf4WQfL85r01_gAAvw8AAAAA",
+        "location": [
+          -51.232581,
+          -30.032181
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 26.86015474
+      },
+      {
+        "hint": "Dvnwhf___39ZAAAAnwAAAAAAAAAFAAAARi2gQqobdkIAAAAA-UqVQFkAAACfAAAAAAAAAAUAAADrlgAAsD3y_KO5Nf4QPfL8YLs1_gAAjwQAAAAA",
+        "location": [
+          -51.23336,
+          -30.033501
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 51.68760294
+      },
+      {
+        "hint": "D_nwhSsiO4s7AAAAEgAAACIAAAAAAAAATmBHQTMeakDOu-VAAAAAAB4AAAAJAAAAEQAAAAAAAADrlgAAUzry_HS5Nf7BOvL8lrk1_gIATxUAAAAA",
+        "location": [
+          -51.234221,
+          -30.033548
+        ],
+        "name": "",
+        "distance": 11.26033059
+      },
+      {
+        "hint": "F4KAg____392AAAA6QAAAAYAAAAiAAAA_mKdQn8fmUK0soZAxk4TQXYAAADpAAAABgAAACIAAADrlgAAzDvy_FC9Nf7AO_L8br01_gIArw8AAAAA",
+        "location": [
+          -51.233844,
+          -30.03256
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 3.521282752
+      },
+      {
+        "hint": "S5Gphv___39KAAAATAAAAAAAAABrAAAAglqDQiwe1z8AAAAAf-u9QkoAAABMAAAAAAAAAGsAAADrlgAA8jny_I_BNf4OOvL8V8E1_gAALwQAAAAA",
+        "location": [
+          -51.234318,
+          -30.031473
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 6.769886066
+      },
+      {
+        "hint": "NoKAg____38SAAAAPwAAAAAAAAAAAAAAaoqGQTHSG0IAAAAAAAAAABIAAAA_AAAAAAAAAAAAAADrlgAAEEXy_BbANf7yRPL8YsA1_gAAvw8AAAAA",
+        "location": [
+          -51.231472,
+          -30.03185
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 8.907973583
+      },
+      {
+        "hint": "C9V_g____39EAAAAbgAAADsAAAAAAAAAeo9zQs-NEkLJI1NCAAAAAEQAAABuAAAAOwAAAAAAAADrlgAA-j3y_EPGNf5JPvL8mMU1_gIAjw8AAAAA",
+        "location": [
+          -51.233286,
+          -30.030269
+        ],
+        "name": "Rua 7 de Setembro",
+        "distance": 20.43027054
+      },
+      {
+        "hint": "EtV_g____39GAAAAiAAAAAAAAAAAAAAAS1B6Qh6PZ0IAAAAAAAAAAEYAAACIAAAAAAAAAAAAAADrlgAAZDDy_EG-Nf4zMPL8rb41_gAATwQAAAAA",
+        "location": [
+          -51.236764,
+          -30.032319
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 12.87138486
+      },
+      {
+        "hint": "xMerg____397AAAAkAAAACsAAAAAAAAAlznbQkPMj0HL1xdCAAAAAHsAAACQAAAAKwAAAAAAAADrlgAAPGjy_N_TNf5nafL86tM1_gIAXxYAAAAA",
+        "location": [
+          -51.222468,
+          -30.026785
+        ],
+        "name": "Rua Pinto Bandeira",
+        "distance": 28.8679288
+      },
+      {
+        "hint": "A_fAg____39sAAAAnQAAABEAAAAAAAAAuyvBQpMYLEJhEXNBAAAAAGwAAACdAAAAEQAAAAAAAADrlgAAU27y_J7QNf5cbvL8ntA1_gIALwsAAAAA",
+        "location": [
+          -51.220909,
+          -30.027618
+        ],
+        "name": "Rua Coronel Vicente",
+        "distance": 0.8681587812
+      },
+      {
+        "hint": "ul_Ag____39AAAAAeAAAADIAAAAAAAAAJ2dmQocsRUK0ZzNCAAAAAEAAAAB4AAAAMgAAAAAAAADrlgAAXHDy_DbPNf4_cPL8wNA1_gQArxAAAAAA",
+        "location": [
+          -51.220388,
+          -30.027978
+        ],
+        "name": "Avenida Alberto Bins",
+        "distance": 43.76552188
+      },
+      {
+        "hint": "fLnahP___38SAAAALgAAAAAAAAAXAAAAE8GBQZyhwkEAAAAAR5ykQRIAAAAuAAAAAAAAABcAAADrlgAA93Hy_ErJNf7ocfL8f8o1_gAAfwUAAAAA",
+        "location": [
+          -51.219977,
+          -30.029494
+        ],
+        "name": "Avenida Independência",
+        "distance": 34.28408183
+      },
+      {
+        "hint": "xcXghMbF4IQBAAAAFgAAAAAAAAAAAAAAAnGtP5nvmUEAAAAAAAAAAAEAAAAWAAAAAAAAAAAAAADrlgAAWmvy_OTINf5Va_L8IMk1_gAAnxAAAAAA",
+        "location": [
+          -51.22167,
+          -30.029596
+        ],
+        "name": "Avenida Independência",
+        "distance": 6.668636303
+      },
+      {
+        "hint": "yMerg____38HAAAAXAAAAEgAAAAAAAAAbmzJQFVqlkKNKIBCAAAAAAcAAABcAAAASAAAAAAAAADrlgAAh2vy_OXONf65a_L84cw1_gIAnxAAAAAA",
+        "location": [
+          -51.221625,
+          -30.028059
+        ],
+        "name": "Avenida Alberto Bins",
+        "distance": 57.40305945
+      },
+      {
+        "hint": "qtqHg____38JAAAAEAAAAOUAAAA6AAAAP37IQOHuhEASVAtDAMQZQgkAAAAQAAAA5QAAADoAAADrlgAAHmXy_ITFNf7DZPL86MU1_gIAPwMAAAAA",
+        "location": [
+          -51.223266,
+          -30.03046
+        ],
+        "name": "Rua General Vitorino",
+        "distance": 14.13993403
+      },
+      {
+        "hint": "hbnahP___3-GAAAAwAAAAAAAAAAAAAAAiMbgQUz4PUEAAAAAAAAAAEMAAABgAAAAAAAAAAAAAADrlgAAi3Dy_AfINf6NcPL828c1_gAAfwUAAAAA",
+        "location": [
+          -51.220341,
+          -30.029817
+        ],
+        "name": "",
+        "distance": 4.881339954
+      },
+      {
+        "hint": "oaFOg____38EAAAAEQAAAAAAAABEAAAAwmC1QMA8jEEAAAAAkdyyQgQAAAARAAAAAAAAAEQAAADrlgAAVGHy_MzCNf4XYfL8oMI1_gAAvwgAAAAA",
+        "location": [
+          -51.224236,
+          -30.031156
+        ],
+        "name": "Avenida João Pessoa",
+        "distance": 7.642899982
+      },
+      {
+        "hint": "8ubchP___38TAAAAFwAAAEcAAAAyAAAAHMKKQTTjX0CLu3pCwkjUQRMAAAAXAAAARwAAADIAAADrlgAA01_y_Au_Nf6rX_L8Lr81_gIAHw4AAAAA",
+        "location": [
+          -51.224621,
+          -30.032117
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 5.4718491
+      },
+      {
+        "hint": "f9uLhf___39UAAAAZQAAAAAAAAAAAAAA83iVQtqHbUEAAAAAAAAAAFQAAABlAAAAAAAAAAAAAADrlgAAil_y_Ke4Nf5BXvL85rk1_gAATw4AAAAA",
+        "location": [
+          -51.224694,
+          -30.033753
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 47.51474428
+      },
+      {
+        "hint": "oqFOg____38PAAAAKAAAAAAAAAAQAAAAuAKsQS_1AUIAAAAAl_GoQQ8AAAAoAAAAAAAAABAAAADrlgAAPWTy_A2_Nf4_ZPL8Dr81_gAAHwkAAAAA",
+        "location": [
+          -51.223491,
+          -30.032115
+        ],
+        "name": "Avenida João Pessoa",
+        "distance": 0.2225041445
+      },
+      {
+        "hint": "f9uLhf___38ZAAAAZQAAAAAAAAAAAAAAppCxQcXFhkIAAAAAAAAAABkAAABlAAAAAAAAAAAAAADrlgAAImHy_OG5Nf7IX_L8Mbs1_gAATw4AAAAA",
+        "location": [
+          -51.224286,
+          -30.033439
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 50.01255746
+      },
+      {
+        "hint": "pcCkg____38wAAAAYAAAAAAAAAAAAAAAj-uBQrP0e0IAAAAAAAAAADAAAABgAAAAAAAAAAAAAADrlgAAIGfy_G27Nf7WZfL8qLo1_gAAHwkAAAAA",
+        "location": [
+          -51.222752,
+          -30.033043
+        ],
+        "name": "Avenida João Pessoa",
+        "distance": 38.60318896
+      },
+      {
+        "hint": "2DDfg____39BAAAAfQAAAAAAAAAQAAAAGNBpQg5PUUIAAAAACDtiQUEAAAB9AAAAAAAAABAAAADrlgAAs2Py_K27Nf7_Y_L8ars1_gAA3wIAAAAA",
+        "location": [
+          -51.223629,
+          -30.032979
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 10.43588695
+      },
+      {
+        "hint": "XNRch2fUXIdhAAAAAAAAAAAAAABlAAAAvs2hQQAAAAAAAAAALhmpQTEAAAAAAAAAAAAAADMAAADrlgAANGTy_Em0Nf7mY_L8VbQ1_gAAbxAAAAAA",
+        "location": [
+          -51.2235,
+          -30.034871
+        ],
+        "name": "",
+        "distance": 7.640729226
+      },
+      {
+        "hint": "j9qHg____38YAAAALgAAAA0AAABVAAAA5XWxQa3yl0H56DNBtgJmQhgAAAAuAAAADQAAAFUAAADrlgAASVfy_DO5Nf50V_L80bg1_gIAXwQAAAAA",
+        "location": [
+          -51.226807,
+          -30.033613
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 11.62850843
+      },
+      {
+        "hint": "tT5Pg____38tAAAAkAAAADsAAAAAAAAAcnEjQn14rkKOagxCAAAAAC0AAACQAAAAOwAAAAAAAADrlgAAMV3y_LO1Nf4eXvL8FbU1_gwAXwIAAAAA",
+        "location": [
+          -51.225295,
+          -30.034509
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 28.79957298
+      },
+      {
+        "hint": "kNqHg____39RAAAAjwAAAAoAAAAAAAAAejiRQlNKW0K2OgdBAAAAAFEAAACPAAAACgAAAAAAAADrlgAAvFXy_Am2Nf5gVvL8_rU1_gIAjwsAAAAA",
+        "location": [
+          -51.227204,
+          -30.034423
+        ],
+        "name": "Rua Marechal Floriano Peixoto",
+        "distance": 15.86670732
+      },
+      {
+        "hint": "ltqHg____388AAAARQAAAAAAAAALAAAAaixWQuYv8UAAAAAA6PUYQTwAAABFAAAAAAAAAAsAAADrlgAAZVPy_P6zNf5iU_L8KrQ1_gAArxAAAAAA",
+        "location": [
+          -51.227803,
+          -30.034946
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 4.886103194
+      },
+      {
+        "hint": "l9qHg____39KAAAAcgAAAAAAAAAdAAAAh8SEQq-IDEIAAAAAsqzPQUoAAAByAAAAAAAAAB0AAADrlgAAWVXy_MexNf7SVPL80LE1_gAAjwsAAAAA",
+        "location": [
+          -51.227303,
+          -30.035513
+        ],
+        "name": "Rua Marechal Floriano Peixoto",
+        "distance": 13.06054297
+      },
+      {
+        "hint": "Jx9Pg____38aAAAAHwAAACQAAAAAAAAAyuO6QSBngkAzl_9BAAAAABoAAAAfAAAAJAAAAAAAAADrlgAAjF3y_CWyNf6_XvL8XbM1_gIAbxMAAAAA",
+        "location": [
+          -51.225204,
+          -30.035419
+        ],
+        "name": "Rua General Lima e Silva",
+        "distance": 45.53217115
+      },
+      {
+        "hint": "Jh9Pg____38QAAAAHQAAABoAAABFAAAA8ZWuQWw5hkEx2g1Cua62QhAAAAAdAAAAGgAAAEUAAADrlgAA113y_EqvNf41XfL8tq81_gQAnw0AAAAA",
+        "location": [
+          -51.225129,
+          -30.03615
+        ],
+        "name": "Avenida Loureiro da Silva",
+        "distance": 19.68578406
+      },
+      {
+        "hint": "q63Rhf___38JAAAATAAAAC4AAAA5AAAATzUMQWNPbEJqViFCXuBLQgkAAABMAAAALgAAADkAAADrlgAATFby_BSxNf73V_L8IrA1_gQAHwIAAAAA",
+        "location": [
+          -51.22706,
+          -30.035692
+        ],
+        "name": "Rua Coronel Genuíno",
+        "distance": 49.15500699
+      },
+      {
+        "hint": "2kUmjd1FJo0eAAAAAAAAAB8AAAAeAAAA1J5IQQAAAABbpUpB-jdFQR4AAAAAAAAAHwAAAB4AAADrlgAAXlry_NSsNf6JWfL81K01_gQAPxMAAAAA",
+        "location": [
+          -51.226018,
+          -30.03678
+        ],
+        "name": "",
+        "distance": 35.03548705
+      },
+      {
+        "hint": "qq3Rhf___38bAAAAbgAAAAgAAAAyAAAADTPHQfNakkIh9-ZAwIkyQhsAAABuAAAACAAAADIAAADrlgAAMFby_OmuNf7vVfL8s641_gIAfwgAAAAA",
+        "location": [
+          -51.227088,
+          -30.036247
+        ],
+        "name": "Rua José do Patrocínio",
+        "distance": 8.668690632
+      },
+      {
+        "hint": "lTFZg____38QAAAAGwAAAKoAAAAzAAAAOcuwQZn8ZkG6M0dDODIlQhAAAAAbAAAAqgAAADMAAADrlgAAeU3y_FymNf7mTfL8Gac1_g4AjxIAAAAA",
+        "location": [
+          -51.229319,
+          -30.038436
+        ],
+        "name": "Avenida Loureiro da Silva",
+        "distance": 23.4415089
+      },
+      {
+        "hint": "eOKfg____38vAAAAbwAAAAAAAAATAAAAOpUoQkJ5YEIAAAAATvCIQS8AAABvAAAAAAAAABMAAADrlgAACVLy_A2uNf6EUfL8Ea41_gAAXwsAAAAA",
+        "location": [
+          -51.228151,
+          -30.036467
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 12.83711785
+      },
+      {
+        "hint": "JdV_g____3-SAAAAxwAAAAAAAAAAAAAA3ykCQ20rOkIAAAAAAAAAAJIAAADHAAAAAAAAAAAAAADrlgAANVDy_HavNf5EUPL8Xa41_gAAfwUAAAAA",
+        "location": [
+          -51.228619,
+          -30.036106
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 31.18324233
+      },
+      {
+        "hint": "deKfg____385AAAAjQAAAAAAAAAAAAAAVEFMQtjAlEIAAAAAAAAAADkAAACNAAAAAAAAAAAAAADrlgAAQFLy_CeyNf77UPL8NrI1_gAAfwsAAAAA",
+        "location": [
+          -51.228096,
+          -30.035417
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 31.39424397
+      },
+      {
+        "hint": "ZnfIhf___38jAAAANgAAAAoAAAAAAAAA9hD7QX7ghEGbGwhBAAAAACMAAAA2AAAACgAAAAAAAADrlgAAmU7y_MazNf6qTvL8ibI1_gIAvxAAAAAA",
+        "location": [
+          -51.229031,
+          -30.035002
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 35.1785997
+      },
+      {
+        "hint": "87Lwhf___38-AAAAVAAAAAAAAAATAAAAzSQnQvX3ZUEAAAAATTBLQT4AAABUAAAAAAAAABMAAADrlgAAiEvy_Ju0Nf7dS_L8lLQ1_gAAnwsAAAAA",
+        "location": [
+          -51.229816,
+          -30.034789
+        ],
+        "name": "Rua Espírito Santo",
+        "distance": 8.235913978
+      },
+      {
+        "hint": "beKfg____38DAAAATAAAADsAAAAOAAAA-NcUQHw0QkK1_B1C-NcUQQMAAABMAAAAOwAAAA4AAADrlgAAxkny_OS5Nf6jSfL8q7g1_gIA_wUAAAAA",
+        "location": [
+          -51.230266,
+          -30.033436
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 34.86081804
+      },
+      {
+        "hint": "FYKAg____3-iAAAAwgAAAAAAAAAIAAAAHnoQQ5DR4EEAAAAAu7nVQKIAAADCAAAAAAAAAAgAAADrlgAAi0ny_GavNf6QSfL8ha81_gAAHwYAAAAA",
+        "location": [
+          -51.230325,
+          -30.036122
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 3.470120294
+      },
+      {
+        "hint": "FYKAg____398AAAAwgAAAAAAAAAIAAAAOA7eQtM0dkIAAAAAu7nVQHwAAADCAAAAAAAAAAgAAADrlgAAM0jy_IyvNf4gSPL8Da81_gAAHwYAAAAA",
+        "location": [
+          -51.230669,
+          -30.036084
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 14.19711233
+      },
+      {
+        "hint": "IIKAg____391AAAA0wAAAAAAAAAAAAAAraPQQgsDp0IAAAAAAAAAAHUAAADTAAAAAAAAAAAAAADrlgAAZkDy_H-wNf5VQPL8JbA1_gAAPwYAAAAA",
+        "location": [
+          -51.232666,
+          -30.035841
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 10.11062912
+      },
+      {
+        "hint": "FoKAg____39EAAAAgwAAAAAAAAALAAAAevs2QrdxJ0IAAAAAIqHqQEQAAACDAAAAAAAAAAsAAADrlgAA2EPy_KWxNf5UQvL8uLE1_gAAPwAAAAAA",
+        "location": [
+          -51.231784,
+          -30.035547
+        ],
+        "name": "Rua General Auto",
+        "distance": 37.48650571
+      },
+      {
+        "hint": "IIKAg____38JAAAA0wAAAAAAAAAAAAAAbW0GQYVsM0MAAAAAAAAAAAkAAADTAAAAAAAAAAAAAADrlgAAkDzy_AexNf6ePPL8VLE1_gAAPwYAAAAA",
+        "location": [
+          -51.233648,
+          -30.035705
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 8.641842302
+      },
+      {
+        "hint": "gdtOg____39OAAAAWAAAAAAAAACTAAAA_Y2LQmzdB0EAAAAAjaHjQk4AAABYAAAAAAAAAJMAAADrlgAAI0Hy_HSzNf4lQfL8p7M1_gAA_xAAAAAA",
+        "location": [
+          -51.232477,
+          -30.035084
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 5.656786848
+      },
+      {
+        "hint": "aqe2hv___38fAAAAOQAAABgAAAAAAAAAHgCmQcuOiEEuj2tAAAAAAB8AAAA5AAAAGAAAAAAAAADrlgAA60Py_Fe6Nf7ZQ_L8wbk1_gIA_wUAAAAA",
+        "location": [
+          -51.231765,
+          -30.033321
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 16.71833847
+      },
+      {
+        "hint": "Dvnwhf___39vAAAAnwAAAAAAAAAFAAAAOJrGQsRBKUIAAAAA-UqVQG8AAACfAAAAAAAAAAUAAADrlgAAbj7y_Ne5Nf6zPvL8Frk1_gAAjwQAAAAA",
+        "location": [
+          -51.23317,
+          -30.033449
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 22.40602192
+      },
+      {
+        "hint": "m9tOg____39XAAAAigAAAAkAAAAeAAAAKtqbQtpaMkJzEv9Avl0NQVcAAACKAAAACQAAAB4AAADrlgAAeDvy_N-1Nf4lPfL8dLY1_gIA7wkAAAAA",
+        "location": [
+          -51.233928,
+          -30.034465
+        ],
+        "name": "Rua General Bento Martins",
+        "distance": 44.55674155
+      },
+      {
+        "hint": "Fh9Pg____38sAAAAfAAAAAAAAAANAAAAPffsQZVZVEIAAAAAaBoHQSwAAAB8AAAAAAAAAA0AAADrlgAA-zXy_GC1Nf7pNvL8nbU1_gAAfxUAAAAA",
+        "location": [
+          -51.235333,
+          -30.034592
+        ],
+        "name": "Rua General Cypriano Ferreira",
+        "distance": 23.93310825
+      },
+      {
+        "hint": "I9V_g____38QAAAAmwAAAAoAAAAAAAAARYxvQfB79kJh8wpBAAAAABAAAACbAAAACgAAAAAAAADrlgAATzvy_Ci0Nf5KO_L81rM1_gIADxEAAAAA",
+        "location": [
+          -51.233969,
+          -30.034904
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 9.102721505
+      },
+      {
+        "hint": "OoKAg0KCgINCAAAAfwAAAAAAAAAAAAAAQYJsQutk4EIAAAAAAAAAAEIAAAB_AAAAAAAAAAAAAADrlgAAwTfy_DGvNf73N_L84a81_gAAjwYAAAAA",
+        "location": [
+          -51.234879,
+          -30.036175
+        ],
+        "name": "Rua Washington Luiz",
+        "distance": 20.19349767
+      },
+      {
+        "hint": "IdV_g____39BAAAAcQAAAAAAAAAAAAAAeBUwQlQk_UEAAAAAAAAAAEEAAABxAAAAAAAAAAAAAADrlgAASzLy_NGwNf4AM_L84bA1_gAA7woAAAAA",
+        "location": [
+          -51.236277,
+          -30.035759
+        ],
+        "name": "Rua General Portinho",
+        "distance": 17.54949482
+      },
+      {
+        "hint": "IdV_g____38OAAAAcQAAAAAAAAAAAAAAkdccQeK4g0IAAAAAAAAAAA4AAABxAAAAAAAAAAAAAADrlgAAJjLy_ASyNf4YMvL8A7I1_gAA7woAAAAA",
+        "location": [
+          -51.236314,
+          -30.035452
+        ],
+        "name": "Rua General Portinho",
+        "distance": 1.35501124
+      },
+      {
+        "hint": "qNtOgyyCgIM0AAAAAwAAAIMAAABJAAAAH7sKQnWR-D-qoK5CIB-AQjQAAAADAAAAgwAAAEkAAADrlgAAHSvy_HyuNf4QK_L87641_goATwUAAAAA",
+        "location": [
+          -51.238115,
+          -30.036356
+        ],
+        "name": "Rua Washington Luiz",
+        "distance": 12.80960815
+      },
+      {
+        "hint": "pNtOg6nbToMHAAAAOAAAADwAAAAZAAAAuXDUQBU2RkLkNldCqsivQQcAAAA4AAAAPAAAABkAAADrlgAA4SPy_CywNf45JPL8krA1_g4A7wcAAAAA",
+        "location": [
+          -51.239967,
+          -30.035924
+        ],
+        "name": "Rua Washington Luiz",
+        "distance": 14.13879349
+      },
+      {
+        "hint": "pdtOg____3-qAAAA6AAAABEAAAAJAAAALH4XQ4UwW0KdHXhBo170QKoAAADoAAAAEQAAAAkAAADrlgAALyny_PKzNf6lKfL837I1_gIAXwQAAAAA",
+        "location": [
+          -51.238609,
+          -30.034958
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 32.54026637
+      },
+      {
+        "hint": "Fx9Pg____38-AAAAawAAAAAAAAATAAAAKgFgQrvzHUIAAAAA44SFQT4AAABrAAAAAAAAABMAAADrlgAADzTy_Ha0Nf4ENPL8m7M1_gAADxEAAAAA",
+        "location": [
+          -51.235825,
+          -30.034826
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 24.2999549
+      },
+      {
+        "hint": "INV_g____38AAAAAIgAAAD0AAAAAAAAAAAAAAMIi8kHlUFdCAAAAAAAAAAAiAAAAPQAAAAAAAADrlgAAnS_y_Hy0Nf6FL_L8LrU1_gYAzw8AAAAA",
+        "location": [
+          -51.236963,
+          -30.03482
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 19.86715781
+      },
+      {
+        "hint": "HoKAg____383AAAASgAAAAgAAAAOAAAA6klFQrkUhUGG69hAUF9BQTcAAABKAAAACAAAAA4AAADrlgAAYDby_Km7Nf5JNvL84rs1_gIArw8AAAAA",
+        "location": [
+          -51.235232,
+          -30.032983
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 6.696803978
+      },
+      {
+        "hint": "JYKAg____38uAAAAbgAAAAAAAAAvAAAAZcn2QffwKEIAAAAA0nL4QS4AAABuAAAAAAAAAC8AAADrlgAAhTXy_Ke4Nf57NfL8pLg1_gAAPxUAAAAA",
+        "location": [
+          -51.235451,
+          -30.033753
+        ],
+        "name": "Rua General Canabarro",
+        "distance": 1.020337511
+      },
+      {
+        "hint": "FNV_g____38aAAAAnwAAAAAAAAAPAAAALyKLQfC-sEIAAAAAAfsjQRoAAACfAAAAAAAAAA8AAADrlgAASi7y_OG8Nf7BLvL8Cb01_gAA7wkAAAAA",
+        "location": [
+          -51.237302,
+          -30.032671
+        ],
+        "name": "Rua General Portinho",
+        "distance": 12.30563062
+      },
+      {
+        "hint": "EtV_g____39IAAAAiAAAAAAAAAAAAAAAjqF_Qtc9YkIAAAAAAAAAAEgAAACIAAAAAAAAAAAAAADrlgAAcTDy_EW-Nf4iMfL8wLw1_gAATwQAAAAA",
+        "location": [
+          -51.236751,
+          -30.032315
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 46.37888334
+      },
+      {
+        "hint": "GdV_g____38kAAAAcQAAAAAAAAAJAAAAY03_QZFJiEIAAAAAVvcEQSQAAABxAAAAAAAAAAkAAADrlgAA1iny_Bm5Nf67KvL8W7k1_gAAXxUAAAAA",
+        "location": [
+          -51.238442,
+          -30.033639
+        ],
+        "name": "Rua General Vasco Alves",
+        "distance": 23.2698977
+      },
+      {
+        "hint": "E9V_gxfVf4NTAAAARwAAAAAAAAAAAAAAASOUQizsfEIAAAAAAAAAAFMAAABHAAAAAAAAAAAAAADrlgAAPyvy_Hu8Nf70K_L89Lo1_gAAjw8AAAAA",
+        "location": [
+          -51.238081,
+          -30.032773
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 46.72788593
+      },
+      {
+        "hint": "G9V_g____388AAAAcAAAAAAAAAAAAAAAT_pYQr_aNkIAAAAAAAAAADwAAABwAAAAAAAAAAAAAADrlgAA2Sry_IK2Nf6GK_L8tbY1_gAAXxUAAAAA",
+        "location": [
+          -51.238183,
+          -30.034302
+        ],
+        "name": "Rua General Vasco Alves",
+        "distance": 17.61957415
+      },
+      {
+        "hint": "pdtOg____3-nAAAA6AAAABEAAAAJAAAAZcsUQ577ZUKdHXhBo170QKcAAADoAAAAEQAAAAkAAADrlgAAFSny_OmzNf6mKPL87bQ1_gIAXwQAAAAA",
+        "location": [
+          -51.238635,
+          -30.034967
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 30.74636657
+      },
+      {
+        "hint": "GtV_g____38sAAAAdwAAAAUAAAAHAAAAsKUdQjMQhEIRb49ANfO1QCwAAAB3AAAABQAAAAcAAADrlgAAkCjy_Im3Nf7cKPL8ybY1_gIAvw8AAAAA",
+        "location": [
+          -51.238768,
+          -30.034039
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 22.51095974
+      },
+      {
+        "hint": "GdV_g____38nAAAAcQAAAAAAAAAJAAAAU2MLQkZrgkIAAAAAVvcEQScAAABxAAAAAAAAAAkAAADrlgAAzCny_DK5Nf5kKfL8FLk1_gAAXxUAAAAA",
+        "location": [
+          -51.238452,
+          -30.033614
+        ],
+        "name": "Rua General Vasco Alves",
+        "distance": 10.56890202
+      },
+      {
+        "hint": "j9tOgyCJd4YUAAAANAAAAAAAAAAAAAAAvxWVQRqiNkIAAAAAAAAAABQAAAA0AAAAAAAAAAAAAADrlgAAgCTy_M-4Nf7GJfL8QLk1_gAA7wkAAAAA",
+        "location": [
+          -51.239808,
+          -30.033713
+        ],
+        "name": "Rua General Salustiano",
+        "distance": 33.84968571
+      },
+      {
+        "hint": "ceKfg____39fAAAAnwAAAAAAAAAAAAAAZwh-Qq8ZKkIAAAAAAAAAAF8AAACfAAAAAAAAAAAAAADrlgAAhlPy_LO_Nf5dU_L8tb81_gAAPwAAAAAA",
+        "location": [
+          -51.22777,
+          -30.031949
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 3.961154858
+      },
+      {
+        "hint": "JdV_g____39qAAAAxwAAAAAAAAAAAAAAa9e9QguSo0IAAAAAAAAAAGoAAADHAAAAAAAAAAAAAADrlgAAyE7y_GivNf7QTvL8y641_gAAfwUAAAAA",
+        "location": [
+          -51.228984,
+          -30.03612
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 17.42099992
+      },
+      {
+        "hint": "9APIi_YDyIumAAAAgQMAAAAAAAAAAAAANt1dQoh4lUMAAAAAAAAAAFMAAADBAQAAAAAAAAAAAADrlgAAeyby_JnCNf7PJfL8osM1_gAAzwMAAAAA",
+        "location": [
+          -51.239301,
+          -30.031207
+        ],
+        "name": "Faixa Portuária",
+        "distance": 33.73762106
+      },
+      {
+        "hint": "JzcthP___38BAAAAJgAAAAAAAAAAAAAAiWCyPyivQkIAAAAAAAAAAAEAAAAmAAAAAAAAAAAAAADrlgAAiWny_J3cNf4_afL8_tw1_gAAjwMAAAAA",
+        "location": [
+          -51.222135,
+          -30.024547
+        ],
+        "name": "Avenida Júlio de Castilhos",
+        "distance": 12.90639279
+      },
+      {
+        "hint": "zvDfhP___38EAAAABwAAAG0AAABAAAAAhJ14QO7LB0DKrsFCf9JfQgQAAAAHAAAAbQAAAEAAAADrlgAAn1Xy_OyoNf7JVvL81qk1_hYAnwgAAAAA",
+        "location": [
+          -51.227233,
+          -30.03778
+        ],
+        "name": "Acesso Hammond",
+        "distance": 38.71920294
+      },
+      {
+        "hint": "cwI9jv___38iAAAAOwAAAFEAAAAAAAAA53y7Qfo5gUH-v1RCAAAAACIAAAA7AAAAUQAAAAAAAADrlgAAsFLy_H2sNf4YU_L8QKw1_ggAbw0AAAAA",
+        "location": [
+          -51.227984,
+          -30.036867
+        ],
+        "name": "Rua Coronel Genuíno",
+        "distance": 12.09822906
+      }
+    ]
+  },
+  "outbound": {
+    "code": "Ok",
+    "distances": [
+      [
+        0,
+        1815.2,
+        1734,
+        676.4,
+        741.2,
+        1614.6,
+        1404.5,
+        1733.2,
+        1532.3,
+        1758.6,
+        1760.6,
+        1719,
+        2307.4,
+        1488,
+        1561.3,
+        2141.2,
+        1694.1,
+        2101.4,
+        2014,
+        1643.8,
+        1583.4,
+        1909,
+        1403.4,
+        1900.9,
+        1861.3,
+        1610.6,
+        1771.8,
+        1435.6,
+        2172.3,
+        1732.4,
+        1291.8,
+        1549,
+        1269.8,
+        1809.6,
+        1249.9,
+        1623.8,
+        1632.8,
+        1378.4,
+        1580.2,
+        1503.6,
+        1851.4,
+        2659.3,
+        1730,
+        2099.4,
+        1777.6,
+        1995,
+        1898.8,
+        1964,
+        1966,
+        2448.8,
+        2099.3,
+        2431.8,
+        2495.1,
+        2364.7,
+        2276,
+        1972.3,
+        2014.2,
+        2149.8,
+        1946.8,
+        2111.1,
+        2077.6,
+        1883.1,
+        2012.3,
+        1787.2,
+        2085,
+        1801.6,
+        1663,
+        1638.7,
+        1868.7,
+        1715.8,
+        1972.9,
+        1931.3,
+        1897.1,
+        2146.8,
+        2150,
+        2256.6,
+        1895.1,
+        1879.5,
+        1498.1,
+        1922.1,
+        1565.4,
+        1611.9,
+        1846.7,
+        1622.1,
+        2064.5,
+        2253.9,
+        1858.7,
+        1849.6,
+        1843.6,
+        2345.8,
+        2240.8,
+        1461.4,
+        1028.1,
+        4032.9,
+        2482.2
+      ]
+    ],
+    "destinations": [
+      {
+        "hint": "g8pbg____38AAAAAeQAAAAAAAABRAAAAAAAAAHbsoEIAAAAAqORXQgAAAAB5AAAAAAAAAFEAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAAPwQAAAAAgcpbg____3-SAAAAkgAAAAAAAAAAAAAA_tTCQgAAAAAAAAAAAAAAAJIAAACSAAAAAAAAAAAAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAA_wkAAAAA",
+        "location": [
+          -51.229995,
+          -30.029124
+        ],
+        "name": "Rua 7 de Setembro / Rua General Câmara",
+        "distance": 13.67612726
+      },
+      {
+        "hint": "q9tOg____39TAAAAuwAAAAAAAAAAAAAA9H1eQiNxiUIAAAAAAAAAAFMAAAC7AAAAAAAAAAAAAADrlgAAs0ry_CrDNf5ES_L8I8M1_gAAPwAAAAAA",
+        "location": [
+          -51.230029,
+          -30.031062
+        ],
+        "name": "Rua General Câmara",
+        "distance": 14.00851066
+      },
+      {
+        "hint": "U4KAg____38YAAAAJwAAAAAAAAAPAAAAIy-vQQwbR0EAAAAAde5RQRgAAAAnAAAAAAAAAA8AAADrlgAAnEvy_DjBNf6cS_L8ZME1_gAA3xAAAAAA",
+        "location": [
+          -51.229796,
+          -30.03156
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 4.877526013
+      },
+      {
+        "hint": "gcpbg____39AAAAAkgAAAAAAAAAAAAAADCkrQvKAWkIAAAAAAAAAAEAAAACSAAAAAAAAAAAAAADrlgAAEEry_IrMNf5LS_L87sw1_gAA_wkAAAAA",
+        "location": [
+          -51.230192,
+          -30.028662
+        ],
+        "name": "Rua General Câmara",
+        "distance": 32.34448438
+      },
+      {
+        "hint": "pdqHg____38NAAAAmQAAAAAAAAAEAAAA7OMSQTCuuUIAAAAA0Vc5QA0AAACZAAAAAAAAAAQAAADrlgAA91fy_MHMNf7yV_L8c8w1_gAA3wUAAAAA",
+        "location": [
+          -51.226633,
+          -30.028607
+        ],
+        "name": "Avenida Otávio Rocha",
+        "distance": 8.659964782
+      },
+      {
+        "hint": "sNqHg____39kAAAAlgAAAAAAAAAAAAAAn-yGQoBFA0IAAAAAAAAAAGQAAACWAAAAAAAAAAAAAADrlgAA913y_NDFNf71XfL8usU1_gAA7wUAAAAA",
+        "location": [
+          -51.225097,
+          -30.030384
+        ],
+        "name": "Rua General Vitorino",
+        "distance": 2.446381969
+      },
+      {
+        "hint": "jtqHg____39DAAAAaQAAAAAAAAAAAAAAtRY0QiT1yEEAAAAAAAAAAEMAAABpAAAAAAAAAAAAAADrlgAA6lry_L_CNf7AW_L8scI1_gAATwAAAAAA",
+        "location": [
+          -51.225878,
+          -30.031169
+        ],
+        "name": "Rua Vigário José Inácio",
+        "distance": 20.7011421
+      },
+      {
+        "hint": "CfnAg____386AAAAmAAAAAAAAAAAAAAASwgbQp-9eUIAAAAAAAAAADoAAACYAAAAAAAAAAAAAADrlgAAd1jy_MTDNf5vWPL8WsM1_gAA3wUAAAAA",
+        "location": [
+          -51.226505,
+          -30.030908
+        ],
+        "name": "Avenida Senador Salgado Filho",
+        "distance": 11.77571654
+      },
+      {
+        "hint": "i9qHg____39rAAAAowAAAAAAAAAAAAAAXamOQpfhFEIAAAAAAAAAAGsAAACjAAAAAAAAAAAAAADrlgAAeVby_Ki-Nf5mV_L8mr41_gAAfwsAAAAA",
+        "location": [
+          -51.227015,
+          -30.032216
+        ],
+        "name": "Rua Marechal Floriano Peixoto",
+        "distance": 22.91413029
+      },
+      {
+        "hint": "lNqHg____39OAAAAbgAAADkAAAAAAAAAabxRQpJRqEEUSBhCAAAAAE4AAABuAAAAOQAAAAAAAADrlgAAs1ry_G3ANf77WfL8fMA1_gIAXwAAAAAA",
+        "location": [
+          -51.225933,
+          -30.031763
+        ],
+        "name": "Rua Vigário José Inácio",
+        "distance": 17.82674206
+      },
+      {
+        "hint": "ldqHg____38LAAAAEQAAAF0AAAAAAAAAFOwfQSKCnkAkCKVCAAAAAAsAAAARAAAAXQAAAAAAAADrlgAAD17y_F69Nf69XfL8_701_gYALwQAAAAA",
+        "location": [
+          -51.225073,
+          -30.032546
+        ],
+        "name": "Rua Jerônimo Coelho",
+        "distance": 19.52160062
+      },
+      {
+        "hint": "ldqHg____385AAAAQwAAAAAAAAArAAAAII5LQrygDEEAAAAAUSUXQjkAAABDAAAAAAAAACsAAADrlgAAbFzy_Cu9Nf5pXPL8-bw1_gAAzwUAAAAA",
+        "location": [
+          -51.225492,
+          -30.032597
+        ],
+        "name": "Rua Jerônimo Coelho",
+        "distance": 5.550192611
+      },
+      {
+        "hint": "cuKfg____38QAAAARwAAAAwAAAAAAAAASNZqQclwQ0Jg1iZBAAAAABAAAABHAAAADAAAAAAAAADrlgAAZVTy_G29Nf5bVPL8srw1_gIAzwUAAAAA",
+        "location": [
+          -51.227547,
+          -30.032531
+        ],
+        "name": "Rua Jerônimo Coelho",
+        "distance": 20.75191714
+      },
+      {
+        "hint": "jNqHg____38eAAAAMAAAAAAAAAAlAAAAFRXYQdTcc0EAAAAAkPoDQh4AAAAwAAAAAAAAACUAAADrlgAAk1Xy_CzBNf6SVfL8jcA1_gAA7xAAAAAA",
+        "location": [
+          -51.227245,
+          -30.031572
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 17.62586932
+      },
+      {
+        "hint": "aeKfg____38TAAAAswAAAAAAAAAKAAAAwgyHQRgXDkMAAAAAwnUMQRMAAACzAAAAAAAAAAoAAADrlgAAm1Ly_DXBNf6aUvL8p8A1_gAA7xAAAAAA",
+        "location": [
+          -51.228005,
+          -30.031563
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 15.74140224
+      },
+      {
+        "hint": "UYKAg____38ZAAAATAAAAAUAAABJAAAAYx2HQROzBkK4XGNA2LVCQhkAAABMAAAABQAAAEkAAADrlgAAZkzy_Bi9Nf6rTPL8FL01_gIAjwsAAAAA",
+        "location": [
+          -51.229594,
+          -30.032616
+        ],
+        "name": "Praça Marechal Deodoro",
+        "distance": 6.670637556
+      },
+      {
+        "hint": "b-Kfg____38xAAAAiAAAAAAAAACoAAAA_XovQl3OmkIAAAAA1MAVQzEAAACIAAAAAAAAAKgAAADrlgAA8lLy_PC7Nf5EUfL8Brw1_gAAfwsAAAAA",
+        "location": [
+          -51.227918,
+          -30.032912
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 41.55032969
+      },
+      {
+        "hint": "jNtOg____382AAAASQAAAAAAAAAKAAAAjZMQQmWWSUEAAAAA2t7WQDYAAABJAAAAAAAAAAoAAADrlgAArUvy_OO9Nf6iS_L8f701_gAA_wUAAAAA",
+        "location": [
+          -51.229779,
+          -30.032413
+        ],
+        "name": "Praça Marechal Deodoro",
+        "distance": 11.135954
+      },
+      {
+        "hint": "WJGphv___39EAAAAdAAAAAAAAAAFAAAAM190QnaOJ0IAAAAAa5qCQEQAAAB0AAAAAAAAAAUAAADrlgAAu0Dy_Mu-Nf4WQfL85r01_gAAvw8AAAAA",
+        "location": [
+          -51.232581,
+          -30.032181
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 26.86015474
+      },
+      {
+        "hint": "Dvnwhf___39ZAAAAnwAAAAAAAAAFAAAARi2gQqobdkIAAAAA-UqVQFkAAACfAAAAAAAAAAUAAADrlgAAsD3y_KO5Nf4QPfL8YLs1_gAAjwQAAAAA",
+        "location": [
+          -51.23336,
+          -30.033501
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 51.68760294
+      },
+      {
+        "hint": "D_nwhSsiO4s7AAAAEgAAACIAAAAAAAAATmBHQTMeakDOu-VAAAAAAB4AAAAJAAAAEQAAAAAAAADrlgAAUzry_HS5Nf7BOvL8lrk1_gIATxUAAAAA",
+        "location": [
+          -51.234221,
+          -30.033548
+        ],
+        "name": "",
+        "distance": 11.26033059
+      },
+      {
+        "hint": "F4KAg____392AAAA6QAAAAYAAAAiAAAA_mKdQn8fmUK0soZAxk4TQXYAAADpAAAABgAAACIAAADrlgAAzDvy_FC9Nf7AO_L8br01_gIArw8AAAAA",
+        "location": [
+          -51.233844,
+          -30.03256
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 3.521282752
+      },
+      {
+        "hint": "S5Gphv___39KAAAATAAAAAAAAABrAAAAglqDQiwe1z8AAAAAf-u9QkoAAABMAAAAAAAAAGsAAADrlgAA8jny_I_BNf4OOvL8V8E1_gAALwQAAAAA",
+        "location": [
+          -51.234318,
+          -30.031473
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 6.769886066
+      },
+      {
+        "hint": "NoKAg____38SAAAAPwAAAAAAAAAAAAAAaoqGQTHSG0IAAAAAAAAAABIAAAA_AAAAAAAAAAAAAADrlgAAEEXy_BbANf7yRPL8YsA1_gAAvw8AAAAA",
+        "location": [
+          -51.231472,
+          -30.03185
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 8.907973583
+      },
+      {
+        "hint": "C9V_g____39EAAAAbgAAADsAAAAAAAAAeo9zQs-NEkLJI1NCAAAAAEQAAABuAAAAOwAAAAAAAADrlgAA-j3y_EPGNf5JPvL8mMU1_gIAjw8AAAAA",
+        "location": [
+          -51.233286,
+          -30.030269
+        ],
+        "name": "Rua 7 de Setembro",
+        "distance": 20.43027054
+      },
+      {
+        "hint": "EtV_g____39GAAAAiAAAAAAAAAAAAAAAS1B6Qh6PZ0IAAAAAAAAAAEYAAACIAAAAAAAAAAAAAADrlgAAZDDy_EG-Nf4zMPL8rb41_gAATwQAAAAA",
+        "location": [
+          -51.236764,
+          -30.032319
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 12.87138486
+      },
+      {
+        "hint": "xMerg____397AAAAkAAAACsAAAAAAAAAlznbQkPMj0HL1xdCAAAAAHsAAACQAAAAKwAAAAAAAADrlgAAPGjy_N_TNf5nafL86tM1_gIAXxYAAAAA",
+        "location": [
+          -51.222468,
+          -30.026785
+        ],
+        "name": "Rua Pinto Bandeira",
+        "distance": 28.8679288
+      },
+      {
+        "hint": "A_fAg____39sAAAAnQAAABEAAAAAAAAAuyvBQpMYLEJhEXNBAAAAAGwAAACdAAAAEQAAAAAAAADrlgAAU27y_J7QNf5cbvL8ntA1_gIALwsAAAAA",
+        "location": [
+          -51.220909,
+          -30.027618
+        ],
+        "name": "Rua Coronel Vicente",
+        "distance": 0.8681587812
+      },
+      {
+        "hint": "ul_Ag____39AAAAAeAAAADIAAAAAAAAAJ2dmQocsRUK0ZzNCAAAAAEAAAAB4AAAAMgAAAAAAAADrlgAAXHDy_DbPNf4_cPL8wNA1_gQArxAAAAAA",
+        "location": [
+          -51.220388,
+          -30.027978
+        ],
+        "name": "Avenida Alberto Bins",
+        "distance": 43.76552188
+      },
+      {
+        "hint": "fLnahP___38SAAAALgAAAAAAAAAXAAAAE8GBQZyhwkEAAAAAR5ykQRIAAAAuAAAAAAAAABcAAADrlgAA93Hy_ErJNf7ocfL8f8o1_gAAfwUAAAAA",
+        "location": [
+          -51.219977,
+          -30.029494
+        ],
+        "name": "Avenida Independência",
+        "distance": 34.28408183
+      },
+      {
+        "hint": "xcXghMbF4IQBAAAAFgAAAAAAAAAAAAAAAnGtP5nvmUEAAAAAAAAAAAEAAAAWAAAAAAAAAAAAAADrlgAAWmvy_OTINf5Va_L8IMk1_gAAnxAAAAAA",
+        "location": [
+          -51.22167,
+          -30.029596
+        ],
+        "name": "Avenida Independência",
+        "distance": 6.668636303
+      },
+      {
+        "hint": "yMerg____38HAAAAXAAAAEgAAAAAAAAAbmzJQFVqlkKNKIBCAAAAAAcAAABcAAAASAAAAAAAAADrlgAAh2vy_OXONf65a_L84cw1_gIAnxAAAAAA",
+        "location": [
+          -51.221625,
+          -30.028059
+        ],
+        "name": "Avenida Alberto Bins",
+        "distance": 57.40305945
+      },
+      {
+        "hint": "qtqHg____38JAAAAEAAAAOUAAAA6AAAAP37IQOHuhEASVAtDAMQZQgkAAAAQAAAA5QAAADoAAADrlgAAHmXy_ITFNf7DZPL86MU1_gIAPwMAAAAA",
+        "location": [
+          -51.223266,
+          -30.03046
+        ],
+        "name": "Rua General Vitorino",
+        "distance": 14.13993403
+      },
+      {
+        "hint": "hbnahP___3-GAAAAwAAAAAAAAAAAAAAAiMbgQUz4PUEAAAAAAAAAAEMAAABgAAAAAAAAAAAAAADrlgAAi3Dy_AfINf6NcPL828c1_gAAfwUAAAAA",
+        "location": [
+          -51.220341,
+          -30.029817
+        ],
+        "name": "",
+        "distance": 4.881339954
+      },
+      {
+        "hint": "oaFOg____38EAAAAEQAAAAAAAABEAAAAwmC1QMA8jEEAAAAAkdyyQgQAAAARAAAAAAAAAEQAAADrlgAAVGHy_MzCNf4XYfL8oMI1_gAAvwgAAAAA",
+        "location": [
+          -51.224236,
+          -30.031156
+        ],
+        "name": "Avenida João Pessoa",
+        "distance": 7.642899982
+      },
+      {
+        "hint": "8ubchP___38TAAAAFwAAAEcAAAAyAAAAHMKKQTTjX0CLu3pCwkjUQRMAAAAXAAAARwAAADIAAADrlgAA01_y_Au_Nf6rX_L8Lr81_gIAHw4AAAAA",
+        "location": [
+          -51.224621,
+          -30.032117
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 5.4718491
+      },
+      {
+        "hint": "f9uLhf___39UAAAAZQAAAAAAAAAAAAAA83iVQtqHbUEAAAAAAAAAAFQAAABlAAAAAAAAAAAAAADrlgAAil_y_Ke4Nf5BXvL85rk1_gAATw4AAAAA",
+        "location": [
+          -51.224694,
+          -30.033753
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 47.51474428
+      },
+      {
+        "hint": "oqFOg____38PAAAAKAAAAAAAAAAQAAAAuAKsQS_1AUIAAAAAl_GoQQ8AAAAoAAAAAAAAABAAAADrlgAAPWTy_A2_Nf4_ZPL8Dr81_gAAHwkAAAAA",
+        "location": [
+          -51.223491,
+          -30.032115
+        ],
+        "name": "Avenida João Pessoa",
+        "distance": 0.2225041445
+      },
+      {
+        "hint": "f9uLhf___38ZAAAAZQAAAAAAAAAAAAAAppCxQcXFhkIAAAAAAAAAABkAAABlAAAAAAAAAAAAAADrlgAAImHy_OG5Nf7IX_L8Mbs1_gAATw4AAAAA",
+        "location": [
+          -51.224286,
+          -30.033439
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 50.01255746
+      },
+      {
+        "hint": "pcCkg____38wAAAAYAAAAAAAAAAAAAAAj-uBQrP0e0IAAAAAAAAAADAAAABgAAAAAAAAAAAAAADrlgAAIGfy_G27Nf7WZfL8qLo1_gAAHwkAAAAA",
+        "location": [
+          -51.222752,
+          -30.033043
+        ],
+        "name": "Avenida João Pessoa",
+        "distance": 38.60318896
+      },
+      {
+        "hint": "2DDfg____39BAAAAfQAAAAAAAAAQAAAAGNBpQg5PUUIAAAAACDtiQUEAAAB9AAAAAAAAABAAAADrlgAAs2Py_K27Nf7_Y_L8ars1_gAA3wIAAAAA",
+        "location": [
+          -51.223629,
+          -30.032979
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 10.43588695
+      },
+      {
+        "hint": "XNRch2fUXIdhAAAAAAAAAAAAAABlAAAAvs2hQQAAAAAAAAAALhmpQTEAAAAAAAAAAAAAADMAAADrlgAANGTy_Em0Nf7mY_L8VbQ1_gAAbxAAAAAA",
+        "location": [
+          -51.2235,
+          -30.034871
+        ],
+        "name": "",
+        "distance": 7.640729226
+      },
+      {
+        "hint": "j9qHg____38YAAAALgAAAA0AAABVAAAA5XWxQa3yl0H56DNBtgJmQhgAAAAuAAAADQAAAFUAAADrlgAASVfy_DO5Nf50V_L80bg1_gIAXwQAAAAA",
+        "location": [
+          -51.226807,
+          -30.033613
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 11.62850843
+      },
+      {
+        "hint": "tT5Pg____38tAAAAkAAAADsAAAAAAAAAcnEjQn14rkKOagxCAAAAAC0AAACQAAAAOwAAAAAAAADrlgAAMV3y_LO1Nf4eXvL8FbU1_gwAXwIAAAAA",
+        "location": [
+          -51.225295,
+          -30.034509
+        ],
+        "name": "Avenida Desembargador André da Rocha",
+        "distance": 28.79957298
+      },
+      {
+        "hint": "kNqHg____39RAAAAjwAAAAoAAAAAAAAAejiRQlNKW0K2OgdBAAAAAFEAAACPAAAACgAAAAAAAADrlgAAvFXy_Am2Nf5gVvL8_rU1_gIAjwsAAAAA",
+        "location": [
+          -51.227204,
+          -30.034423
+        ],
+        "name": "Rua Marechal Floriano Peixoto",
+        "distance": 15.86670732
+      },
+      {
+        "hint": "ltqHg____388AAAARQAAAAAAAAALAAAAaixWQuYv8UAAAAAA6PUYQTwAAABFAAAAAAAAAAsAAADrlgAAZVPy_P6zNf5iU_L8KrQ1_gAArxAAAAAA",
+        "location": [
+          -51.227803,
+          -30.034946
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 4.886103194
+      },
+      {
+        "hint": "l9qHg____39KAAAAcgAAAAAAAAAdAAAAh8SEQq-IDEIAAAAAsqzPQUoAAAByAAAAAAAAAB0AAADrlgAAWVXy_MexNf7SVPL80LE1_gAAjwsAAAAA",
+        "location": [
+          -51.227303,
+          -30.035513
+        ],
+        "name": "Rua Marechal Floriano Peixoto",
+        "distance": 13.06054297
+      },
+      {
+        "hint": "Jx9Pg____38aAAAAHwAAACQAAAAAAAAAyuO6QSBngkAzl_9BAAAAABoAAAAfAAAAJAAAAAAAAADrlgAAjF3y_CWyNf6_XvL8XbM1_gIAbxMAAAAA",
+        "location": [
+          -51.225204,
+          -30.035419
+        ],
+        "name": "Rua General Lima e Silva",
+        "distance": 45.53217115
+      },
+      {
+        "hint": "Jh9Pg____38QAAAAHQAAABoAAABFAAAA8ZWuQWw5hkEx2g1Cua62QhAAAAAdAAAAGgAAAEUAAADrlgAA113y_EqvNf41XfL8tq81_gQAnw0AAAAA",
+        "location": [
+          -51.225129,
+          -30.03615
+        ],
+        "name": "Avenida Loureiro da Silva",
+        "distance": 19.68578406
+      },
+      {
+        "hint": "q63Rhf___38JAAAATAAAAC4AAAA5AAAATzUMQWNPbEJqViFCXuBLQgkAAABMAAAALgAAADkAAADrlgAATFby_BSxNf73V_L8IrA1_gQAHwIAAAAA",
+        "location": [
+          -51.22706,
+          -30.035692
+        ],
+        "name": "Rua Coronel Genuíno",
+        "distance": 49.15500699
+      },
+      {
+        "hint": "2kUmjd1FJo0eAAAAAAAAAB8AAAAeAAAA1J5IQQAAAABbpUpB-jdFQR4AAAAAAAAAHwAAAB4AAADrlgAAXlry_NSsNf6JWfL81K01_gQAPxMAAAAA",
+        "location": [
+          -51.226018,
+          -30.03678
+        ],
+        "name": "",
+        "distance": 35.03548705
+      },
+      {
+        "hint": "qq3Rhf___38bAAAAbgAAAAgAAAAyAAAADTPHQfNakkIh9-ZAwIkyQhsAAABuAAAACAAAADIAAADrlgAAMFby_OmuNf7vVfL8s641_gIAfwgAAAAA",
+        "location": [
+          -51.227088,
+          -30.036247
+        ],
+        "name": "Rua José do Patrocínio",
+        "distance": 8.668690632
+      },
+      {
+        "hint": "lTFZg____38QAAAAGwAAAKoAAAAzAAAAOcuwQZn8ZkG6M0dDODIlQhAAAAAbAAAAqgAAADMAAADrlgAAeU3y_FymNf7mTfL8Gac1_g4AjxIAAAAA",
+        "location": [
+          -51.229319,
+          -30.038436
+        ],
+        "name": "Avenida Loureiro da Silva",
+        "distance": 23.4415089
+      },
+      {
+        "hint": "eOKfg____38vAAAAbwAAAAAAAAATAAAAOpUoQkJ5YEIAAAAATvCIQS8AAABvAAAAAAAAABMAAADrlgAACVLy_A2uNf6EUfL8Ea41_gAAXwsAAAAA",
+        "location": [
+          -51.228151,
+          -30.036467
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 12.83711785
+      },
+      {
+        "hint": "JdV_g____3-SAAAAxwAAAAAAAAAAAAAA3ykCQ20rOkIAAAAAAAAAAJIAAADHAAAAAAAAAAAAAADrlgAANVDy_HavNf5EUPL8Xa41_gAAfwUAAAAA",
+        "location": [
+          -51.228619,
+          -30.036106
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 31.18324233
+      },
+      {
+        "hint": "deKfg____385AAAAjQAAAAAAAAAAAAAAVEFMQtjAlEIAAAAAAAAAADkAAACNAAAAAAAAAAAAAADrlgAAQFLy_CeyNf77UPL8NrI1_gAAfwsAAAAA",
+        "location": [
+          -51.228096,
+          -30.035417
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 31.39424397
+      },
+      {
+        "hint": "ZnfIhf___38jAAAANgAAAAoAAAAAAAAA9hD7QX7ghEGbGwhBAAAAACMAAAA2AAAACgAAAAAAAADrlgAAmU7y_MazNf6qTvL8ibI1_gIAvxAAAAAA",
+        "location": [
+          -51.229031,
+          -30.035002
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 35.1785997
+      },
+      {
+        "hint": "87Lwhf___38-AAAAVAAAAAAAAAATAAAAzSQnQvX3ZUEAAAAATTBLQT4AAABUAAAAAAAAABMAAADrlgAAiEvy_Ju0Nf7dS_L8lLQ1_gAAnwsAAAAA",
+        "location": [
+          -51.229816,
+          -30.034789
+        ],
+        "name": "Rua Espírito Santo",
+        "distance": 8.235913978
+      },
+      {
+        "hint": "beKfg____38DAAAATAAAADsAAAAOAAAA-NcUQHw0QkK1_B1C-NcUQQMAAABMAAAAOwAAAA4AAADrlgAAxkny_OS5Nf6jSfL8q7g1_gIA_wUAAAAA",
+        "location": [
+          -51.230266,
+          -30.033436
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 34.86081804
+      },
+      {
+        "hint": "FYKAg____3-iAAAAwgAAAAAAAAAIAAAAHnoQQ5DR4EEAAAAAu7nVQKIAAADCAAAAAAAAAAgAAADrlgAAi0ny_GavNf6QSfL8ha81_gAAHwYAAAAA",
+        "location": [
+          -51.230325,
+          -30.036122
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 3.470120294
+      },
+      {
+        "hint": "FYKAg____398AAAAwgAAAAAAAAAIAAAAOA7eQtM0dkIAAAAAu7nVQHwAAADCAAAAAAAAAAgAAADrlgAAM0jy_IyvNf4gSPL8Da81_gAAHwYAAAAA",
+        "location": [
+          -51.230669,
+          -30.036084
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 14.19711233
+      },
+      {
+        "hint": "IIKAg____391AAAA0wAAAAAAAAAAAAAAraPQQgsDp0IAAAAAAAAAAHUAAADTAAAAAAAAAAAAAADrlgAAZkDy_H-wNf5VQPL8JbA1_gAAPwYAAAAA",
+        "location": [
+          -51.232666,
+          -30.035841
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 10.11062912
+      },
+      {
+        "hint": "FoKAg____39EAAAAgwAAAAAAAAALAAAAevs2QrdxJ0IAAAAAIqHqQEQAAACDAAAAAAAAAAsAAADrlgAA2EPy_KWxNf5UQvL8uLE1_gAAPwAAAAAA",
+        "location": [
+          -51.231784,
+          -30.035547
+        ],
+        "name": "Rua General Auto",
+        "distance": 37.48650571
+      },
+      {
+        "hint": "IIKAg____38JAAAA0wAAAAAAAAAAAAAAbW0GQYVsM0MAAAAAAAAAAAkAAADTAAAAAAAAAAAAAADrlgAAkDzy_AexNf6ePPL8VLE1_gAAPwYAAAAA",
+        "location": [
+          -51.233648,
+          -30.035705
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 8.641842302
+      },
+      {
+        "hint": "gdtOg____39OAAAAWAAAAAAAAACTAAAA_Y2LQmzdB0EAAAAAjaHjQk4AAABYAAAAAAAAAJMAAADrlgAAI0Hy_HSzNf4lQfL8p7M1_gAA_xAAAAAA",
+        "location": [
+          -51.232477,
+          -30.035084
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 5.656786848
+      },
+      {
+        "hint": "aqe2hv___38fAAAAOQAAABgAAAAAAAAAHgCmQcuOiEEuj2tAAAAAAB8AAAA5AAAAGAAAAAAAAADrlgAA60Py_Fe6Nf7ZQ_L8wbk1_gIA_wUAAAAA",
+        "location": [
+          -51.231765,
+          -30.033321
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 16.71833847
+      },
+      {
+        "hint": "Dvnwhf___39vAAAAnwAAAAAAAAAFAAAAOJrGQsRBKUIAAAAA-UqVQG8AAACfAAAAAAAAAAUAAADrlgAAbj7y_Ne5Nf6zPvL8Frk1_gAAjwQAAAAA",
+        "location": [
+          -51.23317,
+          -30.033449
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 22.40602192
+      },
+      {
+        "hint": "m9tOg____39XAAAAigAAAAkAAAAeAAAAKtqbQtpaMkJzEv9Avl0NQVcAAACKAAAACQAAAB4AAADrlgAAeDvy_N-1Nf4lPfL8dLY1_gIA7wkAAAAA",
+        "location": [
+          -51.233928,
+          -30.034465
+        ],
+        "name": "Rua General Bento Martins",
+        "distance": 44.55674155
+      },
+      {
+        "hint": "Fh9Pg____38sAAAAfAAAAAAAAAANAAAAPffsQZVZVEIAAAAAaBoHQSwAAAB8AAAAAAAAAA0AAADrlgAA-zXy_GC1Nf7pNvL8nbU1_gAAfxUAAAAA",
+        "location": [
+          -51.235333,
+          -30.034592
+        ],
+        "name": "Rua General Cypriano Ferreira",
+        "distance": 23.93310825
+      },
+      {
+        "hint": "I9V_g____38QAAAAmwAAAAoAAAAAAAAARYxvQfB79kJh8wpBAAAAABAAAACbAAAACgAAAAAAAADrlgAATzvy_Ci0Nf5KO_L81rM1_gIADxEAAAAA",
+        "location": [
+          -51.233969,
+          -30.034904
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 9.102721505
+      },
+      {
+        "hint": "OoKAg0KCgINCAAAAfwAAAAAAAAAAAAAAQYJsQutk4EIAAAAAAAAAAEIAAAB_AAAAAAAAAAAAAADrlgAAwTfy_DGvNf73N_L84a81_gAAjwYAAAAA",
+        "location": [
+          -51.234879,
+          -30.036175
+        ],
+        "name": "Rua Washington Luiz",
+        "distance": 20.19349767
+      },
+      {
+        "hint": "IdV_g____39BAAAAcQAAAAAAAAAAAAAAeBUwQlQk_UEAAAAAAAAAAEEAAABxAAAAAAAAAAAAAADrlgAASzLy_NGwNf4AM_L84bA1_gAA7woAAAAA",
+        "location": [
+          -51.236277,
+          -30.035759
+        ],
+        "name": "Rua General Portinho",
+        "distance": 17.54949482
+      },
+      {
+        "hint": "IdV_g____38OAAAAcQAAAAAAAAAAAAAAkdccQeK4g0IAAAAAAAAAAA4AAABxAAAAAAAAAAAAAADrlgAAJjLy_ASyNf4YMvL8A7I1_gAA7woAAAAA",
+        "location": [
+          -51.236314,
+          -30.035452
+        ],
+        "name": "Rua General Portinho",
+        "distance": 1.35501124
+      },
+      {
+        "hint": "qNtOgyyCgIM0AAAAAwAAAIMAAABJAAAAH7sKQnWR-D-qoK5CIB-AQjQAAAADAAAAgwAAAEkAAADrlgAAHSvy_HyuNf4QK_L87641_goATwUAAAAA",
+        "location": [
+          -51.238115,
+          -30.036356
+        ],
+        "name": "Rua Washington Luiz",
+        "distance": 12.80960815
+      },
+      {
+        "hint": "pNtOg6nbToMHAAAAOAAAADwAAAAZAAAAuXDUQBU2RkLkNldCqsivQQcAAAA4AAAAPAAAABkAAADrlgAA4SPy_CywNf45JPL8krA1_g4A7wcAAAAA",
+        "location": [
+          -51.239967,
+          -30.035924
+        ],
+        "name": "Rua Washington Luiz",
+        "distance": 14.13879349
+      },
+      {
+        "hint": "pdtOg____3-qAAAA6AAAABEAAAAJAAAALH4XQ4UwW0KdHXhBo170QKoAAADoAAAAEQAAAAkAAADrlgAALyny_PKzNf6lKfL837I1_gIAXwQAAAAA",
+        "location": [
+          -51.238609,
+          -30.034958
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 32.54026637
+      },
+      {
+        "hint": "Fx9Pg____38-AAAAawAAAAAAAAATAAAAKgFgQrvzHUIAAAAA44SFQT4AAABrAAAAAAAAABMAAADrlgAADzTy_Ha0Nf4ENPL8m7M1_gAADxEAAAAA",
+        "location": [
+          -51.235825,
+          -30.034826
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 24.2999549
+      },
+      {
+        "hint": "INV_g____38AAAAAIgAAAD0AAAAAAAAAAAAAAMIi8kHlUFdCAAAAAAAAAAAiAAAAPQAAAAAAAADrlgAAnS_y_Hy0Nf6FL_L8LrU1_gYAzw8AAAAA",
+        "location": [
+          -51.236963,
+          -30.03482
+        ],
+        "name": "Rua Coronel Fernando Machado",
+        "distance": 19.86715781
+      },
+      {
+        "hint": "HoKAg____383AAAASgAAAAgAAAAOAAAA6klFQrkUhUGG69hAUF9BQTcAAABKAAAACAAAAA4AAADrlgAAYDby_Km7Nf5JNvL84rs1_gIArw8AAAAA",
+        "location": [
+          -51.235232,
+          -30.032983
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 6.696803978
+      },
+      {
+        "hint": "JYKAg____38uAAAAbgAAAAAAAAAvAAAAZcn2QffwKEIAAAAA0nL4QS4AAABuAAAAAAAAAC8AAADrlgAAhTXy_Ke4Nf57NfL8pLg1_gAAPxUAAAAA",
+        "location": [
+          -51.235451,
+          -30.033753
+        ],
+        "name": "Rua General Canabarro",
+        "distance": 1.020337511
+      },
+      {
+        "hint": "FNV_g____38aAAAAnwAAAAAAAAAPAAAALyKLQfC-sEIAAAAAAfsjQRoAAACfAAAAAAAAAA8AAADrlgAASi7y_OG8Nf7BLvL8Cb01_gAA7wkAAAAA",
+        "location": [
+          -51.237302,
+          -30.032671
+        ],
+        "name": "Rua General Portinho",
+        "distance": 12.30563062
+      },
+      {
+        "hint": "EtV_g____39IAAAAiAAAAAAAAAAAAAAAjqF_Qtc9YkIAAAAAAAAAAEgAAACIAAAAAAAAAAAAAADrlgAAcTDy_EW-Nf4iMfL8wLw1_gAATwQAAAAA",
+        "location": [
+          -51.236751,
+          -30.032315
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 46.37888334
+      },
+      {
+        "hint": "GdV_g____38kAAAAcQAAAAAAAAAJAAAAY03_QZFJiEIAAAAAVvcEQSQAAABxAAAAAAAAAAkAAADrlgAA1iny_Bm5Nf67KvL8W7k1_gAAXxUAAAAA",
+        "location": [
+          -51.238442,
+          -30.033639
+        ],
+        "name": "Rua General Vasco Alves",
+        "distance": 23.2698977
+      },
+      {
+        "hint": "E9V_gxfVf4NTAAAARwAAAAAAAAAAAAAAASOUQizsfEIAAAAAAAAAAFMAAABHAAAAAAAAAAAAAADrlgAAPyvy_Hu8Nf70K_L89Lo1_gAAjw8AAAAA",
+        "location": [
+          -51.238081,
+          -30.032773
+        ],
+        "name": "Rua dos Andradas",
+        "distance": 46.72788593
+      },
+      {
+        "hint": "G9V_g____388AAAAcAAAAAAAAAAAAAAAT_pYQr_aNkIAAAAAAAAAADwAAABwAAAAAAAAAAAAAADrlgAA2Sry_IK2Nf6GK_L8tbY1_gAAXxUAAAAA",
+        "location": [
+          -51.238183,
+          -30.034302
+        ],
+        "name": "Rua General Vasco Alves",
+        "distance": 17.61957415
+      },
+      {
+        "hint": "pdtOg____3-nAAAA6AAAABEAAAAJAAAAZcsUQ577ZUKdHXhBo170QKcAAADoAAAAEQAAAAkAAADrlgAAFSny_OmzNf6mKPL87bQ1_gIAXwQAAAAA",
+        "location": [
+          -51.238635,
+          -30.034967
+        ],
+        "name": "Rua Duque de Caxias",
+        "distance": 30.74636657
+      },
+      {
+        "hint": "GtV_g____38sAAAAdwAAAAUAAAAHAAAAsKUdQjMQhEIRb49ANfO1QCwAAAB3AAAABQAAAAcAAADrlgAAkCjy_Im3Nf7cKPL8ybY1_gIAvw8AAAAA",
+        "location": [
+          -51.238768,
+          -30.034039
+        ],
+        "name": "Rua Riachuelo",
+        "distance": 22.51095974
+      },
+      {
+        "hint": "GdV_g____38nAAAAcQAAAAAAAAAJAAAAU2MLQkZrgkIAAAAAVvcEQScAAABxAAAAAAAAAAkAAADrlgAAzCny_DK5Nf5kKfL8FLk1_gAAXxUAAAAA",
+        "location": [
+          -51.238452,
+          -30.033614
+        ],
+        "name": "Rua General Vasco Alves",
+        "distance": 10.56890202
+      },
+      {
+        "hint": "j9tOgyCJd4YUAAAANAAAAAAAAAAAAAAAvxWVQRqiNkIAAAAAAAAAABQAAAA0AAAAAAAAAAAAAADrlgAAgCTy_M-4Nf7GJfL8QLk1_gAA7wkAAAAA",
+        "location": [
+          -51.239808,
+          -30.033713
+        ],
+        "name": "Rua General Salustiano",
+        "distance": 33.84968571
+      },
+      {
+        "hint": "ceKfg____39fAAAAnwAAAAAAAAAAAAAAZwh-Qq8ZKkIAAAAAAAAAAF8AAACfAAAAAAAAAAAAAADrlgAAhlPy_LO_Nf5dU_L8tb81_gAAPwAAAAAA",
+        "location": [
+          -51.22777,
+          -30.031949
+        ],
+        "name": "Avenida Borges de Medeiros",
+        "distance": 3.961154858
+      },
+      {
+        "hint": "JdV_g____39qAAAAxwAAAAAAAAAAAAAAa9e9QguSo0IAAAAAAAAAAGoAAADHAAAAAAAAAAAAAADrlgAAyE7y_GivNf7QTvL8y641_gAAfwUAAAAA",
+        "location": [
+          -51.228984,
+          -30.03612
+        ],
+        "name": "Rua Demétrio Ribeiro",
+        "distance": 17.42099992
+      },
+      {
+        "hint": "9APIi_YDyIumAAAAgQMAAAAAAAAAAAAANt1dQoh4lUMAAAAAAAAAAFMAAADBAQAAAAAAAAAAAADrlgAAeyby_JnCNf7PJfL8osM1_gAAzwMAAAAA",
+        "location": [
+          -51.239301,
+          -30.031207
+        ],
+        "name": "Faixa Portuária",
+        "distance": 33.73762106
+      },
+      {
+        "hint": "JzcthP___38BAAAAJgAAAAAAAAAAAAAAiWCyPyivQkIAAAAAAAAAAAEAAAAmAAAAAAAAAAAAAADrlgAAiWny_J3cNf4_afL8_tw1_gAAjwMAAAAA",
+        "location": [
+          -51.222135,
+          -30.024547
+        ],
+        "name": "Avenida Júlio de Castilhos",
+        "distance": 12.90639279
+      },
+      {
+        "hint": "zvDfhP___38EAAAABwAAAG0AAABAAAAAhJ14QO7LB0DKrsFCf9JfQgQAAAAHAAAAbQAAAEAAAADrlgAAn1Xy_OyoNf7JVvL81qk1_hYAnwgAAAAA",
+        "location": [
+          -51.227233,
+          -30.03778
+        ],
+        "name": "Acesso Hammond",
+        "distance": 38.71920294
+      },
+      {
+        "hint": "cwI9jv___38iAAAAOwAAAFEAAAAAAAAA53y7Qfo5gUH-v1RCAAAAACIAAAA7AAAAUQAAAAAAAADrlgAAsFLy_H2sNf4YU_L8QKw1_ggAbw0AAAAA",
+        "location": [
+          -51.227984,
+          -30.036867
+        ],
+        "name": "Rua Coronel Genuíno",
+        "distance": 12.09822906
+      }
+    ],
+    "durations": [
+      [
+        0,
+        274.8,
+        261,
+        97.7,
+        120.6,
+        263.8,
+        224,
+        270.6,
+        241.9,
+        282.6,
+        274.6,
+        269.9,
+        332.2,
+        229.3,
+        241.6,
+        288,
+        263.6,
+        280.2,
+        292.6,
+        207,
+        208.2,
+        255.3,
+        175.8,
+        279.8,
+        240,
+        208.9,
+        223.1,
+        177.3,
+        233,
+        220.3,
+        205,
+        193.8,
+        209.3,
+        251.9,
+        203.9,
+        243.7,
+        243.4,
+        213.5,
+        237.5,
+        226.9,
+        277.6,
+        310,
+        278.6,
+        310,
+        277.7,
+        288.3,
+        293.3,
+        289,
+        285.8,
+        307.4,
+        302.4,
+        304.4,
+        329.6,
+        297.5,
+        283,
+        296.8,
+        303,
+        281.9,
+        249.4,
+        264.4,
+        260.6,
+        238.8,
+        261,
+        228,
+        271.3,
+        227.6,
+        209.2,
+        201.6,
+        236.2,
+        217.2,
+        251.3,
+        250,
+        244.9,
+        279.2,
+        259.9,
+        279.3,
+        237.3,
+        244.8,
+        186.1,
+        254.5,
+        199.1,
+        209.1,
+        227.4,
+        206.8,
+        267.6,
+        279,
+        226.6,
+        227.7,
+        231.6,
+        337,
+        279,
+        189.6,
+        114.8,
+        484.6,
+        315.1
+      ]
+    ],
+    "sources": [
+      {
+        "hint": "g8pbg____38AAAAAeQAAAAAAAABRAAAAAAAAAHbsoEIAAAAAqORXQgAAAAB5AAAAAAAAAFEAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAAPwQAAAAAgcpbg____3-SAAAAkgAAAAAAAAAAAAAA_tTCQgAAAAAAAAAAAAAAAJIAAACSAAAAAAAAAAAAAADrlgAA1Ury_LzKNf7gSvL8Qco1_gAA_wkAAAAA",
+        "location": [
+          -51.229995,
+          -30.029124
+        ],
+        "name": "Rua 7 de Setembro / Rua General Câmara",
+        "distance": 13.67612726
+      }
+    ]
+  }
+}
